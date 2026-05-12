@@ -1,0 +1,27 @@
+# Cloudflare Workers + Static Assets config for indri.studio.
+#
+# Pattern seeded from ~/SRC/rapid-raccoon-site/wrangler.toml.
+#
+# The [[routes]] block is deliberately omitted — Terraform owns the
+# custom-domain bindings (cloudflare_workers_custom_domain for indri.studio
+# and www.indri.studio) in infrastructure/cloudflare/global/workers.tf.
+# Keeping route configuration in TF means `wrangler deploy` never fights TF
+# for ownership of the domain, and the bindings survive any wrangler.toml
+# edits.
+#
+# Until TF is applied, `wrangler deploy` will publish to indri-studio.<acct>.workers.dev
+# — useful for verifying the build pipeline before pointing the custom domain.
+#
+# If/when we add dynamic behaviour (API routes, form handlers, etc.),
+# uncomment `main` below and point it at a Worker script.
+
+name = "indri-studio"
+compatibility_date = "2024-11-01"
+
+[assets]
+directory = "./dist"
+# 404-page returns our /404.html (Astro generates one if there's a
+# src/pages/404.astro); with "single-page-application" Workers would
+# fall back to index.html instead, which isn't what we want for a
+# multi-page site.
+not_found_handling = "404-page"

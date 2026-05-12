@@ -1,0 +1,161 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+	const posts = await getCollection("apps", ({ data }) => !data.draft);
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: { post },
+	}));
+}
+
+interface Props { post: CollectionEntry<"apps"> }
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const now = new Date();
+const upcoming = post.data.date.valueOf() > now.valueOf();
+const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
+---
+
+<Base title={post.data.title} description={post.data.summary}>
+	<article class="max-w-[720px] mx-auto px-6 md:px-8 py-12 md:py-20">
+		<a
+			href="/#launches"
+			class="inline-flex items-center font-display text-label-md uppercase tracking-[0.2em] text-outline hover:text-primary-container transition-colors mb-10"
+		>
+			<span class="material-symbols-outlined text-base mr-1">chevron_left</span>
+			All apps
+		</a>
+
+		<header class="mb-10">
+			<div class="flex flex-wrap items-center gap-3 mb-6">
+				<time
+					datetime={post.data.date.toISOString()}
+					class="font-display text-label-md uppercase tracking-[0.2em] text-outline"
+				>
+					{fmtDate(post.data.date)}
+				</time>
+				{upcoming && (
+					<span class="pill-purple">
+						<span class="material-symbols-outlined text-sm">hourglass_top</span>
+						Launching Soon
+					</span>
+				)}
+			</div>
+
+			<h1 class="font-display text-headline-lg text-primary-container tracking-tighter mb-6">
+				{post.data.title}
+			</h1>
+
+			{post.data.summary && (
+				<p class="font-body text-body-lg text-secondary border-l-2 border-primary-container pl-6">
+					{post.data.summary}
+				</p>
+			)}
+		</header>
+
+		<div class="prose">
+			<Content />
+		</div>
+	</article>
+
+	<style>
+		.prose :global(h2) {
+			font-family: var(--font-display);
+			font-size: 24px;
+			line-height: 1.3;
+			font-weight: 600;
+			letter-spacing: -0.01em;
+			color: var(--color-on-surface);
+			margin: 2.25rem 0 1rem;
+			text-transform: uppercase;
+		}
+		.prose :global(h3) {
+			font-family: var(--font-display);
+			font-size: 18px;
+			line-height: 1.4;
+			font-weight: 600;
+			color: var(--color-on-surface);
+			margin: 2rem 0 0.75rem;
+		}
+		.prose :global(p) {
+			font-family: var(--font-body);
+			font-size: 16px;
+			line-height: 1.7;
+			color: var(--color-secondary);
+			margin: 0 0 1.25em;
+		}
+		.prose :global(a) {
+			color: var(--color-primary-container);
+			text-decoration-color: rgba(176, 38, 255, 0.3);
+			text-decoration-line: underline;
+			text-underline-offset: 3px;
+			transition: color 150ms ease, text-decoration-color 150ms ease;
+		}
+		.prose :global(a:hover) {
+			text-decoration-color: var(--color-primary-container);
+		}
+		.prose :global(ul),
+		.prose :global(ol) {
+			font-family: var(--font-body);
+			color: var(--color-secondary);
+			margin: 0 0 1.25em;
+			padding-left: 1.5rem;
+		}
+		.prose :global(li) {
+			margin: 0.35em 0;
+			line-height: 1.65;
+		}
+		.prose :global(li::marker) {
+			color: var(--color-primary-container);
+		}
+		.prose :global(blockquote) {
+			border-left: 2px solid var(--color-primary-container);
+			padding-left: 1.25rem;
+			margin: 1.5em 0;
+			color: var(--color-on-surface-variant);
+			font-style: italic;
+		}
+		.prose :global(code) {
+			font-family: var(--font-mono);
+			font-size: 0.9em;
+			background: var(--color-surface-container);
+			border: 1px solid rgba(176, 38, 255, 0.1);
+			padding: 0.15em 0.4em;
+			border-radius: var(--radius-DEFAULT);
+			color: var(--color-primary-fixed);
+		}
+		.prose :global(pre) {
+			background: var(--color-surface-container-low);
+			border: 1px solid rgba(176, 38, 255, 0.15);
+			padding: 1rem 1.25rem;
+			overflow-x: auto;
+			margin: 1.5em 0;
+			border-radius: var(--radius-DEFAULT);
+		}
+		.prose :global(pre code) {
+			background: transparent;
+			border: none;
+			padding: 0;
+			color: var(--color-on-surface);
+		}
+		.prose :global(hr) {
+			border: 0;
+			border-top: 1px solid var(--color-outline-variant);
+			margin: 2.5em 0;
+		}
+		.prose :global(img) {
+			max-width: 100%;
+			height: auto;
+			border: 1px solid var(--color-outline-variant);
+			margin: 1.5em 0;
+		}
+		.prose :global(strong) {
+			color: var(--color-on-surface);
+			font-weight: 600;
+		}
+	</style>
+</Base>

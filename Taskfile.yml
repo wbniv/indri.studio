@@ -1,0 +1,97 @@
+version: '3'
+
+includes:
+  shared:
+    taskfile: ../python-tui-lib/Taskfile.shared.yml
+    optional: true
+    flatten: true
+
+silent: true
+
+tasks:
+  dev:
+    desc: "Astro dev server at http://localhost:4321"
+    cmds:
+      - pnpm dev
+
+  build:
+    desc: "Static build into ./dist/"
+    cmds:
+      - pnpm build
+
+  preview:
+    desc: "Serve ./dist/ locally"
+    cmds:
+      - pnpm preview
+
+  deploy:
+    desc: "Build + wrangler deploy. Reads CLOUDFLARE_API_TOKEN from .env (regenerate via task secrets-pull)."
+    cmds:
+      - pnpm build
+      - pnpm wrangler deploy
+
+  secrets-pull:
+    desc: "Render local .env from SSM (/indri-studio/cloudflare/*). Refuses on drift unless --force."
+    cmds:
+      - bash scripts/secrets-pull.sh {{.CLI_ARGS}}
+
+  secrets-bootstrap:
+    desc: "One-time: push local secret values into SSM. Idempotent."
+    cmds:
+      - bash scripts/secrets-bootstrap.sh {{.CLI_ARGS}}
+
+  tf-plan:
+    desc: "Terraform plan in infrastructure/cloudflare/global/"
+    dir: infrastructure/cloudflare/global
+    cmds:
+      - terraform plan
+
+  tf-apply:
+    desc: "Terraform apply in infrastructure/cloudflare/global/"
+    dir: infrastructure/cloudflare/global
+    cmds:
+      - terraform apply
+
+  publish:
+    desc: "Tag HEAD and push to fire the Cloudflare deploy. Default: bump patch from latest v* tag. Override: task publish VERSION=v1.2.3"
+    cmds:
+      - |
+        set -euo pipefail
+
+        if ! git diff --quiet HEAD; then
+          echo "error: working tree has uncommitted changes vs HEAD. commit or stash first." >&2
+          exit 1
+        fi
+
+        VERSION="{{.VERSION}}"
+        if [ -z "$VERSION" ]; then
+          LATEST=$(git tag --list 'v*' --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -1 || true)
+          if [ -z "$LATEST" ]; then
+            VERSION="v0.1.0"
+          else
+            MAJOR=$(echo "$LATEST" | cut -d. -f1 | tr -d v)
+            MINOR=$(echo "$LATEST" | cut -d. -f2)
+            PATCH=$(echo "$LATEST" | cut -d. -f3)
+            VERSION="v${MAJOR}.${MINOR}.$((PATCH + 1))"
+          fi
+        fi
+
+        if ! echo "$VERSION" | grep -qE '^v[0-9]+\.[0-9]+\.[0-9]+$'; then
+          echo "error: version '$VERSION' must match v<major>.<minor>.<patch>" >&2
+          exit 1
+        fi
+
+        if git rev-parse --verify --quiet "refs/tags/$VERSION" >/dev/null; then
+          echo "error: tag $VERSION already exists" >&2
+          exit 1
+        fi
+
+        BRANCH=$(git rev-parse --abbrev-ref HEAD)
+        SHA=$(git rev-parse --short HEAD)
+        echo "publishing $VERSION on $BRANCH ($SHA)"
+
+        git push origin "$BRANCH"
+        git tag -a "$VERSION" -m "release $VERSION"
+        git push origin "$VERSION"
+
+        echo "tagged $VERSION; deploy workflow triggered."

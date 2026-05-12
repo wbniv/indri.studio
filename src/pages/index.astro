@@ -1,0 +1,106 @@
+---
+import Base from "../layouts/Base.astro";
+import { getCollection } from "astro:content";
+
+const now = new Date();
+
+const nowMs = now.valueOf();
+const allApps = (await getCollection("apps", ({ data }) => !data.draft))
+	.sort((a, b) => {
+		const aFuture = a.data.date.valueOf() > nowMs;
+		const bFuture = b.data.date.valueOf() > nowMs;
+		if (aFuture !== bFuture) return aFuture ? -1 : 1;
+		return aFuture
+			? a.data.date.valueOf() - b.data.date.valueOf()
+			: b.data.date.valueOf() - a.data.date.valueOf();
+	});
+
+const upcomingCount = allApps.filter((p) => p.data.date.valueOf() > now.valueOf()).length;
+
+const statusLabel =
+	upcomingCount === 0
+		? "Idle // Between Launches"
+		: upcomingCount === 1
+			? "1 Launch Incoming"
+			: `${upcomingCount} Launches Incoming`;
+
+const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
+---
+
+<Base title="indri">
+	<!-- Hero -->
+	<section
+		class="relative overflow-hidden border-b border-outline-variant/40 min-h-[600px] md:min-h-[720px] flex items-center"
+	>
+		<!-- Hero background. The body's purple dot grid shows through; the
+		     ringtail-stripe motion module will land here later (plan §Motion). -->
+
+<div class="relative z-10 w-full max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] pt-16 md:pt-24 pb-16 md:pb-32">
+			<div class="max-w-2xl">
+				<div class="pill-purple mb-6">
+					<span class="w-2 h-2 bg-primary-container rounded-full animate-pulse"></span>
+					<span>{statusLabel}</span>
+				</div>
+
+				<h1
+					class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[88px] leading-[0.95] tracking-tighter text-primary-container mb-6 lowercase italic"
+				>
+					indri
+				</h1>
+
+				<p
+					class="font-body text-body-lg text-secondary max-w-xl border-l-2 border-primary-container pl-6"
+				>
+					Small studio. We build apps people use every day — coloring,
+					bookkeeping, parking, play.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Full product list (moved from /products/; no heading — hero provides context) -->
+	<section id="launches" class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-16 md:py-24 scroll-mt-20">
+		{allApps.length === 0 ? (
+			<p class="font-body text-body-md text-secondary">Nothing yet.</p>
+		) : (
+			<ul class="space-y-4">
+				{allApps.map((post) => {
+					const upcoming = post.data.date.valueOf() > now.valueOf();
+					return (
+						<li>
+							<a
+								href={`/apps/${post.id}/`}
+								class="glass-card glass-card-hover block p-6 md:p-8 group"
+							>
+								<div class="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-4 md:gap-8 items-start">
+									<div class="flex flex-col gap-2">
+										<time
+											datetime={post.data.date.toISOString()}
+											class="font-display text-label-md uppercase tracking-[0.2em] text-outline"
+										>
+											{fmtDate(post.data.date)}
+										</time>
+										{upcoming && (
+											<span class="pill-purple self-start">
+												<span class="material-symbols-outlined text-sm">hourglass_top</span>
+												Launching Soon
+											</span>
+										)}
+									</div>
+									<div>
+										<h2 class="font-display text-headline-sm text-primary-container mb-2 group-hover:brightness-125 transition-all">
+											{post.data.title}
+										</h2>
+										{post.data.summary && (
+											<p class="font-body text-body-md text-secondary">{post.data.summary}</p>
+										)}
+									</div>
+								</div>
+							</a>
+						</li>
+					);
+				})}
+			</ul>
+		)}
+	</section>
+</Base>

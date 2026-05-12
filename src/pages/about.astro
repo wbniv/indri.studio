@@ -1,0 +1,51 @@
+---
+import Base from "../layouts/Base.astro";
+import { getCollection } from "astro:content";
+
+const team = (await getCollection("team")).sort(
+	(a, b) => a.data.order - b.data.order,
+);
+---
+
+<Base title="about">
+	<section class="relative overflow-hidden min-h-[calc(100vh-4rem)]">
+		<div class="relative z-10 w-full max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-16 md:py-24">
+			<h1
+				class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[88px] leading-[0.95] tracking-tighter text-primary-container mb-6 lowercase italic"
+			>
+				about
+			</h1>
+
+			<p
+				class="font-body text-body-lg text-secondary max-w-2xl border-l-2 border-primary-container pl-6 mb-12 md:mb-16"
+			>
+				Indri is a small studio. We pick problems that matter, ship
+				something tight, then come back and make it better.
+			</p>
+
+			<h2
+				class="font-display text-headline-md text-on-surface mb-6 md:mb-8 uppercase tracking-tighter"
+			>
+				The team
+			</h2>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+				{
+					team.map((member) => (
+						<article class="glass-card p-6 md:p-8">
+							<h3 class="font-display text-headline-sm text-primary-container mb-1">
+								{member.data.name}
+							</h3>
+							<p class="font-display text-label-md uppercase tracking-[0.2em] text-outline mb-4">
+								{member.data.role}
+							</p>
+							<p class="font-body text-body-md text-secondary">
+								{member.data.bio}
+							</p>
+						</article>
+					))
+				}
+			</div>
+		</div>
+	</section>
+</Base>

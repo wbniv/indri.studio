@@ -1,0 +1,103 @@
+---
+import "../styles/global.css";
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "indri.studio — small studio, building apps people use every day." } = Astro.props;
+
+const siteTitle = "indri";
+const fullTitle = title === siteTitle ? siteTitle : `${title} · ${siteTitle}`;
+
+const pathname = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<meta name="theme-color" content="#b026ff" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+		/>
+		<title>{fullTitle}</title>
+	</head>
+	<body class="min-h-screen flex flex-col bg-surface text-on-surface font-body">
+		<header
+			class="sticky top-0 z-50 w-full border-b border-[rgba(0,242,255,0.2)] bg-[rgba(10,14,15,0.8)] backdrop-blur-xl shadow-[0_4px_20px_rgba(0,242,255,0.1)]"
+		>
+			<div class="flex justify-between items-center w-full px-6 md:px-8 py-4 max-w-[var(--container-max)] mx-auto">
+				<a
+					href="/"
+					class="text-xl md:text-2xl font-black italic tracking-tighter text-primary-container font-display"
+				>
+					INDRI
+				</a>
+				<nav class="flex items-center gap-6 md:gap-8">
+					<a
+						href="/"
+						class:list={[
+							"font-display uppercase tracking-[0.2em] text-xs transition-all",
+							pathname === "/" || pathname.startsWith("/apps")
+								? "text-primary-container border-b border-primary-container pb-1"
+								: "text-outline hover:text-primary-container",
+						]}
+					>
+						Home
+					</a>
+					<a
+						href="/about/"
+						class:list={[
+							"font-display uppercase tracking-[0.2em] text-xs transition-all",
+							pathname.startsWith("/about")
+								? "text-primary-container border-b border-primary-container pb-1"
+								: "text-outline hover:text-primary-container",
+						]}
+					>
+						About
+					</a>
+				</nav>
+			</div>
+		</header>
+
+		<main class="flex-1 w-full">
+			<slot />
+		</main>
+
+		<footer class="w-full border-t border-[rgba(0,242,255,0.15)] bg-[#0b0f10]">
+			<div
+				class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 py-10 md:py-12 grid grid-cols-1 md:grid-cols-2 gap-8"
+			>
+				<div>
+					<div class="text-lg font-bold text-neutral-100 mb-3 uppercase tracking-tighter font-display">
+						INDRI
+					</div>
+					<p class="font-display uppercase text-[10px] tracking-[0.2em] text-neutral-500 leading-loose max-w-xs">
+						Small studio. We build apps people use every day.
+					</p>
+				</div>
+				<div class="flex md:justify-end items-start">
+					<span class="font-display uppercase text-[10px] tracking-[0.2em] text-neutral-600">
+						© {new Date().getFullYear()} INDRI
+					</span>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

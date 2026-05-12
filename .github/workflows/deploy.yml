@@ -1,0 +1,46 @@
+name: Deploy
+
+# Tag-driven deploys: push a `v*` tag (e.g. v1.0.0) to ship.
+# `workflow_dispatch` lets you re-run a deploy manually from the Actions
+# tab without creating a new tag — useful for rollback (pick an old tag's
+# commit from the UI) or re-deploying the current tag after a secret rotation.
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Queue deploys so two near-simultaneous tag pushes don't race each other
+# into the Workers API. We don't cancel in-progress deploys — letting one
+# finish cleanly is safer than killing it mid-upload.
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm build
+
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
