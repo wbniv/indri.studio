@@ -8,7 +8,7 @@ The project follows the **per-project new-account discipline** — every service
 
 Create or designate a dedicated **Cloudflare Account** for indri.studio (separate from any rapid-raccoon Account on your login). Then add the `indri.studio` zone to that Account and ensure it shows as **Active**.
 
-To check status: <https://dash.cloudflare.com/> → **Account home** → **Domains** tile. A **green checkmark** next to `indri.studio` = Active.
+To check status: [dash.cloudflare.com](https://dash.cloudflare.com/) → **Account home** → **Domains** tile. A **green checkmark** next to `indri.studio` = Active.
 
 If you see something other than a green check:
 
@@ -21,7 +21,7 @@ If `indri.studio` is registered *through* Cloudflare Registrar, the zone is set 
 
 Create a token narrowed to indri.studio only. **Do NOT reuse the rapid-raccoon token** or your global API key.
 
-- Open: <https://dash.cloudflare.com/profile/api-tokens>
+- Open: [dash.cloudflare.com/profile/api-tokens](https://dash.cloudflare.com/profile/api-tokens)
 - Click **Create Token** → **Edit Cloudflare Workers** template → **Use template**.
 - In **Account Resources**: pick the dedicated indri.studio Account from step 1.
 - In **Zone Resources**: include `indri.studio` only.
@@ -32,7 +32,7 @@ Long-term, this token is itself managed by Terraform in [`infrastructure/cloudfl
 
 ## 3. Cloudflare account ID
 
-Fastest path: look at the URL after login on <https://dash.cloudflare.com/>. It redirects to `dash.cloudflare.com/<ACCOUNT_ID>/home/overview` — the 32-character hex string is your account ID. Or click into any zone; the right-hand sidebar shows the Account ID with a copy button.
+Fastest path: look at the URL after login on [dash.cloudflare.com](https://dash.cloudflare.com/). It redirects to `dash.cloudflare.com/<ACCOUNT_ID>/home/overview` — the 32-character hex string is your account ID. Or click into any zone; the right-hand sidebar shows the Account ID with a copy button.
 
 ## 4. Push secrets to SSM (source of truth)
 
