@@ -10,6 +10,22 @@
 	inherits: false;
 }
 
+/* Stripe geometry — line width and gap between lines. Registered as
+ * <length> so they interpolate smoothly inside repeating-linear-gradient
+ * color stops. Animated on their own timelines (stripe-width /
+ * stripe-gap) below alongside drift + rotate. */
+@property --stripe-width {
+	syntax: "<length>";
+	initial-value: 4px;
+	inherits: false;
+}
+
+@property --stripe-gap {
+	syntax: "<length>";
+	initial-value: 28px;
+	inherits: false;
+}
+
 /* Register --header-shrink as a typed number so the value itself
  * interpolates over the transition duration set on `html` below. The
  * .header-fx padding derived from this var (in @layer components) then
@@ -165,18 +181,23 @@ html {
 		font-family: var(--font-body);
 		color: var(--color-on-surface);
 		background-color: var(--color-surface);
-		/* Pinstripes that drift AND rotate. The gradient angle reads from a
-		 * registered custom property (--stripe-angle) so it can be smoothly
-		 * animated as an <angle>. Drift and rotation run on separate
-		 * timelines (30s vs 90s) so they don't lock into a visible repeat. */
+		/* Pinstripes that drift, rotate, swell/pinch, and crowd/spread.
+		 * Four independent timelines (60 / 180 / 95 / 140s) — pairwise
+		 * non-divisible, so the combined loop is multi-hour and the
+		 * pattern never visibly repeats. Geometry (angle, line width,
+		 * gap) reads from registered custom properties so each value
+		 * interpolates smoothly inside the gradient. */
 		background-image: repeating-linear-gradient(
 			var(--stripe-angle),
-			transparent 0 28px,
-			rgba(143, 135, 128, 0.04) 28px 32px
+			transparent 0 var(--stripe-gap),
+			rgba(143, 135, 128, 0.04) var(--stripe-gap)
+				calc(var(--stripe-gap) + var(--stripe-width))
 		);
 		animation:
 			stripe-drift 60s linear infinite,
-			stripe-rotate 180s linear infinite;
+			stripe-rotate 180s linear infinite,
+			stripe-width 95s linear infinite,
+			stripe-gap 140s linear infinite;
 	}
 
 	/* Non-uniform keyframes with intentional reversals. Net motion still
@@ -203,6 +224,28 @@ html {
 		65%  { --stripe-angle: 250deg;  animation-timing-function: ease-in-out; }   /* clockwise again */
 		85%  { --stripe-angle: 220deg;  animation-timing-function: ease-in-out; }   /* small counterclockwise */
 		100% { --stripe-angle: 360deg; }                                            /* settle */
+	}
+
+	/* Line thickness breathes. Non-uniform stops with intentional
+	 * reversals so the swell→pinch→swell rhythm never feels metronomic. */
+	@keyframes stripe-width {
+		0%   { --stripe-width: 4px;  animation-timing-function: ease-in-out; }
+		25%  { --stripe-width: 12px; animation-timing-function: ease-in-out; }   /* swell */
+		45%  { --stripe-width: 2px;  animation-timing-function: ease-in-out; }   /* pinch */
+		70%  { --stripe-width: 9px;  animation-timing-function: ease-in-out; }   /* swell again */
+		88%  { --stripe-width: 5px;  animation-timing-function: ease-in-out; }   /* drift back */
+		100% { --stripe-width: 4px; }                                            /* settle */
+	}
+
+	/* Inter-line spacing opens and closes. Different stop positions
+	 * from stripe-width so the two never sync. */
+	@keyframes stripe-gap {
+		0%   { --stripe-gap: 28px; animation-timing-function: ease-in-out; }
+		20%  { --stripe-gap: 60px; animation-timing-function: ease-in-out; }   /* spread */
+		40%  { --stripe-gap: 16px; animation-timing-function: ease-in-out; }   /* crowd */
+		65%  { --stripe-gap: 48px; animation-timing-function: ease-in-out; }   /* spread again */
+		85%  { --stripe-gap: 22px; animation-timing-function: ease-in-out; }   /* small crowd */
+		100% { --stripe-gap: 28px; }                                           /* settle */
 	}
 
 	@media (prefers-reduced-motion: reduce) {
