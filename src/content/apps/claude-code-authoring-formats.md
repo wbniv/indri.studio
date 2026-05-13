@@ -79,7 +79,7 @@ Below: each of the fifteen rendered against one of the four authoring formats. C
   <div class="fm-hint">← → style · ↑ ↓ format · Esc to close</div>
 </dialog>
 
-<script>
+<script data-astro-rerun>
   (function() {
     const dlg = document.getElementById('fm-lightbox');
     if (!dlg) return;
