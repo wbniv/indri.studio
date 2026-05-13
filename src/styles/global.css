@@ -284,21 +284,18 @@
 	 * motion users get the constant max via the var() fallback (the JS
 	 * listener no-ops, --header-shrink is never set, fallback is 0). */
 	.header-fx > div {
-		padding-top: calc(1rem - 0.75rem * var(--header-shrink, 0));
-		padding-bottom: calc(1rem - 0.75rem * var(--header-shrink, 0));
+		padding-top: calc(1.125rem - 0.875rem * var(--header-shrink, 0));
+		padding-bottom: calc(1.125rem - 0.875rem * var(--header-shrink, 0));
 	}
 
-	/* Header motion FX (prototype, gated on html.fx — set by an inline
-	 * script in Base.astro when ?fx is in the URL). Phosphor breathe —
-	 * a slow screen-blended radial glow that pulses across the purple
-	 * header. Stripes were dropped because the page already has the
-	 * StripedGridMotion diagonal motif below. */
-	html.fx .header-fx {
+	/* Header motion FX — Phosphor breathe, a slow screen-blended radial
+	 * glow that pulses across the purple header. Always on. */
+	.header-fx {
 		position: relative;
 		isolation: isolate;
 	}
 
-	html.fx .header-fx::after {
+	.header-fx::after {
 		content: "";
 		position: absolute;
 		inset: 0;
@@ -314,7 +311,7 @@
 		z-index: 0;
 	}
 
-	html.fx .header-fx > * {
+	.header-fx > * {
 		position: relative;
 		z-index: 1;
 	}
@@ -325,7 +322,7 @@
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		html.fx .header-fx::after {
+		.header-fx::after {
 			animation: none;
 		}
 	}

@@ -47,13 +47,6 @@ const navLinkClass = (active: boolean) =>
 		/>
 		<title>{fullTitle}</title>
 		<script is:inline>
-			// Header-FX prototype flag: ?fx in URL toggles motion graphics
-			// on the sticky header. Runs before <body> paints so there's
-			// no flash of un-FX'd header.
-			if (new URLSearchParams(location.search).has("fx")) {
-				document.documentElement.classList.add("fx");
-			}
-
 			// Scroll-shrink: --header-shrink ramps 0 → 1 as scrollY goes
 			// 0 → half a viewport. CSS reads it to interpolate the
 			// header's inner padding. rAF-batched to one update per frame.
