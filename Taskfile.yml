@@ -1,5 +1,9 @@
 version: '3'
 
+# Load CLOUDFLARE_API_TOKEN and friends from .env into every task's env.
+# Populated by `task secrets-pull` from SSM at /indri-studio/...
+dotenv: ['.env']
+
 includes:
   shared:
     taskfile: ../python-tui-lib/Taskfile.shared.yml
@@ -55,12 +59,18 @@ tasks:
   tf-plan:
     desc: "Terraform plan in infrastructure/cloudflare/global/"
     dir: infrastructure/cloudflare/global
+    env:
+      # Bridge .env's Cloudflare-named vars into Terraform's TF_VAR_* convention.
+      # var.account_id in variables.tf populates from this.
+      TF_VAR_account_id: '{{.CLOUDFLARE_ACCOUNT_ID}}'
     cmds:
       - terraform plan
 
   tf-apply:
     desc: "Terraform apply in infrastructure/cloudflare/global/"
     dir: infrastructure/cloudflare/global
+    env:
+      TF_VAR_account_id: '{{.CLOUDFLARE_ACCOUNT_ID}}'
     cmds:
       - terraform apply
 
