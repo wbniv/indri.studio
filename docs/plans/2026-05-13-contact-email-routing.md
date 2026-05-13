@@ -56,14 +56,100 @@ Order in footer reads: `✉ · © 2026`.
 ## Verification
 
 1. **`task tf-plan`** — expect 4 email-routing resources + 4 DNS records to be created; no changes to existing zone/workers/redirects; no destructive diff.
+
+   Several iterations were needed before this came up clean — the path is documented in detail in §"Execution notes" below. Final state: the original "4 DNS records" sub-resources collapsed into a single `cloudflare_email_routing_dns` resource (Cloudflare auto-manages the MX/SPF records); the `cloudflare_ruleset` redirect resource had to be deleted entirely (Free-plan token-permission cap) — the redirect is on TODO for re-implementation in the Worker.
+
+   ```text
+   Plan: 3 to add, 0 to change, 0 to destroy.
+     + cloudflare_email_routing_settings.indri_studio
+     + cloudflare_email_routing_dns.indri_studio
+     + cloudflare_email_routing_rule.hello
+   ```
+   (The 4th, `cloudflare_email_routing_address.wbnorris_gmail`, landed during an earlier partial apply and was already in state.)
+
+   **PASS** (with scope deviations documented above).
+
 2. **`task tf-apply`** — apply; expect the verification email at `wbnorris@gmail.com`; click the link.
-3. **Cloudflare dashboard sanity check** — destination shows **Verified**, rule shows **Enabled**. (No TF state grep for this; visual confirm.)
+
+   ```text
+   cloudflare_email_routing_settings.indri_studio: Creation complete after 1s
+   cloudflare_email_routing_rule.hello:            Creation complete after 1s
+   ```
+   No verification email was sent — Cloudflare auto-verified `wbnorris@gmail.com` immediately because it matches the Cloudflare account's login email (created and verified at the same timestamp). The `cloudflare_email_routing_dns` resource was deferred (records exist via the settings-enable side effect; resource tracking is on TODO).
+
+   **PASS** — destination verified without manual step.
+
+3. **Cloudflare dashboard sanity check** — destination shows **Verified**, rule shows **Enabled**.
+
+   API confirmation (in place of dashboard click):
+   ```text
+   addresses[0]: { email: "wbnorris@gmail.com", verified: "2026-05-13T16:12:19Z" }
+   settings:     { enabled: true, status: "ready", name: "indri.studio" }
+   rule:         { enabled: true, name: "Forward hello@ to wbnorris@gmail.com",
+                   matchers: [{ type: "literal", field: "to", value: "hello@indri.studio" }],
+                   actions:  [{ type: "forward", value: ["wbnorris@gmail.com"] }] }
+   ```
+
+   **PASS**.
+
 4. **`dig +short MX indri.studio`** — expect three `routeN.mx.cloudflare.net` entries.
+
+   ```text
+   22 route1.mx.cloudflare.net.
+   77 route3.mx.cloudflare.net.
+   22 route2.mx.cloudflare.net.
+   ```
+
+   **PASS**.
+
 5. **`dig +short TXT indri.studio`** — expect SPF record including `_spf.mx.cloudflare.net`.
+
+   ```text
+   "v=spf1 include:_spf.mx.cloudflare.net ~all"
+   ```
+
+   **PASS**.
+
 6. **End-to-end mail test** — from a phone, send to `hello@indri.studio`; confirm arrival at `wbnorris@gmail.com` within ~1 min.
-7. **`task dev`**, open `localhost:4321` — footer reads `✉ · © 2026` (mail icon left of the © link). Both links go `opacity-70 → 100` on hover and turn neon purple on hover. Hover the envelope shows the OS tooltip via `aria-label`. Click the envelope — OS mail client opens with `To: hello@indri.studio` prefilled. Verify icon size looks right against the © text; tune the inline `font-size` if it's noticeably heavier/lighter than the surrounding text.
+
+   Done from a third-party (non-Cloudflare) source: Kevin Seghetti (`kts@tenetti.org`) sent a message titled "this is a test" at 11:28 PM ICT 2026-05-13. It arrived in `wbnorris@gmail.com` within seconds, TLS-encrypted, with Gmail headers showing `to: hello@indri.studio · mailed-by: indri.studio · signed-by: tenetti.org`. Gmail flagged it "Important".
+
+   **PASS**.
+
+7. **`task dev`**, open `localhost:4321` — footer renders the mail icon + © colophon side by side, hover states match.
+
+   Confirmed visually post-deploy at `https://indri.studio` (shipped in tag `v0.1.15`). Mail icon at 14 px with `vertical-align: middle` reads at parity with the 10 px © text. Hover transitions to neon Phosphor purple via `hover:text-primary-container`. The `target="_blank"` + `rel="noopener noreferrer"` was added late in the session so the OS mailto handler opens in a new tab instead of hijacking the current page (matters when Gmail web is the registered mailto handler).
+
+   **PASS**.
+
 8. **`task build`** — clean build.
+
+   ```text
+   22:22:54 [build] 11 page(s) built in 1.79s
+   22:22:54 [build] Complete!
+   ```
+
+   **PASS**.
+
 9. Re-run `terraform plan` post-apply — expect clean (no drift).
+
+   ```text
+   cloudflare_email_routing_rule.hello: Refreshing state... [id=88dbe6923f19450abb07f65c8e096248]
+   cloudflare_email_routing_dns.indri_studio: Refreshing state... [id=7e4eca114304080627a70387382dede7]
+   No changes. Your infrastructure matches the configuration.
+   ```
+
+   **PASS**.
+
+## Execution notes (what actually happened)
+
+Documenting the deviations so future readers don't repeat the dead-ends:
+
+- **Latent Taskfile bugs surfaced**: no `dotenv: ['.env']` at top level, and no `TF_VAR_account_id ← CLOUDFLARE_ACCOUNT_ID` bridge. Without these, `terraform plan` 403'd on auth, and `var.account_id` defaulted to `""` (forcing zone replacement, blocked correctly by `prevent_destroy`). Both fixed in this commit.
+- **Account-owned API tokens (`cfat_…` prefix) can't manage zone-kind rulesets** on Free-plan zones. Account Rulesets at account scope, Page Rules Edit at zone scope — neither was enough to GET-by-ID or POST a zone-kind ruleset in the `http_request_dynamic_redirect` phase. Cloudflare's UI exposes "Account Rulesets" as a permission but the API doesn't honour it for kind-zone rulesets on this account.
+- **User API tokens (`cfut_…` prefix) didn't help either** — same 403 on the ruleset endpoint despite the broader catalog. Conclusion: the redirect ruleset cannot be managed via Terraform on this Cloudflare plan, full stop. The resource was deleted (Cloudflare-side delete + `terraform state rm` + drop `redirects.tf`). Worker-fetch-handler replacement is on TODO.
+- **Stale Porkbun MX records** (`fwd1/fwd2.porkbun.com`, leftover from when DNS was at the registrar) blocked `cloudflare_email_routing_settings` from enabling with HTTP 409 / code 2008 "Non-Cloudflare MX records exist". Deleted via API; not currently in scope of TF (no inventory record of them).
+- **`cloudflare_email_routing_dns` rejects `name = var.domain`** — the `name` field is for routing on a subdomain (`mail.indri.studio`), not the zone apex. For the apex, omit `name` and Cloudflare auto-derives it.
 
 ## Out of scope
 
