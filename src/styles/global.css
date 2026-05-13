@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+/* Register the stripe-angle so it can be animated as an <angle>. Without
+ * this, custom-property animation falls back to discrete swaps (no smooth
+ * interpolation between angles). Top-level — @property is not allowed
+ * inside @layer. */
+@property --stripe-angle {
+	syntax: "<angle>";
+	initial-value: 135deg;
+	inherits: false;
+}
+
 /* Indri brand tokens.
  *
  * Palette: warm-tinted greys (ring-tailed-lemur lens) + neon Phosphor purple
@@ -132,12 +142,48 @@
 		font-family: var(--font-body);
 		color: var(--color-on-surface);
 		background-color: var(--color-surface);
-		/* Static diagonal pinstripes for page texture — no motion. */
+		/* Pinstripes that drift AND rotate. The gradient angle reads from a
+		 * registered custom property (--stripe-angle) so it can be smoothly
+		 * animated as an <angle>. Drift and rotation run on separate
+		 * timelines (30s vs 90s) so they don't lock into a visible repeat. */
 		background-image: repeating-linear-gradient(
-			135deg,
+			var(--stripe-angle),
 			transparent 0 28px,
 			rgba(143, 135, 128, 0.04) 28px 32px
 		);
+		animation:
+			stripe-drift 60s linear infinite,
+			stripe-rotate 180s linear infinite;
+	}
+
+	/* Non-uniform keyframes with intentional reversals. Net motion still
+	 * resolves to one period (32px / 360deg) per cycle so the loop seam is
+	 * invisible, but the path BACK-TRACKS at certain points — direction
+	 * flips, slows, then continues. Drift and rotation use different
+	 * reversal points so they never sync. */
+	/* Per-keyframe animation-timing-function sets the easing FROM that
+	 * keyframe to the next, so each segment ease-in-outs into the next
+	 * direction change instead of pivoting linearly. */
+	@keyframes stripe-drift {
+		0%   { background-position: 0 0;        animation-timing-function: ease-in-out; }
+		30%  { background-position: 18px 18px;  animation-timing-function: ease-in-out; }   /* forward burst */
+		45%  { background-position: 10px 10px;  animation-timing-function: ease-in-out; }   /* reverse */
+		70%  { background-position: 26px 26px;  animation-timing-function: ease-in-out; }   /* forward again */
+		85%  { background-position: 22px 22px;  animation-timing-function: ease-in-out; }   /* small reverse */
+		100% { background-position: 32px 32px; }                                            /* settle */
+	}
+
+	@keyframes stripe-rotate {
+		0%   { --stripe-angle: 0deg;    animation-timing-function: ease-in-out; }
+		25%  { --stripe-angle: 140deg;  animation-timing-function: ease-in-out; }   /* clockwise sweep */
+		40%  { --stripe-angle: 80deg;   animation-timing-function: ease-in-out; }   /* counterclockwise dip */
+		65%  { --stripe-angle: 250deg;  animation-timing-function: ease-in-out; }   /* clockwise again */
+		85%  { --stripe-angle: 220deg;  animation-timing-function: ease-in-out; }   /* small counterclockwise */
+		100% { --stripe-angle: 360deg; }                                            /* settle */
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		body { animation: none; }
 	}
 
 	::selection {
