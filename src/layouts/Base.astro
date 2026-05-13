@@ -129,14 +129,13 @@ const navLinkClass = (active: boolean) =>
 						INDRI
 					</span>
 				</div>
-				<div class="font-display uppercase text-[10px] tracking-[0.3em] text-on-surface-variant flex items-center gap-6">
+				<div class="font-display uppercase text-[10px] tracking-[0.3em] text-on-surface-variant">
 					<a
 						href="/colophon"
-						class={`hover:text-primary-container transition-colors ${pathname === "/colophon" ? "text-primary-container" : ""}`}
+						class={`opacity-50 hover:opacity-100 hover:text-primary-container transition-all ${pathname === "/colophon" ? "text-primary-container opacity-100" : ""}`}
 					>
-						colophon
+						© {new Date().getFullYear()}
 					</a>
-					<span class="opacity-50">© {new Date().getFullYear()}</span>
 				</div>
 			</div>
 		</footer>
