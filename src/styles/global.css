@@ -193,13 +193,26 @@
 }
 
 @layer components {
+	/* Per-app theming wrapper. AppLayout writes overrides of the studio
+	 * brand's --color-* / --font-* tokens as inline styles on this div;
+	 * the cascade does the rest. The bg / text / font-family declarations
+	 * below are what gives the wrapper its visible per-app surface —
+	 * without them the inline-style overrides would set vars that nothing
+	 * on the wrapper itself reads. */
+	.app-theme {
+		background-color: var(--color-surface);
+		color: var(--color-on-surface);
+		font-family: var(--font-body);
+		min-height: 100%;
+	}
+
 	/* Hard-card: print-block energy. Flat fill, hard 1px border, no blur,
 	 * no rounding. Class name kept so existing call sites work without
 	 * churn. Border uses a faint Phosphor tint — grey-700 would now match
 	 * the card fill, so we lean on the brand accent to define the edge. */
 	.glass-card {
 		background: var(--color-surface-container);
-		border: 1px solid rgba(176, 38, 255, 0.18);
+		border: 1px solid color-mix(in srgb, var(--color-primary-container) 18%, transparent);
 		border-radius: 0;
 	}
 
@@ -230,8 +243,8 @@
 		text-shadow:
 			0 0 4px rgba(255, 230, 255, 0.95),
 			0 0 12px rgba(221, 179, 255, 0.85),
-			0 0 24px rgba(176, 38, 255, 0.75),
-			0 0 48px rgba(176, 38, 255, 0.45);
+			0 0 24px color-mix(in srgb, var(--color-primary-container) 75%, transparent),
+			0 0 48px color-mix(in srgb, var(--color-primary-container) 45%, transparent);
 	}
 
 	/* Section label: small caps at the top of each homepage section
@@ -247,7 +260,7 @@
 	}
 
 	.glow-sm {
-		box-shadow: 0 0 15px rgba(176, 38, 255, 0.35);
+		box-shadow: 0 0 15px color-mix(in srgb, var(--color-primary-container) 35%, transparent);
 	}
 
 	.grit-texture {
@@ -267,8 +280,8 @@
 		align-items: center;
 		gap: 0.5rem;
 		padding: 0.25rem 0.75rem;
-		border: 1px solid rgba(176, 38, 255, 0.35);
-		background: rgba(176, 38, 255, 0.1);
+		border: 1px solid color-mix(in srgb, var(--color-primary-container) 35%, transparent);
+		background: color-mix(in srgb, var(--color-primary-container) 10%, transparent);
 		color: var(--color-primary-container);
 		font-family: var(--font-display);
 		font-size: 12px;

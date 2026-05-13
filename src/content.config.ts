@@ -51,6 +51,31 @@ const apps = defineCollection({
 				}),
 			)
 			.default([]),
+		// Per-app brand kit. Any field set here is written by AppLayout as
+		// an override of the studio CSS custom property of the same role:
+		//   primary    → --color-primary-container  (accent)
+		//   secondary  → --color-primary            (secondary accent / lighter accent)
+		//   background → --color-surface            (page bg)
+		//   text       → --color-on-surface         (body text)
+		//   fontDisplay → --font-display
+		//   fontBody    → --font-body
+		// Unset fields inherit the studio brand. CSS color values; fonts as
+		// full font-family stacks ("Geist, system-ui, sans-serif").
+		theme: z
+			.object({
+				primary: z.string().optional(),
+				secondary: z.string().optional(),
+				background: z.string().optional(),
+				text: z.string().optional(),
+				fontDisplay: z.string().optional(),
+				fontBody: z.string().optional(),
+				// Stylesheet URLs to inject into <head> on this app's pages —
+				// typically a single Google Fonts URL covering both faces.
+				// Loaded only on pages using this app's theme; studio pages
+				// stay slim (just Space Grotesk + Inter from Base).
+				fontImports: z.array(z.string()).optional(),
+			})
+			.optional(),
 	}),
 });
 

@@ -1,0 +1,50 @@
+---
+// Per-app landing layout. Wraps Base with a div that overrides the
+// studio brand's CSS custom properties with app-specific values. The
+// existing per-app markup inside the slot doesn't need to change —
+// Tailwind v4 utilities and the prose styles all read from these vars
+// via the cascade, so descendants automatically re-theme.
+import Base from "./Base.astro";
+
+interface Props {
+	title: string;
+	description?: string;
+	theme?: {
+		primary?: string;
+		secondary?: string;
+		background?: string;
+		text?: string;
+		fontDisplay?: string;
+		fontBody?: string;
+		fontImports?: string[];
+	};
+}
+
+const { title, description, theme = {} } = Astro.props;
+
+const themeStyle = [
+	theme.primary && `--color-primary-container: ${theme.primary}`,
+	theme.secondary && `--color-primary: ${theme.secondary}`,
+	theme.background && `--color-surface: ${theme.background}`,
+	theme.text && `--color-on-surface: ${theme.text}`,
+	theme.fontDisplay && `--font-display: ${theme.fontDisplay}`,
+	theme.fontBody && `--font-body: ${theme.fontBody}`,
+]
+	.filter(Boolean)
+	.join("; ");
+
+const fontImports = theme.fontImports ?? [];
+---
+
+<Base title={title} description={description}>
+	{fontImports.length > 0 && (
+		<Fragment slot="head">
+			<link rel="preconnect" href="https://fonts.googleapis.com" />
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+			{fontImports.map((href) => <link rel="stylesheet" href={href} />)}
+		</Fragment>
+	)}
+	<div class="app-theme" style={themeStyle}>
+		<slot />
+	</div>
+</Base>
