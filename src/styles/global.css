@@ -9,27 +9,34 @@
  * `bg-surface`, `text-primary-container` etc. utility classes keep working.
  * Only the values change. */
 @theme {
-	/* Grey palette (warm-tinted, ringtail-inspired) */
+	/* Grey palette (warm-tinted, ringtail-inspired).
+	 * grey-1000 is the reserved "black" — footer base, deepest accents,
+	 * pixel-grid pitch cells. grey-900 is the new "dark grey, not black"
+	 * page surface (shifted up from #1A1815 → #2B2723 on 2026-05-13 to
+	 * stop the site reading as a black void). */
 	--color-grey-50: #f5f0e8;
 	--color-grey-200: #c8c0b8;
 	--color-grey-400: #8e8780;
-	--color-grey-700: #3d3833;
-	--color-grey-900: #1a1815;
+	--color-grey-700: #4a4641;
+	--color-grey-900: #3d3833;
 	--color-grey-1000: #0a0908;
 
-	/* Surface tokens — map onto greys */
-	--color-surface: #1a1815;
-	--color-surface-dim: #1a1815;
-	--color-surface-bright: #3d3833;
+	/* Surface tokens — map onto greys.
+	 * Page bg sits at #3D3833 — meaningfully grey, not black. Cards step
+	 * up one tier to #4A4641. Reserved black at grey-1000 stays available
+	 * as surface-container-lowest for the footer / deepest UI. */
+	--color-surface: #3d3833;
+	--color-surface-dim: #3d3833;
+	--color-surface-bright: #5b5650;
 	--color-surface-container-lowest: #0a0908;
-	--color-surface-container-low: #221f1c;
-	--color-surface-container: #2a2724;
-	--color-surface-container-high: #353128;
-	--color-surface-container-highest: #3d3833;
-	--color-surface-variant: #3d3833;
+	--color-surface-container-low: #45403b;
+	--color-surface-container: #4a4641;
+	--color-surface-container-high: #5b5650;
+	--color-surface-container-highest: #6b655f;
+	--color-surface-variant: #4a4641;
 	--color-surface-tint: #b026ff;
 
-	--color-background: #1a1815;
+	--color-background: #3d3833;
 	--color-on-background: #f5f0e8;
 	--color-on-surface: #f5f0e8;
 	--color-on-surface-variant: #c8c0b8;
@@ -144,11 +151,12 @@
 
 @layer components {
 	/* Hard-card: print-block energy. Flat fill, hard 1px border, no blur,
-	 * no rounding. Replaces the seeded glass-card frosted treatment. Class
-	 * name kept so existing call sites work without churn. */
+	 * no rounding. Class name kept so existing call sites work without
+	 * churn. Border uses a faint Phosphor tint — grey-700 would now match
+	 * the card fill, so we lean on the brand accent to define the edge. */
 	.glass-card {
 		background: var(--color-surface-container);
-		border: 1px solid var(--color-grey-700);
+		border: 1px solid rgba(176, 38, 255, 0.18);
 		border-radius: 0;
 	}
 
@@ -160,6 +168,27 @@
 	.glass-card-hover:hover {
 		border-color: var(--color-primary-container);
 		background-color: var(--color-surface-container-high);
+	}
+
+	/* App card title — colour shift + double-layered Phosphor glow on
+	 * parent card hover. The 12 px inner halo handles the "neon sign"
+	 * read; the 24 px outer halo at lower alpha softens the edge so it
+	 * doesn't read as a hard ring. */
+	.app-card-title {
+		transition:
+			color 180ms ease,
+			text-shadow 200ms ease;
+	}
+	.glass-card-hover:hover .app-card-title {
+		color: var(--color-primary-container);
+		/* Neon-sign physics: saturated purple core, paler lavender bloom,
+		 * widening purple halo. The white-pink tight core makes the text
+		 * read as if lit from within instead of just being a colour swap. */
+		text-shadow:
+			0 0 4px rgba(255, 230, 255, 0.95),
+			0 0 12px rgba(221, 179, 255, 0.85),
+			0 0 24px rgba(176, 38, 255, 0.75),
+			0 0 48px rgba(176, 38, 255, 0.45);
 	}
 
 	/* Section label: small caps under a stripe-divider, used to title

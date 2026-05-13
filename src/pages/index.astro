@@ -4,7 +4,13 @@ import StripedGridMotion from "../components/StripedGridMotion.astro";
 import { getCollection } from "astro:content";
 
 const allApps = (await getCollection("apps", ({ data }) => !data.draft))
-	.sort((a, b) => a.data.title.localeCompare(b.data.title));
+	.sort((a, b) => {
+		// Finding Your Way is a commissioned piece (a port for an external author),
+		// not an Indri-originated product. Pin it last in the catalogue.
+		if (a.id === "finding-your-way") return 1;
+		if (b.id === "finding-your-way") return -1;
+		return a.data.title.localeCompare(b.data.title);
+	});
 
 const team = (await getCollection("team")).sort(
 	(a, b) => a.data.order - b.data.order,
@@ -42,32 +48,59 @@ const team = (await getCollection("team")).sort(
 		<h2 class="section-label">our apps</h2>
 
 		<ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-			{allApps.map((app) => (
-				<li>
-					<a
-						href={`/apps/${app.id}/`}
-						class="glass-card glass-card-hover block h-full p-6 md:p-8 group"
-					>
-						<div class="flex items-start justify-between mb-8">
-							<span class="block w-9 h-9 bg-[rgba(176,38,255,0.12)] border border-[rgba(176,38,255,0.4)]"></span>
-							<span class="font-display uppercase tracking-[0.25em] text-[10px] text-on-surface-variant">
-								{app.data.date.getFullYear()}
-							</span>
-						</div>
-						<h3 class="font-display text-2xl md:text-[28px] font-black text-on-surface group-hover:text-primary-container transition-colors mb-3 uppercase tracking-tight leading-[1.05]">
-							{app.data.title}
-						</h3>
-						{app.data.summary && (
-							<p class="font-body text-body-md text-on-surface-variant">
-								{app.data.summary}
-							</p>
-						)}
-						<div class="mt-8 font-display uppercase tracking-[0.25em] text-[11px] text-primary-container">
-							view →
-						</div>
-					</a>
-				</li>
-			))}
+			{allApps.map((app, idx) => {
+				const shots = app.data.screenshots;
+				// Per-card visual variation: slight differences in rotation and
+				// scale across the grid so cards don't read as a uniform stripe.
+				// Alternates direction; magnitude derived from index.
+				const rotation = (idx % 2 === 0 ? 1 : -1) * (5 + ((idx * 3) % 7));
+				const scale = 1.25 + ((idx % 3) * 0.05);
+				return (
+					<li>
+						<a
+							href={`/apps/${app.id}/`}
+							class="glass-card glass-card-hover relative overflow-hidden block h-full p-6 md:p-8 group"
+						>
+							{shots.length > 0 && (
+								<div class="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+									<img
+										src={shots[0].src}
+										alt=""
+										loading="lazy"
+										class="absolute inset-0 w-full h-full object-cover opacity-35 saturate-50"
+										style={`transform: scale(${scale}) rotate(${rotation}deg);`}
+									/>
+									{shots[1] && (
+										<img
+											src={shots[1].src}
+											alt=""
+											loading="lazy"
+											class="absolute -bottom-[20%] -right-[15%] w-3/4 h-3/4 object-cover opacity-25 saturate-50 mix-blend-luminosity"
+											style={`transform: rotate(${-rotation * 1.4}deg);`}
+										/>
+									)}
+									{/* Darken overlay — keeps text legible regardless of underlying screenshot */}
+									<div class="absolute inset-0 bg-gradient-to-br from-[rgba(74,70,65,0.82)] via-[rgba(74,70,65,0.58)] to-[rgba(74,70,65,0.40)]"></div>
+								</div>
+							)}
+
+							<div class="relative z-10">
+								<div class="mb-8">
+									<span class="block w-9 h-9 bg-[rgba(176,38,255,0.12)] border border-[rgba(176,38,255,0.4)]"></span>
+								</div>
+								<h3 class="app-card-title font-display text-2xl md:text-[28px] font-black text-on-surface mb-3 uppercase tracking-tight leading-[1.05]">
+									{app.data.title}
+								</h3>
+								{app.data.summary && (
+									<p class="font-body text-body-md text-on-surface-variant">
+										{app.data.summary}
+									</p>
+								)}
+							</div>
+						</a>
+					</li>
+				);
+			})}
 		</ul>
 	</section>
 

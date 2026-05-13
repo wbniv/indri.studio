@@ -23,7 +23,7 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 <Base title={post.data.title} description={post.data.summary}>
 	<article class="max-w-[720px] mx-auto px-6 md:px-8 py-12 md:py-20">
 		<a
-			href="/#launches"
+			href="/#apps"
 			class="inline-flex items-center font-display text-label-md uppercase tracking-[0.2em] text-outline hover:text-primary-container transition-colors mb-10"
 		>
 			<span class="material-symbols-outlined text-base mr-1">chevron_left</span>
@@ -60,6 +60,30 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 		<div class="prose">
 			<Content />
 		</div>
+
+		{post.data.screenshots.length > 0 && (
+			<section class="mt-12 md:mt-16">
+				<div class="stripe-divider mb-4"></div>
+				<h2 class="section-label">screenshots</h2>
+				<ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 list-none p-0 m-0">
+					{post.data.screenshots.map((shot) => (
+						<li class="glass-card p-3">
+							<img
+								src={shot.src}
+								alt={shot.alt ?? ""}
+								loading="lazy"
+								class="block w-full h-auto"
+							/>
+							{shot.alt && (
+								<p class="font-display uppercase tracking-[0.2em] text-[10px] text-on-surface-variant mt-3 mb-1 px-1">
+									{shot.alt}
+								</p>
+							)}
+						</li>
+					))}
+				</ul>
+			</section>
+		)}
 	</article>
 
 	<style>

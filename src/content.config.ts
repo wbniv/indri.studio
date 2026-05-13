@@ -23,6 +23,18 @@ const apps = defineCollection({
 		summary: z.string().optional(),
 		// Pull an app out of the published list without deleting the file.
 		draft: z.boolean().default(false),
+		// Screenshots rendered below the prose on the per-app landing page.
+		// Paths are relative to /public — e.g. "/screenshots/splitledger/balances.png".
+		// shape-aware framing (phone/tablet/console) is future work; for now
+		// images render at their native aspect ratio inside a grid.
+		screenshots: z
+			.array(
+				z.object({
+					src: z.string(),
+					alt: z.string().optional(),
+				}),
+			)
+			.default([]),
 	}),
 });
 
