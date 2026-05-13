@@ -236,6 +236,18 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 		.prose :global(a:hover) {
 			text-decoration-color: var(--color-primary-container);
 		}
+		.prose :global(a[data-external])::after {
+			content: "";
+			display: inline-block;
+			width: 0.7em;
+			height: 0.7em;
+			margin-left: 0.18em;
+			vertical-align: 0.05em;
+			background-color: currentColor;
+			-webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M7 17 17 7'/><path d='M8 7h9v9'/></svg>") no-repeat center / contain;
+			mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M7 17 17 7'/><path d='M8 7h9v9'/></svg>") no-repeat center / contain;
+			opacity: 0.75;
+		}
 		.prose :global(ul),
 		.prose :global(ol) {
 			font-family: var(--font-body);
