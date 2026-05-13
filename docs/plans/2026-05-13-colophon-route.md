@@ -13,7 +13,9 @@ Energy match: bold-display sectional one-pager (Hoox rhythm), same uppercase `.s
 
 Single static page at `/colophon`, rendering through `Base.astro` (same as homepage and apps). Sectional layout: hero block + 6 content sections separated by the existing `.section-label` styling.
 
-**Section order** (final): hero → SET IN → PALETTE → BUILT WITH → MOTIFS → REFERENCES. The ordering walks from craft details (type, palette, stack) into brand identity (motifs, references). The mascot itself doesn't get a dedicated section — it lives in `Base.astro` directly above the footer, so it sign-offs **every page** on the site (homepage, app pages, colophon).
+**Section order** (final): hero → SET IN → PALETTE → BUILT WITH → MOTIFS → REFERENCES → (mascot image, sitting flush against the footer). The ordering walks from craft details (type, palette, stack) into brand identity (motifs, references) and ends on the mascot.
+
+The mascot is **colophon-only for now** — rendered after the REFERENCES section, just before the layout's `</Base>` so it sits directly above the footer with no section chrome (no `<section>` wrapper, no heading). It may move to a site-wide slot in `Base.astro` later.
 
 No new components required. Reuses:
 
@@ -83,11 +85,11 @@ The ring-tailed lemur isn't pictured anywhere on the site, but its body shows up
 
 The visual anchor for this site is [**Hoox**](https://landingfolio.com/inspiration/hoox) (now offline; preserved in the [landingfolio.com](https://landingfolio.com) archive). Hoox set the rhythm: dark theme, single bold accent, content-rich sectional layout — each section a distinct visual card rather than generic columns. [**clerk.com**](https://clerk.com) is the live, currently-shipping reference for the same DNA. The pixel-grid motion vocabulary comes from [**droneland.au**](https://droneland.au).
 
-### Mascot (site-wide, in Base.astro)
+### Mascot (colophon only, flush above footer)
 
-The mascot lives in `Base.astro` directly above the footer rather than as a section on the colophon. Effect: the lemur signs off **every page** — homepage, app pages, colophon — as the visual closer before the footer band.
+Rendered directly after the REFERENCES section, outside any `<section>` wrapper, so the image sits flush against the footer on the colophon page only. No heading, no caption — the lemur stands on its own as the page's visual sign-off.
 
-Asset: `public/mascot-lemur.png` — a stylised ring-tailed lemur with neon purple eyes, tail looped above its head. Rendered at 1536×1024 intrinsic (3:2). Centered, capped at `max-w-sm`, lazy-loaded, with no caption (the lemur stands on its own).
+Asset: `public/mascot-lemur.png` — a stylised ring-tailed lemur with neon purple eyes, tail looped above its head. Rendered at 1536×1024 intrinsic (3:2). Centered, capped at `max-w-sm`, lazy-loaded.
 
 Footer micro-note (optional): a place line if you want one — e.g. *"Built in Bangkok."* Not a hard requirement.
 
@@ -96,7 +98,7 @@ Footer micro-note (optional): a place line if you want one — e.g. *"Built in B
 | File | Change |
 |---|---|
 | `src/pages/colophon.astro` | **New.** `<Base title="colophon">` wrapper. Hero block + 5 sections in this order: `SET IN`, `PALETTE`, `BUILT WITH`, `MOTIFS`, `REFERENCES`. Wingding bullets per list: `◯` (Phosphor ring) for SET IN and MOTIFS; `▌` (stripe motif, Phosphor) for BUILT WITH. Every external product/typeface/site name rendered as a clickable link to its canonical page. |
-| `src/layouts/Base.astro` | (a) Add `colophon` link to the right side of the footer, just before the `© year` span. Same `font-display uppercase text-[10px] tracking-[0.3em]` styling. (b) Add the mascot image (`public/mascot-lemur.png`) in a centred container directly above the footer — site-wide; appears on every page. |
+| `src/layouts/Base.astro` | Add `colophon` link to the right side of the footer, just before the `© year` span. Same `font-display uppercase text-[10px] tracking-[0.3em]` styling. (Mascot is **not** in Base for now — colophon-only; may move to Base later.) |
 | `public/mascot-lemur.png` | **New.** Mascot image — stylised ring-tailed lemur with neon purple (Phosphor) eyes, tail looped over head. Intrinsic 1536×1024 (3:2). |
 
 ## Verification
@@ -106,7 +108,7 @@ Footer micro-note (optional): a place line if you want one — e.g. *"Built in B
 From a fresh hard-refresh on each test:
 
 1. **Direct visit (dev).** Navigate to [localhost:4321/colophon](http://localhost:4321/colophon). All sections render in order: hero with COLOPHON heading and pull-quote, then SET IN → PALETTE → BUILT WITH → MOTIFS → REFERENCES. The mascot image appears just above the footer (lives in Base.astro, not in a section).
-2. **Mascot site-wide.** Visit [localhost:4321/](http://localhost:4321/), an [app page](http://localhost:4321/apps/splitledger/), and [/colophon](http://localhost:4321/colophon). Scroll to the bottom of each — the mascot lemur image appears just above the footer on all three.
+2. **Mascot colophon-only.** On [/colophon](http://localhost:4321/colophon), scroll to bottom — the lemur image sits flush above the footer. On [the homepage](http://localhost:4321/) and on an [app page](http://localhost:4321/apps/splitledger/), the mascot does **not** appear (intentional, for now).
 3. **Footer link.** From [the homepage](http://localhost:4321/), scroll to footer. Click "colophon". Lands on `/colophon` via Astro view transition (the header height animation we just shipped should fire here on the way in too).
 4. **Cross-page footer link.** From [/apps/splitledger/](http://localhost:4321/apps/splitledger/), scroll to footer, click "colophon". Same smooth transition; lands on `/colophon`.
 5. **Palette swatches reflect actual tokens.** Open DevTools, inspect a swatch — its background should resolve via `var(--color-grey-50)` etc., not be hardcoded. Editing the token in `global.css` should change the swatch.
