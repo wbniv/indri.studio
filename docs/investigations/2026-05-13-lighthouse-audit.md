@@ -201,7 +201,10 @@ Pass-2's other resolved items (A, B, C, #4, #5, #7, #8) carry forward unchanged.
 
 Optional pass-4 candidates if appetite returns:
 
-- **Push `/apps/splitledger/` from 99 to 100.** The single-point gap is `unused-javascript` (View-Transitions runtime adds ~9 KB unused on a route that uses transitions across all routes). Marginal.
+- **Push `/apps/splitledger/` from 99 to 100.** The single-point gap is **not** `unused-javascript` — that audit is passing (score 1.0, 0 items, verified in `splitledger.run-1.report.json`). The deductions come from two scoring audits:
+    - **CLS** (weight 25, score 0.98) — the residual 0.058 shift, sourced from the screenshot grid; would need to drop to 0.0 for score 1.0.
+    - **FCP** (weight 10, score 0.95) — 1.5 s is "good" but the perfect-score threshold is ~0.9 s.
+    Neither is a `<ClientRouter />`-removal target. Skip pass-4 here unless tightening CLS to zero is independently desirable.
 - **Sample more app pages.** Pass 3 covers `/apps/splitledger/` (image-heavy worst case from Pass 1). The longest prose app page is `/apps/claude-code-authoring-formats/`; a one-off measurement under `task lighthouse APPS="claude-code-authoring-formats"` would extend the dataset.
 - **CI integration.** Wire `task lighthouse` into the deploy workflow so every tag push captures a fresh JSON bundle under `dist/lh/<tag>/`. Not urgent.
 
