@@ -413,6 +413,15 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 			animation: none;
 		}
 
+		/* View-transition pseudo-elements default transform-origin to
+		   0 0 (top-left). Force center so scale shrinks/grows around
+		   the middle of the article instead of looking like the page
+		   is falling toward the top-left as it scales. */
+		::view-transition-old(app-content),
+		::view-transition-new(app-content) {
+			transform-origin: 50% 50%;
+		}
+
 		@media (prefers-reduced-motion: no-preference) {
 			/* Outgoing eases-in (accelerates away); incoming eases-out
 			   (decelerates to a stop). Feels more decisive than the
@@ -432,20 +441,20 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 		}
 
 		@keyframes app-slide-out-left {
-			from { opacity: 1; transform: translateX(0); }
-			to   { opacity: 0; transform: translateX(-100%); }
+			from { opacity: 1; transform: translateX(0)     scale(1);    }
+			to   { opacity: 0; transform: translateX(-100%) scale(0.96); }
 		}
 		@keyframes app-slide-in-right {
-			from { opacity: 0; transform: translateX(100%); }
-			to   { opacity: 1; transform: translateX(0); }
+			from { opacity: 0; transform: translateX(100%)  scale(0.96); }
+			to   { opacity: 1; transform: translateX(0)     scale(1);    }
 		}
 		@keyframes app-slide-out-right {
-			from { opacity: 1; transform: translateX(0); }
-			to   { opacity: 0; transform: translateX(100%); }
+			from { opacity: 1; transform: translateX(0)     scale(1);    }
+			to   { opacity: 0; transform: translateX(100%)  scale(0.96); }
 		}
 		@keyframes app-slide-in-left {
-			from { opacity: 0; transform: translateX(-100%); }
-			to   { opacity: 1; transform: translateX(0); }
+			from { opacity: 0; transform: translateX(-100%) scale(0.96); }
+			to   { opacity: 1; transform: translateX(0)     scale(1);    }
 		}
 	</style>
 </AppLayout>
