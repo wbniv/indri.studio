@@ -37,7 +37,10 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 ---
 
 <AppLayout title={post.data.title} description={post.data.summary} theme={post.data.theme}>
-	<article class="max-w-[720px] mx-auto px-6 md:px-8 py-12 md:py-20">
+	<article
+		style="view-transition-name: app-content"
+		class="max-w-[720px] mx-auto px-6 md:px-8 py-12 md:py-20"
+	>
 		<nav aria-label="Catalogue navigation" class="catalogue-nav">
 			<a
 				href={`/apps/${prev.id}/`}
@@ -123,19 +126,38 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 
 	</article>
 
-	<script define:vars={{ prevHref: `/apps/${prev.id}/`, nextHref: `/apps/${next.id}/` }}>
-		// Keyboard navigation between apps. Defers to any open <dialog>
-		// (e.g. an in-page lightbox) so its own arrow handler can take
-		// the keys. Also skips when focus is in an editable field.
-		document.addEventListener('keydown', (e) => {
-			if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-			if (e.ctrlKey || e.metaKey || e.altKey) return;
-			if (document.querySelector('dialog[open]')) return;
-			const t = e.target;
-			if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
-			e.preventDefault();
-			window.location.assign(e.key === 'ArrowLeft' ? prevHref : nextHref);
+	<script>
+		// Tag <html data-nav-dir="prev|next"> before a prev/next click so
+		// the view-transition CSS picks the matching slide animation.
+		// Re-applied at astro:before-preparation + astro:after-swap because
+		// Astro's swap nukes <html> attributes mid-flight.
+		let pendingDir = null;
+
+		const setDir = (dir) => {
+			pendingDir = dir;
+			document.documentElement.dataset.navDir = dir;
+		};
+
+		document.addEventListener('astro:before-preparation', () => {
+			if (pendingDir) document.documentElement.dataset.navDir = pendingDir;
 		});
+		document.addEventListener('astro:after-swap', () => {
+			if (pendingDir) document.documentElement.dataset.navDir = pendingDir;
+		});
+		document.addEventListener('astro:page-load', () => {
+			setTimeout(() => {
+				delete document.documentElement.dataset.navDir;
+				pendingDir = null;
+			}, 400);
+		});
+
+		// Delegated; capture phase so we set data-nav-dir before
+		// ClientRouter's own click interceptor snapshots the old page.
+		document.addEventListener('click', (e) => {
+			const a = e.target && e.target.closest && e.target.closest('a[aria-label^="Previous:"], a[aria-label^="Next:"]');
+			if (!a) return;
+			setDir(a.getAttribute('aria-label').startsWith('Previous') ? 'prev' : 'next');
+		}, true);
 	</script>
 
 	<style>
@@ -268,11 +290,10 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 		}
 		.side-nav-caret {
 			font-family: var(--font-display);
-			font-size: 22px;
+			font-size: 28px;
 			line-height: 1;
 			font-weight: 700;
 			color: var(--color-primary-container);
-			margin-right: 0.4rem;
 		}
 		.side-nav-all-apps .side-nav-title {
 			display: inline-flex;
@@ -329,6 +350,55 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 			.side-nav-arrow {
 				font-size: 24px !important;
 			}
+			.side-nav-caret {
+				font-size: 24px;
+			}
+		}
+	</style>
+
+	<style is:global>
+		/* View transitions between app pages. Direction comes from
+		   <html data-nav-dir="prev|next"> set by the prev/next click
+		   handler before navigation. Slide is scoped to the article
+		   (transition:name="app-content"); the persistent header/footer
+		   sit still while the article slides under them. The root pair
+		   has its animation suppressed so the rest of the page snaps
+		   instead of crossfading. */
+		::view-transition-old(root),
+		::view-transition-new(root) {
+			animation: none;
+		}
+
+		@media (prefers-reduced-motion: no-preference) {
+			:root[data-nav-dir="next"]::view-transition-old(app-content) {
+				animation: app-slide-out-left 280ms cubic-bezier(0.4, 0, 0.2, 1) both;
+			}
+			:root[data-nav-dir="next"]::view-transition-new(app-content) {
+				animation: app-slide-in-right 280ms cubic-bezier(0.4, 0, 0.2, 1) both;
+			}
+			:root[data-nav-dir="prev"]::view-transition-old(app-content) {
+				animation: app-slide-out-right 280ms cubic-bezier(0.4, 0, 0.2, 1) both;
+			}
+			:root[data-nav-dir="prev"]::view-transition-new(app-content) {
+				animation: app-slide-in-left 280ms cubic-bezier(0.4, 0, 0.2, 1) both;
+			}
+		}
+
+		@keyframes app-slide-out-left {
+			from { opacity: 1; transform: translateX(0); }
+			to   { opacity: 0; transform: translateX(-100%); }
+		}
+		@keyframes app-slide-in-right {
+			from { opacity: 0; transform: translateX(100%); }
+			to   { opacity: 1; transform: translateX(0); }
+		}
+		@keyframes app-slide-out-right {
+			from { opacity: 1; transform: translateX(0); }
+			to   { opacity: 0; transform: translateX(100%); }
+		}
+		@keyframes app-slide-in-left {
+			from { opacity: 0; transform: translateX(-100%); }
+			to   { opacity: 1; transform: translateX(0); }
 		}
 	</style>
 </AppLayout>

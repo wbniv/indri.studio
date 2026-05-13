@@ -80,6 +80,7 @@ const navLinkClass = (active: boolean) =>
 		{ringFlare && <RingFlare />}
 
 		<header
+			transition:persist
 			class="header-fx sticky top-0 z-50 w-full border-b border-[rgba(26,24,21,0.4)] bg-primary-container backdrop-blur-md"
 		>
 			<div class="flex justify-between items-center w-full px-6 md:px-8 max-w-[var(--container-max)] mx-auto">
@@ -96,7 +97,10 @@ const navLinkClass = (active: boolean) =>
 			<slot />
 		</main>
 
-		<footer class="w-full border-t border-[color-mix(in_srgb,_var(--color-primary-container)_15%,_transparent)] bg-surface-container-lowest">
+		<footer
+			transition:persist
+			class="w-full border-t border-[color-mix(in_srgb,_var(--color-primary-container)_15%,_transparent)] bg-surface-container-lowest"
+		>
 			<div
 				class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 py-10 md:py-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
 			>
