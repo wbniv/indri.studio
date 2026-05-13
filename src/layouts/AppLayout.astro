@@ -5,6 +5,7 @@
 // Tailwind v4 utilities and the prose styles all read from these vars
 // via the cascade, so descendants automatically re-theme.
 import Base from "./Base.astro";
+import ScrollToTop from "../components/ScrollToTop.astro";
 
 interface Props {
 	title: string;
@@ -52,5 +53,6 @@ const fontImports = theme.fontImports ?? [];
 	</Fragment>
 	<div class="app-theme" style={themeStyle}>
 		<slot />
+		<ScrollToTop />
 	</div>
 </Base>

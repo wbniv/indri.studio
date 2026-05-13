@@ -3,6 +3,7 @@
 Low-priority tasks that aren't blocking but shouldn't be lost.
 
 - [ ] Re-implement www→apex redirect in the indri-studio Worker's `fetch` handler — the `cloudflare_ruleset` resource is unmanageable from any API-token type on this Free-plan zone (deleted manually 2026-05-13). www.indri.studio currently has no redirect; fix before any marketing pushes traffic to `www.`
+- [ ] Scroll-to-top affordance on app pages — floating ^ button, bottom-right, only on app pages that exceed one viewport, appears after scrolling half a screen — [plan](docs/plans/2026-05-14-scroll-to-top.md)
 
 ## Done
 

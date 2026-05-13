@@ -1,0 +1,180 @@
+---
+// Floating ^ button shown on app pages that exceed one viewport, after
+// the reader has scrolled past half a viewport. Theme-aware via the
+// per-app CSS custom properties set by AppLayout.
+---
+
+<button id="scroll-to-top" type="button" aria-label="Scroll to top" data-eligible="false" data-visible="false">
+	<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+		<polyline points="6 15 12 9 18 15"></polyline>
+	</svg>
+</button>
+
+<style>
+	#scroll-to-top {
+		position: fixed;
+		bottom: 1.5rem;
+		right: 1.5rem;
+		width: 2.75rem;
+		height: 2.75rem;
+		border-radius: 999px;
+		background: color-mix(in srgb, var(--color-on-surface) 10%, transparent);
+		color: color-mix(in srgb, var(--color-on-surface) 95%, transparent);
+		border: 1px solid color-mix(in srgb, var(--color-on-surface) 25%, transparent);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 40;
+		opacity: 0;
+		transform: translateY(8px);
+		pointer-events: none;
+		transition: opacity 200ms ease-out, transform 200ms ease-out, background 150ms ease-out;
+	}
+	#scroll-to-top[data-eligible="true"][data-visible="true"] {
+		opacity: 1;
+		transform: translateY(0);
+		pointer-events: auto;
+	}
+	#scroll-to-top:hover {
+		background: color-mix(in srgb, var(--color-on-surface) 20%, transparent);
+	}
+	#scroll-to-top:focus-visible {
+		outline: 2px solid var(--color-primary-container);
+		outline-offset: 3px;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		#scroll-to-top {
+			transition: none;
+			transform: none;
+		}
+		#scroll-to-top[data-eligible="true"][data-visible="true"] {
+			transform: none;
+		}
+	}
+</style>
+
+<script is:inline>
+	(() => {
+		let eligible = false;
+		let pending = false;
+		let firstLoad = true;
+		const VISIBILITY_THRESHOLD_RATIO = 0.5;
+		const ELIGIBILITY_BUFFER_PX = 100;
+		const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+		const button = () => document.getElementById("scroll-to-top");
+
+		const updateVisibility = () => {
+			pending = false;
+			const btn = button();
+			if (!btn || !eligible) return;
+			const shouldShow = window.scrollY > window.innerHeight * VISIBILITY_THRESHOLD_RATIO;
+			btn.dataset.visible = shouldShow ? "true" : "false";
+		};
+
+		const tick = () => {
+			if (pending) return;
+			pending = true;
+			requestAnimationFrame(updateVisibility);
+		};
+
+		const measureEligibility = () => {
+			const btn = button();
+			if (!btn) return;
+			eligible = document.documentElement.scrollHeight > window.innerHeight + ELIGIBILITY_BUFFER_PX;
+			btn.dataset.eligible = eligible ? "true" : "false";
+			updateVisibility();
+		};
+
+		// Cubic ease-in-out: slow start, accelerate through the middle,
+		// decelerate into rest at 0. Feels more deliberate than the
+		// browser-default smooth scroll's near-linear ramp.
+		const easeInOutCubic = (t) =>
+			t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+		let activeAbort = null;
+
+		const smoothScrollToTop = () => {
+			const startY = window.scrollY;
+			if (startY === 0) return;
+			if (reducedMotion) {
+				window.scrollTo(0, 0);
+				return;
+			}
+			// Abort any in-flight animation so back-to-back clicks coalesce
+			// into a single trajectory from the current scroll position.
+			if (activeAbort) activeAbort.abort();
+			// Duration scales with distance: ~0.4 ms/px, clamped 400-900 ms.
+			// Short trips stay snappy; long trips don't drag.
+			const duration = Math.min(900, Math.max(400, startY * 0.4));
+			const startTime = performance.now();
+			const ac = new AbortController();
+			activeAbort = ac;
+			let aborted = false;
+			const cancel = () => {
+				aborted = true;
+				ac.abort();
+			};
+			// Any user-initiated scroll input aborts — never fight the user.
+			const opts = { signal: ac.signal, passive: true };
+			window.addEventListener("wheel", cancel, opts);
+			window.addEventListener("touchstart", cancel, opts);
+			window.addEventListener("pointerdown", cancel, opts);
+			window.addEventListener("keydown", cancel, { signal: ac.signal });
+
+			const step = (now) => {
+				if (aborted) return;
+				const t = Math.min(1, (now - startTime) / duration);
+				const y = Math.round(startY * (1 - easeInOutCubic(t)));
+				window.scrollTo(0, y);
+				if (t < 1) {
+					requestAnimationFrame(step);
+				} else {
+					ac.abort();
+				}
+			};
+			requestAnimationFrame(step);
+		};
+
+		const wireClick = () => {
+			const btn = button();
+			if (!btn) return;
+			btn.addEventListener("click", smoothScrollToTop);
+		};
+
+		window.addEventListener("scroll", tick, { passive: true });
+		window.addEventListener("resize", () => {
+			measureEligibility();
+		}, { passive: true });
+
+		document.addEventListener("astro:before-preparation", () => {
+			eligible = false;
+			const btn = button();
+			if (btn) {
+				btn.dataset.eligible = "false";
+				btn.dataset.visible = "false";
+			}
+		});
+
+		document.addEventListener("astro:page-load", () => {
+			wireClick();
+			// First paint on a long app page: reading scrollHeight forces
+			// a sync layout. Defer to idle. Subsequent loads (after view
+			// transition) are post-paint already — measure promptly.
+			if (firstLoad) {
+				firstLoad = false;
+				const run = () => measureEligibility();
+				if ("requestIdleCallback" in window) {
+					requestIdleCallback(run, { timeout: 250 });
+				} else {
+					setTimeout(run, 0);
+				}
+				return;
+			}
+			requestAnimationFrame(measureEligibility);
+		});
+	})();
+</script>
