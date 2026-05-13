@@ -299,14 +299,11 @@
 	.header-fx > div {
 		padding-top: calc(1.125rem - 1rem * var(--header-shrink, 0));
 		padding-bottom: calc(1.125rem - 1rem * var(--header-shrink, 0));
+		transition: padding-top 220ms ease-in-out, padding-bottom 220ms ease-in-out;
 	}
 
 	/* Header motion FX — Phosphor breathe, a slow screen-blended radial
-<<<<<<< Updated upstream
 	 * glow that pulses across the purple header. Always on. */
-=======
-	 * glow that pulses across the purple header. Runs on every page. */
->>>>>>> Stashed changes
 	.header-fx {
 		position: relative;
 		isolation: isolate;
@@ -341,6 +338,9 @@
 	@media (prefers-reduced-motion: reduce) {
 		.header-fx::after {
 			animation: none;
+		}
+		.header-fx > div {
+			transition: none;
 		}
 	}
 
