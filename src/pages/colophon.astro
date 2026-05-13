@@ -75,10 +75,10 @@ const motifs = [
 <Base title="colophon">
 	<!-- Hero -->
 	<section
-		class="relative overflow-hidden min-h-[480px] md:min-h-[560px] flex items-center"
+		class="relative overflow-hidden min-h-[240px] md:min-h-[280px] flex items-center"
 	>
 		<div
-			class="relative z-10 w-full max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-24 md:py-32"
+			class="relative z-10 w-full max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-12 md:py-16"
 		>
 			<div class="max-w-3xl">
 				<h1 class="font-display mb-2">
@@ -95,7 +95,7 @@ const motifs = [
 				</h1>
 
 				<p
-					class="font-body text-body-lg text-on-surface-variant max-w-xl mt-10 border-l-2 border-primary-container pl-6"
+					class="font-body text-body-lg text-on-surface-variant max-w-xl mt-5 border-l-2 border-primary-container pl-6"
 				>
 					Greys, neon purple, a ring-tailed lemur, and the open web.
 				</p>
@@ -106,12 +106,12 @@ const motifs = [
 	<!-- Set in -->
 	<section
 		id="set-in"
-		class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-16 md:py-24 scroll-mt-20"
+		class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-8 md:py-12 scroll-mt-20"
 	>
 		<h2 class="section-label">set in</h2>
 
 		<ul
-			class="space-y-5 list-none pl-0 font-body text-body-lg text-on-surface-variant max-w-4xl"
+			class="space-y-3 list-none pl-0 font-body text-body-lg text-on-surface-variant max-w-4xl"
 		>
 			<li class="flex items-baseline gap-3">
 				<span
@@ -197,12 +197,12 @@ const motifs = [
 	<!-- Palette -->
 	<section
 		id="palette"
-		class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-16 md:py-24 scroll-mt-20"
+		class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-8 md:py-12 scroll-mt-20"
 	>
 		<h2 class="section-label">palette</h2>
 
 		<p
-			class="font-body text-body-lg text-on-surface-variant max-w-4xl mb-12"
+			class="font-body text-body-lg text-on-surface-variant max-w-4xl mb-6"
 		>
 			A warm-tinted grey scale evoking the body and tail rings of
 			<a
@@ -212,8 +212,8 @@ const motifs = [
 		</p>
 
 		<!-- Accent -->
-		<div class="mb-16 max-w-4xl">
-			<div class="flex items-baseline gap-4 mb-4">
+		<div class="mb-8 max-w-4xl">
+			<div class="flex items-baseline gap-4 mb-2">
 				<span
 					class="inline-block w-10 h-10 flex-shrink-0 self-center"
 					style={`background-color: var(${accent.cssVar});`}
@@ -245,7 +245,7 @@ const motifs = [
 		<!-- Ringtail greys -->
 		<div class="max-w-4xl">
 			<h3
-				class="font-display uppercase tracking-[0.2em] text-xs text-on-surface-variant mb-6"
+				class="font-display uppercase tracking-[0.2em] text-xs text-on-surface-variant mb-3"
 			>
 				Ringtail greys
 			</h3>
@@ -277,12 +277,12 @@ const motifs = [
 	<!-- Built with -->
 	<section
 		id="built-with"
-		class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-16 md:py-24 scroll-mt-20"
+		class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-8 md:py-12 scroll-mt-20"
 	>
 		<h2 class="section-label">built with</h2>
 
 		<ul
-			class="space-y-5 list-none pl-0 font-body text-body-lg text-on-surface-variant max-w-4xl"
+			class="space-y-3 list-none pl-0 font-body text-body-lg text-on-surface-variant max-w-4xl"
 		>
 			<li class="flex items-baseline gap-3">
 				<span
@@ -388,22 +388,22 @@ const motifs = [
 	<!-- Motifs -->
 	<section
 		id="motifs"
-		class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-16 md:py-24 scroll-mt-20"
+		class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-8 md:py-12 scroll-mt-20"
 	>
 		<h2 class="section-label">motifs</h2>
 
 		<p
-			class="font-body text-body-lg text-on-surface-variant max-w-4xl mb-10"
+			class="font-body text-body-lg text-on-surface-variant max-w-4xl mb-5"
 		>
 			The ring-tailed lemur isn't pictured anywhere on the site, but its body
 			shows up structurally:
 		</p>
 
-		<ul class="space-y-6 max-w-4xl list-none pl-0">
+		<ul class="space-y-3 max-w-4xl list-none pl-0">
 			{
 				motifs.map((m) => (
 					<li>
-						<div class="font-display uppercase tracking-tight font-black text-on-surface text-lg md:text-xl mb-2 flex items-baseline gap-3">
+						<div class="font-display uppercase tracking-tight font-black text-on-surface text-lg md:text-xl mb-1 flex items-baseline gap-3">
 							<span
 								class="text-primary-container select-none"
 								aria-hidden="true"
@@ -424,12 +424,12 @@ const motifs = [
 	<!-- References -->
 	<section
 		id="references"
-		class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-16 md:py-24 scroll-mt-20"
+		class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-8 md:py-12 scroll-mt-20"
 	>
 		<h2 class="section-label">references</h2>
 
 		<div
-			class="space-y-6 font-body text-body-lg text-on-surface-variant max-w-4xl"
+			class="space-y-3 font-body text-body-lg text-on-surface-variant max-w-4xl"
 		>
 			<p>
 				The visual anchor for this site is <a
