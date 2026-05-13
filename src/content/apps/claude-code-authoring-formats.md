@@ -29,11 +29,11 @@ Below: the same memory file rendered against each of the fifteen. Click any tile
   .fm-grid img { margin: 0; width: 100%; height: auto; border-radius: 4px; display: block; transition: transform 0.15s ease; }
   .fm-grid button:hover img { transform: scale(1.02); }
   .fm-grid figcaption { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; }
-  dialog#fm-lightbox { position: fixed; inset: 0; width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; padding: 2rem 4rem 5rem 4rem; border: 0; background: transparent; color: var(--color-on-background, #f5f0e8); display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
-  dialog#fm-lightbox::backdrop { background: rgba(61, 56, 51, 0.96); backdrop-filter: blur(6px); }
-  dialog#fm-lightbox figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 1rem; max-width: 100%; max-height: 100%; }
-  dialog#fm-lightbox img { max-width: 100%; max-height: calc(100vh - 12rem); width: auto; height: auto; object-fit: contain; border-radius: 4px; box-shadow: 0 24px 60px rgba(0,0,0,0.5); }
-  dialog#fm-lightbox figcaption { font-size: 0.95rem; color: rgba(245,240,232,0.8); text-align: center; max-width: 70ch; line-height: 1.5; padding: 0 1rem; flex-shrink: 0; }
+  dialog#fm-lightbox { margin: auto; padding: 2rem; border: 0; background: transparent; color: var(--color-on-background, #f5f0e8); max-width: 92vw; max-height: 92vh; }
+  dialog#fm-lightbox::backdrop { background: rgba(61, 56, 51, 0.97); backdrop-filter: blur(4px); }
+  dialog#fm-lightbox figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+  dialog#fm-lightbox img { display: block; max-width: 88vw; max-height: 75vh; width: auto; height: auto; object-fit: contain; border-radius: 4px; box-shadow: 0 24px 60px rgba(0,0,0,0.5); }
+  dialog#fm-lightbox figcaption { font-size: 0.95rem; color: rgba(245,240,232,0.85); text-align: center; max-width: 70ch; line-height: 1.5; padding: 0 1rem; }
   dialog#fm-lightbox .fm-close,
   dialog#fm-lightbox .fm-nav { position: fixed; top: 50%; transform: translateY(-50%); background: rgba(245,240,232,0.1); color: rgba(245,240,232,0.95); border: 1px solid rgba(245,240,232,0.25); border-radius: 999px; width: 2.75rem; height: 2.75rem; font-size: 1.4rem; cursor: pointer; line-height: 1; display: flex; align-items: center; justify-content: center; }
   dialog#fm-lightbox .fm-close { top: 1.5rem; right: 1.5rem; transform: none; }
