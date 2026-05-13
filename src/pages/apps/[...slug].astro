@@ -31,20 +31,14 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 		</a>
 
 		<header class="mb-10">
-			<div class="flex flex-wrap items-center gap-3 mb-6">
-				<time
-					datetime={post.data.date.toISOString()}
-					class="font-display text-label-md uppercase tracking-[0.2em] text-outline"
-				>
-					{fmtDate(post.data.date)}
-				</time>
-				{upcoming && (
+			{upcoming && (
+				<div class="flex flex-wrap items-center gap-3 mb-6">
 					<span class="pill-purple">
 						<span class="material-symbols-outlined text-sm">hourglass_top</span>
 						Launching Soon
 					</span>
-				)}
-			</div>
+				</div>
+			)}
 
 			<h1 class="font-display text-headline-lg text-primary-container tracking-tighter mb-6">
 				{post.data.title}
@@ -63,7 +57,6 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 
 		{post.data.screenshots.length > 0 && (
 			<section class="mt-12 md:mt-16">
-				<div class="stripe-divider mb-4"></div>
 				<h2 class="section-label">screenshots</h2>
 				<ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 list-none p-0 m-0">
 					{post.data.screenshots.map((shot) => (
