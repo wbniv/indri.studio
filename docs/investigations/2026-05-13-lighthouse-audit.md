@@ -1,6 +1,10 @@
 # Lighthouse audit — 2026-05-13 (post-v0.1.13)
 
-> **Status (2026-05-13, after this audit):** items A, B, C below resolved in the next commit. Item D (SplitLedger image optimization) deferred per follow-up plan `docs/plans/2026-05-13-app-screenshot-image-optimization.md` — waiting on another agent's in-flight changes to `src/pages/apps/[...slug].astro`. The cache-TTL recommendation in this report (see §Recommendations #6) was **withdrawn** — long-immutable cache headers without a cache-busting plan would trap stale assets during active development. Revisit only when there's a content-hashing / versioning strategy in place.
+> **Status (2026-05-13, after this audit):**
+> - **Items A, B, C** resolved in commit `7eb9b4c` (team-strip contrast, footer © opacity, Material Symbols off the critical render path).
+> - **Item D / Recommendations #4 + #5** (AVIF/WebP variants, explicit `width`/`height`) shipped in commit `abca262` per `docs/plans/2026-05-13-app-screenshot-image-optimization.md`. Site-wide payload 23 MB PNG → 3 MB AVIF (87% smaller); SplitLedger screenshots 105 KB → 20 KB (81% smaller). A fresh Lighthouse pass on production is still owed — track it as a new investigation note.
+> - **Recommendation #6 (cache-TTL bump) withdrawn** — long-immutable cache headers without a cache-busting plan would trap stale assets during active development. Revisit only when there's a content-hashing / versioning strategy in place.
+> - **Recommendations #7 (colophon `forced-reflow`) and #8 (inline critical CSS)** still open. Lower-impact; no plan yet.
 
 ## Context
 

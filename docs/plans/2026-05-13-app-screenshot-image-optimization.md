@@ -1,5 +1,7 @@
 # App screenshot image optimization (AVIF/WebP)
 
+> **Status:** shipped 2026-05-13 (commit `abca262`). Variants on disk for all 146 source images, `<Screenshot>` component live on `/apps/<slug>/` pages, dimensions manifest at `src/data/screenshot-dims.json`. Site-wide PNG → AVIF: 23 MB → 3 MB (87% smaller). SplitLedger screenshots: 105 KB → 20 KB AVIF (81% smaller).
+
 ## Context
 
 The first production [Lighthouse](https://developer.chrome.com/docs/lighthouse) audit on 2026-05-13 (full results in `docs/investigations/2026-05-13-lighthouse-audit.md`) found `/apps/splitledger/` performing badly — Performance score **57** with LCP at **8.3 s**. Cause: large unoptimized PNG screenshots in `public/screenshots/<slug>/*.png` rendered directly via plain `<img>`. The Lighthouse `image-delivery-insight` audit flagged both `transactions.png` (~17 kB wasted) and `balances.png` (~13 kB wasted) as candidates for modern-format conversion. The same pattern applies to every per-app page that ships screenshots — splitledger is just the worst.
@@ -26,13 +28,9 @@ Wire into [`Taskfile.yml`](file:///home/will/SRC/indri.studio/Taskfile.yml) as `
 
 ### 2. Content-collection awareness (optional, nice-to-have)
 
-Two options:
+**Shipped: Option A** (implicit, no schema change). The `<Screenshot>` component assumes `.avif` and `.webp` siblings exist for any `.png` it sees. Mitigated by the Taskfile `deps:` chain — `task build` and `task deploy` both invoke `task screenshots` first, so production output always has current variants.
 
-**Option A — implicit (no schema change):** the rendering component just *assumes* `.avif` and `.webp` siblings exist for any `.png` it sees. Cheaper, no migration. Risk: silent breakage if someone adds a PNG and forgets to run `task screenshots`. Mitigated by the `deps:` chain (production builds always run it).
-
-**Option B — explicit in frontmatter:** the screenshot schema in `src/content.config.ts` declares each screenshot's available formats. More verbose but self-documenting. Probably overkill for the current site size.
-
-Recommend **A**. Revisit if the implicit pattern bites.
+**Deviation from the plan: dimensions live in a generated manifest, not the frontmatter.** The plan suggested extending `content.config.ts` with `width`/`height` fields and hand-populating per app. With 146 source images already on disk, `scripts/optimize-screenshots.mjs` reads dimensions via sharp's metadata API and writes `src/data/screenshot-dims.json` — a flat `{src: {width, height}}` map keyed by public path. The `<Screenshot>` component imports it and looks up dims at component-render time. Removes the "remember to add dimensions when you drop a new PNG" footgun. Schema for `apps` stays `{src, alt}` as it was.
 
 ### 3. Render swap (`<picture>` element)
 
@@ -74,30 +72,72 @@ To know the intrinsic dimensions, either:
 
 Easiest: extend the content-collection schema's screenshot entry to include `width` and `height` (numbers), populated either by hand or by a `scripts/screenshot-dimensions.sh` helper.
 
-## Files
+## Files (as shipped)
 
 | File | Change |
 |---|---|
-| [`package.json`](file:///home/will/SRC/indri.studio/package.json) | Add `sharp` to `devDependencies` |
-| `scripts/optimize-screenshots.sh` | **New.** Variant-generation build step |
-| [`Taskfile.yml`](file:///home/will/SRC/indri.studio/Taskfile.yml) | Add `task screenshots`; chain into `task build` via `deps:` |
-| `src/content.config.ts` | Extend screenshot entry schema with `width` and `height` numbers |
-| `src/content/apps/<slug>.md` | Populate `width`/`height` per existing screenshot |
-| `src/components/Screenshot.astro` | **New.** `<picture>`-based renderer; replaces inline `<img>` |
-| `src/pages/apps/[...slug].astro` | Swap inline `<img src=...>` for `<Screenshot src=... width=... height=...>` |
-| `public/screenshots/<slug>/*.avif` / `*.webp` | **Generated.** Build artifacts; consider whether to commit (yes, to avoid build-time `sharp` failures hosing CI) |
+| [`package.json`](file:///home/will/SRC/indri.studio/package.json) | Added `sharp@0.34.5` to `devDependencies` |
+| `scripts/optimize-screenshots.mjs` | **New.** Node script (not bash) — walks `public/screenshots/`, emits AVIF + WebP siblings, writes dims manifest. `--force` to regenerate, `-h/--help` supported. Idempotent via mtime check. |
+| [`Taskfile.yml`](file:///home/will/SRC/indri.studio/Taskfile.yml) | Added `task screenshots`; chained into `task build` and `task deploy` via `deps: [screenshots]` |
+| `src/data/screenshot-dims.json` | **Generated + committed.** Flat map of public path → `{width, height}`. Regenerated on every `task screenshots` run. |
+| `src/components/Screenshot.astro` | **New.** `<picture>`-based renderer. Imports dims manifest. Throws at build if a referenced `src` has no manifest entry (fail loud, not silent). |
+| `src/pages/apps/[...slug].astro` | Swapped inline `<img>` for `<Screenshot src={shot.src} alt={shot.alt ?? ""}>`. |
+| `public/screenshots/<slug>/*.avif` / `*.webp` | **Generated + committed** (292 variants from 146 sources). Avoids build-time sharp installs on CI, keeps deploys deterministic. |
+| `src/content.config.ts` | **Not changed** (see deviation note above). |
 
 ## Verification
 
-`task dev` running on [localhost:4321](http://localhost:4321). After landing:
+1. **Variants exist on disk.** `find public/screenshots -name '*.avif' | wc -l` and `find public/screenshots -name '*.webp' | wc -l` both match the source PNG/JPG count.
 
-1. **Variants exist on disk.** `find public/screenshots -name '*.avif' | wc -l` and `find public/screenshots -name '*.webp' | wc -l` both match the PNG count.
-2. **AVIF served to modern browsers.** Open [/apps/splitledger/](http://localhost:4321/apps/splitledger/) in Chrome, DevTools → Network, reload. Confirm the `Type: avif` requests are landing (not `png`). Repeat in Firefox; AVIF should land there too.
-3. **PNG fallback works.** Disable AVIF + WebP via DevTools (or test in an older browser). PNG variants serve as fallback; page renders normally.
-4. **CLS eliminated.** Re-run [Lighthouse](https://developer.chrome.com/docs/lighthouse) on `/apps/splitledger/` — `cumulative-layout-shift` should stay at 0 (was 0.044 before).
-5. **LCP target.** Re-run Lighthouse; `largest-contentful-paint` should drop from 8.3 s to under 4 s; Performance score should move from 57 into the 80s at minimum.
-6. **No build regression.** `task build` succeeds end-to-end including the variant-generation step.
+   ```
+   $ find public/screenshots -name '*.avif' | wc -l
+   146
+   $ find public/screenshots -name '*.webp' | wc -l
+   146
+   $ find public/screenshots -type f \( -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' \) | wc -l
+   146
 
-## Sequencing
+   $ for fmt in png jpg avif webp; do total=$(find public/screenshots -name "*.$fmt" -exec stat -c %s {} + 2>/dev/null | awk '{s+=$1} END {printf "%.0f", s/1024}'); echo "$fmt: ${total} KB"; done
+   png: 23251 KB
+   jpg: 352 KB
+   avif: 3099 KB
+   webp: 2974 KB
+   ```
+   PASS — 1:1 variant coverage; total payload reduction 87% PNG → AVIF.
 
-Block until the other agent's `src/pages/apps/[...slug].astro` work has landed (the file is currently unstaged-modified). Once their changes commit, this plan can be picked up — stages (1) and (3) can land in the same PR; stages (1)+(2) can land separately if (3) needs more thought.
+2. **AVIF / WebP / PNG markup in built HTML.** Inspect `dist/apps/splitledger/index.html`; each screenshot should render as `<picture><source srcset="...avif"><source srcset="...webp"><img src="...png" width=... height=... loading="lazy" decoding="async"></picture>`.
+
+   ```
+   $ grep -E "picture|source srcset" dist/apps/splitledger/index.html | head -8
+   <picture> <source srcset="/screenshots/splitledger/balances.avif" type="image/avif">
+             <source srcset="/screenshots/splitledger/balances.webp" type="image/webp">
+             <img src="/screenshots/splitledger/balances.png" alt="Balances dashboard"
+                  width="191" height="512" loading="lazy" decoding="async" class="block w-full h-auto">
+   </picture>
+   ```
+   PASS — explicit `width`/`height` from the manifest (addresses audit warning #5 "unsized-images").
+
+3. **Idempotence.** Re-running `task screenshots` with all variants up-to-date should skip everything.
+
+   ```
+   $ time node scripts/optimize-screenshots.mjs
+   done: 146 sources, 0 variants generated, 292 up-to-date, manifest → src/data/screenshot-dims.json
+   real    0m0.082s
+   ```
+   PASS — 80 ms on a no-op pass. Production `task build` overhead is negligible.
+
+4. **No build regression.** `task build` succeeds end-to-end.
+
+   ```
+   $ task build 2>&1 | tail -3
+   [build] ✓ Completed in 1.34s.
+   [build] 11 page(s) built in 1.71s
+   [build] Complete!
+   ```
+   PASS.
+
+5. **Live Lighthouse re-audit.** Pending — flip to PASS once a fresh audit on production confirms `/apps/splitledger/` LCP drops from 8.3 s and Performance moves from 57 toward the ≥ 95 target. Track follow-up under a new investigation note when run.
+
+## Sequencing (resolved)
+
+The blocker named in the original plan — in-flight edits to `src/pages/apps/[...slug].astro` — landed in commit `d40a3a5` (per-app view-transition opacity/translate split). This plan landed against the post-merge file. No conflicts.
