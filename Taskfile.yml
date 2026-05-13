@@ -74,6 +74,59 @@ tasks:
     cmds:
       - terraform apply
 
+  lighthouse:
+    desc: "Run Lighthouse 13.3.0 against the three Pass-1 prod URLs, 3 runs each under --throttling-method=devtools (Pass 3 canonical). Prints per-page median Perf + CWV. Reports under /tmp/lh/latest/."
+    cmds:
+      - |
+        set -euo pipefail
+        mkdir -p /tmp/lh/latest
+        URLS=(
+          "https://indri.studio/|home"
+          "https://indri.studio/colophon/|colophon"
+          "https://indri.studio/apps/splitledger/|splitledger"
+        )
+        for pair in "${URLS[@]}"; do
+          URL="${pair%|*}"; SLUG="${pair#*|}"
+          for RUN in 1 2 3; do
+            TS=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+            echo "[$TS] === ${SLUG} run ${RUN} ==="
+            npx --yes lighthouse@13.3.0 "$URL" \
+              --form-factor=mobile \
+              --throttling-method=devtools \
+              --chrome-flags="--headless=new --no-sandbox --disable-gpu" \
+              --quiet --output=json \
+              --output-path="/tmp/lh/latest/${SLUG}.run-${RUN}.report.json"
+          done
+        done
+        echo
+        echo "=== devtools / n=3 / scores per run ==="
+        printf "%-12s %-3s %-4s %-4s %-4s %-5s %-6s %-5s %s\n" "page" "run" "perf" "a11y" "bp" "fcp" "lcp" "tbt" "cls"
+        for SLUG in home colophon splitledger; do
+          for RUN in 1 2 3; do
+            jq -r --arg slug "$SLUG" --arg run "$RUN" '
+              [$slug, $run,
+               (.categories.performance.score*100|round|tostring),
+               (.categories.accessibility.score*100|round|tostring),
+               (.categories["best-practices"].score*100|round|tostring),
+               .audits["first-contentful-paint"].displayValue,
+               .audits["largest-contentful-paint"].displayValue,
+               .audits["total-blocking-time"].displayValue,
+               .audits["cumulative-layout-shift"].displayValue
+              ] | @tsv' "/tmp/lh/latest/${SLUG}.run-${RUN}.report.json"
+          done
+        done | column -t -s $'\t'
+        echo
+        echo "=== Perf medians (sorted middle of 3 runs) ==="
+        for SLUG in home colophon splitledger; do
+          PERF=()
+          for RUN in 1 2 3; do
+            PERF+=( "$(jq -r '(.categories.performance.score*100)|round' \
+              /tmp/lh/latest/${SLUG}.run-${RUN}.report.json)" )
+          done
+          MED=$(printf '%s\n' "${PERF[@]}" | sort -n | sed -n 2p)
+          printf "  %-12s  %d\n" "$SLUG" "$MED"
+        done
+
   publish:
     desc: "Tag HEAD and push to fire the Cloudflare deploy. Default: bump patch from latest v* tag. Override: task publish VERSION=v1.2.3"
     cmds:

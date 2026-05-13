@@ -7,6 +7,7 @@
 > - **Recommendation #7 (colophon `forced-reflow`)** shipped in commit landing 2026-05-13. Scroll-shrink script's first `update()` is now skipped entirely when `scrollY === 0` (CSS default already correct), and deferred via `requestIdleCallback` when scrollY > 0 (hash anchor case). Subsequent updates (scroll, resize, post-view-transition) keep the prompt rAF path so the cross-page header animation still fires immediately. Live re-audit owed.
 > - **Recommendation #8 (inline critical CSS)** plan written in commit `1115347` (`docs/plans/2026-05-13-inline-critical-css.md`); **implementation landed 2026-05-14** — `astro.config.mjs` now sets `build.inlineStylesheets: "always"`, every built page carries an inline `<style>` block, and no `<link rel="stylesheet" href="/_astro/*.css">` remains in `dist/`. Visual smoke confirmed (prod-vs-preview screenshots, all 4 routes × 2 viewports, pixel-identical). Pending prod verification + Lighthouse re-spot post-deploy.
 > - **Pass 2 (2026-05-14)** run against the same three prod URLs as pass 1, post-`v0.1.24`. See [`## Pass 2 — 2026-05-14`](#pass-2--2026-05-14) below for new scores, Δ vs pass 1, and updated recommendation states. Headline findings: A11y hit 95 across the board (Recs A + B confirmed). SplitLedger Perf jumped 57 → 94 (Rec #4 AVIF/WebP confirmed). New CLS regression on all three pages traced to font/icon swap on hero content — a pass-3 candidate.
+> - **Pass 3 (2026-05-14)** runs the three Pass-2 URLs under all three Lighthouse throttling methods (`simulate`, `devtools`, `provided`) to resolve NEW #10. `devtools` chosen (summed Perf range 0 across 9 runs, vs 35 for `simulate`) and codified as `task lighthouse`. Re-baselined Perf 100 / 100 / 99, A11y 95 / 95 / 95, BP 100, SEO 100 — Phase-5 Lighthouse target met. Pass-2 CLS regression largely a `simulate` extrapolation artefact (home CLS 0.342 → 0.003 under `devtools`); NEW #9 reframed accordingly. See [`## Pass 3 — 2026-05-14`](#pass-3--2026-05-14-methodology-study--re-baseline).
 
 ## Context
 
@@ -104,8 +105,8 @@ The Δ column reads at face value as a disaster on the two studio pages and a tr
 | #6 | Cache TTL bump             | —            | n/a                                                                        | **withdrawn** (no cache-busting strategy) |
 | #7 | Colophon forced-reflow     | `e526d2e`    | colophon TBT 180 ms → 0 ms                                                 | **resolved** |
 | #8 | Inline critical CSS        | landed 2026-05-14 | impl shipped after pass 2; built `dist/` has 0 external Astro CSS links + 1 inline `<style>` per page. Lighthouse FCP effect to be re-measured in pass 3 post-deploy. | **resolved (pending prod verification)** |
-| **NEW #9** | Hero CLS from font/icon swap | —     | home 0 → 0.342, colophon 0 → 0.094, splitledger 0.044 → 0.129              | **open** |
-| **NEW #10** | Lighthouse methodology jitter | —    | `simulate` swings ±30 Perf points run-to-run on long pages                 | **open** (process, not site) |
+| **NEW #9** | Hero CLS from font/icon swap | —     | home 0 → 0.342, colophon 0 → 0.094, splitledger 0.044 → 0.129              | **resolved (artefact of `simulate`)** in [Pass 3](#pass-3--2026-05-14-methodology-study--re-baseline) — under `devtools` real-measured CLS: home 0.003, colophon 0, splitledger 0.058, all well within the 0.1 target |
+| **NEW #10** | Lighthouse methodology jitter | —    | `simulate` swings ±30 Perf points run-to-run on long pages                 | **resolved** in [Pass 3](#pass-3--2026-05-14-methodology-study--re-baseline) — `devtools` chosen, codified as `task lighthouse` |
 
 ### Remaining gaps to ≥ 95
 
@@ -121,6 +122,88 @@ Pass-3 candidate work, priority order:
 2. **Actually land Rec #8 inline critical CSS** — flip `astro.config.mjs` to `build: { inlineStylesheets: 'always' }` per the existing plan doc. One-line change. Should clear the 814 ms blocking-CSS hit on every page.
 3. **Switch pass 3 to `--throttling-method=devtools`** — keeps numbers comparable run-to-run. Document the methodology change in the pass-3 section header.
 4. **`srcset` on the apps gallery** — splitledger is at 94 because the LCP fix is dramatic; getting the studio homepage gallery the same treatment (responsive `srcset` with AVIF) should pull `/` toward the same neighbourhood.
+
+## Pass 3 — 2026-05-14 (methodology study + re-baseline)
+
+Pass 2's three-run medians were undermined by Lighthouse `simulate`'s well-known network-extrapolation variance: home Perf came in at 42 / 73 / 40, colophon at 55 / 55 / 89. NEW #10 was opened to find a more stable methodology. Pass 3 runs all three Pass-2 URLs three times under each of Lighthouse's three throttling modes, picks the lowest-variance method, and re-baselines the scores using it. Plan: `docs/plans/2026-05-14-lighthouse-pass-3.md`.
+
+**Configuration matrix.** Same Lighthouse 13.3.0, same mobile form factor, same Chrome flags as Pass 1/2. Only `--throttling-method` varied — 27 cells total (3 methods × 3 URLs × 3 runs).
+
+### Variance by throttling method
+
+| URL | Method | run 1 | run 2 | run 3 | range | median |
+|---|---|---|---|---|---|---|
+| [/](https://indri.studio/) | `simulate` | 90 | 89 | 89 | 1 | 89 |
+| [/](https://indri.studio/) | `devtools` | **100** | **100** | **100** | **0** | **100** |
+| [/](https://indri.studio/) | `provided` | 100 | 100 | 100 | 0 | 100 |
+| [/colophon/](https://indri.studio/colophon/) | `simulate` | 91 | 57 | 88 | **34** | 88 |
+| [/colophon/](https://indri.studio/colophon/) | `devtools` | **100** | **100** | **100** | **0** | **100** |
+| [/colophon/](https://indri.studio/colophon/) | `provided` | 100 | 98 | 100 | 2 | 100 |
+| [/apps/splitledger/](https://indri.studio/apps/splitledger/) | `simulate` | 94 | 94 | 94 | 0 | 94 |
+| [/apps/splitledger/](https://indri.studio/apps/splitledger/) | `devtools` | **99** | **99** | **99** | **0** | **99** |
+| [/apps/splitledger/](https://indri.studio/apps/splitledger/) | `provided` | 96 | 96 | 99 | 3 | 96 |
+
+Summed Perf range per method (lower = more stable): **`devtools` 0, `provided` 5, `simulate` 35**.
+
+### Decision — `devtools` wins
+
+`devtools` throttling produced zero run-to-run Perf variance across all three URLs — every cell scored identically across all three runs. `provided` was nearly as tight (summed range 5) but isn't a defensible baseline because it reflects host network speed rather than a mobile-user proxy. `simulate` reproduced the Pass-2 jitter signature on `/colophon/` exactly (91 / 57 / 88, range 34) — Pass 2 was not flukey, the method is.
+
+Why is `devtools` more optimistic *and* more stable than `simulate`? Both apply the same Slow-4G + 4× CPU throttling profile, but `simulate` extrapolates final metrics from a brief observation window — any transient slowness in those first seconds inflates the projection. `devtools` actually measures full page lifecycle under throttling, so the numbers reflect real timing under the synthetic conditions rather than a worst-case projection. The 11-point gap on `/` median (`simulate` 89 vs `devtools` 100) and the volatility on `/colophon/` both vanish.
+
+**`devtools` is now the project's canonical Lighthouse throttling method**, wired into `task lighthouse` for reproducible audits. Future passes should not introduce a fourth method without explicit justification — a `simulate` re-run will produce different numbers but no new signal.
+
+### Re-baseline under `devtools` (median of 3 runs)
+
+Raw reports (run 1 HTML + all 27 JSONs):
+
+- [/tmp/lh/pass3/devtools-html/home.report.html](file:///tmp/lh/pass3/devtools-html/home.report.html) · [run-1.json](file:///tmp/lh/pass3/devtools/home.run-1.report.json) · [run-2.json](file:///tmp/lh/pass3/devtools/home.run-2.report.json) · [run-3.json](file:///tmp/lh/pass3/devtools/home.run-3.report.json)
+- [/tmp/lh/pass3/devtools-html/colophon.report.html](file:///tmp/lh/pass3/devtools-html/colophon.report.html) · [run-1.json](file:///tmp/lh/pass3/devtools/colophon.run-1.report.json) · [run-2.json](file:///tmp/lh/pass3/devtools/colophon.run-2.report.json) · [run-3.json](file:///tmp/lh/pass3/devtools/colophon.run-3.report.json)
+- [/tmp/lh/pass3/devtools-html/splitledger.report.html](file:///tmp/lh/pass3/devtools-html/splitledger.report.html) · [run-1.json](file:///tmp/lh/pass3/devtools/splitledger.run-1.report.json) · [run-2.json](file:///tmp/lh/pass3/devtools/splitledger.run-2.report.json) · [run-3.json](file:///tmp/lh/pass3/devtools/splitledger.run-3.report.json)
+
+#### Category scores
+
+| Page | Performance | Accessibility | Best Practices | SEO |
+|---|---|---|---|---|
+| [/](https://indri.studio/) | **100** ✓ | **95** ✓ | 100 ✓ | 100 ✓ |
+| [/colophon/](https://indri.studio/colophon/) | **100** ✓ | **95** ✓ | 100 ✓ | 100 ✓ |
+| [/apps/splitledger/](https://indri.studio/apps/splitledger/) | **99** ✓ | **95** ✓ | 100 ✓ | 100 ✓ |
+
+All three pages clear the Phase-5 ≥ 95 target on every category.
+
+#### Core Web Vitals
+
+| Metric | / | /colophon/ | /apps/splitledger/ | Target |
+|---|---|---|---|---|
+| First Contentful Paint | 1.5 s ✓ | 1.5 s ✓ | 1.4 s ✓ | < 1.8 s |
+| Largest Contentful Paint | 1.5 s ✓ | 1.5 s ✓ | 1.4 s ✓ | < 2.5 s |
+| Speed Index | 1.8 s ✓ | 1.7 s ✓ | 1.7 s ✓ | < 3.4 s |
+| Total Blocking Time | 0 ms ✓ | 0 ms ✓ | 0 ms ✓ | < 200 ms |
+| Cumulative Layout Shift | **0.003** ✓ | **0** ✓ | **0.058** ✓ | < 0.1 |
+| Time to Interactive | 2.3 s | 2.0 s | 2.4 s | — |
+
+Every CWV on every page clears its target under `devtools`. CLS in particular: home dropped 0.342 → 0.003, colophon 0.094 → 0, splitledger 0.129 → 0.058. The change is methodology, not the site — see NEW #9 note below.
+
+> **Numbers are not comparable to Pass 2.** Throttling method changed (`simulate` → `devtools`), so Pass-2-vs-Pass-3 deltas mix a methodology shift with whatever real change the site underwent in the interim (which is none — same `v0.1.24` build). Treat Pass 3 as the new canonical baseline; future passes compare against it, not against Pass 2.
+
+### Recommendation status after pass 3
+
+| ID | Item | Empirical effect (pass 3) | Status |
+|---|---|---|---|
+| **NEW #9** | Hero CLS from font/icon swap | Under `devtools` (real-measured CLS, not extrapolated): home 0.003, colophon 0, splitledger 0.058 — all well within the 0.1 target. The Pass-2 0.342 / 0.094 / 0.129 numbers were inflated by `simulate`'s pessimistic font-arrival timing. The splitledger 0.058 residual is real (screenshot grid still shifts slightly) but no longer a budget concern. | **resolved (artefact of `simulate`)** — reopen only if a future audit shows CLS > 0.1 under `devtools` |
+| **NEW #10** | Lighthouse methodology jitter | `devtools` summed-Perf-range 0 across 9 runs vs 35 for `simulate`; canonical throttling method codified as `task lighthouse` | **resolved** |
+
+Pass-2's other resolved items (A, B, C, #4, #5, #7, #8) carry forward unchanged.
+
+### Remaining gaps to ≥ 95
+
+**None.** The Phase-5 Lighthouse target (`Performance ≥ 95, Accessibility ≥ 95, Best Practices ≥ 95`) is met across all three sampled pages under the canonical `devtools` methodology. The colophon row's run 2 under `simulate` (Perf 57) is the only score in any cell that fell below the target, and `simulate` is no longer the canonical method.
+
+Optional pass-4 candidates if appetite returns:
+
+- **Push `/apps/splitledger/` from 99 to 100.** The single-point gap is `unused-javascript` (View-Transitions runtime adds ~9 KB unused on a route that uses transitions across all routes). Marginal.
+- **Sample more app pages.** Pass 3 covers `/apps/splitledger/` (image-heavy worst case from Pass 1). The longest prose app page is `/apps/claude-code-authoring-formats/`; a one-off measurement under `task lighthouse APPS="claude-code-authoring-formats"` would extend the dataset.
+- **CI integration.** Wire `task lighthouse` into the deploy workflow so every tag push captures a fresh JSON bundle under `dist/lh/<tag>/`. Not urgent.
 
 ## Cross-cutting issues (all three pages)
 

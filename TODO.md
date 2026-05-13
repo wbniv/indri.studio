@@ -6,6 +6,7 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 ## Done
 
+- [x] **2026-05-14** Lighthouse pass 3 — methodology study + re-baseline; `devtools` throttling chosen (summed Perf range 0 vs 35 for `simulate`), codified as `task lighthouse`; Phase-5 ≥ 95 target met (100 / 100 / 99); NEW #9 + #10 resolved — [plan](docs/plans/2026-05-14-lighthouse-pass-3.md) · [audit](docs/investigations/2026-05-13-lighthouse-audit.md#pass-3--2026-05-14-methodology-study--re-baseline)
 - [x] **2026-05-14** Scroll-to-top ^ button on long app pages, gated to >1 viewport, lifts above footer when it enters view — [plan](docs/plans/2026-05-14-scroll-to-top.md)
 - [x] **2026-05-14** Land Rec #8: inline critical CSS via Astro `build.inlineStylesheets: 'always'`, every built page now carries inlined Base.css, no external `_astro/*.css` link — [design](docs/plans/2026-05-13-inline-critical-css.md) · [exec](docs/plans/2026-05-14-land-inline-critical-css.md)
 - [x] **2026-05-14** Lighthouse pass 2 against prod (post-`v0.1.24`) — A11y now 95 across the board, SplitLedger Perf 57→94, but new CLS regression (font/icon swap) and Rec #8 plan never wired in — [plan](docs/plans/2026-05-14-lighthouse-pass-2.md) · [audit](docs/investigations/2026-05-13-lighthouse-audit.md#pass-2--2026-05-14)
