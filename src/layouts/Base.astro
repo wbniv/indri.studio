@@ -46,19 +46,25 @@ const navLinkClass = (active: boolean) =>
 			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
 		/>
 		<title>{fullTitle}</title>
+		<script is:inline>
+			// Header-FX prototype flag: ?fx in URL toggles motion graphics
+			// on the sticky header. Runs before <body> paints so there's
+			// no flash of un-FX'd header.
+			if (new URLSearchParams(location.search).has("fx")) {
+				document.documentElement.classList.add("fx");
+			}
+		</script>
 	</head>
 	<body class="min-h-screen flex flex-col bg-surface text-on-surface font-body">
 		<RingFlare />
 
 		<header
-			class="sticky top-0 z-50 w-full border-b border-[rgba(176,38,255,0.18)] bg-[rgba(61,56,51,0.85)] backdrop-blur-md"
+			class="header-fx sticky top-0 z-50 w-full border-b border-[rgba(26,24,21,0.4)] bg-primary-container backdrop-blur-md"
 		>
 			<div class="flex justify-between items-center w-full px-6 md:px-8 py-4 max-w-[var(--container-max)] mx-auto">
 				<a href="/" class="flex items-center gap-3 group">
-					<!-- Pixel-block accent: 3×3 grid in purple/grey, echoes the
-					     StripedGridMotion and reads as Indri's signature. -->
-					<span class="block w-3 h-3 bg-primary-container shrink-0"></span>
-					<span class="font-display text-xl md:text-2xl font-black uppercase tracking-[0.3em] text-on-surface group-hover:text-primary-container transition-colors">
+					<span class="block w-3 h-3 bg-grey-900 shrink-0"></span>
+					<span class="font-display text-xl md:text-2xl font-black uppercase tracking-[0.3em] text-on-surface transition-colors">
 						INDRI
 					</span>
 				</a>

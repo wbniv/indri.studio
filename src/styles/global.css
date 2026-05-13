@@ -277,4 +277,46 @@
 		text-transform: uppercase;
 	}
 
+	/* Header motion FX (prototype, gated on html.fx — set by an inline
+	 * script in Base.astro when ?fx is in the URL). Phosphor breathe —
+	 * a slow screen-blended radial glow that pulses across the purple
+	 * header. Stripes were dropped because the page already has the
+	 * StripedGridMotion diagonal motif below. */
+	html.fx .header-fx {
+		position: relative;
+		isolation: isolate;
+	}
+
+	html.fx .header-fx::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		background: radial-gradient(
+			ellipse 50% 200% at 50% 50%,
+			rgba(255, 220, 255, 0.65) 0%,
+			rgba(255, 220, 255, 0.30) 40%,
+			transparent 75%
+		);
+		mix-blend-mode: screen;
+		animation: header-breathe 2.5s ease-in-out infinite alternate;
+		z-index: 0;
+	}
+
+	html.fx .header-fx > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	@keyframes header-breathe {
+		from { opacity: 0.4; }
+		to   { opacity: 1; }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html.fx .header-fx::after {
+			animation: none;
+		}
+	}
+
 }
