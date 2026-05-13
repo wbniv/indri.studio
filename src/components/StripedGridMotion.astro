@@ -1,0 +1,88 @@
+---
+// StripedGridMotion — the ringtail-stripe motion module.
+//
+// Pure-CSS, build-time-randomised, server-rendered. No JS shipped.
+//
+// Renders a horizontal grid of cells in alternating "dense" and "sparse"
+// rows (the stripe motif). Each cell has its own randomised animation
+// delay + duration so the pattern doesn't read as gridded. A small
+// fraction of cells (default 3%) flicker in Phosphor purple instead of
+// pulsing in grey — the lemur's tail accent showing up in the UI.
+//
+// Astro re-runs frontmatter per component instance, so two bands placed
+// in the same page get independent random patterns from a single
+// component — no extra plumbing.
+//
+// See: docs/plans/2026-05-13-striped-grid-motion.md
+
+interface Props {
+	rows?: number;        // default 4
+	cols?: number;        // default 60
+	cellSize?: number;    // px, default 18
+	flickerRate?: number; // fraction of cells that pulse purple, default 0.03
+	class?: string;       // wrapper classes for positioning (absolute, top, etc.)
+}
+
+const {
+	rows = 4,
+	cols = 60,
+	cellSize = 18,
+	flickerRate = 0.03,
+	class: extraClass = "",
+} = Astro.props;
+
+const cells = Array.from({ length: rows * cols }, (_, i) => {
+	const row = Math.floor(i / cols);
+	const dense = row % 2 === 0;                            // alternating stripe density
+	const delay = (Math.random() * 6).toFixed(2);
+	const duration = (3 + Math.random() * 4).toFixed(2);
+	const flicker = Math.random() < flickerRate;
+	return { dense, delay, duration, flicker };
+});
+---
+
+<div class:list={["stripe-grid", extraClass]} aria-hidden="true">
+	{cells.map((c) => (
+		<span
+			class:list={["cell", c.dense ? "dense" : "sparse", c.flicker && "flicker"]}
+			style={`--d:${c.delay}s; --t:${c.duration}s;`}
+		/>
+	))}
+</div>
+
+<style define:vars={{ cols, cellSize: `${cellSize}px` }}>
+	.stripe-grid {
+		display: grid;
+		grid-template-columns: repeat(var(--cols), var(--cellSize));
+		grid-auto-rows: var(--cellSize);
+		width: 100%;
+		overflow: hidden;
+		pointer-events: none;
+		/* Fade horizontal edges so the grid doesn't hard-cut at the viewport. */
+		-webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+		        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+	}
+	.cell {
+		background: var(--color-grey-700);
+		opacity: 0;
+		animation: pulse-dense var(--t) ease-in-out var(--d) infinite alternate;
+	}
+	.cell.sparse {
+		animation: pulse-sparse calc(var(--t) * 1.5) ease-in-out var(--d) infinite alternate;
+	}
+	.cell.flicker {
+		background: var(--color-primary-container);
+		animation: pulse-flicker calc(var(--t) * 0.8) ease-in-out var(--d) infinite alternate;
+	}
+	@keyframes pulse-dense   { 0% { opacity: 0; } 100% { opacity: 0.14; } }
+	@keyframes pulse-sparse  { 0% { opacity: 0; } 100% { opacity: 0.06; } }
+	@keyframes pulse-flicker {
+		0%   { opacity: 0;    }
+		50%  { opacity: 0.40; }
+		100% { opacity: 0;    }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.cell         { animation: none; opacity: 0.05; }
+		.cell.flicker { animation: none; opacity: 0.25; }
+	}
+</style>
