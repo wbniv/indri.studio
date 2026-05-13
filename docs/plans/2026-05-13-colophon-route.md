@@ -11,7 +11,9 @@ Energy match: bold-display sectional one-pager (Hoox rhythm), same uppercase `.s
 
 ## Approach
 
-Single static page at `/colophon`, rendering through `Base.astro` (same as homepage and apps). Sectional layout: hero block + 4-5 content sections separated by the existing `.section-label` styling.
+Single static page at `/colophon`, rendering through `Base.astro` (same as homepage and apps). Sectional layout: hero block + 6 content sections separated by the existing `.section-label` styling.
+
+**Section order** (final): hero → SET IN → PALETTE → BUILT WITH → MOTIFS → REFERENCES → MASCOT. The ordering walks from craft details (type, palette, stack) into brand identity (motifs, references) and finishes on the mascot — the unifying figure behind the whole identity, kept last so the page ends on a visual.
 
 No new components required. Reuses:
 
@@ -58,22 +60,6 @@ Swatches rendered inline as small squares pulling their background from the live
   - `grey-900` &nbsp;`#2B2723`&nbsp; · &nbsp;`oklch(0.15 0.01 60)` — page background (`--color-surface`)
   - `grey-1000` &nbsp;`#1A1815`&nbsp; · &nbsp;`oklch(0.08 0.01 60)` — pitch, footer base and deepest accents
 
-### MASCOT (placeholder)
-
-The studio's spirit animal is the [ring-tailed lemur](https://en.wikipedia.org/wiki/Ring-tailed_lemur) (*Lemur catta*, native to Madagascar). The stripe motif and warm grey palette both trace back to its body.
-
-Two-column layout: short intro paragraph on the left; on the right, a placeholder "mascot card" — dashed Phosphor-tinted border, charcoal fill, with three stylized elements (◐ ◐ eyes, a rotated ▌▍▎▏ tail-stripes band, MASCOT / PLACEHOLDER labels). The card is intentionally unrefined — it signals *"a proper illustration is forthcoming"* without pretending to be one.
-
-When a real mascot illustration lands (the in-flight `src/components/Lemur.astro` is the candidate), this card swaps for that component in place; the surrounding section copy stays.
-
-### MOTIFS
-
-The ring-tailed lemur isn't pictured anywhere on the site, but its body shows up structurally:
-
-- **Stripes**. Pinstripe page backgrounds drift slowly across the page on two independent timelines (drift + rotation); section dividers alternate `grey-900 ↔ grey-700` bands; app-card hover states draw a thin accent line along the bottom edge. The tail abstracted into UI furniture.
-- **Header breathe**. The Phosphor-purple header band carries a slow radial-gradient pulse — `screen` blended over the band, opacity oscillating across a 2.5-second cycle. Quiet ambient motion; off under `prefers-reduced-motion: reduce`.
-- **Ring-flare** ambient layer (homepage only). Sparse Phosphor-coloured rings expand and fade across the studio front, set to a long randomised cadence. Off on per-app pages so each app's brand has room.
-
 ### BUILT WITH
 
 Each tool on its own line, prefixed by a `▌` Phosphor-coloured bullet (the stripe motif applied to UI furniture):
@@ -86,11 +72,25 @@ Each tool on its own line, prefixed by a `▌` Phosphor-coloured bullet (the str
 - Build and deploy run through [**GitHub Actions**](https://github.com/features/actions).
 - Package manager is [**pnpm**](https://pnpm.io).
 
+### MOTIFS
+
+The ring-tailed lemur isn't pictured anywhere on the site, but its body shows up structurally. Each motif name prefixed by a `◈` Phosphor lozenge:
+
+- **Stripes**. Pinstripe page backgrounds drift slowly across the page on two independent timelines (drift + rotation); section dividers alternate `grey-900 ↔ grey-700` bands; app-card hover states draw a thin accent line along the bottom edge. The tail abstracted into UI furniture.
+- **Header breathe**. The Phosphor-purple header band carries a slow radial-gradient pulse — `screen` blended over the band, opacity oscillating across a 2.5-second cycle. Quiet ambient motion; off under `prefers-reduced-motion: reduce`.
+- **Ring-flare** ambient layer (homepage only). Sparse Phosphor-coloured rings expand and fade across the studio front, set to a long randomised cadence. Off on per-app pages so each app's brand has room.
+
 ### REFERENCES
 
 The visual anchor for this site is [**Hoox**](https://landingfolio.com/inspiration/hoox) (now offline; preserved in the [landingfolio.com](https://landingfolio.com) archive). Hoox set the rhythm: dark theme, single bold accent, content-rich sectional layout — each section a distinct visual card rather than generic columns. [**clerk.com**](https://clerk.com) is the live, currently-shipping reference for the same DNA. The pixel-grid motion vocabulary comes from [**droneland.au**](https://droneland.au).
 
-Footer micro-note (optional): a place line if you want one — e.g. *"Built in Bangkok."* Not a hard requirement.
+### MASCOT (placeholder, last section)
+
+The studio's spirit animal is the [ring-tailed lemur](https://en.wikipedia.org/wiki/Ring-tailed_lemur) (*Lemur catta*, native to Madagascar). The stripe motif and warm grey palette both trace back to its body.
+
+Two-column layout: short intro paragraph on the left; on the right, a placeholder "mascot card" — dashed Phosphor-tinted border, charcoal fill, with three stylized elements (`◐ ◐` eyes, a rotated `▌▍▎▏` tail-stripes band, MASCOT / PLACEHOLDER labels). The card is intentionally unrefined — it signals *"a proper illustration is forthcoming"* without pretending to be one.
+
+When a real mascot illustration lands (the in-flight `src/components/Lemur.astro` is the candidate), this card swaps for that component in place; the surrounding section copy stays. Kept as the page's last section so the visual closes out the colophon.
 
 Footer micro-note (optional): a place line if you want one — e.g. *"Built in Bangkok."* Not a hard requirement.
 
@@ -98,7 +98,7 @@ Footer micro-note (optional): a place line if you want one — e.g. *"Built in B
 
 | File | Change |
 |---|---|
-| `src/pages/colophon.astro` | **New.** `<Base title="colophon">` wrapper. Hero block + 6 sections (`SET IN`, `PALETTE`, `MASCOT`, `MOTIFS`, `BUILT WITH`, `REFERENCES`). Uses existing utility classes and palette tokens — no new CSS unless a swatch helper class earns its keep across multiple swatches. Wingding bullets per list: `▌` (stripe motif, Phosphor) for BUILT WITH; `◈` (lozenge, Phosphor) for MOTIFS. Mascot card is a Unicode-glyph placeholder (`◐ ◐` eyes, rotated `▌▍▎▏` tail-stripes, dashed Phosphor border). Every external product/typeface/site name rendered as a clickable link to its canonical page. |
+| `src/pages/colophon.astro` | **New.** `<Base title="colophon">` wrapper. Hero block + 6 sections in this order: `SET IN`, `PALETTE`, `BUILT WITH`, `MOTIFS`, `REFERENCES`, `MASCOT`. Uses existing utility classes and palette tokens — no new CSS unless a swatch helper class earns its keep across multiple swatches. Wingding bullets per list: `▌` (stripe motif, Phosphor) for BUILT WITH; `◈` (lozenge, Phosphor) for MOTIFS. Mascot card is a Unicode-glyph placeholder (`◐ ◐` eyes, rotated `▌▍▎▏` tail-stripes, dashed Phosphor border). Every external product/typeface/site name rendered as a clickable link to its canonical page. |
 | `src/layouts/Base.astro` | Add `colophon` link to the right side of the footer (currently lines 119-138), positioned just before the `© year` span. Same `font-display uppercase text-[10px] tracking-[0.3em]` styling. Hover state: existing nav-link pattern from the file's top (`hover:text-primary-container`). |
 
 ## Verification
@@ -107,12 +107,12 @@ Footer micro-note (optional): a place line if you want one — e.g. *"Built in B
 
 From a fresh hard-refresh on each test:
 
-1. **Direct visit (dev).** Navigate to [localhost:4321/colophon](http://localhost:4321/colophon). All sections render: hero with COLOPHON heading and pull-quote, then SET IN / PALETTE / MASCOT / MOTIFS / BUILT WITH / REFERENCES.
+1. **Direct visit (dev).** Navigate to [localhost:4321/colophon](http://localhost:4321/colophon). All sections render in order: hero with COLOPHON heading and pull-quote, then SET IN → PALETTE → BUILT WITH → MOTIFS → REFERENCES → MASCOT.
 2. **Footer link.** From [the homepage](http://localhost:4321/), scroll to footer. Click "colophon". Lands on `/colophon` via Astro view transition (the header height animation we just shipped should fire here on the way in too).
 3. **Cross-page footer link.** From [/apps/splitledger/](http://localhost:4321/apps/splitledger/), scroll to footer, click "colophon". Same smooth transition; lands on `/colophon`.
 4. **Palette swatches reflect actual tokens.** Open DevTools, inspect a swatch — its background should resolve via `var(--color-grey-50)` etc., not be hardcoded. Editing the token in `global.css` should change the swatch.
 5. **Every external reference is a clickable link.** Hover each product name in SET IN, BUILT WITH, and REFERENCES — the cursor should change to a pointer and the destination URL should appear in the browser's status bar. Bare unlinked names anywhere = bug.
-6. **Mobile width.** Narrow Chrome to 375px. Sections stack cleanly; no horizontal scroll; pull-quote wraps.
+6. **Mobile width.** Narrow Chrome to 375px. Sections stack cleanly; no horizontal scroll; pull-quote wraps. Mascot card stays inside its column.
 7. **Reduced motion.** Chrome devtools → Rendering → Emulate `prefers-reduced-motion: reduce`. Page renders fine; no animations.
 8. **`task md` preview of this plan.** After writing, run `task md -- docs/plans/2026-05-13-colophon-route.md`.
 9. **Production smoke test (post-deploy).** After the next `v*` tag deploys, visit [https://indri.studio/colophon](https://indri.studio/colophon). Page resolves with valid TLS, all sections render, every external link in the page works. Same check on [https://www.indri.studio/colophon](https://www.indri.studio/colophon) — should 301 to the apex.
