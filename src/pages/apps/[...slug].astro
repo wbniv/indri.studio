@@ -4,15 +4,30 @@ import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
-	const posts = await getCollection("apps", ({ data }) => !data.draft);
-	return posts.map((post) => ({
+	// Same sort as the homepage gallery — alphabetical with finding-your-way
+	// pinned last — so prev/next here matches the order users see there.
+	const posts = (await getCollection("apps", ({ data }) => !data.draft)).sort((a, b) => {
+		if (a.id === "finding-your-way") return 1;
+		if (b.id === "finding-your-way") return -1;
+		return a.data.title.localeCompare(b.data.title);
+	});
+	return posts.map((post, i) => ({
 		params: { slug: post.id },
-		props: { post },
+		props: {
+			post,
+			// Wrap around at the edges so the catalogue cycles continuously.
+			prev: posts[(i - 1 + posts.length) % posts.length],
+			next: posts[(i + 1) % posts.length],
+		},
 	}));
 }
 
-interface Props { post: CollectionEntry<"apps"> }
-const { post } = Astro.props;
+interface Props {
+	post: CollectionEntry<"apps">;
+	prev: CollectionEntry<"apps">;
+	next: CollectionEntry<"apps">;
+}
+const { post, prev, next } = Astro.props;
 const { Content } = await render(post);
 
 const now = new Date();
@@ -77,6 +92,31 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 				</ul>
 			</section>
 		)}
+
+		<nav class="mt-12 md:mt-16 grid grid-cols-2 gap-3 md:gap-4" aria-label="Catalogue navigation">
+			<a
+				href={`/apps/${prev.id}/`}
+				class="glass-card glass-card-hover block p-5 md:p-6 group"
+			>
+				<span class="font-display uppercase tracking-[0.25em] text-[10px] text-on-surface-variant">
+					←&nbsp;&nbsp;previous
+				</span>
+				<div class="app-card-title font-display text-lg md:text-xl font-black uppercase tracking-tight text-on-surface mt-2 leading-[1.1]">
+					{prev.data.title}
+				</div>
+			</a>
+			<a
+				href={`/apps/${next.id}/`}
+				class="glass-card glass-card-hover block p-5 md:p-6 text-right group"
+			>
+				<span class="font-display uppercase tracking-[0.25em] text-[10px] text-on-surface-variant">
+					next&nbsp;&nbsp;→
+				</span>
+				<div class="app-card-title font-display text-lg md:text-xl font-black uppercase tracking-tight text-on-surface mt-2 leading-[1.1]">
+					{next.data.title}
+				</div>
+			</a>
+		</nav>
 	</article>
 
 	<style>
