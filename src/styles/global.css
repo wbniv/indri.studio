@@ -1,31 +1,5 @@
 @import "tailwindcss";
 
-/* Register the stripe-angle so it can be animated as an <angle>. Without
- * this, custom-property animation falls back to discrete swaps (no smooth
- * interpolation between angles). Top-level — @property is not allowed
- * inside @layer. */
-@property --stripe-angle {
-	syntax: "<angle>";
-	initial-value: 135deg;
-	inherits: false;
-}
-
-/* Stripe geometry — line width and gap between lines. Registered as
- * <length> so they interpolate smoothly inside repeating-linear-gradient
- * color stops. Animated on their own timelines (stripe-width /
- * stripe-gap) below alongside drift + rotate. */
-@property --stripe-width {
-	syntax: "<length>";
-	initial-value: 4px;
-	inherits: false;
-}
-
-@property --stripe-gap {
-	syntax: "<length>";
-	initial-value: 28px;
-	inherits: false;
-}
-
 /* Register --header-shrink as a typed number so the value itself
  * interpolates over the transition duration set on `html` below. The
  * .header-fx padding derived from this var (in @layer components) then
@@ -180,86 +154,56 @@ html {
 	body {
 		font-family: var(--font-body);
 		color: var(--color-on-surface);
-		background-color: var(--color-surface);
-		/* Pinstripes that drift, rotate, swell/pinch, and crowd/spread.
-		 * Four independent timelines (60 / 180 / 95 / 140s) — pairwise
-		 * non-divisible, so the combined loop is multi-hour and the
-		 * pattern never visibly repeats. Geometry (angle, line width,
-		 * gap) reads from registered custom properties so each value
-		 * interpolates smoothly inside the gradient. */
+		/* No background-color — html provides the surface colour, and
+		 * body::before below paints the pinstripe gradient through
+		 * the transparent body. */
+	}
+
+	/* Pinstripe BG. Static gradient on an oversized fixed pseudo-element,
+	 * animated only via `transform`. Animating a `repeating-linear-gradient`
+	 * via `@property` value changes or `background-position` updates triggers
+	 * per-frame paint invalidation + async tile rasterization, which on
+	 * Chrome/Linux produces visible segmented-line artifacts (lines break
+	 * into 4–10 px pieces along their length). Transforms run on the
+	 * compositor thread without rasterization — the gradient is rasterized
+	 * exactly once, then translated + rotated as a cached bitmap. See
+	 * docs/investigations/2026-05-14-animated-gradient-segmentation.md.
+	 *
+	 * inset: -50% oversizes the wrapper so any rotation still covers the
+	 * full viewport (a viewport-sized element rotated 45° would expose
+	 * empty corners). */
+	body::before {
+		content: "";
+		position: fixed;
+		inset: -50%;
+		pointer-events: none;
+		z-index: -1;
 		background-image: repeating-linear-gradient(
-			var(--stripe-angle),
-			transparent 0 var(--stripe-gap),
-			rgba(143, 135, 128, 0.04) var(--stripe-gap)
-				calc(var(--stripe-gap) + var(--stripe-width))
+			135deg,
+			transparent 0 28px,
+			rgba(143, 135, 128, 0.04) 28px 32px
 		);
-		animation:
-			stripe-drift 60s linear infinite,
-			stripe-rotate 180s linear infinite,
-			stripe-width 95s linear infinite,
-			stripe-gap 140s linear infinite;
+		animation: stripes-motion 180s linear infinite;
+		will-change: transform;
 	}
 
-	/* Non-uniform keyframes with intentional reversals. The path
-	 * BACK-TRACKS at certain points — direction flips, slows, then
-	 * continues. Each animation uses different reversal points so they
-	 * never sync. Drift ends at 96px (≈ peak gap) to land roughly on a
-	 * period boundary; with gap animating live, the seam is imperfect
-	 * but invisible against the other timelines. Rotation always
-	 * resolves to a full 360deg per cycle. */
-	/* Per-keyframe animation-timing-function sets the easing FROM that
-	 * keyframe to the next, so each segment ease-in-outs into the next
-	 * direction change instead of pivoting linearly. */
-	@keyframes stripe-drift {
-		0%   { background-position: 0 0;        animation-timing-function: ease-in-out; }
-		30%  { background-position: 54px 54px;  animation-timing-function: ease-in-out; }   /* forward burst */
-		45%  { background-position: 30px 30px;  animation-timing-function: ease-in-out; }   /* reverse */
-		70%  { background-position: 78px 78px;  animation-timing-function: ease-in-out; }   /* forward again */
-		85%  { background-position: 66px 66px;  animation-timing-function: ease-in-out; }   /* small reverse */
-		100% { background-position: 96px 96px; }                                            /* settle */
-	}
-
-	@keyframes stripe-rotate {
-		0%   { --stripe-angle: 0deg;    animation-timing-function: ease-in-out; }
-		25%  { --stripe-angle: 140deg;  animation-timing-function: ease-in-out; }   /* clockwise sweep */
-		40%  { --stripe-angle: 80deg;   animation-timing-function: ease-in-out; }   /* counterclockwise dip */
-		65%  { --stripe-angle: 250deg;  animation-timing-function: ease-in-out; }   /* clockwise again */
-		85%  { --stripe-angle: 220deg;  animation-timing-function: ease-in-out; }   /* small counterclockwise */
-		100% { --stripe-angle: 360deg; }                                            /* settle */
-	}
-
-	/* Line thickness breathes. Non-uniform stops with intentional
-	 * reversals so the pinch→swell→swell rhythm never feels
-	 * metronomic. Pinch is intentionally placed EARLIER in the cycle
-	 * than the big swell — gap's tight phase (40% of its own cycle)
-	 * happens roughly between width's pinch (25%) and big swell
-	 * (45%), so when the two timelines drift through compatible
-	 * phases, width is most likely to be small or transitioning when
-	 * gap is at its tightest. Doesn't eliminate dense-moment
-	 * coincidence over long time (timelines are independent) but
-	 * skews the odds heavily toward "thin stripes when crowded." */
-	@keyframes stripe-width {
-		0%   { --stripe-width: 4px;  animation-timing-function: ease-in-out; }
-		25%  { --stripe-width: 2px;  animation-timing-function: ease-in-out; }   /* pinch first */
-		45%  { --stripe-width: 12px; animation-timing-function: ease-in-out; }   /* swell after */
-		70%  { --stripe-width: 9px;  animation-timing-function: ease-in-out; }   /* swell again */
-		88%  { --stripe-width: 5px;  animation-timing-function: ease-in-out; }   /* drift back */
-		100% { --stripe-width: 4px; }                                            /* settle */
-	}
-
-	/* Inter-line spacing opens and closes. Different stop positions
-	 * from stripe-width so the two never sync. */
-	@keyframes stripe-gap {
-		0%   { --stripe-gap: 28px;  animation-timing-function: ease-in-out; }
-		20%  { --stripe-gap: 140px; animation-timing-function: ease-in-out; }   /* spread */
-		40%  { --stripe-gap: 16px;  animation-timing-function: ease-in-out; }   /* crowd */
-		65%  { --stripe-gap: 90px;  animation-timing-function: ease-in-out; }   /* spread again */
-		85%  { --stripe-gap: 22px;  animation-timing-function: ease-in-out; }   /* small crowd */
-		100% { --stripe-gap: 28px; }                                            /* settle */
+	/* Non-uniform keyframes with intentional reversals — direction flips,
+	 * slows, then continues. Translate values shift the cached gradient
+	 * bitmap (equivalent visual to the old background-position drift);
+	 * rotate values sweep the apparent stripe angle. Combined into one
+	 * timeline so the compositor only deals with a single transform matrix
+	 * update per frame. */
+	@keyframes stripes-motion {
+		0%   { transform: translate(0,     0)    rotate(0deg);   animation-timing-function: ease-in-out; }
+		25%  { transform: translate(18px,  18px) rotate(140deg); animation-timing-function: ease-in-out; }
+		40%  { transform: translate(10px,  10px) rotate(80deg);  animation-timing-function: ease-in-out; }
+		65%  { transform: translate(26px,  26px) rotate(250deg); animation-timing-function: ease-in-out; }
+		85%  { transform: translate(22px,  22px) rotate(220deg); animation-timing-function: ease-in-out; }
+		100% { transform: translate(32px,  32px) rotate(360deg); }
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		body { animation: none; }
+		body::before { animation: none; }
 	}
 
 	::selection {
