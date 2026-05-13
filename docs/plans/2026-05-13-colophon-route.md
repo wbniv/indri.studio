@@ -78,7 +78,7 @@ The ring-tailed lemur isn't pictured anywhere on the site, but its body shows up
 
 - **Stripes**. Pinstripe page backgrounds drift slowly across the page on two independent timelines (drift + rotation); section dividers alternate `grey-900 ↔ grey-700` bands; app-card hover states draw a thin accent line along the bottom edge. The tail abstracted into UI furniture.
 - **Header breathe**. The Phosphor-purple header band carries a slow radial-gradient pulse — `screen` blended over the band, opacity oscillating across a 2.5-second cycle. Quiet ambient motion; off under `prefers-reduced-motion: reduce`.
-- **Ring-flare** ambient layer (homepage only). Sparse Phosphor-coloured rings expand and fade across the studio front, set to a long randomised cadence. Off on per-app pages so each app's brand has room.
+- **Neon purple rings** (homepage only). Sparse Phosphor-bright rings expand and fade across the studio front, set to a long randomised cadence. Off on per-app pages so each app's brand has room.
 
 ### REFERENCES
 
