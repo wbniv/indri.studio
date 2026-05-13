@@ -38,13 +38,38 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 
 <AppLayout title={post.data.title} description={post.data.summary} theme={post.data.theme}>
 	<article class="max-w-[720px] mx-auto px-6 md:px-8 py-12 md:py-20">
-		<a
-			href="/#apps"
-			class="inline-flex items-center font-display text-label-md uppercase tracking-[0.2em] text-outline hover:text-primary-container transition-colors mb-10"
-		>
-			<span class="material-symbols-outlined text-base mr-1">chevron_left</span>
-			All apps
-		</a>
+		<nav aria-label="Catalogue navigation" class="catalogue-nav">
+			<a
+				href={`/apps/${prev.id}/`}
+				class="side-nav side-nav-inline group"
+				aria-label={`Previous: ${prev.data.title}`}
+			>
+				<span class="material-symbols-outlined side-nav-arrow">chevron_left</span>
+				<span class="side-nav-label">
+					<span class="side-nav-eyebrow">previous</span>
+					<span class="side-nav-title">{prev.data.title}</span>
+				</span>
+			</a>
+			<a
+				href="/#apps"
+				class="side-nav-inline side-nav-all-apps"
+				aria-label="All apps"
+			>
+				<span class="side-nav-caret" aria-hidden="true">^</span>
+				<span class="side-nav-title">All apps</span>
+			</a>
+			<a
+				href={`/apps/${next.id}/`}
+				class="side-nav side-nav-inline group"
+				aria-label={`Next: ${next.data.title}`}
+			>
+				<span class="side-nav-label side-nav-label-right">
+					<span class="side-nav-eyebrow">next</span>
+					<span class="side-nav-title">{next.data.title}</span>
+				</span>
+				<span class="material-symbols-outlined side-nav-arrow">chevron_right</span>
+			</a>
+		</nav>
 
 		<header class="mb-10">
 			{upcoming && (
@@ -97,31 +122,6 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 		)}
 
 	</article>
-
-	<nav aria-label="Catalogue navigation">
-		<a
-			href={`/apps/${prev.id}/`}
-			class="side-nav side-nav-prev group"
-			aria-label={`Previous: ${prev.data.title}`}
-		>
-			<span class="material-symbols-outlined side-nav-arrow">chevron_left</span>
-			<span class="side-nav-label">
-				<span class="side-nav-eyebrow">previous</span>
-				<span class="side-nav-title">{prev.data.title}</span>
-			</span>
-		</a>
-		<a
-			href={`/apps/${next.id}/`}
-			class="side-nav side-nav-next group"
-			aria-label={`Next: ${next.data.title}`}
-		>
-			<span class="side-nav-label side-nav-label-right">
-				<span class="side-nav-eyebrow">next</span>
-				<span class="side-nav-title">{next.data.title}</span>
-			</span>
-			<span class="material-symbols-outlined side-nav-arrow">chevron_right</span>
-		</a>
-	</nav>
 
 	<script define:vars={{ prevHref: `/apps/${prev.id}/`, nextHref: `/apps/${next.id}/` }}>
 		// Keyboard navigation between apps. Defers to any open <dialog>
@@ -234,44 +234,50 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 			font-weight: 600;
 		}
 
-		/* Fixed-position prev/next arrows on the sides of the content.
-		   Visible on screens wide enough for the gutter; on narrower
-		   viewports they shrink and ride the edges. */
-		.side-nav {
-			position: fixed;
-			top: 50%;
-			transform: translateY(-50%);
+		.catalogue-nav {
 			display: flex;
 			align-items: center;
+			justify-content: space-between;
 			gap: 0.5rem;
-			padding: 1.5rem 0.875rem;
-			min-height: 120px;
+			margin-bottom: 2.5rem;
+		}
+		.side-nav-inline {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+			padding: 0.5rem 0.75rem;
 			background: rgba(61, 56, 51, 0.55);
 			border: 1px solid rgba(255, 255, 255, 0.06);
 			border-radius: 12px;
 			color: var(--color-on-surface-variant);
 			backdrop-filter: blur(6px);
 			transition: background 180ms ease, color 180ms ease, padding 180ms ease,
-				border-color 180ms ease, transform 180ms ease;
-			z-index: 30;
+				border-color 180ms ease;
 			text-decoration: none;
 		}
-		.side-nav:hover {
+		.side-nav-inline:hover {
 			background: color-mix(in srgb, var(--color-primary-container) 18%, transparent);
 			border-color: color-mix(in srgb, var(--color-primary-container) 45%, transparent);
 			color: var(--color-on-surface);
-			padding: 1.5rem 1.25rem;
-		}
-		.side-nav-prev {
-			left: max(0.75rem, calc((100vw - 720px) / 2 - 96px));
-		}
-		.side-nav-next {
-			right: max(0.75rem, calc((100vw - 720px) / 2 - 96px));
+			padding: 0.5rem 1rem;
 		}
 		.side-nav-arrow {
-			font-size: 44px !important;
+			font-size: 28px !important;
 			line-height: 1;
 			color: var(--color-primary-container);
+		}
+		.side-nav-caret {
+			font-family: var(--font-display);
+			font-size: 22px;
+			line-height: 1;
+			font-weight: 700;
+			color: var(--color-primary-container);
+			margin-right: 0.4rem;
+		}
+		.side-nav-all-apps .side-nav-title {
+			display: inline-flex;
+			max-width: none;
+			opacity: 1;
 		}
 		.side-nav-label {
 			display: none;
@@ -286,7 +292,7 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 		.side-nav-label-right {
 			text-align: right;
 		}
-		.side-nav:hover .side-nav-label {
+		.side-nav-inline:hover .side-nav-label {
 			max-width: 220px;
 			opacity: 1;
 		}
@@ -307,22 +313,21 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 			color: var(--color-on-surface);
 		}
 
-		@media (min-width: 1024px) {
+		@media (min-width: 768px) {
 			.side-nav-label {
 				display: flex;
 			}
 		}
 
-		/* On very narrow screens, shrink the buttons so they don't crowd
-		   the body text. */
 		@media (max-width: 480px) {
-			.side-nav {
-				padding: 1rem 0.5rem;
-				min-height: 88px;
-				border-radius: 10px;
+			.side-nav-inline {
+				padding: 0.35rem 0.55rem;
+			}
+			.side-nav-inline:hover {
+				padding: 0.35rem 0.7rem;
 			}
 			.side-nav-arrow {
-				font-size: 32px !important;
+				font-size: 24px !important;
 			}
 		}
 	</style>
