@@ -169,9 +169,12 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 
 		// Touch swipe: horizontal pan ≥ 60px on the article navigates to
 		// prev (swipe right) or next (swipe left). Ignores vertical
-		// scrolls so the page can still scroll normally.
+		// scrolls so the page can still scroll normally. Touches starting
+		// within EDGE_GUARD of either viewport edge are skipped so the
+		// iOS Safari back/forward edge gesture isn't fighting us.
 		const SWIPE_MIN = 60;
 		const SWIPE_MAX_OFF_AXIS = 40;
+		const EDGE_GUARD = 24;
 		let touchStart = null;
 
 		document.addEventListener('touchstart', (e) => {
@@ -179,6 +182,7 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 			const article = e.target && e.target.closest && e.target.closest('article');
 			if (!article) return;
 			const t = e.touches[0];
+			if (t.clientX < EDGE_GUARD || t.clientX > window.innerWidth - EDGE_GUARD) return;
 			touchStart = { x: t.clientX, y: t.clientY };
 		}, { passive: true });
 
