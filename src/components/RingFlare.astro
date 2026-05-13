@@ -1,0 +1,97 @@
+---
+// RingFlare — occasional Phosphor neon ring bursts as an ambient layer.
+//
+// Ten rings scattered across the viewport, each on its own animation
+// cycle (prime-numbered seconds — 29, 31, 37 … 67 — so they desync
+// over many minutes). Each ring spends ~95% of its cycle invisible.
+// A flare: small Phosphor dot blooms to ~20× the base size in about
+// a second while the 4-layer Phosphor glow (matches the
+// app-card-title hover) fades out — looks like a slice of a much
+// larger circle sweeping past the viewport edges.
+//
+// On page load, a tiny inline script randomises each ring's
+// animation-delay so the first flare's position varies every visit
+// instead of always firing in the top-left. Each ring lands somewhere
+// in its silent phase at t=0 — no ring is mid-flare on load.
+//
+// Honors prefers-reduced-motion: reduce.
+
+const rings = [
+	{ top: "12%", left: "8%",  duration: 29 },
+	{ top: "24%", left: "38%", duration: 31 },
+	{ top: "15%", left: "72%", duration: 37 },
+	{ top: "45%", left: "15%", duration: 41 },
+	{ top: "52%", left: "55%", duration: 43 },
+	{ top: "40%", left: "82%", duration: 47 },
+	{ top: "70%", left: "28%", duration: 53 },
+	{ top: "75%", left: "62%", duration: 59 },
+	{ top: "85%", left: "10%", duration: 61 },
+	{ top: "88%", left: "88%", duration: 67 },
+];
+---
+
+<div class="ring-flare" aria-hidden="true">
+	{rings.map((r) => (
+		<span
+			class="ring"
+			data-duration={r.duration}
+			style={`top: ${r.top}; left: ${r.left}; animation-duration: ${r.duration}s;`}
+		/>
+	))}
+</div>
+
+<script is:inline>
+	// Per-visit randomisation. Each ring gets a negative animation-delay
+	// in [5%, 95%] of its cycle — so on load each ring is somewhere in
+	// its silent phase (never mid-flare), and which ring fires first
+	// changes every page load.
+	for (const r of document.querySelectorAll(".ring")) {
+		const d = parseFloat(r.dataset.duration);
+		r.style.animationDelay = -(d * (0.05 + Math.random() * 0.9)) + "s";
+	}
+</script>
+
+<style>
+	.ring-flare {
+		position: fixed;
+		inset: 0;
+		pointer-events: none;
+		z-index: 0;
+		overflow: hidden;
+	}
+	.ring {
+		position: absolute;
+		width: 140px;
+		height: 140px;
+		border-radius: 50%;
+		border: 2px solid var(--color-primary-container);
+		/* 4-layer Phosphor glow — same as .app-card-title hover state. */
+		box-shadow:
+			0 0 4px rgba(255, 230, 255, 0.95),
+			0 0 12px rgba(221, 179, 255, 0.85),
+			0 0 24px rgba(176, 38, 255, 0.75),
+			0 0 48px rgba(176, 38, 255, 0.45);
+		transform: scale(0.15);
+		opacity: 0;
+		animation: ring-flare linear infinite;
+	}
+
+	@keyframes ring-flare {
+		0%, 5%, 100% {
+			transform: scale(0.15);
+			opacity: 0;
+		}
+		1% {
+			transform: scale(0.25);
+			opacity: 0.95;
+		}
+		4% {
+			transform: scale(20);
+			opacity: 0;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.ring { animation: none; }
+	}
+</style>

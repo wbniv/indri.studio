@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import RingFlare from "../components/RingFlare.astro";
 
 interface Props {
 	title: string;
@@ -47,6 +48,8 @@ const navLinkClass = (active: boolean) =>
 		<title>{fullTitle}</title>
 	</head>
 	<body class="min-h-screen flex flex-col bg-surface text-on-surface font-body">
+		<RingFlare />
+
 		<header
 			class="sticky top-0 z-50 w-full border-b border-[rgba(176,38,255,0.18)] bg-[rgba(61,56,51,0.85)] backdrop-blur-md"
 		>
