@@ -7,8 +7,10 @@ import Base from "../layouts/Base.astro";
 	     positioned at the section's bottom edge — guarantees its body-bottom
 	     is flush against the footer's top, regardless of flex/grid quirks.
 	     Same layout phone → desktop. pb-[…] reserves space below the text so
-	     it doesn't collide with the absolutely-positioned lemur. -->
-	<section class="relative overflow-hidden flex-1 min-h-[100svh] md:min-h-[860px] pb-[290px] md:pb-[340px]">
+	     it doesn't collide with the absolutely-positioned lemur. flex-1
+	     fills the space between header and footer without forcing a viewport-
+	     height min — so the footer stays on-screen at typical viewports. -->
+	<section class="relative overflow-hidden flex-1 pb-[290px] md:pb-[340px]">
 		<!-- Text content -->
 		<div class="text-center pt-12 md:pt-20 lg:pt-24 px-6 md:px-8 w-full max-w-3xl mx-auto">
 			<h1 class="font-display mb-2">
