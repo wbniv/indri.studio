@@ -39,6 +39,18 @@ const apps = defineCollection({
 				}),
 			)
 			.default([]),
+		// Thematic stand-in imagery used only as the home-gallery card's
+		// blurred background when an app has no real screenshots yet. Never
+		// rendered on the per-app detail page (those are reserved for actual
+		// app screenshots). Same {src, alt} shape as `screenshots`.
+		cardImages: z
+			.array(
+				z.object({
+					src: z.string(),
+					alt: z.string().optional(),
+				}),
+			)
+			.default([]),
 	}),
 });
 

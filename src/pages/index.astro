@@ -48,7 +48,11 @@ const team = (await getCollection("team")).sort(
 
 		<ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
 			{allApps.map((app, idx) => {
-				const shots = app.data.screenshots;
+				// Real screenshots first, with thematic stand-ins as fallback
+				// for apps that don't have any captures yet.
+				const shots = app.data.screenshots.length > 0
+					? app.data.screenshots
+					: app.data.cardImages;
 				// Per-card visual variation: slight differences in rotation and
 				// scale across the grid so cards don't read as a uniform stripe.
 				// Alternates direction; magnitude derived from index.
