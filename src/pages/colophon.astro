@@ -1,0 +1,373 @@
+---
+import Base from "../layouts/Base.astro";
+
+const linkClass =
+	"text-on-surface underline decoration-primary-container/40 underline-offset-4 hover:text-primary-container hover:decoration-primary-container transition-colors";
+
+const accent = {
+	name: "Phosphor",
+	hex: "#B026FF",
+	oklch: "oklch(0.62 0.32 305)",
+	cssVar: "--color-primary-container",
+};
+
+const ringtailGreys = [
+	{
+		token: "grey-50",
+		hex: "#F5F0E8",
+		oklch: "oklch(0.95 0.01 80)",
+		cssVar: "--color-grey-50",
+		use: "cream, high-emphasis text",
+	},
+	{
+		token: "grey-200",
+		hex: "#C8C0B8",
+		oklch: "oklch(0.78 0.01 70)",
+		cssVar: "--color-grey-200",
+		use: "soft warm grey, secondary text",
+	},
+	{
+		token: "grey-400",
+		hex: "#8E8780",
+		oklch: "oklch(0.58 0.01 70)",
+		cssVar: "--color-grey-400",
+		use: "mid grey, low-contrast dividers",
+	},
+	{
+		token: "grey-700",
+		hex: "#4A4641",
+		oklch: "oklch(0.30 0.01 60)",
+		cssVar: "--color-grey-700",
+		use: "charcoal, card surfaces",
+	},
+	{
+		token: "grey-900",
+		hex: "#2B2723",
+		oklch: "oklch(0.15 0.01 60)",
+		cssVar: "--color-grey-900",
+		use: "page background",
+	},
+	{
+		token: "grey-1000",
+		hex: "#1A1815",
+		oklch: "oklch(0.08 0.01 60)",
+		cssVar: "--color-grey-1000",
+		use: "pitch, footer base, deepest accents",
+	},
+];
+
+const motifs = [
+	{
+		name: "Stripes",
+		body: "Pinstripe page backgrounds drift slowly across the surface on two independent timelines (drift and rotation); section dividers alternate grey-900 ↔ grey-700 bands; app-card hover states draw a thin accent line along the bottom edge. The ring-tailed lemur's tail abstracted into UI furniture.",
+	},
+	{
+		name: "Header breathe",
+		body: "The Phosphor-purple header band carries a slow radial-gradient pulse — screen-blended over the band, opacity oscillating across a 2.5-second cycle. Quiet ambient motion; off under prefers-reduced-motion: reduce.",
+	},
+	{
+		name: "Ring-flare",
+		body: "Studio homepage only. Sparse Phosphor-coloured rings expand and fade across the front on a long, randomised cadence. Off on per-app pages so each app's own visual identity has room.",
+	},
+];
+---
+
+<Base title="colophon">
+	<!-- Hero -->
+	<section
+		class="relative overflow-hidden min-h-[480px] md:min-h-[560px] flex items-center"
+	>
+		<div
+			class="relative z-10 w-full max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-24 md:py-32"
+		>
+			<div class="max-w-3xl">
+				<h1 class="font-display mb-2">
+					<span
+						class="block text-6xl sm:text-7xl md:text-8xl lg:text-[120px] leading-[0.9] tracking-tight font-black uppercase text-primary-container"
+					>
+						Colophon
+					</span>
+					<span
+						class="block text-3xl sm:text-4xl md:text-5xl leading-[1] tracking-tight font-light text-on-surface mt-2"
+					>
+						how it's built.
+					</span>
+				</h1>
+
+				<p
+					class="font-body text-body-lg text-on-surface-variant max-w-xl mt-10 border-l-2 border-primary-container pl-6"
+				>
+					Greys, neon purple, a ring-tailed lemur, and the open web.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Set in -->
+	<section
+		id="set-in"
+		class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-16 md:py-24 scroll-mt-20"
+	>
+		<h2 class="section-label">set in</h2>
+
+		<div
+			class="space-y-6 font-body text-body-lg text-on-surface-variant max-w-4xl"
+		>
+			<p>
+				Display headlines, the wordmark, and section labels are set in
+				<a
+					href="https://fonts.google.com/specimen/Space+Grotesk"
+					class={linkClass}>Space Grotesk</a
+				> by <a href="https://floriankarsten.com" class={linkClass}>Florian Karsten</a> (2018,
+				open-source via <a
+					href="https://github.com/floriankarsten/space-grotesk"
+					class={linkClass}>GitHub</a
+				>), weights 300–700. A proportional-width descendant of Colophon
+				Foundry's <a
+					href="https://fonts.google.com/specimen/Space+Mono"
+					class={linkClass}>Space Mono</a
+				> (2016) — it keeps Space Mono's geometric quirks but widens the
+				letterforms for prose use. No italics; emphasis is carried by weight
+				and uppercasing.
+			</p>
+
+			<p>
+				Body copy and UI text are set in
+				<a
+					href="https://fonts.google.com/specimen/Inter"
+					class={linkClass}>Inter</a
+				> by <a href="https://rsms.me" class={linkClass}>Rasmus Andersson</a>
+				(2016, open-source), weights 300–600. Inter is screen-optimized: it
+				ships <a
+					href="https://rsms.me/inter/#features/tnum"
+					class={linkClass}>tabular figures</a
+				>, contextual alternates, and a sister face
+				<a href="https://rsms.me/inter/#display" class={linkClass}
+					>Inter Display</a
+				> tuned for larger sizes (not currently in use here — Space Grotesk handles
+				display).
+			</p>
+
+			<p>
+				Icons are drawn from
+				<a href="https://fonts.google.com/icons" class={linkClass}
+					>Material Symbols Outlined</a
+				> by <a href="https://design.google" class={linkClass}>Google</a> — a
+				variable icon font with continuous weight, fill, and optical-size
+				axes. Used sparingly; the rest of the UI furniture is hand-built in
+				CSS.
+			</p>
+
+			<p>
+				Both faces are served via <a
+					href="https://fonts.google.com"
+					class={linkClass}>Google Fonts</a
+				>; preconnect hints to <code class="font-mono text-sm">fonts.googleapis.com</code> and
+				<code class="font-mono text-sm">fonts.gstatic.com</code> are emitted
+				from the base layout to keep the type from blocking first paint.
+			</p>
+		</div>
+	</section>
+
+	<!-- Palette -->
+	<section
+		id="palette"
+		class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-16 md:py-24 scroll-mt-20"
+	>
+		<h2 class="section-label">palette</h2>
+
+		<p
+			class="font-body text-body-lg text-on-surface-variant max-w-4xl mb-12"
+		>
+			A warm-tinted grey scale evoking the body and tail rings of
+			<a
+				href="https://en.wikipedia.org/wiki/Ring-tailed_lemur"
+				class={linkClass}><em>Lemur catta</em></a
+			> (the ring-tailed lemur), against a single phosphor-bright purple accent.
+		</p>
+
+		<!-- Accent -->
+		<div class="mb-16 max-w-4xl">
+			<div class="flex items-baseline gap-4 mb-4">
+				<span
+					class="inline-block w-10 h-10 flex-shrink-0 self-center"
+					style={`background-color: var(${accent.cssVar});`}
+				></span>
+				<div
+					class="font-display uppercase tracking-tight font-black text-on-surface text-2xl md:text-3xl"
+				>
+					{accent.name}
+				</div>
+				<div class="font-mono text-sm text-on-surface-variant">
+					<code>{accent.hex}</code> · <code>{accent.oklch}</code>
+				</div>
+			</div>
+			<p
+				class="font-body text-body text-on-surface-variant pl-14 max-w-3xl"
+			>
+				The single accent colour. Picked from a brief of five neon-purple
+				candidates (Ultraviolet <code class="font-mono text-sm">#6600FF</code
+				>, Electric violet <code class="font-mono text-sm">#7300FF</code>,
+				Hot purple <code class="font-mono text-sm">#A020F0</code>, Phosphor
+				<code class="font-mono text-sm">#B026FF</code>, Magenta-purple
+				<code class="font-mono text-sm">#CB00FF</code>) tested against the
+				dark-grey ground for legibility and energy. Used for the header
+				band, the wordmark's small square mark, hover glows on app cards,
+				link colour, and the uppercase section labels throughout the site.
+			</p>
+		</div>
+
+		<!-- Ringtail greys -->
+		<div class="max-w-4xl">
+			<h3
+				class="font-display uppercase tracking-[0.2em] text-xs text-on-surface-variant mb-6"
+			>
+				Ringtail greys
+			</h3>
+			<ul class="space-y-3">
+				{
+					ringtailGreys.map((c) => (
+						<li class="flex items-center gap-4 flex-wrap">
+							<span
+								class="inline-block w-8 h-8 flex-shrink-0 border border-grey-400/30"
+								style={`background-color: var(${c.cssVar});`}
+							/>
+							<div class="font-display uppercase tracking-tight font-black text-on-surface text-base md:text-lg w-24">
+								{c.token}
+							</div>
+							<div class="font-mono text-sm text-on-surface-variant">
+								<code>{c.hex}</code> ·{" "}
+								<code>{c.oklch}</code>
+							</div>
+							<div class="font-body text-sm text-on-surface-variant">
+								— {c.use}
+							</div>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	<!-- Motifs -->
+	<section
+		id="motifs"
+		class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-16 md:py-24 scroll-mt-20"
+	>
+		<h2 class="section-label">motifs</h2>
+
+		<p
+			class="font-body text-body-lg text-on-surface-variant max-w-4xl mb-10"
+		>
+			The ring-tailed lemur isn't pictured anywhere on the site, but its body
+			shows up structurally:
+		</p>
+
+		<ul class="space-y-6 max-w-4xl">
+			{
+				motifs.map((m) => (
+					<li>
+						<div class="font-display uppercase tracking-tight font-black text-on-surface text-lg md:text-xl mb-2">
+							{m.name}
+						</div>
+						<p class="font-body text-body text-on-surface-variant">
+							{m.body}
+						</p>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+
+	<!-- Built with -->
+	<section
+		id="built-with"
+		class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-16 md:py-24 scroll-mt-20"
+	>
+		<h2 class="section-label">built with</h2>
+
+		<div
+			class="space-y-6 font-body text-body-lg text-on-surface-variant max-w-4xl"
+		>
+			<p>
+				The site is generated by <a
+					href="https://astro.build"
+					class={linkClass}>Astro 6</a
+				> — a content-driven static site generator that compiles to plain HTML+CSS+JS
+				with minimal client-side runtime. Pages live as <code
+					class="font-mono text-sm">.astro</code
+				> files; content (apps, team) as Markdown in content collections. Cross-page
+				navigation uses Astro's <a
+					href="https://docs.astro.build/en/guides/view-transitions/"
+					class={linkClass}>ClientRouter</a
+				> for view transitions; persistent elements (header, footer) survive
+				page changes.
+			</p>
+
+			<p>
+				Styling is <a href="https://tailwindcss.com" class={linkClass}
+					>Tailwind CSS v4</a
+				> using its CSS-first configuration — palette tokens, type scales, and
+				breakpoints all declared in <code class="font-mono text-sm"
+					>@theme</code
+				> blocks rather than a JS config. Custom properties registered via <a
+					href="https://developer.mozilla.org/en-US/docs/Web/CSS/@property"
+					class={linkClass}><code class="font-mono text-sm">@property</code
+					></a
+				> where they need to animate (the scroll-driven header shrink is one).
+			</p>
+
+			<p>
+				Hosted on <a
+					href="https://developers.cloudflare.com/workers/static-assets/"
+					class={linkClass}>Cloudflare Workers + Static Assets</a
+				>. The full Cloudflare configuration — zone, custom-domain bindings,
+				redirect rules, API tokens — is declared in <a
+					href="https://www.terraform.io"
+					class={linkClass}>Terraform</a
+				>. Secrets live in <a
+					href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html"
+					class={linkClass}>AWS SSM Parameter Store</a
+				>. Build and deploy run through <a
+					href="https://github.com/features/actions"
+					class={linkClass}>GitHub Actions</a
+				>. Package manager is <a href="https://pnpm.io" class={linkClass}
+					>pnpm</a
+				>.
+			</p>
+		</div>
+	</section>
+
+	<!-- References -->
+	<section
+		id="references"
+		class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-16 md:py-24 scroll-mt-20"
+	>
+		<h2 class="section-label">references</h2>
+
+		<div
+			class="space-y-6 font-body text-body-lg text-on-surface-variant max-w-4xl"
+		>
+			<p>
+				The visual anchor for this site is <a
+					href="https://landingfolio.com/inspiration/hoox"
+					class={linkClass}>Hoox</a
+				> (now offline; preserved in the <a
+					href="https://landingfolio.com"
+					class={linkClass}>landingfolio.com</a
+				> archive). Hoox set the rhythm: dark theme, single bold accent, content-rich
+				sectional layout — each section a distinct visual card rather than generic
+				columns.
+			</p>
+
+			<p>
+				<a href="https://clerk.com" class={linkClass}>clerk.com</a> is the live,
+				currently-shipping reference for the same DNA. The pixel-grid motion
+				vocabulary comes from <a
+					href="https://droneland.au"
+					class={linkClass}>droneland.au</a
+				>.
+			</p>
+		</div>
+	</section>
+</Base>
