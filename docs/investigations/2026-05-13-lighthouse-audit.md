@@ -4,7 +4,8 @@
 > - **Items A, B, C** resolved in commit `7eb9b4c` (team-strip contrast, footer © opacity, Material Symbols off the critical render path).
 > - **Item D / Recommendations #4 + #5** (AVIF/WebP variants, explicit `width`/`height`) shipped in commit `abca262` per `docs/plans/2026-05-13-app-screenshot-image-optimization.md`. Site-wide payload 23 MB PNG → 3 MB AVIF (87% smaller); SplitLedger screenshots 105 KB → 20 KB (81% smaller). A fresh Lighthouse pass on production is still owed — track it as a new investigation note.
 > - **Recommendation #6 (cache-TTL bump) withdrawn** — long-immutable cache headers without a cache-busting plan would trap stale assets during active development. Revisit only when there's a content-hashing / versioning strategy in place.
-> - **Recommendations #7 (colophon `forced-reflow`) and #8 (inline critical CSS)** still open. Lower-impact; no plan yet.
+> - **Recommendation #7 (colophon `forced-reflow`)** shipped in commit landing 2026-05-13. Scroll-shrink script's first `update()` is now skipped entirely when `scrollY === 0` (CSS default already correct), and deferred via `requestIdleCallback` when scrollY > 0 (hash anchor case). Subsequent updates (scroll, resize, post-view-transition) keep the prompt rAF path so the cross-page header animation still fires immediately. Live re-audit owed.
+> - **Recommendation #8 (inline critical CSS)** still open. Lower-impact; no plan yet.
 
 ## Context
 

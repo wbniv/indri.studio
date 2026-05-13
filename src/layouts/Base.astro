@@ -83,6 +83,7 @@ const navLinkClass = (active: boolean) =>
 			if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
 				let pending = false;
 				let inTransition = false;
+				let firstLoad = true;
 				const update = () => {
 					pending = false;
 					if (inTransition) return;
@@ -102,6 +103,26 @@ const navLinkClass = (active: boolean) =>
 				});
 				document.addEventListener("astro:page-load", () => {
 					inTransition = false;
+					// First paint: the scrollY read inside update() forces a
+					// sync layout right before the first frame, which Lighthouse
+					// flags as forced-reflow on long pages (e.g. /colophon/).
+					// If we're at the top, the CSS default for --header-shrink
+					// is already 0 → no work to do. If the user landed scrolled
+					// (hash anchor), defer the read to idle so it doesn't block
+					// the critical path. Subsequent page-loads (post-transition)
+					// keep the prompt rAF path so the cross-page header animation
+					// fires without delay.
+					if (firstLoad) {
+						firstLoad = false;
+						if (window.scrollY === 0) return;
+						const run = () => requestAnimationFrame(update);
+						if ("requestIdleCallback" in window) {
+							requestIdleCallback(run, { timeout: 250 });
+						} else {
+							setTimeout(run, 0);
+						}
+						return;
+					}
 					requestAnimationFrame(update);
 				});
 			}
@@ -141,7 +162,15 @@ const navLinkClass = (active: boolean) =>
 						INDRI
 					</span>
 				</div>
-				<div class="font-display uppercase text-[10px] tracking-[0.3em] text-on-surface-variant">
+				<div class="font-display uppercase text-[10px] tracking-[0.3em] text-on-surface-variant flex items-center gap-2">
+					<a
+						href="mailto:hello@indri.studio"
+						aria-label="Email Indri"
+						class="opacity-70 hover:opacity-100 hover:text-primary-container transition-all inline-flex items-center"
+					>
+						<span class="material-symbols-outlined" aria-hidden="true" style="font-size: 14px;">mail</span>
+					</a>
+					<span aria-hidden="true">·</span>
 					<a
 						href="/colophon"
 						class={`opacity-70 hover:opacity-100 hover:text-primary-container transition-all ${pathname === "/colophon" ? "text-primary-container opacity-100" : ""}`}
