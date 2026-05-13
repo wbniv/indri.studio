@@ -1,5 +1,6 @@
 ---
 import AppLayout from "../../layouts/AppLayout.astro";
+import StoreBadges from "../../components/StoreBadges.astro";
 import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
@@ -64,6 +65,8 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 					{post.data.summary}
 				</p>
 			)}
+
+			<StoreBadges links={post.data.storeLinks} />
 		</header>
 
 		<div class="prose">

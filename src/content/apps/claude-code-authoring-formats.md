@@ -3,6 +3,8 @@ title: Claude Code Authoring Formats
 date: 2026-05-13
 summary: Type-aware rendering for Claude Code authoring formats — memory, skill, subagent, slash command.
 draft: false
+storeLinks:
+  github: "#"
 screenshots: []
 ---
 

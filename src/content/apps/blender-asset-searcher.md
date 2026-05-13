@@ -3,6 +3,8 @@ title: Blender Asset Searcher
 date: 2026-08-01
 summary: Licensed 3D asset search inside Blender — with provenance baked in.
 draft: false
+storeLinks:
+  blenderExtensions: "#"
 screenshots:
   - { src: "/screenshots/blender-asset-searcher/gallery.png", alt: "Searching across four providers — Poly Haven CC0-1.0 result selected, OpenGameArt results carry a lower-trust marker" }
 ---

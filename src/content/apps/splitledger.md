@@ -3,6 +3,9 @@ title: SplitLedger
 date: 2026-06-01
 summary: Split bills, settle accounts. Across currencies, across continents.
 draft: false
+storeLinks:
+  appStore: "#"
+  googlePlay: "#"
 screenshots:
   - { src: "/screenshots/splitledger/balances.png", alt: "Balances dashboard" }
   - { src: "/screenshots/splitledger/transactions.png", alt: "Transactions list" }

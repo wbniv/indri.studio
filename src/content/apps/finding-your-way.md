@@ -3,6 +3,9 @@ title: Finding Your Way
 date: 2026-06-01
 summary: A philosophical hypertext through Love, Reason, Truth, and God.
 draft: false
+storeLinks:
+  appStore: "#"
+  googlePlay: "#"
 screenshots:
   - { src: "/screenshots/finding-your-way/intro.png", alt: "Opening page — drop cap on parchment" }
   - { src: "/screenshots/finding-your-way/love-realm.png", alt: "Love realm" }

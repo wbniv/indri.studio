@@ -3,6 +3,8 @@ title: World Foundry
 date: 2026-12-01
 summary: Build worlds, run games — anywhere.
 draft: false
+storeLinks:
+  github: "#"
 screenshots:
   - { src: "/screenshots/world-foundry/logo.png", alt: "World Foundry logo" }
   - { src: "/screenshots/world-foundry/blender-house.png", alt: "Blender → World Foundry roundtrip render" }

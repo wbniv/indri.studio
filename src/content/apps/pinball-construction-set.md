@@ -3,6 +3,10 @@ title: Pinball Construction Set
 date: 2026-09-01
 summary: Build pinball tables. Simulate physics in real time. Play instantly.
 draft: false
+storeLinks:
+  appStore: "#"
+  googlePlay: "#"
+  steam: "#"
 cardImages:
   - { src: "/screenshots/pinball-construction-set/playfield.jpg", alt: "Williams Earthshaker playfield — public domain reference" }
   - { src: "/screenshots/pinball-construction-set/playfield-detail.jpg", alt: "Williams High Speed playfield detail — public domain reference" }

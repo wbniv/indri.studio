@@ -51,6 +51,19 @@ const apps = defineCollection({
 				}),
 			)
 			.default([]),
+		// Store / download links — one URL per platform. Each present key
+		// renders the platform's badge below the app header. Use "#" as a
+		// placeholder when the actual store listing doesn't exist yet (a
+		// badge still renders, the link just no-ops).
+		storeLinks: z
+			.object({
+				appStore: z.string().optional(),
+				googlePlay: z.string().optional(),
+				steam: z.string().optional(),
+				blenderExtensions: z.string().optional(),
+				github: z.string().optional(),
+			})
+			.optional(),
 		// Per-app brand kit. Any field set here is written by AppLayout as
 		// an override of the studio CSS custom property of the same role:
 		//   primary    → --color-primary-container  (accent)

@@ -4,6 +4,9 @@ date: 2026-06-01
 summary: Arrive, park, pay. Done.
 b2b: Got a space you don't drive into? List it. Take the cut. Zero overhead.
 draft: false
+storeLinks:
+  appStore: "#"
+  googlePlay: "#"
 screenshots:
   - { src: "/screenshots/parking-space/history.png", alt: "Payment history" }
   - { src: "/screenshots/parking-space/operator.png", alt: "Operator view" }

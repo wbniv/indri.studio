@@ -1,0 +1,74 @@
+---
+// StoreBadges — a row of platform-store badges below the app header.
+//
+// Each badge is an <a> wrapping an <img> of the official-style badge
+// SVG from /public/img/store-badges/. Hover lifts the badge slightly
+// and softens the alpha so the row reads as interactive without
+// drowning in motion.
+
+interface StoreLinks {
+  appStore?: string;
+  googlePlay?: string;
+  steam?: string;
+  blenderExtensions?: string;
+  github?: string;
+}
+
+interface Props {
+  links?: StoreLinks;
+}
+
+const { links } = Astro.props;
+
+// Order matters — phone stores first, then desktop, then source.
+const entries: { key: keyof StoreLinks; src: string; alt: string; width: number }[] = [
+  { key: "appStore",          src: "/img/store-badges/app-store.svg",          alt: "Download on the App Store",  width: 135 },
+  { key: "googlePlay",        src: "/img/store-badges/google-play.svg",        alt: "Get it on Google Play",       width: 152 },
+  { key: "steam",             src: "/img/store-badges/steam.svg",              alt: "Available on Steam",          width: 135 },
+  { key: "blenderExtensions", src: "/img/store-badges/blender-extensions.svg", alt: "Get it on Blender Extensions",width: 165 },
+  { key: "github",            src: "/img/store-badges/github.svg",             alt: "Get it on GitHub",            width: 135 },
+];
+
+const present = entries.filter((e) => links && links[e.key]);
+---
+
+{present.length > 0 && (
+  <ul class="store-badges" aria-label="Get the app">
+    {present.map((entry) => (
+      <li>
+        <a href={links![entry.key]} class="store-badge">
+          <img src={entry.src} alt={entry.alt} width={entry.width} height={40} />
+        </a>
+      </li>
+    ))}
+  </ul>
+)}
+
+<style>
+  .store-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 1.75rem 0 0;
+  }
+  .store-badge {
+    display: inline-block;
+    transition: opacity 150ms ease, transform 150ms ease;
+    opacity: 0.92;
+  }
+  .store-badge:hover,
+  .store-badge:focus-visible {
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+  .store-badge img {
+    display: block;
+    height: 40px;
+    width: auto;
+    border: 0;
+    margin: 0;
+  }
+</style>
