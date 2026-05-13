@@ -19,8 +19,12 @@ const apps = defineCollection({
 		// Any JS-parseable date string in the frontmatter becomes a Date.
 		// Used to sort upcoming-first on the homepage gallery.
 		date: z.coerce.date(),
-		// Short teaser line shown on the listing / home page.
+		// Short teaser line shown on the listing / home page (consumer-facing).
 		summary: z.string().optional(),
+		// Optional second teaser aimed at the supply side / B2B angle —
+		// rendered below the summary on the gallery card, slightly muted.
+		// E.g. ParkingSpace uses it to pitch lot owners.
+		b2b: z.string().optional(),
 		// Pull an app out of the published list without deleting the file.
 		draft: z.boolean().default(false),
 		// Screenshots rendered below the prose on the per-app landing page.
