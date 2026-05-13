@@ -93,31 +93,32 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 			</section>
 		)}
 
-		<nav class="mt-12 md:mt-16 grid grid-cols-2 gap-3 md:gap-4" aria-label="Catalogue navigation">
-			<a
-				href={`/apps/${prev.id}/`}
-				class="glass-card glass-card-hover block p-5 md:p-6 group"
-			>
-				<span class="font-display uppercase tracking-[0.25em] text-[10px] text-on-surface-variant">
-					←&nbsp;&nbsp;previous
-				</span>
-				<div class="app-card-title font-display text-lg md:text-xl font-black uppercase tracking-tight text-on-surface mt-2 leading-[1.1]">
-					{prev.data.title}
-				</div>
-			</a>
-			<a
-				href={`/apps/${next.id}/`}
-				class="glass-card glass-card-hover block p-5 md:p-6 text-right group"
-			>
-				<span class="font-display uppercase tracking-[0.25em] text-[10px] text-on-surface-variant">
-					next&nbsp;&nbsp;→
-				</span>
-				<div class="app-card-title font-display text-lg md:text-xl font-black uppercase tracking-tight text-on-surface mt-2 leading-[1.1]">
-					{next.data.title}
-				</div>
-			</a>
-		</nav>
 	</article>
+
+	<nav aria-label="Catalogue navigation">
+		<a
+			href={`/apps/${prev.id}/`}
+			class="side-nav side-nav-prev group"
+			aria-label={`Previous: ${prev.data.title}`}
+		>
+			<span class="material-symbols-outlined side-nav-arrow">chevron_left</span>
+			<span class="side-nav-label">
+				<span class="side-nav-eyebrow">previous</span>
+				<span class="side-nav-title">{prev.data.title}</span>
+			</span>
+		</a>
+		<a
+			href={`/apps/${next.id}/`}
+			class="side-nav side-nav-next group"
+			aria-label={`Next: ${next.data.title}`}
+		>
+			<span class="side-nav-label side-nav-label-right">
+				<span class="side-nav-eyebrow">next</span>
+				<span class="side-nav-title">{next.data.title}</span>
+			</span>
+			<span class="material-symbols-outlined side-nav-arrow">chevron_right</span>
+		</a>
+	</nav>
 
 	<style>
 		.prose :global(h2) {
@@ -213,6 +214,95 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 		.prose :global(strong) {
 			color: var(--color-on-surface);
 			font-weight: 600;
+		}
+
+		/* Fixed-position prev/next arrows on the sides of the content.
+		   Visible on screens wide enough for the gutter; on narrower
+		   viewports they shrink and ride the edges. */
+		.side-nav {
+			position: fixed;
+			top: 50%;
+			transform: translateY(-50%);
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+			padding: 0.75rem;
+			background: rgba(61, 56, 51, 0.55);
+			border: 1px solid rgba(255, 255, 255, 0.06);
+			border-radius: 999px;
+			color: var(--color-on-surface-variant);
+			backdrop-filter: blur(6px);
+			transition: background 180ms ease, color 180ms ease, padding 180ms ease,
+				border-color 180ms ease, transform 180ms ease;
+			z-index: 30;
+			text-decoration: none;
+		}
+		.side-nav:hover {
+			background: rgba(176, 38, 255, 0.18);
+			border-color: rgba(176, 38, 255, 0.45);
+			color: var(--color-on-surface);
+			padding: 0.75rem 1.1rem;
+		}
+		.side-nav-prev {
+			left: max(0.75rem, calc((100vw - 720px) / 2 - 96px));
+		}
+		.side-nav-next {
+			right: max(0.75rem, calc((100vw - 720px) / 2 - 96px));
+		}
+		.side-nav-arrow {
+			font-size: 36px !important;
+			line-height: 1;
+			color: var(--color-primary-container);
+		}
+		.side-nav-label {
+			display: none;
+			flex-direction: column;
+			line-height: 1.1;
+			max-width: 0;
+			overflow: hidden;
+			white-space: nowrap;
+			opacity: 0;
+			transition: max-width 220ms ease, opacity 220ms ease 60ms;
+		}
+		.side-nav-label-right {
+			text-align: right;
+		}
+		.side-nav:hover .side-nav-label {
+			max-width: 220px;
+			opacity: 1;
+		}
+		.side-nav-eyebrow {
+			font-family: var(--font-display);
+			text-transform: uppercase;
+			letter-spacing: 0.25em;
+			font-size: 9px;
+			color: var(--color-on-surface-variant);
+			margin-bottom: 2px;
+		}
+		.side-nav-title {
+			font-family: var(--font-display);
+			text-transform: uppercase;
+			letter-spacing: -0.01em;
+			font-weight: 800;
+			font-size: 14px;
+			color: var(--color-on-surface);
+		}
+
+		@media (min-width: 1024px) {
+			.side-nav-label {
+				display: flex;
+			}
+		}
+
+		/* On very narrow screens, shrink the buttons so they don't crowd
+		   the body text. */
+		@media (max-width: 480px) {
+			.side-nav {
+				padding: 0.5rem;
+			}
+			.side-nav-arrow {
+				font-size: 28px !important;
+			}
 		}
 	</style>
 </Base>
