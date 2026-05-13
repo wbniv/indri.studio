@@ -200,21 +200,23 @@ html {
 			stripe-gap 140s linear infinite;
 	}
 
-	/* Non-uniform keyframes with intentional reversals. Net motion still
-	 * resolves to one period (32px / 360deg) per cycle so the loop seam is
-	 * invisible, but the path BACK-TRACKS at certain points — direction
-	 * flips, slows, then continues. Drift and rotation use different
-	 * reversal points so they never sync. */
+	/* Non-uniform keyframes with intentional reversals. The path
+	 * BACK-TRACKS at certain points — direction flips, slows, then
+	 * continues. Each animation uses different reversal points so they
+	 * never sync. Drift ends at 96px (≈ peak gap) to land roughly on a
+	 * period boundary; with gap animating live, the seam is imperfect
+	 * but invisible against the other timelines. Rotation always
+	 * resolves to a full 360deg per cycle. */
 	/* Per-keyframe animation-timing-function sets the easing FROM that
 	 * keyframe to the next, so each segment ease-in-outs into the next
 	 * direction change instead of pivoting linearly. */
 	@keyframes stripe-drift {
 		0%   { background-position: 0 0;        animation-timing-function: ease-in-out; }
-		30%  { background-position: 18px 18px;  animation-timing-function: ease-in-out; }   /* forward burst */
-		45%  { background-position: 10px 10px;  animation-timing-function: ease-in-out; }   /* reverse */
-		70%  { background-position: 26px 26px;  animation-timing-function: ease-in-out; }   /* forward again */
-		85%  { background-position: 22px 22px;  animation-timing-function: ease-in-out; }   /* small reverse */
-		100% { background-position: 32px 32px; }                                            /* settle */
+		30%  { background-position: 54px 54px;  animation-timing-function: ease-in-out; }   /* forward burst */
+		45%  { background-position: 30px 30px;  animation-timing-function: ease-in-out; }   /* reverse */
+		70%  { background-position: 78px 78px;  animation-timing-function: ease-in-out; }   /* forward again */
+		85%  { background-position: 66px 66px;  animation-timing-function: ease-in-out; }   /* small reverse */
+		100% { background-position: 96px 96px; }                                            /* settle */
 	}
 
 	@keyframes stripe-rotate {
@@ -240,12 +242,12 @@ html {
 	/* Inter-line spacing opens and closes. Different stop positions
 	 * from stripe-width so the two never sync. */
 	@keyframes stripe-gap {
-		0%   { --stripe-gap: 28px; animation-timing-function: ease-in-out; }
-		20%  { --stripe-gap: 60px; animation-timing-function: ease-in-out; }   /* spread */
-		40%  { --stripe-gap: 16px; animation-timing-function: ease-in-out; }   /* crowd */
-		65%  { --stripe-gap: 48px; animation-timing-function: ease-in-out; }   /* spread again */
-		85%  { --stripe-gap: 22px; animation-timing-function: ease-in-out; }   /* small crowd */
-		100% { --stripe-gap: 28px; }                                           /* settle */
+		0%   { --stripe-gap: 28px;  animation-timing-function: ease-in-out; }
+		20%  { --stripe-gap: 140px; animation-timing-function: ease-in-out; }   /* spread */
+		40%  { --stripe-gap: 16px;  animation-timing-function: ease-in-out; }   /* crowd */
+		65%  { --stripe-gap: 90px;  animation-timing-function: ease-in-out; }   /* spread again */
+		85%  { --stripe-gap: 22px;  animation-timing-function: ease-in-out; }   /* small crowd */
+		100% { --stripe-gap: 28px; }                                            /* settle */
 	}
 
 	@media (prefers-reduced-motion: reduce) {
