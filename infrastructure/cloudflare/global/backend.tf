@@ -5,6 +5,6 @@ terraform {
     region         = "us-west-2"
     dynamodb_table = "indri-studio-terraform-locks"
     encrypt        = true
-    profile        = "is-terraform"
+    profile        = "indri-terraform"
   }
 }

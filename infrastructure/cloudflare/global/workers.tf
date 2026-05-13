@@ -11,7 +11,6 @@ resource "cloudflare_workers_custom_domain" "apex" {
   zone_id    = cloudflare_zone.indri_studio.id
   hostname   = var.domain
   service    = var.worker_name
-  environment = "production"
 }
 
 resource "cloudflare_workers_custom_domain" "www" {
@@ -19,5 +18,4 @@ resource "cloudflare_workers_custom_domain" "www" {
   zone_id    = cloudflare_zone.indri_studio.id
   hostname   = "www.${var.domain}"
   service    = var.worker_name
-  environment = "production"
 }

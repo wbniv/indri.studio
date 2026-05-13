@@ -27,7 +27,7 @@ terraform {
 
 provider "aws" {
   region  = "us-west-2"
-  profile = "is-terraform"
+  profile = "indri-terraform"
 }
 
 variable "project" {

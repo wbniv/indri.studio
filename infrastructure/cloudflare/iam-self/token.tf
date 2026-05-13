@@ -1,4 +1,4 @@
-# is-cf-token: the narrow, project-scoped Cloudflare API token used by both
+# indri-cf-token: the narrow, project-scoped Cloudflare API token used by both
 # the global/ Terraform config and the CI deploy workflow.
 #
 # Scope: indri.studio zone only, Workers Scripts edit, DNS edit, Workers
@@ -25,44 +25,53 @@ variable "zone_id" {
   default = ""
 }
 
-# Permission group IDs are stable Cloudflare-side. These four cover everything
-# the global/ TF and CI deploy need:
-#   - Workers Scripts:Edit       (deploy + bind the Worker)
-#   - DNS:Edit                   (custom-domain bindings touch DNS)
-#   - Workers Routes:Edit        (custom-domain bindings touch routes)
-#   - Zone:Read                  (provider needs to enumerate the zone)
-data "cloudflare_api_token_permission_groups_list" "all" {}
+# Permission groups for CI deploys. CF v5 uses cloudflare_account_token
+# (Account API token, not user-tied). Two policies for clean scope split:
+#   - Zone-scoped: DNS Write + Workers Routes Write + Zone Read
+#     (custom-domain bindings touch DNS records and routes)
+#   - Account-scoped: Workers Scripts Write
+#     (deploy = upload script to account)
+data "cloudflare_account_api_token_permission_groups_list" "all" {
+  account_id = var.account_id
+}
 
-resource "cloudflare_api_token" "is_cf_token" {
-  name = "${var.project}-cf-token"
+locals {
+  pg = {
+    for p in data.cloudflare_account_api_token_permission_groups_list.all.result :
+    p.name => p.id
+  }
+}
+
+resource "cloudflare_account_token" "indri_cf_token" {
+  account_id = var.account_id
+  name       = "indri-cf-token"
 
   policies = [
     {
       effect = "allow"
-
-      resources = {
+      resources = jsonencode({
         "com.cloudflare.api.account.zone.${var.zone_id}" = "*"
-      }
-
+      })
       permission_groups = [
-        # Filter to the four permission groups by name. Names are stable;
-        # IDs are stable but opaque. Use names for readability.
-        # Adjust this list when extending scope — never just remove the filter.
-        for pg in data.cloudflare_api_token_permission_groups_list.all.result :
-        { id = pg.id }
-        if contains([
-          "Workers Scripts Write",
-          "DNS Write",
-          "Workers Routes Write",
-          "Zone Read",
-        ], pg.name)
+        { id = local.pg["DNS Write"] },
+        { id = local.pg["Workers Routes Write"] },
+        { id = local.pg["Zone Read"] },
       ]
-    }
+    },
+    {
+      effect = "allow"
+      resources = jsonencode({
+        "com.cloudflare.api.account.${var.account_id}" = "*"
+      })
+      permission_groups = [
+        { id = local.pg["Workers Scripts Write"] },
+      ]
+    },
   ]
 }
 
 output "token_value" {
   description = "Newly minted token value. Push this to SSM at /indri-studio/cloudflare/api_token, then revoke the bootstrap token."
-  value       = cloudflare_api_token.is_cf_token.value
+  value       = cloudflare_account_token.indri_cf_token.value
   sensitive   = true
 }

@@ -14,10 +14,11 @@
 # Cloudflare Registrar, switching to pattern 2 is a `terraform import` away.
 
 resource "cloudflare_zone" "indri_studio" {
-  zone       = var.domain
-  account_id = var.account_id
-  plan       = "free"
-  type       = "full"
+  account = {
+    id = var.account_id
+  }
+  name = var.domain
+  type = "full"
 
   lifecycle {
     prevent_destroy = true

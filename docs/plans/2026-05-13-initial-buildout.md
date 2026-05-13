@@ -560,7 +560,7 @@ The same template, rendered with `world-foundry`'s frontmatter, would render in 
   **AWS / Cloudflare split** holds for stateful backends: SplitLedger's Serverpod backend, ParkingSpace's API, etc. stay on AWS. The studio marketing site is the static surface where Cloudflare wins on cost and simplicity. Both clouds are Terraform-managed.
 
   **Per-project Cloudflare API token** (matches your AWS per-project IAM pattern):
-  - Create an `is-cf-token` scoped to: Zone `indri.studio` — Workers Scripts:Edit, DNS:Edit, Workers Routes:Edit, Zone:Read. Nothing more.
+  - Create an `indri-cf-token` scoped to: Zone `indri.studio` — Workers Scripts:Edit, DNS:Edit, Workers Routes:Edit, Zone:Read. Nothing more.
   - Managed declaratively via `cloudflare_api_token` resource in `infrastructure/cloudflare/iam-self/` (mirrors `finding-your-way/infrastructure/aws/iam-self/`). A one-time bootstrap account-token creates the narrowed project token; the bootstrap then gets rotated/deleted.
   - **SSM is the source of truth** for the token value: `/indri-studio/cloudflare/api_token` as `SecureString` (same naming pattern as the parking-space / SplitLedger projects). Any local cache (`.env`, `~/.cloudflare/`) is read-only, regenerated from SSM via `task secrets-pull`. Never hand-edit; rotation happens in SSM and propagates from there.
 
@@ -750,9 +750,9 @@ Following the sibling-project pattern (parking-space uses `/parkingspace/...`, S
 | Service | Decision | Notes |
 |---|---|---|
 | **Cloudflare account** | **New Account** under existing login | CF supports multiple Accounts per login. Indri's zone, Workers, R2, Analytics all under a dedicated Account, separate from Rapid Raccoon's. |
-| **Cloudflare API token** | **Per-project, narrowed** | `is-cf-token` scoped to indri.studio zone + Workers only. Stored in SSM at `/indri-studio/cloudflare/api_token`. |
+| **Cloudflare API token** | **Per-project, narrowed** | `indri-cf-token` scoped to indri.studio zone + Workers only. Stored in SSM at `/indri-studio/cloudflare/api_token`. |
 | **GitHub** | **New organization** | `indri-studio` (or chosen name). All Indri repos under one org. Free tier = unlimited public + private repos, separate secrets / Dependabot / Actions. |
-| **AWS** | **Forced share** | Used only for TF state S3 backend. Cost of a new AWS Org isn't worth it for a single S3 bucket. Project-scoped IAM user `is-terraform` (matches `sl-terraform`, `gc-terraform` pattern). |
+| **AWS** | **Forced share** | Used only for TF state S3 backend. Cost of a new AWS Org isn't worth it for a single S3 bucket. Project-scoped IAM user `indri-terraform` (matches `sl-terraform`, `gc-terraform` pattern). |
 | **Domain registrar** | **Cloudflare Registrar** | Move indri.studio to CF Registrar at-cost. No markup, integrates with the zone. |
 | **Google Cloud / OAuth** | **New project** | `indri-studio` GCP project for any OAuth client IDs (Google Drive sync in Gustos Colores, Sign-In with Google if used). Existing Rapid Raccoon GCP project stays as-is. |
 | **Apple Developer** | **Forced share** | $99/yr per legal entity. Apple's model is one account, many apps. Sub-divide via team roles + per-app provisioning profiles. |

@@ -3,7 +3,7 @@
 # Bootstrap flow:
 #   1. Create a temporary, broad-scope "bootstrap" token in the Cloudflare
 #      dashboard. Export it as CLOUDFLARE_API_TOKEN.
-#   2. Run `terraform apply` here to mint a narrow `is-cf-token` with only
+#   2. Run `terraform apply` here to mint a narrow `indri-cf-token` with only
 #      the permissions the global/ config and CI deploys need.
 #   3. Store the narrow token value in SSM at /indri-studio/cloudflare/api_token.
 #   4. Revoke the bootstrap token in the Cloudflare dashboard.

@@ -33,3 +33,6 @@ pnpm-debug.log*
 *.tfvars
 crash.log
 crash.*.log
+
+# terraform plan files
+tfplan

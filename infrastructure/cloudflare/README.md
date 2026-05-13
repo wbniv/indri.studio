@@ -7,7 +7,7 @@ Terraform skeleton for the indri.studio zone, Workers custom-domain bindings, re
 | Dir | Purpose | Backend |
 |---|---|---|
 | `bootstrap/` | One-time: create the S3 state bucket + DynamoDB locks table. | local (chicken-and-egg) |
-| `iam-self/` | Self-narrow the bootstrap CF token to `is-cf-token` (project-scoped). | S3 |
+| `iam-self/` | Self-narrow the bootstrap CF token to `indri-cf-token` (project-scoped). | S3 |
 | `global/` | Zone settings, Workers custom-domain bindings, redirect rules. | S3 |
 
 ## First-apply order
@@ -38,4 +38,4 @@ cd ../global && terraform init && terraform apply
 
 ## State backend
 
-Each project gets its own S3 state bucket — `indri-studio-terraform-state`, paralleling `findingyourway-terraform-state`, `parkingspace-terraform-state`, etc. AWS profile: `is-terraform` (per-project IAM user, narrow scope, see plan).
+Each project gets its own S3 state bucket — `indri-studio-terraform-state`, paralleling `findingyourway-terraform-state`, `parkingspace-terraform-state`, etc. AWS profile: `indri-terraform` (per-project IAM user, narrow scope, see plan).
