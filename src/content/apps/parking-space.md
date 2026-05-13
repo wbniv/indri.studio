@@ -2,7 +2,7 @@
 title: ParkingSpace
 date: 2026-06-01
 summary: Arrive, park, pay. Done.
-b2b: Run a lot? Mount a phone. Take the cut. Zero upfront.
+b2b: Got a space you don't drive into? List it. Take the cut. Zero overhead.
 draft: false
 screenshots:
   - { src: "/screenshots/parking-space/history.png", alt: "Payment history" }
@@ -18,13 +18,10 @@ Currently operating in Thailand.
   <img src="/screenshots/parking-space/active.png" alt="Active parking session" style="margin: 0; max-width: 100%; height: auto;" />
 </div>
 
-## For parking-lot owners
+## Your unused space is income
 
-If you run a lot, you can run it on ParkingSpace today.
+If your building gave you a parking space you don't use, ParkingSpace turns it into income.
 
-- **Zero upfront cost.** No install fee, no subscription, no hardware to buy.
-- **Use what you already have.** Already own a phone or tablet? Mount it at the lot. That's the entire install.
-- **Revenue share, not a bill.** ParkingSpace earns a small percentage of each paid session. You keep the rest. If nobody parks, we earn nothing.
-- **One app, every role.** Switch between consumer, attendant, and owner views from the same install.
-
-If you already have a screen to mount, your out-of-pocket setup cost is zero. Your only commitment is the cut we take when customers actually pay.
+- **List it, set your hours.** Available evenings only? Weekends? Always? Your call.
+- **Nothing to install.** No mounted screen, no hardware. Drivers find your space in-app and pay through it.
+- **Revenue share, not a bill.** ParkingSpace takes a small cut of each paid session. If nobody parks, we earn nothing.
