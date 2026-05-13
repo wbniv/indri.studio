@@ -1,0 +1,586 @@
+{
+	"/screenshots/blender-asset-searcher/gallery.png": {
+		"width": 897,
+		"height": 711
+	},
+	"/screenshots/claude-code-authoring-formats/memory.png": {
+		"width": 1400,
+		"height": 400
+	},
+	"/screenshots/claude-code-authoring-formats/skill.png": {
+		"width": 1400,
+		"height": 400
+	},
+	"/screenshots/claude-code-authoring-formats/slash-command.png": {
+		"width": 1400,
+		"height": 400
+	},
+	"/screenshots/claude-code-authoring-formats/style-a-arcane-full.png": {
+		"width": 1326,
+		"height": 577
+	},
+	"/screenshots/claude-code-authoring-formats/style-a-arcane-skill-full.png": {
+		"width": 1326,
+		"height": 509
+	},
+	"/screenshots/claude-code-authoring-formats/style-a-arcane-skill.png": {
+		"width": 700,
+		"height": 269
+	},
+	"/screenshots/claude-code-authoring-formats/style-a-arcane-slash-command-full.png": {
+		"width": 1326,
+		"height": 513
+	},
+	"/screenshots/claude-code-authoring-formats/style-a-arcane-slash-command.png": {
+		"width": 700,
+		"height": 271
+	},
+	"/screenshots/claude-code-authoring-formats/style-a-arcane-subagent-full.png": {
+		"width": 1326,
+		"height": 551
+	},
+	"/screenshots/claude-code-authoring-formats/style-a-arcane-subagent.png": {
+		"width": 700,
+		"height": 291
+	},
+	"/screenshots/claude-code-authoring-formats/style-a-arcane.png": {
+		"width": 700,
+		"height": 305
+	},
+	"/screenshots/claude-code-authoring-formats/style-b-holo-full.png": {
+		"width": 1326,
+		"height": 470
+	},
+	"/screenshots/claude-code-authoring-formats/style-b-holo-skill-full.png": {
+		"width": 1326,
+		"height": 420
+	},
+	"/screenshots/claude-code-authoring-formats/style-b-holo-skill.png": {
+		"width": 700,
+		"height": 222
+	},
+	"/screenshots/claude-code-authoring-formats/style-b-holo-slash-command-full.png": {
+		"width": 1326,
+		"height": 420
+	},
+	"/screenshots/claude-code-authoring-formats/style-b-holo-slash-command.png": {
+		"width": 700,
+		"height": 222
+	},
+	"/screenshots/claude-code-authoring-formats/style-b-holo-subagent-full.png": {
+		"width": 1326,
+		"height": 450
+	},
+	"/screenshots/claude-code-authoring-formats/style-b-holo-subagent.png": {
+		"width": 700,
+		"height": 238
+	},
+	"/screenshots/claude-code-authoring-formats/style-b-holo.png": {
+		"width": 700,
+		"height": 248
+	},
+	"/screenshots/claude-code-authoring-formats/style-c-gem-full.png": {
+		"width": 1274,
+		"height": 492
+	},
+	"/screenshots/claude-code-authoring-formats/style-c-gem-skill-full.png": {
+		"width": 1274,
+		"height": 434
+	},
+	"/screenshots/claude-code-authoring-formats/style-c-gem-skill.png": {
+		"width": 699,
+		"height": 238
+	},
+	"/screenshots/claude-code-authoring-formats/style-c-gem-slash-command-full.png": {
+		"width": 1274,
+		"height": 428
+	},
+	"/screenshots/claude-code-authoring-formats/style-c-gem-slash-command.png": {
+		"width": 700,
+		"height": 235
+	},
+	"/screenshots/claude-code-authoring-formats/style-c-gem-subagent-full.png": {
+		"width": 1274,
+		"height": 492
+	},
+	"/screenshots/claude-code-authoring-formats/style-c-gem-subagent.png": {
+		"width": 699,
+		"height": 270
+	},
+	"/screenshots/claude-code-authoring-formats/style-c-gem.png": {
+		"width": 699,
+		"height": 270
+	},
+	"/screenshots/claude-code-authoring-formats/style-d-min-full.png": {
+		"width": 1234,
+		"height": 379
+	},
+	"/screenshots/claude-code-authoring-formats/style-d-min-skill-full.png": {
+		"width": 1234,
+		"height": 326
+	},
+	"/screenshots/claude-code-authoring-formats/style-d-min-skill.png": {
+		"width": 700,
+		"height": 185
+	},
+	"/screenshots/claude-code-authoring-formats/style-d-min-slash-command-full.png": {
+		"width": 1234,
+		"height": 332
+	},
+	"/screenshots/claude-code-authoring-formats/style-d-min-slash-command.png": {
+		"width": 699,
+		"height": 188
+	},
+	"/screenshots/claude-code-authoring-formats/style-d-min-subagent-full.png": {
+		"width": 1234,
+		"height": 379
+	},
+	"/screenshots/claude-code-authoring-formats/style-d-min-subagent.png": {
+		"width": 700,
+		"height": 215
+	},
+	"/screenshots/claude-code-authoring-formats/style-d-min.png": {
+		"width": 700,
+		"height": 215
+	},
+	"/screenshots/claude-code-authoring-formats/style-e-max-full.png": {
+		"width": 1222,
+		"height": 397
+	},
+	"/screenshots/claude-code-authoring-formats/style-e-max-skill-full.png": {
+		"width": 1222,
+		"height": 348
+	},
+	"/screenshots/claude-code-authoring-formats/style-e-max-skill.png": {
+		"width": 699,
+		"height": 199
+	},
+	"/screenshots/claude-code-authoring-formats/style-e-max-slash-command-full.png": {
+		"width": 1222,
+		"height": 328
+	},
+	"/screenshots/claude-code-authoring-formats/style-e-max-slash-command.png": {
+		"width": 700,
+		"height": 188
+	},
+	"/screenshots/claude-code-authoring-formats/style-e-max-subagent-full.png": {
+		"width": 1222,
+		"height": 397
+	},
+	"/screenshots/claude-code-authoring-formats/style-e-max-subagent.png": {
+		"width": 699,
+		"height": 227
+	},
+	"/screenshots/claude-code-authoring-formats/style-e-max.png": {
+		"width": 699,
+		"height": 227
+	},
+	"/screenshots/claude-code-authoring-formats/style-f-future-full.png": {
+		"width": 1250,
+		"height": 383
+	},
+	"/screenshots/claude-code-authoring-formats/style-f-future-skill-full.png": {
+		"width": 1250,
+		"height": 334
+	},
+	"/screenshots/claude-code-authoring-formats/style-f-future-skill.png": {
+		"width": 700,
+		"height": 187
+	},
+	"/screenshots/claude-code-authoring-formats/style-f-future-slash-command-full.png": {
+		"width": 1250,
+		"height": 335
+	},
+	"/screenshots/claude-code-authoring-formats/style-f-future-slash-command.png": {
+		"width": 700,
+		"height": 188
+	},
+	"/screenshots/claude-code-authoring-formats/style-f-future-subagent-full.png": {
+		"width": 1250,
+		"height": 383
+	},
+	"/screenshots/claude-code-authoring-formats/style-f-future-subagent.png": {
+		"width": 698,
+		"height": 214
+	},
+	"/screenshots/claude-code-authoring-formats/style-f-future.png": {
+		"width": 698,
+		"height": 214
+	},
+	"/screenshots/claude-code-authoring-formats/style-g-editorial-full.png": {
+		"width": 1242,
+		"height": 403
+	},
+	"/screenshots/claude-code-authoring-formats/style-g-editorial-skill-full.png": {
+		"width": 1242,
+		"height": 360
+	},
+	"/screenshots/claude-code-authoring-formats/style-g-editorial-skill.png": {
+		"width": 700,
+		"height": 203
+	},
+	"/screenshots/claude-code-authoring-formats/style-g-editorial-slash-command-full.png": {
+		"width": 1242,
+		"height": 336
+	},
+	"/screenshots/claude-code-authoring-formats/style-g-editorial-slash-command.png": {
+		"width": 699,
+		"height": 189
+	},
+	"/screenshots/claude-code-authoring-formats/style-g-editorial-subagent-full.png": {
+		"width": 1242,
+		"height": 403
+	},
+	"/screenshots/claude-code-authoring-formats/style-g-editorial-subagent.png": {
+		"width": 700,
+		"height": 227
+	},
+	"/screenshots/claude-code-authoring-formats/style-g-editorial.png": {
+		"width": 700,
+		"height": 227
+	},
+	"/screenshots/claude-code-authoring-formats/style-h-mondrian-full.png": {
+		"width": 1326,
+		"height": 468
+	},
+	"/screenshots/claude-code-authoring-formats/style-h-mondrian-skill-full.png": {
+		"width": 1298,
+		"height": 353
+	},
+	"/screenshots/claude-code-authoring-formats/style-h-mondrian-skill.png": {
+		"width": 699,
+		"height": 190
+	},
+	"/screenshots/claude-code-authoring-formats/style-h-mondrian-slash-command-full.png": {
+		"width": 1298,
+		"height": 369
+	},
+	"/screenshots/claude-code-authoring-formats/style-h-mondrian-slash-command.png": {
+		"width": 700,
+		"height": 199
+	},
+	"/screenshots/claude-code-authoring-formats/style-h-mondrian-subagent-full.png": {
+		"width": 1326,
+		"height": 468
+	},
+	"/screenshots/claude-code-authoring-formats/style-h-mondrian-subagent.png": {
+		"width": 700,
+		"height": 247
+	},
+	"/screenshots/claude-code-authoring-formats/style-h-mondrian.png": {
+		"width": 700,
+		"height": 247
+	},
+	"/screenshots/claude-code-authoring-formats/style-i-nin-full.png": {
+		"width": 1326,
+		"height": 495
+	},
+	"/screenshots/claude-code-authoring-formats/style-i-nin-skill-full.png": {
+		"width": 1326,
+		"height": 454
+	},
+	"/screenshots/claude-code-authoring-formats/style-i-nin-skill.png": {
+		"width": 700,
+		"height": 240
+	},
+	"/screenshots/claude-code-authoring-formats/style-i-nin-slash-command-full.png": {
+		"width": 1326,
+		"height": 450
+	},
+	"/screenshots/claude-code-authoring-formats/style-i-nin-slash-command.png": {
+		"width": 700,
+		"height": 238
+	},
+	"/screenshots/claude-code-authoring-formats/style-i-nin-subagent-full.png": {
+		"width": 1326,
+		"height": 495
+	},
+	"/screenshots/claude-code-authoring-formats/style-i-nin-subagent.png": {
+		"width": 699,
+		"height": 261
+	},
+	"/screenshots/claude-code-authoring-formats/style-i-nin.png": {
+		"width": 699,
+		"height": 261
+	},
+	"/screenshots/claude-code-authoring-formats/style-j-bladerunner-full.png": {
+		"width": 1326,
+		"height": 422
+	},
+	"/screenshots/claude-code-authoring-formats/style-j-bladerunner-skill-full.png": {
+		"width": 1326,
+		"height": 383
+	},
+	"/screenshots/claude-code-authoring-formats/style-j-bladerunner-skill.png": {
+		"width": 699,
+		"height": 202
+	},
+	"/screenshots/claude-code-authoring-formats/style-j-bladerunner-slash-command-full.png": {
+		"width": 1326,
+		"height": 382
+	},
+	"/screenshots/claude-code-authoring-formats/style-j-bladerunner-slash-command.png": {
+		"width": 700,
+		"height": 202
+	},
+	"/screenshots/claude-code-authoring-formats/style-j-bladerunner-subagent-full.png": {
+		"width": 1326,
+		"height": 422
+	},
+	"/screenshots/claude-code-authoring-formats/style-j-bladerunner-subagent.png": {
+		"width": 700,
+		"height": 223
+	},
+	"/screenshots/claude-code-authoring-formats/style-j-bladerunner.png": {
+		"width": 700,
+		"height": 223
+	},
+	"/screenshots/claude-code-authoring-formats/style-k-caravaggio-full.png": {
+		"width": 1326,
+		"height": 644
+	},
+	"/screenshots/claude-code-authoring-formats/style-k-caravaggio-skill-full.png": {
+		"width": 1326,
+		"height": 597
+	},
+	"/screenshots/claude-code-authoring-formats/style-k-caravaggio-skill.png": {
+		"width": 700,
+		"height": 315
+	},
+	"/screenshots/claude-code-authoring-formats/style-k-caravaggio-slash-command-full.png": {
+		"width": 1326,
+		"height": 581
+	},
+	"/screenshots/claude-code-authoring-formats/style-k-caravaggio-slash-command.png": {
+		"width": 700,
+		"height": 307
+	},
+	"/screenshots/claude-code-authoring-formats/style-k-caravaggio-subagent-full.png": {
+		"width": 1326,
+		"height": 644
+	},
+	"/screenshots/claude-code-authoring-formats/style-k-caravaggio-subagent.png": {
+		"width": 700,
+		"height": 340
+	},
+	"/screenshots/claude-code-authoring-formats/style-k-caravaggio.png": {
+		"width": 700,
+		"height": 340
+	},
+	"/screenshots/claude-code-authoring-formats/style-l-vangogh-full.png": {
+		"width": 1282,
+		"height": 531
+	},
+	"/screenshots/claude-code-authoring-formats/style-l-vangogh-skill-full.png": {
+		"width": 1282,
+		"height": 464
+	},
+	"/screenshots/claude-code-authoring-formats/style-l-vangogh-skill.png": {
+		"width": 699,
+		"height": 253
+	},
+	"/screenshots/claude-code-authoring-formats/style-l-vangogh-slash-command-full.png": {
+		"width": 1282,
+		"height": 481
+	},
+	"/screenshots/claude-code-authoring-formats/style-l-vangogh-slash-command.png": {
+		"width": 700,
+		"height": 263
+	},
+	"/screenshots/claude-code-authoring-formats/style-l-vangogh-subagent-full.png": {
+		"width": 1282,
+		"height": 507
+	},
+	"/screenshots/claude-code-authoring-formats/style-l-vangogh-subagent.png": {
+		"width": 700,
+		"height": 277
+	},
+	"/screenshots/claude-code-authoring-formats/style-l-vangogh.png": {
+		"width": 700,
+		"height": 290
+	},
+	"/screenshots/claude-code-authoring-formats/style-m-ukiyoe-full.png": {
+		"width": 1282,
+		"height": 503
+	},
+	"/screenshots/claude-code-authoring-formats/style-m-ukiyoe-skill-full.png": {
+		"width": 1282,
+		"height": 460
+	},
+	"/screenshots/claude-code-authoring-formats/style-m-ukiyoe-skill.png": {
+		"width": 700,
+		"height": 251
+	},
+	"/screenshots/claude-code-authoring-formats/style-m-ukiyoe-slash-command-full.png": {
+		"width": 1282,
+		"height": 447
+	},
+	"/screenshots/claude-code-authoring-formats/style-m-ukiyoe-slash-command.png": {
+		"width": 700,
+		"height": 244
+	},
+	"/screenshots/claude-code-authoring-formats/style-m-ukiyoe-subagent-full.png": {
+		"width": 1282,
+		"height": 503
+	},
+	"/screenshots/claude-code-authoring-formats/style-m-ukiyoe-subagent.png": {
+		"width": 700,
+		"height": 275
+	},
+	"/screenshots/claude-code-authoring-formats/style-m-ukiyoe.png": {
+		"width": 700,
+		"height": 275
+	},
+	"/screenshots/claude-code-authoring-formats/style-n-miro-full.png": {
+		"width": 1272,
+		"height": 495
+	},
+	"/screenshots/claude-code-authoring-formats/style-n-miro-skill-full.png": {
+		"width": 1272,
+		"height": 430
+	},
+	"/screenshots/claude-code-authoring-formats/style-n-miro-skill.png": {
+		"width": 700,
+		"height": 237
+	},
+	"/screenshots/claude-code-authoring-formats/style-n-miro-slash-command-full.png": {
+		"width": 1272,
+		"height": 446
+	},
+	"/screenshots/claude-code-authoring-formats/style-n-miro-slash-command.png": {
+		"width": 699,
+		"height": 245
+	},
+	"/screenshots/claude-code-authoring-formats/style-n-miro-subagent-full.png": {
+		"width": 1272,
+		"height": 471
+	},
+	"/screenshots/claude-code-authoring-formats/style-n-miro-subagent.png": {
+		"width": 699,
+		"height": 259
+	},
+	"/screenshots/claude-code-authoring-formats/style-n-miro.png": {
+		"width": 699,
+		"height": 272
+	},
+	"/screenshots/claude-code-authoring-formats/style-o-picasso-full.png": {
+		"width": 1258,
+		"height": 519
+	},
+	"/screenshots/claude-code-authoring-formats/style-o-picasso-skill-full.png": {
+		"width": 1258,
+		"height": 454
+	},
+	"/screenshots/claude-code-authoring-formats/style-o-picasso-skill.png": {
+		"width": 700,
+		"height": 253
+	},
+	"/screenshots/claude-code-authoring-formats/style-o-picasso-slash-command-full.png": {
+		"width": 1258,
+		"height": 461
+	},
+	"/screenshots/claude-code-authoring-formats/style-o-picasso-slash-command.png": {
+		"width": 700,
+		"height": 257
+	},
+	"/screenshots/claude-code-authoring-formats/style-o-picasso-subagent-full.png": {
+		"width": 1258,
+		"height": 495
+	},
+	"/screenshots/claude-code-authoring-formats/style-o-picasso-subagent.png": {
+		"width": 699,
+		"height": 275
+	},
+	"/screenshots/claude-code-authoring-formats/style-o-picasso.png": {
+		"width": 700,
+		"height": 289
+	},
+	"/screenshots/claude-code-authoring-formats/subagent.png": {
+		"width": 1400,
+		"height": 400
+	},
+	"/screenshots/finding-your-way/god-realm.png": {
+		"width": 430,
+		"height": 2606
+	},
+	"/screenshots/finding-your-way/intro.png": {
+		"width": 430,
+		"height": 980
+	},
+	"/screenshots/finding-your-way/love-realm.png": {
+		"width": 430,
+		"height": 1424
+	},
+	"/screenshots/finding-your-way/truth-realm.png": {
+		"width": 430,
+		"height": 1988
+	},
+	"/screenshots/gustos-colores/blank.png": {
+		"width": 1008,
+		"height": 2014
+	},
+	"/screenshots/gustos-colores/gallery.png": {
+		"width": 1008,
+		"height": 2014
+	},
+	"/screenshots/gustos-colores/inprogress.png": {
+		"width": 1008,
+		"height": 2014
+	},
+	"/screenshots/gustos-colores/zoom.png": {
+		"width": 1008,
+		"height": 2014
+	},
+	"/screenshots/parking-space/active.png": {
+		"width": 1008,
+		"height": 2244
+	},
+	"/screenshots/parking-space/history.png": {
+		"width": 1008,
+		"height": 2244
+	},
+	"/screenshots/parking-space/login.png": {
+		"width": 1008,
+		"height": 2244
+	},
+	"/screenshots/parking-space/operator.png": {
+		"width": 1008,
+		"height": 2244
+	},
+	"/screenshots/pinball-construction-set/playfield-detail.jpg": {
+		"width": 640,
+		"height": 480
+	},
+	"/screenshots/pinball-construction-set/playfield.jpg": {
+		"width": 900,
+		"height": 1200
+	},
+	"/screenshots/splitledger/balances.png": {
+		"width": 191,
+		"height": 512
+	},
+	"/screenshots/splitledger/contacts.png": {
+		"width": 226,
+		"height": 512
+	},
+	"/screenshots/splitledger/settings.png": {
+		"width": 226,
+		"height": 512
+	},
+	"/screenshots/splitledger/transactions.png": {
+		"width": 226,
+		"height": 512
+	},
+	"/screenshots/world-foundry/blender-house.png": {
+		"width": 960,
+		"height": 540
+	},
+	"/screenshots/world-foundry/logo.png": {
+		"width": 108,
+		"height": 133
+	},
+	"/screenshots/world-foundry/uv-seams.png": {
+		"width": 960,
+		"height": 1020
+	}
+}

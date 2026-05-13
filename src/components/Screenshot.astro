@@ -1,0 +1,42 @@
+---
+// <picture>-based renderer for app screenshots. Serves AVIF to browsers
+// that accept it, WebP next, falls back to the original PNG/JPG. Reads
+// intrinsic dimensions from src/data/screenshot-dims.json — populated by
+// scripts/optimize-screenshots.mjs (chained into `task build` via deps).
+// Explicit width/height eliminates CLS while the image loads.
+import dims from "../data/screenshot-dims.json";
+
+interface Props {
+	src: string;
+	alt?: string;
+	loading?: "lazy" | "eager";
+	class?: string;
+}
+
+const { src, alt = "", loading = "lazy", class: className = "block w-full h-auto" } = Astro.props;
+
+const stem = src.replace(/\.(png|jpe?g)$/i, "");
+const avif = `${stem}.avif`;
+const webp = `${stem}.webp`;
+
+const dim = (dims as Record<string, { width: number; height: number }>)[src];
+if (!dim) {
+	throw new Error(
+		`Screenshot.astro: no dimensions for "${src}" in src/data/screenshot-dims.json. Run \`task screenshots\` to regenerate the manifest.`,
+	);
+}
+---
+
+<picture>
+	<source srcset={avif} type="image/avif" />
+	<source srcset={webp} type="image/webp" />
+	<img
+		src={src}
+		alt={alt}
+		width={dim.width}
+		height={dim.height}
+		loading={loading}
+		decoding="async"
+		class={className}
+	/>
+</picture>

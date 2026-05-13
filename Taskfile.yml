@@ -16,6 +16,7 @@ tasks:
 
   build:
     desc: "Static build into ./dist/"
+    deps: [screenshots]
     cmds:
       - pnpm build
 
@@ -24,8 +25,14 @@ tasks:
     cmds:
       - pnpm preview
 
+  screenshots:
+    desc: "Generate AVIF + WebP variants of public/screenshots/**/*.{png,jpg} and write src/data/screenshot-dims.json. Idempotent."
+    cmds:
+      - node scripts/optimize-screenshots.mjs {{.CLI_ARGS}}
+
   deploy:
     desc: "Build + wrangler deploy. Reads CLOUDFLARE_API_TOKEN from .env (regenerate via task secrets-pull)."
+    deps: [screenshots]
     cmds:
       - pnpm build
       - pnpm wrangler deploy

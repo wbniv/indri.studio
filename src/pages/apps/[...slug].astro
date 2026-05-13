@@ -1,6 +1,7 @@
 ---
 import AppLayout from "../../layouts/AppLayout.astro";
 import StoreBadges from "../../components/StoreBadges.astro";
+import Screenshot from "../../components/Screenshot.astro";
 import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
@@ -113,12 +114,7 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 				<ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 list-none p-0 m-0">
 					{post.data.screenshots.map((shot) => (
 						<li class="glass-card p-3">
-							<img
-								src={shot.src}
-								alt={shot.alt ?? ""}
-								loading="lazy"
-								class="block w-full h-auto"
-							/>
+							<Screenshot src={shot.src} alt={shot.alt ?? ""} />
 							{shot.alt && (
 								<p class="font-display uppercase tracking-[0.2em] text-[10px] text-on-surface-variant mt-3 mb-1 px-1">
 									{shot.alt}
