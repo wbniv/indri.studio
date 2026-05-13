@@ -5,9 +5,13 @@ import RingFlare from "../components/RingFlare.astro";
 interface Props {
 	title: string;
 	description?: string;
+	/* Phosphor-neon ring bursts ambient layer. On by default for the studio
+	 * front; off for per-app pages so each app's own visual identity has
+	 * room. AppLayout passes `ringFlare={false}`. */
+	ringFlare?: boolean;
 }
 
-const { title, description = "indri.studio — small studio, building apps people use every day." } = Astro.props;
+const { title, description = "indri.studio — small studio, building apps people use every day.", ringFlare = true } = Astro.props;
 
 const siteTitle = "indri";
 const fullTitle = title === siteTitle ? siteTitle : `${title} · ${siteTitle}`;
@@ -73,7 +77,7 @@ const navLinkClass = (active: boolean) =>
 		</script>
 	</head>
 	<body class="min-h-screen flex flex-col bg-surface text-on-surface font-body">
-		<RingFlare />
+		{ringFlare && <RingFlare />}
 
 		<header
 			class="header-fx sticky top-0 z-50 w-full border-b border-[rgba(26,24,21,0.4)] bg-primary-container backdrop-blur-md"
