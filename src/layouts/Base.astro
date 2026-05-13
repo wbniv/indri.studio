@@ -46,10 +46,22 @@ const navLinkClass = (active: boolean) =>
 			rel="stylesheet"
 			href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
 		/>
+		<!-- Material Symbols Outlined loaded non-blocking — only used on
+		 ~ /404 and per-app pages. preload + onload-swap lets the request
+		 ~ happen off the critical path; <noscript> fallback keeps icons
+		 ~ working when JS is disabled. -->
 		<link
-			rel="stylesheet"
+			rel="preload"
+			as="style"
 			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+			onload="this.onload=null; this.rel='stylesheet'"
 		/>
+		<noscript>
+			<link
+				rel="stylesheet"
+				href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+			/>
+		</noscript>
 		<slot name="head" />
 		<title>{fullTitle}</title>
 		<ClientRouter />
@@ -132,7 +144,7 @@ const navLinkClass = (active: boolean) =>
 				<div class="font-display uppercase text-[10px] tracking-[0.3em] text-on-surface-variant">
 					<a
 						href="/colophon"
-						class={`opacity-50 hover:opacity-100 hover:text-primary-container transition-all ${pathname === "/colophon" ? "text-primary-container opacity-100" : ""}`}
+						class={`opacity-70 hover:opacity-100 hover:text-primary-container transition-all ${pathname === "/colophon" ? "text-primary-container opacity-100" : ""}`}
 					>
 						© {new Date().getFullYear()}
 					</a>

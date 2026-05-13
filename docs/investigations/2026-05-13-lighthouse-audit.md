@@ -1,5 +1,7 @@
 # Lighthouse audit — 2026-05-13 (post-v0.1.13)
 
+> **Status (2026-05-13, after this audit):** items A, B, C below resolved in the next commit. Item D (SplitLedger image optimization) deferred per follow-up plan `docs/plans/2026-05-13-app-screenshot-image-optimization.md` — waiting on another agent's in-flight changes to `src/pages/apps/[...slug].astro`. The cache-TTL recommendation in this report (see §Recommendations #6) was **withdrawn** — long-immutable cache headers without a cache-busting plan would trap stale assets during active development. Revisit only when there's a content-hashing / versioning strategy in place.
+
 ## Context
 
 First [Lighthouse](https://developer.chrome.com/docs/lighthouse) audit of `indri.studio` in production, run minutes after the `v0.1.13` deploy that landed the colophon route, the site-wide cross-page header animation, and footer changes. Goal: establish a baseline for the Phase-5 *"Lighthouse: Performance ≥ 95, Accessibility ≥ 95, Best Practices ≥ 95"* target from `docs/plans/2026-05-13-initial-buildout.md`.
