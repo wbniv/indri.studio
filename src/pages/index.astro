@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import PlatformIcon from "../components/PlatformIcon.astro";
 import { getCollection } from "astro:content";
 
 const allApps = (await getCollection("apps", ({ data }) => !data.draft))
@@ -30,9 +31,24 @@ const team = (await getCollection("team")).sort(
 					</span>
 				</h1>
 
-				<p class="font-body text-body-lg text-on-surface-variant max-w-xl mt-10 border-l-2 border-primary-container pl-6">
-					We build apps people use every day — coloring, bookkeeping, parking, play.
-				</p>
+				<div class="max-w-xl mt-10 border-l-2 border-primary-container pl-6">
+					<p class="font-body text-body-lg text-on-surface-variant">
+						We build apps people use every day — coloring, bookkeeping, parking, play.
+					</p>
+
+					<div class="flex items-center gap-6 md:gap-8 mt-6 flex-wrap">
+						<ul class="platform-strip flex items-center gap-6 md:gap-8 list-none p-0">
+							<li><PlatformIcon platform="phone"   /></li>
+							<li><PlatformIcon platform="tablet"  /></li>
+							<li><PlatformIcon platform="console" /></li>
+							<li><PlatformIcon platform="tv"      /></li>
+							<li><PlatformIcon platform="web"     /></li>
+						</ul>
+						<span class="platform-caption font-display uppercase tracking-[0.2em] text-[10px] text-on-surface-variant">
+							On every screen you own
+						</span>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>

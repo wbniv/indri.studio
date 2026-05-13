@@ -364,4 +364,72 @@ html {
 		}
 	}
 
+	/* Sequential glow loop for the hero platform-icon strip.
+	 ~ Five icons, 6 s cycle: each icon briefly ramps from faint to full
+	 ~ Phosphor purple + neon text-shadow, 1.2 s apart. Suggests "one
+	 ~ studio, many platforms" via the traversal.
+	 ~ Hairline behind the row threads the icons together as one axis.
+	 ~ Hover: each icon lifts + scales; transform is independent of the
+	 ~ keyframe (which only touches opacity + text-shadow), so the two
+	 ~ effects don't fight.
+	 ~ Reduced-motion: static + no hover transform. */
+	.platform-strip {
+		background:
+			linear-gradient(
+				to right,
+				transparent,
+				color-mix(in srgb, var(--color-primary-container) 20%, transparent) 4%,
+				color-mix(in srgb, var(--color-primary-container) 20%, transparent) 96%,
+				transparent
+			);
+		background-size: 100% 1px;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+	.platform-strip .material-symbols-outlined {
+		/* Font-size set here (not via Tailwind text-[Npx]) so the
+		 ~ two-class selector beats Google's `.material-symbols-outlined
+		 ~ { font-size: 24px }` rule — Material Symbols loads via preload
+		 ~ + onload-swap so it can land late in the cascade. */
+		font-size: 40px;
+		color: var(--color-primary-container);
+		opacity: 0.35;
+		animation: platform-glow 6s ease-in-out infinite;
+		transition: transform 0.2s ease-out;
+	}
+	@media (min-width: 768px) {
+		.platform-strip .material-symbols-outlined {
+			font-size: 48px;
+		}
+	}
+	.platform-strip li:hover .material-symbols-outlined {
+		transform: translateY(-3px) scale(1.08);
+	}
+	.platform-strip > li:nth-child(2) .material-symbols-outlined { animation-delay: 1.2s; }
+	.platform-strip > li:nth-child(3) .material-symbols-outlined { animation-delay: 2.4s; }
+	.platform-strip > li:nth-child(4) .material-symbols-outlined { animation-delay: 3.6s; }
+	.platform-strip > li:nth-child(5) .material-symbols-outlined { animation-delay: 4.8s; }
+
+	@keyframes platform-glow {
+		0%, 20%, 100% {
+			opacity: 0.35;
+			text-shadow: 0 0 0 transparent;
+		}
+		10% {
+			opacity: 1;
+			text-shadow: 0 0 16px var(--color-primary-container);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.platform-strip .material-symbols-outlined {
+			animation: none;
+			opacity: 0.5;
+			transition: none;
+		}
+		.platform-strip li:hover .material-symbols-outlined {
+			transform: none;
+		}
+	}
+
 }

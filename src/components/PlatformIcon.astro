@@ -1,0 +1,26 @@
+---
+type Platform = "phone" | "tablet" | "console" | "tv" | "web";
+
+interface Props {
+	platform: Platform;
+	class?: string;
+}
+
+const { platform, class: className = "" } = Astro.props;
+
+const PLATFORMS: Record<Platform, { symbol: string; label: string }> = {
+	phone:   { symbol: "smartphone",     label: "Phone" },
+	tablet:  { symbol: "tablet",         label: "Tablet" },
+	console: { symbol: "sports_esports", label: "Console" },
+	tv:      { symbol: "cast",           label: "TV" },
+	web:     { symbol: "public",         label: "Web" },
+};
+
+const { symbol, label } = PLATFORMS[platform];
+---
+
+<span
+	class:list={["material-symbols-outlined", className]}
+	role="img"
+	aria-label={label}
+>{symbol}</span>

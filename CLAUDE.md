@@ -2,7 +2,7 @@
 
 > Project-specific conventions. Shared conventions cascade from `~/SRC/CLAUDE.md`.
 
-indri.studio is the marketing site for **Indri**, a small studio that builds apps for phones, tablets, consoles, and the web. The site catalogues every Indri app, hosts each app's privacy/terms, and introduces the studio team.
+indri.studio is the marketing site for **Indri**, a small studio that builds apps for phones, tablets, consoles, TVs, and the web. The site catalogues every Indri app, hosts each app's privacy/terms, and introduces the studio team.
 
 It directly replaces `rapid-raccoon.com` — the predecessor studio site — using the same Cloudflare-hosted Astro pattern, plus full Terraform-managed infrastructure.
 
