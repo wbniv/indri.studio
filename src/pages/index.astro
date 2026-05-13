@@ -49,10 +49,17 @@ const team = (await getCollection("team")).sort(
 		<ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
 			{allApps.map((app, idx) => {
 				// Real screenshots first, with thematic stand-ins as fallback
-				// for apps that don't have any captures yet.
-				const shots = app.data.screenshots.length > 0
-					? app.data.screenshots
-					: app.data.cardImages;
+				// for apps that don't have any captures yet. Stand-ins are
+				// rendered far more subdued (grayscale, lower opacity) since
+				// they're decorative, not representative of actual UI.
+				const usingPlaceholder = app.data.screenshots.length === 0;
+				const shots = usingPlaceholder ? app.data.cardImages : app.data.screenshots;
+				const primaryClass = usingPlaceholder
+					? "absolute inset-0 w-full h-full object-cover opacity-20 grayscale contrast-75"
+					: "absolute inset-0 w-full h-full object-cover opacity-35 saturate-50";
+				const secondaryClass = usingPlaceholder
+					? "absolute -bottom-[20%] -right-[15%] w-3/4 h-3/4 object-cover opacity-15 grayscale contrast-75 mix-blend-luminosity"
+					: "absolute -bottom-[20%] -right-[15%] w-3/4 h-3/4 object-cover opacity-25 saturate-50 mix-blend-luminosity";
 				// Per-card visual variation: slight differences in rotation and
 				// scale across the grid so cards don't read as a uniform stripe.
 				// Alternates direction; magnitude derived from index.
@@ -70,7 +77,7 @@ const team = (await getCollection("team")).sort(
 										src={shots[0].src}
 										alt=""
 										loading="lazy"
-										class="absolute inset-0 w-full h-full object-cover opacity-35 saturate-50"
+										class={primaryClass}
 										style={`transform: scale(${scale}) rotate(${rotation}deg);`}
 									/>
 									{shots[1] && (
@@ -78,7 +85,7 @@ const team = (await getCollection("team")).sort(
 											src={shots[1].src}
 											alt=""
 											loading="lazy"
-											class="absolute -bottom-[20%] -right-[15%] w-3/4 h-3/4 object-cover opacity-25 saturate-50 mix-blend-luminosity"
+											class={secondaryClass}
 											style={`transform: rotate(${-rotation * 1.4}deg);`}
 										/>
 									)}
