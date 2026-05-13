@@ -126,6 +126,34 @@ const navLinkClass = (active: boolean) =>
 					requestAnimationFrame(update);
 				});
 			}
+
+			// Post-swap scroll fix. Chrome's moveBefore() (used by Astro's
+			// swap for transition:persist elements) anchors the persisted
+			// footer to the bottom of the new document — so the page lands
+			// at scrollY = docH - viewport regardless of where the router
+			// tried to scroll. The router's own scrollTo (top:0 for
+			// push/replace, history-state for traverse) runs synchronously
+			// and gets overridden once the post-swap layout pass applies
+			// the anchor shift. Re-assert in rAF, mirroring the router's
+			// own logic, so we scroll *after* the override lands. Skip
+			// hash navigation — the browser owns that case.
+			document.addEventListener("astro:before-preparation", (e) => {
+				const navType = e.navigationType;
+				const target =
+					navType === "traverse"
+						? { left: history.state?.scrollX ?? 0, top: history.state?.scrollY ?? 0 }
+						: { left: 0, top: 0 };
+				document.addEventListener(
+					"astro:after-swap",
+					() => {
+						if (location.hash) return;
+						requestAnimationFrame(() =>
+							window.scrollTo({ ...target, behavior: "instant" }),
+						);
+					},
+					{ once: true },
+				);
+			});
 		</script>
 	</head>
 	<body class="min-h-screen flex flex-col bg-surface text-on-surface font-body">

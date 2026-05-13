@@ -229,11 +229,19 @@ html {
 	}
 
 	/* Line thickness breathes. Non-uniform stops with intentional
-	 * reversals so the swell→pinch→swell rhythm never feels metronomic. */
+	 * reversals so the pinch→swell→swell rhythm never feels
+	 * metronomic. Pinch is intentionally placed EARLIER in the cycle
+	 * than the big swell — gap's tight phase (40% of its own cycle)
+	 * happens roughly between width's pinch (25%) and big swell
+	 * (45%), so when the two timelines drift through compatible
+	 * phases, width is most likely to be small or transitioning when
+	 * gap is at its tightest. Doesn't eliminate dense-moment
+	 * coincidence over long time (timelines are independent) but
+	 * skews the odds heavily toward "thin stripes when crowded." */
 	@keyframes stripe-width {
 		0%   { --stripe-width: 4px;  animation-timing-function: ease-in-out; }
-		25%  { --stripe-width: 12px; animation-timing-function: ease-in-out; }   /* swell */
-		45%  { --stripe-width: 2px;  animation-timing-function: ease-in-out; }   /* pinch */
+		25%  { --stripe-width: 2px;  animation-timing-function: ease-in-out; }   /* pinch first */
+		45%  { --stripe-width: 12px; animation-timing-function: ease-in-out; }   /* swell after */
 		70%  { --stripe-width: 9px;  animation-timing-function: ease-in-out; }   /* swell again */
 		88%  { --stripe-width: 5px;  animation-timing-function: ease-in-out; }   /* drift back */
 		100% { --stripe-width: 4px; }                                            /* settle */
