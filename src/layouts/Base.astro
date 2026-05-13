@@ -53,6 +53,29 @@ const navLinkClass = (active: boolean) =>
 			if (new URLSearchParams(location.search).has("fx")) {
 				document.documentElement.classList.add("fx");
 			}
+
+			// Scroll-shrink: --header-shrink ramps 0 → 1 as scrollY goes
+			// 0 → half a viewport. CSS reads it to interpolate the
+			// header's inner padding. rAF-batched to one update per frame.
+			// Ease-out curve so the header reacts immediately to scroll
+			// then settles into min, rather than feeling laggy.
+			if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+				let pending = false;
+				const update = () => {
+					pending = false;
+					const raw = Math.min(1, window.scrollY / (window.innerHeight / 2));
+					const eased = 1 - (1 - raw) * (1 - raw);
+					document.documentElement.style.setProperty("--header-shrink", eased.toFixed(3));
+				};
+				const tick = () => {
+					if (pending) return;
+					pending = true;
+					requestAnimationFrame(update);
+				};
+				window.addEventListener("scroll", tick, { passive: true });
+				window.addEventListener("resize", tick, { passive: true });
+				update();
+			}
 		</script>
 	</head>
 	<body class="min-h-screen flex flex-col bg-surface text-on-surface font-body">
@@ -61,7 +84,7 @@ const navLinkClass = (active: boolean) =>
 		<header
 			class="header-fx sticky top-0 z-50 w-full border-b border-[rgba(26,24,21,0.4)] bg-primary-container backdrop-blur-md"
 		>
-			<div class="flex justify-between items-center w-full px-6 md:px-8 py-4 max-w-[var(--container-max)] mx-auto">
+			<div class="flex justify-between items-center w-full px-6 md:px-8 max-w-[var(--container-max)] mx-auto">
 				<a href="/" class="flex items-center gap-3 group">
 					<span class="block w-3 h-3 bg-grey-900 shrink-0"></span>
 					<span class="font-display text-xl md:text-2xl font-black uppercase tracking-[0.3em] text-on-surface transition-colors">

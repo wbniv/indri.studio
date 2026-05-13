@@ -277,6 +277,17 @@
 		text-transform: uppercase;
 	}
 
+	/* Scroll-driven header shrink. --header-shrink (0 → 1) is set by an
+	 * inline script in Base.astro that tracks scrollY / viewport-height.
+	 * Inner padding interpolates from 1rem at the top of the page down
+	 * to 0.25rem once you've scrolled ~one viewport. prefers-reduced-
+	 * motion users get the constant max via the var() fallback (the JS
+	 * listener no-ops, --header-shrink is never set, fallback is 0). */
+	.header-fx > div {
+		padding-top: calc(1rem - 0.75rem * var(--header-shrink, 0));
+		padding-bottom: calc(1rem - 0.75rem * var(--header-shrink, 0));
+	}
+
 	/* Header motion FX (prototype, gated on html.fx — set by an inline
 	 * script in Base.astro when ?fx is in the URL). Phosphor breathe —
 	 * a slow screen-blended radial glow that pulses across the purple
