@@ -10,6 +10,29 @@
 	inherits: false;
 }
 
+/* Register --header-shrink as a typed number so the value itself
+ * interpolates over the transition duration set on `html` below. The
+ * .header-fx padding derived from this var (in @layer components) then
+ * animates as a free consequence — works regardless of how scrollY
+ * changes (continuous scroll, click-to-top, keyboard Home/End,
+ * programmatic scroll, resize). Top-level — @property is not allowed
+ * inside @layer. */
+@property --header-shrink {
+	syntax: "<number>";
+	inherits: true;
+	initial-value: 0;
+}
+
+html {
+	transition: --header-shrink 220ms ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		transition: none;
+	}
+}
+
 /* Indri brand tokens.
  *
  * Palette: warm-tinted greys (ring-tailed-lemur lens) + neon Phosphor purple
@@ -293,13 +316,13 @@
 	/* Scroll-driven header shrink. --header-shrink (0 → 1) is set by an
 	 * inline script in Base.astro that tracks scrollY / viewport-height.
 	 * Inner padding interpolates from 1rem at the top of the page down
-	 * to 0.25rem once you've scrolled ~one viewport. prefers-reduced-
-	 * motion users get the constant max via the var() fallback (the JS
-	 * listener no-ops, --header-shrink is never set, fallback is 0). */
+	 * to 0.25rem once you've scrolled ~one viewport. The var is registered
+	 * at top-level via @property and transitioned on `html`, so every
+	 * change (scroll, click-to-top, Home/End, resize) eases. prefers-
+	 * reduced-motion disables both the transition and the JS listener. */
 	.header-fx > div {
 		padding-top: calc(1.125rem - 1rem * var(--header-shrink, 0));
 		padding-bottom: calc(1.125rem - 1rem * var(--header-shrink, 0));
-		transition: padding-top 220ms ease-in-out, padding-bottom 220ms ease-in-out;
 	}
 
 	/* Header motion FX — Phosphor breathe, a slow screen-blended radial
@@ -338,9 +361,6 @@
 	@media (prefers-reduced-motion: reduce) {
 		.header-fx::after {
 			animation: none;
-		}
-		.header-fx > div {
-			transition: none;
 		}
 	}
 

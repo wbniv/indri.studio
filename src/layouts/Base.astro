@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import RingFlare from "../components/RingFlare.astro";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
 	title: string;
@@ -51,16 +52,28 @@ const navLinkClass = (active: boolean) =>
 		/>
 		<slot name="head" />
 		<title>{fullTitle}</title>
+		<ClientRouter />
 		<script is:inline>
 			// Scroll-shrink: --header-shrink ramps 0 → 1 as scrollY goes
-			// 0 → half a viewport. CSS reads it to interpolate the
-			// header's inner padding. rAF-batched to one update per frame.
-			// Ease-out curve so the header reacts immediately to scroll
-			// then settles into min, rather than feeling laggy.
+			// 0 → half a viewport. CSS (var registered via @property,
+			// transitioned on `html`) interpolates the header's inner
+			// padding through every value change.
+			//
+			// Cross-page nav uses ClientRouter, so state persists. But
+			// scrollY resets to 0 on the new page mid-transition; the
+			// scroll listener would fire and set --header-shrink to 0
+			// BEFORE the new-page snapshot is captured, leaving the fade
+			// with no size delta to animate. Gate update() during the
+			// view transition so the var stays at its old (shrunk) value
+			// through snapshot capture, then re-run update() on
+			// astro:page-load so the CSS transition fires from old → new
+			// on the now-visible new page.
 			if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
 				let pending = false;
+				let inTransition = false;
 				const update = () => {
 					pending = false;
+					if (inTransition) return;
 					const raw = Math.min(1, window.scrollY / (window.innerHeight / 2));
 					const eased = 1 - (1 - raw) * (1 - raw);
 					document.documentElement.style.setProperty("--header-shrink", eased.toFixed(3));
@@ -72,7 +85,13 @@ const navLinkClass = (active: boolean) =>
 				};
 				window.addEventListener("scroll", tick, { passive: true });
 				window.addEventListener("resize", tick, { passive: true });
-				update();
+				document.addEventListener("astro:before-preparation", () => {
+					inTransition = true;
+				});
+				document.addEventListener("astro:page-load", () => {
+					inTransition = false;
+					requestAnimationFrame(update);
+				});
 			}
 		</script>
 	</head>

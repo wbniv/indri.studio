@@ -5,7 +5,6 @@
 // Tailwind v4 utilities and the prose styles all read from these vars
 // via the cascade, so descendants automatically re-theme.
 import Base from "./Base.astro";
-import { ClientRouter } from "astro:transitions";
 
 interface Props {
 	title: string;
@@ -41,7 +40,6 @@ const fontImports = theme.fontImports ?? [];
 
 <Base title={title} description={description} ringFlare={false}>
 	<Fragment slot="head">
-		<ClientRouter />
 		{prevHref && <link rel="prefetch" href={prevHref} />}
 		{nextHref && <link rel="prefetch" href={nextHref} />}
 		{fontImports.length > 0 && (

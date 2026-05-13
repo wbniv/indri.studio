@@ -2,108 +2,100 @@
 
 ## Context
 
-The sticky header on every page shrinks as the user scrolls down and grows back as they scroll up. When the scroll position changes *abruptly* — clicking an in-page link that jumps to top, pressing `Home`/`End`, or any programmatic scroll without smooth-behavior — the header height snaps between its shrunk and full sizes in a single frame. Visually it pops.
+The sticky header on every page shrinks as the user scrolls down and grows back as they scroll up. When the scroll position changed *abruptly* — clicking the `INDRI` wordmark to go to `/`, pressing `Home`/`End`, or any programmatic jump — the header height snapped between its shrunk and full sizes in a single frame.
 
-The fix should be intrinsic to the header itself: animate every height change with ease-in-out, regardless of *why* the height is changing. No assumption about scroll behavior, no dependence on a particular call path.
+The fix should be intrinsic to the header: animate every height change with ease-in-out, regardless of *why* the height is changing — including cross-page navigation.
 
-## Root cause
+## Root cause (in three layers)
 
-The header's vertical padding is driven by a CSS custom property `--header-shrink` that's recomputed every animation frame from `window.scrollY`.
+The header's vertical padding is driven by a CSS custom property `--header-shrink`, recomputed every animation frame from `window.scrollY` by an inline script in `Base.astro:54-77`.
 
-**`src/layouts/Base.astro:54-77`** — inline script in `<head>`:
+### Layer 1 — no transition declared on the consumer property
 
-```js
-const update = () => {
-    pending = false;
-    const raw = Math.min(1, window.scrollY / (window.innerHeight / 2));
-    const eased = 1 - (1 - raw) * (1 - raw);
-    document.documentElement.style.setProperty("--header-shrink", eased.toFixed(3));
-};
-```
+`src/styles/global.css:299-302` interpolated `padding-top/bottom` from `--header-shrink` via `calc()`, but had no `transition`. The padding changed instantly whenever the variable did.
 
-rAF-batched, listens for `scroll` and `resize`. The script's `eased` curve gives a nice ramp during *continuous* scroll, but when `scrollY` jumps from large to 0 in one frame, `eased` also jumps from ~1 to 0 in one frame.
+### Layer 2 — the variable wasn't registered with `@property`
 
-**`src/styles/global.css:299-302`** — the property consumer:
+Even adding `transition: padding-top 220ms ease-in-out` doesn't work reliably in Chrome when the property value comes from `calc(var(...))`. Browsers don't consistently treat changes to *unregistered* custom properties as transition triggers for their dependents. Registered (`@property`) custom properties with typed `syntax` solve this: the variable itself becomes animatable, and `transition: --header-shrink <duration>` interpolates it smoothly. Everything derived from it (the `padding-top` calc) follows for free.
 
-```css
-.header-fx > div {
-    padding-top:    calc(1.125rem - 1rem * var(--header-shrink, 0));
-    padding-bottom: calc(1.125rem - 1rem * var(--header-shrink, 0));
-}
-```
+### Layer 3 — cross-layout navigation was a full page reload
 
-No `transition` declared, so the computed padding is applied instantly when the variable updates. That's the pop.
+`<ClientRouter />` (Astro's view-transition router) was only mounted in `AppLayout.astro`. Navigating from an app page back to the homepage (`Base.astro`) — including the `INDRI` wordmark click — fell back to a normal browser navigation because the destination didn't have ClientRouter. Full page reload → all inline state wiped → `--header-shrink` reset to its `@property` initial-value (0) on the new page → no "old value" for the transition to ease *from* → user sees a snap.
+
+### Bonus: the gate
+
+Even with `ClientRouter` site-wide, scrollY resets to 0 on the new page *during* the view transition. The scroll listener fires and would set `--header-shrink` to 0 before the new-page snapshot is captured — making both snapshots show a full header and leaving the fade with no size delta. An `inTransition` gate suppresses `update()` during the navigation, then `astro:page-load` lifts the gate and re-runs `update()` *after* the swap, so the CSS transition fires on the now-visible new page.
 
 ## Fix
 
-Add a CSS transition on the padding properties. Modern browsers transition the computed value of `padding-*`; when the variable updates and the computed value changes, the transition fires — regardless of whether the change came from scroll, a click handler, a resize, or `prefers-reduced-motion` flipping at runtime.
+Three changes, applied together:
+
+**1. Register `--header-shrink` with `@property`** (top-level — not allowed inside `@layer`), alongside the existing `--stripe-angle` registration:
 
 ```css
-.header-fx > div {
-    padding-top:    calc(1.125rem - 1rem * var(--header-shrink, 0));
-    padding-bottom: calc(1.125rem - 1rem * var(--header-shrink, 0));
-    transition: padding-top 220ms ease-in-out, padding-bottom 220ms ease-in-out;
+@property --header-shrink {
+    syntax: "<number>";
+    inherits: true;
+    initial-value: 0;
 }
-```
 
-### Why this works under continuous scroll too
+html {
+    transition: --header-shrink 220ms ease-in-out;
+}
 
-Every animation frame, the JS sets a new target value for `--header-shrink`. The browser starts a fresh transition toward that target from the *current* intermediate value (transitions don't restart from zero — they ease toward the new endpoint from wherever the property currently is). With a 220 ms duration and ~16 ms scroll updates, the result reads as smooth continuous motion that lags scroll by ~100 ms — perceptible only if you stare for it, and pleasantly weighty in practice.
-
-If the lag turns out to feel rubbery during fast trackpad scrolls, drop to 150 ms. If it feels too snappy on click-to-top, go to 280 ms. 220 ms is the safe middle.
-
-### Easing
-
-`ease-in-out` per the request.
-
-### Reduced motion
-
-The existing inline JS already no-ops under `prefers-reduced-motion: reduce` — the listener block is gated by `if (!matchMedia(...).matches)`. So `--header-shrink` stays at its fallback value (`0`) and the header stays full-size. Add a matching transition guard so the property doesn't animate on initial paint or other state changes:
-
-```css
 @media (prefers-reduced-motion: reduce) {
-    .header-fx > div {
+    html {
         transition: none;
     }
 }
 ```
 
-There's already a `prefers-reduced-motion` block at `global.css:341-345` covering `.header-fx::after`. Extend it rather than adding a second.
+The `.header-fx > div` rule inside `@layer components` keeps its `calc(1.125rem - 1rem * var(--header-shrink, 0))` and gets no transition of its own — it follows the smoothly-interpolating variable.
 
-## Cleanup — merge conflict in the same file
+**2. Mount `<ClientRouter />` in `Base.astro`** (and remove it from `AppLayout.astro` so it's not double-mounted, since AppLayout wraps Base). This makes every navigation use Astro view transitions, eliminating full reloads.
 
-`src/styles/global.css:305-309` has unresolved git conflict markers in a comment:
+**3. Gate `update()` during view transitions** in the inline script:
 
-```css
-/* Header motion FX — Phosphor breathe, a slow screen-blended radial
-<<<<<<< Updated upstream
- * glow that pulses across the purple header. Always on. */
-=======
- * glow that pulses across the purple header. Runs on every page. */
->>>>>>> Stashed changes
+```js
+let inTransition = false;
+// ... update() returns early if inTransition is true ...
+document.addEventListener("astro:before-preparation", () => { inTransition = true; });
+document.addEventListener("astro:page-load", () => {
+    inTransition = false;
+    requestAnimationFrame(update);
+});
 ```
 
-Both branches say the same thing. Resolve in favor of "Always on." (shorter) as part of the same commit since it's adjacent to the code being edited.
+The script's initial-call-at-script-execution is removed; `astro:page-load` covers both first load and every navigation.
 
-## Files to change
+### Duration & easing
+
+`220ms ease-in-out`. Long enough to read as motion, short enough not to feel rubbery during continuous scroll. If it feels rubbery on fast trackpad scrolls, drop to 150ms; if it feels too snappy on click-to-top, go to 280ms.
+
+### Reduced motion
+
+The existing inline JS already no-ops under `prefers-reduced-motion: reduce` (the listener block is gated by `if (!matchMedia(...).matches)`), so `--header-shrink` stays at its initial-value (0) and the header stays full-size. A matching `transition: none` on `html` ensures no animation fires on initial paint or any state change.
+
+## Files changed
 
 | File | Change |
 |---|---|
-| `src/styles/global.css` | Add transition to `.header-fx > div` (lines 299-302). Add `transition: none` for `.header-fx > div` inside the existing `@media (prefers-reduced-motion: reduce)` block (lines 341-345). Resolve merge conflict at lines 305-309. |
-| `src/layouts/Base.astro` | **No change.** Scroll script keeps doing exactly what it does. |
+| `src/styles/global.css` | **Top-level:** registered `@property --header-shrink`, added `html { transition: --header-shrink 220ms ease-in-out; }` and matching `prefers-reduced-motion` block. **Inside `@layer components`:** resolved leftover merge-conflict markers; `.header-fx > div` calc unchanged. |
+| `src/layouts/Base.astro` | Imported and mounted `<ClientRouter />`. Rewrote inline script: added `inTransition` gate, `astro:before-preparation` + `astro:page-load` listeners, removed eager `update()` at script-execution time. |
+| `src/layouts/AppLayout.astro` | Removed `<ClientRouter />` and its import (now provided by Base, since AppLayout wraps Base — would have been double-mounted otherwise). |
 
 ## Verification
 
-`task dev` is running on `localhost:4321`.
+`task dev` running on `localhost:4321`. From a fresh hard-refresh on each test:
 
-1. **Reproduce the jump first.** Open `/apps/claude-code-authoring-formats/`, scroll near the bottom, click anything that returns to the top of a page (the `INDRI` wordmark in the header is a clean test — links to `/`). Observe header pops between sizes.
-2. **Apply the fix.** Save `global.css`. Astro HMR injects without a full reload.
-3. **Click-to-top.** Same page, scroll down, click the wordmark. Header should ease from shrunk → full over ~220 ms.
-4. **Same-page anchor.** From the homepage scrolled to "the team", click the wordmark. Header should ease, not snap.
-5. **Manual scroll.** Slowly scroll down and back up. The header should progressively shrink/grow without feeling laggy or rubbery on continuous input.
-6. **Keyboard jump.** Press `End` then `Home`. Header should ease both directions, not snap.
-7. **Reduced motion.** Chrome devtools → Rendering → "Emulate CSS media feature prefers-reduced-motion" → "reduce". Reload. Header stays full-size regardless of scroll position; no transition fires on any state change.
-8. **Visual regression.** Header background, breathe pulse, and `INDRI` wordmark layout all unchanged.
-9. **No conflict markers left.** `grep -rn '<<<<<<<\|=======\|>>>>>>>' src/ docs/` returns empty.
+1. **Reproduce the original snap.** (Optional — only meaningful before the fix lands.) Open `/apps/claude-code-authoring-formats/`, scroll near the bottom, click the `INDRI` wordmark. Observe header pops between sizes.
+2. **Click-to-top, cross-page.** With the fix applied: open `/apps/foo/`, scroll down so the header is clearly shrunk, click `INDRI`. The cross-page view transition runs; after it lands on `/`, the header should ease from shrunk → full over ~220ms.
+3. **Continuous scroll.** Slowly scroll down and back up. Header progressively shrinks/grows without feeling laggy or rubbery on continuous input.
+4. **Keyboard jump.** Press `End` then `Home`. Header eases both directions; no snap.
+5. **Same-page anchor.** From the homepage with scroll past `the team`, click `INDRI`. Header eases from shrunk → full.
+6. **Reduced motion.** Chrome devtools → Rendering → "Emulate CSS media feature prefers-reduced-motion" → "reduce". Reload. Header stays full-size regardless of scroll position; no transition fires.
+7. **Visual regression.** Header background, breathe pulse, and `INDRI` wordmark layout all unchanged.
+8. **No conflict markers.** `grep -rn '<<<<<<<\|=======\|>>>>>>>' src/` returns empty.
+9. **Single ClientRouter.** `curl -s http://localhost:4321/ | grep -c "@view-transition"` returns `1`. Same on `/apps/foo/`.
 
-After all pass, commit the CSS change and this plan together.
+After all pass, commit.
