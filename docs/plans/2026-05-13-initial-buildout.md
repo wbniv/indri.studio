@@ -35,7 +35,7 @@ What to borrow from Hoox specifically:
 - Each section a distinct "card" with its own internal layout — not generic columns
 - Photography of people / product UI used as content, not decoration
 - Comparison-table / "vs" section as a structural element
-- Testimonials with portraits, FAQ accordion, final CTA — sections that earn their place
+- Testimonials with portraits, final CTA — sections that earn their place (FAQ accordion not borrowed; see note under "Sectional rhythm to borrow from Hoox")
 
 ### Closest analog from the recommended set: **clerk.com** ⭐ (user's favourite)
 
@@ -117,7 +117,9 @@ The Indri studio brand draws from the ring-tailed lemur — soft greys in stripe
 ### Sectional rhythm to borrow from Hoox
 
 - Bold hero statement → "N reasons" or feature grid → screenshot/demo card → metrics/proof → comparison table → testimonials with portraits → FAQ → final CTA.
-- For Indri: hero → app gallery → featured screenshots → studio statement → newsletter/contact → FAQ → CTA ("try our apps").
+- For Indri: hero → app gallery → featured screenshots → studio statement → newsletter/contact → CTA ("try our apps").
+
+**FAQ section deliberately dropped from the Indri rhythm** (2026-05-13). The Hoox/clerk.com FAQ pattern fits a single-product landing where users have predictable operational questions (pricing, cancellation, integrations). On a studio-portfolio one-pager, those questions are per-app and belong on the per-app pages (where the privacy/terms/store-link context already lives). The studio-level questions ("who are you", "what are you working on") are softer and handled by the about-statement strip and `/colophon`. Don't re-add at studio root; consider per-app FAQ blocks later if real questions accumulate.
 
 ### Visual-texture vocabulary
 
@@ -894,7 +896,7 @@ The per-app *backends* — SplitLedger's Serverpod backend on Lightsail, Parking
 ### Phase 5 — Polish & deploy
 - Cloudflare Pages deploy, point `indri.studio` DNS
 - Per-app `<title>`, Open Graph tags, favicons
-- **Studio favicon: reuse the seeded image, recolour two-tone purple.** Keep `public/favicon.svg`, `favicon.ico`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png` as inherited from rapid-raccoon-site — swap the cyan palette to **neon Phosphor `#B026FF` + a deep dark-purple companion** (e.g. `#3A004B` from the on-primary token, or `#5B00A3` from primary-fixed-variant). Two-tone gives the favicon depth without re-drawing the silhouette.
+- ✅ **Studio favicon recoloured two-tone purple** (commit `6441f22`, 2026-05-13). All five files regenerated: `favicon.svg` (`#B026FF` shape + `#3A004B` eyes), `favicon.ico`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`.
 - Lighthouse pass, cross-browser check
 
 ## App inventory (identified from `~/SRC/`)
