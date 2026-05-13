@@ -387,11 +387,17 @@ html {
 		background-repeat: no-repeat;
 	}
 	.platform-strip .material-symbols-outlined {
-		/* Font-size set here (not via Tailwind text-[Npx]) so the
-		 ~ two-class selector beats Google's `.material-symbols-outlined
-		 ~ { font-size: 24px }` rule — Material Symbols loads via preload
-		 ~ + onload-swap so it can land late in the cascade. */
-		font-size: 40px;
+		/* `!important` on font-size is needed because Google's
+		 ~ Material Symbols stylesheet is loaded *unlayered* and our
+		 ~ rules live inside `@layer components`. Per CSS cascade
+		 ~ layers, normal unlayered rules beat normal layered rules
+		 ~ regardless of specificity — so a plain `font-size: 40px`
+		 ~ here loses to Google's `.material-symbols-outlined {
+		 ~ font-size: 24px }`. `!important` in a layer beats normal
+		 ~ unlayered, which restores the win. Other properties
+		 ~ (color, opacity, animation, transition) aren't set by
+		 ~ Material Symbols so no override needed. */
+		font-size: 40px !important;
 		color: var(--color-primary-container);
 		opacity: 0.35;
 		animation: platform-glow 6s ease-in-out infinite;
@@ -399,7 +405,7 @@ html {
 	}
 	@media (min-width: 768px) {
 		.platform-strip .material-symbols-outlined {
-			font-size: 48px;
+			font-size: 48px !important;
 		}
 	}
 	.platform-strip li:hover .material-symbols-outlined {
