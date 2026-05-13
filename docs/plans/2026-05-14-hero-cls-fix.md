@@ -69,7 +69,7 @@ No JS, no new components, no markup changes to hero or platform-icon strip.
 - The Material Symbols `font-size: 40px/48px !important` rule lives in `global.css` lines 415-443. The new `width`/`height` rules go alongside it.
 - The Google Fonts loading pattern in `Base.astro` (preconnect + stylesheet for Space Grotesk/Inter; preload-style + onload-swap for Material Symbols) stays — only the `display=` query string changes.
 - `--font-display` and `--font-body` CSS custom properties already gate font-family resolution site-wide; the fallback only needs to be added in one place.
-- Rec #8 (inline critical CSS via `inlineStylesheets: "always"` in `astro.config.mjs`) has just landed alongside this work; the inlined CSS makes the metric-matched fallback declarations available on first paint with no extra round-trip, which is the optimal condition for this fix.
+- Rec #8 (inline critical CSS via `inlineStylesheets: "always"` in `astro.config.mjs`) landed in commit `2db6163` immediately before this plan. Every built page now carries a single inline `<style>` block with all of `Base.css` (incl. design tokens, font-family stack, `.platform-strip` rules). The metric-matched fallback declarations this plan adds will therefore be available on first paint with no extra round-trip — the optimal condition for the swap to be invisible.
 
 ## Verification
 
