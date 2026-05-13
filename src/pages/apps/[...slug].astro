@@ -226,10 +226,11 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 			display: flex;
 			align-items: center;
 			gap: 0.5rem;
-			padding: 0.75rem;
+			padding: 1.5rem 0.875rem;
+			min-height: 120px;
 			background: rgba(61, 56, 51, 0.55);
 			border: 1px solid rgba(255, 255, 255, 0.06);
-			border-radius: 999px;
+			border-radius: 12px;
 			color: var(--color-on-surface-variant);
 			backdrop-filter: blur(6px);
 			transition: background 180ms ease, color 180ms ease, padding 180ms ease,
@@ -241,7 +242,7 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 			background: rgba(176, 38, 255, 0.18);
 			border-color: rgba(176, 38, 255, 0.45);
 			color: var(--color-on-surface);
-			padding: 0.75rem 1.1rem;
+			padding: 1.5rem 1.25rem;
 		}
 		.side-nav-prev {
 			left: max(0.75rem, calc((100vw - 720px) / 2 - 96px));
@@ -250,7 +251,7 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 			right: max(0.75rem, calc((100vw - 720px) / 2 - 96px));
 		}
 		.side-nav-arrow {
-			font-size: 36px !important;
+			font-size: 44px !important;
 			line-height: 1;
 			color: var(--color-primary-container);
 		}
@@ -298,10 +299,12 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 		   the body text. */
 		@media (max-width: 480px) {
 			.side-nav {
-				padding: 0.5rem;
+				padding: 1rem 0.5rem;
+				min-height: 88px;
+				border-radius: 10px;
 			}
 			.side-nav-arrow {
-				font-size: 28px !important;
+				font-size: 32px !important;
 			}
 		}
 	</style>
