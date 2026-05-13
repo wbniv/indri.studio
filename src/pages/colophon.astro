@@ -113,11 +113,10 @@ const motifs = [
 		<ul
 			class="space-y-3 list-none pl-0 font-body text-body-lg text-on-surface-variant max-w-4xl"
 		>
-			<li class="flex items-baseline gap-3">
+			<li class="flex items-start gap-3">
 				<span
-					class="text-primary-container select-none font-bold"
-					aria-hidden="true">◯</span
-				>
+					class="inline-block w-[10px] h-[10px] rounded-full border-2 border-primary-container shrink-0 mt-[0.55em]"
+					aria-hidden="true"></span>
 				<span>
 					Display headlines, the wordmark, and section labels are set in
 					<a
@@ -137,11 +136,10 @@ const motifs = [
 					weight and uppercasing.
 				</span>
 			</li>
-			<li class="flex items-baseline gap-3">
+			<li class="flex items-start gap-3">
 				<span
-					class="text-primary-container select-none font-bold"
-					aria-hidden="true">◯</span
-				>
+					class="inline-block w-[10px] h-[10px] rounded-full border-2 border-primary-container shrink-0 mt-[0.55em]"
+					aria-hidden="true"></span>
 				<span>
 					Body copy and UI text are set in
 					<a
@@ -160,11 +158,10 @@ const motifs = [
 					handles display).
 				</span>
 			</li>
-			<li class="flex items-baseline gap-3">
+			<li class="flex items-start gap-3">
 				<span
-					class="text-primary-container select-none font-bold"
-					aria-hidden="true">◯</span
-				>
+					class="inline-block w-[10px] h-[10px] rounded-full border-2 border-primary-container shrink-0 mt-[0.55em]"
+					aria-hidden="true"></span>
 				<span>
 					Icons are drawn from
 					<a href="https://fonts.google.com/icons" class={linkClass}
@@ -175,11 +172,10 @@ const motifs = [
 					is hand-built in CSS.
 				</span>
 			</li>
-			<li class="flex items-baseline gap-3">
+			<li class="flex items-start gap-3">
 				<span
-					class="text-primary-container select-none font-bold"
-					aria-hidden="true">◯</span
-				>
+					class="inline-block w-[10px] h-[10px] rounded-full border-2 border-primary-container shrink-0 mt-[0.55em]"
+					aria-hidden="true"></span>
 				<span>
 					Both faces are served via <a
 						href="https://fonts.google.com"
@@ -403,13 +399,11 @@ const motifs = [
 			{
 				motifs.map((m) => (
 					<li>
-						<div class="font-display uppercase tracking-tight font-black text-on-surface text-lg md:text-xl mb-1 flex items-baseline gap-3">
+						<div class="font-display uppercase tracking-tight font-black text-on-surface text-lg md:text-xl mb-1 flex items-center gap-3">
 							<span
-								class="text-primary-container select-none font-bold"
+								class="inline-block w-[10px] h-[10px] rounded-full border-2 border-primary-container shrink-0"
 								aria-hidden="true"
-							>
-								◯
-							</span>
+							/>
 							{m.name}
 						</div>
 						<p class="font-body text-body text-on-surface-variant pl-7">
