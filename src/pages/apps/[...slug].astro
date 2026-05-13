@@ -127,6 +127,8 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 	</article>
 
 	<script>
+		import { navigate } from 'astro:transitions/client';
+
 		// Tag <html data-nav-dir="prev|next"> before a prev/next click so
 		// the view-transition CSS picks the matching slide animation.
 		// Re-applied at astro:before-preparation + astro:after-swap because
@@ -158,6 +160,38 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 			if (!a) return;
 			setDir(a.getAttribute('aria-label').startsWith('Previous') ? 'prev' : 'next');
 		}, true);
+
+		// Touch swipe: horizontal pan ≥ 60px on the article navigates to
+		// prev (swipe right) or next (swipe left). Ignores vertical
+		// scrolls so the page can still scroll normally.
+		const SWIPE_MIN = 60;
+		const SWIPE_MAX_OFF_AXIS = 40;
+		let touchStart = null;
+
+		document.addEventListener('touchstart', (e) => {
+			if (e.touches.length !== 1) return;
+			const article = e.target && e.target.closest && e.target.closest('article');
+			if (!article) return;
+			const t = e.touches[0];
+			touchStart = { x: t.clientX, y: t.clientY };
+		}, { passive: true });
+
+		document.addEventListener('touchend', (e) => {
+			if (!touchStart) return;
+			const t = e.changedTouches[0];
+			const dx = t.clientX - touchStart.x;
+			const dy = t.clientY - touchStart.y;
+			touchStart = null;
+			if (Math.abs(dy) > SWIPE_MAX_OFF_AXIS) return;
+			if (Math.abs(dx) < SWIPE_MIN) return;
+			const dir = dx > 0 ? 'prev' : 'next';
+			const label = dir === 'prev' ? 'Previous' : 'Next';
+			const a = document.querySelector(`a[aria-label^="${label}:"]`);
+			const href = a && a.getAttribute('href');
+			if (!href) return;
+			setDir(dir);
+			navigate(href);
+		}, { passive: true });
 	</script>
 
 	<style>
