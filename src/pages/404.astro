@@ -1,0 +1,92 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="404" description="Page not found." ringFlare={false}>
+	<!-- Hero section: single centered column. Text at top, lemur absolutely
+	     positioned at the section's bottom edge — guarantees its body-bottom
+	     is flush against the footer's top, regardless of flex/grid quirks.
+	     Same layout phone → desktop. pb-[…] reserves space below the text so
+	     it doesn't collide with the absolutely-positioned lemur. -->
+	<section class="relative overflow-hidden flex-1 min-h-[100svh] md:min-h-[860px] pb-[290px] md:pb-[340px]">
+		<!-- Text content -->
+		<div class="text-center pt-12 md:pt-20 lg:pt-24 px-6 md:px-8 w-full max-w-3xl mx-auto">
+			<h1 class="font-display mb-2">
+				<span class="block text-6xl sm:text-7xl md:text-8xl lg:text-[120px] leading-[0.9] tracking-tight font-black uppercase text-primary-container">
+					404
+				</span>
+				<span class="block text-3xl sm:text-4xl md:text-5xl leading-[1] tracking-tight font-light text-on-surface mt-2">
+					Page not found.
+				</span>
+			</h1>
+
+			<!-- Accent paragraph: text stays left-aligned with its purple
+			     left-border (brand pattern), but the BLOCK is mx-auto so it
+			     sits centered under the centered headline. -->
+			<p class="font-body text-body-lg text-on-surface-variant max-w-xl mx-auto mt-10 border-l-2 border-primary-container pl-6 text-left">
+				We build what should exist and we'd use.<br/>
+				This one didn't make the cut.
+			</p>
+
+			<div class="flex flex-wrap justify-center gap-3 mt-10">
+				<a
+					href="/"
+					class="pill-purple transition-colors hover:bg-[color-mix(in_srgb,_var(--color-primary-container)_18%,_transparent)]"
+				>
+					<span class="material-symbols-outlined pill-icon" aria-hidden="true">home</span>
+					home
+				</a>
+				<a
+					href="/#apps"
+					class="pill-purple transition-colors hover:bg-[color-mix(in_srgb,_var(--color-primary-container)_18%,_transparent)]"
+				>
+					<span class="material-symbols-outlined pill-icon" aria-hidden="true">apps</span>
+					all apps
+				</a>
+			</div>
+		</div>
+
+		<!-- Lemur: absolutely positioned, bottom-0 == section's bottom edge
+		     == footer's top edge. Image bottom-row is the lemur's body
+		     bottom (cropped tight at check-in), so the silhouette sits ON
+		     the footer divider. pointer-events-none so the body decoration
+		     doesn't intercept clicks meant for the CTAs above. -->
+		<div class="absolute bottom-0 inset-x-0 px-6 md:px-8 pointer-events-none">
+			<img
+				src="/lemur.png"
+				alt=""
+				class="lemur-idle block w-full max-w-[420px] md:max-w-[480px] mx-auto select-none"
+				loading="eager"
+				decoding="async"
+			/>
+		</div>
+	</section>
+
+	<style>
+		.pill-icon {
+			font-size: 16px;
+			line-height: 1;
+		}
+
+		/* Subtle idle motion on the lemur — barely-there breathe + sway so
+		   he doesn't read as a flat sticker. Asymmetric keyframes for
+		   organic pacing. Origin near the base so the upper body wobbles
+		   around a planted bottom. Disabled under reduced-motion. */
+		.lemur-idle {
+			transform-origin: 50% 92%;
+			animation: lemur-idle 7s ease-in-out infinite;
+			will-change: transform;
+		}
+		@keyframes lemur-idle {
+			0%   { transform: translateY(0)    rotate(-0.6deg) scale(1.000); }
+			22%  { transform: translateY(-2px) rotate(0.3deg)  scale(1.010); }
+			46%  { transform: translateY(0)    rotate(0.9deg)  scale(1.000); }
+			64%  { transform: translateY(-3px) rotate(0.2deg)  scale(1.014); }
+			82%  { transform: translateY(-1px) rotate(-0.5deg) scale(1.006); }
+			100% { transform: translateY(0)    rotate(-0.6deg) scale(1.000); }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			.lemur-idle { animation: none; }
+		}
+	</style>
+</Base>

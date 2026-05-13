@@ -40,6 +40,11 @@ tasks:
     cmds:
       - bash scripts/secrets-bootstrap.sh {{.CLI_ARGS}}
 
+  setup-workers-ai:
+    desc: "One-time: push Cloudflare Workers AI token to SSM. Validates with a probe call. Idempotent (--force to rotate)."
+    cmds:
+      - bash scripts/setup-workers-ai.sh {{.CLI_ARGS}}
+
   tf-plan:
     desc: "Terraform plan in infrastructure/cloudflare/global/"
     dir: infrastructure/cloudflare/global
