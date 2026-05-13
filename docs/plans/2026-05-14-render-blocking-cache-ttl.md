@@ -98,16 +98,28 @@ Result:
 - Colophon: zero icon-font request.
 - Homepage / 404 / per-app pages: same non-blocking icon load as today, just declared at the page level.
 
-### 3. Long-TTL cache headers via Cloudflare Cache Rules in Terraform
+### 3. Long-TTL cache headers via `public/_headers` (revised)
 
-Create `infrastructure/cloudflare/global/cache.tf`. Two rules in a single `http_request_cache_settings` zone-phase ruleset:
+**Original approach (reverted):** Terraform `cloudflare_ruleset` in the `http_request_cache_settings` phase. `tf-plan` validated cleanly, but `tf-apply` fails with `403 Forbidden / "request is not authorized"` — the same constraint that killed the www→apex redirect ruleset (see `TODO.md`). Cloudflare Free-plan API tokens cannot manage rulesets on this zone regardless of phase.
 
-| Path pattern | Edge TTL | Browser TTL | Reason |
-|---|---|---|---|
-| `^/_astro/` | `31536000` (1y) | `31536000` (1y) | Astro content-hashes filenames; safe to mark immutable |
-| `^/screenshots/` | `31536000` (1y) | `31536000` (1y) | App screenshots are stable URLs |
+**Revised approach:** ship cache rules in `public/_headers`. Cloudflare reads this file from the static-assets bundle at deploy time and applies matches at the edge — no API-token permissions involved.
 
-HTML responses untouched — they keep the default short TTL so deploys flush promptly.
+```
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/screenshots/*
+  Cache-Control: public, max-age=31536000, immutable
+```
+
+| Path pattern | Cache-Control | Reason |
+|---|---|---|
+| `/_astro/*` | `public, max-age=31536000, immutable` | Astro content-hashes filenames; safe to mark immutable |
+| `/screenshots/*` | `public, max-age=31536000, immutable` | App screenshots are stable URLs |
+
+HTML responses untouched — they keep the Workers Static Assets default (short TTL), so deploys flush promptly.
+
+`infrastructure/cloudflare/global/cache.tf` is deleted as part of the fix-forward commit.
 
 ## Files to change
 
@@ -232,26 +244,14 @@ Per SRC `CLAUDE.md` plan-verification format — keep numbered steps verbatim; b
    ```
    **PASS** — only `✉` matches; no `mail` text leaks through.
 
-5. **Terraform plan for cache rules is clean and additive.**
+5. **Terraform plan for cache rules is clean and additive.** (Withdrawn — `tf-apply` fails on Free plan.)
    ```
-   # cloudflare_ruleset.cache_immutable will be created
-     + resource "cloudflare_ruleset" "cache_immutable" {
-         + name        = "indri-studio cache immutable hashed assets"
-         + kind        = "zone"
-         + phase       = "http_request_cache_settings"
-         + rules       = [
-             + { action = "set_cache_settings", expression = "(starts_with(http.request.uri.path, \"/_astro/\"))",
-                 action_parameters = { cache = true, edge_ttl = { mode = "override_origin", default = 31536000 },
-                                       browser_ttl = { mode = "override_origin", default = 31536000 } } },
-             + { action = "set_cache_settings", expression = "(starts_with(http.request.uri.path, \"/screenshots/\"))",
-                 action_parameters = { cache = true, edge_ttl = { mode = "override_origin", default = 31536000 },
-                                       browser_ttl = { mode = "override_origin", default = 31536000 } } },
-           ]
-         + zone_id     = "7e4eca114304080627a70387382dede7"
-       }
-   Plan: 1 to add, 0 to change, 0 to destroy.
+   Plan: 1 to add, 0 to change, 0 to destroy.   # plan was clean
+   cloudflare_ruleset.cache_immutable: Creating...
+   Error: failed to make http request
+   POST .../rulesets: 403 Forbidden { "errors": [{"message": "request is not authorized"}] }
    ```
-   **PASS** — exactly one additive resource, both rules well-formed, no destructive changes. The Free-plan ruleset permission concern from `TODO.md` (which applies to dynamic-redirect phase) did not trip the `http_request_cache_settings` phase plan.
+   **FAIL (root cause: Free-plan API token cannot manage rulesets — same as the deleted www→apex ruleset).** Pivoted to `public/_headers`; `cache.tf` deleted in the fix-forward commit. The remaining verification steps target the `_headers`-based approach.
 
 6. **After `task tf-apply` + `task deploy`, edge serves long-TTL Cache-Control for `_astro/*` and `screenshots/*`.**
    Pending — run after tf-apply + deploy.

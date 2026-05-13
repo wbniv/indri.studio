@@ -1,0 +1,23 @@
+# Cache-Control headers for Workers Static Assets.
+#
+# Terraform `cloudflare_ruleset` for the http_request_cache_settings
+# phase fails with 403 on this Free-plan zone (same constraint that
+# killed the www→apex redirect ruleset — see TODO.md). Shipping the
+# rules in this file is the API-token-independent path. Cloudflare
+# reads `_headers` from the static-assets bundle at deploy time and
+# applies the matches at the edge when ASSETS.fetch() serves them.
+#
+# Replaces infrastructure/cloudflare/global/cache.tf (which was
+# correct as written but cannot be applied). Plan:
+# docs/plans/2026-05-14-render-blocking-cache-ttl.md.
+
+# Astro content-hashes every filename in _astro/* (the manifest URL
+# changes any time the contents change). Safe to mark immutable for
+# a year — clients never need to revalidate.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# App screenshots: stable URLs, content rotates only when an app
+# entry changes. 1y immutable matches Astro's hashed-asset policy.
+/screenshots/*
+  Cache-Control: public, max-age=31536000, immutable
