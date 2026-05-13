@@ -5,6 +5,7 @@
 // Tailwind v4 utilities and the prose styles all read from these vars
 // via the cascade, so descendants automatically re-theme.
 import Base from "./Base.astro";
+import MaterialSymbols from "../components/MaterialSymbols.astro";
 import ScrollToTop from "../components/ScrollToTop.astro";
 
 interface Props {
@@ -41,6 +42,7 @@ const fontImports = theme.fontImports ?? [];
 
 <Base title={title} description={description} ringFlare={false}>
 	<Fragment slot="head">
+		<MaterialSymbols />
 		{prevHref && <link rel="prefetch" href={prevHref} />}
 		{nextHref && <link rel="prefetch" href={nextHref} />}
 		{fontImports.length > 0 && (

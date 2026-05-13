@@ -1,0 +1,18 @@
+---
+// Drop into Base's `head` slot on pages that actually render
+// `material-symbols-outlined` glyphs. preload + onload-swap moves the
+// request off the critical path; <noscript> fallback keeps icons
+// working when JS is disabled.
+---
+<link
+	rel="preload"
+	as="style"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block"
+	onload="this.onload=null; this.rel='stylesheet'"
+/>
+<noscript>
+	<link
+		rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block"
+	/>
+</noscript>

@@ -1,8 +1,10 @@
 ---
 import Base from "../layouts/Base.astro";
+import MaterialSymbols from "../components/MaterialSymbols.astro";
 ---
 
 <Base title="404" description="Page not found." ringFlare={false}>
+	<MaterialSymbols slot="head" />
 	<!-- Hero section: single centered column. Text at top, lemur absolutely
 	     positioned at the section's bottom edge — guarantees its body-bottom
 	     is flush against the footer's top, regardless of flex/grid quirks.
