@@ -63,7 +63,11 @@ const cells = Array.from({ length: rows * cols }, (_, i) => {
 		        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 	}
 	.cell {
-		background: var(--color-grey-700);
+		/* grey-400 (#8E8780), not grey-700 (#3D3833) — at 0.14 opacity over
+		 * grey-900 (#1A1815) the darker grey was sub-perceptual. grey-400
+		 * sits high enough above the page background that the low-opacity
+		 * "faint" range actually reads. */
+		background: var(--color-grey-400);
 		opacity: 0;
 		animation: pulse-dense var(--t) ease-in-out var(--d) infinite alternate;
 	}

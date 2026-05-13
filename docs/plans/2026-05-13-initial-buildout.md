@@ -14,7 +14,7 @@ The site serves two jobs:
 | Dimension | Direction |
 |---|---|
 | **Domain** | indri.studio |
-| **Apps** | 5 ready: ParkingSpace, World Foundry, SplitLedger, Finding Your Way, Gustos Colores. More coming. |
+| **Apps** | 6 ready: ParkingSpace, World Foundry, SplitLedger, Finding Your Way, Gustos Colores, Pinball Construction Set. More coming. |
 | **Platforms** | Mixed: phone only, phone + tablet, console, possibly Mac/web/Windows |
 | **Aesthetic** | **Hoox-like**: dark theme + single bold accent colour, bold sans-serif typography, content-rich sectional one-pager. Expressive marketing energy, not restrained. |
 | **Screenshots** | Centrepiece. Multiple aspect ratios (phone portrait, tablet, console 16:9). |
@@ -892,11 +892,12 @@ The per-app *backends* — SplitLedger's Serverpod backend on Lightsail, Parking
 ### Phase 5 — Polish & deploy
 - Cloudflare Pages deploy, point `indri.studio` DNS
 - Per-app `<title>`, Open Graph tags, favicons
+- **Studio favicon: reuse the seeded image, recolour two-tone purple.** Keep `public/favicon.svg`, `favicon.ico`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png` as inherited from rapid-raccoon-site — swap the cyan palette to **neon Phosphor `#B026FF` + a deep dark-purple companion** (e.g. `#3A004B` from the on-primary token, or `#5B00A3` from primary-fixed-variant). Two-tone gives the favicon depth without re-drawing the silhouette.
 - Lighthouse pass, cross-browser check
 
 ## App inventory (identified from `~/SRC/`)
 
-The five apps confirmed as initial Indri catalogue:
+The six apps confirmed as initial Indri catalogue:
 
 ### 1. ParkingSpace
 - **Repo**: `~/SRC/parking-space/`
@@ -938,6 +939,15 @@ The five apps confirmed as initial Indri catalogue:
 - **Screenshot assets**: `finding-your-way/docs/images/{intro-qr,goddess-quote}.png`, `finding-your-way/test-results/pages-*-phone/*-actual.png` (Playwright visual-regression captures of individual pages — usable as content screenshots), and atmospheric content imagery in `finding-your-way/public/images/` (doors, religious icons, courts — narrative imagery).
 - **Initial brand kit**: primary `#c9a227` (golden accent), background `#e8dbc1` parchment, text `#2a2620` dark sepia, fonts a book serif for body (e.g. Cardo, EB Garamond, or PT Serif) + same serif for display.
 
+### 6. Pinball Construction Set
+- **Repo**: `~/SRC/pcs/`
+- **Product**: cross-platform pinball construction set — drag flippers, slingshots, bumpers, ramps; physics simulates in real time; save/load locally, share tables.
+- **Platforms**: Flutter. **Mobile**: App Store (iOS), Google Play (Android). **Desktop + handheld**: Steam (Linux, macOS, Windows, **Steam Deck**) — Steam is the right distribution channel for a desktop construction-set / game tool, not the Mac App Store. Steam Deck verification is the natural follow-on once the touch UI is dialed in.
+- **Visual identity**: TBD — the in-repo specs describe deterministic 2D physics + a construction-set UI; brand kit not yet pinned. Likely candidates: high-contrast retro-arcade flavour (CRT scanlines, red+black+yellow), or modern flat construction-tool feel (grey + accent).
+- **Design intent**: "fast, intuitive, deterministic, and fun — not realistic" (per `pinball_construction_set_full_spec.md`).
+- **Initial brand kit (suggested)**: TBD; defer until first screenshots exist.
+- **Screenshot assets**: not yet captured.
+
 ### 5. Gustos Colores
 - **Repo**: `~/SRC/gustos-colores/`
 - **Product**: adult / mindful coloring app; SVG → JSON pipeline; cloud-sync via Google Drive
@@ -952,6 +962,21 @@ The five apps confirmed as initial Indri catalogue:
   - **A. Single product, internal showcase**: one `/apps/gustos-colores/` page that shows the cobrand variety as a feature. Cleaner studio gallery.
   - **B. One product per cobrand**: each cobrand is a separately-published app with its own page. Matches user's apparent Play Console pattern of "two apps" already, scales to 20+.
   - User to choose. **Recommendation: A initially** (less work, cleaner story); migrate to B later if individual cobrands get separate App Store listings.
+
+## Brand voice / approved taglines
+
+User-approved lines for studio copy (selected 2026-05-13 from a brainstorm of ~20). Use as a pool — the lead line goes in the homepage about-indri section; the others can land in footer taglines, /about page sub-statements, future manifesto strip, social profiles, etc.
+
+| Line | Use |
+|---|---|
+| **"If it should exist and we'd use it, we build it."** | ⭐ **Lead.** Currently in homepage about-indri statement. |
+| "Indri doesn't pick a vertical. Indri picks problems." | Available — strong positioning statement. Candidate for /about page sub-heading or social bio. |
+| "Tools that don't grow up to be unicorns." | Available — anti-unicorn/SaaS-bloat stance. Candidate for footer tagline. |
+| "Lemurs hold on. So do our apps." | Available — lemur-brand riff. Candidate for footer tagline or a manifesto strip between sections. |
+| *"Indri makes apps. No business plan. We sleep fine."* | ✋ **Note but don't use** — user likes it as a sentiment but doesn't want it on the live site. Keep on file. |
+
+Replaced and **retired** (not approved):
+- ~~"We pick problems that matter, ship something tight, then come back and make it better."~~ — original placeholder, too generic.
 
 ## Studio migration: rapid-raccoon → indri
 

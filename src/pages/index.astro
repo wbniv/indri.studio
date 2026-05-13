@@ -3,56 +3,32 @@ import Base from "../layouts/Base.astro";
 import StripedGridMotion from "../components/StripedGridMotion.astro";
 import { getCollection } from "astro:content";
 
-const now = new Date();
-
-const nowMs = now.valueOf();
 const allApps = (await getCollection("apps", ({ data }) => !data.draft))
-	.sort((a, b) => {
-		const aFuture = a.data.date.valueOf() > nowMs;
-		const bFuture = b.data.date.valueOf() > nowMs;
-		if (aFuture !== bFuture) return aFuture ? -1 : 1;
-		return aFuture
-			? a.data.date.valueOf() - b.data.date.valueOf()
-			: b.data.date.valueOf() - a.data.date.valueOf();
-	});
+	.sort((a, b) => a.data.title.localeCompare(b.data.title));
 
-const upcomingCount = allApps.filter((p) => p.data.date.valueOf() > now.valueOf()).length;
-
-const statusLabel =
-	upcomingCount === 0
-		? "Idle // Between Launches"
-		: upcomingCount === 1
-			? "1 Launch Incoming"
-			: `${upcomingCount} Launches Incoming`;
-
-const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
+const team = (await getCollection("team")).sort(
+	(a, b) => a.data.order - b.data.order,
+);
 ---
 
 <Base title="indri">
 	<!-- Hero -->
-	<section
-		class="relative overflow-hidden border-b border-outline-variant/40 min-h-[600px] md:min-h-[720px] flex items-center"
-	>
+	<section class="relative overflow-hidden min-h-[640px] md:min-h-[760px] flex items-center">
 		<StripedGridMotion class="absolute left-0 right-0 top-6 z-0" />
 
-<div class="relative z-10 w-full max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] pt-16 md:pt-24 pb-16 md:pb-32">
-			<div class="max-w-2xl">
-				<div class="pill-purple mb-6">
-					<span class="w-2 h-2 bg-primary-container rounded-full animate-pulse"></span>
-					<span>{statusLabel}</span>
-				</div>
-
-				<h1
-					class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[88px] leading-[0.95] tracking-tighter text-primary-container mb-6 lowercase italic"
-				>
-					indri
+		<div class="relative z-10 w-full max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-24 md:py-32">
+			<div class="max-w-3xl">
+				<h1 class="font-display mb-2">
+					<span class="block text-6xl sm:text-7xl md:text-8xl lg:text-[120px] leading-[0.9] tracking-tight font-black uppercase text-primary-container">
+						Software
+					</span>
+					<span class="block text-3xl sm:text-4xl md:text-5xl leading-[1] tracking-tight font-light text-on-surface mt-2">
+						for everyone.
+					</span>
 				</h1>
 
-				<p
-					class="font-body text-body-lg text-secondary max-w-xl border-l-2 border-primary-container pl-6"
-				>
-					Small studio. We build apps people use every day — coloring,
-					bookkeeping, parking, play.
+				<p class="font-body text-body-lg text-on-surface-variant max-w-xl mt-10 border-l-2 border-primary-container pl-6">
+					We build apps people use every day — coloring, bookkeeping, parking, play.
 				</p>
 			</div>
 		</div>
@@ -60,49 +36,73 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 		<StripedGridMotion class="absolute left-0 right-0 bottom-6 z-0" />
 	</section>
 
-	<!-- Full product list (moved from /products/; no heading — hero provides context) -->
-	<section id="launches" class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-16 md:py-24 scroll-mt-20">
-		{allApps.length === 0 ? (
-			<p class="font-body text-body-md text-secondary">Nothing yet.</p>
-		) : (
-			<ul class="space-y-4">
-				{allApps.map((post) => {
-					const upcoming = post.data.date.valueOf() > now.valueOf();
-					return (
-						<li>
-							<a
-								href={`/apps/${post.id}/`}
-								class="glass-card glass-card-hover block p-6 md:p-8 group"
-							>
-								<div class="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-4 md:gap-8 items-start">
-									<div class="flex flex-col gap-2">
-										<time
-											datetime={post.data.date.toISOString()}
-											class="font-display text-label-md uppercase tracking-[0.2em] text-outline"
-										>
-											{fmtDate(post.data.date)}
-										</time>
-										{upcoming && (
-											<span class="pill-purple self-start">
-												<span class="material-symbols-outlined text-sm">hourglass_top</span>
-												Launching Soon
-											</span>
-										)}
-									</div>
-									<div>
-										<h2 class="font-display text-headline-sm text-primary-container mb-2 group-hover:brightness-125 transition-all">
-											{post.data.title}
-										</h2>
-										{post.data.summary && (
-											<p class="font-body text-body-md text-secondary">{post.data.summary}</p>
-										)}
-									</div>
-								</div>
-							</a>
-						</li>
-					);
-				})}
-			</ul>
-		)}
+	<!-- Our apps -->
+	<section id="apps" class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-16 md:py-24 scroll-mt-20">
+		<div class="stripe-divider mb-4"></div>
+		<h2 class="section-label">our apps</h2>
+
+		<ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+			{allApps.map((app) => (
+				<li>
+					<a
+						href={`/apps/${app.id}/`}
+						class="glass-card glass-card-hover block h-full p-6 md:p-8 group"
+					>
+						<div class="flex items-start justify-between mb-8">
+							<span class="block w-9 h-9 bg-[rgba(176,38,255,0.12)] border border-[rgba(176,38,255,0.4)]"></span>
+							<span class="font-display uppercase tracking-[0.25em] text-[10px] text-on-surface-variant">
+								{app.data.date.getFullYear()}
+							</span>
+						</div>
+						<h3 class="font-display text-2xl md:text-[28px] font-black text-on-surface group-hover:text-primary-container transition-colors mb-3 uppercase tracking-tight leading-[1.05]">
+							{app.data.title}
+						</h3>
+						{app.data.summary && (
+							<p class="font-body text-body-md text-on-surface-variant">
+								{app.data.summary}
+							</p>
+						)}
+						<div class="mt-8 font-display uppercase tracking-[0.25em] text-[11px] text-primary-container">
+							view →
+						</div>
+					</a>
+				</li>
+			))}
+		</ul>
 	</section>
+
+	<!-- About indri -->
+	<section id="about" class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-16 md:py-24 scroll-mt-20">
+		<div class="stripe-divider mb-4"></div>
+		<h2 class="section-label">about indri</h2>
+
+		<p class="font-display text-3xl md:text-4xl lg:text-5xl font-black uppercase leading-[1.1] tracking-tight text-on-surface max-w-4xl">
+			<span class="text-primary-container">Indri</span> is a small studio.<br/>
+			If it should exist and we'd use it, we build it.
+		</p>
+	</section>
+
+	<!-- The team -->
+	<section id="team" class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 lg:px-[var(--spacing-margin)] py-16 md:py-24 scroll-mt-20">
+		<div class="stripe-divider mb-4"></div>
+		<h2 class="section-label">the team</h2>
+
+		<ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+			{team.map((member) => (
+				<li class="glass-card p-5 md:p-6">
+					<h3 class="font-display text-xl md:text-2xl font-black text-on-surface mb-1 uppercase tracking-tight">
+						{member.data.name}
+					</h3>
+					<p class="font-display uppercase tracking-[0.2em] text-[10px] text-primary-container mb-4">
+						{member.data.role}
+					</p>
+					<p class="font-body text-sm text-on-surface-variant">
+						{member.data.bio}
+					</p>
+				</li>
+			))}
+		</ul>
+	</section>
+
+	<div class="stripe-divider"></div>
 </Base>

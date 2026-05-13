@@ -12,6 +12,14 @@ const siteTitle = "indri";
 const fullTitle = title === siteTitle ? siteTitle : `${title} · ${siteTitle}`;
 
 const pathname = Astro.url.pathname;
+
+const navLinkClass = (active: boolean) =>
+	[
+		"font-display uppercase tracking-[0.25em] text-xs transition-colors",
+		active
+			? "text-primary-container"
+			: "text-on-surface-variant hover:text-primary-container",
+	].join(" ");
 ---
 
 <!doctype html>
@@ -40,39 +48,17 @@ const pathname = Astro.url.pathname;
 	</head>
 	<body class="min-h-screen flex flex-col bg-surface text-on-surface font-body">
 		<header
-			class="sticky top-0 z-50 w-full border-b border-[rgba(0,242,255,0.2)] bg-[rgba(10,14,15,0.8)] backdrop-blur-xl shadow-[0_4px_20px_rgba(0,242,255,0.1)]"
+			class="sticky top-0 z-50 w-full border-b border-[rgba(176,38,255,0.18)] bg-[rgba(26,24,21,0.85)] backdrop-blur-md"
 		>
 			<div class="flex justify-between items-center w-full px-6 md:px-8 py-4 max-w-[var(--container-max)] mx-auto">
-				<a
-					href="/"
-					class="text-xl md:text-2xl font-black italic tracking-tighter text-primary-container font-display"
-				>
-					INDRI
+				<a href="/" class="flex items-center gap-3 group">
+					<!-- Pixel-block accent: 3×3 grid in purple/grey, echoes the
+					     StripedGridMotion and reads as Indri's signature. -->
+					<span class="block w-3 h-3 bg-primary-container shrink-0"></span>
+					<span class="font-display text-xl md:text-2xl font-black uppercase tracking-[0.3em] text-on-surface group-hover:text-primary-container transition-colors">
+						INDRI
+					</span>
 				</a>
-				<nav class="flex items-center gap-6 md:gap-8">
-					<a
-						href="/"
-						class:list={[
-							"font-display uppercase tracking-[0.2em] text-xs transition-all",
-							pathname === "/" || pathname.startsWith("/apps")
-								? "text-primary-container border-b border-primary-container pb-1"
-								: "text-outline hover:text-primary-container",
-						]}
-					>
-						Home
-					</a>
-					<a
-						href="/about/"
-						class:list={[
-							"font-display uppercase tracking-[0.2em] text-xs transition-all",
-							pathname.startsWith("/about")
-								? "text-primary-container border-b border-primary-container pb-1"
-								: "text-outline hover:text-primary-container",
-						]}
-					>
-						About
-					</a>
-				</nav>
 			</div>
 		</header>
 
@@ -80,22 +66,19 @@ const pathname = Astro.url.pathname;
 			<slot />
 		</main>
 
-		<footer class="w-full border-t border-[rgba(0,242,255,0.15)] bg-[#0b0f10]">
+		<footer class="w-full border-t border-[rgba(176,38,255,0.15)] bg-surface-container-lowest">
 			<div
-				class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 py-10 md:py-12 grid grid-cols-1 md:grid-cols-2 gap-8"
+				class="max-w-[var(--container-max)] mx-auto px-6 md:px-8 py-10 md:py-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
 			>
-				<div>
-					<div class="text-lg font-bold text-neutral-100 mb-3 uppercase tracking-tighter font-display">
+				<div class="flex items-center gap-3">
+					<span class="block w-3 h-3 bg-primary-container shrink-0"></span>
+					<span class="font-display text-base font-black uppercase tracking-[0.3em] text-on-surface">
 						INDRI
-					</div>
-					<p class="font-display uppercase text-[10px] tracking-[0.2em] text-neutral-500 leading-loose max-w-xs">
-						Small studio. We build apps people use every day.
-					</p>
-				</div>
-				<div class="flex md:justify-end items-start">
-					<span class="font-display uppercase text-[10px] tracking-[0.2em] text-neutral-600">
-						© {new Date().getFullYear()} INDRI
 					</span>
+				</div>
+				<div class="font-display uppercase text-[10px] tracking-[0.3em] text-on-surface-variant flex flex-wrap gap-x-6 gap-y-2">
+					<a href="/" class="hover:text-primary-container transition-colors">apps</a>
+					<span class="opacity-50">© {new Date().getFullYear()}</span>
 				</div>
 			</div>
 		</footer>

@@ -125,11 +125,15 @@
 		font-family: var(--font-body);
 		color: var(--color-on-surface);
 		background-color: var(--color-surface);
-		/* Subtle Phosphor dot grid behind everything.
-		 * The studio's "striped pixel grid" motion module
-		 * lives separately on the homepage hero zone. */
-		background-image: radial-gradient(rgba(176, 38, 255, 0.0625) 1px, transparent 1px);
-		background-size: 32px 32px;
+		/* Ringtail horizontal stripe banding as the body texture.
+		 * 4 px stripe every 32 px in faint grey — reads as the lemur-tail
+		 * motif without competing with section content. Replaces the
+		 * rapid-raccoon-era dot grid. */
+		background-image: repeating-linear-gradient(
+			180deg,
+			transparent 0 28px,
+			rgba(143, 135, 128, 0.04) 28px 32px
+		);
 	}
 
 	::selection {
@@ -139,22 +143,35 @@
 }
 
 @layer components {
+	/* Hard-card: print-block energy. Flat fill, hard 1px border, no blur,
+	 * no rounding. Replaces the seeded glass-card frosted treatment. Class
+	 * name kept so existing call sites work without churn. */
 	.glass-card {
-		background: rgba(45, 41, 36, 0.6);
-		backdrop-filter: blur(12px);
-		-webkit-backdrop-filter: blur(12px);
-		border: 1px solid rgba(176, 38, 255, 0.12);
+		background: var(--color-surface-container);
+		border: 1px solid var(--color-grey-700);
+		border-radius: 0;
 	}
 
 	.glass-card-hover {
 		transition:
-			border-color 180ms ease,
-			box-shadow 180ms ease,
-			transform 180ms ease;
+			border-color 120ms linear,
+			background-color 120ms linear;
 	}
 	.glass-card-hover:hover {
-		border-color: rgba(176, 38, 255, 0.4);
-		box-shadow: 0 0 20px rgba(176, 38, 255, 0.3);
+		border-color: var(--color-primary-container);
+		background-color: var(--color-surface-container-high);
+	}
+
+	/* Section label: small caps under a stripe-divider, used to title
+	 * each homepage section ("our apps", "about indri", "try one"). */
+	.section-label {
+		font-family: var(--font-display);
+		font-size: 12px;
+		font-weight: 500;
+		letter-spacing: 0.3em;
+		text-transform: lowercase;
+		color: var(--color-on-surface-variant);
+		margin: 1rem 0 2rem;
 	}
 
 	.glow-sm {
