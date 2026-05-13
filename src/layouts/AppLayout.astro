@@ -19,9 +19,11 @@ interface Props {
 		fontBody?: string;
 		fontImports?: string[];
 	};
+	prevHref?: string;
+	nextHref?: string;
 }
 
-const { title, description, theme = {} } = Astro.props;
+const { title, description, theme = {}, prevHref, nextHref } = Astro.props;
 
 const themeStyle = [
 	theme.primary && `--color-primary-container: ${theme.primary}`,
@@ -40,6 +42,8 @@ const fontImports = theme.fontImports ?? [];
 <Base title={title} description={description} ringFlare={false}>
 	<Fragment slot="head">
 		<ClientRouter />
+		{prevHref && <link rel="prefetch" href={prevHref} />}
+		{nextHref && <link rel="prefetch" href={nextHref} />}
 		{fontImports.length > 0 && (
 			<>
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
