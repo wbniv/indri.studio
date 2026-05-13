@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import rehypeExternalLinks from 'rehype-external-links';
 
@@ -13,6 +13,43 @@ export default defineConfig({
 		// docs/plans/2026-05-13-inline-critical-css.md.
 		inlineStylesheets: "always",
 	},
+	// Self-host Space Grotesk + Inter via the Astro Fonts API. Downloads
+	// the woff2 files at build time, Latin-subsetted, into
+	// dist/_astro/fonts/, served from the same origin as the HTML. The
+	// <Font /> components in Base.astro emit @font-face declarations
+	// inline + auto-preload tags. Replaces the cross-origin
+	// fonts.googleapis.com + fonts.gstatic.com round-trip that
+	// Lighthouse's render-blocking-insight flagged as ~1.35 s of wasted
+	// critical time on every page. font-display: optional preserved
+	// per-family so the no-FOUT/no-CLS contract holds. Ending each
+	// fallbacks array with a generic family name (sans-serif) triggers
+	// optimizedFallbacks — Astro derives a metric-matched fallback face
+	// from the *actual* downloaded woff2's @capsizecss/unpack metrics,
+	// which replaces the hand-tuned "Space Grotesk Fallback" / "Inter
+	// Fallback" blocks previously in global.css. Plan:
+	// docs/plans/2026-05-14-self-host-fonts.md.
+	fonts: [
+		{
+			provider: fontProviders.google(),
+			name: "Space Grotesk",
+			cssVariable: "--font-space-grotesk",
+			weights: ["300", "400", "500", "600", "700"],
+			styles: ["normal"],
+			subsets: ["latin"],
+			display: "optional",
+			fallbacks: ["system-ui", "-apple-system", "Segoe UI", "sans-serif"],
+		},
+		{
+			provider: fontProviders.google(),
+			name: "Inter",
+			cssVariable: "--font-inter",
+			weights: ["300", "400", "500", "600"],
+			styles: ["normal"],
+			subsets: ["latin"],
+			display: "optional",
+			fallbacks: ["system-ui", "-apple-system", "Segoe UI", "sans-serif"],
+		},
+	],
 	vite: {
 		plugins: [tailwindcss()],
 	},

@@ -2,6 +2,7 @@
 
 Low-priority tasks that aren't blocking but shouldn't be lost.
 
+- [verify] **2026-05-14** Self-host Space Grotesk + Inter via Astro Fonts API — emits 2 variable-font woff2 (~70 KB total) into `dist/_astro/fonts/`, replaces the cross-origin Google Fonts round-trip. Build/local verification PASS; Lighthouse re-run pending `task deploy` — [plan](docs/plans/2026-05-14-self-host-fonts.md)
 - [verify] **2026-05-14** Render-blocking + cache TTL cleanup — preload-swap the Space Grotesk + Inter type stylesheet, lift Material Symbols from Base.astro to per-page (frees colophon from icon-font request), drop `<MaterialSymbols />` into Base's head slot from `/`, `/404`, and AppLayout, swap footer mail icon for unicode `✉`, add `cloudflare_ruleset.cache_immutable` for 1y TTL on `_astro/*` + `screenshots/*` — [plan](docs/plans/2026-05-14-render-blocking-cache-ttl.md)
 - [ ] Re-implement www→apex redirect in the indri-studio Worker's `fetch` handler — the `cloudflare_ruleset` resource is unmanageable from any API-token type on this Free-plan zone (deleted manually 2026-05-13). www.indri.studio currently has no redirect; fix before any marketing pushes traffic to `www.`
 

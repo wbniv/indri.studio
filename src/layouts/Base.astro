@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { Font } from "astro:assets";
 import RingFlare from "../components/RingFlare.astro";
 import { ClientRouter } from "astro:transitions";
 
@@ -40,25 +41,20 @@ const navLinkClass = (active: boolean) =>
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<link rel="manifest" href="/site.webmanifest" />
 		<meta name="theme-color" content="#b026ff" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<!-- Type stylesheet (Space Grotesk + Inter) loaded non-blocking via
-		 ~ preload + onload-swap. display=optional + metric-matched fallbacks
-		 ~ in global.css absorb the swap with zero CLS. Material Symbols is
-		 ~ loaded per-page (see MaterialSymbols.astro) on the pages that
-		 ~ actually use icons — colophon doesn't, so it pays nothing. -->
-		<link
-			rel="preload"
-			as="style"
-			href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=optional"
-			onload="this.onload=null; this.rel='stylesheet'"
-		/>
-		<noscript>
-			<link
-				rel="stylesheet"
-				href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=optional"
-			/>
-		</noscript>
+		<!-- Self-hosted brand fonts via Astro Fonts API. Build-time download
+		 ~ of Space Grotesk + Inter into dist/_astro/fonts/, served same-
+		 ~ origin via Workers Static Assets — no cross-origin DNS/TCP/TLS
+		 ~ round-trip to fonts.googleapis.com or fonts.gstatic.com.
+		 ~ <Font /> emits @font-face inline + auto-preload per family.
+		 ~ font-display: optional is set per-family in astro.config.mjs;
+		 ~ optimizedFallbacks (default) derives a metric-matched fallback
+		 ~ face from the actual downloaded woff2's metrics — replaces the
+		 ~ old hand-tuned "* Fallback" blocks in global.css. Material
+		 ~ Symbols is loaded per-page (see MaterialSymbols.astro) on the
+		 ~ pages that actually use icons — colophon doesn't, so it pays
+		 ~ nothing. -->
+		<Font cssVariable="--font-space-grotesk" preload />
+		<Font cssVariable="--font-inter" preload />
 		<slot name="head" />
 		<title>{fullTitle}</title>
 		<ClientRouter />
