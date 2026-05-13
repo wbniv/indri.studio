@@ -13,7 +13,7 @@
 <style>
 	#scroll-to-top {
 		position: fixed;
-		bottom: 1.5rem;
+		bottom: calc(1.5rem + var(--scroll-to-top-lift, 0px));
 		right: 1.5rem;
 		width: 2.75rem;
 		height: 2.75rem;
@@ -67,12 +67,30 @@
 
 		const button = () => document.getElementById("scroll-to-top");
 
+		let lift = 0;
+
 		const updateVisibility = () => {
 			pending = false;
 			const btn = button();
-			if (!btn || !eligible) return;
-			const shouldShow = window.scrollY > window.innerHeight * VISIBILITY_THRESHOLD_RATIO;
-			btn.dataset.visible = shouldShow ? "true" : "false";
+			if (!btn) return;
+			if (eligible) {
+				const shouldShow = window.scrollY > window.innerHeight * VISIBILITY_THRESHOLD_RATIO;
+				btn.dataset.visible = shouldShow ? "true" : "false";
+			}
+			// Lift above the footer when it intrudes into the viewport so
+			// the button never sits on top of the footer's mail/copyright
+			// icons. Throttled inside rAF (called via tick()), so the
+			// getBoundingClientRect read is safe here.
+			const footer = document.querySelector("footer");
+			if (footer) {
+				const rect = footer.getBoundingClientRect();
+				const overlap = window.innerHeight - rect.top;
+				const newLift = Math.max(0, overlap + 12);
+				if (newLift !== lift) {
+					lift = newLift;
+					btn.style.setProperty("--scroll-to-top-lift", `${lift}px`);
+				}
+			}
 		};
 
 		const tick = () => {
