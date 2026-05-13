@@ -419,20 +419,20 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 		}
 
 		@keyframes app-slide-out-left {
-			from { opacity: 1; transform: translateX(0); }
-			to   { opacity: 0; transform: translateX(-100%); }
+			from { opacity: 1; transform: translateX(0)      scale(1);    }
+			to   { opacity: 0; transform: translateX(-100%)  scale(0.96); }
 		}
 		@keyframes app-slide-in-right {
-			from { opacity: 0; transform: translateX(100%); }
-			to   { opacity: 1; transform: translateX(0); }
+			from { opacity: 0; transform: translateX(100%)   scale(0.96); }
+			to   { opacity: 1; transform: translateX(0)      scale(1);    }
 		}
 		@keyframes app-slide-out-right {
-			from { opacity: 1; transform: translateX(0); }
-			to   { opacity: 0; transform: translateX(100%); }
+			from { opacity: 1; transform: translateX(0)      scale(1);    }
+			to   { opacity: 0; transform: translateX(100%)   scale(0.96); }
 		}
 		@keyframes app-slide-in-left {
-			from { opacity: 0; transform: translateX(-100%); }
-			to   { opacity: 1; transform: translateX(0); }
+			from { opacity: 0; transform: translateX(-100%)  scale(0.96); }
+			to   { opacity: 1; transform: translateX(0)      scale(1);    }
 		}
 	</style>
 </AppLayout>
