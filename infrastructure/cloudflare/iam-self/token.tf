@@ -25,23 +25,23 @@ variable "zone_id" {
   default = ""
 }
 
-# Permission groups for CI deploys. CF v5 uses cloudflare_account_token
-# (Account API token, not user-tied). Two policies for clean scope split:
-#   - Zone-scoped: DNS Write + Workers Routes Write + Zone Read
-#     (custom-domain bindings touch DNS records and routes)
-#   - Account-scoped: Workers Scripts Write
-#     (deploy = upload script to account)
-data "cloudflare_account_api_token_permission_groups_list" "all" {
-  account_id = var.account_id
-}
-
+# Permission group IDs are CF-managed UUIDs and stable across accounts.
+# Hardcoded rather than looked up via data source because the data source
+# returns the full catalogue (~200 entries) with duplicate display names
+# across different scopes, which breaks any name→id map. Resolved via
+# `curl /accounts/{aid}/tokens/permission_groups` once; pasted here.
 locals {
-  pg = {
-    for p in data.cloudflare_account_api_token_permission_groups_list.all.result :
-    p.name => p.id
+  permission_groups = {
+    dns_write             = "4755a26eedb94da69e1066d98aa820be"  # zone scope
+    workers_routes_write  = "28f4b596e7d643029c524985477ae49a"  # zone scope
+    workers_scripts_write = "e086da7e2179491d91ee5f35b3ca210a"  # account scope
   }
 }
 
+# Why no Zone Read: dropped to avoid widening the bootstrap token. Narrow
+# token is for CI's wrangler deploy, which only needs to write the Worker
+# script — it doesn't enumerate zones. If a future workflow needs to read
+# zone metadata, add Zone Read to both bootstrap and here, then re-apply.
 resource "cloudflare_account_token" "indri_cf_token" {
   account_id = var.account_id
   name       = "indri-cf-token"
@@ -53,9 +53,8 @@ resource "cloudflare_account_token" "indri_cf_token" {
         "com.cloudflare.api.account.zone.${var.zone_id}" = "*"
       })
       permission_groups = [
-        { id = local.pg["DNS Write"] },
-        { id = local.pg["Workers Routes Write"] },
-        { id = local.pg["Zone Read"] },
+        { id = local.permission_groups.dns_write },
+        { id = local.permission_groups.workers_routes_write },
       ]
     },
     {
@@ -64,7 +63,7 @@ resource "cloudflare_account_token" "indri_cf_token" {
         "com.cloudflare.api.account.${var.account_id}" = "*"
       })
       permission_groups = [
-        { id = local.pg["Workers Scripts Write"] },
+        { id = local.permission_groups.workers_scripts_write },
       ]
     },
   ]
