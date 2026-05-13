@@ -183,23 +183,52 @@ html {
 			transparent 0 28px,
 			rgba(143, 135, 128, 0.04) 28px 32px
 		);
-		animation: stripes-motion 180s linear infinite;
+		/* Three independent timelines — pairwise non-divisible (gcd 5),
+		 * combined loop is ~11 hours so the pattern never visibly repeats.
+		 * Uses CSS individual transform properties (translate, rotate,
+		 * scale) so each animates a distinct property without colliding
+		 * on the `transform` shorthand. Per spec these compose as
+		 * translate × rotate × scale (scale closest to the element). */
+		animation:
+			stripes-translate 60s linear infinite,
+			stripes-rotate 175s linear infinite,
+			stripes-scale 95s linear infinite;
 		will-change: transform;
 	}
 
 	/* Non-uniform keyframes with intentional reversals — direction flips,
-	 * slows, then continues. Translate values shift the cached gradient
-	 * bitmap (equivalent visual to the old background-position drift);
-	 * rotate values sweep the apparent stripe angle. Combined into one
-	 * timeline so the compositor only deals with a single transform matrix
-	 * update per frame. */
-	@keyframes stripes-motion {
-		0%   { transform: translate(0,     0)    rotate(0deg);   animation-timing-function: ease-in-out; }
-		25%  { transform: translate(18px,  18px) rotate(140deg); animation-timing-function: ease-in-out; }
-		40%  { transform: translate(10px,  10px) rotate(80deg);  animation-timing-function: ease-in-out; }
-		65%  { transform: translate(26px,  26px) rotate(250deg); animation-timing-function: ease-in-out; }
-		85%  { transform: translate(22px,  22px) rotate(220deg); animation-timing-function: ease-in-out; }
-		100% { transform: translate(32px,  32px) rotate(360deg); }
+	 * slows, then continues. Three channels run on separate timelines so
+	 * they desync over hours. Translate shifts the cached gradient bitmap
+	 * (equivalent to the old background-position drift); rotate sweeps
+	 * the apparent stripe angle; scale breathes the stripe period (lines
+	 * and gaps grow/shrink together at fixed 1:7 ratio — independent
+	 * width/gap variation would require animating gradient stop
+	 * positions, which is the bug we're working around). */
+	@keyframes stripes-translate {
+		0%   { translate: 0     0;     animation-timing-function: ease-in-out; }
+		30%  { translate: 18px  18px;  animation-timing-function: ease-in-out; }   /* forward burst */
+		45%  { translate: 10px  10px;  animation-timing-function: ease-in-out; }   /* reverse */
+		70%  { translate: 26px  26px;  animation-timing-function: ease-in-out; }   /* forward again */
+		85%  { translate: 22px  22px;  animation-timing-function: ease-in-out; }   /* small reverse */
+		100% { translate: 32px  32px; }                                             /* settle */
+	}
+
+	@keyframes stripes-rotate {
+		0%   { rotate: 0deg;    animation-timing-function: ease-in-out; }
+		25%  { rotate: 140deg;  animation-timing-function: ease-in-out; }   /* clockwise sweep */
+		40%  { rotate: 80deg;   animation-timing-function: ease-in-out; }   /* counterclockwise dip */
+		65%  { rotate: 250deg;  animation-timing-function: ease-in-out; }   /* clockwise again */
+		85%  { rotate: 220deg;  animation-timing-function: ease-in-out; }   /* small counterclockwise */
+		100% { rotate: 360deg; }                                            /* settle */
+	}
+
+	@keyframes stripes-scale {
+		0%   { scale: 1;    animation-timing-function: ease-in-out; }
+		25%  { scale: 0.6;  animation-timing-function: ease-in-out; }   /* pinch */
+		45%  { scale: 2.8;  animation-timing-function: ease-in-out; }   /* big spread */
+		70%  { scale: 0.9;  animation-timing-function: ease-in-out; }   /* small crowd */
+		88%  { scale: 1.8;  animation-timing-function: ease-in-out; }   /* moderate spread */
+		100% { scale: 1; }                                              /* settle */
 	}
 
 	@media (prefers-reduced-motion: reduce) {
