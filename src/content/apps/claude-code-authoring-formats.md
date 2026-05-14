@@ -79,8 +79,6 @@ Below: each of the fifteen rendered against one of the four authoring formats. C
   <div class="fm-hint">← → style · ↑ ↓ format · Esc to close</div>
 </dialog>
 
-<script src="/cca-lightbox.js"></script>
-
 ## Where it lives
 
 Part of the shared `python-tui-lib` toolchain at `~/SRC/python-tui-lib/`. Drop the script into any project, point it at a Markdown file, set `FRONTMATTER_STYLE=<name>`, and ship a PDF that knows what kind of document it is.

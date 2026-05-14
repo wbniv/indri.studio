@@ -100,6 +100,11 @@ const apps = defineCollection({
 					// typically a single Google Fonts URL covering both faces.
 					// Loaded only on pages using this app's theme; studio pages
 					// stay slim (just Space Grotesk + Inter from Base).
+					// IMPORTANT: each URL's origin must also appear in the CSP
+					// `style-src` directive in worker/index.ts. Adding a non-
+					// Google Fonts URL here without updating the CSP causes the
+					// font to load in dev (no CSP applied) but fail silently in
+					// production. Currently only fonts.googleapis.com is allowed.
 					fontImports: z.array(z.string().url()).optional(),
 				})
 				.optional();

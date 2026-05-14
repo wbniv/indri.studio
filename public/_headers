@@ -46,8 +46,6 @@
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 /sitemap-*.xml
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
-/cca-lightbox.js
-  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 /img/cca-styles/*
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 /img/store-badges/*

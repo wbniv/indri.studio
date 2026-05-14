@@ -4,6 +4,7 @@ import StoreBadges from "../../components/StoreBadges.astro";
 import Screenshot from "../../components/Screenshot.astro";
 import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
+import lightboxUrl from "../../scripts/cca-lightbox.js?url";
 
 export async function getStaticPaths() {
 	// Same sort as the homepage gallery — alphabetical with finding-your-way
@@ -107,6 +108,7 @@ const upcoming = post.data.date.valueOf() > now.valueOf();
 
 		<div class="prose">
 			<Content />
+			{post.id === 'claude-code-authoring-formats' && <script src={lightboxUrl}></script>}
 		</div>
 
 		{post.data.screenshots.length > 0 && (

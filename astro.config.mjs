@@ -55,6 +55,14 @@ export default defineConfig({
 	],
 	vite: {
 		plugins: [tailwindcss()],
+		build: {
+			// Force all ?url-imported assets to emit as separate hashed files
+			// rather than being inlined as data: URIs. Without this, small files
+			// (< 4 KB) like cca-lightbox.js get base64-encoded into the HTML
+			// instead of landing at /_astro/<name>.<hash>.js where they pick up
+			// the immutable 1-year cache rule.
+			assetsInlineLimit: 0,
+		},
 	},
 	markdown: {
 		rehypePlugins: [

@@ -15,10 +15,9 @@
   let typeIdx = 0;
   let opener = null;
 
-  function urlFor(style, type, full) {
-    const suffix = full ? '-full' : '';
+  function urlFor(style, type) {
     const typePart = type === 'memory' ? '' : `-${type}`;
-    return `/img/cca-styles/style-${style}${typePart}${suffix}.avif`;
+    return `/img/cca-styles/style-${style}${typePart}-full.avif`;
   }
 
   function render() {
@@ -26,7 +25,7 @@
     const btn = buttons[styleIdx];
     const style = btn.dataset.style;
     const type = TYPES[typeIdx];
-    img.src = urlFor(style, type, true);
+    img.src = urlFor(style, type);
     img.alt = `${btn.dataset.title} (${TYPE_LABEL[type]})`;
     cap.textContent = `${btn.dataset.title} · ${TYPE_LABEL[type]} — ${btn.dataset.desc}`;
     if (!dlg.open && typeof dlg.showModal === 'function') dlg.showModal();

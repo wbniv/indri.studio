@@ -45,6 +45,9 @@ export default {
       const nonce = generateNonce();
       const headers = new Headers(response.headers);
       headers.set("Cache-Control", "no-store");
+      headers.set("X-Content-Type-Options", "nosniff");
+      headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+      headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
       headers.set(
         "Content-Security-Policy",
         `default-src 'self'; ` +
