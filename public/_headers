@@ -11,6 +11,14 @@
 # correct as written but cannot be applied). Plan:
 # docs/plans/2026-05-14-render-blocking-cache-ttl.md.
 
+# HTML pages and anything else not explicitly matched below.
+# _headers uses last-match-wins semantics, so the specific rules below
+# override this for _astro/*, favicons, etc. no-store prevents edge
+# caching of HTML — stale HTML referencing old _astro/<hash> URLs that
+# no longer exist in the current deploy would produce broken pages.
+/*
+  Cache-Control: no-store
+
 # Astro content-hashes every filename in _astro/* (the manifest URL
 # changes any time the contents change). Safe to mark immutable for
 # a year — clients never need to revalidate. App screenshots now
