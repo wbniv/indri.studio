@@ -400,6 +400,24 @@ html {
 		}
 	}
 
+	.material-symbols-outlined {
+		/* Reserve the icon box during the Material Symbols FOIT window
+		 * (display=block on the @font-face). Before the font loads, the
+		 * ligature names ("hourglass_top", "arrow_back") have near-zero
+		 * width — adjacent text would shift right by ~1em when glyphs
+		 * render. The hero .platform-strip override below uses this
+		 * same pattern with explicit pixel sizes; this is the
+		 * em-relative version that covers every other icon site.
+		 *
+		 * Google's Material Symbols stylesheet doesn't set width or
+		 * height (it sets font-size, display: inline-block,
+		 * line-height: 1), so a plain layered rule wins without
+		 * !important. */
+		width: 1em;
+		height: 1em;
+		text-align: center;
+	}
+
 	/* Sequential glow loop for the hero platform-icon strip.
 	 ~ Five icons, 6 s cycle: each icon briefly ramps from faint to full
 	 ~ Phosphor purple + neon text-shadow, 1.2 s apart. Suggests "one

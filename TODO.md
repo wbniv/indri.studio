@@ -2,6 +2,8 @@
 
 Low-priority tasks that aren't blocking but shouldn't be lost.
 
+- [verify] **2026-05-14** Defensive CLS hardening — reserve Material Symbols icon box at 1em globally; add CLS-budget alert (≤ 0.05) to post-deploy CI Lighthouse step. Local: Perf 100/100/100, CLS 0.003/0/0. CI summary table verifies on next `v*` tag — [plan](docs/plans/2026-05-14-cls-defensive-hardening.md)
+
 ## Done
 
 - [x] **2026-05-14** CI: `task lighthouse` runs after every deploy (RUNS=1 to fit Free-tier budget, ~2 min added/deploy); JSON bundle uploaded as per-tag artifact + summary table in Actions UI — [plan](docs/plans/2026-05-14-lighthouse-ci.md)

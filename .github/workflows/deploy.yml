@@ -99,3 +99,41 @@ jobs:
               ' /tmp/lh/latest/${SLUG}.run-1.report.json
             done
           } >> $GITHUB_STEP_SUMMARY
+
+      # CLS regression alert. Pass 4 (2026-05-14) brought every sampled
+      # page to CLS ≤ 0.003 under devtools throttling. This step asserts
+      # the budget on each subsequent deploy: any page over 0.05 fails
+      # the step (red badge in Actions UI) and emits a ::warning::
+      # annotation. The deploy itself already shipped at line 42–46
+      # before Lighthouse runs, so this is a post-deploy alert, not a
+      # gate. Threshold rationale + design in
+      # docs/plans/2026-05-14-cls-defensive-hardening.md.
+      - name: CLS budget check
+        if: steps.lh.outcome == 'success'
+        continue-on-error: true
+        env:
+          CLS_BUDGET: '0.05'
+        run: |
+          set -euo pipefail
+          violations=0
+          {
+            echo
+            echo "### CLS budget: ≤ ${CLS_BUDGET}"
+            echo
+            echo "| Page | CLS | Status |"
+            echo "|---|---:|:---:|"
+            for SLUG in home colophon splitledger; do
+              CLS=$(jq -r '.audits["cumulative-layout-shift"].numericValue' \
+                /tmp/lh/latest/${SLUG}.run-1.report.json)
+              STATUS=$(awk -v c="$CLS" -v b="$CLS_BUDGET" \
+                'BEGIN { print (c+0 <= b+0) ? "✓ OK" : "⚠️ OVER" }')
+              printf "| %s | %.4f | %s |\n" "$SLUG" "$CLS" "$STATUS"
+              if [ "${STATUS#⚠️}" != "$STATUS" ]; then
+                violations=$((violations + 1))
+              fi
+            done
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [ "$violations" -gt 0 ]; then
+            echo "::warning::$violations page(s) over CLS budget ${CLS_BUDGET}; see job summary."
+            exit 1
+          fi
