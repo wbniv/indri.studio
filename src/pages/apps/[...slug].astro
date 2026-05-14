@@ -34,9 +34,10 @@ const { Content } = await render(post);
 
 const now = new Date();
 const upcoming = post.data.date.valueOf() > now.valueOf();
-const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 ---
 
+<!-- TODO: pass post.data.screenshots[0] as ogImage once AppLayout/Base
+     prop-threading is wired and OG image assets exist. -->
 <AppLayout
 	title={post.data.title}
 	description={post.data.summary}
