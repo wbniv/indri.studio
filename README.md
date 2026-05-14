@@ -59,7 +59,7 @@ The Taskfile wraps these — `task dev`, `task build`, `task deploy`. See [docs/
    ---
    ```
 
-3. Appears on [/about](/about) ordered by `order`. If `featured: true`, also on the homepage team strip.
+3. Appears on the homepage team strip if `featured: true`. The full `/about` page (every member, regardless of `featured`) is planned but not yet shipped.
 
 ## Deploy
 
@@ -76,7 +76,6 @@ src/
     Base.astro             shared header + footer + global CSS
   pages/
     index.astro            studio homepage with app gallery
-    about.astro            studio statement + team grid
     apps/
       [...slug].astro      one page per content entry
   content/

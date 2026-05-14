@@ -13,7 +13,7 @@ const allApps = (await getCollection("apps", ({ data }) => !data.draft))
 		return a.data.title.localeCompare(b.data.title);
 	});
 
-const team = (await getCollection("team")).sort(
+const team = (await getCollection("team", ({ data }) => data.featured)).sort(
 	(a, b) => a.data.order - b.data.order,
 );
 ---

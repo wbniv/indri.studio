@@ -68,7 +68,7 @@ Frontmatter (current v1 schema): `title`, `date`, `summary`, `draft`. The richer
 src/content/team/<slug>.md
 ```
 
-Frontmatter: `name`, `role`, `bio`, `order`, `featured`, optional `socials`. Used by `/about` (full team) and the homepage team strip (subset where `featured: true`).
+Frontmatter: `name`, `role`, `bio`, `order`, `featured`, optional `socials`. The homepage team strip renders the subset where `featured: true`. The full `/about` page (every member regardless of `featured`) is planned but not yet shipped.
 
 ## Per-app theming (planned, not yet wired)
 

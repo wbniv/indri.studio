@@ -177,14 +177,17 @@ const motifs = [
 					class="inline-block w-[10px] h-[10px] rounded-full border-2 border-primary-container shrink-0 mt-[0.55em]"
 					aria-hidden="true"></span>
 				<span>
-					Both faces are served via <a
-						href="https://fonts.google.com"
-						class={linkClass}>Google Fonts</a
-					>; preconnect hints to <code class="font-mono text-sm"
+					Space Grotesk and Inter are self-hosted via Astro's <a
+						href="https://docs.astro.build/en/reference/configuration-reference/#experimental-fonts"
+						class={linkClass}>Fonts API</a
+					>: the build step downloads the woff2 files into <code class="font-mono text-sm"
+						>dist/_astro/fonts/</code
+					> and Workers Static Assets serves them same-origin, with <code class="font-mono text-sm"
+						>font-display: optional</code
+					> plus metric-matched fallback faces so first paint never blocks on
+					the type. Only Material Symbols Outlined is still served from <code class="font-mono text-sm"
 						>fonts.googleapis.com</code
-					> and <code class="font-mono text-sm">fonts.gstatic.com</code> are
-					emitted from the base layout to keep the type from blocking first
-					paint.
+					>, on the pages that use it.
 				</span>
 			</li>
 		</ul>

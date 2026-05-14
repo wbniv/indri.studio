@@ -42,7 +42,7 @@ tasks:
       - pnpm wrangler deploy
 
   secrets-pull:
-    desc: "Render local .env from SSM (/indri-studio/cloudflare/*). Refuses on drift unless --force."
+    desc: "Render local .env from SSM (/indri-studio/cloudflare/*). Overwrites any existing .env."
     cmds:
       - bash scripts/secrets-pull.sh {{.CLI_ARGS}}
 
