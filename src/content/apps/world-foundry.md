@@ -6,7 +6,6 @@ draft: false
 storeLinks:
   github: "#"
 screenshots:
-  - { src: "../../assets/screenshots/world-foundry/logo.png", alt: "World Foundry logo" }
   - { src: "../../assets/screenshots/world-foundry/blender-house.png", alt: "Blender → World Foundry roundtrip render" }
   - { src: "../../assets/screenshots/world-foundry/uv-seams.png", alt: "UV seam handling" }
 ---
