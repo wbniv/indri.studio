@@ -49,21 +49,21 @@ Below: each of the fifteen rendered against one of the four authoring formats. C
 </style>
 
 <div class="fm-grid">
-  <button data-style="a-arcane" data-type="memory" data-title="A · Arcane Codex" data-desc="illuminated-manuscript framing, Cinzel serif, drop-cap medallion, Latin type-words." aria-label="View A · Arcane Codex full-size"><figure><img src="/img/cca-styles/style-a-arcane.png" alt="A · Arcane Codex (memory)" /><figcaption>A · Arcane Codex — illuminated-manuscript framing, Cinzel serif, drop-cap medallion, Latin type-words.</figcaption></figure></button>
-  <button data-style="b-holo" data-type="skill" data-title="B · Holo Foil ID" data-desc="cyberpunk security card with conic-gradient holo strip and hex-grid icon panel." aria-label="View B · Holo Foil ID full-size"><figure><img src="/img/cca-styles/style-b-holo-skill.png" alt="B · Holo Foil ID (skill)" /><figcaption>B · Holo Foil ID — cyberpunk security card with conic-gradient holo strip and hex-grid icon panel.</figcaption></figure></button>
-  <button data-style="c-gem" data-type="subagent" data-title="C · Hearthstone Gem" data-desc="painterly card, gem-socketed icon, ribbon banner across the top." aria-label="View C · Hearthstone Gem full-size"><figure><img src="/img/cca-styles/style-c-gem-subagent.png" alt="C · Hearthstone Gem (subagent)" /><figcaption>C · Hearthstone Gem — painterly card, gem-socketed icon, ribbon banner across the top.</figcaption></figure></button>
-  <button data-style="d-min" data-type="slash-command" data-title="D · Modern Minimalist" data-desc="white card, hairlines, thin-line geometric SVG glyphs, mono ID stamps." aria-label="View D · Modern Minimalist full-size"><figure><img src="/img/cca-styles/style-d-min-slash-command.png" alt="D · Modern Minimalist (slash command)" /><figcaption>D · Modern Minimalist — white card, hairlines, thin-line geometric SVG glyphs, mono ID stamps.</figcaption></figure></button>
-  <button data-style="e-max" data-type="memory" data-title="E · Modern Maximalist" data-desc="cream paper, saturated icon panel with circular wax seal, hard offset shadow." aria-label="View E · Modern Maximalist full-size"><figure><img src="/img/cca-styles/style-e-max.png" alt="E · Modern Maximalist (memory)" /><figcaption>E · Modern Maximalist — cream paper, saturated icon panel with circular wax seal, hard offset shadow.</figcaption></figure></button>
-  <button data-style="f-future" data-type="skill" data-title="F · Future Minimalist" data-desc="pastel gradient card, glassy thin borders, large radii, fintech-quiet." aria-label="View F · Future Minimalist full-size"><figure><img src="/img/cca-styles/style-f-future-skill.png" alt="F · Future Minimalist (skill)" /><figcaption>F · Future Minimalist — pastel gradient card, glassy thin borders, large radii, fintech-quiet.</figcaption></figure></button>
-  <button data-style="g-editorial" data-type="subagent" data-title="G · Editorial Riso" data-desc="tinted pastel card with halftone overlay, blob icon panel, italic Instrument Serif." aria-label="View G · Editorial Riso full-size"><figure><img src="/img/cca-styles/style-g-editorial-subagent.png" alt="G · Editorial Riso (subagent)" /><figcaption>G · Editorial Riso — tinted pastel card with halftone overlay, blob icon panel, italic Instrument Serif.</figcaption></figure></button>
-  <button data-style="h-mondrian" data-type="slash-command" data-title="H · Mondriaan" data-desc="primaries on bright white with thick black grid lines drawn as gaps on black." aria-label="View H · Mondriaan full-size"><figure><img src="/img/cca-styles/style-h-mondrian-slash-command.png" alt="H · Mondriaan (slash command)" /><figcaption>H · Mondriaan — primaries on bright white with thick black grid lines drawn as gaps on black.</figcaption></figure></button>
-  <button data-style="i-nin" data-type="memory" data-title="I · NIN Industrial" data-desc="deep black with chromatic-aberration display titles, hazard chevrons, scratch noise." aria-label="View I · NIN Industrial full-size"><figure><img src="/img/cca-styles/style-i-nin.png" alt="I · NIN Industrial (memory)" /><figcaption>I · NIN Industrial — deep black with chromatic-aberration display titles, hazard chevrons, scratch noise.</figcaption></figure></button>
-  <button data-style="j-bladerunner" data-type="skill" data-title="J · Blade Runner" data-desc="smoky amber haze, per-type neon, CJK kanji watermark, ESPER icon panel." aria-label="View J · Blade Runner full-size"><figure><img src="/img/cca-styles/style-j-bladerunner-skill.png" alt="J · Blade Runner (skill)" /><figcaption>J · Blade Runner — smoky amber haze, per-type neon, CJK kanji watermark, ESPER icon panel.</figcaption></figure></button>
-  <button data-style="k-caravaggio" data-type="subagent" data-title="K · Caravaggio" data-desc="velvet-black tenebrism, single warm light, gilt-framed icon niche, Italian italics." aria-label="View K · Caravaggio full-size"><figure><img src="/img/cca-styles/style-k-caravaggio-subagent.png" alt="K · Caravaggio (subagent)" /><figcaption>K · Caravaggio — velvet-black tenebrism, single warm light, gilt-framed icon niche, Italian italics.</figcaption></figure></button>
-  <button data-style="l-vangogh" data-type="slash-command" data-title="L · Van Gogh" data-desc="each type as a painting (Starry Night, Sunflowers, Irises, Wheatfield), handwritten captions." aria-label="View L · Van Gogh full-size"><figure><img src="/img/cca-styles/style-l-vangogh-slash-command.png" alt="L · Van Gogh (slash command)" /><figcaption>L · Van Gogh — each type as a painting (Starry Night, Sunflowers, Irises, Wheatfield), handwritten captions.</figcaption></figure></button>
-  <button data-style="m-ukiyoe" data-type="memory" data-title="M · Ukiyo-e" data-desc="washi paper, woodblock motifs, vertical kanji, red hanko seals, Shippori Mincho." aria-label="View M · Ukiyo-e full-size"><figure><img src="/img/cca-styles/style-m-ukiyoe.png" alt="M · Ukiyo-e (memory)" /><figcaption>M · Ukiyo-e — washi paper, woodblock motifs, vertical kanji, red hanko seals, Shippori Mincho.</figcaption></figure></button>
-  <button data-style="n-miro" data-type="skill" data-title="N · Joan Miró · Constel·lacions" data-desc="cream paper, primary colours, biomorphic blob, Catalan titles." aria-label="View N · Joan Miró full-size"><figure><img src="/img/cca-styles/style-n-miro-skill.png" alt="N · Joan Miró (skill)" /><figcaption>N · Joan Miró · Constel·lacions — cream paper, primary colours, biomorphic blob, Catalan titles.</figcaption></figure></button>
-  <button data-style="o-picasso" data-type="subagent" data-title="O · Pablo Picasso · Cubismo" data-desc="fractured planes, mask-like glyph, period stamp, &ldquo;Picasso.&rdquo; signature." aria-label="View O · Pablo Picasso full-size"><figure><img src="/img/cca-styles/style-o-picasso-subagent.png" alt="O · Pablo Picasso (subagent)" /><figcaption>O · Pablo Picasso · Cubismo — fractured planes, mask-like glyph, period stamp, &ldquo;Picasso.&rdquo; signature.</figcaption></figure></button>
+  <button data-style="a-arcane" data-type="memory" data-title="A · Arcane Codex" data-desc="illuminated-manuscript framing, Cinzel serif, drop-cap medallion, Latin type-words." aria-label="View A · Arcane Codex full-size"><figure><img src="/img/cca-styles/style-a-arcane.avif" alt="A · Arcane Codex (memory)" loading="lazy" /><figcaption>A · Arcane Codex — illuminated-manuscript framing, Cinzel serif, drop-cap medallion, Latin type-words.</figcaption></figure></button>
+  <button data-style="b-holo" data-type="skill" data-title="B · Holo Foil ID" data-desc="cyberpunk security card with conic-gradient holo strip and hex-grid icon panel." aria-label="View B · Holo Foil ID full-size"><figure><img src="/img/cca-styles/style-b-holo-skill.avif" alt="B · Holo Foil ID (skill)" loading="lazy" /><figcaption>B · Holo Foil ID — cyberpunk security card with conic-gradient holo strip and hex-grid icon panel.</figcaption></figure></button>
+  <button data-style="c-gem" data-type="subagent" data-title="C · Hearthstone Gem" data-desc="painterly card, gem-socketed icon, ribbon banner across the top." aria-label="View C · Hearthstone Gem full-size"><figure><img src="/img/cca-styles/style-c-gem-subagent.avif" alt="C · Hearthstone Gem (subagent)" loading="lazy" /><figcaption>C · Hearthstone Gem — painterly card, gem-socketed icon, ribbon banner across the top.</figcaption></figure></button>
+  <button data-style="d-min" data-type="slash-command" data-title="D · Modern Minimalist" data-desc="white card, hairlines, thin-line geometric SVG glyphs, mono ID stamps." aria-label="View D · Modern Minimalist full-size"><figure><img src="/img/cca-styles/style-d-min-slash-command.avif" alt="D · Modern Minimalist (slash command)" loading="lazy" /><figcaption>D · Modern Minimalist — white card, hairlines, thin-line geometric SVG glyphs, mono ID stamps.</figcaption></figure></button>
+  <button data-style="e-max" data-type="memory" data-title="E · Modern Maximalist" data-desc="cream paper, saturated icon panel with circular wax seal, hard offset shadow." aria-label="View E · Modern Maximalist full-size"><figure><img src="/img/cca-styles/style-e-max.avif" alt="E · Modern Maximalist (memory)" loading="lazy" /><figcaption>E · Modern Maximalist — cream paper, saturated icon panel with circular wax seal, hard offset shadow.</figcaption></figure></button>
+  <button data-style="f-future" data-type="skill" data-title="F · Future Minimalist" data-desc="pastel gradient card, glassy thin borders, large radii, fintech-quiet." aria-label="View F · Future Minimalist full-size"><figure><img src="/img/cca-styles/style-f-future-skill.avif" alt="F · Future Minimalist (skill)" loading="lazy" /><figcaption>F · Future Minimalist — pastel gradient card, glassy thin borders, large radii, fintech-quiet.</figcaption></figure></button>
+  <button data-style="g-editorial" data-type="subagent" data-title="G · Editorial Riso" data-desc="tinted pastel card with halftone overlay, blob icon panel, italic Instrument Serif." aria-label="View G · Editorial Riso full-size"><figure><img src="/img/cca-styles/style-g-editorial-subagent.avif" alt="G · Editorial Riso (subagent)" loading="lazy" /><figcaption>G · Editorial Riso — tinted pastel card with halftone overlay, blob icon panel, italic Instrument Serif.</figcaption></figure></button>
+  <button data-style="h-mondrian" data-type="slash-command" data-title="H · Mondriaan" data-desc="primaries on bright white with thick black grid lines drawn as gaps on black." aria-label="View H · Mondriaan full-size"><figure><img src="/img/cca-styles/style-h-mondrian-slash-command.avif" alt="H · Mondriaan (slash command)" loading="lazy" /><figcaption>H · Mondriaan — primaries on bright white with thick black grid lines drawn as gaps on black.</figcaption></figure></button>
+  <button data-style="i-nin" data-type="memory" data-title="I · NIN Industrial" data-desc="deep black with chromatic-aberration display titles, hazard chevrons, scratch noise." aria-label="View I · NIN Industrial full-size"><figure><img src="/img/cca-styles/style-i-nin.avif" alt="I · NIN Industrial (memory)" loading="lazy" /><figcaption>I · NIN Industrial — deep black with chromatic-aberration display titles, hazard chevrons, scratch noise.</figcaption></figure></button>
+  <button data-style="j-bladerunner" data-type="skill" data-title="J · Blade Runner" data-desc="smoky amber haze, per-type neon, CJK kanji watermark, ESPER icon panel." aria-label="View J · Blade Runner full-size"><figure><img src="/img/cca-styles/style-j-bladerunner-skill.avif" alt="J · Blade Runner (skill)" loading="lazy" /><figcaption>J · Blade Runner — smoky amber haze, per-type neon, CJK kanji watermark, ESPER icon panel.</figcaption></figure></button>
+  <button data-style="k-caravaggio" data-type="subagent" data-title="K · Caravaggio" data-desc="velvet-black tenebrism, single warm light, gilt-framed icon niche, Italian italics." aria-label="View K · Caravaggio full-size"><figure><img src="/img/cca-styles/style-k-caravaggio-subagent.avif" alt="K · Caravaggio (subagent)" loading="lazy" /><figcaption>K · Caravaggio — velvet-black tenebrism, single warm light, gilt-framed icon niche, Italian italics.</figcaption></figure></button>
+  <button data-style="l-vangogh" data-type="slash-command" data-title="L · Van Gogh" data-desc="each type as a painting (Starry Night, Sunflowers, Irises, Wheatfield), handwritten captions." aria-label="View L · Van Gogh full-size"><figure><img src="/img/cca-styles/style-l-vangogh-slash-command.avif" alt="L · Van Gogh (slash command)" loading="lazy" /><figcaption>L · Van Gogh — each type as a painting (Starry Night, Sunflowers, Irises, Wheatfield), handwritten captions.</figcaption></figure></button>
+  <button data-style="m-ukiyoe" data-type="memory" data-title="M · Ukiyo-e" data-desc="washi paper, woodblock motifs, vertical kanji, red hanko seals, Shippori Mincho." aria-label="View M · Ukiyo-e full-size"><figure><img src="/img/cca-styles/style-m-ukiyoe.avif" alt="M · Ukiyo-e (memory)" loading="lazy" /><figcaption>M · Ukiyo-e — washi paper, woodblock motifs, vertical kanji, red hanko seals, Shippori Mincho.</figcaption></figure></button>
+  <button data-style="n-miro" data-type="skill" data-title="N · Joan Miró · Constel·lacions" data-desc="cream paper, primary colours, biomorphic blob, Catalan titles." aria-label="View N · Joan Miró full-size"><figure><img src="/img/cca-styles/style-n-miro-skill.avif" alt="N · Joan Miró (skill)" loading="lazy" /><figcaption>N · Joan Miró · Constel·lacions — cream paper, primary colours, biomorphic blob, Catalan titles.</figcaption></figure></button>
+  <button data-style="o-picasso" data-type="subagent" data-title="O · Pablo Picasso · Cubismo" data-desc="fractured planes, mask-like glyph, period stamp, &ldquo;Picasso.&rdquo; signature." aria-label="View O · Pablo Picasso full-size"><figure><img src="/img/cca-styles/style-o-picasso-subagent.avif" alt="O · Pablo Picasso (subagent)" loading="lazy" /><figcaption>O · Pablo Picasso · Cubismo — fractured planes, mask-like glyph, period stamp, &ldquo;Picasso.&rdquo; signature.</figcaption></figure></button>
 </div>
 
 <dialog id="fm-lightbox" aria-label="Style preview">
@@ -79,81 +79,7 @@ Below: each of the fifteen rendered against one of the four authoring formats. C
   <div class="fm-hint">← → style · ↑ ↓ format · Esc to close</div>
 </dialog>
 
-<script data-astro-rerun>
-  (function() {
-    const dlg = document.getElementById('fm-lightbox');
-    if (!dlg) return;
-    const img = dlg.querySelector('img');
-    const cap = dlg.querySelector('figcaption');
-    const closeBtn = dlg.querySelector('.fm-close');
-    const prevBtn = dlg.querySelector('.fm-prev');
-    const nextBtn = dlg.querySelector('.fm-next');
-    const upBtn = dlg.querySelector('.fm-up');
-    const downBtn = dlg.querySelector('.fm-down');
-    const buttons = Array.from(document.querySelectorAll('.fm-grid button[data-style]'));
-    const TYPES = ['memory', 'skill', 'subagent', 'slash-command'];
-    const TYPE_LABEL = { memory: 'memory', skill: 'skill', subagent: 'subagent', 'slash-command': 'slash command' };
-    let styleIdx = -1;
-    let typeIdx = 0;
-    let opener = null;
-
-    function urlFor(style, type, full) {
-      const suffix = full ? '-full' : '';
-      const typePart = type === 'memory' ? '' : `-${type}`;
-      return `/img/cca-styles/style-${style}${typePart}${suffix}.png`;
-    }
-
-    function render() {
-      if (styleIdx < 0) return;
-      const btn = buttons[styleIdx];
-      const style = btn.dataset.style;
-      const type = TYPES[typeIdx];
-      img.src = urlFor(style, type, true);
-      img.alt = `${btn.dataset.title} (${TYPE_LABEL[type]})`;
-      cap.textContent = `${btn.dataset.title} · ${TYPE_LABEL[type]} — ${btn.dataset.desc}`;
-      if (!dlg.open && typeof dlg.showModal === 'function') dlg.showModal();
-    }
-
-    function step(dStyle, dType) {
-      if (styleIdx < 0) return;
-      if (dStyle) styleIdx = (styleIdx + dStyle + buttons.length) % buttons.length;
-      if (dType) typeIdx = (typeIdx + dType + TYPES.length) % TYPES.length;
-      render();
-    }
-
-    buttons.forEach((btn, idx) => {
-      btn.addEventListener('click', () => {
-        opener = btn;
-        styleIdx = idx;
-        typeIdx = TYPES.indexOf(btn.dataset.type);
-        if (typeIdx < 0) typeIdx = 0;
-        render();
-      });
-    });
-    closeBtn.addEventListener('click', () => dlg.close());
-    prevBtn.addEventListener('click', () => step(-1, 0));
-    nextBtn.addEventListener('click', () => step(1, 0));
-    upBtn.addEventListener('click', () => step(0, -1));
-    downBtn.addEventListener('click', () => step(0, 1));
-
-    dlg.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1, 0); }
-      else if (e.key === 'ArrowRight') { e.preventDefault(); step(1, 0); }
-      else if (e.key === 'ArrowUp') { e.preventDefault(); step(0, -1); }
-      else if (e.key === 'ArrowDown') { e.preventDefault(); step(0, 1); }
-    });
-
-    dlg.addEventListener('click', (e) => {
-      if (e.target === dlg) dlg.close();
-    });
-
-    dlg.addEventListener('close', () => {
-      styleIdx = -1;
-      if (opener && typeof opener.focus === 'function') opener.focus();
-      img.removeAttribute('src');
-    });
-  })();
-</script>
+<script src="/cca-lightbox.js"></script>
 
 ## Where it lives
 
