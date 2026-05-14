@@ -253,17 +253,48 @@ Per SRC `CLAUDE.md` plan-verification format — keep numbered steps verbatim; b
    ```
    **FAIL (root cause: Free-plan API token cannot manage rulesets — same as the deleted www→apex ruleset).** Pivoted to `public/_headers`; `cache.tf` deleted in the fix-forward commit. The remaining verification steps target the `_headers`-based approach.
 
-6. **After `task tf-apply` + `task deploy`, edge serves long-TTL Cache-Control for `_astro/*` and `screenshots/*`.**
-   Pending — run after tf-apply + deploy.
+6. **After `task deploy`, edge serves long-TTL Cache-Control for `_astro/*` and `screenshots/*`.**
+   ```
+   --- /_astro/fonts/68c4c61e5cf389d9.woff2 (cold) ---
+   content-type: font/woff2
+   cf-cache-status: MISS
+   cache-control: public, max-age=31536000, immutable
+
+   --- /_astro/fonts/68c4c61e5cf389d9.woff2 (warm) ---
+   cf-cache-status: HIT
+   cache-control: public, max-age=31536000, immutable
+
+   --- /screenshots/splitledger/balances.avif ---
+   content-type: image/avif
+   cf-cache-status: HIT
+   cache-control: public, max-age=31536000, immutable
+   ```
+   **PASS** — both rule patterns return `public, max-age=31536000, immutable` exactly as written in `public/_headers`. Cold MISS → warm HIT confirms the edge is honoring the new TTL. (Note: `tf-apply` is N/A — pivoted to `_headers` per step 5; nothing to apply.)
 
 7. **HTML cache headers unaffected (short TTL preserved for deploy flush).**
-   Pending — run after tf-apply + deploy.
+   ```
+   --- https://indri.studio/ ---
+   content-type: text/html
+   cf-cache-status: HIT
+   cache-control: public, max-age=0, must-revalidate
+
+   --- https://indri.studio/colophon/ ---
+   content-type: text/html
+   cf-cache-status: HIT
+   cache-control: public, max-age=0, must-revalidate
+
+   --- https://indri.studio/apps/splitledger/ ---
+   content-type: text/html
+   cf-cache-status: HIT
+   cache-control: public, max-age=0, must-revalidate
+   ```
+   **PASS** — `max-age=0, must-revalidate` on all three. Edge caches the response but every client request revalidates, so deploys flush promptly. No `_headers` rule touched HTML, exactly as intended.
 
 8. **`task lighthouse` re-baseline: render-blocking + cache-TTL findings drop off, Perf scores hold ≥ 99.**
-   Pending — run after tf-apply + deploy.
+   Deferred per user request — to be run as a separate turn.
 
 9. **Markdown preview of the audit-doc Pass 4 section renders cleanly.**
-   Pending — section gets appended after Lighthouse re-baseline.
+   Deferred — section gets appended after the Lighthouse re-baseline lands.
 
 ## Out of scope
 
