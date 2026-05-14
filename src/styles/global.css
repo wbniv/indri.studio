@@ -114,7 +114,7 @@ html {
 	 * belt-and-suspenders. */
 	--font-display: var(--font-space-grotesk), system-ui, -apple-system, Segoe UI, sans-serif;
 	--font-body: var(--font-inter), system-ui, -apple-system, Segoe UI, sans-serif;
-	--font-mono: var(--font-space-grotesk), ui-monospace, SFMono-Regular, Menlo, monospace;
+	--font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 	--font-sans: var(--font-inter), system-ui, -apple-system, Segoe UI, sans-serif;
 
 	--text-headline-lg: 48px;
