@@ -71,22 +71,25 @@ const pathname = Astro.url.pathname;
 			// the anchor shift. Re-assert in rAF, mirroring the router's
 			// own logic, so we scroll *after* the override lands. Skip
 			// hash navigation — the browser owns that case.
+			//
+			// Both handlers registered once at init. pendingScroll carries
+			// intent from before-preparation → after-swap; registering
+			// after-swap inside before-preparation would accumulate
+			// listeners on rapid navigation (second nav fires before first
+			// after-swap runs), calling scrollTo twice with the same target.
+			let pendingScroll: { left: number; top: number } | null = null;
 			document.addEventListener("astro:before-preparation", (e) => {
 				const navType = (e as any).navigationType;
-				const target =
+				pendingScroll =
 					navType === "traverse"
 						? { left: history.state?.scrollX ?? 0, top: history.state?.scrollY ?? 0 }
 						: { left: 0, top: 0 };
-				document.addEventListener(
-					"astro:after-swap",
-					() => {
-						if (location.hash) return;
-						requestAnimationFrame(() =>
-							window.scrollTo({ ...target, behavior: "instant" }),
-						);
-					},
-					{ once: true },
-				);
+			});
+			document.addEventListener("astro:after-swap", () => {
+				if (!pendingScroll || location.hash) { pendingScroll = null; return; }
+				const target = pendingScroll;
+				pendingScroll = null;
+				requestAnimationFrame(() => window.scrollTo({ ...target, behavior: "instant" }));
 			});
 
 			// Scroll-shrink: --header-shrink ramps 0 → 1 as scrollY goes
