@@ -2,10 +2,10 @@
 
 > **Status (2026-05-13, after this audit):**
 > - **Items A, B, C** resolved in commit `7eb9b4c` (team-strip contrast, footer © opacity, Material Symbols off the critical render path).
-> - **Item D / Recommendations #4 + #5** (AVIF/WebP variants, explicit `width`/`height`) shipped in commit `abca262` per `docs/plans/2026-05-13-app-screenshot-image-optimization.md`. Site-wide payload 23 MB PNG → 3 MB AVIF (87% smaller); SplitLedger screenshots 105 KB → 20 KB (81% smaller). A fresh Lighthouse pass on production is still owed — track it as a new investigation note.
-> - **Recommendation #6 (cache-TTL bump) withdrawn** — long-immutable cache headers without a cache-busting plan would trap stale assets during active development. Revisit only when there's a content-hashing / versioning strategy in place.
-> - **Recommendation #7 (colophon `forced-reflow`)** shipped in commit landing 2026-05-13. Scroll-shrink script's first `update()` is now skipped entirely when `scrollY === 0` (CSS default already correct), and deferred via `requestIdleCallback` when scrollY > 0 (hash anchor case). Subsequent updates (scroll, resize, post-view-transition) keep the prompt rAF path so the cross-page header animation still fires immediately. Live re-audit owed.
-> - **Recommendation #8 (inline critical CSS)** plan written in commit `1115347` (`docs/plans/2026-05-13-inline-critical-css.md`); **implementation landed 2026-05-14** — `astro.config.mjs` now sets `build.inlineStylesheets: "always"`, every built page carries an inline `<style>` block, and no `<link rel="stylesheet" href="/_astro/*.css">` remains in `dist/`. Visual smoke confirmed (prod-vs-preview screenshots, all 4 routes × 2 viewports, pixel-identical). Pending prod verification + Lighthouse re-spot post-deploy.
+> - **Item D / Recommendations #4 + #5** (AVIF/WebP variants, explicit `width`/`height`) shipped in commit `abca262` per `docs/plans/2026-05-13-app-screenshot-image-optimization.md`. Site-wide payload 23 MB PNG → 3 MB AVIF (87% smaller); SplitLedger screenshots 105 KB → 20 KB (81% smaller). A fresh Lighthouse pass on production is still owed — track it as a new investigation note. **→ Pass 2 / Pass 3 / Pass 4 below ran the owed re-audits.**
+> - **Recommendation #6 (cache-TTL bump) withdrawn** — long-immutable cache headers without a cache-busting plan would trap stale assets during active development. Revisit only when there's a content-hashing / versioning strategy in place. **→ Pass 4 resolved this** via `public/_headers` route (not Terraform rulesets; Free-plan API token can't manage them). `_astro/*` + `screenshots/*` now serve `public, max-age=31536000, immutable` on prod; HTML stays short-TTL for deploy flush.
+> - **Recommendation #7 (colophon `forced-reflow`)** shipped in commit landing 2026-05-13. Scroll-shrink script's first `update()` is now skipped entirely when `scrollY === 0` (CSS default already correct), and deferred via `requestIdleCallback` when scrollY > 0 (hash anchor case). Subsequent updates (scroll, resize, post-view-transition) keep the prompt rAF path so the cross-page header animation still fires immediately. Live re-audit owed. **→ Pass 2 verified:** TBT 180 ms → 0 ms on colophon; all three pages now 0 ms TBT under `devtools` (Pass 3 + Pass 4).
+> - **Recommendation #8 (inline critical CSS)** plan written in commit `1115347` (`docs/plans/2026-05-13-inline-critical-css.md`); **implementation landed 2026-05-14** — `astro.config.mjs` now sets `build.inlineStylesheets: "always"`, every built page carries an inline `<style>` block, and no `<link rel="stylesheet" href="/_astro/*.css">` remains in `dist/`. Visual smoke confirmed (prod-vs-preview screenshots, all 4 routes × 2 viewports, pixel-identical). Pending prod verification + Lighthouse re-spot post-deploy. **→ Pass 4 verified on prod:** `_astro/Base.<hash>.css` no longer present in deployed HTML; `render-blocking-resources` audit returns `null` (n/a) on all 9 runs.
 > - **Pass 2 (2026-05-14)** run against the same three prod URLs as pass 1, post-`v0.1.24`. See [`## Pass 2 — 2026-05-14`](#pass-2--2026-05-14) below for new scores, Δ vs pass 1, and updated recommendation states. Headline findings: A11y hit 95 across the board (Recs A + B confirmed). SplitLedger Perf jumped 57 → 94 (Rec #4 AVIF/WebP confirmed). New CLS regression on all three pages traced to font/icon swap on hero content — a pass-3 candidate.
 > - **Pass 3 (2026-05-14)** runs the three Pass-2 URLs under all three Lighthouse throttling methods (`simulate`, `devtools`, `provided`) to resolve NEW #10. `devtools` chosen (summed Perf range 0 across 9 runs, vs 35 for `simulate`) and codified as `task lighthouse`. Re-baselined Perf 100 / 100 / 99, A11y 95 / 95 / 95, BP 100, SEO 100 — Phase-5 Lighthouse target met. Pass-2 CLS regression largely a `simulate` extrapolation artefact (home CLS 0.342 → 0.003 under `devtools`); NEW #9 reframed accordingly. See [`## Pass 3 — 2026-05-14`](#pass-3--2026-05-14-methodology-study--re-baseline).
 > - **Pass 4 (2026-05-14)** re-audits after the render-blocking + cache-TTL cleanup landed (self-hosted Space Grotesk + Inter via Astro Fonts API, Material Symbols lifted to per-page, `_astro/*` + `screenshots/*` pinned 1y immutable via `public/_headers`). Median Perf 100 / 100 / 100 (SplitLedger picked up the +1 to perfect). `render-blocking-resources` and `uses-long-cache-ttl` audits both go to `null` (n/a) on all 9 runs — the best possible outcome. Home FCP 1.5 s → 1.1 s; SplitLedger CLS 0.058 → 0. Third consecutive pass to clear the Phase-5 bar; no remaining gap to chase. See [`## Pass 4 — 2026-05-14`](#pass-4--2026-05-14-render-blocking--cache-ttl-cleanup).
@@ -301,6 +301,8 @@ Variants 2–4 pass cleanly. Variants 5 and 8 pass with caveats. None reads as t
 
 ## Cross-cutting issues (all three pages)
 
+> **Resolved by Pass 4 (2026-05-14).** Every item in this section was resolved by the render-blocking + cache-TTL cleanup. `render-blocking-resources` and `uses-long-cache-ttl` both return `null` (n/a) on all 9 production runs; `network-dependency-tree` follows as a consequence. See [`## Pass 4 — 2026-05-14`](#pass-4--2026-05-14-render-blocking--cache-ttl-cleanup) for per-fix verification. Pass-1 narrative below preserved as historical record.
+
 ### Render-blocking resources
 
 All three pages have the same three render-blocking requests in the critical path:
@@ -322,6 +324,8 @@ Cloudflare's default cache headers on the Worker static assets are likely shorte
 Each blocking request adds to the chain. Fixed by addressing the above two.
 
 ## Per-page findings
+
+> **Largely resolved by later passes (2026-05-14).** Findings below mix three categories: render-blocking and image-delivery items resolved by Pass 4 + Pass 2 (`#3`, `#4`, `#5`, `#6`, `#8`); team-strip + footer-opacity A11y items resolved in commit `7eb9b4c` (Items A + B + C in the status banner); colour-contrast on Phosphor `#B026FF` accepted as a brand trade in [`Why A11y stays at 95`](#why-a11y-stays-at-95-and-isnt-being-chased). See the per-Pass `Recommendation status` tables for item-by-item state.
 
 ### / (homepage)
 
@@ -368,6 +372,21 @@ The accessibility score of 95 is actually the highest of the three — the per-a
 
 ## Recommendations (priority order)
 
+> **Status as of Pass 4 (2026-05-14):**
+>
+> | # | Item | Status |
+> |---|---|---|
+> | 1 | Team-strip contrast | **resolved** (commit `7eb9b4c`, Items A/B/C) |
+> | 2 | Footer © opacity | **resolved** (commit `7eb9b4c`) |
+> | 3 | Material Symbols off the critical render path | **resolved** by Pass 4 (`<MaterialSymbols />` per-page component) |
+> | 4 | AVIF/WebP screenshot variants | **resolved** (commit `abca262`, verified Pass 2) |
+> | 5 | Explicit `width`/`height` on screenshot `<img>` | **resolved** (commit `abca262`, verified Pass 2) |
+> | 6 | Cloudflare cache TTL on `_astro/*` + `screenshots/*` | **resolved** by Pass 4 (`public/_headers` route) |
+> | 7 | Colophon `forced-reflow` | **resolved** (Pass 2 — TBT 180 ms → 0) |
+> | 8 | Inline critical CSS | **resolved** (commit `2db6163`; `inlineStylesheets: "always"`, Pass 4-verified) |
+>
+> All eight Pass-1 recommendations are resolved. Pass-1 prose below preserved as historical context.
+
 ### High impact, low effort
 
 1. **Fix the team-strip contrast** (homepage A11y +3 to 95). Either drop the placeholder founders entirely or change the role line's `text-primary-container` to a colour that clears 4.5:1 against the card surface. Quick win.
@@ -385,7 +404,9 @@ The accessibility score of 95 is actually the highest of the three — the per-a
 7. **Address the colophon `forced-reflow` warning** (Perf +5-8). Either gate the scroll-shrink script's first `update()` behind `requestIdleCallback`, or accept that 180 ms TBT is fine for the route's complexity.
 8. **Inline critical CSS** for the above-the-fold render and defer `Base.<hash>.css` (all pages FCP improvement). Astro can do this via `astro-critters` or hand-rolled approach.
 
-## Will pursuing all of these get to ≥ 95?
+## Will pursuing all of these get to ≥ 95? (Pass-1 speculation — answered "yes" by Pass 4)
+
+> **Answered: yes.** Three consecutive passes (Pass 2, Pass 3, Pass 4) have cleared the Phase-5 ≥ 95 bar across Perf / A11y / BP / SEO on all three sampled URLs. Pass 4 medians: Perf 100 / 100 / 100, A11y 95 / 95 / 95 (the brand-colour trade documented in [`Why A11y stays at 95`](#why-a11y-stays-at-95-and-isnt-being-chased)), BP 100 / 100 / 100, SEO 100 / 100 / 100. Speculative analysis below is Pass-1 era and preserved for historical context.
 
 Realistically, yes for Accessibility and Best Practices. For Performance:
 
