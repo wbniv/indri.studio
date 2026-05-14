@@ -5,6 +5,7 @@ summary: Build worlds, run games — anywhere.
 draft: false
 storeLinks:
   github: "#"
+logo: ../../assets/screenshots/world-foundry/logo.png
 screenshots:
   - { src: "../../assets/screenshots/world-foundry/blender-house.png", alt: "Blender → World Foundry roundtrip render" }
   - { src: "../../assets/screenshots/world-foundry/uv-seams.png", alt: "UV seam handling" }

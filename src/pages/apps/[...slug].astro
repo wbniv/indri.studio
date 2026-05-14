@@ -2,6 +2,7 @@
 import AppLayout from "../../layouts/AppLayout.astro";
 import StoreBadges from "../../components/StoreBadges.astro";
 import Screenshot from "../../components/Screenshot.astro";
+import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import lightboxUrl from "../../scripts/cca-lightbox.js?url";
@@ -98,6 +99,16 @@ const ogImage = post.data.screenshots[0]?.src.src
 						Launching Soon
 					</span>
 				</div>
+			)}
+
+			{post.data.logo && (
+				<Image
+					src={post.data.logo}
+					alt=""
+					class="mb-6"
+					loading="eager"
+					fetchpriority="high"
+				/>
 			)}
 
 			<h1 class="font-display text-headline-lg text-primary-container tracking-tighter mb-6">

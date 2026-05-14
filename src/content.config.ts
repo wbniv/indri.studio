@@ -29,6 +29,10 @@ const apps = defineCollection({
 		b2b: z.string().optional(),
 		// Pull an app out of the published list without deleting the file.
 		draft: z.boolean().default(false),
+		// Optional app logo rendered at natural size in the page header,
+		// above the title. Use for wordmarks/icons that are too small or
+		// wrong aspect ratio to work as screenshots.
+		logo: image().optional(),
 		// Screenshots rendered below the prose on the per-app landing page.
 		// Paths are relative to the markdown file — e.g.
 		// "../../assets/screenshots/splitledger/balances.png". `image()`
