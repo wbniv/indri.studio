@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indri contrast mockups — Phosphor purple on grey-700</title>
+<style>
+  :root {
+    --grey-900: #1A1815;
+    --grey-700: #3D3833;
+    --grey-200: #C8C0B8;
+    --grey-50: #F5F0E8;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--grey-900); color: var(--grey-50);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+  .page { max-width: 1100px; margin: 0 auto; padding: 32px 28px 80px; }
+  h1 { font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 700;
+       font-size: 28px; letter-spacing: -0.01em; margin: 0 0 6px; }
+  .lede { color: var(--grey-200); font-size: 14px; line-height: 1.5; max-width: 720px; margin: 0 0 28px; }
+  .legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: 12px; color: var(--grey-200); margin-bottom: 24px; }
+  .legend code { background: #2a2622; padding: 1px 6px; border-radius: 3px; color: var(--grey-50); }
+  .row { background: var(--grey-700); border-radius: 12px; padding: 24px 28px; margin-bottom: 14px;
+         display: grid; grid-template-columns: 1fr 220px; gap: 18px; align-items: center; }
+  .meta { font-size: 11px; color: var(--grey-200); text-align: right; line-height: 1.5; }
+  .meta b { color: var(--grey-50); font-weight: 600; }
+  .meta .label { font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 600;
+                 letter-spacing: 0.02em; text-transform: uppercase; font-size: 11px;
+                 color: var(--grey-50); display: block; margin-bottom: 6px; }
+  .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 2px; vertical-align: -2px;
+            margin-right: 4px; border: 1px solid rgba(255,255,255,.1); }
+  .hero { font-family: 'Space Grotesk', system-ui, sans-serif; font-weight: 700;
+          font-size: 60px; line-height: 0.9; letter-spacing: -0.02em; }
+  .hero .lead { color: var(--grey-50); }
+  .hero .accent { display: block; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px;
+          font-size: 12px; font-weight: 500; border-radius: 999px;
+          font-family: 'Space Grotesk', system-ui, sans-serif; letter-spacing: 0.08em;
+          text-transform: uppercase; margin-top: 14px; }
+  .badge { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 10px;
+           font-weight: 600; letter-spacing: 0.04em; font-family: 'Inter', system-ui, sans-serif; }
+  .pass { background: #1f7a3a; color: #e8ffe8; }
+  .fail { background: #6a1f1f; color: #ffe8e8; }
+  .borderline { background: #6a4a1f; color: #ffefcc; }
+  .ratio { font-size: 18px; font-weight: 700; color: var(--grey-50); }
+  .ratio.bad { color: #ff9a9a; }
+  .pair { font-size: 10px; color: var(--grey-200); margin-top: 6px; }
+  .pair code { background: #2a2622; padding: 1px 5px; border-radius: 2px; color: var(--grey-50);
+               font-size: 10px; }
+
+  /* per-variant accents */
+  .v-current .accent { color: #b026ff; }
+  .v-current .pill   { background: #483647; color: #b026ff; }
+
+  .v-bright .accent  { color: #d97aff; }
+  .v-bright .pill    { background: #483647; color: #d97aff; }
+
+  .v-fuchsia .accent { color: #e879f9; }
+  .v-fuchsia .pill   { background: #483647; color: #e879f9; }
+
+  .v-lavender .accent { color: #f0ccff; }
+  .v-lavender .pill   { background: #483647; color: #f0ccff; }
+
+  .v-stroke .accent {
+    color: #b026ff;
+    -webkit-text-stroke: 1.5px #f5f0e8;
+    paint-order: stroke fill;
+  }
+  .v-stroke .pill { background: #b026ff; color: #1a1815; }
+
+  .v-glow .accent {
+    color: #b026ff;
+    text-shadow: 0 0 14px rgba(176,38,255,0.65), 0 0 28px rgba(176,38,255,0.45);
+  }
+  .v-glow .pill { background: #483647; color: #b026ff;
+    text-shadow: 0 0 8px rgba(176,38,255,0.7); }
+
+  .v-reverse .accent { color: #b026ff; }
+  .v-reverse .pill   { background: #b026ff; color: #1a1815; font-weight: 700; }
+
+  .v-gradient .accent {
+    background: linear-gradient(180deg, #ffffff 0%, #d97aff 45%, #b026ff 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  .v-gradient .pill { background: #483647; color: #d97aff; }
+</style>
+</head>
+<body>
+<div class="page">
+<h1>Phosphor purple — contrast mockups</h1>
+<p class="lede">
+  The brand accent <code>#B026FF</code> on the card-surface grey
+  <code>#3D3833</code> ships at <b>2.52:1</b>, below WCAG AA's 3:1
+  (large text) and 4.5:1 (small text). This page renders eight options
+  on the actual card surface, with computed contrast ratios + WCAG
+  AA badges. Each row shows a Pass-4 failing context: hero accent word
+  (large) and the "LAUNCHING SOON" pill (12px → needs 4.5:1).
+</p>
+<div class="legend">
+  <span><span class="badge pass">AA-LG</span> ≥ 3:1 on large text (24px+ or 18.66px bold)</span>
+  <span><span class="badge pass">AA-SM</span> ≥ 4.5:1 on body text</span>
+  <span><span class="badge fail">FAIL</span> below threshold</span>
+</div>
+
+<div class="row v-current">
+  <div>
+    <div class="hero">
+      <span class="lead">INDRI</span>
+      <span class="accent">SOFTWARE</span>
+    </div>
+    <span class="pill" data-ctx="pill"><span aria-hidden="true">⏳</span> LAUNCHING SOON</span>
+  </div>
+  <div class="meta" data-fg="#b026ff" data-bg="#3d3833" data-fg-pill="#b026ff" data-bg-pill="#483647">
+    <span class="label">1 · Current (control)</span>
+    <span class="swatch" style="background:#b026ff"></span><code>#B026FF</code> on <code>#3D3833</code>
+    <div class="ratio bad">2.52:1</div>
+    <div class="pair">hero: <span class="badge fail">FAIL</span> · pill on #483647: <span class="badge fail">FAIL</span></div>
+  </div>
+</div>
+
+<div class="row v-bright">
+  <div>
+    <div class="hero">
+      <span class="lead">INDRI</span>
+      <span class="accent">SOFTWARE</span>
+    </div>
+    <span class="pill" data-ctx="pill"><span aria-hidden="true">⏳</span> LAUNCHING SOON</span>
+  </div>
+  <div class="meta" data-fg="#d97aff" data-bg="#3d3833" data-fg-pill="#d97aff" data-bg-pill="#483647">
+    <span class="label">2 · Brighter Phosphor</span>
+    <span class="swatch" style="background:#d97aff"></span><code>#D97AFF</code> on <code>#3D3833</code>
+    <div class="ratio">—</div>
+    <div class="pair">closest-cousin to Phosphor; still neon</div>
+  </div>
+</div>
+
+<div class="row v-fuchsia">
+  <div>
+    <div class="hero">
+      <span class="lead">INDRI</span>
+      <span class="accent">SOFTWARE</span>
+    </div>
+    <span class="pill" data-ctx="pill"><span aria-hidden="true">⏳</span> LAUNCHING SOON</span>
+  </div>
+  <div class="meta" data-fg="#e879f9" data-bg="#3d3833" data-fg-pill="#e879f9" data-bg-pill="#483647">
+    <span class="label">3 · Fuchsia-pink</span>
+    <span class="swatch" style="background:#e879f9"></span><code>#E879F9</code> on <code>#3D3833</code>
+    <div class="ratio">—</div>
+    <div class="pair">drifts toward magenta; loses "Phosphor"</div>
+  </div>
+</div>
+
+<div class="row v-lavender">
+  <div>
+    <div class="hero">
+      <span class="lead">INDRI</span>
+      <span class="accent">SOFTWARE</span>
+    </div>
+    <span class="pill" data-ctx="pill"><span aria-hidden="true">⏳</span> LAUNCHING SOON</span>
+  </div>
+  <div class="meta" data-fg="#f0ccff" data-bg="#3d3833" data-fg-pill="#f0ccff" data-bg-pill="#483647">
+    <span class="label">4 · Pale lavender</span>
+    <span class="swatch" style="background:#f0ccff"></span><code>#F0CCFF</code> on <code>#3D3833</code>
+    <div class="ratio">—</div>
+    <div class="pair">safest pass; quietest accent; loses neon</div>
+  </div>
+</div>
+
+<div class="row v-stroke">
+  <div>
+    <div class="hero">
+      <span class="lead">INDRI</span>
+      <span class="accent">SOFTWARE</span>
+    </div>
+    <span class="pill" data-ctx="pill"><span aria-hidden="true">⏳</span> LAUNCHING SOON</span>
+  </div>
+  <div class="meta" data-fg="#b026ff" data-bg="#3d3833" data-fg-pill="#1a1815" data-bg-pill="#b026ff">
+    <span class="label">5 · Outline / pill-invert</span>
+    <span class="swatch" style="background:#b026ff"></span> hero: cream stroke<br>
+    pill: <code>#1A1815</code> on <code>#B026FF</code>
+    <div class="ratio">—</div>
+    <div class="pair">stroke uses real text-stroke (Lighthouse may not score it)</div>
+  </div>
+</div>
+
+<div class="row v-glow">
+  <div>
+    <div class="hero">
+      <span class="lead">INDRI</span>
+      <span class="accent">SOFTWARE</span>
+    </div>
+    <span class="pill" data-ctx="pill"><span aria-hidden="true">⏳</span> LAUNCHING SOON</span>
+  </div>
+  <div class="meta" data-fg="#b026ff" data-bg="#3d3833" data-fg-pill="#b026ff" data-bg-pill="#483647">
+    <span class="label">6 · Neon glow halo</span>
+    <span class="swatch" style="background:#b026ff"></span><code>#B026FF</code> + glow
+    <div class="ratio bad">2.52:1</div>
+    <div class="pair">Lighthouse measures computed fg only — glow doesn't count</div>
+  </div>
+</div>
+
+<div class="row v-reverse">
+  <div>
+    <div class="hero">
+      <span class="lead">INDRI</span>
+      <span class="accent">SOFTWARE</span>
+    </div>
+    <span class="pill" data-ctx="pill"><span aria-hidden="true">⏳</span> LAUNCHING SOON</span>
+  </div>
+  <div class="meta" data-fg="#b026ff" data-bg="#3d3833" data-fg-pill="#1a1815" data-bg-pill="#b026ff">
+    <span class="label">7 · Pill-invert only</span>
+    Hero unchanged · pill: <code>#1A1815</code> on <code>#B026FF</code>
+    <div class="ratio">—</div>
+    <div class="pair">smallest-blast-radius fix: only the 12px pill</div>
+  </div>
+</div>
+
+<div class="row v-gradient">
+  <div>
+    <div class="hero">
+      <span class="lead">INDRI</span>
+      <span class="accent">SOFTWARE</span>
+    </div>
+    <span class="pill" data-ctx="pill"><span aria-hidden="true">⏳</span> LAUNCHING SOON</span>
+  </div>
+  <div class="meta" data-fg="#d97aff" data-bg="#3d3833" data-fg-pill="#d97aff" data-bg-pill="#483647">
+    <span class="label">8 · White→Phosphor gradient</span>
+    <span class="swatch" style="background:linear-gradient(180deg,#fff,#d97aff,#b026ff)"></span> hero gradient (white→purple); pill <code>#D97AFF</code>
+    <div class="ratio">—</div>
+    <div class="pair">axe samples one colour — top-of-gradient measured</div>
+  </div>
+</div>
+
+<script>
+  // WCAG 2.x contrast ratio
+  function srgbToLinear(v) {
+    v /= 255;
+    return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+  }
+  function relLum(hex) {
+    const h = hex.replace('#', '');
+    const r = parseInt(h.slice(0, 2), 16);
+    const g = parseInt(h.slice(2, 4), 16);
+    const b = parseInt(h.slice(4, 6), 16);
+    return 0.2126 * srgbToLinear(r) + 0.7152 * srgbToLinear(g) + 0.0722 * srgbToLinear(b);
+  }
+  function contrast(fg, bg) {
+    const l1 = relLum(fg), l2 = relLum(bg);
+    const [a, b] = l1 > l2 ? [l1, l2] : [l2, l1];
+    return (a + 0.05) / (b + 0.05);
+  }
+  function badge(ratio, threshold) {
+    if (ratio >= threshold) return '<span class="badge pass">PASS</span>';
+    if (ratio >= threshold * 0.9) return '<span class="badge borderline">CLOSE</span>';
+    return '<span class="badge fail">FAIL</span>';
+  }
+
+  document.querySelectorAll('.row .meta').forEach((meta) => {
+    const fg = meta.dataset.fg, bg = meta.dataset.bg;
+    const fgP = meta.dataset.fgPill, bgP = meta.dataset.bgPill;
+    if (!fg || !bg) return;
+    const rHero = contrast(fg, bg);
+    const rPill = contrast(fgP, bgP);
+    const ratioEl = meta.querySelector('.ratio');
+    const pairEl = meta.querySelector('.pair');
+    ratioEl.innerHTML = `hero ${rHero.toFixed(2)}:1 &nbsp;·&nbsp; pill ${rPill.toFixed(2)}:1`;
+    ratioEl.classList.toggle('bad', rHero < 3 || rPill < 4.5);
+    pairEl.innerHTML =
+      `hero ≥3:1 ${badge(rHero, 3)} &nbsp;·&nbsp; pill ≥4.5:1 ${badge(rPill, 4.5)}`;
+  });
+</script>
+</div>
+</body>
+</html>

@@ -280,11 +280,24 @@ Failing nodes across the sampled pages:
 - `/colophon/` — the hero accent word "COLOPHON".
 - `/apps/splitledger/` — the `<h1>SplitLedger</h1>` accent (uses `text-primary-container`); the "LAUNCHING SOON" pill (`<span class="pill-purple">`, 12 px → the 4.5:1 case).
 
-**Mockup study (2026-05-14, `/tmp/lh/contrast-mockups.html`).** Eight alternatives were rendered on the real `#3D3833` surface with the real type and live-computed contrast ratios: brighter Phosphor (`#D97AFF`), fuchsia-pink (`#E879F9`), pale lavender (`#F0CCFF`), cream text-stroke + white-on-purple pill, neon `text-shadow` glow, pill-only invert, and a white→Phosphor vertical gradient. Several pass AA cleanly. None of the passing variants read as the right brand colour — they either drift hue (fuchsia-pink), wash out (pale lavender), or kill the neon (anything that adds white). The "glow" path passes the eye but Lighthouse measures the computed foreground colour and ignores `text-shadow`, so it doesn't move the audit either.
+**Mockup study (2026-05-14).** Eight alternatives rendered on the real `#3D3833` card surface with the real Space Grotesk type and live-computed contrast ratios. Open [`contrast-mockups.html`](contrast-mockups.html) locally to interact with it — the page computes WCAG 2.x ratios in-browser and renders pass/fail badges; numbers in the table below are baked from that page.
+
+<img src="screenshots/2026-05-14-contrast-mockups.png" width="700" alt="Eight contrast variants of the Phosphor purple accent on the grey-700 card surface, each with its computed contrast ratio.">
+
+| # | Variant | Hero ratio | Pill ratio | AA-LG (≥3:1) | AA-SM (≥4.5:1) | Verdict |
+|---|---|---|---|---|---|---|
+| 1 | **Current** (`#B026FF`) | 2.52:1 | 2.52:1 | ❌ | ❌ | control — what Pass 4 flags |
+| 2 | **Brighter Phosphor** (`#D97AFF`) | 4.51:1 | 4.32:1 | ✓ | almost (CLOSE) | closest-cousin to neon Phosphor |
+| 3 | **Fuchsia-pink** (`#E879F9`) | 5.84:1 | 5.59:1 | ✓ | ✓ | drifts to magenta; loses "Phosphor" |
+| 4 | **Pale lavender** (`#F0CCFF`) | 8.16:1 | 7.81:1 | ✓ | ✓ | safest pass; washes out the neon |
+| 5 | **Outline + pill-invert** | hero 2.52:1 + cream stroke; pill 9.30:1 (`#1A1815` on `#B026FF`) | — | hero: stroke not scored by Lighthouse; pill: ✓ | pill: ✓ | hero look survives; pill solved cleanly |
+| 6 | **Neon glow halo** | 2.52:1 | 2.52:1 | ❌ | ❌ | passes the eye; `text-shadow` ignored by audit |
+| 7 | **Pill-invert only** | 2.52:1 (unchanged) | 9.30:1 | hero ❌; pill ✓ | hero ❌; pill ✓ | smallest blast radius — fixes pill only |
+| 8 | **White→Phosphor gradient** | top 9.30:1 / mid 4.51:1 (axe samples one colour) | 4.51:1 | likely ✓ | likely ✓ | striking but introduces white into hero word |
+
+Variants 2–4 pass cleanly. Variants 5 and 8 pass with caveats. None reads as the right brand colour: 2 is the brand-cousin but already loses some "Phosphor" snap, 3 drifts to fuchsia, 4 is too washed-out for an accent, 5 introduces a stroke treatment that doesn't exist anywhere else in the brand system, 6 doesn't actually move the audit, 7 leaves the hero failing, 8 puts white into the hero word.
 
 **Decision: keep `#B026FF`; accept A11y 95.** The Phosphor accent on grey-700 is the brand. The audit deduction is a known, documented trade-off, not an oversight. Phase-5's ≥ 95 bar is met across every category on every sampled page. If a future audit surfaces an A11y deduction *outside* this colour pair, address it on its own merits; do not reopen the brand-colour question without a designed pair of "brand at full saturation" vs "brand at AA" tokens.
-
-(The mockup HTML is throwaway scratch under `/tmp/`; not committed.)
 
 ## Cross-cutting issues (all three pages)
 
