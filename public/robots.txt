@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /lh/
+
+Sitemap: https://indri.studio/sitemap-index.xml

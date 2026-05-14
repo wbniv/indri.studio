@@ -58,7 +58,12 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Wait for Cloudflare propagation
-        run: sleep 30
+        # Poll until the site responds (typically 1–5 s). Cap at 60 s so a
+        # broken deploy doesn't hang CI indefinitely.
+        timeout-minutes: 1
+        run: |
+          set -euo pipefail
+          until curl -sf https://indri.studio/ -o /dev/null; do sleep 3; done
 
       - name: Lighthouse audit
         id: lh

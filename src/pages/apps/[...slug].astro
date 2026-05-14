@@ -143,16 +143,21 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 		};
 
 		document.addEventListener('astro:before-preparation', () => {
-			if (pendingDir) document.documentElement.dataset.navDir = pendingDir;
+			// Re-assert the pending direction (Astro's swap nukes <html> attrs).
+			// Also clear any stale direction from the *previous* navigation so a
+			// rapid prev→next→prev sequence never applies the wrong slide.
+			if (pendingDir) {
+				document.documentElement.dataset.navDir = pendingDir;
+			} else {
+				delete document.documentElement.dataset.navDir;
+			}
 		});
 		document.addEventListener('astro:after-swap', () => {
 			if (pendingDir) document.documentElement.dataset.navDir = pendingDir;
 		});
 		document.addEventListener('astro:page-load', () => {
-			setTimeout(() => {
-				delete document.documentElement.dataset.navDir;
-				pendingDir = null;
-			}, 400);
+			pendingDir = null;
+			delete document.documentElement.dataset.navDir;
 		});
 
 		// Delegated; capture phase so we set data-nav-dir before

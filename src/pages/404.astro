@@ -75,26 +75,5 @@ import lemur from "../assets/lemur.png";
 			font-size: 16px;
 			line-height: 1;
 		}
-
-		/* Subtle idle motion on the lemur — barely-there breathe + sway so
-		   he doesn't read as a flat sticker. Asymmetric keyframes for
-		   organic pacing. Origin near the base so the upper body wobbles
-		   around a planted bottom. Disabled under reduced-motion. */
-		.lemur-idle {
-			transform-origin: 50% 92%;
-			animation: lemur-idle 7s ease-in-out infinite;
-			will-change: transform;
-		}
-		@keyframes lemur-idle {
-			0%   { transform: translateY(0)    rotate(-0.6deg) scale(1.000); }
-			22%  { transform: translateY(-2px) rotate(0.3deg)  scale(1.010); }
-			46%  { transform: translateY(0)    rotate(0.9deg)  scale(1.000); }
-			64%  { transform: translateY(-3px) rotate(0.2deg)  scale(1.014); }
-			82%  { transform: translateY(-1px) rotate(-0.5deg) scale(1.006); }
-			100% { transform: translateY(0)    rotate(-0.6deg) scale(1.000); }
-		}
-		@media (prefers-reduced-motion: reduce) {
-			.lemur-idle { animation: none; }
-		}
 	</style>
 </Base>

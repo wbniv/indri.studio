@@ -22,6 +22,18 @@ export default {
     if (ct.includes("text/html")) {
       const headers = new Headers(response.headers);
       headers.set("Cache-Control", "no-store");
+      // Permissive CSP. 'unsafe-inline' is required because Astro inlines
+      // all stylesheets (build.inlineStylesheets: "always") and uses an
+      // inline <script is:inline> in Base.astro. Blocks third-party script
+      // injection while allowing the self-hosted font + icon stack.
+      headers.set(
+        "Content-Security-Policy",
+        "default-src 'self'; " +
+        "font-src 'self' fonts.gstatic.com; " +
+        "style-src 'self' 'unsafe-inline' fonts.googleapis.com; " +
+        "script-src 'self' 'unsafe-inline'; " +
+        "img-src 'self' data:"
+      );
       return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
     }
     return response;

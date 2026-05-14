@@ -11,9 +11,11 @@ interface Props {
 	 * front; off for per-app pages so each app's own visual identity has
 	 * room. AppLayout passes `ringFlare={false}`. */
 	ringFlare?: boolean;
+	ogImage?: string;
+	ogType?: string;
 }
 
-const { title, description = "indri.studio — small studio, building apps people use every day.", ringFlare = true } = Astro.props;
+const { title, description = "indri.studio — small studio, building apps people use every day.", ringFlare = true, ogImage, ogType } = Astro.props;
 
 const siteTitle = "indri";
 const fullTitle = title === siteTitle ? siteTitle : `${title} · ${siteTitle}`;
@@ -28,6 +30,13 @@ const pathname = Astro.url.pathname;
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
+		<link rel="canonical" href={Astro.url.href.replace("www.", "")} />
+		<meta property="og:title" content={fullTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content={ogType ?? "website"} />
+		<meta property="og:url" content={Astro.url.href} />
+		{ogImage && <meta property="og:image" content={ogImage} />}
+		<meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
