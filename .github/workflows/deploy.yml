@@ -67,12 +67,22 @@ jobs:
           RUNS: '1'
         run: task lighthouse
 
+      # Stage to a workspace-relative path so the resulting artifact zip
+      # has flat filenames — `actions/upload-artifact@v4` preserves
+      # absolute paths by default, which trips `gh run download`'s
+      # path-traversal guard on the consumer side.
+      - name: Stage Lighthouse artifacts
+        if: steps.lh.outcome == 'success'
+        run: |
+          mkdir -p lighthouse-bundle
+          cp /tmp/lh/latest/*.json lighthouse-bundle/
+
       - name: Upload Lighthouse bundle
         if: steps.lh.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
           name: lighthouse-${{ github.ref_name }}
-          path: /tmp/lh/latest/*.json
+          path: lighthouse-bundle/*.json
           retention-days: 90
 
       - name: Lighthouse summary
