@@ -102,7 +102,6 @@ Explicitly deferred in the plans, acknowledged in CLAUDE.md, not lost. Listed he
 |------|--------------|--------|
 | Per-app theming (`AppLayout`, theme tokens from frontmatter) | `CLAUDE.md §"Per-app theming"`, `self-host-fonts.md §"Out of scope"` | Planned, not wired — needs `AppLayout.astro` + schema fields |
 | Store-badge SVG `public/img/store-badges/*.svg` through asset pipeline | `asset-pipeline-cache-busting.md §"Out of scope"` | No urgency; SVGs are stable |
-| Per-app `platforms` enum population in frontmatter | `initial-buildout.md §"apps schema"` | Schema field exists; no app has data yet |
 | `StripedGridMotion.astro` re-use | `code-review.md D6`, shelved to `attic/` | Component preserved locally; wire back if striped hero bands are wanted |
 
 ---
