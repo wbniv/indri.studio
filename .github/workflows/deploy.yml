@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write   # write so the per-tag archive step can commit-back to main
 
 # Queue deploys so two near-simultaneous tag pushes don't race each other
 # into the Workers API. We don't cancel in-progress deploys — letting one
@@ -93,10 +93,11 @@ jobs:
             echo
             echo "| Page | Perf | FCP | LCP | TBT | CLS |"
             echo "|---|---:|---:|---:|---:|---:|"
-            for SLUG in home colophon splitledger; do
-              jq -r --arg slug "$SLUG" '
+            for f in lighthouse-bundle/*.run-1.report.json; do
+              slug=$(basename "$f" .run-1.report.json)
+              jq -r --arg slug "$slug" '
                 "| \($slug) | \((.categories.performance.score*100)|round) | \(.audits["first-contentful-paint"].displayValue) | \(.audits["largest-contentful-paint"].displayValue) | \(.audits["total-blocking-time"].displayValue) | \(.audits["cumulative-layout-shift"].displayValue) |"
-              ' /tmp/lh/latest/${SLUG}.run-1.report.json
+              ' "$f"
             done
           } >> $GITHUB_STEP_SUMMARY
 
@@ -122,9 +123,9 @@ jobs:
             echo
             echo "| Page | CLS | Status |"
             echo "|---|---:|:---:|"
-            for SLUG in home colophon splitledger; do
-              CLS=$(jq -r '.audits["cumulative-layout-shift"].numericValue' \
-                /tmp/lh/latest/${SLUG}.run-1.report.json)
+            for f in /tmp/lh/latest/*.run-1.report.json; do
+              SLUG=$(basename "$f" .run-1.report.json)
+              CLS=$(jq -r '.audits["cumulative-layout-shift"].numericValue' "$f")
               STATUS=$(awk -v c="$CLS" -v b="$CLS_BUDGET" \
                 'BEGIN { print (c+0 <= b+0) ? "✓ OK" : "⚠️ OVER" }')
               printf "| %s | %.4f | %s |\n" "$SLUG" "$CLS" "$STATUS"
@@ -137,3 +138,47 @@ jobs:
             echo "::warning::$violations page(s) over CLS budget ${CLS_BUDGET}; see job summary."
             exit 1
           fi
+
+      # Phase-5 threshold gate. Fails the workflow (no continue-on-error)
+      # if any sampled page drops below Perf / A11y / BP / SEO ≥ 95. The
+      # Cloudflare deploy step already ran before Lighthouse, so a red
+      # threshold check doesn't block the ship — it surfaces the
+      # regression as a failed workflow visible in the Actions UI and on
+      # the next PR's merge view. Aligns with the "regression guard"
+      # principle from ~/SRC/CLAUDE.md. See
+      # docs/plans/2026-05-14-lighthouse-pass-5.md §"Part C".
+      - name: Phase-5 threshold check
+        if: steps.lh.outcome == 'success'
+        run: ./scripts/lighthouse-threshold.sh
+
+      # Per-tag durable archive. Copies the run-1 JSONs to
+      # public/lh/<tag>/, commits back to main with [skip ci]. Astro's
+      # next build auto-copies public/ → dist/, so the bundle serves at
+      # https://indri.studio/lh/<tag>/<slug>.run-1.report.json on the
+      # next deploy. NOT gated on threshold success — archiving a
+      # *failed* audit is especially valuable as evidence of what
+      # regressed. workflow_dispatch runs (no tag) skip this step. See
+      # docs/plans/2026-05-14-lighthouse-pass-5.md §"Part A".
+      - name: Archive Lighthouse bundle to main
+        if: |
+          steps.lh.outcome == 'success' &&
+          startsWith(github.ref, 'refs/tags/v')
+        run: |
+          set -euo pipefail
+          TAG=${{ github.ref_name }}
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+          # Switch from the detached-HEAD tag checkout to a fresh main.
+          # JSONs live at /tmp/lh/latest/ — outside the workspace, so
+          # they survive the branch switch.
+          git fetch origin main
+          git checkout -B main origin/main
+
+          mkdir -p "public/lh/$TAG"
+          cp /tmp/lh/latest/*.run-1.report.json "public/lh/$TAG/"
+
+          git add "public/lh/$TAG/"
+          git commit -m "CI: archive Lighthouse bundle for $TAG [skip ci]"
+          git push origin main

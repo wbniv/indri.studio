@@ -1,14 +1,62 @@
 # Lighthouse audit — 2026-05-13 (post-v0.1.13)
 
-> **Status (2026-05-13, after this audit):**
-> - **Items A, B, C** resolved in commit `7eb9b4c` (team-strip contrast, footer © opacity, Material Symbols off the critical render path).
-> - **Item D / Recommendations #4 + #5** (AVIF/WebP variants, explicit `width`/`height`) shipped in commit `abca262` per `docs/plans/2026-05-13-app-screenshot-image-optimization.md`. Site-wide payload 23 MB PNG → 3 MB AVIF (87% smaller); SplitLedger screenshots 105 KB → 20 KB (81% smaller). A fresh Lighthouse pass on production is still owed — track it as a new investigation note. **→ Pass 2 / Pass 3 / Pass 4 below ran the owed re-audits.**
-> - **Recommendation #6 (cache-TTL bump) withdrawn** — long-immutable cache headers without a cache-busting plan would trap stale assets during active development. Revisit only when there's a content-hashing / versioning strategy in place. **→ Pass 4 resolved this** via `public/_headers` route (not Terraform rulesets; Free-plan API token can't manage them). `_astro/*` + `screenshots/*` now serve `public, max-age=31536000, immutable` on prod; HTML stays short-TTL for deploy flush.
-> - **Recommendation #7 (colophon `forced-reflow`)** shipped in commit landing 2026-05-13. Scroll-shrink script's first `update()` is now skipped entirely when `scrollY === 0` (CSS default already correct), and deferred via `requestIdleCallback` when scrollY > 0 (hash anchor case). Subsequent updates (scroll, resize, post-view-transition) keep the prompt rAF path so the cross-page header animation still fires immediately. Live re-audit owed. **→ Pass 2 verified:** TBT 180 ms → 0 ms on colophon; all three pages now 0 ms TBT under `devtools` (Pass 3 + Pass 4).
-> - **Recommendation #8 (inline critical CSS)** plan written in commit `1115347` (`docs/plans/2026-05-13-inline-critical-css.md`); **implementation landed 2026-05-14** — `astro.config.mjs` now sets `build.inlineStylesheets: "always"`, every built page carries an inline `<style>` block, and no `<link rel="stylesheet" href="/_astro/*.css">` remains in `dist/`. Visual smoke confirmed (prod-vs-preview screenshots, all 4 routes × 2 viewports, pixel-identical). Pending prod verification + Lighthouse re-spot post-deploy. **→ Pass 4 verified on prod:** `_astro/Base.<hash>.css` no longer present in deployed HTML; `render-blocking-resources` audit returns `null` (n/a) on all 9 runs.
-> - **Pass 2 (2026-05-14)** run against the same three prod URLs as pass 1, post-`v0.1.24`. See [`## Pass 2 — 2026-05-14`](#pass-2--2026-05-14) below for new scores, Δ vs pass 1, and updated recommendation states. Headline findings: A11y hit 95 across the board (Recs A + B confirmed). SplitLedger Perf jumped 57 → 94 (Rec #4 AVIF/WebP confirmed). New CLS regression on all three pages traced to font/icon swap on hero content — a pass-3 candidate.
-> - **Pass 3 (2026-05-14)** runs the three Pass-2 URLs under all three Lighthouse throttling methods (`simulate`, `devtools`, `provided`) to resolve NEW #10. `devtools` chosen (summed Perf range 0 across 9 runs, vs 35 for `simulate`) and codified as `task lighthouse`. Re-baselined Perf 100 / 100 / 99, A11y 95 / 95 / 95, BP 100, SEO 100 — Phase-5 Lighthouse target met. Pass-2 CLS regression largely a `simulate` extrapolation artefact (home CLS 0.342 → 0.003 under `devtools`); NEW #9 reframed accordingly. See [`## Pass 3 — 2026-05-14`](#pass-3--2026-05-14-methodology-study--re-baseline).
-> - **Pass 4 (2026-05-14)** re-audits after the render-blocking + cache-TTL cleanup landed (self-hosted Space Grotesk + Inter via Astro Fonts API, Material Symbols lifted to per-page, `_astro/*` + `screenshots/*` pinned 1y immutable via `public/_headers`). Median Perf 100 / 100 / 100 (SplitLedger picked up the +1 to perfect). `render-blocking-resources` and `uses-long-cache-ttl` audits both go to `null` (n/a) on all 9 runs — the best possible outcome. Home FCP 1.5 s → 1.1 s; SplitLedger CLS 0.058 → 0. Third consecutive pass to clear the Phase-5 bar; no remaining gap to chase. See [`## Pass 4 — 2026-05-14`](#pass-4--2026-05-14-render-blocking--cache-ttl-cleanup).
+## Summary (current state, post-Pass 5, 2026-05-14)
+
+**Phase-5 Lighthouse target met on 8 of 10 sampled pages.** Pass 5 extended sampling from the canonical three to every routable page (home + colophon + all 8 app pages). The broader sample surfaced two LCP-bound regressions on prose-light app pages — pages where the screenshot grid lands inside the mobile viewport and dominates LCP timing. All Pass-1-through-4 recommendations carry forward as resolved.
+
+### Final scores (Pass 5 — full-site sample, 1 run/URL `devtools`)
+
+| Page | Performance | Accessibility | Best Practices | SEO |
+|---|---|---|---|---|
+| [/](https://indri.studio/) | **100** ✓ | **95** ✓ | **100** ✓ | **100** ✓ |
+| [/colophon/](https://indri.studio/colophon/) | **99** ✓ | **95** ✓ | **100** ✓ | **100** ✓ |
+| [/apps/blender-asset-searcher/](https://indri.studio/apps/blender-asset-searcher/) | **100** ✓ | **96** ✓ | **100** ✓ | **100** ✓ |
+| [/apps/claude-code-authoring-formats/](https://indri.studio/apps/claude-code-authoring-formats/) | **100** ✓ | **96** ✓ | **100** ✓ | **100** ✓ |
+| [/apps/finding-your-way/](https://indri.studio/apps/finding-your-way/) | **96** ✓ | **95** ✓ | **100** ✓ | **100** ✓ |
+| [/apps/gustos-colores/](https://indri.studio/apps/gustos-colores/) | **91** ✗ | **95** ✓ | **100** ✓ | **100** ✓ |
+| [/apps/parking-space/](https://indri.studio/apps/parking-space/) | **94** ✗ | **95** ✓ | **100** ✓ | **100** ✓ |
+| [/apps/pinball-construction-set/](https://indri.studio/apps/pinball-construction-set/) | **99** ✓ | **96** ✓ | **100** ✓ | **100** ✓ |
+| [/apps/splitledger/](https://indri.studio/apps/splitledger/) | **100** ✓ | **95** ✓ | **100** ✓ | **100** ✓ |
+| [/apps/world-foundry/](https://indri.studio/apps/world-foundry/) | **100** ✓ | **95** ✓ | **96** ✓ | **100** ✓ |
+
+The two ✗ pages both fail on Perf — gustos-colores LCP 3.5 s, parking-space LCP 3.0 s — caused by the screenshot grid landing inside the 823 px mobile viewport on intro-light pages. Detail in [Pass 5](#pass-5--2026-05-14-full-site-sampling).
+
+### Recommendation status — all resolved
+
+| # | Item | Shipped in | Confirmed by |
+|---|---|---|---|
+| 1 | Team-strip contrast | commit `7eb9b4c` | Pass 2 (A11y 92 → 95) |
+| 2 | Footer © opacity | commit `7eb9b4c` | Pass 2 (A11y +1 all pages) |
+| 3 | Material Symbols off critical render path | Pass 4 (`<MaterialSymbols />` per-page) | Pass 4 (`render-blocking-resources` → n/a) |
+| 4 | AVIF/WebP screenshot variants | commit `abca262` | Pass 2 (SplitLedger LCP 8.3 s → 1.7 s) |
+| 5 | Explicit `width`/`height` on screenshot `<img>` | commit `abca262` | Pass 2 |
+| 6 | Long cache TTL on `_astro/*` + `screenshots/*` | Pass 4 (`public/_headers` route) | Pass 4 (`uses-long-cache-ttl` → n/a) |
+| 7 | Colophon forced-reflow | commit `e526d2e` | Pass 2 (TBT 180 ms → 0) |
+| 8 | Inline critical CSS | commit `2db6163` (`inlineStylesheets: "always"`) | Pass 4 (no `_astro/*.css` in prod HTML) |
+| NEW #9 | Hero CLS from font/icon swap | — | Pass 3 (artefact of `simulate`; real CLS ≤ 0.058) |
+| NEW #10 | Lighthouse methodology jitter | `task lighthouse` codified | Pass 3 (`devtools` summed range 0 vs `simulate` 35) |
+
+### Remaining action items
+
+- **Resolve Pass-5 LCP regressions** on gustos-colores (Perf 91) and parking-space (Perf 94). Root cause: short app intros let the screenshot grid land inside the mobile viewport, making it the LCP element; the first AVIF then bottlenecks initial paint. Fix path under construction in [docs/plans/2026-05-14-asset-pipeline-cache-busting.md](../plans/2026-05-14-asset-pipeline-cache-busting.md) (migration of screenshots to Astro's `image()` content-collection schema with content-hashed AVIF/WebP + sharper compression). Once that lands, re-audit and confirm ≥ 95.
+- **Phase-5 threshold gate** now active in `.github/workflows/deploy.yml` — workflow turns red on any page < 95 until the regressions above are fixed. Intentional regression-guard, not a deploy blocker (Lighthouse runs *after* the Cloudflare deploy in the workflow).
+- Tighten splitledger CLS further (currently 0 under `devtools`, so this is purely defensive against future regressions).
+
+### A11y stays at 95 by design
+
+The only weighted A11y deduction is the Phosphor neon `#B026FF` accent on the `#3D3833` card surface at 2.52:1 — below WCAG AA. An 8-variant mockup study chose to keep the brand colour rather than wash it out for the audit; rationale and the alternatives considered in [`Why A11y stays at 95`](#why-a11y-stays-at-95-and-isnt-being-chased).
+
+---
+
+## Pass-by-pass changelog
+
+> Compact timeline; full per-pass detail in the sections below.
+
+- **Pass 1 (2026-05-13, post-`v0.1.13`)** — baseline. Perf 86 / 85 / 57, A11y 92 / 93 / 95. Identified Recs #1–#8.
+- **Pass 2 (2026-05-14, post-`v0.1.24`)** — A11y to 95 across the board (Recs A/B). SplitLedger Perf 57 → 94 (Rec #4 AVIF/WebP). Colophon TBT 180 ms → 0 (Rec #7). Studio-page Perf swings (42/73/40 on home) traced to `simulate`-throttling extrapolation jitter; opened NEW #10. New CLS regression on hero opened NEW #9.
+- **Pass 3 (2026-05-14)** — 27-cell methodology study (3 methods × 3 URLs × 3 runs). `devtools` summed Perf range 0 vs `simulate` 35; codified as `task lighthouse`. Under `devtools`: Perf 100 / 100 / 99, A11y 95, BP 100, SEO 100 — Phase-5 target met. NEW #9 resolved as `simulate` artefact (real CLS home 0.003, colophon 0, splitledger 0.058).
+- **Pass 4 (2026-05-14, post-`v0.1.25`)** — render-blocking + cache-TTL cleanup. Self-hosted Space Grotesk + Inter via Astro Fonts API, Material Symbols per-page, `_astro/*` + `screenshots/*` pinned 1y immutable via `public/_headers`. Median Perf 100 / 100 / 100. `render-blocking-resources` and `uses-long-cache-ttl` both go to `null` (n/a) on all 9 runs.
+- **Pass 5 (2026-05-14)** — full-site sampling. `Taskfile.yml`'s `lighthouse:` task now auto-enumerates every routable page (home + colophon + all 8 app pages); CI workflow gains a `Phase-5 threshold check` step (reds on any score < 95) + per-tag `public/lh/<tag>/` durable archive. Phase-5 ≥ 95 holds on 8 of 10 pages; gustos-colores 91 + parking-space 94 fail with sub-fold screenshot-grid LCP. Pass-5 baseline archived at [https://indri.studio/lh/pass5-baseline/](https://indri.studio/lh/pass5-baseline/).
 
 ## Context
 
@@ -298,6 +346,66 @@ Failing nodes across the sampled pages:
 Variants 2–4 pass cleanly. Variants 5 and 8 pass with caveats. None reads as the right brand colour: 2 is the brand-cousin but already loses some "Phosphor" snap, 3 drifts to fuchsia, 4 is too washed-out for an accent, 5 introduces a stroke treatment that doesn't exist anywhere else in the brand system, 6 doesn't actually move the audit, 7 leaves the hero failing, 8 puts white into the hero word.
 
 **Decision: keep `#B026FF`; accept A11y 95.** The Phosphor accent on grey-700 is the brand. The audit deduction is a known, documented trade-off, not an oversight. Phase-5's ≥ 95 bar is met across every category on every sampled page. If a future audit surfaces an A11y deduction *outside* this colour pair, address it on its own merits; do not reopen the brand-colour question without a designed pair of "brand at full saturation" vs "brand at AA" tokens.
+
+## Pass 5 — 2026-05-14 (full-site sampling)
+
+First audit run against every routable production page rather than the three Pass-1 representatives. `Taskfile.yml`'s `lighthouse:` task now auto-enumerates `/`, `/colophon/`, and every entry under `src/content/apps/*.md` — adding/removing an app extends/shrinks the sampled set with no Taskfile edit. CI workflow gained a `Phase-5 threshold check` step that reds the workflow on any score < 95, plus a per-tag durable archive at `public/lh/<tag>/`. Same Lighthouse 13.3.0 / `--throttling-method=devtools` / mobile form factor / `RUNS=1` as Pass 4.
+
+Pass-5 baseline JSONs committed at `public/lh/pass5-baseline/`; served at [https://indri.studio/lh/pass5-baseline/](https://indri.studio/lh/pass5-baseline/) on the next deploy.
+
+### Category scores
+
+| Page | Performance | Accessibility | Best Practices | SEO |
+|---|---|---|---|---|
+| [/](https://indri.studio/) | **100** ✓ | **95** ✓ | 100 ✓ | 100 ✓ |
+| [/colophon/](https://indri.studio/colophon/) | **99** ✓ | **95** ✓ | 100 ✓ | 100 ✓ |
+| [/apps/blender-asset-searcher/](https://indri.studio/apps/blender-asset-searcher/) | **100** ✓ | **96** ✓ | 100 ✓ | 100 ✓ |
+| [/apps/claude-code-authoring-formats/](https://indri.studio/apps/claude-code-authoring-formats/) | **100** ✓ | **96** ✓ | 100 ✓ | 100 ✓ |
+| [/apps/finding-your-way/](https://indri.studio/apps/finding-your-way/) | **96** ✓ | **95** ✓ | 100 ✓ | 100 ✓ |
+| [/apps/gustos-colores/](https://indri.studio/apps/gustos-colores/) | **91** ❌ | **95** ✓ | 100 ✓ | 100 ✓ |
+| [/apps/parking-space/](https://indri.studio/apps/parking-space/) | **94** ❌ | **95** ✓ | 100 ✓ | 100 ✓ |
+| [/apps/pinball-construction-set/](https://indri.studio/apps/pinball-construction-set/) | **99** ✓ | **96** ✓ | 100 ✓ | 100 ✓ |
+| [/apps/splitledger/](https://indri.studio/apps/splitledger/) | **100** ✓ | **95** ✓ | 100 ✓ | 100 ✓ |
+| [/apps/world-foundry/](https://indri.studio/apps/world-foundry/) | **100** ✓ | **95** ✓ | 96 ✓ | 100 ✓ |
+
+### Core Web Vitals
+
+| Page | FCP | LCP | SI | TBT | CLS |
+|---|---|---|---|---|---|
+| / | 1.1 s ✓ | 1.1 s ✓ | 1.4 s ✓ | 20 ms ✓ | 0.003 ✓ |
+| /colophon/ | 1.6 s ✓ | 1.6 s ✓ | 1.9 s ✓ | 0 ms ✓ | 0 ✓ |
+| /apps/blender-asset-searcher/ | 1.1 s ✓ | 1.1 s ✓ | 1.4 s ✓ | 0 ms ✓ | 0 ✓ |
+| /apps/claude-code-authoring-formats/ | 1.1 s ✓ | 1.1 s ✓ | 1.4 s ✓ | 0 ms ✓ | 0 ✓ |
+| /apps/finding-your-way/ | 1.3 s ✓ | **2.8 s** ❌ | 1.6 s ✓ | 0 ms ✓ | 0 ✓ |
+| /apps/gustos-colores/ | 1.3 s ✓ | **3.5 s** ❌ | 1.7 s ✓ | 0 ms ✓ | 0 ✓ |
+| /apps/parking-space/ | 1.1 s ✓ | **3.0 s** ❌ | 1.9 s ✓ | 0 ms ✓ | 0 ✓ |
+| /apps/pinball-construction-set/ | 1.6 s ✓ | 1.6 s ✓ | 1.9 s ✓ | 0 ms ✓ | 0 ✓ |
+| /apps/splitledger/ | 1.1 s ✓ | 1.1 s ✓ | 1.9 s ✓ | 0 ms ✓ | 0 ✓ |
+| /apps/world-foundry/ | 1.3 s ✓ | 1.3 s ✓ | 1.8 s ✓ | 0 ms ✓ | 0 ✓ |
+
+LCP target: < 2.5 s. Three pages exceed it. Note finding-your-way at 2.8 s clears the **Phase-5 ≥ 95 Perf score** despite missing the CWV target — LCP weighting is 25% of Perf, so 2.8 s docks ~4 points (Perf 96, still passing). gustos-colores at 3.5 s and parking-space at 3.0 s dock enough to push Perf below 95.
+
+### Notable findings
+
+**Sub-fold screenshot grid dominates LCP on prose-light pages.** The mobile Lighthouse viewport is 412 × 823 px. On app pages with short intros (gustos-colores: "Tap to fill. Save your work. Sync across all your devices via Google Drive."), the screenshot grid's top edge lands inside that viewport. The first screenshot then becomes the LCP element, and its lazy-load AVIF (60–90 KB under slow-4G throttling) takes 2.3–3 s to download. The same pages would clear ≥ 95 on desktop or with longer intros — they're penalized for the combination of (a) viewport-relative LCP candidacy + (b) lazy-load delay + (c) throttled bandwidth.
+
+Pages where the screenshot grid lands *below* the 823 px fold — splitledger (longer intro), pinball-construction-set, blender-asset-searcher, etc. — pick a different LCP element (usually hero text) and score 100.
+
+**Tried + reverted: `loading="eager"` on the first screenshot.** Hypothesis was that eager-loading would let Chromium fetch the AVIF during initial HTML parse, dropping the resourceLoadDelay component of LCP. In practice it saved nothing on gustos-colores (LCP 3.5 s → 3.5 s — the AVIF download itself is the bottleneck, not the request timing) AND tanked claude-code-authoring-formats from 100 → 61 (page with 124 screenshots; eager-loading the first forced an unfortunate network ordering). Reverted in the same change.
+
+**`task lighthouse` jitter higher than Pass 3 indicated.** Pass 3 established `devtools` summed-Perf-range 0 across 9 runs. Pass 5 saw transient outliers — `home` swung 100 → 55 in one run with TTFB 15.7 s, then back to 100 next run. Cloudflare PoP propagation / regional network variance during back-to-back audits is the likely cause. Scores reported here are from the second clean run after one outlier was discarded; CI's `RUNS=1` accepts that this level of jitter occasionally appears, with the threshold gate's red-on-fail behaviour catching anything genuinely regressed across two runs.
+
+### Recommendation status after Pass 5
+
+| ID | Item | Status |
+|---|---|---|
+| **NEW #11** | Sub-fold screenshot grid LCP on prose-light app pages | Tracked in [docs/plans/2026-05-14-asset-pipeline-cache-busting.md](../plans/2026-05-14-asset-pipeline-cache-busting.md) — migration of screenshots to Astro's `image()` content-collection schema with content-hashed AVIF/WebP + tighter compression. Expected to drop LCP image transfer below 1 s on slow-4G, clearing all three borderline pages. |
+
+Pass-1-through-4 recommendations (1–8 + NEW #9/#10) all carry forward as resolved.
+
+### Why not lower the threshold below 95?
+
+The threshold gate in `.github/workflows/deploy.yml` fails the workflow if any score drops below 95. With gustos-colores at 91 and parking-space at 94, every deploy will turn the workflow red until the asset-pipeline refactor lands. Intentional — failing loudly is the regression-guard principle from [`~/SRC/CLAUDE.md`](../../../CLAUDE.md). Lowering to 90 would silence the alert at the cost of accepting a degraded user experience. Better to surface the work clearly. The Cloudflare deploy still ships (the audit runs *after* the deploy), so the red workflow is a follow-up signal, not a release blocker.
 
 ## Cross-cutting issues (all three pages)
 
