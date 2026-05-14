@@ -66,7 +66,7 @@ Below: each of the fifteen rendered against one of the four authoring formats. C
   <button data-style="o-picasso" data-type="subagent" data-title="O · Pablo Picasso · Cubismo" data-desc="fractured planes, mask-like glyph, period stamp, &ldquo;Picasso.&rdquo; signature." aria-label="View O · Pablo Picasso full-size"><figure><img src="/img/cca-styles/style-o-picasso-subagent.avif" alt="O · Pablo Picasso (subagent)" loading="lazy" /><figcaption>O · Pablo Picasso · Cubismo — fractured planes, mask-like glyph, period stamp, &ldquo;Picasso.&rdquo; signature.</figcaption></figure></button>
 </div>
 
-<dialog id="fm-lightbox" aria-label="Style preview">
+<dialog id="fm-lightbox" aria-label="Style preview" aria-modal="true">
   <button class="fm-nav fm-up" type="button" aria-label="Previous authoring format">▲</button>
   <button class="fm-nav fm-prev" type="button" aria-label="Previous style">‹</button>
   <button class="fm-nav fm-next" type="button" aria-label="Next style">›</button>
