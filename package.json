@@ -17,6 +17,7 @@
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.4",
     "rehype-external-links": "^3.0.0",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4.2.4",
     "wrangler": "^4.84.1"
   }
