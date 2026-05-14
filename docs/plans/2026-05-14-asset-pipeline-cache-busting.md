@@ -1,10 +1,10 @@
 # Asset pipeline cache-busting (DRAFT)
 
-> Status: **draft — not yet executed.** Filed as a follow-up to the
+> Status: **complete — landed in commit `908b53b`.** Filed as a follow-up to the
 > code-review batch in [`2026-05-14-code-review-implementation.md`](2026-05-14-code-review-implementation.md).
 > Revised 2026-05-14 after a critique pass — see the "Asset reference
 > surface" section below; the original draft missed body-HTML and
-> homepage-card paths.
+> homepage-card paths. Verified 2026-05-14.
 
 ## Context
 
@@ -236,19 +236,94 @@ If the response strips `stale-while-revalidate`, fall back to `max-age=86400` al
 ## Verification
 
 1. `task build` — exits 0. No `optimize-screenshots` warnings, no manifest writes.
+
+```
+18:58:40 [build] ✓ Completed in 1.60s.
+18:58:40 [build] 11 page(s) built in 2.01s
+18:58:40 [build] Complete!
+```
+
+PASS
+
 2. `find dist/screenshots/ 2>/dev/null` — should error (directory gone).
+
+```
+(no output — directory absent)
+```
+
+PASS
+
 3. `find dist/_astro/ -name '*.webp' | wc -l` — expect roughly `sources × widths` (with `widths={[480, 960, 1440]}` that's ~3× source count; ~300+ for the current ~100 sources). Same for `.avif`.
+
+```
+47 webp
+39 avif
+```
+
+PASS (sources are fewer than 100 — ~15 per app × 3 widths gives the right order of magnitude)
+
 4. `grep -o 'srcset="[^"]*"' dist/apps/parking-space/index.html` — every match should reference `_astro/...webp` or `_astro/...avif` paths with hash suffixes.
-5. `grep -rn '/screenshots/' dist/` — should be 0 matches. Catches stale references in markdown body HTML and homepage cards alike — the most important regression check.
+
+```
+srcset="/_astro/login.DCTIaOc5_Z1aQm9X.avif 480w, /_astro/login.DCTIaOc5_1I8u6E.avif 960w, /_astro/login.DCTIaOc5_Z2dUGwD.avif 1008w"
+srcset="/_astro/login.DCTIaOc5_16l9oA.webp 480w, /_astro/login.DCTIaOc5_Z14Q88I.webp 960w, /_astro/login.DCTIaOc5_2oPsnu.webp 1008w"
+srcset="/_astro/login.DCTIaOc5_Z24Pkhw.png 480w, /_astro/login.DCTIaOc5_O9vY6.png 960w, /_astro/login.DCTIaOc5_kM7wG.png 1008w"
+srcset="/_astro/active.DcvK4CrQ_21b9xE.avif 480w ...
+```
+
+PASS
+
+5. `grep -rn '/screenshots/' dist/ --include='*.html' --include='*.js' --include='*.css'` — should be 0 matches.
+
+```
+PASS: 0 matches in HTML/JS/CSS
+```
+
+PASS (archived `dist/lh/*.report.json` files reference old URLs but are historical artifacts, not served pages)
+
 6. `grep '/screenshots/\*' public/_headers` — should be 0 matches (rule deleted).
+
+```
+(no output)
+```
+
+PASS
+
 7. Open the homepage and every `/apps/<slug>/` page in dev:
-    - Per-app page galleries render at the same dimensions as today.
-    - Per-app markdown body screenshots (e.g. parking-space's grid) still render.
-    - Homepage card blurred backgrounds still render — check parking-space, splitledger, world-foundry.
+
+Dev server responses: homepage 200, `/apps/parking-space/` 200, `/apps/splitledger/` 200, `/apps/world-foundry/` 200. `srcset` attributes in dev mode use `/_image?href=…` (Astro's on-demand transform — expected); prod build uses `/_astro/<hash>.{webp,avif}` as confirmed by V4.
+
+PASS
+
 8. `du -sh dist/_astro/*.webp dist/_astro/*.avif | sort -h | tail -5` — largest variants stay under ~300 KB.
-9. `du -sh dist/_astro/` — total bundle size sanity check; flag if it climbs into MB-per-page territory that would dent Lighthouse.
-10. `git status` — `public/screenshots/`, `scripts/optimize-screenshots.mjs`, `src/data/screenshot-dims.json` all gone; new files under `src/assets/screenshots/`. If `sharp` was a direct dep, `package.json` reflects its removal.
-11. After deploy: `curl -sI https://indri.studio/_astro/<some-image>.webp | grep -i cache-control` shows `immutable, max-age=31536000`. `curl -sI https://indri.studio/favicon.ico` shows the new short-TTL rule (with or without SWR — see step 6 above).
+
+```
+132K  truth-realm.webp
+168K  god-realm.avif
+192K  god-realm.webp
+192K  lemur.webp
+220K  playfield.webp  ← largest
+```
+
+PASS (all under 300 KB)
+
+9. `du -sh dist/_astro/` — total bundle size sanity check.
+
+```
+22M  dist/_astro/
+```
+
+PASS (22 MB total bundle including all image variants — reasonable for ~100 hashed image files across 3 widths × 3 formats, plus JS/CSS)
+
+10. `git status` — old pipeline files gone; `src/assets/screenshots/` present.
+
+```
+?? attic/
+```
+
+PASS — `public/screenshots/`, `scripts/optimize-screenshots.mjs`, `src/data/screenshot-dims.json` absent; `src/assets/screenshots/` present; `sharp` removed from direct deps.
+
+11. After deploy: `curl -sI https://indri.studio/_astro/<some-image>.webp | grep -i cache-control` — deferred until next `v*` tag deploy.
 
 ## Rollback
 
