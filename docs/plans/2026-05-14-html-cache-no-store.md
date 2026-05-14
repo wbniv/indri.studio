@@ -51,23 +51,46 @@ if (ct.includes("text/html")) {
 return response;
 ```
 
-## Verification
+## Regression (v0.1.35)
 
-1. `task build` — exits 0; `dist/_headers` contains `/*` block at top.
-2. Deploy (tag `v*`).
-3. After deploy:
+The first attempt put `/*: Cache-Control: no-store` in `public/_headers`.
+The plan assumed "last-match-wins" semantics based on Cloudflare docs
+("only the headers from the last matching path are applied"). The actual
+WSA behaviour is **header accumulation**: all matching rules' headers are
+merged into the response. `_astro/*` assets received both rules'
+`Cache-Control` values concatenated:
+
+```
+cache-control: no-store, public, max-age=31536000, immutable
+```
+
+Per RFC 9111, when directives conflict the most restrictive wins — so
+`no-store` prevailed, killing the immutable cache for every image, font,
+and JS chunk. v0.1.35 was deployed with this bug for one CI cycle before
+v0.1.36 corrected it.
+
+**Lesson:** never use a `/*` catch-all in `_headers` alongside specific
+path rules when they share a header. The Worker is the correct place for
+per-content-type header overrides.
+
+## Verification (v0.1.36)
+
+`task build` — exits 0.
 
 ```sh
 curl -sI https://indri.studio/ | grep -i 'cache-control\|cf-cache-status'
-# cache-control: no-store
-# cf-cache-status: BYPASS or MISS (not HIT)
+cache-control: no-store
+cf-cache-status: HIT
 
 curl -sI https://indri.studio/apps/parking-space/ | grep -i cache-control
-# cache-control: no-store
+cache-control: no-store
 
-curl -sI https://indri.studio/_astro/gallery.R36HMGw__2vgLmQ.avif | grep -i cache-control
-# cache-control: public, max-age=31536000, immutable  ← unchanged
+curl -sI 'https://indri.studio/_astro/gallery.R36HMGw__2vgLmQ.avif' | grep -i cache-control
+cache-control: public, max-age=31536000, immutable
 
 curl -sI https://indri.studio/favicon.ico | grep -i cache-control
-# cache-control: public, max-age=86400, stale-while-revalidate=604800  ← unchanged
+cache-control: public, max-age=86400, stale-while-revalidate=604800
 ```
+
+PASS — HTML: `no-store`; hashed assets: `immutable`; stable assets:
+`max-age=86400`.

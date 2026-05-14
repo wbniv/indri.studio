@@ -4,6 +4,7 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 ## Done
 
+- [x] **2026-05-14** HTML cache: `no-store` via Worker (content-type check); `_headers` merges rules so `/*` catch-all broke `_astro/*` immutable cache in v0.1.35, corrected in v0.1.36 — [plan](docs/plans/2026-05-14-html-cache-no-store.md)
 - [x] **2026-05-14** Fix gustos-colores LCP: eager-load first screenshot (`loading="eager"` + `fetchpriority="high"`); 94 → 96 on CI, Phase-5 threshold gate green on v0.1.34
 - [x] **2026-05-14** Lighthouse pass 5 — 10-page sampling, per-tag prod archive at `/lh/<tag>/`, Phase-5 threshold gate (≥ 95); fixed gustos-colores 94→96 (font-display swap + 720w Screenshot breakpoint) on v0.1.33 — [plan](docs/plans/2026-05-14-lighthouse-pass-5.md)
 - [x] **2026-05-14** Defensive CLS hardening: Material Symbols 1em slot + CI CLS-budget check (≤ 0.05); Perf 100/100/100, CLS 0/0/0.003; CI green on v0.1.28 — [plan](docs/plans/2026-05-14-cls-defensive-hardening.md)
