@@ -13,17 +13,32 @@
 
 # Astro content-hashes every filename in _astro/* (the manifest URL
 # changes any time the contents change). Safe to mark immutable for
-# a year — clients never need to revalidate.
+# a year — clients never need to revalidate. App screenshots now
+# ride this rule too: src/assets/screenshots/* sources flow through
+# Astro's image pipeline to /_astro/<name>.<hash>.{webp,avif}. See
+# docs/plans/2026-05-14-asset-pipeline-cache-busting.md.
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
 
-# App screenshots aren't content-hashed yet (raw public/ files with
-# stable URLs), so `immutable` would lie — a year-old cached entry
-# would never revalidate after an in-place replacement. Interim:
-# 1-day TTL — trades a few KB of revalidation bandwidth for
-# correctness. The follow-up plan at
-# docs/plans/2026-05-14-asset-pipeline-cache-busting.md migrates
-# screenshots into src/assets/ so they ship hashed under _astro/*
-# and this rule can be deleted entirely.
-/screenshots/*
-  Cache-Control: public, max-age=86400
+# Stable-URL-by-convention files (browser, PWA, search-engine spec,
+# plus the claude-code-authoring-formats style demo PNGs whose
+# filenames encode style+type and are referenced from JS-built
+# template literals — can't be hashed). Short max-age plus
+# stale-while-revalidate lets in-place updates propagate within a
+# day without ever paying a cold fetch on revalidate. Verify SWR is
+# honored by Workers Static Assets via:
+#   curl -sI https://indri.studio/favicon.ico | grep -i cache-control
+# If the response strips `stale-while-revalidate`, no harm done —
+# max-age alone is still in effect.
+/favicon.ico
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/favicon.svg
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/apple-touch-icon.png
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/icon-*.png
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/site.webmanifest
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/img/cca-styles/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800

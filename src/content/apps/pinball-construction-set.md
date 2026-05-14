@@ -8,8 +8,8 @@ storeLinks:
   googlePlay: "#"
   steam: "#"
 cardImages:
-  - { src: "/screenshots/pinball-construction-set/playfield.jpg", alt: "Williams Earthshaker playfield — public domain reference" }
-  - { src: "/screenshots/pinball-construction-set/playfield-detail.jpg", alt: "Williams High Speed playfield detail — public domain reference" }
+  - { src: "../../assets/screenshots/pinball-construction-set/playfield.jpg", alt: "Williams Earthshaker playfield — public domain reference" }
+  - { src: "../../assets/screenshots/pinball-construction-set/playfield-detail.jpg", alt: "Williams High Speed playfield detail — public domain reference" }
 ---
 
 A cross-platform construction set for pinball: drag in flippers, slingshots, bumpers, and ramps; the physics simulator runs live as you build. Save your tables locally, share them, play them.

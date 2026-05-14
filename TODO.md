@@ -2,6 +2,7 @@
 
 Low-priority tasks that aren't blocking but shouldn't be lost.
 
+- [ ] **2026-05-14** Asset pipeline migration — replace roll-your-own `optimize-screenshots.mjs` with Astro's native asset pipeline. Hashed `_astro/*` URLs inherit immutable-1y cache. CCA style screenshots stay in `public/img/cca-styles/` (JS-built paths, stable-by-convention) — [plan](docs/plans/2026-05-14-asset-pipeline-cache-busting.md)
 - [verify] **2026-05-14** Defensive CLS hardening — reserve Material Symbols icon box at 1em globally; add CLS-budget alert (≤ 0.05) to post-deploy CI Lighthouse step. Local: Perf 100/100/100, CLS 0.003/0/0. CI summary table verifies on next `v*` tag — [plan](docs/plans/2026-05-14-cls-defensive-hardening.md)
 - [verify] **2026-05-14** Lighthouse pass 5 — full-site sampling (10 routable pages), per-tag prod archive at `/lh/<tag>/`, Phase-5 threshold gate (≥ 95) reds workflow on regression. parking-space/gustos-colores image-delivery fixes shipped alongside — [plan](docs/plans/2026-05-14-lighthouse-pass-5.md)
 

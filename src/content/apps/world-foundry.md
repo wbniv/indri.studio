@@ -6,9 +6,9 @@ draft: false
 storeLinks:
   github: "#"
 screenshots:
-  - { src: "/screenshots/world-foundry/logo.png", alt: "World Foundry logo" }
-  - { src: "/screenshots/world-foundry/blender-house.png", alt: "Blender → World Foundry roundtrip render" }
-  - { src: "/screenshots/world-foundry/uv-seams.png", alt: "UV seam handling" }
+  - { src: "../../assets/screenshots/world-foundry/logo.png", alt: "World Foundry logo" }
+  - { src: "../../assets/screenshots/world-foundry/blender-house.png", alt: "Blender → World Foundry roundtrip render" }
+  - { src: "../../assets/screenshots/world-foundry/uv-seams.png", alt: "UV seam handling" }
 ---
 
 A 3D game engine plus a growing catalogue of games. Forth-scripted levels, Jolt physics, open asset pipeline.

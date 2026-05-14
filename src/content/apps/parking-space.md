@@ -8,18 +8,15 @@ storeLinks:
   appStore: "#"
   googlePlay: "#"
 screenshots:
-  - { src: "/screenshots/parking-space/history.png", alt: "Payment history" }
-  - { src: "/screenshots/parking-space/operator.png", alt: "Operator view" }
+  - { src: "../../assets/screenshots/parking-space/login.png", alt: "Login screen" }
+  - { src: "../../assets/screenshots/parking-space/active.png", alt: "Active parking session" }
+  - { src: "../../assets/screenshots/parking-space/history.png", alt: "Payment history" }
+  - { src: "../../assets/screenshots/parking-space/operator.png", alt: "Operator view" }
 ---
 
 Motorbike parking the way it should be — a 30-second transaction, no booth, no cash, no envelope.
 
 Currently operating in Thailand.
-
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2.5rem 0;">
-  <img src="/screenshots/parking-space/login.png" alt="Login screen" style="margin: 0; max-width: 100%; height: auto;" />
-  <img src="/screenshots/parking-space/active.png" alt="Active parking session" style="margin: 0; max-width: 100%; height: auto;" />
-</div>
 
 ## Your unused space is income
 

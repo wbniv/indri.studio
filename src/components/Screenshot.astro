@@ -1,42 +1,34 @@
 ---
-// <picture>-based renderer for app screenshots. Serves AVIF to browsers
-// that accept it, WebP next, falls back to the original PNG/JPG. Reads
-// intrinsic dimensions from src/data/screenshot-dims.json — populated by
-// scripts/optimize-screenshots.mjs (chained into `task build` via deps).
-// Explicit width/height eliminates CLS while the image loads.
-import dims from "../data/screenshot-dims.json";
+// AVIF/WebP-serving <picture> via Astro's native asset pipeline.
+// `src` is an ImageMetadata resolved by the content collection's
+// image() schema helper — Astro emits hashed _astro/* derivatives
+// at build time and writes intrinsic width/height on the <img>
+// fallback so layout is reserved before the image loads.
+//
+// widths is bounded to three sizes (phone / desktop / desktop-2x)
+// to keep the variant count predictable; default Astro responsive
+// widths would produce 6+ sizes × 2 formats per source.
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
 
 interface Props {
-	src: string;
+	src: ImageMetadata;
 	alt?: string;
 	loading?: "lazy" | "eager";
 	class?: string;
 }
 
 const { src, alt = "", loading = "lazy", class: className = "block w-full h-auto" } = Astro.props;
-
-const stem = src.replace(/\.(png|jpe?g)$/i, "");
-const avif = `${stem}.avif`;
-const webp = `${stem}.webp`;
-
-const dim = (dims as Record<string, { width: number; height: number }>)[src];
-if (!dim) {
-	throw new Error(
-		`Screenshot.astro: no dimensions for "${src}" in src/data/screenshot-dims.json. Run \`task screenshots\` to regenerate the manifest.`,
-	);
-}
 ---
 
-<picture>
-	<source srcset={avif} type="image/avif" />
-	<source srcset={webp} type="image/webp" />
-	<img
-		src={src}
-		alt={alt}
-		width={dim.width}
-		height={dim.height}
-		loading={loading}
-		decoding="async"
-		class={className}
-	/>
-</picture>
+<Picture
+	src={src}
+	alt={alt}
+	formats={["avif", "webp"]}
+	widths={[480, 960, 1440]}
+	sizes="(min-width: 768px) 50vw, 100vw"
+	loading={loading}
+	fetchpriority={loading === "eager" ? "high" : undefined}
+	decoding="async"
+	class={className}
+/>

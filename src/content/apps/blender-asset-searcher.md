@@ -6,7 +6,7 @@ draft: false
 storeLinks:
   blenderExtensions: "#"
 screenshots:
-  - { src: "/screenshots/blender-asset-searcher/gallery.png", alt: "Searching across four providers — Poly Haven CC0-1.0 result selected, OpenGameArt results carry a lower-trust marker" }
+  - { src: "../../assets/screenshots/blender-asset-searcher/gallery.png", alt: "Searching across four providers — Poly Haven CC0-1.0 result selected, OpenGameArt results carry a lower-trust marker" }
 ---
 
 A [Blender](https://www.blender.org/) sidebar panel that searches licensed 3D assets across multiple online providers and records the **provenance** of everything you import — where it came from, who made it, under what terms, and what attribution you owe.

@@ -14,7 +14,7 @@ import { glob } from "astro/loaders";
 
 const apps = defineCollection({
 	loader: glob({ pattern: "**/*.md", base: "./src/content/apps" }),
-	schema: z.object({
+	schema: ({ image }) => z.object({
 		title: z.string(),
 		// Any JS-parseable date string in the frontmatter becomes a Date.
 		// Drives the "Launching Soon" pill on per-app pages when in the
@@ -30,13 +30,14 @@ const apps = defineCollection({
 		// Pull an app out of the published list without deleting the file.
 		draft: z.boolean().default(false),
 		// Screenshots rendered below the prose on the per-app landing page.
-		// Paths are relative to /public — e.g. "/screenshots/splitledger/balances.png".
-		// shape-aware framing (phone/tablet/console) is future work; for now
-		// images render at their native aspect ratio inside a grid.
+		// Paths are relative to the markdown file — e.g.
+		// "../../assets/screenshots/splitledger/balances.png". `image()`
+		// resolves them to ImageMetadata objects that Astro's <Picture>
+		// hashes + derives AVIF/WebP variants from at build time.
 		screenshots: z
 			.array(
 				z.object({
-					src: z.string(),
+					src: image(),
 					alt: z.string().optional(),
 				}),
 			)
@@ -48,7 +49,7 @@ const apps = defineCollection({
 		cardImages: z
 			.array(
 				z.object({
-					src: z.string(),
+					src: image(),
 					alt: z.string().optional(),
 				}),
 			)

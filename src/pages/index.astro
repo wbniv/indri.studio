@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import MaterialSymbols from "../components/MaterialSymbols.astro";
 import PlatformIcon from "../components/PlatformIcon.astro";
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 
 const allApps = (await getCollection("apps", ({ data }) => !data.draft))
 	.sort((a, b) => {
@@ -86,18 +87,22 @@ const team = (await getCollection("team", ({ data }) => data.featured)).sort(
 						>
 							{shots.length > 0 && (
 								<div class="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
-									<img
+									<Image
 										src={shots[0].src}
 										alt=""
 										loading="lazy"
+										widths={[480, 960]}
+										sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
 										class={primaryClass}
 										style={`transform: scale(${scale}) rotate(${rotation}deg);`}
 									/>
 									{shots[1] && (
-										<img
+										<Image
 											src={shots[1].src}
 											alt=""
 											loading="lazy"
+											widths={[480, 960]}
+											sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
 											class={secondaryClass}
 											style={`transform: rotate(${-rotation * 1.4}deg);`}
 										/>

@@ -2,8 +2,9 @@
 
 > Status: **draft — not yet executed.** Filed as a follow-up to the
 > code-review batch in [`2026-05-14-code-review-implementation.md`](2026-05-14-code-review-implementation.md).
-> The next session should review this plan, ask any unresolved
-> questions, then execute.
+> Revised 2026-05-14 after a critique pass — see the "Asset reference
+> surface" section below; the original draft missed body-HTML and
+> homepage-card paths.
 
 ## Context
 
@@ -14,6 +15,23 @@ The studio currently runs a roll-your-own asset pipeline for app screenshots:
 - ~100 source PNG/JPGs plus their 200 converted siblings sit under `public/screenshots/`, served with **stable URLs** (`/screenshots/<app>/<file>.png`).
 
 That's three independent things to keep in sync (sources, variants, manifest) and stable URLs make `Cache-Control: immutable` impossible — code review item H3 caught this. The interim fix (commit `<sha>`, this batch) shortened `/screenshots/*` to `max-age=86400` and dropped `immutable`. This plan replaces the roll-your-own pipeline with Astro's native asset pipeline: hashed filenames under `_astro/*` automatically inherit the existing `immutable, 1y` cache rule, and the AVIF/WebP/dim concerns become free.
+
+## Asset reference surface
+
+Every site location that points at `/screenshots/*` today. All four must be migrated together or the build silently produces broken images:
+
+1. **`screenshots[]` frontmatter** — `src/content/apps/*.md`. Consumed by `Screenshot.astro` on per-app pages and by the homepage card-background `<img>` tags.
+2. **`cardImages[]` frontmatter** — same files, same consumers, only used when an app has zero real screenshots.
+3. **Homepage card `<img>` tags** — `src/pages/index.astro:89-99` reads `shots[0].src` / `shots[1].src` and renders raw `<img src={…}>`. After the schema flip these become `ImageMetadata` objects, not strings — bare `<img>` will break.
+4. **Inline `<picture>` HTML in markdown bodies** — at least `parking-space.md` has hand-written `<picture>` blocks with `srcset="/screenshots/..."` and hardcoded `width`/`height`. Markdown body HTML does **not** go through Astro's image pipeline; these references will 404 once `public/screenshots/` is gone.
+
+The original draft of this plan only addressed (1) and the `<Screenshot>` callsite in `src/pages/apps/[...slug].astro`. The migration steps below cover all four.
+
+Audit command before starting (should return zero matches when done):
+
+```sh
+grep -rn '/screenshots/' src/ public/_headers
+```
 
 ## Goal
 
@@ -69,14 +87,14 @@ Note: the schema becomes a function of `{ image }`, not a bare object — Astro 
 
 ### 3. Update each app's frontmatter
 
-`src/content/apps/*.md` — relative paths replace absolute ones. Astro resolves these relative to the markdown file itself:
+`src/content/apps/*.md` — relative paths replace absolute ones. Astro 6's `image()` schema resolves paths relative to the markdown file itself, so from `src/content/apps/parking-space.md` reaching `src/assets/screenshots/parking-space/active.png` is `../../assets/screenshots/parking-space/active.png`:
 
 ```yaml
 screenshots:
   - { src: "../../assets/screenshots/parking-space/active.png", alt: "..." }
 ```
 
-(Confirm the exact relative-path syntax Astro 6 accepts — it might prefer `./assets/...` if assets live next to content, or some other convention. Verify with one app first before bulk-editing.)
+Apply the same change to `cardImages[]` entries. Bulk sed across all eight app files; one diff to review.
 
 ### 4. Rewrite `Screenshot.astro`
 
@@ -101,7 +119,9 @@ const { src, alt = "", loading = "lazy", class: className = "block w-full h-auto
   src={src}
   alt={alt}
   formats={["avif", "webp"]}
+  widths={[480, 960, 1440]}
   loading={loading}
+  fetchpriority={loading === "eager" ? "high" : undefined}
   decoding="async"
   class={className}
 />
@@ -109,15 +129,62 @@ const { src, alt = "", loading = "lazy", class: className = "block w-full h-auto
 
 `<Picture />` emits the same `<picture><source srcset=…/>…<img …/></picture>` structure today's manual markup produces, plus intrinsic `width`/`height` derived from the source.
 
+`widths={[…]}` is set explicitly to bound variant count — Astro's default responsive widths can produce 6+ sizes per source × per format, which for ~100 sources blows up the `_astro/` bundle. Three widths covers phone / desktop-2x and keeps total derivative count predictable (~600 files). `fetchpriority="high"` on the eager screenshot helps LCP — current `Screenshot.astro` doesn't set this and it's a free win while we're rewriting.
+
 ### 5. Update call sites
 
-Any `.astro` page that calls `<Screenshot src="…" />` now passes the resolved `ImageMetadata` from the content entry, not a string. Check:
+Two consumers, not one:
+
+**a. `src/pages/apps/[...slug].astro`** — `<Screenshot src={shot.src} …>` now receives `ImageMetadata` rather than a string. No code change needed (the prop type changes in the component); just verify after the schema flip.
+
+**b. `src/pages/index.astro:89-99`** — the homepage card background renders `<img src={shots[0].src}>` and `<img src={shots[1].src}>` **directly**, bypassing `Screenshot.astro`. After step 2 these are `ImageMetadata` objects, not strings. Two options:
+
+- Cheap fix: `<img src={shots[0].src.src}>` — keeps the bare `<img>`, loses AVIF/WebP/responsive sizing on the card backgrounds (which are already heavily filtered with `opacity-20 grayscale`, so format gains are marginal).
+- Proper fix: switch to `<Image src={shots[0].src} …>` from `astro:assets`. Card backgrounds get hashed URLs and format negotiation like the per-app page images.
+
+Recommend the proper fix; it's two lines and keeps the whole gallery on the hashed pipeline. Pass `class`, `style`, `loading="lazy"`, and `alt=""` (decorative); intrinsic dims come from the metadata.
+
+Confirm coverage with:
 
 ```sh
-grep -rn 'Screenshot' src/pages src/layouts src/components
+grep -rn 'screenshots\|cardImages' src/pages src/layouts src/components
 ```
 
-…and update each callsite.
+…every `.src` access on these arrays must now feed an Astro image component or be replaced with `.src.src` for the bare-`<img>` escape hatch.
+
+### 5b. Convert markdown-body `<picture>` blocks
+
+At least `src/content/apps/parking-space.md` (audit the rest with `grep -rln '<picture>' src/content/apps/`) has hand-written `<picture>` blocks in the markdown body with `srcset="/screenshots/..."` paths. Markdown body HTML is **not** processed by Astro's image pipeline — those `/screenshots/*` URLs will 404 after step 6 deletes the public directory.
+
+Two options:
+
+- **Preferred: rename the file to `.mdx`** and replace each `<picture>` block with an Astro `<Picture>` import. MDX in Astro 6 supports component imports via the `components` prop on `<Content />`, or via explicit `import` at the top of the `.mdx` file:
+
+    ```mdx
+    import { Picture } from "astro:assets";
+    import login from "../../assets/screenshots/parking-space/login.png";
+    import active from "../../assets/screenshots/parking-space/active.png";
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+      <Picture src={login} formats={["avif", "webp"]} alt="Login screen" loading="lazy" />
+      <Picture src={active} formats={["avif", "webp"]} alt="Active session" loading="lazy" />
+    </div>
+    ```
+
+- **Alternative: lift body screenshots into `screenshots[]` frontmatter** and delete the inline HTML. Cleaner long-term — one source of truth per app — but changes the page layout (the body grid disappears, screenshots all render in the bottom gallery). Decide per-app whether layout intent matters.
+
+Check `getCollection` and `render` calls — `.md` → `.mdx` renames need the glob pattern updated:
+
+```ts
+// src/content.config.ts
+loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/apps" }),
+```
+
+…and `@astrojs/mdx` needs to be in the integrations list in `astro.config.mjs`. Add it if it isn't already:
+
+```sh
+pnpm astro add mdx
+```
 
 ### 6. Delete the old pipeline
 
@@ -130,6 +197,9 @@ rm src/data/screenshot-dims.json
 Edit `Taskfile.yml`:
 - Remove the `screenshots` task.
 - Remove `deps: [screenshots]` from `build` and `deploy`.
+
+Edit `package.json`:
+- Check whether `sharp` is a direct dep used only by `optimize-screenshots.mjs`. If so, remove it (`pnpm remove sharp`) — Astro pulls its own copy transitively for the image service.
 
 Edit `public/_headers`:
 - Remove the entire `/screenshots/*` rule (the comment block too).
@@ -151,6 +221,14 @@ Edit `public/_headers`:
       Cache-Control: public, max-age=86400, stale-while-revalidate=604800
     ```
 
+**Verify `stale-while-revalidate` is honored by Workers Static Assets before relying on it.** The Workers runtime cache sometimes ignores SWR directives even when they appear in `_headers`. After deploy:
+
+```sh
+curl -sI https://indri.studio/favicon.ico | grep -i cache-control
+```
+
+If the response strips `stale-while-revalidate`, fall back to `max-age=86400` alone — the SWR window was a nice-to-have, not load-bearing.
+
 ### 7. (Optional) Store-badge SVGs
 
 `public/img/store-badges/*.svg` are tiny + low churn but could ride the same wagon. Leave them in `public/` for now (they're spec-shaped: `/img/store-badges/<platform>.svg` URLs feel reasonable) unless a future need surfaces.
@@ -159,19 +237,28 @@ Edit `public/_headers`:
 
 1. `task build` — exits 0. No `optimize-screenshots` warnings, no manifest writes.
 2. `find dist/screenshots/ 2>/dev/null` — should error (directory gone).
-3. `find dist/_astro/ -name '*.webp' | wc -l` — should be ≥ 200 (one or two variants per source).
-4. `grep -o 'srcset="[^"]*"' dist/apps/splitledger/index.html | head -1` — should show `_astro/...webp` paths with hash suffixes.
-5. `grep '/screenshots/\*' public/_headers` — should be 0 matches (rule deleted).
-6. Open each `/apps/<slug>/` page in dev: every screenshot renders at the same dimensions as today; no visual regression.
-7. `du -sh dist/_astro/*.webp dist/_astro/*.avif | sort -h | tail -5` — largest variants stay under ~300 KB.
-8. `git status` — `public/screenshots/`, `scripts/optimize-screenshots.mjs`, `src/data/screenshot-dims.json` all gone; new files under `src/assets/screenshots/`.
+3. `find dist/_astro/ -name '*.webp' | wc -l` — expect roughly `sources × widths` (with `widths={[480, 960, 1440]}` that's ~3× source count; ~300+ for the current ~100 sources). Same for `.avif`.
+4. `grep -o 'srcset="[^"]*"' dist/apps/parking-space/index.html` — every match should reference `_astro/...webp` or `_astro/...avif` paths with hash suffixes.
+5. `grep -rn '/screenshots/' dist/` — should be 0 matches. Catches stale references in markdown body HTML and homepage cards alike — the most important regression check.
+6. `grep '/screenshots/\*' public/_headers` — should be 0 matches (rule deleted).
+7. Open the homepage and every `/apps/<slug>/` page in dev:
+    - Per-app page galleries render at the same dimensions as today.
+    - Per-app markdown body screenshots (e.g. parking-space's grid) still render.
+    - Homepage card blurred backgrounds still render — check parking-space, splitledger, world-foundry.
+8. `du -sh dist/_astro/*.webp dist/_astro/*.avif | sort -h | tail -5` — largest variants stay under ~300 KB.
+9. `du -sh dist/_astro/` — total bundle size sanity check; flag if it climbs into MB-per-page territory that would dent Lighthouse.
+10. `git status` — `public/screenshots/`, `scripts/optimize-screenshots.mjs`, `src/data/screenshot-dims.json` all gone; new files under `src/assets/screenshots/`. If `sharp` was a direct dep, `package.json` reflects its removal.
+11. After deploy: `curl -sI https://indri.studio/_astro/<some-image>.webp | grep -i cache-control` shows `immutable, max-age=31536000`. `curl -sI https://indri.studio/favicon.ico` shows the new short-TTL rule (with or without SWR — see step 6 above).
+
+## Rollback
+
+Single-commit migration → `git revert <sha>` restores `public/screenshots/`, the script, the manifest, the old schema, and the `/screenshots/*` `_headers` rule in one shot. No state migration to unwind. If `task build` fails post-revert, run `task screenshots` once to regenerate the manifest.
 
 ## Open questions for next-session review
 
-- **Frontmatter path convention** — does Astro 6's `image()` schema accept `../../assets/...` paths from markdown frontmatter, or does it expect a specific anchor? Verify with one app before bulk-editing.
-- **`cardImages` field** — currently used as a homepage-card blurred-background. Confirm it still renders correctly through `<Image />` / `<Picture />` (the blur is a CSS filter; the underlying `<img>` shape may change).
-- **CI cache** — once `optimize-screenshots.mjs` is gone, the GitHub Actions runner's `dist/_astro/` is rebuilt cold every run. Acceptable (variants are fast to regenerate), but worth a one-build wall-clock measurement before declaring done.
+- **CI cache** — once `optimize-screenshots.mjs` is gone, the GitHub Actions runner regenerates Astro's image variants from scratch each run. Measure wall-clock before/after; if it adds ≥ 30 s to `task deploy`, wire `actions/cache` over `.astro/` and `node_modules/.astro/`. Acceptable to defer until measured.
+- **MDX vs frontmatter-only for body screenshots** — per-app decision. `parking-space.md` uses a body grid that the gallery section doesn't replicate; renaming to `.mdx` preserves the layout. Other apps may not have body screenshots at all (audit with `grep -rln '<picture>\|<img' src/content/apps/`).
 
 ## When to land
 
-After the rest of the code-review batch settles. Independent commit, single-shot migration (don't split per-app — keeps the schema change atomic).
+After the rest of the code-review batch settles. Single commit covering all four reference paths in the surface map at the top (schema, `Screenshot.astro`, homepage `<img>`, markdown bodies) — splitting risks half-migrated state where some images 404. The schema flip is the atomicity-forcing move.
