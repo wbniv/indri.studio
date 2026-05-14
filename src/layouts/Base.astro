@@ -60,7 +60,7 @@ const pathname = Astro.url.pathname;
 		<slot name="head" />
 		<title>{fullTitle}</title>
 		<ClientRouter />
-		<script is:inline>
+		<script>
 			// Post-swap scroll fix. Chrome's moveBefore() (used by Astro's
 			// swap for transition:persist elements) anchors the persisted
 			// footer to the bottom of the new document — so the page lands
@@ -72,7 +72,7 @@ const pathname = Astro.url.pathname;
 			// own logic, so we scroll *after* the override lands. Skip
 			// hash navigation — the browser owns that case.
 			document.addEventListener("astro:before-preparation", (e) => {
-				const navType = e.navigationType;
+				const navType = (e as any).navigationType;
 				const target =
 					navType === "traverse"
 						? { left: history.state?.scrollX ?? 0, top: history.state?.scrollY ?? 0 }

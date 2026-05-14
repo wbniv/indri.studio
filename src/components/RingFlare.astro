@@ -40,15 +40,20 @@ const rings = [
 	))}
 </div>
 
-<script is:inline>
+<script>
 	// Per-visit randomisation. Each ring gets a negative animation-delay
 	// in [5%, 95%] of its cycle — so on load each ring is somewhere in
 	// its silent phase (never mid-flare), and which ring fires first
-	// changes every page load.
-	for (const r of document.querySelectorAll(".ring")) {
-		const d = parseFloat(r.dataset.duration);
-		r.style.animationDelay = -(d * (0.05 + Math.random() * 0.9)) + "s";
+	// changes every visit. astro:page-load fires on initial load and
+	// after each View Transition swap, so new .ring elements are always
+	// in the DOM when this runs.
+	function randomizeRings() {
+		for (const r of document.querySelectorAll<HTMLElement>(".ring")) {
+			const d = parseFloat(r.dataset.duration ?? "0");
+			r.style.animationDelay = -(d * (0.05 + Math.random() * 0.9)) + "s";
+		}
 	}
+	document.addEventListener("astro:page-load", randomizeRings);
 </script>
 
 <style>
