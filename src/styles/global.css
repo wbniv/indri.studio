@@ -62,7 +62,7 @@ html {
 	--color-surface-container-high: #5b5650;
 	--color-surface-container-highest: #6b655f;
 	--color-surface-variant: #4a4641;
-	--color-surface-tint: #b026ff;
+	--color-surface-tint: var(--color-primary-container);
 
 	--color-background: #3d3833;
 	--color-on-background: #f5f0e8;
@@ -129,6 +129,7 @@ html {
 
 	--text-headline-sm: 24px;
 	--text-headline-sm--line-height: 1.3;
+	--text-headline-sm--letter-spacing: 0em;
 	--text-headline-sm--font-weight: 600;
 
 	--text-body-lg: 18px;
@@ -507,4 +508,15 @@ html {
 		}
 	}
 
+}
+
+/* Anchor scroll-margin that tracks the shrinking header. The sticky
+ * header is ~72px before shrink and ~40px after (--header-shrink:
+ * 0 → 1, registered at the top of this file). Holding scroll-margin-top
+ * at a fixed 80px (Tailwind scroll-mt-20) means anchored headings land
+ * too low once the header has shrunk. Compute it instead so the
+ * anchor target sits just below whatever height the header is at the
+ * moment the jump completes. */
+.scroll-mt-header {
+	scroll-margin-top: calc(80px - 32px * var(--header-shrink, 0));
 }

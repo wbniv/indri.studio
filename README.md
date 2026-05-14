@@ -16,13 +16,14 @@ The full project plan: [`docs/plans/2026-05-13-initial-buildout.md`](docs/plans/
 ## Dev
 
 ```sh
-pnpm install
-pnpm dev        # http://localhost:4321
-pnpm build      # static output into dist/
-pnpm preview    # serve dist/ locally
+pnpm install      # first-time only
+task dev          # http://localhost:4321  (wraps pnpm dev)
+task build        # static output into dist/  (wraps pnpm build, deps: screenshots)
+task preview      # serve dist/ locally  (wraps pnpm preview)
+task deploy       # build + wrangler deploy
 ```
 
-The Taskfile wraps these — `task dev`, `task build`, `task deploy`. See [docs/SETUP.md](docs/SETUP.md) for first-time setup.
+The Taskfile is the canonical command surface — see [`Taskfile.yml`](Taskfile.yml) for the full list. The `pnpm` wrapping in each `task` entry is incidental; prefer `task <name>` in scripts and docs so the indirection layer stays consistent. See [docs/SETUP.md](docs/SETUP.md) for first-time setup.
 
 ## Adding an app
 
