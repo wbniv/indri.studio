@@ -9,7 +9,7 @@
 
 Items where code still needs to be written or a decision still needs to be made.
 
-### A1. gustos-colores Perf 94 fails Phase‑5 threshold on every deploy
+### ~~A1. gustos-colores Perf 94 fails Phase‑5 threshold on every deploy~~ ✓
 
 The CI `Phase-5 threshold check` step (`scripts/lighthouse-threshold.sh`) exits 1 on every deploy because gustos-colores consistently scores 94 on the CI runner's single-run devtools audit. All other 9 pages clear 95.
 
@@ -126,5 +126,5 @@ These were flagged by the sweep but turned out to be resolved or intentionally c
 
 If addressing the above:
 
-1. **A1** (gustos-colores Perf 94) — breaks the threshold gate on every deploy; worth at least a 30-minute diagnostic to understand the LCP source.
-2. ~~**B1–B7** — all resolved in `72814ea`~~
+~~1. **A1** — resolved in `8b3adba` (v0.1.34); gustos-colores 94 → 96, threshold gate green~~
+~~2. **B1–B7** — all resolved in `72814ea`~~
