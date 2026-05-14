@@ -291,10 +291,37 @@ Per SRC `CLAUDE.md` plan-verification format — keep numbered steps verbatim; b
    **PASS** — `max-age=0, must-revalidate` on all three. Edge caches the response but every client request revalidates, so deploys flush promptly. No `_headers` rule touched HTML, exactly as intended.
 
 8. **`task lighthouse` re-baseline: render-blocking + cache-TTL findings drop off, Perf scores hold ≥ 99.**
-   Deferred per user request — to be run as a separate turn.
+   ```
+   === devtools / n=3 / scores per run ===
+   page         run perf a11y bp   fcp    lcp    tbt    cls
+   home         1   100  95   100  1.2 s  1.2 s  10 ms  0.003
+   home         2   100  95   100  1.1 s  1.1 s  10 ms  0.003
+   home         3   100  95   100  1.1 s  1.1 s  10 ms  0.003
+   colophon     1   99   95   100  1.7 s  1.7 s   0 ms  0
+   colophon     2   100  95   100  1.5 s  1.5 s   0 ms  0
+   colophon     3   100  95   100  1.4 s  1.4 s   0 ms  0
+   splitledger  1   100  95   100  1.4 s  1.4 s   0 ms  0
+   splitledger  2   99   95   100  1.6 s  1.6 s   0 ms  0
+   splitledger  3   100  95   100  1.2 s  1.2 s   0 ms  0
+
+   === Perf medians ===
+     home          100
+     colophon      100
+     splitledger   100
+
+   $ jq '.audits["render-blocking-resources"].score, .audits["uses-long-cache-ttl"].score' \
+       /tmp/lh/latest/*.run-*.report.json
+   # all 18 lines: null
+   ```
+   **PASS** — Perf medians 100 / 100 / 100 (beat the ≥ 99 bar; SplitLedger picked up the missing point from Pass 3's 99). Both audits return `null` on all 9 runs — they're no longer applicable to the page, the best possible outcome per the plan's `1 or null` expectation. A11y 95, BP 100 hold steady.
 
 9. **Markdown preview of the audit-doc Pass 4 section renders cleanly.**
-   Deferred — section gets appended after the Lighthouse re-baseline lands.
+   ```
+   $ task md -- docs/investigations/2026-05-13-lighthouse-audit.md
+   /home/will/tmp/2026-05-13-lighthouse-audit.html (47 KB)
+   Opening in existing browser session.
+   ```
+   **PASS** — markdown renders to HTML cleanly (47 KB, no errors); Pass 4 tables align in the preview and the `Pass 4 — 2026-05-14` anchor from the top-of-doc status block resolves to the new section.
 
 ## Out of scope
 

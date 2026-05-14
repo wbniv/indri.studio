@@ -8,6 +8,7 @@
 > - **Recommendation #8 (inline critical CSS)** plan written in commit `1115347` (`docs/plans/2026-05-13-inline-critical-css.md`); **implementation landed 2026-05-14** — `astro.config.mjs` now sets `build.inlineStylesheets: "always"`, every built page carries an inline `<style>` block, and no `<link rel="stylesheet" href="/_astro/*.css">` remains in `dist/`. Visual smoke confirmed (prod-vs-preview screenshots, all 4 routes × 2 viewports, pixel-identical). Pending prod verification + Lighthouse re-spot post-deploy.
 > - **Pass 2 (2026-05-14)** run against the same three prod URLs as pass 1, post-`v0.1.24`. See [`## Pass 2 — 2026-05-14`](#pass-2--2026-05-14) below for new scores, Δ vs pass 1, and updated recommendation states. Headline findings: A11y hit 95 across the board (Recs A + B confirmed). SplitLedger Perf jumped 57 → 94 (Rec #4 AVIF/WebP confirmed). New CLS regression on all three pages traced to font/icon swap on hero content — a pass-3 candidate.
 > - **Pass 3 (2026-05-14)** runs the three Pass-2 URLs under all three Lighthouse throttling methods (`simulate`, `devtools`, `provided`) to resolve NEW #10. `devtools` chosen (summed Perf range 0 across 9 runs, vs 35 for `simulate`) and codified as `task lighthouse`. Re-baselined Perf 100 / 100 / 99, A11y 95 / 95 / 95, BP 100, SEO 100 — Phase-5 Lighthouse target met. Pass-2 CLS regression largely a `simulate` extrapolation artefact (home CLS 0.342 → 0.003 under `devtools`); NEW #9 reframed accordingly. See [`## Pass 3 — 2026-05-14`](#pass-3--2026-05-14-methodology-study--re-baseline).
+> - **Pass 4 (2026-05-14)** re-audits after the render-blocking + cache-TTL cleanup landed (self-hosted Space Grotesk + Inter via Astro Fonts API, Material Symbols lifted to per-page, `_astro/*` + `screenshots/*` pinned 1y immutable via `public/_headers`). Median Perf 100 / 100 / 100 (SplitLedger picked up the +1 to perfect). `render-blocking-resources` and `uses-long-cache-ttl` audits both go to `null` (n/a) on all 9 runs — the best possible outcome. Home FCP 1.5 s → 1.1 s; SplitLedger CLS 0.058 → 0. Third consecutive pass to clear the Phase-5 bar; no remaining gap to chase. See [`## Pass 4 — 2026-05-14`](#pass-4--2026-05-14-render-blocking--cache-ttl-cleanup).
 
 ## Context
 
@@ -207,6 +208,68 @@ Optional pass-4 candidates if appetite returns:
     Neither is a `<ClientRouter />`-removal target. Skip pass-4 here unless tightening CLS to zero is independently desirable.
 - **Sample more app pages.** Pass 3 covers `/apps/splitledger/` (image-heavy worst case from Pass 1). The longest prose app page is `/apps/claude-code-authoring-formats/`; a one-off measurement under `task lighthouse APPS="claude-code-authoring-formats"` would extend the dataset.
 - **CI integration.** Wire `task lighthouse` into the deploy workflow so every tag push captures a fresh JSON bundle under `dist/lh/<tag>/`. Not urgent.
+
+## Pass 4 — 2026-05-14 (render-blocking + cache-TTL cleanup)
+
+Re-audit after the render-blocking + cache-TTL plan landed: Space Grotesk + Inter self-hosted via the Astro Fonts API, Material Symbols lifted out of `Base.astro` into a per-page `<MaterialSymbols />` component, footer mail glyph swapped for unicode `✉`, and `_astro/*` + `screenshots/*` marked `public, max-age=31536000, immutable` via `public/_headers` (after the `cloudflare_ruleset` route 403'd on the Free-plan API token). Same Lighthouse 13.3.0, mobile form factor, `--throttling-method=devtools` (Pass 3 canonical) via `task lighthouse`. Live build: post-`v0.1.25` deploy (commits `4908df0` fonts, `a6627c2` cache headers).
+
+### Category scores (median of 3 runs)
+
+| Page | Performance | Accessibility | Best Practices | SEO | Δ Perf vs Pass 3 |
+|---|---|---|---|---|---|
+| [/](https://indri.studio/) | **100** ✓ | **95** ✓ | 100 ✓ | 100 ✓ | — |
+| [/colophon/](https://indri.studio/colophon/) | **100** ✓ | **95** ✓ | 100 ✓ | 100 ✓ | — |
+| [/apps/splitledger/](https://indri.studio/apps/splitledger/) | **100** ✓ | **95** ✓ | 100 ✓ | 100 ✓ | **+1** (was 99) |
+
+SplitLedger picks up the missing point — Pass 3's residual 0.058 CLS from the screenshot grid is gone now that the type and icon stylesheets aren't gating the swap on a render-blocking request.
+
+### Core Web Vitals (median of 3 runs)
+
+| Metric | / | /colophon/ | /apps/splitledger/ | Target |
+|---|---|---|---|---|
+| First Contentful Paint | 1.1 s ✓ | 1.5 s ✓ | 1.4 s ✓ | < 1.8 s |
+| Largest Contentful Paint | 1.1 s ✓ | 1.5 s ✓ | 1.4 s ✓ | < 2.5 s |
+| Speed Index | 1.5 s ✓ | 1.8 s ✓ | 1.8 s ✓ | < 3.4 s |
+| Total Blocking Time | 10 ms ✓ | 0 ms ✓ | 0 ms ✓ | < 200 ms |
+| Cumulative Layout Shift | 0.003 ✓ | 0 ✓ | 0 ✓ | < 0.1 |
+
+All within target, with notable improvements vs Pass 3: home FCP/LCP 1.5 s → 1.1 s (self-hosted fonts removed the cross-origin round-trip), splitledger CLS 0.058 → 0 (font-and-icon swap no longer waits on render-blocking CSS).
+
+### Diagnostics that fell off
+
+The two opportunity audits this pass targeted both became inapplicable on every run — the best possible outcome:
+
+| Audit | Pass 3 score | Pass 4 score | Why |
+|---|---|---|---|
+| `render-blocking-resources` | flagged (3 items: Google Fonts type CSS, Material Symbols, Astro `Base.css`) | **`null`** (n/a) on all 9 runs | Type and icon CSS now preload+onload-swap; Astro `Base.css` already inlined since the Rec #8 land |
+| `uses-long-cache-ttl` | 0.5 | **`null`** (n/a) on all 9 runs | `_astro/*` and `screenshots/*` serve `max-age=31536000, immutable` via `public/_headers`; nothing left to flag |
+
+Edge verification (warm requests via `curl -sI`):
+
+| URL pattern | `cache-control` | `cf-cache-status` |
+|---|---|---|
+| `/_astro/*` (e.g. ClientRouter JS) | `public, max-age=31536000, immutable` | HIT |
+| `/_astro/fonts/*` (Astro-Fonts woff2) | `public, max-age=31536000, immutable` | HIT |
+| `/screenshots/*.webp` | `public, max-age=31536000, immutable` | HIT |
+| `/` (HTML) | `public, max-age=0, must-revalidate` | HIT |
+
+HTML keeps the Workers Static Assets short TTL so tag-driven deploys flush promptly; only fingerprinted/stable URLs are pinned at 1y.
+
+### Recommendation status after pass 4
+
+| ID | Item | Pass 4 status |
+|---|---|---|
+| **#6** | `Use efficient cache lifetimes` — long-immutable cache headers on hashed/stable assets | **resolved** (`public/_headers` route; ruleset path withdrawn — Free-plan API token can't manage rulesets) |
+| **Render-blocking resources** (all 3 items) | Eliminate type + icon stylesheet blocking the critical path | **resolved** — Space Grotesk/Inter self-hosted via Astro Fonts API, Material Symbols preload+onload-swap, Astro CSS already inlined |
+| **Self-host Space Grotesk + Inter** | Migrate from `fonts.googleapis.com` to Astro Fonts API | **resolved** — `dist/_astro/fonts/` carries the two variable-font woff2 (~70 KB Latin-subsetted), Latin-only, `display: optional` preserved, `optimizedFallbacks` derives metric-matched fallback from the actual woff2 metrics |
+
+All prior Pass-3 resolutions carry forward unchanged.
+
+### Remaining gaps to ≥ 95
+
+**None.** Every audited page now medians at Perf 100 / A11y 95 / BP 100 / SEO 100. Pass-3's optional pass-4 candidates (CLS-to-zero on splitledger, more app-page samples, CI integration) carry forward but are not blocking the Phase-5 target.
+
+This is the third consecutive pass to hit the Phase-5 ≥ 95 bar across the sampled set. Future passes are opportunity-driven only — no remaining gap to chase.
 
 ## Cross-cutting issues (all three pages)
 

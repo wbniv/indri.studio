@@ -2,11 +2,10 @@
 
 Low-priority tasks that aren't blocking but shouldn't be lost.
 
-- [verify] **2026-05-14** Self-host Space Grotesk + Inter via Astro Fonts API — emits 2 variable-font woff2 (~70 KB total) into `dist/_astro/fonts/`, replaces the cross-origin Google Fonts round-trip. Build/local verification PASS; Lighthouse re-run pending `task deploy` — [plan](docs/plans/2026-05-14-self-host-fonts.md)
-- [verify] **2026-05-14** Render-blocking + cache TTL cleanup — preload-swap the Space Grotesk + Inter type stylesheet, lift Material Symbols from Base.astro to per-page (frees colophon from icon-font request), drop `<MaterialSymbols />` into Base's head slot from `/`, `/404`, and AppLayout, swap footer mail icon for unicode `✉`, add `cloudflare_ruleset.cache_immutable` for 1y TTL on `_astro/*` + `screenshots/*` — [plan](docs/plans/2026-05-14-render-blocking-cache-ttl.md)
-
 ## Done
 
+- [x] **2026-05-14** Lighthouse pass 4 — render-blocking + cache-TTL cleanup verified on prod; Perf medians 100/100/100 (SplitLedger +1), both targeted audits go to `null`/n-a on all 9 runs — [plan](docs/plans/2026-05-14-render-blocking-cache-ttl.md) · [audit](docs/investigations/2026-05-13-lighthouse-audit.md#pass-4--2026-05-14-render-blocking--cache-ttl-cleanup)
+- [x] **2026-05-14** Self-host Space Grotesk + Inter via Astro Fonts API — 2 variable-font woff2 (~70 KB) under `_astro/fonts/`, optimizedFallbacks derive metric-matched fallback from real woff2 metrics — [plan](docs/plans/2026-05-14-self-host-fonts.md)
 - [x] **2026-05-14** www→apex 301 redirect via Worker `fetch` handler (replaces deleted `cloudflare_ruleset`); prod verified, path + query preserved — [plan](docs/plans/2026-05-14-www-apex-redirect.md)
 - [x] **2026-05-14** Lighthouse pass 3 — methodology study + re-baseline; `devtools` throttling chosen (summed Perf range 0 vs 35 for `simulate`), codified as `task lighthouse`; Phase-5 ≥ 95 target met (100 / 100 / 99); NEW #9 + #10 resolved — [plan](docs/plans/2026-05-14-lighthouse-pass-3.md) · [audit](docs/investigations/2026-05-13-lighthouse-audit.md#pass-3--2026-05-14-methodology-study--re-baseline)
 - [x] **2026-05-14** Scroll-to-top ^ button on long app pages, gated to >1 viewport, lifts above footer when it enters view — [plan](docs/plans/2026-05-14-scroll-to-top.md)
