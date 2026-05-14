@@ -112,9 +112,9 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
 			<section class="mt-12 md:mt-16">
 				<h2 class="section-label">screenshots</h2>
 				<ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 list-none p-0 m-0">
-					{post.data.screenshots.map((shot) => (
+					{post.data.screenshots.map((shot, idx) => (
 						<li class="glass-card p-3">
-							<Screenshot src={shot.src} alt={shot.alt ?? ""} />
+							<Screenshot src={shot.src} alt={shot.alt ?? ""} loading={idx === 0 ? "eager" : "lazy"} />
 							{shot.alt && (
 								<p class="font-display uppercase tracking-[0.2em] text-[10px] text-on-surface-variant mt-3 mb-1 px-1">
 									{shot.alt}
