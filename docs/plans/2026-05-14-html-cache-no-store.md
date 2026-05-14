@@ -1,6 +1,6 @@
 # HTML cache: explicit `no-store` fallback
 
-> Status: **complete — landed in this commit.**
+> Status: **complete — v0.1.36 (corrected approach after v0.1.35 regression).**
 
 ## Context
 
@@ -23,18 +23,33 @@ filenames), but the missing explicit HTML rule is a real gap.
 headers from the last matching path are applied"). Adding `/*` at the top
 means every more-specific rule later in the file still overrides it.
 
-## Change
+## Approach (corrected)
 
-`public/_headers` — add `/*: no-store` block at the top:
+**First attempt (v0.1.35):** added `/*: Cache-Control: no-store` at the
+top of `public/_headers`. This failed: Cloudflare WSA `_headers` **merges
+all matching rules** rather than replacing earlier ones. `_astro/*` assets
+received `cache-control: no-store, public, max-age=31536000, immutable` —
+contradictory directives where `no-store` (most restrictive) wins, killing
+the immutable cache entirely.
 
+**Correct approach (v0.1.36):** set `no-store` in the Worker instead.
+The Worker already runs for all requests (`run_worker_first = true`). After
+`env.ASSETS.fetch()` resolves, check `content-type: text/html` and
+override `Cache-Control` via `new Response(body, { headers })`. Non-HTML
+assets (`_astro/*`, favicons, images) pass through unmodified.
+
+`worker/index.ts`:
+
+```ts
+const response = await env.ASSETS.fetch(request);
+const ct = response.headers.get("content-type") ?? "";
+if (ct.includes("text/html")) {
+  const headers = new Headers(response.headers);
+  headers.set("Cache-Control", "no-store");
+  return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
+}
+return response;
 ```
-/*
-  Cache-Control: no-store
-```
-
-`no-store` over `no-cache` because WSA emits no ETag, so `no-cache`
-can't buy 304 savings — `no-store` is cleaner and removes the
-`cf-cache-status: HIT` ambiguity entirely.
 
 ## Verification
 
