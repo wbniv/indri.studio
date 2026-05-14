@@ -75,17 +75,24 @@ tasks:
       - terraform apply
 
   lighthouse:
-    desc: "Run Lighthouse 13.3.0 against the three prod URLs, RUNS=${RUNS:-3} runs each under --throttling-method=devtools (Pass-3 canonical). CI passes RUNS=1 (devtools variance is 0, see plan §budget). Reports under /tmp/lh/latest/."
+    desc: "Run Lighthouse 13.3.0 against every routable prod page (home, colophon, all /apps/<slug>/), RUNS=${RUNS:-3} runs each, devtools throttling. URL list auto-enumerates from src/content/apps/*.md — adding/removing an app extends/shrinks the sampled set with no Taskfile edit. CI passes RUNS=1. Reports under /tmp/lh/latest/."
     cmds:
       - |
         set -euo pipefail
         mkdir -p /tmp/lh/latest
         RUNS=${RUNS:-3}
+
+        # Auto-enumerate routable pages: home + colophon + every app slug
         URLS=(
           "https://indri.studio/|home"
           "https://indri.studio/colophon/|colophon"
-          "https://indri.studio/apps/splitledger/|splitledger"
         )
+        for app_md in src/content/apps/*.md; do
+          slug=$(basename -s .md "$app_md")
+          URLS+=( "https://indri.studio/apps/${slug}/|${slug}" )
+        done
+        SLUGS=(); for pair in "${URLS[@]}"; do SLUGS+=( "${pair#*|}" ); done
+
         for pair in "${URLS[@]}"; do
           URL="${pair%|*}"; SLUG="${pair#*|}"
           for RUN in $(seq 1 "$RUNS"); do
@@ -101,8 +108,8 @@ tasks:
         done
         echo
         echo "=== devtools / n=${RUNS} / scores per run ==="
-        printf "%-12s %-3s %-4s %-4s %-4s %-5s %-6s %-5s %s\n" "page" "run" "perf" "a11y" "bp" "fcp" "lcp" "tbt" "cls"
-        for SLUG in home colophon splitledger; do
+        printf "%-30s %-3s %-4s %-4s %-4s %-5s %-6s %-5s %s\n" "page" "run" "perf" "a11y" "bp" "fcp" "lcp" "tbt" "cls"
+        for SLUG in "${SLUGS[@]}"; do
           for RUN in $(seq 1 "$RUNS"); do
             jq -r --arg slug "$SLUG" --arg run "$RUN" '
               [$slug, $run,
@@ -122,14 +129,14 @@ tasks:
         else
           echo "=== Perf scores (n=1) ==="
         fi
-        for SLUG in home colophon splitledger; do
+        for SLUG in "${SLUGS[@]}"; do
           PERF=()
           for RUN in $(seq 1 "$RUNS"); do
             PERF+=( "$(jq -r '(.categories.performance.score*100)|round' \
               /tmp/lh/latest/${SLUG}.run-${RUN}.report.json)" )
           done
           MED=$(printf '%s\n' "${PERF[@]}" | sort -n | sed -n $(( (RUNS + 1) / 2 ))p)
-          printf "  %-12s  %d\n" "$SLUG" "$MED"
+          printf "  %-30s  %d\n" "$SLUG" "$MED"
         done
 
   publish:
