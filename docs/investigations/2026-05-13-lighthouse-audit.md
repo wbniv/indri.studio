@@ -271,6 +271,21 @@ All prior Pass-3 resolutions carry forward unchanged.
 
 This is the third consecutive pass to hit the Phase-5 ≥ 95 bar across the sampled set. Future passes are opportunity-driven only — no remaining gap to chase.
 
+### Why A11y stays at 95 (and isn't being chased)
+
+The only weighted A11y audit failing on any sampled page is `color-contrast`, and the failing pair is the same on all three: brand neon **`#B026FF`** (Phosphor purple, defined in `src/styles/global.css` as `--color-primary-container`) on the card surface **`#3D3833`** (`--color-grey-700`), measured at **2.52:1** — below WCAG AA's 3:1 (large text) and 4.5:1 (12 px pill text).
+
+Failing nodes across the sampled pages:
+- `/` — the hero accent word "SOFTWARE"; the "INDRI" span in `#about`.
+- `/colophon/` — the hero accent word "COLOPHON".
+- `/apps/splitledger/` — the `<h1>SplitLedger</h1>` accent (uses `text-primary-container`); the "LAUNCHING SOON" pill (`<span class="pill-purple">`, 12 px → the 4.5:1 case).
+
+**Mockup study (2026-05-14, `/tmp/lh/contrast-mockups.html`).** Eight alternatives were rendered on the real `#3D3833` surface with the real type and live-computed contrast ratios: brighter Phosphor (`#D97AFF`), fuchsia-pink (`#E879F9`), pale lavender (`#F0CCFF`), cream text-stroke + white-on-purple pill, neon `text-shadow` glow, pill-only invert, and a white→Phosphor vertical gradient. Several pass AA cleanly. None of the passing variants read as the right brand colour — they either drift hue (fuchsia-pink), wash out (pale lavender), or kill the neon (anything that adds white). The "glow" path passes the eye but Lighthouse measures the computed foreground colour and ignores `text-shadow`, so it doesn't move the audit either.
+
+**Decision: keep `#B026FF`; accept A11y 95.** The Phosphor accent on grey-700 is the brand. The audit deduction is a known, documented trade-off, not an oversight. Phase-5's ≥ 95 bar is met across every category on every sampled page. If a future audit surfaces an A11y deduction *outside* this colour pair, address it on its own merits; do not reopen the brand-colour question without a designed pair of "brand at full saturation" vs "brand at AA" tokens.
+
+(The mockup HTML is throwaway scratch under `/tmp/`; not committed.)
+
 ## Cross-cutting issues (all three pages)
 
 ### Render-blocking resources
