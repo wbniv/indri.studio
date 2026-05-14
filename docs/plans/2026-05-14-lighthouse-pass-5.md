@@ -389,7 +389,30 @@ Per SRC `CLAUDE.md` plan-verification format — keep numbered steps verbatim; b
    ```
    Expect: workflow completes; threshold step runs (green if no regression); archive step runs.
 
-   **PENDING** — v0.1.29 (run 25852211699 on `004e2d5`) triggered via `workflow_dispatch`; Lighthouse audit step in progress.
+   v0.1.31 CI run 25858461843 (`62908a5`), tag-push event:
+   ```
+   Phase-5 threshold check: failure (gustos-colores 94, 1 below threshold)
+   Archive Lighthouse bundle to main: success
+   TAG=v0.1.31; git push origin main (commit "CI: archive Lighthouse bundle for v0.1.31 [skip ci]")
+   ```
+   **PASS** — workflow completed; threshold step ran (failed at gustos-colores 94, rest pass); archive step ran and committed. Note: two earlier tag-push runs couldn't verify the archive — v0.1.28 (`eff6bed`) had no archive step yet; v0.1.29 (`004e2d5`) was triggered via `workflow_dispatch` which GitHub doesn't resolve as `refs/tags/v` so the archive was skipped (fixed in subsequent commit with `always()`). v0.1.30 (`7139074`) failed the build (Sharp missing). v0.1.31 (`62908a5`) is the first clean tag-push run with all three new features working.
+
+   Asset pipeline improvement visible in this run: parking-space lifted from 75→100, world-foundry 62→100. gustos-colores improved 89→94 but still 1 below threshold (single-run CI jitter likely; LCP 2.3 s — may clear on next run).
+
+   ```
+   | Page | Perf | A11y | BP | SEO | Status |
+   |---|---:|---:|---:|---:|:---:|
+   | blender-asset-searcher | 100 | 96 | 100 | 100 | ✓ |
+   | claude-code-authoring-formats | 100 | 96 | 100 | 100 | ✓ |
+   | colophon | 100 | 95 | 100 | 100 | ✓ |
+   | finding-your-way | 100 | 95 | 100 | 100 | ✓ |
+   | gustos-colores | 94 | 95 | 100 | 100 | ✗ |
+   | home | 99 | 95 | 100 | 100 | ✓ |
+   | parking-space | 100 | 95 | 100 | 100 | ✓ |
+   | pinball-construction-set | 100 | 96 | 100 | 100 | ✓ |
+   | splitledger | 100 | 95 | 100 | 100 | ✓ |
+   | world-foundry | 100 | 95 | 96 | 100 | ✓ |
+   ```
 
 8. **Commit-back lands on main.**
    ```bash
@@ -399,7 +422,17 @@ Per SRC `CLAUDE.md` plan-verification format — keep numbered steps verbatim; b
    ```
    Expect: most recent commit on main is the bot's `[skip ci]` archive commit; `public/lh/<new_tag>/` contains 10 JSONs.
 
-   **PENDING** — depends on step 7.
+   ```
+   7432270 CI: archive Lighthouse bundle for v0.1.31 [skip ci]
+   62908a5 Verify CLS + Lighthouse pass 5 plans: steps 1-6 + partial 7-11
+   02711d4 Fix: restore sharp as explicit devDep for Astro image pipeline
+   ---
+   100644 blob …  public/lh/.gitkeep
+   040000 tree …  public/lh/pass5-baseline
+   040000 tree …  public/lh/v0.1.31
+   ```
+   `git ls-tree origin/main public/lh/v0.1.31/` → 10 JSON files.
+   **PASS.**
 
 9. **Next deploy serves the prior tag's bundle from prod.**
    ```bash

@@ -2,11 +2,11 @@
 
 Low-priority tasks that aren't blocking but shouldn't be lost.
 
-- [verify] **2026-05-14** Defensive CLS hardening — reserve Material Symbols icon box at 1em globally; add CLS-budget alert (≤ 0.05) to post-deploy CI Lighthouse step. Local: Perf 100/100/100, CLS 0.003/0/0. CI summary table verifies on next `v*` tag — [plan](docs/plans/2026-05-14-cls-defensive-hardening.md)
 - [verify] **2026-05-14** Lighthouse pass 5 — full-site sampling (10 routable pages), per-tag prod archive at `/lh/<tag>/`, Phase-5 threshold gate (≥ 95) reds workflow on regression. parking-space/gustos-colores image-delivery fixes shipped alongside — [plan](docs/plans/2026-05-14-lighthouse-pass-5.md)
 
 ## Done
 
+- [x] **2026-05-14** Defensive CLS hardening: Material Symbols 1em slot + CI CLS-budget check (≤ 0.05); Perf 100/100/100, CLS 0/0/0.003; CI green on v0.1.28 — [plan](docs/plans/2026-05-14-cls-defensive-hardening.md)
 - [x] **2026-05-14** Asset pipeline: roll-your-own `optimize-screenshots.mjs` → Astro native; hashed `_astro/*` URLs inherit immutable-1y cache; V1–V10 PASS — [plan](docs/plans/2026-05-14-asset-pipeline-cache-busting.md)
 - [x] **2026-05-14** IAM token narrowing (audit H5 Path A): `iam-self/token.tf` expanded to cover all `global/` surfaces; narrow `indri-cf-token` replaced (new id `1834…`), SSM + GH Actions secret rotated, old bootstrap `90c2…` revoked — [plan](docs/plans/2026-05-14-iam-token-narrow.md) · [audit](docs/investigations/2026-05-14-iam-token-audit.md#resolved-2026-05-14)
 - [x] **2026-05-14** Code review pass — 22 of 24 findings closed across 5 commits (B3 skipped per user, H3/H4 deferred to asset-pipeline follow-up plan) — [plan](docs/plans/2026-05-14-code-review-implementation.md)
