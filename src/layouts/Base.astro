@@ -33,8 +33,9 @@ const pathname = Astro.url.pathname;
 		<link rel="canonical" href={Astro.url.href.replace("www.", "")} />
 		<meta property="og:title" content={fullTitle} />
 		<meta property="og:description" content={description} />
+		<meta property="og:site_name" content="indri" />
 		<meta property="og:type" content={ogType ?? "website"} />
-		<meta property="og:url" content={Astro.url.href} />
+		<meta property="og:url" content={Astro.url.href.replace("www.", "")} />
 		{ogImage && <meta property="og:image" content={ogImage} />}
 		<meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
