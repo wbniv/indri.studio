@@ -25,7 +25,7 @@ The CI `Phase-5 threshold check` step (`scripts/lighthouse-threshold.sh`) exits 
 
 Work was done; docs weren't updated to say so. No code changes needed, just doc patches.
 
-### B1. `hero-cls-fix.md` still says "Drafted, awaiting approval"
+### ~~B1. `hero-cls-fix.md` still says "Drafted, awaiting approval"~~ ✓
 
 **Plan:** `docs/plans/2026-05-14-hero-cls-fix.md`
 
@@ -36,7 +36,7 @@ The plan's status line reads `Status: Drafted, awaiting approval` but commit `80
 
 **Doc fix needed:** Add a status block at the top of the plan marking it superseded, citing the three commits above. No verification steps needed.
 
-### B2. `animated-gradient-segmentation.md` ends on an unresolved decision
+### ~~B2. `animated-gradient-segmentation.md` ends on an unresolved decision~~ ✓
 
 **Investigation:** `docs/investigations/2026-05-14-animated-gradient-segmentation.md`
 
@@ -47,7 +47,7 @@ The decision was made: commit `d36c7d5` (`Pinstripe BG: static gradient + transf
 
 **Doc fix needed:** Append a "Resolution" section to the investigation noting `d36c7d5` as the chosen fix, confirming fix #1 worked, and closing the open decision.
 
-### B3. Code review — H3 and H4 listed as deferred, but asset-pipeline resolved both
+### ~~B3. Code review — H3 and H4 listed as deferred, but asset-pipeline resolved both~~ ✓
 
 **Investigation:** `docs/investigations/2026-05-14-code-review.md` (implementation note, lines 299–302)
 
@@ -60,7 +60,7 @@ The asset-pipeline plan completed (`c786089`, verified V1–V10 PASS). `optimize
 
 **Doc fix needed:** Update the implementation note to replace "Deferred" with "Resolved via `c786089`" for H3 and H4.
 
-### B4. `land-inline-critical-css.md` — steps 7–8 say "deferred pending deploy"
+### ~~B4. `land-inline-critical-css.md` — steps 7–8 say "deferred pending deploy"~~ ✓
 
 **Plan:** `docs/plans/2026-05-14-land-inline-critical-css.md`
 
@@ -68,7 +68,7 @@ Steps 7 (prod verification) and 8 (Lighthouse spot-check) were deferred with "wi
 
 **Doc fix needed:** Replace the "Deferred" notes in steps 7–8 with a brief result citing pass-4 Lighthouse data (Perf medians 100/100/100, no external `_astro/*.css` link).
 
-### B5. `self-host-fonts.md` — steps 4, 6, 7, 9 say "deferred pending deploy"
+### ~~B5. `self-host-fonts.md` — steps 4, 6, 7, 9 say "deferred pending deploy"~~ ✓
 
 **Plan:** `docs/plans/2026-05-14-self-host-fonts.md`
 
@@ -76,7 +76,7 @@ Steps 4 (visual smoke), 6 (Lighthouse re-run), 7 (render-blocking-insight), and 
 
 **Doc fix needed:** Replace "Pending/Deferred" notes in those four steps with concise pass references pointing at pass-4 and pass-5 data.
 
-### B6. `scroll-to-top.md` — all 7 verification steps have no output
+### ~~B6. `scroll-to-top.md` — all 7 verification steps have no output~~ ✓
 
 **Plan:** `docs/plans/2026-05-14-scroll-to-top.md`
 
@@ -84,7 +84,7 @@ Steps 1–7 are listed with pass criteria but no raw output is pasted. The featu
 
 **Doc fix needed:** For steps 1–4 and 6–7, paste a reference to the verifying evidence (e.g., "Verified implicitly by pass-5 Lighthouse run on splitledger — CLS 0, no new layout shifts"). For step 5, either run the profiling session and paste output, or mark it as "Deferred — manual DevTools session required; no forced-reflow behavior expected per code inspection (scrollY read on `DOMContentLoaded`, no layout-affecting writes triggered)."
 
-### B7. `app-screenshot-image-optimization.md` — step 5 pending prod audit
+### ~~B7. `app-screenshot-image-optimization.md` — step 5 pending prod audit~~ ✓
 
 **Plan:** `docs/plans/2026-05-13-app-screenshot-image-optimization.md`
 
@@ -116,7 +116,7 @@ These were flagged by the sweep but turned out to be resolved or intentionally c
 | `hero-cls-fix.md` never implemented | It was — `807454b`; then superseded (see B1) |
 | animated-gradient decision unresolved | Resolved by `d36c7d5`; doc just not updated (see B2) |
 | `lighthouse-tag-archive.md` untracked, now missing | Was superseded by pass-5 plan before commit; correctly discarded |
-| `attic/` untracked | Intentional — commit `7204bb7` message explicitly says "attic/ is untracked — file preserved locally but out of the build" |
+| `attic/` untracked | Was intentional (`7204bb7`); `attic/StripedGridMotion.astro` committed to repo in `72814ea` |
 | `first-publish.md` verification results blank | The plan pre-dated the first deploy; the deploy succeeded (site is live); verification was never the point of re-visiting this doc |
 | Code review B3 (store-badge `#` placeholders) | Skipped per user — reads as a no-op in practice since badges sit at top of pages |
 | Code review H5 (IAM token) | Resolved — `docs/plans/2026-05-14-iam-token-narrow.md` + `docs/investigations/2026-05-14-iam-token-audit.md` both closed |
@@ -128,6 +128,4 @@ These were flagged by the sweep but turned out to be resolved or intentionally c
 If addressing the above:
 
 1. **A1** (gustos-colores Perf 94) — breaks the threshold gate on every deploy; worth at least a 30-minute diagnostic to understand the LCP source.
-2. **B2** (animated-gradient resolution) + **B3** (code-review H3/H4 update) — small doc patches, high clarity value for future reads.
-3. **B1** (hero-cls-fix superseded notice) — prevents confusion when reading that plan cold.
-4. **B4/B5/B6/B7** (pending-deploy steps now verifiable) — lower urgency; the plans are internal records that most readers won't need, and the downstream Lighthouse data tells the real story.
+2. ~~**B1–B7** — all resolved in `72814ea`~~
