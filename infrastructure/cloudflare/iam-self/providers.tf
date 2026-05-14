@@ -1,16 +1,17 @@
 # Self-narrow the indri-studio Cloudflare API token.
 #
-# Bootstrap flow:
-#   1. Create a temporary, broad-scope "bootstrap" token in the Cloudflare
-#      dashboard. Export it as CLOUDFLARE_API_TOKEN.
-#   2. Run `terraform apply` here to mint a narrow `indri-cf-token` with only
-#      the permissions the global/ config and CI deploys need.
-#   3. Store the narrow token value in SSM at /indri-studio/cloudflare/api_token.
-#   4. Revoke the bootstrap token in the Cloudflare dashboard.
+# This config manages the narrow `indri-cf-token` (cloudflare_account_token).
+# To run terraform plan/apply against this module, CLOUDFLARE_API_TOKEN must
+# point at a *bootstrap* token with `Account → Account API Tokens: Edit`
+# (account-scoped) plus `User → API Tokens: Edit` if you also need to
+# revoke the previous user-scope bootstrap. The narrow token itself
+# deliberately CAN'T manage other tokens, so every rotation needs a fresh
+# bootstrap minted in the dashboard for the duration of the apply.
 #
-# After step 4, only the narrowed token exists — the global/ config and CI
-# deploys both use it. Mirrors the iam-self pattern in
-# ~/SRC/finding-your-way/infrastructure/aws/iam-self/.
+# Mirrors the iam-self pattern in ~/SRC/finding-your-way/infrastructure/aws/iam-self/
+# — the Cloudflare equivalent of the AWS terraform-user self-narrowing.
+#
+# See ../README.md "First-apply order" and "Token rotation" for the full flow.
 
 terraform {
   required_version = ">= 1.5"

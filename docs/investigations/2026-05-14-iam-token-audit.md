@@ -94,3 +94,16 @@ Recommend Path A. It captures actual practice in code rather than restricting it
 
 - `~/SRC/CLAUDE.md`: "Everything must be reproducible." — the SSM/TF mismatch directly violates this.
 - `iam-self/README.md` step 2 — the missed step.
+
+## Resolved 2026-05-14
+
+Path A executed end-to-end — see [`docs/plans/2026-05-14-iam-token-narrow.md`](../plans/2026-05-14-iam-token-narrow.md).
+
+Findings during implementation that updated the audit's model:
+
+- The bootstrap token (`90c2…`) was named `indri-studio-terraform` — confirming the audit's hypothesis that it was the first-apply bootstrap, never swapped out. Audit was right.
+- The `d789…` narrow token had been hand-widened via the dashboard at some point after first-apply (it carried `Account Rulesets Write` and `Page Rules Write` not in `token.tf`) — both leftovers from the original `cloudflare_ruleset` redirect that was later replaced by a Worker `fetch` handler. Drift the audit didn't surface because it never plan-refreshed `iam-self/`.
+- The `d789…` token's stored value in TF state was dead (rolled separately at some point), so the rotation had to `-replace` the resource rather than update-in-place. New id `1834…`.
+- The Cloudflare TF provider matches `policies[]` and `permission_groups[]` by list index, not set equality — `token.tf` now orders both deterministically to match the API's return order (account-scoped policy first; perm groups in UUID-ascending order).
+
+Outcome: SSM, CI, and TF state all point at the same narrow `1834…` token. Old `90c2…` revoked via API. The chain `TF code → narrow token → SSM/CI → runtime` is unbroken and reproducible from `git clone` + the one-shot bootstrap token described in `infrastructure/cloudflare/README.md`.
