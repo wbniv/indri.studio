@@ -35,13 +35,19 @@ const { Content } = await render(post);
 
 const now = new Date();
 const upcoming = post.data.date.valueOf() > now.valueOf();
+
+// OG image: first screenshot as an absolute URL. `src.src` is the hashed
+// /_astro/*.{ext} path emitted by Astro's asset pipeline. Astro.site is
+// set in astro.config.mjs (https://indri.studio).
+const ogImage = post.data.screenshots[0]?.src.src
+	? new URL(post.data.screenshots[0].src.src, Astro.site).href
+	: undefined;
 ---
 
-<!-- TODO: pass post.data.screenshots[0] as ogImage once AppLayout/Base
-     prop-threading is wired and OG image assets exist. -->
 <AppLayout
 	title={post.data.title}
 	description={post.data.summary}
+	ogImage={ogImage}
 	theme={post.data.theme}
 	prevHref={`/apps/${prev.id}/`}
 	nextHref={`/apps/${next.id}/`}
