@@ -293,7 +293,7 @@ None of this is blocking — the site renders cleanly and Lighthouse is at 100 /
 | P1 | `a00ba62` | B1, B2, B4, B5 (B3 skipped — store-badge `#` reads as a no-op in practice since badges sit at the top of app pages) |
 | P2 | `153a011` | D1, D2, D3, D4, D5 + D6 (cross-project glossary CLS entry at `~/SRC/docs/glossary.md`) |
 | P3 | `65ddf4a` | H1, H2, H6, H7, H8, H9 + H3 (interim band-aid: `max-age=86400`) |
-| P3 | `235f45d` | H5 audit findings — env token diverged from TF-managed token; reconciliation pending in a follow-up plan |
+| P3 | `235f45d` | H5 audit findings — env token diverged from TF-managed token; reconciled in `docs/plans/2026-05-14-iam-token-narrow.md` (resolved 2026-05-14) |
 | P4 | `52758d7` | S1, S2, S3, S5 (S4 was praise — no action) |
 
 Resolved via [`docs/plans/2026-05-14-asset-pipeline-cache-busting.md`](../plans/2026-05-14-asset-pipeline-cache-busting.md), commit `c786089` (V1–V10 PASS):
