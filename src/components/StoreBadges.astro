@@ -2,9 +2,14 @@
 // StoreBadges — a row of platform-store badges below the app header.
 //
 // Each badge is an <a> wrapping an <img> of the official-style badge
-// SVG from /public/img/store-badges/. Hover lifts the badge slightly
-// and softens the alpha so the row reads as interactive without
-// drowning in motion.
+// SVG. SVGs are imported with ?url so Vite emits them as hashed
+// /_astro/*.svg files that inherit the immutable 1-year cache rule.
+
+import appStoreUrl          from "../assets/store-badges/app-store.svg?url";
+import googlePlayUrl        from "../assets/store-badges/google-play.svg?url";
+import steamUrl             from "../assets/store-badges/steam.svg?url";
+import blenderExtensionsUrl from "../assets/store-badges/blender-extensions.svg?url";
+import githubUrl            from "../assets/store-badges/github.svg?url";
 
 interface StoreLinks {
   appStore?: string;
@@ -22,11 +27,11 @@ const { links } = Astro.props;
 
 // Order matters — phone stores first, then desktop, then source.
 const entries: { key: keyof StoreLinks; src: string; alt: string; width: number }[] = [
-  { key: "appStore",          src: "/img/store-badges/app-store.svg",          alt: "Download on the App Store",  width: 135 },
-  { key: "googlePlay",        src: "/img/store-badges/google-play.svg",        alt: "Get it on Google Play",       width: 152 },
-  { key: "steam",             src: "/img/store-badges/steam.svg",              alt: "Available on Steam",          width: 135 },
-  { key: "blenderExtensions", src: "/img/store-badges/blender-extensions.svg", alt: "Get it on Blender Extensions",width: 165 },
-  { key: "github",            src: "/img/store-badges/github.svg",             alt: "Get it on GitHub",            width: 135 },
+  { key: "appStore",          src: appStoreUrl,          alt: "Download on the App Store",        width: 135 },
+  { key: "googlePlay",        src: googlePlayUrl,        alt: "Get it on Google Play",             width: 152 },
+  { key: "steam",             src: steamUrl,             alt: "Available on Steam",                width: 135 },
+  { key: "blenderExtensions", src: blenderExtensionsUrl, alt: "Get it on Blender Extensions",      width: 165 },
+  { key: "github",            src: githubUrl,            alt: "Get it on GitHub",                  width: 135 },
 ];
 
 const present = entries.filter((e) => links && links[e.key]);

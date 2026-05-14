@@ -48,8 +48,6 @@
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 /img/cca-styles/*
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800
-/img/store-badges/*
-  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 
 # Lighthouse JSON archives are immutable once written — a tag's audit
 # data never changes. Cache for a year to prevent unnecessary revalidation.
