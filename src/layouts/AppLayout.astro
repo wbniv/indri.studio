@@ -12,6 +12,7 @@ interface Props {
 	title: string;
 	description?: string;
 	ogImage?: string;
+	ogType?: string;
 	theme?: {
 		primary?: string;
 		secondary?: string;
@@ -25,7 +26,7 @@ interface Props {
 	nextHref?: string;
 }
 
-const { title, description, ogImage, theme = {}, prevHref, nextHref } = Astro.props;
+const { title, description, ogImage, ogType, theme = {}, prevHref, nextHref } = Astro.props;
 
 const themeStyle = [
 	theme.primary && `--color-primary-container: ${theme.primary}`,
@@ -41,7 +42,7 @@ const themeStyle = [
 const fontImports = theme.fontImports ?? [];
 ---
 
-<Base title={title} description={description} ogImage={ogImage} ringFlare={false}>
+<Base title={title} description={description} ogImage={ogImage} ogType={ogType} ringFlare={false}>
 	<Fragment slot="head">
 		<MaterialSymbols />
 		{prevHref && <link rel="prefetch" href={prevHref} />}
