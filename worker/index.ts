@@ -32,7 +32,8 @@ export default {
         "font-src 'self' fonts.gstatic.com; " +
         "style-src 'self' 'unsafe-inline' fonts.googleapis.com; " +
         "script-src 'self' 'unsafe-inline'; " +
-        "img-src 'self' data:"
+        "img-src 'self' data:; " +
+        "frame-ancestors 'none'"
       );
       return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
     }
