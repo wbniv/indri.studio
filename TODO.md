@@ -6,6 +6,7 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 ## Done
 
+- [x] **2026-05-14** Code review pass — 22 of 24 findings closed across 5 commits (B3 skipped per user, H3/H4 deferred to asset-pipeline follow-up plan) — [plan](docs/plans/2026-05-14-code-review-implementation.md)
 - [x] **2026-05-14** CI: `task lighthouse` runs after every deploy (RUNS=1 to fit Free-tier budget, ~2 min added/deploy); JSON bundle uploaded as per-tag artifact + summary table in Actions UI — [plan](docs/plans/2026-05-14-lighthouse-ci.md)
 - [x] **2026-05-14** Audit-doc cleanup — Pass-1 cross-cutting / per-page / recs / "will we get to 95" sections now annotated as superseded by Pass 2/3/4 — [plan](docs/plans/2026-05-14-audit-doc-stale-cleanup.md)
 - [x] **2026-05-14** Lighthouse pass 4 — render-blocking + cache-TTL cleanup verified on prod; Perf medians 100/100/100 (SplitLedger +1), both targeted audits go to `null`/n-a on all 9 runs — [plan](docs/plans/2026-05-14-render-blocking-cache-ttl.md) · [audit](docs/investigations/2026-05-13-lighthouse-audit.md#pass-4--2026-05-14-render-blocking--cache-ttl-cleanup)
