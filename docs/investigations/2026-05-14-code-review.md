@@ -296,9 +296,9 @@ None of this is blocking — the site renders cleanly and Lighthouse is at 100 /
 | P3 | `235f45d` | H5 audit findings — env token diverged from TF-managed token; reconciliation pending in a follow-up plan |
 | P4 | `52758d7` | S1, S2, S3, S5 (S4 was praise — no action) |
 
-Deferred to [`docs/plans/2026-05-14-asset-pipeline-cache-busting.md`](../plans/2026-05-14-asset-pipeline-cache-busting.md) (filed in `65ddf4a`):
+Resolved via [`docs/plans/2026-05-14-asset-pipeline-cache-busting.md`](../plans/2026-05-14-asset-pipeline-cache-busting.md), commit `c786089` (V1–V10 PASS):
 
-- H3 properly — migrate `public/screenshots/` into `src/assets/` via Astro's `image()` schema, so screenshots ship hashed under `_astro/*` and the interim 1-day rule can be deleted.
-- H4 — the proposed CI pre-build regen step becomes moot once `optimize-screenshots.mjs` is deleted.
+- H3 — `public/screenshots/` migrated into `src/assets/`; all screenshot URLs now hashed `_astro/*` and inherit the immutable‑1y rule. The interim `max-age=86400` rule for `/screenshots/*` was deleted.
+- H4 — moot; `optimize-screenshots.mjs` and `screenshot-dims.json` deleted; Astro handles variant generation at build time.
 
 H8 expanded mid-implementation: in addition to adding intrinsic dimensions on the 404 lemur, both lemur PNGs were moved from `public/` into `src/assets/` and now ship as hashed, resized variants via Astro's `<Image />` (~4 MB → ~366 KB total).

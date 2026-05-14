@@ -227,12 +227,15 @@ shuffle the symptom.
    `docs/plans/2026-05-13-stripe-width-gap-pulse.md` — the new rendering
    approach may not exhibit the artifact.
 
-## Status
+## Resolution
 
-Reverted to commit `68d6c5f` (drift+rotate only, original 0.04 opacity / 4 px
-line / 28 px gap, body's `background-image`, no pseudo-element). Working tree
-matches that state; revert is staged but not committed. Decide whether to:
+Fix candidate #1 (static gradient, animate via `transform` only) was implemented
+in commit `d36c7d5` (`Pinstripe BG: static gradient + transform animation — fixes
+Chrome/Linux segmented-line bug`). The approach: gradient rasterised once on a
+`body::before` pseudo-element; only `transform` (translate + rotate) is animated,
+never the gradient coordinates. Chrome's tile-invalidation path is never triggered.
 
-- Commit the revert as `Revert "Pinstripe BG: ..."` (lands the rollback),
-- Reset to HEAD and continue experimenting (keeps current commits),
-- Move forward with one of the fix candidates above.
+The fix landed cleanly; the segmentation artefact is gone on Chrome/Linux. The
+`scale` breathing animation was added separately in `a674118` on the same static
+pseudo-element and is clean too. `StripedGridMotion.astro` was later shelved to
+`attic/` (`7204bb7`) since the body pinstripe fully replaces it.

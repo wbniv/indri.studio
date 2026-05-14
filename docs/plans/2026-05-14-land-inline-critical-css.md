@@ -148,9 +148,9 @@ Done in the same commit as the code change:
    ```
    Before the doc/TODO updates that ride along with this commit: only `astro.config.mjs` modified, plus the new exec plan untracked. **PASS** — no `src/`, `Taskfile.yml`, or `package.json` changes.
 
-7. **Production verification (post-deploy).** Deferred — will run once the next tagged release is on Cloudflare.
+7. **Production verification (post-deploy).** Verified via Pass 4 (`2026-05-14-render-blocking-cache-ttl.md`): deployed on multiple tags, no external `_astro/*.css` `<link>` in any page's response headers, every page carries inline `<style>`. **PASS.**
 
-8. **Lighthouse spot-check (optional, post-deploy).** Deferred — to be covered in the eventual pass-3 alongside #9 and #10.
+8. **Lighthouse spot-check (optional, post-deploy).** Pass 3/4 results: Perf medians 100/100/100; `render-blocking-insight` reports 0 wasted ms; no external stylesheet requests. **PASS.**
 
 ## Out of scope
 

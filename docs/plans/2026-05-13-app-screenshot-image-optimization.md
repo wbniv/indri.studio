@@ -136,7 +136,7 @@ Easiest: extend the content-collection schema's screenshot entry to include `wid
    ```
    PASS.
 
-5. **Live Lighthouse re-audit.** Pending — flip to PASS once a fresh audit on production confirms `/apps/splitledger/` LCP drops from 8.3 s and Performance moves from 57 toward the ≥ 95 target. Track follow-up under a new investigation note when run.
+5. **Live Lighthouse re-audit.** The approach changed: the roll-your-own WebP/AVIF variant generation described in this plan was superseded by the Astro native asset pipeline (`docs/plans/2026-05-14-asset-pipeline-cache-busting.md`, `c786089`). Under the new pipeline, Pass 5 CI (v0.1.31) measured splitledger Perf **100**, LCP ≤ 1.5 s. **PASS** (via superseding plan).
 
 ## Sequencing (resolved)
 

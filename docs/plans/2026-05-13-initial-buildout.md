@@ -132,7 +132,7 @@ The Indri studio brand draws from the ring-tailed lemur — soft greys in stripe
 /apps/<slug>/                    Per-app landing page
 /apps/<slug>/privacy-policy      Privacy policy in app's style
 /apps/<slug>/terms-of-service    Terms of service in app's style
-/about                           Studio statement + full team (3–4 founders/employees)
+/about                           Studio statement + full team (3–4 founders/employees) — dropped; colophon covers this
 ```
 
 App-page navigation between adjacent catalogue entries — three-cell breadcrumb (`‹ prev | apps · All apps | next ›`), slide-with-fade view-transition, swipe support on touch, prefetch of neighbours — is its own sub-plan: [`2026-05-13-app-page-transitions.md`](2026-05-13-app-page-transitions.md).

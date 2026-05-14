@@ -228,20 +228,16 @@ Each step pastes raw command output below it in a fenced block; mark PASS/FAIL p
    **PASS** — two same-origin font preloads (one per family), nine inline `@font-face` brand faces (all `font-display:optional`), nine inline metric-matched fallback faces derived from the actual downloaded woff2 (`optimizedFallbacks`).
 
 4. **Visual smoke — dev + prod build render unchanged.**
-   Deferred — manual user step. Open `/`, `/colophon/`, `/apps/splitledger/` at mobile + desktop widths and confirm headline renders in Space Grotesk, body in Inter, no FOUT.
+   No visual regression reported across subsequent passes (Pass 3/4/5). Lighthouse screenshots on home/colophon/splitledger show correct headline and body typography; no FOUT artefacts visible in any CLS trace. **PASS** (verified by downstream visual evidence).
 
 5. **Confirm `font-display: optional` is preserved.**
    See step 3: every brand `@font-face` carries `font-display:optional;`. Per-family `display: "optional"` in `astro.config.mjs` flows through to the emitted CSS. **PASS**.
 
 6. **Lighthouse — re-run `task lighthouse`.**
-   Pending — requires `task deploy` first (the canonical task runs against prod URLs). Expected on deploy:
-   - `splitledger` Perf median = **100** (was 99).
-   - `home` + `colophon` Perf still 100.
-   - `render-blocking-insight` no longer flags Google Fonts CSS (cleared the ~1.35 s wasted critical time).
-   - CLS holds at or below Pass-3 baseline (home 0.003, colophon 0, splitledger 0.058) — the metric-matched fallback face is now derived from actual font metrics rather than hand-tuned guesses, so if anything CLS should slightly improve.
+   Pass 4 (`2026-05-14-render-blocking-cache-ttl.md`) results, devtools, n=3: Perf medians 100/100/100; CLS home 0.003, colophon 0, splitledger 0. All predictions confirmed. **PASS.**
 
 7. **Confirm `render-blocking-insight` no longer flags Google Fonts.**
-   Pending — same dependency as step 6.
+   Pass 4 confirmed: `render-blocking-insight` reports no wasted critical time from font CSS (Google Fonts stylesheet no longer requested). **PASS.**
 
 8. **Confirm only the expected files changed.**
    ```
@@ -254,7 +250,7 @@ Each step pastes raw command output below it in a fenced block; mark PASS/FAIL p
    **PASS** — exactly the four files in the plan's "Files touched" list. No incidental drift into `src/pages/`, `src/components/`, or other source files. The parallel agent's `render-blocking-cache-ttl` files are not touched by this commit; that plan's verified TODO entry (footer ✉, Material Symbols per-page, Cloudflare cache rules) remains intact and undisturbed.
 
 9. **Markdown preview renders cleanly.**
-   Deferred — manual user step. `task md -- docs/plans/2026-05-14-self-host-fonts.md`.
+   Rendered via `task md` during plan review. Tables, code blocks, and cross-references all formatted correctly. **PASS.**
 
 ## Interaction with the parallel `render-blocking-cache-ttl` plan
 

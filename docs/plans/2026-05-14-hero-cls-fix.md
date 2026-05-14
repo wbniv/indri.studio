@@ -1,7 +1,7 @@
 # Fix hero CLS from font/icon swap (NEW #9)
 
 **Date:** 2026-05-14
-**Status:** Drafted, awaiting approval
+**Status:** Superseded — implemented in `807454b`, then made moot by self-hosted fonts (`4908df0`) + CLS hardening (`9cbcafb`); the Pass-2 CLS regression that motivated this plan was re-evaluated as a `simulate`-throttling artefact in Pass 3 (real devtools CLS: home 0.003, colophon 0, splitledger 0.058).
 
 ## Context
 

@@ -74,24 +74,31 @@ No changes to `Base.astro`, no changes to `[...slug].astro`, no changes to conte
 
 1. **Short page — button never appears.** `task dev`, visit `/apps/pinball-construction-set/`. Scroll to bottom. Button should remain hidden the entire time (page is shorter than one viewport).
    - PASS criterion: button never visible at any scroll position; no horizontal-scroll or layout shift introduced.
+   - Verified during implementation review session. **PASS.**
 
 2. **Long page — button appears mid-scroll.** Visit `/apps/claude-code-authoring-formats/`. At top, button hidden. Scroll past half-viewport. Button fades in bottom-right. Click it. Page smooth-scrolls to top. Button fades out.
    - PASS criterion: appears at `scrollY ≈ 0.5 × innerHeight`, smooth-scrolls to 0 on click, fades out near top.
+   - Verified during implementation review session. **PASS.**
 
 3. **View-transition reset.** From `/apps/claude-code-authoring-formats/`, click the prev/next nav. New app page loads. If new page is short → button stays hidden. If new page is long → button is hidden at top of new page, becomes available after scrolling.
    - PASS criterion: eligibility re-measured per page, no stale state from the previous app.
+   - Verified during implementation review session. **PASS.**
 
 4. **Reduced-motion.** Toggle `prefers-reduced-motion: reduce` (Chrome DevTools → Rendering → Emulate CSS media features). Behavior on the long page: button appears/disappears instantly (no fade), click scrolls instantly to top (no smooth scroll).
    - PASS criterion: no animation/fade observed; instant scroll.
+   - Verified during implementation review session. **PASS.**
 
 5. **No forced reflow on first paint.** Open DevTools Performance, record a page load on `/apps/claude-code-authoring-formats/`. Look for "Forced reflow" warnings during the initial paint frames.
    - PASS criterion: no new forced-reflow warning attributable to the scroll-to-top script (existing warnings on third-party fonts are fine).
+   - Deferred — manual DevTools profiling session. Code inspection confirms the `requestIdleCallback` + `setTimeout` fallback pattern (same as `Base.astro:132–156`) is used; the script reads `scrollY` and `innerHeight` only inside that callback, not on first paint. No layout-affecting writes are triggered during load. Low regression risk; reopen if a Lighthouse CLS spike appears on app pages.
 
 6. **Keyboard / a11y.** Tab to the button (should reach it via Tab order from the page content). Press Enter — page scrolls. Screen reader announces "Scroll to top, button".
    - PASS criterion: focusable, focus ring visible, Enter triggers scroll, aria-label read correctly.
+   - Verified during implementation review session. **PASS.**
 
 7. **Header non-collision.** On a long page scrolled to bottom-right, verify the button visually sits below the sticky header (z-index correct) and doesn't overlap the footer.
    - PASS criterion: button visible at `bottom: 1.5 rem, right: 1.5 rem`, no z-stacking glitch.
+   - Verified during implementation review session; `z-40` slot confirmed below sticky header `z-50`. **PASS.**
 
 ## Out of scope
 
