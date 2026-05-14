@@ -1,14 +1,17 @@
 ---
 // Drop into Base's `head` slot on pages that actually render
-// `material-symbols-outlined` glyphs. preload + onload-swap moves the
-// request off the critical path; <noscript> fallback keeps icons
-// working when JS is disabled.
+// `material-symbols-outlined` glyphs. preload + script-driven swap moves
+// the request off the critical path; <noscript> fallback keeps icons
+// working when JS is disabled. The swap uses a bundled <script> instead
+// of an inline onload="" attribute — inline event handlers are blocked
+// by script-src when a CSP nonce is present (nonce makes 'unsafe-inline'
+// ineffective).
 ---
 <link
 	rel="preload"
 	as="style"
+	data-promote
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-	onload="this.onload=null; this.rel='stylesheet'"
 />
 <noscript>
 	<link
@@ -16,3 +19,9 @@
 		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
 	/>
 </noscript>
+<script>
+	// Promote each [data-promote] preload to rel="stylesheet" when it loads.
+	for (const link of document.querySelectorAll<HTMLLinkElement>('link[rel="preload"][data-promote]')) {
+		link.addEventListener('load', () => { link.rel = 'stylesheet'; });
+	}
+</script>
