@@ -1,11 +1,13 @@
 {
-  "name": "Rapid Raccoon",
-  "short_name": "RR",
+  "name": "indri",
+  "short_name": "Indri",
+  "description": "Small studio, building apps people use every day.",
   "icons": [
     { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
   ],
-  "theme_color": "#00f2ff",
-  "background_color": "#0a0e0f",
-  "display": "standalone"
+  "theme_color": "#b026ff",
+  "background_color": "#3d3833",
+  "display": "standalone",
+  "start_url": "/"
 }
