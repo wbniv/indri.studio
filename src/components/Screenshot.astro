@@ -25,8 +25,8 @@ const { src, alt = "", loading = "lazy", class: className = "block w-full h-auto
 	src={src}
 	alt={alt}
 	formats={["avif", "webp"]}
-	widths={[480, 960, 1440]}
-	sizes="(min-width: 768px) 50vw, 100vw"
+	widths={[480, 720, 960, 1440]}
+	sizes="(min-width: 640px) calc(50vw - 3rem), calc(100vw - 3rem)"
 	loading={loading}
 	fetchpriority={loading === "eager" ? "high" : undefined}
 	decoding="async"
