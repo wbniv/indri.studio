@@ -183,6 +183,11 @@ tasks:
         fi
 
         BRANCH=$(git rev-parse --abbrev-ref HEAD)
+        if [ "$BRANCH" != "main" ]; then
+          echo "error: must be on main to publish (currently on '$BRANCH'). Merge your branch first." >&2
+          exit 1
+        fi
+
         SHA=$(git rev-parse --short HEAD)
         echo "publishing $VERSION on $BRANCH ($SHA)"
 
