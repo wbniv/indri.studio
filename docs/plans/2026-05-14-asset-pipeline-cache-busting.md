@@ -323,7 +323,17 @@ PASS (22 MB total bundle including all image variants — reasonable for ~100 ha
 
 PASS — `public/screenshots/`, `scripts/optimize-screenshots.mjs`, `src/data/screenshot-dims.json` absent; `src/assets/screenshots/` present; `sharp` removed from direct deps.
 
-11. After deploy: `curl -sI https://indri.studio/_astro/<some-image>.webp | grep -i cache-control` — deferred until next `v*` tag deploy.
+11. After deploy: `curl -sI https://indri.studio/_astro/<some-image>.webp | grep -i cache-control` shows `immutable, max-age=31536000`. `curl -sI https://indri.studio/favicon.ico` shows the new short-TTL rule.
+
+```
+curl -sI https://indri.studio/_astro/gallery.R36HMGw__MlTt4.png | grep -i cache-control
+cache-control: public, max-age=31536000, immutable
+
+curl -sI https://indri.studio/favicon.ico | grep -i cache-control
+cache-control: public, max-age=86400, stale-while-revalidate=604800
+```
+
+PASS — Workers Static Assets honors `stale-while-revalidate` on this zone.
 
 ## Rollback
 
