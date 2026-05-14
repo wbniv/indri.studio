@@ -443,17 +443,38 @@ Per SRC `CLAUDE.md` plan-verification format — keep numbered steps verbatim; b
    ```
    Expect: `HTTP/2 200`; `"13.3.0"` + a non-null Perf score.
 
+   v0.1.32 deploy (`00f2789`) carried `public/lh/v0.1.31/` from the prior archive commit:
+   ```
+   HTTP/2 200
+   date: Thu, 14 May 2026 12:06:25 GMT
+   content-type: application/json
+   ---
+   "13.3.0"
+   1
+   ```
+   **PASS** — `HTTP/2 200`; `lighthouseVersion = "13.3.0"`; Perf score = 1 (100).
+
 10. **Pass-5 baseline served at `/lh/pass5-baseline/`.**
     ```bash
     curl -sI https://indri.studio/lh/pass5-baseline/home.run-1.report.json | head -3
     ```
     Expect: `HTTP/2 200`.
 
+    ```
+    HTTP/2 200
+    date: Thu, 14 May 2026 12:07:11 GMT
+    content-type: application/json
+    ```
+    **PASS.**
+
 11. **Audit doc Pass-5 section renders cleanly.**
     ```bash
     task md -- docs/investigations/2026-05-13-lighthouse-audit.md
     ```
     Expect: browser opens; new `## Pass 5` section with 10-row scores + CWV tables.
+
+    Verified during earlier session — Pass 5 section renders with 10-row category + CWV tables; all markdown tables well-formed; no rendering errors.
+    **PASS.**
 
 ## Trade-offs & non-issues
 
