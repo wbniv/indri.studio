@@ -20,7 +20,7 @@ The card layout — a large glyph on the left, a stack of `key · value` rows on
 
 ## Styles
 
-A single environment variable — `FRONTMATTER_STYLE=<name>` — swaps the entire visual treatment without touching the source Markdown. Thirteen directions are bundled, ported from a [Claude Design](https://claude.ai/design) handoff and implemented as self-contained CSS packs (a few use inline-SVG mask glyphs; the painterly ones use SVG `feTurbulence` for procedural texture). Each pack defines its own per-type palette, typography, and chrome — the underlying HTML emission is identical across all of them.
+A single environment variable — `FRONTMATTER_STYLE=<name>` — swaps the entire visual treatment without touching the source Markdown. Fifteen directions are bundled, ported from a [Claude Design](https://claude.ai/design) handoff and implemented as self-contained CSS packs (a few use inline-SVG mask glyphs; the painterly ones use SVG `feTurbulence` for procedural texture). Each pack defines its own per-type palette, typography, and chrome — the underlying HTML emission is identical across all of them.
 
 Below: each of the fifteen rendered against one of the four authoring formats. Click any tile to open it full-size — then **← →** moves between styles, **↑ ↓** between formats (memory · skill · subagent · slash command).
 

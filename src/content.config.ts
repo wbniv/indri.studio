@@ -17,7 +17,9 @@ const apps = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		// Any JS-parseable date string in the frontmatter becomes a Date.
-		// Used to sort upcoming-first on the homepage gallery.
+		// Drives the "Launching Soon" pill on per-app pages when in the
+		// future; the homepage gallery sorts alphabetically by title (with
+		// finding-your-way pinned last), not by date.
 		date: z.coerce.date(),
 		// Short teaser line shown on the listing / home page (consumer-facing).
 		summary: z.string().optional(),

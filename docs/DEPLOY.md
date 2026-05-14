@@ -12,7 +12,7 @@ Config lives in [`wrangler.toml`](../wrangler.toml):
 
 ## Primary flow: push a version tag
 
-Deploys are triggered by pushing a `v*` tag. The workflow at [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml) runs `pnpm build` then `cloudflare/wrangler-action@v3`, and is also wired to `workflow_dispatch` so you can re-run a deploy from the GitHub Actions UI without cutting a new tag.
+Deploys are triggered by pushing a `v*` tag. The workflow at [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml) runs `pnpm build` then `cloudflare/wrangler-action@v4`, and is also wired to `workflow_dispatch` so you can re-run a deploy from the GitHub Actions UI without cutting a new tag.
 
 ```sh
 git tag v0.1.0
@@ -64,7 +64,7 @@ curl -I http://indri.studio/                         # expect 301 → https://in
 | `http://indri.studio/` | 301 → `https://indri.studio/` (Always Use HTTPS) |
 | `http://www.indri.studio/` | 301 → `https://indri.studio/` (combined HTTPS + apex redirect) |
 
-All four behaviours are Terraform-declared and survive any UI change.
+Three of the four behaviours are Terraform-declared and survive any UI change: Always-Use-HTTPS (zone setting), the apex `indri.studio` custom-domain binding, and the `www.indri.studio` custom-domain binding (all in [`infrastructure/cloudflare/global/`](../infrastructure/cloudflare/global/)). The www→apex 301 itself is implemented in [`worker/index.ts`](../worker/index.ts) — the Free-plan API token can't manage `cloudflare_ruleset`, so the Worker's `fetch` handler rewrites the host on www requests before delegating to `ASSETS.fetch`. Static-asset cache TTLs live in [`public/_headers`](../public/_headers) for the same reason.
 
 ## Common failures
 

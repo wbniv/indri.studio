@@ -40,11 +40,13 @@ Greys + neon Phosphor purple, ringtail-lemur palette. **Always pull design token
 
 | Token | Hex | Use |
 |---|---|---|
-| `--color-grey-900` | `#1A1815` | Primary background |
-| `--color-grey-700` | `#3D3833` | Card surfaces |
+| `--color-grey-900` | `#3D3833` | Primary background |
+| `--color-grey-700` | `#4A4641` | Card surfaces |
 | `--color-grey-200` | `#C8C0B8` | Secondary text |
 | `--color-grey-50`  | `#F5F0E8` | High-emphasis text |
 | `--color-primary-container` | `#B026FF` | Phosphor neon purple — accent |
+
+Authoritative values live in [`src/styles/global.css`](src/styles/global.css); this table is a convenience snapshot.
 
 Existing Material-name utilities work as expected: `bg-surface`, `text-primary-container`, `border-outline-variant`, etc.
 
