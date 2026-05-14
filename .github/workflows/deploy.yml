@@ -44,3 +44,48 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy
+
+      # Lighthouse audit against prod after deploy. Informational — keeps
+      # `continue-on-error: true` so a Lighthouse failure never blocks a
+      # ship. RUNS=1 (instead of the local default 3) because devtools
+      # throttling has zero run-to-run Perf variance in Pass-3 / Pass-4
+      # data — single run is statistically equivalent to a 3-run median
+      # and saves ~3 min of Actions budget per deploy. See
+      # docs/plans/2026-05-14-lighthouse-ci.md.
+      - uses: arduino/setup-task@v2
+        with:
+          version: '3.x'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Wait for Cloudflare propagation
+        run: sleep 30
+
+      - name: Lighthouse audit
+        id: lh
+        continue-on-error: true
+        env:
+          RUNS: '1'
+        run: task lighthouse
+
+      - name: Upload Lighthouse bundle
+        if: steps.lh.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-${{ github.ref_name }}
+          path: /tmp/lh/latest/*.json
+          retention-days: 90
+
+      - name: Lighthouse summary
+        if: steps.lh.outcome == 'success'
+        run: |
+          {
+            echo "## Lighthouse — ${{ github.ref_name }}"
+            echo
+            echo "| Page | Perf | FCP | LCP | TBT | CLS |"
+            echo "|---|---:|---:|---:|---:|---:|"
+            for SLUG in home colophon splitledger; do
+              jq -r --arg slug "$SLUG" '
+                "| \($slug) | \((.categories.performance.score*100)|round) | \(.audits["first-contentful-paint"].displayValue) | \(.audits["largest-contentful-paint"].displayValue) | \(.audits["total-blocking-time"].displayValue) | \(.audits["cumulative-layout-shift"].displayValue) |"
+              ' /tmp/lh/latest/${SLUG}.run-1.report.json
+            done
+          } >> $GITHUB_STEP_SUMMARY

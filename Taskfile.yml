@@ -75,11 +75,12 @@ tasks:
       - terraform apply
 
   lighthouse:
-    desc: "Run Lighthouse 13.3.0 against the three Pass-1 prod URLs, 3 runs each under --throttling-method=devtools (Pass 3 canonical). Prints per-page median Perf + CWV. Reports under /tmp/lh/latest/."
+    desc: "Run Lighthouse 13.3.0 against the three prod URLs, RUNS=${RUNS:-3} runs each under --throttling-method=devtools (Pass-3 canonical). CI passes RUNS=1 (devtools variance is 0, see plan §budget). Reports under /tmp/lh/latest/."
     cmds:
       - |
         set -euo pipefail
         mkdir -p /tmp/lh/latest
+        RUNS=${RUNS:-3}
         URLS=(
           "https://indri.studio/|home"
           "https://indri.studio/colophon/|colophon"
@@ -87,7 +88,7 @@ tasks:
         )
         for pair in "${URLS[@]}"; do
           URL="${pair%|*}"; SLUG="${pair#*|}"
-          for RUN in 1 2 3; do
+          for RUN in $(seq 1 "$RUNS"); do
             TS=$(date -u +%Y-%m-%dT%H:%M:%SZ)
             echo "[$TS] === ${SLUG} run ${RUN} ==="
             npx --yes lighthouse@13.3.0 "$URL" \
@@ -99,10 +100,10 @@ tasks:
           done
         done
         echo
-        echo "=== devtools / n=3 / scores per run ==="
+        echo "=== devtools / n=${RUNS} / scores per run ==="
         printf "%-12s %-3s %-4s %-4s %-4s %-5s %-6s %-5s %s\n" "page" "run" "perf" "a11y" "bp" "fcp" "lcp" "tbt" "cls"
         for SLUG in home colophon splitledger; do
-          for RUN in 1 2 3; do
+          for RUN in $(seq 1 "$RUNS"); do
             jq -r --arg slug "$SLUG" --arg run "$RUN" '
               [$slug, $run,
                (.categories.performance.score*100|round|tostring),
@@ -116,14 +117,18 @@ tasks:
           done
         done | column -t -s $'\t'
         echo
-        echo "=== Perf medians (sorted middle of 3 runs) ==="
+        if [ "$RUNS" -gt 1 ]; then
+          echo "=== Perf medians (n=${RUNS}) ==="
+        else
+          echo "=== Perf scores (n=1) ==="
+        fi
         for SLUG in home colophon splitledger; do
           PERF=()
-          for RUN in 1 2 3; do
+          for RUN in $(seq 1 "$RUNS"); do
             PERF+=( "$(jq -r '(.categories.performance.score*100)|round' \
               /tmp/lh/latest/${SLUG}.run-${RUN}.report.json)" )
           done
-          MED=$(printf '%s\n' "${PERF[@]}" | sort -n | sed -n 2p)
+          MED=$(printf '%s\n' "${PERF[@]}" | sort -n | sed -n $(( (RUNS + 1) / 2 ))p)
           printf "  %-12s  %d\n" "$SLUG" "$MED"
         done
 
