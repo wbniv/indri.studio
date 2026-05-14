@@ -17,7 +17,13 @@
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
 
-# App screenshots: stable URLs, content rotates only when an app
-# entry changes. 1y immutable matches Astro's hashed-asset policy.
+# App screenshots aren't content-hashed yet (raw public/ files with
+# stable URLs), so `immutable` would lie — a year-old cached entry
+# would never revalidate after an in-place replacement. Interim:
+# 1-day TTL — trades a few KB of revalidation bandwidth for
+# correctness. The follow-up plan at
+# docs/plans/2026-05-14-asset-pipeline-cache-busting.md migrates
+# screenshots into src/assets/ so they ship hashed under _astro/*
+# and this rule can be deleted entirely.
 /screenshots/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=86400

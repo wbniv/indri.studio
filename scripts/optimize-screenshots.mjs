@@ -68,8 +68,13 @@ const ts = () => new Date().toISOString();
 
 const sources = await walk(screenshotsDir);
 if (sources.length === 0) {
-	console.error(`${ts()} no source images found under ${screenshotsDir}`);
-	process.exit(1);
+	// Empty source dir is benign for a fresh clone / CI cache miss. Warn
+	// and let the build proceed with an empty manifest rather than
+	// hard-failing.
+	console.warn(`${ts()} warning: no source images found under ${screenshotsDir}`);
+	await fs.mkdir(path.dirname(manifestPath), { recursive: true });
+	await fs.writeFile(manifestPath, JSON.stringify({}, null, "\t") + "\n");
+	process.exit(0);
 }
 
 let generated = 0;

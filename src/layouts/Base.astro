@@ -19,14 +19,6 @@ const siteTitle = "indri";
 const fullTitle = title === siteTitle ? siteTitle : `${title} · ${siteTitle}`;
 
 const pathname = Astro.url.pathname;
-
-const navLinkClass = (active: boolean) =>
-	[
-		"font-display uppercase tracking-[0.25em] text-xs transition-colors",
-		active
-			? "text-primary-container"
-			: "text-on-surface-variant hover:text-primary-container",
-	].join(" ");
 ---
 
 <!doctype html>
@@ -186,8 +178,6 @@ const navLinkClass = (active: boolean) =>
 				<div class="font-display uppercase text-[10px] tracking-[0.3em] text-on-surface-variant flex items-center gap-2">
 					<a
 						href="mailto:hello@indri.studio"
-						target="_blank"
-						rel="noopener noreferrer"
 						aria-label="Email Indri"
 						class="opacity-70 hover:opacity-100 hover:text-primary-container transition-all inline-flex items-center"
 					>

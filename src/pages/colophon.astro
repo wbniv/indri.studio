@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
+import mascotLemur from "../assets/mascot-lemur.png";
 
 const linkClass =
 	"text-on-surface underline decoration-primary-container/40 underline-offset-4 hover:text-primary-container hover:decoration-primary-container transition-colors";
@@ -453,11 +455,11 @@ const motifs = [
 
 	<!-- Mascot — colophon only for now, sits flush against the footer -->
 	<div class="w-full flex justify-center pt-6 px-6">
-		<img
-			src="/mascot-lemur.png"
+		<Image
+			src={mascotLemur}
 			alt="Indri mascot — a stylised ring-tailed lemur with neon purple eyes, tail looped over its head"
-			width="1536"
-			height="1024"
+			width={384}
+			densities={[1, 2]}
 			loading="lazy"
 			class="lemur-idle relative top-2 w-full max-w-sm h-auto block"
 		/>

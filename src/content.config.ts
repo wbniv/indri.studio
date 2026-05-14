@@ -76,21 +76,33 @@ const apps = defineCollection({
 		//   fontBody    → --font-body
 		// Unset fields inherit the studio brand. CSS color values; fonts as
 		// full font-family stacks ("Geist, system-ui, sans-serif").
-		theme: z
-			.object({
-				primary: z.string().optional(),
-				secondary: z.string().optional(),
-				background: z.string().optional(),
-				text: z.string().optional(),
-				fontDisplay: z.string().optional(),
-				fontBody: z.string().optional(),
-				// Stylesheet URLs to inject into <head> on this app's pages —
-				// typically a single Google Fonts URL covering both faces.
-				// Loaded only on pages using this app's theme; studio pages
-				// stay slim (just Space Grotesk + Inter from Base).
-				fontImports: z.array(z.string()).optional(),
-			})
-			.optional(),
+		theme: (() => {
+			// Theme color and font-family values get interpolated directly
+			// into AppLayout's `style="…"` attribute. Author-controlled
+			// today, but block the obvious CSS-injection vectors (a value
+			// containing `;` could append rules; `{}<>` could break out of
+			// the attribute) so the safety doesn't depend on remembering.
+			// Quote marks are allowed because font-family stacks like
+			// `"Times New Roman", system-ui` need them.
+			const cssSafe = z
+				.string()
+				.regex(/^[^;{}<>\\]+$/, "theme value must not contain ; { } < > or \\");
+			return z
+				.object({
+					primary: cssSafe.optional(),
+					secondary: cssSafe.optional(),
+					background: cssSafe.optional(),
+					text: cssSafe.optional(),
+					fontDisplay: cssSafe.optional(),
+					fontBody: cssSafe.optional(),
+					// Stylesheet URLs to inject into <head> on this app's pages —
+					// typically a single Google Fonts URL covering both faces.
+					// Loaded only on pages using this app's theme; studio pages
+					// stay slim (just Space Grotesk + Inter from Base).
+					fontImports: z.array(z.string().url()).optional(),
+				})
+				.optional();
+		})(),
 	}),
 });
 
