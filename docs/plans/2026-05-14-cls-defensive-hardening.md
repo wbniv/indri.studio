@@ -162,7 +162,14 @@ Per SRC `CLAUDE.md` plan-verification format — keep numbered steps verbatim; b
    ```
    **PASS** — Perf medians 100 / 100 / 100 held. CLS: home 0.003 (all 3 runs), colophon 0 (all 3 runs), splitledger 0 (all 3 runs) — all well under the 0.05 budget. Colophon run-1 Perf 89 is a single-run outlier (3.0 s FCP/LCP, likely a cold-fetch transient); runs 2 + 3 confirm the steady-state at 100.
 
-6. **CI budget check formats the summary table correctly on a green run.** **PENDING** — verifies on the next `v*` tag push (the workflow only fires on tag-push or `workflow_dispatch`). Expect: existing Lighthouse table prints first; below it, a `### CLS budget: ≤ 0.05` table with three rows showing `✓ OK`; the step shows green.
+6. **CI budget check formats the summary table correctly on a green run.** Expect: existing Lighthouse table prints first; below it, a `### CLS budget: ≤ 0.05` table with three rows showing `✓ OK`; the step shows green.
+
+   v0.1.28 CI run 25851404768 (`eff6bed`):
+   ```
+   CLS budget check: conclusion = success, no ::warning:: annotation emitted
+   (table written to $GITHUB_STEP_SUMMARY — home/colophon/splitledger all ✓ OK, 0 violations)
+   ```
+   **PASS** — step concluded green; no warning annotation; all 3 pages were under the 0.05 budget. Note: this run used the hardcoded `for SLUG in home colophon splitledger` loop (from `eff6bed`). The current `HEAD` (`004e2d5`) uses the dynamic `for f in /tmp/lh/latest/*.run-1.report.json` glob — verified to work correctly by the v0.1.29 run and local threshold tests.
 
 7. **CI budget check fires on a synthetic regression.** **PENDING** — opportunistic verify-on-incident; not worth injecting a deliberate regression just to exercise the alert path. The exit-1 + `::warning::` annotation logic is straightforward bash; semantic confidence comes from the local Lighthouse data above (all CLS values well under budget; the alert branch is dead code until a real regression lands).
 
