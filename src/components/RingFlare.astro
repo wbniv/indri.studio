@@ -9,10 +9,12 @@
 // app-card-title hover) fades out — looks like a slice of a much
 // larger circle sweeping past the viewport edges.
 //
-// On page load, a tiny inline script randomises each ring's
-// animation-delay so the first flare's position varies every visit
-// instead of always firing in the top-left. Each ring lands somewhere
-// in its silent phase at t=0 — no ring is mid-flare on load.
+// Rings start with `animation: none` (no timing, no playback).
+// On astro:page-load, randomizeRings() sets animation-delay (placing
+// the ring in its silent phase) and adds class `ready` (which starts
+// the animation) in the same JS task. The browser batches both style
+// mutations before painting, so the first rendered frame is already
+// at the silent-phase position — no intermediate visible frame.
 //
 // Honors prefers-reduced-motion: reduce.
 
@@ -41,16 +43,16 @@ const rings = [
 </div>
 
 <script>
-	// Per-visit randomisation. Each ring gets a negative animation-delay
-	// in [5%, 95%] of its cycle — so on load each ring is somewhere in
-	// its silent phase (never mid-flare), and which ring fires first
-	// changes every visit. astro:page-load fires on initial load and
-	// after each View Transition swap, so new .ring elements are always
-	// in the DOM when this runs.
+	// Rings start with `animation: none`. Setting animationDelay and adding
+	// the `ready` class happen in the same JS task so the browser applies
+	// both before the next paint — the animation begins directly at the
+	// silent-phase position, never showing an intermediate visible frame.
 	function randomizeRings() {
+		if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 		for (const r of document.querySelectorAll<HTMLElement>(".ring")) {
 			const d = parseFloat(r.dataset.duration ?? "0");
 			r.style.animationDelay = -(d * (0.05 + Math.random() * 0.9)) + "s";
+			r.classList.add("ready");
 		}
 	}
 	document.addEventListener("astro:page-load", randomizeRings);
@@ -78,6 +80,9 @@ const rings = [
 			0 0 48px color-mix(in srgb, var(--color-primary-container) 45%, transparent);
 		transform: scale(0.15);
 		opacity: 0;
+		animation: none;
+	}
+	.ring.ready {
 		animation: ring-flare linear infinite;
 	}
 
@@ -97,6 +102,6 @@ const rings = [
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.ring { animation: none; }
+		.ring, .ring.ready { animation: none !important; }
 	}
 </style>
