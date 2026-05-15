@@ -23,7 +23,16 @@
 	// Switch each [data-promote] print stylesheet to media="all" so it
 	// applies to the screen. Setting .media is idempotent — no race
 	// condition whether the resource has already loaded or is still in-flight.
-	for (const link of document.querySelectorAll<HTMLLinkElement>('link[data-promote]')) {
-		link.media = 'all';
-	}
+	//
+	// Also wire astro:page-load: Astro deduplicates <script> tags across
+	// ClientRouter navigations so this block only executes once, but the
+	// <link media="print"> is re-injected into <head> on every swap. The
+	// page-load listener re-promotes it on every subsequent navigation.
+	const promote = () => {
+		for (const link of document.querySelectorAll<HTMLLinkElement>('link[data-promote]')) {
+			link.media = 'all';
+		}
+	};
+	promote();
+	document.addEventListener('astro:page-load', promote);
 </script>

@@ -153,6 +153,45 @@ const pathname = Astro.url.pathname;
 				});
 			}
 		</script>
+		<script>
+			// Persist header::after breathe + body::before stripe animations across
+			// page transitions. ClientRouter re-applies inlined <style> on each swap,
+			// restarting CSS @keyframe animations from 0 even on transition:persist
+			// elements. Save currentTime before nav; restore after page-load.
+			if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+				let savedBreathe: number[] = [];
+				let savedStripe: number[] = [];
+
+				const getBreatheAnims = () =>
+					document.getAnimations().filter((a) => {
+						const fx = a.effect as KeyframeEffect | null;
+						return fx?.pseudoElement === "::after" &&
+							(fx?.target as Element)?.matches?.(".header-fx");
+					});
+
+				const getStripeAnims = () =>
+					document.getAnimations().filter((a) => {
+						const fx = a.effect as KeyframeEffect | null;
+						return fx?.pseudoElement === "::before" && fx?.target === document.body;
+					});
+
+				document.addEventListener("astro:before-preparation", () => {
+					savedBreathe = getBreatheAnims().map((a) => (a.currentTime as number) ?? 0);
+					savedStripe  = getStripeAnims().map((a)  => (a.currentTime as number) ?? 0);
+				});
+
+				document.addEventListener("astro:page-load", () => {
+					getBreatheAnims().forEach((anim, i) => {
+						if (savedBreathe[i] != null) anim.currentTime = savedBreathe[i];
+					});
+					getStripeAnims().forEach((anim, i) => {
+						if (savedStripe[i] != null) anim.currentTime = savedStripe[i];
+					});
+					savedBreathe = [];
+					savedStripe  = [];
+				});
+			}
+		</script>
 	</head>
 	<body class="min-h-screen flex flex-col text-on-surface font-body">
 		<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-surface-container focus:text-on-surface focus:rounded focus:ring-2 focus:ring-primary-container">
