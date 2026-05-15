@@ -154,7 +154,7 @@ tasks:
       - |
         set -euo pipefail
 
-        if ! git diff --quiet HEAD; then
+        if ! git diff --quiet HEAD -- ':!docs/transcripts'; then
           echo "error: working tree has uncommitted changes vs HEAD. commit or stash first." >&2
           exit 1
         fi
