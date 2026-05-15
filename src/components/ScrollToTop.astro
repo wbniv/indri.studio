@@ -169,6 +169,9 @@
 		}, { passive: true });
 
 		document.addEventListener("astro:before-preparation", () => {
+			// Cancel any in-flight smooth-scroll so step() doesn't continue
+			// calling scrollTo() on the incoming page after the swap.
+			if (activeAbort) activeAbort.abort();
 			eligible = false;
 			const btn = button();
 			if (btn) {
