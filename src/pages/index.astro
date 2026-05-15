@@ -5,6 +5,8 @@ import PlatformIcon from "../components/PlatformIcon.astro";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 
+// TODO: add getCollection("team") + team strip section once bios are written.
+// Schema + content files exist in src/content/team/; not rendered anywhere yet.
 const allApps = (await getCollection("apps", ({ data }) => !data.draft))
 	.sort((a, b) => {
 		// Finding Your Way is a commissioned piece (a port for an external author),

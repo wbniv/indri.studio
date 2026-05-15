@@ -11,10 +11,8 @@ variable "domain" {
 }
 
 variable "account_id" {
-  description = "Cloudflare account ID hosting the indri.studio zone. Source-of-truth value lives in SSM at /indri-studio/cloudflare/account_id; mirrored here for TF clarity."
+  description = "Cloudflare account ID hosting the indri.studio zone. Source-of-truth value lives in SSM at /indri-studio/cloudflare/account_id; supplied at apply-time via TF_VAR_account_id (see Taskfile.yml tf-apply)."
   type        = string
-  # TODO: set the actual account ID before first apply
-  default = ""
 }
 
 variable "worker_name" {
