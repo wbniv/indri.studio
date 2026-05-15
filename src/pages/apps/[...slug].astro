@@ -101,6 +101,10 @@ const ogImage = post.data.screenshots[0]?.src.src
 				</div>
 			)}
 
+			<h1 class="font-display text-headline-lg text-primary-container tracking-tighter mb-6">
+				{post.data.title}
+			</h1>
+
 			{post.data.logo && (
 				<Image
 					src={post.data.logo}
@@ -110,10 +114,6 @@ const ogImage = post.data.screenshots[0]?.src.src
 					fetchpriority="high"
 				/>
 			)}
-
-			<h1 class="font-display text-headline-lg text-primary-container tracking-tighter mb-6">
-				{post.data.title}
-			</h1>
 
 			{post.data.summary && (
 				<p class="font-body text-body-lg text-secondary border-l-2 border-primary-container pl-6">
