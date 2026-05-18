@@ -88,6 +88,21 @@ tasks:
     cmds:
       - bash scripts/lh-report.sh {{.CLI_ARGS}}
 
+  card-preview:
+    desc: "Composite-preview a card background. IMG1=, IMG2=, TITLE=, SUMMARY= (opt), INDEX= (opt, default 0), SCALE2= (opt), ROTATION2= (opt), FULLBLEED2=true (opt). Output: /tmp/card-preview.png"
+    cmds:
+      - |
+        set -euo pipefail
+        args=(--img1 "{{.IMG1}}" --title "{{.TITLE}}")
+        [ -n "{{.IMG2}}" ]             && args+=(--img2 "{{.IMG2}}")
+        [ -n "{{.SUMMARY}}" ]          && args+=(--summary "{{.SUMMARY}}")
+        [ -n "{{.INDEX}}" ]            && args+=(--index "{{.INDEX}}")
+        [ -n "{{.SCALE2}}" ]           && args+=(--scale2 "{{.SCALE2}}")
+        [ -n "{{.ROTATION2}}" ]        && args+=(--rotation2 "{{.ROTATION2}}")
+        [ "{{.FULLBLEED2}}" = "true" ] && args+=(--fullbleed2)
+        python3 scripts/preview-card.py "${args[@]}" --out /tmp/card-preview.png
+        xdg-open /tmp/card-preview.png
+
   lighthouse:
     desc: "Run Lighthouse 13.3.0 against every routable prod page (home, colophon, all /apps/<slug>/), RUNS=${RUNS:-3} runs each, devtools throttling. URL list auto-enumerates from src/content/apps/*.md — adding/removing an app extends/shrinks the sampled set with no Taskfile edit. CI passes RUNS=1. Reports under /tmp/lh/latest/."
     cmds:

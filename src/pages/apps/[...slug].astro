@@ -10,7 +10,7 @@ import lightboxUrl from "../../scripts/cca-lightbox.js?url";
 export async function getStaticPaths() {
 	// Same sort as the homepage gallery — alphabetical with finding-your-way
 	// pinned last — so prev/next here matches the order users see there.
-	const posts = (await getCollection("apps", ({ data }) => !data.draft)).sort((a, b) => {
+	const posts = (await getCollection("apps", ({ data }) => !data.draft && !data.externalUrl)).sort((a, b) => {
 		if (a.id === "finding-your-way") return 1;
 		if (b.id === "finding-your-way") return -1;
 		return a.data.title.localeCompare(b.data.title);

@@ -30,6 +30,7 @@ task secrets-pull            # Pull SSM secrets into local .env
 task secrets-bootstrap       # Push local secrets into SSM (one-time)
 task tf-plan                 # Terraform plan (in infrastructure/cloudflare/global/)
 task tf-apply                # Terraform apply
+task card-preview IMG1=… IMG2=… TITLE=…   # Composite-preview a card background image
 ```
 
 Run all commands from the repo root. The `Taskfile.yml` is the canonical entry point — never run raw `wrangler`/`terraform`/`pnpm` unless no task entry covers it.
@@ -51,6 +52,20 @@ Authoritative values live in [`src/styles/global.css`](src/styles/global.css); t
 Existing Material-name utilities work as expected: `bg-surface`, `text-primary-container`, `border-outline-variant`, etc.
 
 **Stripe motif** — ring-tailed-lemur reference. Available as `.stripe-divider` for horizontal banding between sections. Use sparingly — it's a flavour element, not a structural one.
+
+## App card images
+
+Homepage cards use two source images composited by CSS at render time (primary full-bleed, secondary bottom-right corner). **Before committing card images, preview the composite:**
+
+```bash
+task card-preview IMG1=src/assets/screenshots/<slug>/primary.png \
+                  IMG2=src/assets/screenshots/<slug>/secondary.png \
+                  TITLE="App Name" INDEX=<grid-slot>
+# Opens /tmp/card-preview.png for review.
+# Secondary overrides: SCALE2=1.3 ROTATION2=-30 FULLBLEED2=true
+```
+
+`INDEX` drives the same rotation/scale formula as the grid (`index.astro`). Once approved, reference the images in the app's frontmatter (`screenshots` or `cardImages`). Add `cardSecondaryStyle` to the frontmatter if the secondary needs non-default scale/rotation/fullBleed treatment.
 
 ## Content collections
 

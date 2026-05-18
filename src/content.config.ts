@@ -62,6 +62,10 @@ const apps = defineCollection({
 		// renders the platform's badge below the app header. Use "#" as a
 		// placeholder when the actual store listing doesn't exist yet (a
 		// badge still renders, the link just no-ops).
+		// External site URL. When set the homepage card links here (new tab)
+		// instead of the internal /apps/<slug>/ page, and no static page is
+		// generated for this entry.
+		externalUrl: z.string().url().optional(),
 		storeLinks: z
 			.object({
 				appStore: z.string().optional(),
@@ -69,6 +73,17 @@ const apps = defineCollection({
 				steam: z.string().optional(),
 				blenderExtensions: z.string().optional(),
 				github: z.string().optional(),
+			})
+			.optional(),
+		// Per-card overrides for the secondary background image treatment.
+		// When fullBleed is true the image covers the whole card instead of
+		// sitting in the bottom-right corner; scale and rotation are applied
+		// as CSS transform (rotation defaults to the computed grid value).
+		cardSecondaryStyle: z
+			.object({
+				scale: z.number().optional(),
+				rotation: z.number().optional(),
+				fullBleed: z.boolean().optional(),
 			})
 			.optional(),
 		// Per-app brand kit. Any field set here is written by AppLayout as

@@ -69,7 +69,10 @@ const allApps = (await getCollection("apps", ({ data }) => !data.draft))
 				const primaryClass = usingPlaceholder
 					? "absolute inset-0 w-full h-full object-cover opacity-20 grayscale contrast-75"
 					: "absolute inset-0 w-full h-full object-cover opacity-35 saturate-50";
-				const secondaryClass = usingPlaceholder
+				const css2 = app.data.cardSecondaryStyle;
+				const secondaryClass = css2?.fullBleed
+					? "absolute inset-0 w-full h-full object-cover opacity-25 saturate-50 mix-blend-luminosity"
+					: usingPlaceholder
 					? "absolute -bottom-[20%] -right-[15%] w-3/4 h-3/4 object-cover opacity-15 grayscale contrast-75 mix-blend-luminosity"
 					: "absolute -bottom-[20%] -right-[15%] w-3/4 h-3/4 object-cover opacity-25 saturate-50 mix-blend-luminosity";
 				// Per-card visual variation: slight differences in rotation and
@@ -80,7 +83,8 @@ const allApps = (await getCollection("apps", ({ data }) => !data.draft))
 				return (
 					<li>
 						<a
-							href={`/apps/${app.id}/`}
+							href={app.data.externalUrl ?? `/apps/${app.id}/`}
+							{...(app.data.externalUrl ? { target: "_blank", rel: "noopener noreferrer" } : {})}
 							class="glass-card glass-card-hover relative overflow-hidden block h-full p-6 md:p-8 group"
 						>
 							{shots.length > 0 && (
@@ -102,7 +106,12 @@ const allApps = (await getCollection("apps", ({ data }) => !data.draft))
 											widths={[480, 960]}
 											sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
 											class={secondaryClass}
-											style={`transform: rotate(${-rotation * 1.4}deg);`}
+											style={(() => {
+												const css2 = app.data.cardSecondaryStyle;
+												const rot2 = css2?.rotation ?? -rotation * 1.4;
+												const sc2 = css2?.scale ?? 1;
+												return `transform: scale(${sc2}) rotate(${rot2}deg);`;
+											})()}
 										/>
 									)}
 									{/* Darken overlay — keeps text legible regardless of underlying screenshot */}
