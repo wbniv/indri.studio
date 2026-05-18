@@ -110,7 +110,12 @@ const allApps = (await getCollection("apps", ({ data }) => !data.draft))
 												const css2 = app.data.cardSecondaryStyle;
 												const rot2 = css2?.rotation ?? -rotation * 1.4;
 												const sc2 = css2?.scale ?? 1;
-												return `transform: scale(${sc2}) rotate(${rot2}deg);`;
+												const ty = css2?.offsetY ?? 0;
+												const pos = css2?.objectPosition;
+												return [
+													`transform: translateY(${ty}%) scale(${sc2}) rotate(${rot2}deg)`,
+													pos && `object-position: ${pos}`,
+												].filter(Boolean).join('; ');
 											})()}
 										/>
 									)}

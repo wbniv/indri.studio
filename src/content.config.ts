@@ -84,6 +84,10 @@ const apps = defineCollection({
 				scale: z.number().optional(),
 				rotation: z.number().optional(),
 				fullBleed: z.boolean().optional(),
+				offsetY: z.number().optional(),
+				// CSS object-position value — controls which part of the image is
+				// visible when object-cover crops it. E.g. "top", "center top".
+				objectPosition: z.string().optional(),
 			})
 			.optional(),
 		// Per-app brand kit. Any field set here is written by AppLayout as
