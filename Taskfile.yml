@@ -83,6 +83,11 @@ tasks:
     cmds:
       - terraform apply
 
+  lh-report:
+    desc: "Print Lighthouse score table. Default: /tmp/lh/latest/. Args: lh-report v0.0.29 | lh-report path/to/file.json"
+    cmds:
+      - bash scripts/lh-report.sh {{.CLI_ARGS}}
+
   lighthouse:
     desc: "Run Lighthouse 13.3.0 against every routable prod page (home, colophon, all /apps/<slug>/), RUNS=${RUNS:-3} runs each, devtools throttling. URL list auto-enumerates from src/content/apps/*.md — adding/removing an app extends/shrinks the sampled set with no Taskfile edit. CI passes RUNS=1. Reports under /tmp/lh/latest/."
     cmds:
