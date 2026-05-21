@@ -8,6 +8,8 @@
 - [Cloudflare _headers merges rules](feedback-cloudflare-headers-merge.md) — WSA _headers accumulates all matching rules; never use `/*` catch-all with specific path rules for same header; use Worker instead
 - [Forced reflow on first paint](feedback-forced-reflow-first-paint.md) — scripts that read layout (scrollY/innerHeight/getBoundingClientRect) + write styles stall first paint; skip when default applies, else defer with requestIdleCallback
 - [Render design artifacts, don't describe them](feedback-render-design-artifacts.md) — icons, swatches, type samples must be rendered as actual HTML in design docs; text substitutes (icon names, hex strings) are not acceptable
+- [Project-scoped state, not GH-org-scoped](feedback-project-scoped-state.md) — secrets buckets, bootstrap caches, CF tokens scope off `<zone-slug>`/`<CUSTOM_DOMAIN>`, never off `${GH_ORG}` — wbniv hosts multiple projects that must not collide
+- [Apt repos under wbniv](project-apt-repos-on-cloudflare.md) — current: apt.worldfoundry.org, apt.indri.studio; planned: apt.biohack.net — naming convention + cross-repo isolation rules
 
 <!-- BEGIN GLOBAL MEMORY (managed by claude-housekeeping; do not edit) -->
 

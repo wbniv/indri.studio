@@ -4,6 +4,9 @@ dist/
 /apt/.aptly/
 /apt/public/
 /apt/gen/__pycache__/
+
+# Claude Code runtime state (per-session lock; PID + acquired-at)
+/.claude/scheduled_tasks.lock
 # generated types
 .astro/
 # wrangler cache + state
