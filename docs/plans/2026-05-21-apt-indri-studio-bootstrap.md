@@ -25,30 +25,37 @@ Mirrors the existing `apt.worldfoundry.org` pattern (monorepo + Cloudflare R2 + 
 | DNS / Edge | Cloudflare DNS CNAME `apt` → R2; transform rule for trailing-`/` → `index.html` |
 | Signing | GPG 4096-bit RSA, 2yr expiry, key id "Indri Packages <packages@indri.studio>" |
 | CI | `.github/workflows/publish.yml` triggered on `apt-v*` tags |
-| Secrets backup | R2 bucket `wbniv-secrets` (already exists from worldfoundry bootstrap) |
+| Secrets backup | R2 bucket `indri-studio-secrets` (project-scoped, not GH-org-scoped — multiple apt repos under one GH org must not share a secrets bucket) |
 | Tag namespace | `apt-v*` (website deploy uses `v*`; `deploy.yml` updated to exclude `apt-v*`) |
 
 ## Derived config (bootstrap-apt.sh)
 
 ```
-GH_ORG=wbniv
+GH_ORG=wbniv                              # GitHub org/owner — the only wbniv-scoped value
 PKG_NAME=indri-apt
-GH_REPO=wbniv/indri.studio          # monorepo
+GH_REPO=wbniv/indri.studio                # monorepo
 APT_SUBDIR=apt
-REPO_NAME=indri                      # override; algo would give wbniv
+REPO_NAME=indri                            # override; algo would give wbniv
 SUITE=stable
 R2_BUCKET=indri-apt
-SECRETS_BUCKET=wbniv-secrets         # reused from worldfoundry bootstrap
+SECRETS_BUCKET=indri-studio-secrets        # project-scoped, NOT wbniv-scoped
 CUSTOM_DOMAIN=apt.indri.studio
 CF_ZONE_NAME=indri.studio
-CF_OPERATOR_TOKEN_NAME=wbniv-operator  # reused; cached in /tmp/wbniv-bootstrap.env
-R2_TOKEN_NAME=indri-apt-ci             # new
+CF_OPERATOR_TOKEN_NAME=apt.indri.studio    # token name = custom domain (memorable)
+R2_TOKEN_NAME=indri-apt-ci
+BOOTSTRAP_CACHE=/tmp/indri-studio-bootstrap.env  # project-scoped local cache
 KEY_NAME="Indri Packages"
 KEY_EMAIL=packages@indri.studio
 TAG_PREFIX=apt-
 ```
 
-Cached operator token + R2 creds live at `/tmp/wbniv-bootstrap.env` (mode 600) from the prior worldfoundry run, so this bootstrap should not re-prompt for CF_API_TOKEN; the new R2 token (`indri-apt-ci`, bucket-scoped) is the only fresh secret the user has to paste.
+**Decision (2026-05-21, mid-bootstrap):** the skill's original defaults
+(`SECRETS_BUCKET=${GH_ORG}-secrets`, `BOOTSTRAP_CACHE=/tmp/${GH_ORG}-bootstrap.env`,
+`CF_OPERATOR_TOKEN_NAME=${GH_ORG}-operator`) wrongly assumed one GH org → one apt
+repo. wbniv hosts (today) indri.studio's apt and (planned) biohack.net's apt;
+they MUST not share state. New convention: scope these off `<zone-slug>`
+(`indri-studio`, `biohack-net`) and use `<CUSTOM_DOMAIN>` for the CF token name.
+Skill defaults updated to match.
 
 ## First package: claude-usage
 

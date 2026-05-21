@@ -30,12 +30,12 @@ PUB_KEY="/tmp/indri-packages.pub.gpg"
 SEC_KEY="/tmp/indri-packages.sec.gpg"
 
 R2_BUCKET="indri-apt"
-SECRETS_BUCKET="wbniv-secrets"
+SECRETS_BUCKET="indri-studio-secrets"
 R2_TOKEN_NAME="indri-apt-ci"
-BOOTSTRAP_CACHE="/tmp/wbniv-bootstrap.env"
+BOOTSTRAP_CACHE="/tmp/indri-studio-bootstrap.env"
 CUSTOM_DOMAIN="apt.indri.studio"
 DNS_CNAME="apt"
-CF_OPERATOR_TOKEN_NAME="wbniv-operator"
+CF_OPERATOR_TOKEN_NAME="apt.indri.studio"
 CF_ZONE_NAME="indri.studio"
 
 DRY_RUN=false
