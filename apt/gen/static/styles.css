@@ -569,6 +569,7 @@ html[data-shrink="1"] .nav-link .logo { height: 22px; }
 }
 .entry.dir .icon { color: var(--color-accent); }
 .entry.up .icon { color: var(--color-accent); }
+.entry .icon.is-deb { color: var(--color-accent); }
 .entry .name {
   font-family: var(--font-mono);
   font-weight: 500;

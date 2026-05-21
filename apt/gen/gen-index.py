@@ -136,7 +136,7 @@ def fmt_mtime(ts: float) -> dict:
 ICONS = {
     "up":  '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M3 10 L8 5 L13 10 Z"/></svg>',
     "dir": '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M5 4 L11 8 L5 12 Z"/></svg>',
-    "deb": '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="10" height="10"/></svg>',
+    "deb": '<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="8" cy="8" r="5"/></svg>',
     "gz":  '<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 3 L13 3 L13 13 L3 13 Z M3 6 L13 6 M3 9 L13 9 M3 12 L13 12"/></svg>',
     "sig": '<svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M5 1 L5 4 L1 4 L1 6 L5 6 L5 9 L1 9 L1 11 L5 11 L5 15 L7 15 L7 1 Z"/><circle cx="11" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>',
     "key": '<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="5" cy="8" r="3"/><path d="M8 8 L15 8 M12 8 L12 11 M14 8 L14 10"/></svg>',
@@ -556,9 +556,10 @@ def render_row(e: Entry, rel: str, show_arch: bool, show_hash: bool) -> str:
     href = esc(e.href if e.href is not None else (e.name + ("/" if e.is_dir else "")))
     icon = ICONS["dir"] if e.is_dir else ICONS.get(e.ext, ICONS["txt"])
     cls = "entry " + ("dir" if e.is_dir else "file")
+    icon_cls = "icon" + (f" is-{e.ext}" if not e.is_dir and e.ext else "")
     name_html = (
         f'<a class="{cls}" href="{href}">'
-        f'<span class="icon">{icon}</span>'
+        f'<span class="{icon_cls}">{icon}</span>'
         f'<span class="name">{esc(e.name)}{"/" if e.is_dir else ""}</span>'
         f'</a>'
     )
