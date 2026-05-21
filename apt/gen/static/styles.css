@@ -1,36 +1,40 @@
-/* worldfoundry.org tokens — adapted for apt.worldfoundry.org index listing
+/* Indri brand tokens — apt.indri.studio index listing
  *
- * All colour + type tokens live below in one place. Names follow the
- * Tailwind v4 `@theme` namespace convention (--color-*, --font-*) so this
- * block can be migrated verbatim into an `@theme {}` directive if/when
- * you compile through the Tailwind CLI for utility-class generation.
- *
- *     npx @tailwindcss/cli -i src.css -o styles.css
- *
- *     // src.css
- *     @import "tailwindcss";
- *     @theme { --color-accent: #f80000; ... }
- *     @import "styles.css";
+ * Mirrors src/styles/global.css of the indri.studio marketing site:
+ * warm-tinted greys (ring-tailed-lemur lens) + neon Phosphor purple
+ * (#B026FF) as the single accent. Material naming preserved so the
+ * deeper component selectors below keep working.
  */
 
-@import url("https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
 
 :root {
-  /* ─── Colours — molten red on near-black ─────────────────────── */
-  --color-surface:          #1a1714;
-  --color-surface-raised:   #241f1b;
-  --color-surface-sunken:   #13110f;
-  --color-on-surface:       #f2ede6;
-  --color-on-surface-muted: #b8aea3;
-  --color-on-surface-dim:   #6f655c;
-  --color-accent:           #f80000;
-  --color-accent-dim:       #a30000;
-  --color-border:           #3a322c;
+  /* ─── Greys (warm-tinted, ringtail-inspired) ──────────────────── */
+  --color-grey-50:   #f5f0e8;
+  --color-grey-200:  #c8c0b8;
+  --color-grey-400:  #8e8780;
+  --color-grey-700:  #4a4641;
+  --color-grey-900:  #3d3833;
+  --color-grey-1000: #0a0908;
 
-  /* ─── Typography ─────────────────────────────────────────────── */
-  --font-display: Anton, Impact, "Arial Narrow", sans-serif;
-  --font-body:    "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  /* ─── Surfaces — page sits at grey-900, cards step up ─────────── */
+  --color-surface:          var(--color-grey-900);
+  --color-surface-raised:   var(--color-grey-700);
+  --color-surface-sunken:   #2a2724;
+  --color-on-surface:       var(--color-grey-50);
+  --color-on-surface-muted: var(--color-grey-200);
+  --color-on-surface-dim:   var(--color-grey-400);
+  --color-border:           #5b5650;
+
+  /* ─── Accent: Phosphor neon purple ────────────────────────────── */
+  --color-accent:           #b026ff;
+  --color-accent-dim:       #6c00b0;
+  --color-on-accent:        #1a002b;
+
+  /* ─── Typography (mirrors indri.studio) ───────────────────────── */
+  --font-display: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body:    Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
   /* ─── Layout ─────────────────────────────────────────────────── */
   --container-max: 1120px;
@@ -66,7 +70,7 @@ a {
 }
 a:hover {
   background: var(--color-accent);
-  color: #fff;
+  color: var(--color-on-accent);
   text-decoration-style: solid;
 }
 
@@ -82,7 +86,7 @@ a:hover {
   top: 0;
   z-index: 50;
   background: var(--color-accent);
-  color: #fff;
+  color: var(--color-on-accent);
   padding: 1rem 0;
   transition: padding 220ms ease-in-out, box-shadow 220ms ease-in-out;
   overflow: hidden;
@@ -90,7 +94,7 @@ a:hover {
 }
 html[data-shrink="1"] .site-header {
   padding: 0.125rem 0;
-  box-shadow: 0 2px 0 0 rgba(255, 255, 255, 1);
+  box-shadow: 0 2px 0 0 var(--color-on-accent);
 }
 
 .site-header .grid-motion {
@@ -142,11 +146,11 @@ html[data-motion="0"] .site-header .grid-motion span { animation: none !importan
   font-size: 1.25rem;
   letter-spacing: 0.30em;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--color-on-accent);
   text-decoration: none;
   line-height: 1;
 }
-.wordmark:hover { background: transparent; color: #fff; }
+.wordmark:hover { background: transparent; color: var(--color-on-accent); }
 .wordmark .square {
   display: inline-block;
   width: 14px;
@@ -154,7 +158,7 @@ html[data-motion="0"] .site-header .grid-motion span { animation: none !importan
   background: var(--color-surface);
 }
 .wordmark .subdomain {
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(26, 0, 43, 0.65);   /* on-accent at 65% */
   margin-left: -0.15em;
 }
 .nav-link {
@@ -166,7 +170,7 @@ html[data-motion="0"] .site-header .grid-motion span { animation: none !importan
   letter-spacing: 0.20em;
   text-transform: uppercase;
   font-variant: small-caps;
-  color: #fff;
+  color: var(--color-on-accent);
   text-decoration: none;
   padding: 0.35rem 0.9rem;
   margin-right: -24px;
@@ -176,14 +180,14 @@ html[data-motion="0"] .site-header .grid-motion span { animation: none !importan
   display: block;
   height: 32px;
   width: auto;
-  outline: 1px solid rgba(0, 0, 0, 0.35);   /* hairline so the white sticker reads on red */
+  outline: 1px solid rgba(26, 0, 43, 0.35);  /* hairline so the logo reads on purple */
   outline-offset: -1px;
   transition: height 220ms ease-in-out, outline-color 0.15s;
   flex-shrink: 0;
 }
 html[data-shrink="1"] .nav-link .logo { height: 22px; }
-.nav-link:hover { background: var(--color-surface); color: #fff; }
-.nav-link:hover .logo { outline-color: rgba(255, 255, 255, 0.45); }
+.nav-link:hover { background: var(--color-surface); color: var(--color-on-surface); }
+.nav-link:hover .logo { outline-color: rgba(245, 240, 232, 0.45); }
 
 /* ─── MAIN LAYOUT ────────────────────────────────────────────────── */
 .page {
@@ -306,7 +310,7 @@ html[data-shrink="1"] .nav-link .logo { height: 22px; }
 }
 .setup-tab:hover { color: var(--color-on-surface); }
 .setup-tab[aria-selected="true"] {
-  color: #fff;
+  color: var(--color-on-accent);
   background: var(--color-accent);
   border-bottom-color: transparent;
 }
@@ -341,7 +345,7 @@ html[data-shrink="1"] .nav-link .logo { height: 22px; }
   transition: color 0.15s, background 0.15s, border-color 0.15s;
 }
 .setup-body .copy:hover {
-  color: #fff;
+  color: var(--color-on-accent);
   background: var(--color-accent);
   border-color: var(--color-accent);
 }
@@ -408,7 +412,7 @@ html[data-shrink="1"] .nav-link .logo { height: 22px; }
   caret-color: var(--color-accent);
 }
 .filter-input::placeholder { color: var(--color-on-surface-dim); }
-.filter-input:focus { background: rgba(248, 0, 0, 0.06); }
+.filter-input:focus { background: rgba(176, 38, 255, 0.08); }
 .filter-clear {
   background: transparent;
   border: 0;
@@ -421,7 +425,7 @@ html[data-shrink="1"] .nav-link .logo { height: 22px; }
   cursor: pointer;
   transition: color 0.15s, background 0.15s;
 }
-.filter-clear:hover { color: #fff; background: var(--color-accent); }
+.filter-clear:hover { color: var(--color-on-accent); background: var(--color-accent); }
 
 /* ─── LISTING TABLE ──────────────────────────────────────────────── */
 .listing-wrap {
@@ -481,11 +485,11 @@ html[data-shrink="1"] .nav-link .logo { height: 22px; }
   color: var(--color-on-surface);
 }
 .listing-table tbody tr {
-  border-bottom: 1px solid #2a2522;
+  border-bottom: 1px solid var(--color-border);
   transition: background 0.1s;
 }
 .listing-table tbody tr:last-child { border-bottom: 0; }
-.listing-table tbody tr:hover { background: #211d19; }
+.listing-table tbody tr:hover { background: var(--color-surface-sunken); }
 .listing-table td {
   padding: 0.45rem 1rem;
   vertical-align: middle;
@@ -577,7 +581,7 @@ html[data-shrink="1"] .nav-link .logo { height: 22px; }
 .entry.up .name { color: var(--color-on-surface-muted); font-style: italic; }
 
 .entry:hover { background: transparent; color: inherit; }
-.entry:hover .name { background: var(--color-accent); color: #fff; text-decoration-style: solid; }
+.entry:hover .name { background: var(--color-accent); color: var(--color-on-accent); text-decoration-style: solid; }
 
 /* arch badge */
 .arch {
@@ -685,7 +689,7 @@ html[data-shrink="1"] .nav-link .logo { height: 22px; }
 }
 .listing-table tbody tr.meta-details a.dep-link:hover {
   background: var(--color-accent);
-  color: #fff;
+  color: var(--color-on-accent);
   text-decoration-color: transparent;
 }
 
