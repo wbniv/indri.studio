@@ -130,7 +130,7 @@ orange composite. Follow-up: vendor a baseline PNG into
    - Uploads public key to `r2://indri-apt/key.gpg`.
    - Patches `apt/gen/config.py` with fingerprint.
    - Stores `GPG_PRIVATE_KEY`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY` as GH Actions secrets on `wbniv/indri.studio`.
-   - Mirrors all secrets into `r2://wbniv-secrets/`.
+   - Mirrors all secrets into `r2://indri-studio-secrets/`.
 6. Push first tag: `task -d apt bump` → `apt-v0.1.0`. Watch `publish.yml` go green.
 7. Verify:
    - `curl -sI https://apt.indri.studio/` → 200 text/html
@@ -182,12 +182,12 @@ no DNS fees beyond the existing Cloudflare free plan zone.
 
 ## Risks / known gotchas
 
-- **Operator token reuse.** `wbniv-operator` is scoped to `worldfoundry.org` zone only.
-  Bootstrap will need to re-create it with `indri.studio` added to Zone Resources, OR
-  use a separate `indri-operator` token. The skill defaults to per-org (one token across
-  all this org's zones); the cached token won't have indri.studio in scope. **Expected
-  first failure:** step 1b reports missing zone-level perms. Fix: edit the existing token
-  to include `indri.studio` under Zone Resources, or create a new token and re-cache.
+- **Per-project state isolation.** This bootstrap creates project-scoped resources
+  (`indri-studio-secrets`, `/tmp/indri-studio-bootstrap.env`, CF token `apt.indri.studio`).
+  When `apt.biohack.net` lands later it MUST get its own equivalents (`biohack-net-secrets`,
+  `/tmp/biohack-net-bootstrap.env`, CF token `apt.biohack.net`) — never share state across
+  projects under the same GH org. Skill defaults updated to enforce this 2026-05-21.
 - **rclone bucket-create probe.** Templates already ship `--s3-no-check-bucket`. Confirm
   it's present in `publish.yml` before tagging.
-- **claude-usage payload sourcing** (step 3) — see flag above. May need a follow-up plan.
+- **claude-usage payload sourcing** (step 3) — see decision above. Wrapped via build.sh;
+  port to canonical `debian/` is the follow-up.
