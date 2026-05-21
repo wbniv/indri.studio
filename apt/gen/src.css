@@ -1,0 +1,32 @@
+/*
+ * src.css — Tailwind v4 @theme source.
+ *
+ * Edit the @theme tokens below, then run:
+ *   npx @tailwindcss/cli -i gen/src.css -o gen/static/styles.css --minify
+ *
+ * The default theme here is the WorldFoundry design (molten red on near-black).
+ * Replace with your project's brand colours, fonts, and sizing.
+ */
+
+@import "tailwindcss";
+
+@theme {
+  /* ── colour palette ─────────────────────────────────────────── */
+  --color-surface:          #1a1714;   /* page background */
+  --color-surface-raised:   #241f1b;   /* card / panel background */
+  --color-surface-sunken:   #13110f;   /* inset / code block background */
+  --color-on-surface:       #f2ede6;   /* primary text */
+  --color-on-surface-muted: #b8aea3;   /* secondary text */
+  --color-on-surface-dim:   #6f655c;   /* placeholder / metadata */
+  --color-accent:           #f80000;   /* brand accent (links, badges, buttons) */
+  --color-accent-dim:       #a30000;   /* hover / pressed accent */
+  --color-border:           #3a322c;   /* dividers and outlines */
+
+  /* ── typography ─────────────────────────────────────────────── */
+  --font-display: Anton, Impact, "Arial Narrow", sans-serif;
+  --font-body:    "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* ── layout ──────────────────────────────────────────────────── */
+  --container-max: 1120px;
+}

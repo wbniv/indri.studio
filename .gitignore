@@ -1,5 +1,9 @@
 # build output
 dist/
+# apt repo generated artifacts (built by apt-builder docker image)
+/apt/.aptly/
+/apt/public/
+/apt/gen/__pycache__/
 # generated types
 .astro/
 # wrangler cache + state

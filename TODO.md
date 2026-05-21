@@ -2,6 +2,10 @@
 
 Low-priority tasks that aren't blocking but shouldn't be lost.
 
+## Active
+
+- [ ] **2026-05-21** Bootstrap `apt.indri.studio` (monorepo `apt/`, Cloudflare R2 + aptly + GH Actions) and publish `claude-usage` as first package — [plan](docs/plans/2026-05-21-apt-indri-studio-bootstrap.md)
+
 ## Done
 
 - [x] **2026-05-14** HTML cache: `no-store` via Worker (content-type check); `_headers` merges rules so `/*` catch-all broke `_astro/*` immutable cache in v0.1.35, corrected in v0.1.36 — [plan](docs/plans/2026-05-14-html-cache-no-store.md)

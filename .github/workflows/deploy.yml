@@ -8,6 +8,7 @@ on:
   push:
     tags:
       - 'v*'
+      - '!apt-v*'   # apt-v* tags belong to apt/ publish workflow; never fire the website deploy
   workflow_dispatch:
 
 permissions:
