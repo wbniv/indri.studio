@@ -4,11 +4,11 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 ## Active
 
-- [ ] **2026-05-21** Bootstrap `apt.indri.studio` (monorepo `apt/`, Cloudflare R2 + aptly + GH Actions) and publish `claude-usage` as first package — [plan](docs/plans/2026-05-21-apt-indri-studio-bootstrap.md)
 - [ ] **2026-05-21** Stand up a second apt repo at `apt.biohack.net` (own zone, own R2 bucket `biohack-net-secrets` + `biohack-net-apt`, own operator token). Decide whether biohack.net gets a fresh monorepo or piggy-backs on an existing biohack.net website repo. Reuse the same skill (`new-web-apt-repo`).
 
 ## Done
 
+- [x] **2026-05-21** Bootstrap `apt.indri.studio` + publish `claude-usage` 0.11.20 (apt-v0.1.1 green; InRelease + key.gpg live; verified `apt-cache show` end-to-end from clean ubuntu:latest) — [plan](docs/plans/2026-05-21-apt-indri-studio-bootstrap.md)
 - [x] **2026-05-14** HTML cache: `no-store` via Worker (content-type check); `_headers` merges rules so `/*` catch-all broke `_astro/*` immutable cache in v0.1.35, corrected in v0.1.36 — [plan](docs/plans/2026-05-14-html-cache-no-store.md)
 - [x] **2026-05-14** Fix gustos-colores LCP: eager-load first screenshot (`loading="eager"` + `fetchpriority="high"`); 94 → 96 on CI, Phase-5 threshold gate green on v0.1.34
 - [x] **2026-05-14** Lighthouse pass 5 — 10-page sampling, per-tag prod archive at `/lh/<tag>/`, Phase-5 threshold gate (≥ 95); fixed gustos-colores 94→96 (font-display swap + 720w Screenshot breakpoint) on v0.1.33 — [plan](docs/plans/2026-05-14-lighthouse-pass-5.md)
