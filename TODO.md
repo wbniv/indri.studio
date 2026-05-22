@@ -4,6 +4,8 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 ## Active
 
+- [ ] **2026-05-22** Add `curl | bash` installer for `claude-usage` at `apt.indri.studio/install-claude-usage.sh` (thin bootstrap → upstream `install.sh`); also tighten `install.sh` pre-flight checks for `glib-compile-schemas` / `systemctl --user` / `gnome-shell` — [plan](docs/plans/2026-05-22-claude-usage-curlbash-installer.md)
+
 - [ ] **2026-05-21** Stand up a second apt repo at `apt.biohack.net` (own zone, own R2 bucket `biohack-net-secrets` + `biohack-net-apt`, own operator token). Decide whether biohack.net gets a fresh monorepo or piggy-backs on an existing biohack.net website repo. Reuse the same skill (`new-web-apt-repo`).
 
 ## Done

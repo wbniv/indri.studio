@@ -66,5 +66,13 @@ python3 gen/gen-index.py \
     --static gen/static/ --config gen/config.py --quiet
 
 echo
+echo "=== Staging hosted installers ==="
+# Per-package curl|bash bootstraps. Source lives in apt/installers/; rclone
+# syncs apt/public/ to R2 unchanged, so any file dropped here is served from
+# https://apt.indri.studio/<basename>.
+install -m 0755 installers/claude-usage.sh public/install-claude-usage.sh
+echo "  ✓ public/install-claude-usage.sh"
+
+echo
 echo "=== Published — apt sources line ==="
 echo "deb [trusted=yes] file://$(pwd)/public $SUITE main"
