@@ -17,8 +17,8 @@ set -euo pipefail
 NAME="claude-usage"
 UPSTREAM_OWNER="wbniv"
 UPSTREAM_REPO="claude-usage"
-TAG="v0.11.20"
-EXPECTED_SHA="42de54bb5af539e3125a4cbb31070e4c112fe28a1d586ab71fb61a6376f230b4"
+TAG="v0.11.21"
+EXPECTED_SHA="fe51d47bf0078d2ec70f5307cdb7d381841cd13c29a12a02aa4e58adec6ed67a"
 
 PKG_DIR="$(cd "$(dirname "$0")" && pwd)"
 APT_ROOT="$(cd "$PKG_DIR/../.." && pwd)"
