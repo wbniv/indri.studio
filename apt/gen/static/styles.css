@@ -645,6 +645,18 @@ html[data-shrink="1"] .nav-link .logo { height: 22px; }
   border-bottom: 1px solid var(--color-border);
   font-size: 0.85rem;
   color: var(--color-on-surface);
+  /* Override the table-wide `white-space: nowrap` default so prose
+     paragraphs and Depends/Recommends lists wrap inside the panel
+     (especially on narrow viewports). */
+  white-space: normal;
+  /* Override the .listing-table mono font for the entire expanded
+     panel — mono is right for scanning package names in the table
+     proper, but wrong for paragraphs of prose explanation. */
+  font-family: var(--font-body);
+}
+.listing-table tbody tr.meta-details a.dep-link,
+.listing-table tbody tr.meta-details code {
+  font-family: var(--font-mono);
 }
 .listing-table tbody tr.meta-details p.meta-long {
   margin: 0 0 0.5rem 0;
@@ -796,11 +808,118 @@ html[data-shrink="1"] .nav-link .logo { height: 22px; }
 
 /* mobile */
 @media (max-width: 639px) {
-  .listing-table thead th.col-mod,
-  .listing-table td.col-mod { display: none; }
-  .listing-table thead th.col-hash,
-  .listing-table td.col-hash { display: none; }
-  .listing-table td { padding: 0.45rem 0.6rem; }
-  .listing-table thead th { padding: 0.55rem 0.6rem; }
   .headline { font-size: 1.75rem; }
+
+  /* Mobile layout: each entry becomes a self-contained card (vertical
+     stack) instead of a wide table row. Five columns of metadata don't
+     fit in 375 px without character-by-character text breaks or extreme
+     truncation; cards work natively.
+
+     Per row, the grid template is:
+       row 1: Name (spans full width — long filenames wrap at <wbr>
+              breakpoints injected by gen-index.py's name_with_wbr())
+       row 2: Arch badges (left) | Size (right) — combined metadata strip
+       row 3: Description (spans full width)
+
+     Last-modified (col-mod) and hash (col-hash) stay hidden on mobile;
+     they're the lowest-value metadata to drop. */
+  .listing-table thead { display: none; }
+  .listing-table,
+  .listing-table tbody { display: block; }
+
+  /* Entry rows — the card layout */
+  .listing-table tbody tr.entry-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "name name"
+      "arch size"
+      "desc desc";
+    gap: 0.4rem 0.6rem;
+    padding: 0.75rem 0.6rem;
+    align-items: center;
+  }
+  .listing-table tbody tr.entry-row > td {
+    display: block;
+    padding: 0;
+    border: 0;
+  }
+  .listing-table tbody tr.entry-row > td.col-name {
+    grid-area: name;
+    /* Desktop sets `width: 1px` as a table-layout shrink-to-content hack.
+       In our mobile grid that becomes a literal 1 px and the name cell
+       collapses inside its grid area — reset to auto so the name span
+       uses the full row width its grid-area gives it. */
+    width: auto;
+  }
+  /* `.entry` is inline-flex on desktop (hugs its children's min-content)
+     — make it a block-level flex on mobile so the long .deb filename
+     wraps against the row width, not against its longest token. */
+  .listing-table tbody tr.entry-row > td.col-name .entry {
+    display: flex;
+    width: 100%;
+  }
+  .listing-table tbody tr.entry-row > td.col-arch { grid-area: arch; }
+  .listing-table tbody tr.entry-row > td.col-size { grid-area: size; justify-self: end; }
+  .listing-table tbody tr.entry-row > td.col-desc { grid-area: desc; }
+  .listing-table tbody tr.entry-row > td.col-mod,
+  .listing-table tbody tr.entry-row > td.col-hash { display: none; }
+
+  /* Section-header rows ("Install this — umbrella metapackages", etc.)
+     stay as full-width banners. */
+  .listing-table tbody tr.section-header { display: block; }
+  .listing-table tbody tr.section-header > td.section-header-cell {
+    display: block;
+    padding: 1rem 0.6rem 0.4rem;
+  }
+
+  /* Parent-directory row: same card shape, simplified. */
+  .listing-table tbody tr[data-parent="1"] { display: block; padding: 0.6rem; }
+  .listing-table tbody tr[data-parent="1"] > td {
+    display: block;
+    padding: 0;
+    border: 0;
+  }
+  .listing-table tbody tr[data-parent="1"] > td.col-mod,
+  .listing-table tbody tr[data-parent="1"] > td.col-size,
+  .listing-table tbody tr[data-parent="1"] > td.col-arch,
+  .listing-table tbody tr[data-parent="1"] > td.col-hash { display: none; }
+
+  /* Meta-details expanded panel — keep its full-width block layout. */
+  .listing-table tbody tr.meta-details { display: block; }
+  .listing-table tbody tr.meta-details > td.meta-details-cell {
+    display: block;
+    padding: 0.6rem 0.75rem 0.9rem 0.75rem;
+  }
+
+  /* Long .deb filenames need a place to wrap. gen-index.py injects
+     <wbr> after every -/_/./+ via name_with_wbr(); we just need the
+     fallback for the rare unbreakable token. */
+  .listing-table .entry .name { overflow-wrap: break-word; }
+
+  /* Inline "Pulls in: …" / "Recommends: …" labels each move to their
+     own line so the dep names get the full available width. */
+  .listing-table tbody tr.meta-row td.col-desc .desc-deps,
+  .listing-table tbody tr.meta-row td.col-desc .desc-recommends {
+    display: block;
+    margin-right: 0;
+  }
+
+  /* Header: at 375 px both wordmarks can't fit side-by-side. Tighten the
+     left wordmark, drop the right nav text label (keeping just the logo). */
+  .header-inner { padding: 0 12px; gap: 0.5rem; }
+  .wordmark {
+    font-size: 1rem;
+    letter-spacing: 0.18em;
+    gap: 0.45rem;
+    min-width: 0;
+  }
+  .wordmark .square { width: 10px; height: 10px; }
+  .nav-link {
+    padding: 0.25rem 0.5rem;
+    margin-right: -12px;
+    flex-shrink: 0;
+  }
+  .nav-link > span { display: none; }
+  .nav-link .logo { height: 26px; }
 }
