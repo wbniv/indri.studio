@@ -141,3 +141,49 @@ No infra changes (no Terraform, no DNS, no new R2 bucket). No GitHub Actions wor
     cd ~/SRC/claude-usage
     task md -- MANUAL.md
     ```
+
+---
+
+## Follow-up (2026-05-22 afternoon): sanitize wbniv from distributed artifacts + add release gate
+
+### Context
+
+After the v0.11.21 release, audit showed `wbniv` (the GitHub owner / personal handle) leaking into shipped artifacts:
+
+1. `apt.indri.studio/install-claude-usage.sh` — line 38: `OWNER="wbniv"` (visible to anyone who curls the bootstrap)
+2. `MANUAL.md` inside the .deb — two `github.com/wbniv/claude-usage…` URLs (Option A releases link, Option B clone URL)
+3. `apt/packages/claude-usage/build.sh` — `UPSTREAM_OWNER="wbniv"` — this one runs only inside CI and doesn't ship, but stays in scope for the gate's reasoning.
+
+The repo itself stays on `github.com/wbniv/...` — sanitization means routing distribution through `apt.indri.studio` so end-users never see the owner string.
+
+### Strategy: mirror source tarballs to R2
+
+On every apt build, mirror the pinned claude-usage source tarball to `apt.indri.studio/sources/`:
+
+- `apt.indri.studio/sources/claude-usage_<version>.tar.gz` — the tarball (byte-identical to GitHub's `codeload.github.com/...tag/<TAG>.tar.gz`)
+- `apt.indri.studio/sources/claude-usage-latest.json` — `{ "version": "0.11.21", "tarball": "https://apt.indri.studio/sources/claude-usage_0.11.21.tar.gz", "sha256": "..." }`
+
+Bootstrap rewrites to read the JSON pointer + fetch the tarball from R2, verify SHA256, extract, exec install.sh. **Zero GitHub API calls. Zero wbniv references.**
+
+The mirror lives in indri.studio's existing apt publish pipeline — the build already downloads the tarball (`apt/packages/claude-usage/build.sh:35`), so the marginal cost is just an `rclone copy` to `R2:indri-apt/sources/`.
+
+### Files to change
+
+| Path | Change |
+|---|---|
+| `indri.studio/apt/scripts/publish-local.sh` | After the existing source-tarball download, copy it + write a `claude-usage-latest.json` into `apt/public/sources/`. |
+| `indri.studio/apt/installers/claude-usage.sh` | Rewrite — drop GitHub API call + tarball URL; read `apt.indri.studio/sources/claude-usage-latest.json`, fetch + sha-verify the tarball. |
+| `indri.studio/.github/workflows/publish.yml` | New step **between** build and rclone sync: grep `apt/public/install-*.sh` and `apt/public/*.gpg` for `wbniv`; fail the workflow with an annotation if any match. |
+| `claude-usage/MANUAL.md` | Option A: replace "GitHub releases page" link with "add the apt.indri.studio repo, then `sudo apt install claude-usage`". Option B: replace clone URL with "download the source tarball from `apt.indri.studio/sources/claude-usage_X.Y.Z.tar.gz`" (or drop entirely and direct users to Option C). |
+
+### Gate scope (per user)
+
+Just `apt/public/install-*.sh` + `apt/public/*.gpg` — not the auto-generated index.html, not the .deb contents, not the Debian metadata. The .deb is sanitized at source via MANUAL.md edits, not via a runtime grep.
+
+### Verification
+
+1. `task -d apt clean && task -d apt publish-local` produces `apt/public/sources/claude-usage_0.11.21.tar.gz` + `claude-usage-latest.json`.
+2. `bash apt/public/install-claude-usage.sh --help` still prints usage; no GitHub references.
+3. Synthetic gate test: insert `# wbniv test` into a published installer copy → re-run gate → expect non-zero exit + annotation.
+4. After publish: `curl https://apt.indri.studio/install-claude-usage.sh | grep -c wbniv` returns **0**.
+5. After publish: `curl https://apt.indri.studio/sources/claude-usage-latest.json | jq` returns valid JSON with the pinned version + tarball URL.

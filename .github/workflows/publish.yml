@@ -47,6 +47,38 @@ jobs:
           GPG_KEY: ''
         run: bash apt/scripts/in-docker.sh bash scripts/publish-local.sh
 
+      # Sanitization gate. Distributed artifacts hosted at apt.indri.studio
+      # must not name the upstream GitHub owner string. Scope (per design):
+      # the bootstrap installers + the GPG public key — everything else in
+      # apt/public/ is either auto-generated index HTML (no risk of drift)
+      # or the .deb / repo metadata (sanitized at source via the upstream
+      # MANUAL.md). Extend FORBIDDEN as more strings need fencing.
+      - name: Sanitization gate — forbidden strings in distributed artifacts
+        run: |
+          set -euo pipefail
+          FORBIDDEN=(wbniv)
+          FAIL=0
+          shopt -s nullglob
+          targets=(apt/public/install-*.sh apt/public/*.gpg)
+          shopt -u nullglob
+          if [[ ${#targets[@]} -eq 0 ]]; then
+            echo "::warning::sanitization gate found no targets to scan"
+          fi
+          for f in "${targets[@]}"; do
+            for needle in "${FORBIDDEN[@]}"; do
+              if LC_ALL=C grep -l --binary-files=text "$needle" "$f" >/dev/null 2>&1; then
+                lineno=$(LC_ALL=C grep -n --binary-files=text "$needle" "$f" | head -1 | cut -d: -f1)
+                echo "::error file=$f,line=${lineno:-1}::distributed artifact contains forbidden string '$needle'"
+                FAIL=1
+              fi
+            done
+          done
+          if [[ "$FAIL" == "1" ]]; then
+            echo "Release blocked — see annotations above." >&2
+            exit 1
+          fi
+          echo "Sanitization gate: ${#targets[@]} files scanned, 0 forbidden strings."
+
       - name: Sign Release (in container)
         if: ${{ !inputs.dry_run }}
         env:

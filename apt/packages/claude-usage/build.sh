@@ -17,13 +17,14 @@ set -euo pipefail
 NAME="claude-usage"
 UPSTREAM_OWNER="wbniv"
 UPSTREAM_REPO="claude-usage"
-TAG="v0.11.21"
-EXPECTED_SHA="fe51d47bf0078d2ec70f5307cdb7d381841cd13c29a12a02aa4e58adec6ed67a"
+TAG="v0.11.22"
+EXPECTED_SHA="2abc6ab15c88f723706a4dcbc2ec80a6be07f5b901592f521b0790bc7274f858"
 
 PKG_DIR="$(cd "$(dirname "$0")" && pwd)"
 APT_ROOT="$(cd "$PKG_DIR/../.." && pwd)"
 DIST="$APT_ROOT/dist"
-mkdir -p "$DIST"
+SRC_DIST="$APT_ROOT/dist/sources"
+mkdir -p "$DIST" "$SRC_DIST"
 
 UPSTREAM_URL="https://codeload.github.com/${UPSTREAM_OWNER}/${UPSTREAM_REPO}/tar.gz/refs/tags/${TAG}"
 
@@ -41,6 +42,15 @@ if [[ "$actual_sha" != "$EXPECTED_SHA" ]]; then
     echo "  actual:   $actual_sha"   >&2
     exit 1
 fi
+
+# Stage the verified source tarball into apt/dist/sources/ so publish-local.sh
+# can mirror it into apt/public/sources/ alongside a latest.json pointer.
+# This is what the curl|bash bootstrap fetches at runtime — going via the R2
+# mirror means the published installer never names github.com/<owner>/<repo>.
+VERSION="${TAG#v}"
+SRC_BASENAME="${NAME}_${VERSION}.tar.gz"
+cp "$WORKDIR/src.tar.gz" "$SRC_DIST/$SRC_BASENAME"
+echo "OK   dist/sources/$SRC_BASENAME  ($(stat -c%s "$SRC_DIST/$SRC_BASENAME") bytes)"
 
 mkdir -p "$WORKDIR/src"
 tar -xzf "$WORKDIR/src.tar.gz" -C "$WORKDIR/src"

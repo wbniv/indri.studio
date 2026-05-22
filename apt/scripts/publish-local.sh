@@ -74,5 +74,38 @@ install -m 0755 installers/claude-usage.sh public/install-claude-usage.sh
 echo "  ✓ public/install-claude-usage.sh"
 
 echo
+echo "=== Mirroring source tarballs ==="
+# Each package's build.sh copies its verified upstream tarball into
+# apt/dist/sources/<pkg>_<version>.tar.gz. Promote them to apt/public/sources/
+# and emit <pkg>-latest.json so the curl|bash bootstrap can fetch source
+# from R2 instead of github.com — keeps the upstream GitHub owner string
+# out of every distributed artifact.
+mkdir -p public/sources
+shopt -s nullglob
+srcs=(dist/sources/*.tar.gz)
+shopt -u nullglob
+if [[ ${#srcs[@]} -eq 0 ]]; then
+    echo "  (no source tarballs in dist/sources/ — nothing to mirror)"
+else
+    for src in "${srcs[@]}"; do
+        base=$(basename "$src")
+        cp "$src" "public/sources/$base"
+        sha=$(sha256sum "$src" | awk '{print $1}')
+        # Filename shape: <pkg>_<version>.tar.gz — same as build.sh emits.
+        pkg=${base%_*}
+        version=${base#*_}; version=${version%.tar.gz}
+        cat > "public/sources/${pkg}-latest.json" <<JSON
+{
+  "version": "${version}",
+  "tarball": "https://apt.indri.studio/sources/${base}",
+  "sha256":  "${sha}"
+}
+JSON
+        echo "  ✓ public/sources/${base}  (sha256:${sha:0:12}…)"
+        echo "  ✓ public/sources/${pkg}-latest.json"
+    done
+fi
+
+echo
 echo "=== Published — apt sources line ==="
 echo "deb [trusted=yes] file://$(pwd)/public $SUITE main"
