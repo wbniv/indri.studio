@@ -18,6 +18,10 @@
 - [user_profile.md](user_profile.md) — Will's role, setup, and desktop/dev preferences
 - [user_mammouth_subscription.md](user_mammouth_subscription.md) — €20/mo Mammouth.ai Standard: multi-model API (GPT-4o, Claude, Gemini, Mistral, Llama) at api.mammouth.ai/v1
 
+## Project (inherited from ~)
+
+- [home_src_layout.md](home_src_layout.md) — Projects moved ~/SRC/<name> → ~/<name> post-reformat; projects.json + hook-runner still assume ~/SRC (hook-runner patched via symlink)
+
 ## Feedback (inherited from ~)
 
 - [feedback_wayland_keybindings.md](feedback_wayland_keybindings.md) — How held modifiers combine with ydotool on GNOME Wayland; architecture for tab switching across apps
