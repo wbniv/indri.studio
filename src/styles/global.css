@@ -401,24 +401,6 @@ html {
 		}
 	}
 
-	.material-symbols-outlined {
-		/* Reserve the icon box during the Material Symbols FOIT window
-		 * (display=block on the @font-face). Before the font loads, the
-		 * ligature names ("hourglass_top", "arrow_back") have near-zero
-		 * width — adjacent text would shift right by ~1em when glyphs
-		 * render. The hero .platform-strip override below uses this
-		 * same pattern with explicit pixel sizes; this is the
-		 * em-relative version that covers every other icon site.
-		 *
-		 * Google's Material Symbols stylesheet doesn't set width or
-		 * height (it sets font-size, display: inline-block,
-		 * line-height: 1), so a plain layered rule wins without
-		 * !important. */
-		width: 1em;
-		height: 1em;
-		text-align: center;
-	}
-
 	/* Sequential glow loop for the hero platform-icon strip.
 	 ~ Five icons, 6 s cycle: each icon briefly ramps from faint to full
 	 ~ Phosphor purple + neon text-shadow, 1.2 s apart. Suggests "one
@@ -441,69 +423,47 @@ html {
 		background-position: center;
 		background-repeat: no-repeat;
 	}
-	.platform-strip .material-symbols-outlined {
-		/* `!important` on font-size is needed because Google's
-		 ~ Material Symbols stylesheet is loaded *unlayered* and our
-		 ~ rules live inside `@layer components`. Per CSS cascade
-		 ~ layers, normal unlayered rules beat normal layered rules
-		 ~ regardless of specificity — so a plain `font-size: 40px`
-		 ~ here loses to Google's `.material-symbols-outlined {
-		 ~ font-size: 24px }`. `!important` in a layer beats normal
-		 ~ unlayered, which restores the win. Other properties
-		 ~ (color, opacity, animation, transition) aren't set by
-		 ~ Material Symbols so no override needed. */
-		font-size: 40px !important;
-		/* Reserve the icon box at first paint regardless of whether
-		 * the Material Symbols font has loaded. Before load, the
-		 * ligature names ("phone_iphone" etc.) have near-zero width
-		 * and would create a horizontal pop when glyphs render.
-		 * inline-block + fixed width/height + line-height locks the
-		 * box; display=block on the @font-face keeps the text
-		 * invisible during the wait. */
-		display: inline-block;
+	.platform-strip .platform-icon {
+		display: block;
 		width: 40px;
 		height: 40px;
-		line-height: 40px;
-		text-align: center;
 		color: var(--color-primary-container);
 		opacity: 0.35;
 		animation: platform-glow 6s ease-in-out infinite;
 		transition: transform 0.2s ease-out;
 	}
 	@media (min-width: 768px) {
-		.platform-strip .material-symbols-outlined {
-			font-size: 48px !important;
+		.platform-strip .platform-icon {
 			width: 48px;
 			height: 48px;
-			line-height: 48px;
 		}
 	}
-	.platform-strip li:hover .material-symbols-outlined {
+	.platform-strip li:hover .platform-icon {
 		transform: translateY(-3px) scale(1.08);
 	}
-	.platform-strip > li:nth-child(2) .material-symbols-outlined { animation-delay: 1.2s; }
-	.platform-strip > li:nth-child(3) .material-symbols-outlined { animation-delay: 2.4s; }
-	.platform-strip > li:nth-child(4) .material-symbols-outlined { animation-delay: 3.6s; }
-	.platform-strip > li:nth-child(5) .material-symbols-outlined { animation-delay: 4.8s; }
+	.platform-strip > li:nth-child(2) .platform-icon { animation-delay: 1.2s; }
+	.platform-strip > li:nth-child(3) .platform-icon { animation-delay: 2.4s; }
+	.platform-strip > li:nth-child(4) .platform-icon { animation-delay: 3.6s; }
+	.platform-strip > li:nth-child(5) .platform-icon { animation-delay: 4.8s; }
 
 	@keyframes platform-glow {
 		0%, 20%, 100% {
 			opacity: 0.35;
-			text-shadow: 0 0 0 transparent;
+			filter: none;
 		}
 		10% {
 			opacity: 1;
-			text-shadow: 0 0 16px var(--color-primary-container);
+			filter: drop-shadow(0 0 8px var(--color-primary-container));
 		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.platform-strip .material-symbols-outlined {
+		.platform-strip .platform-icon {
 			animation: none;
 			opacity: 0.5;
 			transition: none;
 		}
-		.platform-strip li:hover .material-symbols-outlined {
+		.platform-strip li:hover .platform-icon {
 			transform: none;
 		}
 	}

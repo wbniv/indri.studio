@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
+    "@material-symbols/svg-400": "^0.44.10",
     "astro": "^6.1.9"
   },
   "devDependencies": {

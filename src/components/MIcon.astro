@@ -1,0 +1,31 @@
+---
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+interface Props {
+	name: string;
+	class?: string;
+	label?: string;
+	size?: number;
+	ariaHidden?: boolean;
+}
+const { name, class: className = '', label, size = 24, ariaHidden = false } = Astro.props;
+
+const svgRaw = readFileSync(
+	resolve(`node_modules/@material-symbols/svg-400/outlined/${name}.svg`),
+	'utf-8'
+);
+
+const semantics = ariaHidden
+	? `aria-hidden="true"`
+	: `role="img" aria-label="${label ?? name}"`;
+
+const svg = svgRaw.replace(
+	/<svg ([^>]*)>/,
+	(_, attrs) => {
+		const cleaned = attrs.replace(/\s*(width|height)="\d+"/g, '');
+		return `<svg ${cleaned} class="${className}" ${semantics} width="${size}" height="${size}" fill="currentColor">`;
+	}
+);
+---
+<Fragment set:html={svg} />

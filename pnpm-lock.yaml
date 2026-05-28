@@ -11,6 +11,9 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3.7.2
         version: 3.7.2
+      '@material-symbols/svg-400':
+        specifier: ^0.44.10
+        version: 0.44.10
       astro:
         specifier: ^6.1.9
         version: 6.1.9(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)
@@ -613,6 +616,9 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
+
+  '@material-symbols/svg-400@0.44.10':
+    resolution: {integrity: sha512-GYm0ojhaMGWTLzSj45eflZd3kOplXaFL/87Dqbz9+yhUQctHNIPHlanBPPmIrF87Eg3PY+spov+i8+tCUP2zjw==}
 
   '@oslojs/encoding@1.1.0':
     resolution: {integrity: sha512-70wQhgYmndg4GCPxPPxPGevRKqTIJ2Nh4OkiMWmDAVYsTQ+Ta7Sq+rPevXyXGdzr30/qZBnyOalCszoMxlyldQ==}
@@ -2351,6 +2357,8 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@material-symbols/svg-400@0.44.10': {}
 
   '@oslojs/encoding@1.1.0': {}
 

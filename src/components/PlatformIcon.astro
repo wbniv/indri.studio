@@ -1,4 +1,6 @@
 ---
+import MIcon from './MIcon.astro';
+
 type Platform = "phone" | "tablet" | "console" | "tv" | "web";
 
 interface Props {
@@ -8,19 +10,15 @@ interface Props {
 
 const { platform, class: className = "" } = Astro.props;
 
-const PLATFORMS: Record<Platform, { symbol: string; label: string }> = {
-	phone:   { symbol: "smartphone",     label: "Phone" },
-	tablet:  { symbol: "tablet",         label: "Tablet" },
-	console: { symbol: "sports_esports", label: "Console" },
-	tv:      { symbol: "cast",           label: "TV" },
-	web:     { symbol: "public",         label: "Web" },
+const PLATFORMS: Record<Platform, { name: string; label: string }> = {
+	phone:   { name: "mobile",         label: "Phone" },
+	tablet:  { name: "tablet",         label: "Tablet" },
+	console: { name: "sports_esports", label: "Console" },
+	tv:      { name: "cast",           label: "TV" },
+	web:     { name: "public",         label: "Web" },
 };
 
-const { symbol, label } = PLATFORMS[platform];
+const { name, label } = PLATFORMS[platform];
 ---
 
-<span
-	class:list={["material-symbols-outlined", className]}
-	role="img"
-	aria-label={label}
->{symbol}</span>
+<MIcon name={name} class:list={["platform-icon", className]} label={label} size={40} />

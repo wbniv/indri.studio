@@ -1,12 +1,11 @@
 ---
 import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
-import MaterialSymbols from "../components/MaterialSymbols.astro";
+import MIcon from "../components/MIcon.astro";
 import lemur from "../assets/lemur.png";
 ---
 
 <Base title="404" description="Page not found." ringFlare={false}>
-	<MaterialSymbols />
 	<!-- Hero section: single centered column. Text at top, lemur absolutely
 	     positioned at the section's bottom edge — guarantees its body-bottom
 	     is flush against the footer's top, regardless of flex/grid quirks.
@@ -39,14 +38,14 @@ import lemur from "../assets/lemur.png";
 					href="/"
 					class="pill-purple transition-colors hover:bg-[color-mix(in_srgb,_var(--color-primary-container)_18%,_transparent)]"
 				>
-					<span class="material-symbols-outlined pill-icon" aria-hidden="true">home</span>
+					<MIcon name="home" class="pill-icon" size={16} ariaHidden />
 					home
 				</a>
 				<a
 					href="/#apps"
 					class="pill-purple transition-colors hover:bg-[color-mix(in_srgb,_var(--color-primary-container)_18%,_transparent)]"
 				>
-					<span class="material-symbols-outlined pill-icon" aria-hidden="true">apps</span>
+					<MIcon name="apps" class="pill-icon" size={16} ariaHidden />
 					all apps
 				</a>
 			</div>
@@ -72,8 +71,7 @@ import lemur from "../assets/lemur.png";
 
 	<style>
 		.pill-icon {
-			font-size: 16px;
-			line-height: 1;
+			flex-shrink: 0;
 		}
 	</style>
 </Base>
