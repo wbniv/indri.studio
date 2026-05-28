@@ -1,5 +1,5 @@
 ---
-title: World Foundry
+title: World Foundry v2
 date: 2026-12-01
 summary: Build worlds, run games — anywhere.
 draft: false
