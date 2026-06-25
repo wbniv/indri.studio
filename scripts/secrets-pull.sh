@@ -50,13 +50,25 @@ trap 'rm -f "$TMP"' EXIT
   echo "# Source of record: AWS SSM /indri-studio/cloudflare/*."
   echo "# To rotate: aws ssm put-parameter --overwrite ..., then re-run this."
   echo ""
+  r2=0
   while IFS=$'\t' read -r name value; do
     case "$name" in
       */api_token)  echo "CLOUDFLARE_API_TOKEN=$value" ;;
       */account_id) echo "CLOUDFLARE_ACCOUNT_ID=$value" ;;
+      */r2_access_key_id)     echo "RCLONE_CONFIG_R2_ACCESS_KEY_ID=$value";     r2=1 ;;
+      */r2_secret_access_key) echo "RCLONE_CONFIG_R2_SECRET_ACCESS_KEY=$value"; r2=1 ;;
+      */r2_endpoint)          echo "RCLONE_CONFIG_R2_ENDPOINT=$value";          r2=1 ;;
       *) echo "# skipped unknown key: $name" ;;
     esac
   done <<<"$PARAMS"
+  # Static rclone S3 backend config — only emitted when the R2 keys are present,
+  # so a non-R2 .env stays clean. Together with the three keys above they form
+  # the `R2:` remote that scripts/release-upload.sh publishes /sources through.
+  if [[ $r2 -eq 1 ]]; then
+    echo "RCLONE_CONFIG_R2_TYPE=s3"
+    echo "RCLONE_CONFIG_R2_PROVIDER=Cloudflare"
+    echo "RCLONE_CONFIG_R2_REGION=auto"
+  fi
 } >"$TMP"
 
 chmod 600 "$TMP"

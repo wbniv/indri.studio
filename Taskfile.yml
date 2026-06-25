@@ -54,6 +54,11 @@ tasks:
     cmds:
       - bash scripts/secrets-bootstrap.sh {{.CLI_ARGS}}
 
+  secrets-set-r2:
+    desc: "Collect a bucket-scoped R2 API token's S3 keys (Access Key ID + Secret, hidden prompt) and store them in SSM, then secrets-pull so RCLONE_CONFIG_R2_* lands in .env. Enables `task release-upload`. Keys: reuse/roll the indri-apt-ci token (Object R/W on indri-apt) in Cloudflare R2 → Manage R2 API Tokens."
+    cmds:
+      - bash scripts/secrets-set-r2.sh {{.CLI_ARGS}}
+
   setup-workers-ai:
     desc: "One-time: push Cloudflare Workers AI token to SSM. Validates with a probe call. Idempotent (--force to rotate)."
     cmds:
