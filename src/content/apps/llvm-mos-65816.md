@@ -50,6 +50,6 @@ published while the codegen patches make their way upstream into llvm-mos.
 - [65816 opcode reference](/docs/65816-opcodes/) — the instruction set as the backend encodes it
 - [SNES hardware summary](/docs/snes-hardware/) — CPU, PPU, memory map, DMA
 - [SNES register map](/docs/snes-registers/) — every CPU-visible I/O register
-- [Object-oriented C and assembly](/docs/oop-in-c/) — vtables and polymorphism on the 65816
 - [SNES bootup sequence](/docs/snes-bootup/) — power-on to `main()`
 - [Capturing SNES screenshots, headless](/docs/emulator-screenshots/) — true PPU output for CI
+- [Object-oriented C and assembly](/docs/oop-in-c/) — vtables and polymorphism on the 65816
