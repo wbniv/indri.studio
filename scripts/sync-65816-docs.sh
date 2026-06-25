@@ -32,9 +32,9 @@ DOCS=$(cat <<'TSV'
 65816-opcodes|wt/321-snes-hwref|docs/refs/65816/65816-reference.md|1|65816 opcode reference|The 65816 instruction set as the llvm-mos backend encodes it — every opcode, addressing mode, and byte count, cross-checked against a canonical matrix.
 snes-hardware|wt/321-snes-hwref|docs/refs/snes-hardware/snes-hardware-summary.md|2|SNES hardware summary|A compact tour of the Super Nintendo hardware the compiler targets — CPU, PPU, memory map, DMA, and the boot environment.
 snes-registers|wt/321-snes-hwref|docs/refs/snes-hardware/snes-register-map.md|3|SNES register map|The CPU-visible SNES register map — every memory-mapped I/O register, what it does, and how to drive it from C.
-oop-in-c|main|docs/investigations/object-oriented-c-and-assembly.md|4|Object-oriented C and assembly|Vtables, inheritance, and polymorphism in plain C (and assembly) on a 3.58 MHz 65816 — with measured codegen.
+snes-bootup|main|docs/snes-bootup-sequence.md|4|SNES bootup sequence|What happens between power-on and main() on the SNES — reset vector, native-mode switch, and crt0 init.
 emulator-screenshots|main|docs/investigations/snes-emulator-screenshots.md|5|Capturing SNES screenshots, headless|Getting a true, PPU-rendered PNG of the SNES screen out of MAME and bsnes-jg with no window or GPU — for CI.
-snes-bootup|main|docs/snes-bootup-sequence.md|6|SNES bootup sequence|What happens between power-on and main() on the SNES — reset vector, native-mode switch, and crt0 init.
+oop-in-c|main|docs/investigations/object-oriented-c-and-assembly.md|6|Object-oriented C and assembly|Vtables, inheritance, and polymorphism in plain C (and assembly) on a 3.58 MHz 65816 — with measured codegen.
 TSV
 )
 
@@ -85,6 +85,34 @@ sys.stdout.write('\n'.join(out))
 PY
 rewrite_links() { python3 "$REWRITER_PY"; }
 
+# Pre-render ```mermaid fences to inline SVG (via mermaid.ink) so the published doc
+# page shows the diagram, not raw `flowchart TD …` source. Build-time render = static
+# SVG, no client JS — matches the PDF path (md-to-html.sh does the same for downloads).
+# A block whose render fails is left as-is (still a readable code block), never dropped.
+MERMAID_PY="$(mktemp --suffix=.py)"
+trap 'rm -f "$REWRITER_PY" "$MERMAID_PY"' EXIT
+cat > "$MERMAID_PY" <<'PY'
+import re, sys, base64, urllib.request
+def svg_for(src):
+    # Force the dark mermaid theme so the diagram reads on the dark doc page.
+    body = '%%{init: {"theme":"dark"}}%%\n' + src.strip()
+    enc = base64.urlsafe_b64encode(body.encode()).decode()
+    # mermaid.ink 403s the default urllib UA — send one (matches md-to-html.sh).
+    req = urllib.request.Request(f"https://mermaid.ink/svg/{enc}", headers={"User-Agent": "indri-docs"})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return r.read().decode("utf-8")
+def repl(m):
+    try:
+        return '\n<div class="mermaid-diagram">\n' + svg_for(m.group(1)) + '\n</div>\n'
+    except Exception as e:
+        sys.stderr.write(f"    WARN: mermaid render failed ({e}) — leaving code block\n")
+        return m.group(0)
+text = sys.stdin.read()
+# ```mermaid … ``` fenced block (multiline, non-greedy).
+sys.stdout.write(re.sub(r'```mermaid[ \t]*\n(.*?)\n```', repl, text, flags=re.DOTALL))
+PY
+render_mermaid() { python3 "$MERMAID_PY"; }
+
 # Read the table on FD 3 so inner commands (chrome, md-to-html) can't consume it.
 while IFS='|' read -r slug ref path order title summary <&3; do
   [ -n "$slug" ] || continue
@@ -111,7 +139,7 @@ while IFS='|' read -r slug ref path order title summary <&3; do
     printf 'sourceCommit: "%s"\n' "$commit"
     printf 'order: %s\n' "$order"
     printf -- '---\n\n'
-    printf '%s\n' "$raw" | strip_h1 | rewrite_links
+    printf '%s\n' "$raw" | strip_h1 | render_mermaid | rewrite_links
   } > "$CONTENT/$slug.md"
 
   # 3. PDF (best-effort: needs md-to-html.sh + headless Chrome)

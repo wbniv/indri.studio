@@ -4,7 +4,7 @@ summary: "Vtables, inheritance, and polymorphism in plain C (and assembly) on a 
 app: "llvm-mos-65816"
 sourceRepo: "llvm-mos-65816"
 sourceCommit: "e934f93"
-order: 4
+order: 6
 ---
 
 
