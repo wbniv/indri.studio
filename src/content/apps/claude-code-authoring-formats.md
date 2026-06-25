@@ -8,13 +8,13 @@ storeLinks:
 screenshots: []
 ---
 
-A typographic rendering system for Claude Code's four authoring formats — **memory**, **skill**, **subagent**, and **slash command** — emitted by `md-to-pdf.sh` from any plain Markdown file with frontmatter.
+A typographic rendering system for Claude Code's four authoring formats — **memory**, **skill**, **subagent**, and **slash command** — emitted by `md-to-html.sh` from any plain Markdown file with frontmatter.
 
 Each format gets its own colour identity, glyph, and chrome, so a document's type is legible at a glance before you read a word: charcoal brains for memories, warm umber tools for skills, deep purple sleuths for subagents, forest green keys for slash commands.
 
 ## How it works
 
-`scripts/md-to-pdf.sh` reads a Markdown file's YAML frontmatter, detects its authoring type from a small set of signals (`type:` for memories, `description:` plus a `Skills/` path for skills, `model:` for subagents, `argument-hint:` or `allowed-tools:` for slash commands), and emits a self-contained HTML render with a typed card stamped above the prose. The same script handles inline image resolution, raster resizing, and produces output a browser can print to PDF.
+`scripts/md-to-html.sh` reads a Markdown file's YAML frontmatter, detects its authoring type from a small set of signals (`type:` for memories, `description:` plus a `Skills/` path for skills, `model:` for subagents, `argument-hint:` or `allowed-tools:` for slash commands), and emits a self-contained HTML render with a typed card stamped above the prose. The same script handles inline image resolution, raster resizing, and produces output a browser can print to PDF.
 
 The card layout — a large glyph on the left, a stack of `key · value` rows on the right — stays constant across types and across styles. Only the colour palette, glyph, and surrounding chrome change.
 
