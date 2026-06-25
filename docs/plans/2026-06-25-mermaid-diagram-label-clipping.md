@@ -1,154 +1,122 @@
-# Fix Mermaid diagram label clipping on /docs/ pages
+# Fix Mermaid diagram label clipping + spill on /docs/ pages
 
-## Status — DONE + DEPLOYED (2026-06-25, v0.1.65)
+## Status — DONE + DEPLOYED (2026-06-25, v0.1.66)
 
-Reported by the user with a screenshot of `indri.studio/docs/snes-bootup/`: the
-flowchart's node boxes were cutting off the last line of every multi-line label
-(e.g. "65816 in 6502-emulation mode (E=1)" → "mode (E=1)" missing; "…point the
-soft stack at $2000" → "the soft stack at $2000" missing). Two independent causes;
-both fixed and verified live. Final state: **0/10 labels overflow** on the live
-production SVG.
+Reported via screenshots of `indri.studio/docs/snes-bootup/`: first the node boxes
+**clipped** the last line of multi-line labels, then (after a partial fix) every
+label was **duplicated as plain prose below the diagram** (the "spill"). Two distinct
+root causes; both fixed and verified. Final state: full diagram, no clip, no spill.
+
+This was a long investigation with several wrong turns (recorded under *Dead ends*
+so the next person doesn't repeat them).
 
 ## Context
 
-Doc pages are built from `src/content/docs/<slug>.md`, which `scripts/sync-65816-docs.sh`
-generates from the `../llvm-mos-65816` reader docs. That script **pre-renders**
-each ```` ```mermaid ```` fence to inline SVG at build time via the mermaid.ink API
-(forcing the dark theme) and wraps it in `<div class="mermaid-diagram">…</div>`.
-The page (`src/pages/docs/[...slug].astro`) renders the markdown into `<div class="prose">`.
+`scripts/sync-65816-docs.sh` pre-renders each ```` ```mermaid ```` fence to SVG via
+the mermaid.ink API at build time and embeds it in `src/content/docs/<slug>.md`.
+The doc page (`src/pages/docs/[...slug].astro`) renders that markdown into
+`<div class="prose">`. Only **snes-bootup** actually has a diagram. Introduced in
+`2fc4c17`.
 
-Introduced in commit `2fc4c17` ("docs(65816): render Mermaid diagrams + reorder doc
-list"). The SVG geometry from mermaid.ink is itself correct — the bug is entirely in
-how the labels are styled/serialised once embedded in the page.
+## Root cause — two independent causes
 
-## Root cause — two stacked causes
+1. **Clip — Inter-font cascade.** `.prose :global(p)` sets `font-family: var(--font-body)`
+   (= **Inter**, wider than mermaid's baked `trebuchet/verdana/arial` stack) and
+   `line-height:1.7`. mermaid's labels are HTML `<p>` inside `<foreignObject>` with the
+   box height baked at render time, so the inherited Inter/1.7 reflows them taller/wider
+   than the box → `foreignObject` clips the overflow.
 
-mermaid renders node labels as **HTML inside `<foreignObject>`** (`<span class="nodeLabel"><p>…</p></span>`),
-with each node's box (`<rect>` + `<foreignObject height=…>`) baked at render time from
-mermaid.ink's own font metrics (`trebuchet ms`/`verdana`/`arial` @16px, line-height 1.5).
-`foreignObject` **clips** content taller than its baked height. Two things made the
-labels render taller than the baked box:
-
-1. **Font cascade.** `src/pages/docs/[...slug].astro` has
-   `.prose :global(p){ font-family: var(--font-body); line-height:1.7 }`, and
-   `--font-body` is **Inter** (`src/styles/global.css:116`) — wider than the baked
-   sans stack. That rule cascades into the foreignObject `<p>` labels, so they wrap to
-   more lines and each line is taller → overflow → clip.
-
-2. **`<br></br>` double line-break (dominant).** mermaid.ink emits multi-line labels as
-   `<p>a<br/>b</p>`. Astro's markdown → HTML pipeline (rehype) **re-serialises that
-   `<br/>` as `<br></br>`**, which browsers parse as **two** `<br>` → every multi-line
-   label gains a blank line → overflow. The font fix alone left this unaddressed.
+2. **Spill — rehype foster-parenting of inline SVG.** The SVG was embedded as inline
+   markup in the markdown. Astro's `rehype-raw` round-trip **re-serialises** it: it
+   doubles `<br/>` → `<br></br>` (two breaks → more clipping) and, decisively,
+   **foster-parents the `<g class="nodes">` group out of the `<svg>`** into the prose,
+   so every node label renders twice — once in its box, once as stray body text. The
+   *pristine* mermaid.ink SVG is well-formed and renders cleanly inline; only the rehype
+   re-serialisation corrupts it. A user `rehypePlugin` can't intercept it because **Astro
+   runs user `rehypePlugins` before its internal `rehype-raw`** (confirmed: the plugin
+   sees the diagram as an unparsed `raw` node, not an element).
 
 ## The fix
 
-- **Cause 1 — CSS** (`src/pages/docs/[...slug].astro`, commit `f945cf3`, v0.1.64):
-  scope the mermaid labels back to an Arial-width stack matching the bake
-  (`verdana` dropped so wide-Verdana macOS/Windows clients don't re-wrap), restore
-  `line-height:1.5` and `margin:0`, make the SVG responsive:
-  ```css
-  .prose :global(.mermaid-diagram p),
-  .prose :global(.mermaid-diagram .nodeLabel),
-  .prose :global(.mermaid-diagram .edgeLabel) {
-      font-family: "trebuchet ms", arial, "Liberation Sans", sans-serif;
-      line-height: 1.5; margin: 0;
-  }
-  ```
-- **Cause 2 — sync script** (`scripts/sync-65816-docs.sh` `svg_for()`, commit `b5d8929`, v0.1.65):
-  split multi-line labels into separate `<p>` instead of `<br>` (no void element for
-  rehype to mangle); the CSS above gives them `margin:0` so they stack tightly:
-  ```python
-  return re.sub(r'<br\s*/?>', '</p><p>', svg)
-  ```
-  `src/content/docs/snes-bootup.md` regenerated (the only doc with multi-line labels).
-
-Pure presentation change — works with the existing pre-rendered SVGs; no diagram
-re-fetch from mermaid.ink needed.
+- **Cause 1 — CSS** (`src/pages/docs/[...slug].astro`, `f945cf3`, v0.1.64): scope the
+  mermaid labels back to an Arial-width stack + `line-height:1.5` + `margin:0`.
+- **Cause 2 — don't put SVG markup in the markdown** (`39a4947`, v0.1.66):
+  - `sync-65816-docs.sh` embeds the SVG as **base64 in a `data-mermaid-b64` attribute**
+    on an empty `<div class="mermaid-diagram">`. Attribute values pass through rehype
+    verbatim, untouched.
+  - A new **`astro:build:done` integration** (`src/mermaid-inject-integration.mjs`)
+    decodes it and writes the pristine SVG straight into the built `.html`, bypassing
+    rehype. The browser then parses mermaid.ink's exact bytes. No client JS, static.
 
 ## Files changed
 
 | File | Commit | What |
 |---|---|---|
-| `src/pages/docs/[...slug].astro` | `f945cf3` | scoped `.mermaid-diagram` label CSS |
-| `scripts/sync-65816-docs.sh` | `b5d8929` | `svg_for()` splits `<br/>` → `</p><p>` |
-| `src/content/docs/snes-bootup.md` | `b5d8929` | regenerated (only doc with multi-line labels) |
+| `src/pages/docs/[...slug].astro` | `f945cf3` | scoped `.mermaid-diagram` label CSS (clip) |
+| `scripts/sync-65816-docs.sh` | `39a4947` | emit `<div data-mermaid-b64="…">` instead of inline SVG |
+| `src/mermaid-inject-integration.mjs` | `39a4947` | `astro:build:done` — decode + inject pristine SVG |
+| `astro.config.mjs` | `39a4947` | register the integration |
+| `src/content/docs/snes-bootup.md` | `39a4947` | regenerated to the base64-div form |
 
-Deploys: **v0.1.64** (`f945cf3`, run 28169559509) then **v0.1.65** (`b5d8929`, run 28170271972),
-both via `task publish` (tag-driven Cloudflare deploy). The `<br></br>` cause was
-caught during post-deploy verification of v0.1.64 — the CSS-only fix measured 8/10.
+Deploys: v0.1.64 (`f945cf3`, CSS) → ~~v0.1.65 (`b5d8929`, `</p><p>` — wrong, see Dead
+ends)~~ → **v0.1.66 (`39a4947`, integration)**.
 
 ## Verification
 
-Method: extract the diagram `<svg>`, render it under the **real** page CSS (Inter
-`.prose p` @ lh1.7 + the deployed mermaid fix) with Inter loaded from
-`.astro/fonts/`, and count `foreignObject`s whose inner label `scrollHeight`
-exceeds the baked box `height` (= clipped). Headless Chrome.
+1. **Pristine SVG is fine; rehype is the corruptor.** Pristine mermaid.ink SVG inline
+   in a plain HTML doc: `<br></br>`=0, no foster-parented `<g>`. Through Astro's rehype:
+   `<br/>`→`<br></br>` and a `<g class="nodes">` appears as a sibling of the diagram div.
+   PASS — the SVG is good; the pipeline breaks it.
 
-1. **Diagnose the cascade — confirm `.prose p` uses a wide font.**
-   ```
-   src/pages/docs/[...slug].astro:149  .prose :global(p){ font-family: var(--font-body); line-height:1.7 }
-   src/styles/global.css:116           --font-body: var(--font-inter), system-ui, …  → Inter
-   ```
-   PASS — Inter (wide) + line-height 1.7 cascade into the SVG labels.
+2. **Plugin ordering proves a user rehype plugin can't fix it.** A debug rehype plugin
+   reports the diagram as `raw:1, div:0` — i.e. still an unparsed raw node when user
+   plugins run (before rehype-raw). PASS — must bypass rehype, not plug into it.
 
-2. **Reproduce the clip + prove the CSS fix on the real SVG** (harness, content-file SVG with `<br/>`).
+3. **Clean build with base64-div + integration.**
    ```
-   CURRENT (.prose p / Inter):  CLIPS 10/10 labels overflow  [27>24, 82>72, 82>72, 163>144, 82>72, 109>96, 82>72, 54>48, 27>24, 82>72]
-   FIX  (scoped label CSS):     OK    0/10
+   [mermaid-inject] injected 1 diagram(s) across 1 page(s)
+   dist/docs/snes-bootup/index.html:  <svg id="mermaid-svg">=1  <g class="nodes">=1
+   "Power-on / reset"=1   text after </svg></div> = "<p><code>.init.*</code> fragments…"
    ```
-   PASS — matches the user's screenshot; the CSS fix clears it on a single-`<br/>` SVG.
+   PASS — one SVG, one nodes group, each label once, clean prose after the diagram.
 
-3. **Find the second cause — diff content-file SVG vs the deployed page SVG.**
-   ```
-   IDENTICAL: False
-   CONTENT: …Power-on / reset<br />65816 in 6502-emulation mode (E=1)</p>
-   LIVE:    …Power-on / reset<br></br>65816 in 6502-emulation mode (E=1)</p>
-   live svg <br></br> count: 9
-   ```
-   PASS — the deployed SVG has `<br></br>` (double break); the content source has `<br />`.
+4. **Served page (real CSS + Inter).** `pnpm preview` + headless screenshot of
+   `/docs/snes-bootup/`: full diagram, every multi-line label intact (no clip), and
+   clean article prose below the diagram (no duplicated labels). PASS.
 
-4. **Isolate the line-break fix on the live SVG** (with the deployed CSS fix applied).
-   ```
-   A deployed-as-is (<br></br> + font-fix):  overflow 8/10
-   B single <br>            (font-fix):       overflow 0/10
-   C </p><p> split          (font-fix):       overflow 0/10
-   ```
-   PASS — eliminating the double-break is required; `</p><p>` clears it.
+5. **Live production after v0.1.66.** (recorded on deploy) — HTTP 200, fix present,
+   diagram clean.
 
-5. **Prove `</p><p>` survives the real Astro build** (edit content, `pnpm build`, measure the built page).
-   ```
-   br forms in content file after: (none)
-   <br></br> count in dist/docs/snes-bootup/index.html: 0
-   BUILT page overflow (real pipeline + deployed CSS): 0/10
-   ```
-   PASS — rehype no longer doubles anything; built page is clean.
+## Dead ends (do not retry)
 
-6. **Whole-site rebuild — no doubling anywhere.**
-   ```
-   18 page(s) built — Complete!
-   ✓ zero <br></br> across all built docs
-   ```
-   PASS.
+- **`</p><p>` line-split (v0.1.65, `b5d8929`).** Replacing `<br/>` with `</p><p>` fixed
+  the clip but made the spill *worse* (each line its own foster-parented paragraph). The
+  spill was never about `<br>`.
+- **`htmlLabels:false`.** mermaid.ink drops node text (only edge labels render) — unusable.
+- **PNG render.** Rejected by user (loses crisp vector + selectable text + a11y).
+- **`</p><p>` etc.** (above) — chasing the line-break, not the round-trip.
 
-7. **Live production after v0.1.65** (cache-busted fetch from `https://indri.studio/docs/snes-bootup/`).
-   ```
-   live page <br></br> count: 0
-   fix CSS present: trebuchet ms,arial,Liberation Sans
-   LIVE production overflow: 0/10
-   ```
-   PASS — fix is live; every formerly-clipped line ("…mode (E=1)", "…PPU force-blank",
-   "…the soft stack at $2000") is fully visible (see screenshot in the session).
+**Correction (the commit message `39a4947` got this wrong):** I initially claimed Astro
+7 / Sätteri "wouldn't help." It *would* — see below. The foster-parenting is rehype
+**corrupting the SVG at build time** (re-serialisation → malformed static HTML), NOT the
+browser parsing a pristine SVG. Proof: the integration writes the pristine SVG into the
+static HTML and the served/live pages render clean. So any approach that lands pristine
+SVG in the static HTML works — the build-done integration **or** a verbatim-passthrough
+pipeline (Sätteri).
+- **Misreads:** an early "minimal is clean" was a bad probe (counted `<g>` only / a phrase
+  that also appears in prose / matched the probe's own `<script>` literal). And the
+  snes-bootup content file had accumulated a *stray inline SVG* across debug iterations —
+  the regenerate in `39a4947` removed it. Ground truth came from screenshots, not probes.
 
-## Follow-ups / not done
+## Follow-ups
 
-- **PDF + release-bundled docs** render via a *different* path (`md-to-html.sh` in
-  `../python-tui-lib`, used by `../llvm-mos-65816/dev/build-release-docs.sh`), not the
-  Astro pipeline. They may or may not share the `<br></br>` / font issue — unverified.
-  The `scripts/sync-65816-docs.sh` `</p><p>` change does **not** touch that path. Check
-  a generated `.pdf` before assuming it's clean.
-- **Cross-OS font residual.** The label text "65816 in 6502-emulation mode (E=1)" sits
-  right at the 200px foreignObject wrap boundary. The fix pins an Arial-width stack
-  (`trebuchet ms, arial, Liberation Sans, sans-serif`) that matches mermaid.ink's
-  server bake on Linux/Windows/Mac; `verdana` was deliberately dropped (wide, installed
-  on Mac/Windows). If a future label is added that's even tighter, prefer shorter label
-  text over relying on the wrap margin.
+- **`task sync-docs` is broken** — its manifest references the deleted `wt/321-snes-hwref`
+  branch (from the worktree consolidation). Re-syncing all docs is blocked until the
+  manifest points the consolidated docs at `main`. Tracked in TODO.
+- **Astro 7 / Sätteri migration** — `docs/plans/2026-06-25-astro-7-migration.md`. Its
+  verbatim raw-HTML handling would let inline SVG survive uncorrupted, making the
+  build-done integration **removable** (simpler). Verify the verbatim claim during the
+  migration before deleting the integration.
+- **Dev mode** — the integration runs on `astro build` only, so `astro dev` shows an empty
+  diagram box (production is correct). Acceptable; revisit if dev preview of diagrams is
+  needed (a tiny client-side DOMParser hydrator would cover dev).

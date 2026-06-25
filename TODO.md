@@ -10,6 +10,10 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 - [ ] **2026-05-21** Stand up a second apt repo at `apt.biohack.net` (own zone, own R2 bucket `biohack-net-secrets` + `biohack-net-apt`, own operator token). Decide whether biohack.net gets a fresh monorepo or piggy-backs on an existing biohack.net website repo. Reuse the same skill (`new-web-apt-repo`).
 
+- [ ] **2026-06-25** **Astro 7 migration (Sätteri pipeline)** — modernise the markdown pipeline; its verbatim raw-HTML handling would let inline Mermaid SVG survive uncorrupted, letting us delete the build-done `mermaid-inject` integration. Requires porting `rehypeExternalLinks` to a Sätteri HAST plugin. Major bump — branch + full Lighthouse before tagging — [plan](docs/plans/2026-06-25-astro-7-migration.md)
+
+- [ ] **2026-06-25** Fix the stale `scripts/sync-65816-docs.sh` manifest — it references the deleted `wt/321-snes-hwref` branch (worktree consolidation), so `task sync-docs` fails on `65816-opcodes`. Point the consolidated docs at `main`. Blocks regenerating the reader docs from source.
+
 - [ ] **2026-06-25** Verify the **PDF / release-bundled docs** render path (`../python-tui-lib/scripts/md-to-html.sh`, used by `../llvm-mos-65816/dev/build-release-docs.sh`) for the same Mermaid `<br></br>` double-break / label-clip the web path had — it doesn't go through Astro so it may differ, and the `sync-65816-docs.sh` `</p><p>` fix doesn't touch it. Check a generated `.pdf` before assuming clean — [plan](docs/plans/2026-06-25-mermaid-diagram-label-clipping.md)
 
 ## Done
@@ -45,4 +49,8 @@ _Auto-added from plan "Out of scope"/"Deferred" sections at commit time. Triage 
 <!-- BEGIN auto-captured-deferrals (managed by audit-plan-deferrals.sh — triage these into the curated sections above; the fingerprint ledger means a deleted item is NOT re-added) -->
 - [verify] **2026-06-25-add-llvm-mos-65816-to-the-indri-studio-product-gal** — Verification section present but no PASS recorded — run + record the steps. _from [2026-06-25-add-llvm-mos-65816-to-the-indri-studio-product-gal.md](docs/plans/2026-06-25-add-llvm-mos-65816-to-the-indri-studio-product-gal.md)_  <!-- fp:b6de012c5009da31 -->
 <!-- triaged 2026-06-25: PDF/release-docs check (fp:f8b15c02) promoted to ## Active above. Cross-OS font residual (fp:17fcdb9d) is a non-actionable caveat fully recorded in the plan's "Follow-ups" section, not backlog — dropped. Ledger keeps both from returning. -->
+- [verify] **2026-06-25-astro-7-migration** — Verification section present but no PASS recorded — run + record the steps. _from [2026-06-25-astro-7-migration.md](docs/plans/2026-06-25-astro-7-migration.md)_  <!-- fp:9989472dd8f5079f -->
+- [ ] **(triage)** **`task sync-docs` is broken** — its manifest references the deleted `wt/321-snes-hwref` — _from [2026-06-25-mermaid-diagram-label-clipping.md](docs/plans/2026-06-25-mermaid-diagram-label-clipping.md)_  <!-- fp:d49ec893aba1b3f2 -->
+- [ ] **(triage)** **Astro 7 / Sätteri migration** — `docs/plans/2026-06-25-astro-7-migration.md`. Its — _from [2026-06-25-mermaid-diagram-label-clipping.md](docs/plans/2026-06-25-mermaid-diagram-label-clipping.md)_  <!-- fp:ad1c2c59bbaa6743 -->
+- [ ] **(triage)** **Dev mode** — the integration runs on `astro build` only, so `astro dev` shows an empty — _from [2026-06-25-mermaid-diagram-label-clipping.md](docs/plans/2026-06-25-mermaid-diagram-label-clipping.md)_  <!-- fp:0585a2198b355d4f -->
 <!-- END auto-captured-deferrals -->
