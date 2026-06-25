@@ -10,6 +10,24 @@
 // <canvas>; we point it at the right base + ROM and (re)boot on astro:page-load
 // so it survives the site's view transitions. The run loop pauses when the card
 // scrolls out of view (handled in app.js via IntersectionObserver).
+//
+// Cache-busting: the play/ assets keep stable filenames but their bytes change on every
+// re-sync, so at BUILD time we hash each one and inject window.BJG_BUST (path -> short sha).
+// app.js appends "?v=<sha>" to every fetch (incl. the wasm via locateFile), letting the edge
+// cache them immutably while a changed asset still gets a fresh url. Missing files (no sync)
+// degrade to plain paths.
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
+const PLAY = "public/apps/llvm-mos-65816/play";
+const BUST_ASSETS = [
+  "app.js", "cores/bsnes_jg.js", "cores/bsnes_jg.wasm", "cores/PROVENANCE.json",
+  "roms/manifest.json", "roms/mandel-display.sfc", "preview/mandel-display.png",
+];
+const bust: Record<string, string> = {};
+for (const a of BUST_ASSETS) {
+  try { bust[a] = createHash("sha256").update(readFileSync(`${PLAY}/${a}`)).digest("hex").slice(0, 12); } catch {}
+}
+const appV = bust["app.js"] ?? "";
 ---
 
 <section id="bjg-embed" class="emu" aria-label="Live SNES emulator running a C-compiled Mandelbrot">
@@ -35,22 +53,24 @@
   </div>
 </section>
 
-<script>
+<script is:inline define:vars={{ bust, appV }}>
   // (Re)boot the emulator on every page-load so it survives view transitions.
   // app.js is a plain static script under /apps/llvm-mos-65816/play/; we set its
-  // base + default ROM, then (re)inject it, stopping any prior run first.
+  // base + default ROM + the build-time cache-bust map, then (re)inject it (with its own
+  // hash on the url), stopping any prior run first.
   function bootEmulator() {
     if (!document.getElementById("bjg-embed")) return;          // only on this page
     if (window.__bjgStop) { try { window.__bjgStop(); } catch (e) {} }
     window.BJG_BASE = "/apps/llvm-mos-65816/play/";
     window.BJG_DEFAULT_ROM = "mandel-display";
+    window.BJG_BUST = bust;                                      // path -> content sha (build time)
     window.BsnesJg = undefined;                                 // force a fresh core module
     window.__bjg = undefined;
     var old = document.getElementById("bjg-appjs");
     if (old) old.remove();
     var s = document.createElement("script");
     s.id = "bjg-appjs";
-    s.src = "/apps/llvm-mos-65816/play/app.js";
+    s.src = "/apps/llvm-mos-65816/play/app.js" + (appV ? "?v=" + appV : "");
     document.body.appendChild(s);
   }
   if (!window.__bjgReg) {

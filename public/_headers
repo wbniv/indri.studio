@@ -54,9 +54,13 @@
 /lh/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Live SNES emulator bundle (synced from bsnes-jg-wasm). The core's filenames
-# aren't content-hashed, so cache a day + revalidate in the background rather
-# than mark immutable — a re-sync replaces them in place. Workers Static Assets
-# serves the .wasm as application/wasm by extension.
+# Live SNES emulator bundle (synced from bsnes-jg-wasm). app.js appends a per-asset content
+# hash (?v=<sha>, from window.BJG_BUST injected at build time by EmulatorEmbed.astro / the
+# bundle's index.html) to EVERY fetch — incl. the wasm via Emscripten locateFile. So a changed
+# asset gets a NEW url and these can be cached IMMUTABLY (no more day-long stale ROM after a
+# deploy). The standalone loader page carries the hash map inline, so it alone must stay fresh.
+# (The indri embed at /apps/llvm-mos-65816/ is a normal Astro HTML page — already revalidated.)
 /apps/llvm-mos-65816/play/*
-  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+  Cache-Control: public, max-age=31536000, immutable
+/apps/llvm-mos-65816/play/index.html
+  Cache-Control: public, max-age=60, stale-while-revalidate=604800
