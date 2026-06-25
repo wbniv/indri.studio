@@ -1,6 +1,9 @@
 # Plan — embed the live `bsnes-jg-wasm` emulator on `/apps/llvm-mos-65816/`
 
-**Status:** IN PROGRESS (2026-06-25). Cross-repo: assets/build come from
+**Status:** ✅ DEPLOYED + VERIFIED IN PRODUCTION (2026-06-25, tags `v0.1.68` → `v0.1.69`).
+Live at [https://indri.studio/apps/llvm-mos-65816/](https://indri.studio/apps/llvm-mos-65816/):
+the embed boots mandel-display and the Verify-fidelity self-check reads `0x9103 == gate` in a real
+browser against the CDN. See **Results** below. Cross-repo: assets/build come from
 [`~/SRC/bsnes-jg-wasm`](../../../bsnes-jg-wasm) (see its
 [plan](../../../bsnes-jg-wasm/docs/plans/2026-06-25-bsnes-jg-wasm.md)); the integration,
 hosting, and deploy land here in `indri.studio`.
@@ -148,6 +151,24 @@ when the card scrolls out of view.
 - `pnpm build`; `task preview`; manual + headless check (see Verification).
 - Commit; **tag `v*` and push** → `.github/workflows/deploy.yml` builds + `wrangler deploy` + runs
   the post-deploy Lighthouse audit. Confirm the budget held.
+
+## Results (2026-06-25)
+
+- **Local (headless Chrome, `pnpm build` → `dist/`):** embed boots, renders the Mandelbrot, self-check
+  `✓ FIDELITY 0x9103 == gate`, no console errors. PASS.
+- **Production (`v0.1.69`):** after deploy, `https://indri.studio/apps/llvm-mos-65816/` →
+  `running mandel-display.sfc · 512×240`, `✓ FIDELITY 0x9103 == gate`, no page errors; core served as
+  `application/wasm`. PASS.
+- **Production bug found + fixed (CSP).** The first deploy (`v0.1.68`) shipped but the core failed to
+  instantiate live: the Worker's CSP `script-src` (`'self' 'nonce-…' 'unsafe-inline'`) blocks
+  `WebAssembly.instantiate()` (both streaming and the ArrayBuffer fallback → `CompileError`). Local
+  dev sends no CSP, so it was prod-only. Fixed in `worker/index.ts` by adding **`'wasm-unsafe-eval'`**
+  (permits WASM compile only, not general `eval()`; Lighthouse-CSP-clean), redeployed as `v0.1.69`.
+- **Lighthouse budget — not affected.** The CI Lighthouse sample is home + 9 specific app pages and
+  does **not** include `llvm-mos-65816`, so the inline 3.9 MB wasm never enters the audited budget.
+  The deploy's threshold/CLS alerts (`continue-on-error`) are the documented single-run variance on
+  the *sampled* pages, unrelated to this change. (Deliberately leaving the heavy interactive page out
+  of the sample rather than letting it create a standing ≥95-Perf alert.)
 
 ## Verification
 

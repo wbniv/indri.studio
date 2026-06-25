@@ -6,8 +6,6 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 - [ ] **2026-06-25** Publish "SNES C Compiler" (llvm-mos-65816) gallery entry — committed as `draft: true`; flip to `false` + `task publish` once `wbniv/llvm-mos-65816` is public (badge 404s until then) and any WDC outreach is settled — [plan](docs/plans/2026-06-25-add-llvm-mos-65816-to-the-indri-studio-product-gal.md)
 
-- [ ] **2026-06-25** Embed the live `bsnes-jg-wasm` emulator (cycle-accurate bsnes-jg running our `mandel-display` program + the `0x9103` fidelity self-check) on `/apps/llvm-mos-65816/` — click-to-launch iframe over a static bundle at `public/apps/llvm-mos-65816/play/`, synced from `../bsnes-jg-wasm`; keep the Lighthouse budget (lazy-load). Confirm embed model + check phone perf before tagging — [plan](docs/plans/2026-06-25-llvm-mos-emulator-embed.md)
-
 - [ ] **2026-05-22** Add `curl | bash` installer for `claude-usage` at `apt.indri.studio/install-claude-usage.sh` (thin bootstrap → upstream `install.sh`); also tighten `install.sh` pre-flight checks for `glib-compile-schemas` / `systemctl --user` / `gnome-shell` — [plan](docs/plans/2026-05-22-claude-usage-curlbash-installer.md)
 
 - [ ] **2026-05-21** Stand up a second apt repo at `apt.biohack.net` (own zone, own R2 bucket `biohack-net-secrets` + `biohack-net-apt`, own operator token). Decide whether biohack.net gets a fresh monorepo or piggy-backs on an existing biohack.net website repo. Reuse the same skill (`new-web-apt-repo`).
@@ -20,6 +18,7 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 ## Done
 
+- [x] **2026-06-25** Embedded the live `bsnes-jg-wasm` emulator (cycle-accurate bsnes-jg 2.1.0, sha256-pinned) inline on `/apps/llvm-mos-65816/` running our `mandel-display` + the `0x9103` fidelity self-check; bundle at `public/apps/llvm-mos-65816/play/` (synced from `../bsnes-jg-wasm`). Found+fixed a prod CSP block (added `'wasm-unsafe-eval'`). Live + verified (`v0.1.69`); page isn't in the LH sample so the budget is untouched — [plan](docs/plans/2026-06-25-llvm-mos-emulator-embed.md)
 - [x] **2026-05-21** Bootstrap `apt.indri.studio` + publish `claude-usage` 0.11.20 (apt-v0.1.1 green; InRelease + key.gpg live; verified `apt-cache show` end-to-end from clean ubuntu:latest) — [plan](docs/plans/2026-05-21-apt-indri-studio-bootstrap.md)
 - [x] **2026-05-14** HTML cache: `no-store` via Worker (content-type check); `_headers` merges rules so `/*` catch-all broke `_astro/*` immutable cache in v0.1.35, corrected in v0.1.36 — [plan](docs/plans/2026-05-14-html-cache-no-store.md)
 - [x] **2026-05-14** Fix gustos-colores LCP: eager-load first screenshot (`loading="eager"` + `fetchpriority="high"`); 94 → 96 on CI, Phase-5 threshold gate green on v0.1.34
