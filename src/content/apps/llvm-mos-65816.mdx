@@ -9,6 +9,7 @@ screenshots:
 ---
 
 import EmulatorEmbed from '../../components/EmulatorEmbed.astro';
+import DownloadBadges from '../../components/DownloadBadges.astro';
 
 An optimizing, open-source C compiler for the WDC&nbsp;65816 — the CPU at the
 heart of the [Super Nintendo](https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System) —
@@ -56,9 +57,13 @@ anywhere and compile with `bin/mos-clang --config bin/mos-snes.cfg -Os hello.c`.
 The 65816 output is identical across hosts: a cross-built clang is the *same*
 compiler, and its ROM bytes are verified byte-for-byte against the Linux build.
 
-- **Linux&nbsp;arm64** (aarch64) — [tarball](https://apt.indri.studio/sources/llvm-mos-65816_0.0.0+git20260625.bff643e_linux-aarch64.tar.xz) (Raspberry&nbsp;Pi, ARM servers, Asahi)
-- **Windows&nbsp;x86-64** — [zip](https://apt.indri.studio/sources/llvm-mos-65816_0.0.0+git20260625.bff643e_windows-x86_64.zip) — invoke `mos-clang.exe --config bin\mos-snes.cfg`; keep the bundled `*.dll` next to the `.exe`. *Early preview — please [report](https://indri.studio/) whether it runs on your machine.*
-- macOS&nbsp;arm64 — on the way.
+<DownloadBadges items={[
+  { os: "Linux", arch: "arm64", format: "tar.xz", href: "https://apt.indri.studio/sources/llvm-mos-65816_0.0.0+git20260625.bff643e_linux-aarch64.tar.xz" },
+  { os: "Windows", arch: "x86-64", format: "zip", note: "early preview", href: "https://apt.indri.studio/sources/llvm-mos-65816_0.0.0+git20260625.bff643e_windows-x86_64.zip" },
+  { os: "macOS", arch: "arm64", soon: true },
+]} />
+
+On Windows, invoke `mos-clang.exe --config bin\mos-snes.cfg`; keep the bundled `*.dll` next to the `.exe`. Please [report](https://indri.studio/) whether it runs on your machine.
 
 </details>
 

@@ -1,0 +1,106 @@
+---
+// DownloadBadges — a compact row of per-platform download badges for relocatable archives.
+// Self-hosted styling (no external badge images, matching the page's glass aesthetic): each
+// badge is a download icon + OS/arch + a format tag, with "soon" platforms rendered disabled.
+interface Item {
+  os: string;
+  arch?: string;
+  format?: string;   // e.g. "tar.xz" / "zip" — shown as a small monospace tag
+  href?: string;
+  note?: string;     // small subtitle, e.g. "Raspberry Pi · ARM servers · Asahi"
+  soon?: boolean;    // render disabled with a "soon" pill
+}
+interface Props { items: Item[] }
+const { items } = Astro.props;
+---
+
+<ul class="dl-badges" role="list" aria-label="Platform downloads">
+  {items.map((it) => {
+    const live = !it.soon && !!it.href;
+    return (
+      <li>
+        <a
+          class:list={["dl-badge", { "is-soon": !live }]}
+          href={live ? it.href : undefined}
+          aria-disabled={live ? undefined : "true"}
+        >
+          <svg class="dl-ico" viewBox="0 0 24 24" aria-hidden="true" fill="none"
+               stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v11m0 0-4-4m4 4 4-4M5 17v1a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3v-1" />
+          </svg>
+          <span class="dl-main">
+            <span class="dl-os">{it.os}{it.arch && <span class="dl-arch">&nbsp;{it.arch}</span>}</span>
+            {it.note && <span class="dl-note">{it.note}</span>}
+          </span>
+          {it.format && !it.soon && <span class="dl-tag">{it.format}</span>}
+          {it.soon && <span class="dl-tag dl-soon">soon</span>}
+        </a>
+      </li>
+    );
+  })}
+</ul>
+
+<style>
+  .dl-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    list-style: none;
+    padding: 0;
+    margin: 1.25rem 0;
+  }
+  .dl-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    padding: 0.55rem 0.85rem;
+    border-radius: var(--radius-DEFAULT, 10px);
+    background: var(--color-surface-container);
+    color: var(--color-on-surface);
+    border: 1px solid color-mix(in srgb, var(--color-primary-container) 30%, transparent);
+    transition: border-color 150ms ease, transform 150ms ease;
+  }
+  .dl-badge:hover,
+  .dl-badge:focus-visible {
+    border-color: var(--color-primary-container);
+    transform: translateY(-1px);
+  }
+  .dl-badge.is-soon {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+  }
+  .dl-ico {
+    width: 20px;
+    height: 20px;
+    color: var(--color-primary-container);
+    flex: none;
+  }
+  .dl-main {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+  .dl-os {
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .dl-arch { font-weight: 500; color: var(--color-on-surface-variant); }
+  .dl-note {
+    font-size: 11px;
+    color: var(--color-on-surface-variant);
+    margin-top: 1px;
+  }
+  .dl-tag {
+    margin-left: 0.1rem;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-on-surface-variant);
+    background: color-mix(in srgb, var(--color-on-surface) 8%, transparent);
+    padding: 2px 6px;
+    border-radius: 6px;
+  }
+</style>
