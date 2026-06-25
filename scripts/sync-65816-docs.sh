@@ -100,18 +100,21 @@ def svg_for(src):
     # mermaid.ink 403s the default urllib UA — send one (matches md-to-html.sh).
     req = urllib.request.Request(f"https://mermaid.ink/svg/{enc}", headers={"User-Agent": "indri-docs"})
     with urllib.request.urlopen(req, timeout=30) as r:
-        svg = r.read().decode("utf-8")
-    # mermaid.ink emits multi-line foreignObject labels as <p>a<br/>b</p>. Astro's
-    # markdown -> HTML pipeline (rehype) re-serializes that <br/> as <br></br>, which
-    # browsers parse as TWO line breaks -> every multi-line label gains a blank line
-    # and overflows its baked <foreignObject> box (the diagram clips). Split the lines
-    # into separate <p> instead (no <br> for the serializer to mangle); the docs page
-    # CSS gives mermaid labels margin:0 so the paragraphs stack tightly. See the
-    # .mermaid-diagram rules in src/pages/docs/[...slug].astro.
-    return re.sub(r'<br\s*/?>', '</p><p>', svg)
+        return r.read().decode("utf-8")
 def repl(m):
     try:
-        return '\n<div class="mermaid-diagram">\n' + svg_for(m.group(1)) + '\n</div>\n'
+        svg = svg_for(m.group(1))
+        # Carry the PRISTINE svg through the markdown pipeline as base64 in a data
+        # attribute, NOT as inline markup. Astro's rehype round-trip corrupts inline
+        # <svg>+<foreignObject>: it doubles <br/> -> <br></br> and foster-parents the
+        # <g class="nodes"> group out of the SVG into the prose (labels render twice —
+        # once in the box, once as stray text). Attribute values pass through rehype
+        # verbatim; the rehype-mermaid-raw plugin (astro.config.mjs) decodes this and
+        # emits the svg as a raw passthrough node, so the browser parses mermaid.ink's
+        # exact bytes. (The Inter-font label-clip is handled separately by the
+        # .mermaid-diagram CSS in src/pages/docs/[...slug].astro.)
+        b64 = base64.b64encode(svg.encode()).decode()
+        return f'\n<div class="mermaid-diagram" data-mermaid-b64="{b64}"></div>\n'
     except Exception as e:
         sys.stderr.write(f"    WARN: mermaid render failed ({e}) — leaving code block\n")
         return m.group(0)
