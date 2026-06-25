@@ -6,6 +6,7 @@ interface Item {
   os: string;
   arch?: string;
   format?: string;   // e.g. "tar.xz" / "zip" — shown as a small monospace tag
+  size?: string;     // e.g. "55 MB" — shown muted next to the format tag
   href?: string;
   note?: string;     // small subtitle, e.g. "Raspberry Pi · ARM servers · Asahi"
   soon?: boolean;    // render disabled with a "soon" pill
@@ -33,6 +34,7 @@ const { items } = Astro.props;
             {it.note && <span class="dl-note">{it.note}</span>}
           </span>
           {it.format && !it.soon && <span class="dl-tag">{it.format}</span>}
+          {it.size && !it.soon && <span class="dl-size">{it.size}</span>}
           {it.soon && <span class="dl-tag dl-soon">soon</span>}
         </a>
       </li>
@@ -102,5 +104,10 @@ const { items } = Astro.props;
     background: color-mix(in srgb, var(--color-on-surface) 8%, transparent);
     padding: 2px 6px;
     border-radius: 6px;
+  }
+  .dl-size {
+    font-size: 11px;
+    color: var(--color-on-surface-variant);
+    white-space: nowrap;   /* keep "55 MB" on one line */
   }
 </style>
