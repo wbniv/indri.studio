@@ -13,7 +13,7 @@ import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
 const apps = defineCollection({
-	loader: glob({ pattern: "**/*.md", base: "./src/content/apps" }),
+	loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/apps" }),
 	schema: ({ image }) => z.object({
 		title: z.string(),
 		// Any JS-parseable date string in the frontmatter becomes a Date.

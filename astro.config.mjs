@@ -3,12 +3,13 @@ import { defineConfig, fontProviders } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import rehypeExternalLinks from 'rehype-external-links';
 import sitemap from '@astrojs/sitemap';
+import mdx from '@astrojs/mdx';
 import mermaidInject from './src/mermaid-inject-integration.mjs';
 
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://indri.studio',
-	integrations: [sitemap(), mermaidInject()],
+	integrations: [mdx(), sitemap(), mermaidInject()],
 	build: {
 		// Inline all compiled CSS into each HTML response. Eliminates the
 		// render-blocking <link rel="stylesheet" href="/_astro/Base.*.css">

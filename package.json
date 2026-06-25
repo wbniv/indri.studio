@@ -12,9 +12,10 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/mdx": "^6.0.3",
     "@astrojs/sitemap": "^3.7.2",
     "@material-symbols/svg-400": "^0.44.10",
-    "astro": "^6.1.9"
+    "astro": "^6.4.8"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.4",
