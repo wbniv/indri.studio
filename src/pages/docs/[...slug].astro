@@ -153,6 +153,22 @@ const pdfHref = `/docs/${doc.id}.pdf`;
 			color: var(--color-secondary);
 			margin: 0 0 1.25em;
 		}
+		/* Mermaid diagrams are pre-rendered to static SVG at build time (sync-65816-docs.sh
+		   → mermaid.ink), with the renderer's font metrics baked into each node's
+		   <rect>/<foreignObject>. The labels are <p>/<span> inside foreignObject, so the
+		   .prose body font (Inter — wider than mermaid's baked sans stack) plus line-height:1.7
+		   reflow them to more/taller lines than the box was sized for, and foreignObject CLIPS
+		   the overflow. Pin the label text back to an Arial-width sans stack matching the bake
+		   so it fits. Verified on the snes-bootup flowchart: 10/10 → 0/10 labels overflow. */
+		.prose :global(.mermaid-diagram) { margin: 1.5em 0; }
+		.prose :global(.mermaid-diagram svg) { max-width: 100%; height: auto; }
+		.prose :global(.mermaid-diagram p),
+		.prose :global(.mermaid-diagram .nodeLabel),
+		.prose :global(.mermaid-diagram .edgeLabel) {
+			font-family: "trebuchet ms", arial, "Liberation Sans", sans-serif;
+			line-height: 1.5;
+			margin: 0;
+		}
 		.prose :global(a) {
 			color: var(--color-primary-container);
 			text-decoration-color: color-mix(in srgb, var(--color-primary-container) 30%, transparent);
