@@ -160,6 +160,9 @@ html {
 	html {
 		color-scheme: dark;
 		background-color: var(--color-surface);
+		/* lets `block-size: auto` interpolate, so <details> twisties (below)
+		 * can animate open/closed instead of snapping. */
+		interpolate-size: allow-keywords;
 	}
 
 	body {
@@ -249,6 +252,51 @@ html {
 	::selection {
 		background-color: var(--color-primary-container);
 		color: var(--color-on-primary-container);
+	}
+
+	/* Animated <details> twisties (app + doc pages). The implicit
+	 * ::details-content slot transitions its block-size between 0 and auto —
+	 * `interpolate-size: allow-keywords` (on html) is what lets `auto`
+	 * interpolate — while content-visibility flips discretely at the END of the
+	 * height run (the `allow-discrete` keyword), so the body stays painted right
+	 * through a close. The disclosure marker rotates with it. Engines without
+	 * ::details-content degrade to the native instant toggle; engines with it
+	 * but without interpolate-size still open/close correctly, just unanimated. */
+	details > summary {
+		cursor: pointer;
+		list-style: none;          /* drop the native triangle for our own marker */
+		display: flex;
+		align-items: center;
+		gap: 0.5ch;
+	}
+	details > summary::-webkit-details-marker { display: none; }   /* Safari */
+	details > summary::before {
+		content: "▸";
+		display: inline-block;
+		color: var(--color-primary);
+		transition: rotate 0.3s ease;
+	}
+	details[open] > summary::before { rotate: 90deg; }
+
+	details::details-content {
+		block-size: 0;
+		overflow: clip;
+		opacity: 0;
+		transition:
+			block-size 0.32s ease,
+			opacity 0.32s ease,
+			content-visibility 0.32s ease allow-discrete;
+	}
+	details[open]::details-content {
+		block-size: auto;
+		opacity: 1;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		details::details-content,
+		details > summary::before {
+			transition: none;
+		}
 	}
 }
 
