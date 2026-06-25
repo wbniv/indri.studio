@@ -135,6 +135,26 @@ const apps = defineCollection({
 	}),
 });
 
+// Long-form technical docs rendered at /docs/<slug>/ and linked from product
+// pages (currently the SNES C Compiler / llvm-mos-65816 entry). Snapshot-copied
+// from the llvm-mos-65816 repo by scripts/sync-65816-docs.sh; sourceCommit
+// records provenance. Each page also offers .md + .pdf downloads from public/docs/.
+const docs = defineCollection({
+	loader: glob({ pattern: "**/*.md", base: "./src/content/docs" }),
+	schema: z.object({
+		title: z.string(),
+		// One-line teaser shown in the page header and any docs index.
+		summary: z.string().optional(),
+		// Which product this doc belongs to (slug under src/content/apps).
+		app: z.string().default("llvm-mos-65816"),
+		// Provenance: source repo + short commit the markdown was snapshot from.
+		sourceRepo: z.string().optional(),
+		sourceCommit: z.string().optional(),
+		// Sort order within the product's documentation list (ascending).
+		order: z.number().default(0),
+	}),
+});
+
 const team = defineCollection({
 	loader: glob({ pattern: "**/*.md", base: "./src/content/team" }),
 	schema: z.object({
@@ -162,4 +182,4 @@ const team = defineCollection({
 	}),
 });
 
-export const collections = { apps, team };
+export const collections = { apps, docs, team };

@@ -34,6 +34,11 @@ tasks:
       - pnpm build
       - pnpm wrangler deploy
 
+  sync-docs:
+    desc: "Snapshot the llvm-mos-65816 reader docs into src/content/docs/ (web pages) + public/docs/ (.md + .pdf downloads). Interim; re-run after the source docs change. Env: LLVM_MOS_REPO=<path>."
+    cmds:
+      - bash scripts/sync-65816-docs.sh {{.CLI_ARGS}}
+
   secrets-pull:
     desc: "Render local .env from SSM (/indri-studio/cloudflare/*). Overwrites any existing .env."
     cmds:
