@@ -44,6 +44,17 @@ Prefer no package manager? The same build is a relocatable
 — extract anywhere and run `bin/mos-snes-clang`. This is an interim preview,
 published while the codegen patches make their way upstream into llvm-mos.
 
+### Other platforms
+
+The same toolchain, cross-built for other hosts — relocatable archives; extract
+anywhere and compile with `bin/mos-clang --config bin/mos-snes.cfg -Os hello.c`.
+The 65816 output is identical across hosts: a cross-built clang is the *same*
+compiler, and its ROM bytes are verified byte-for-byte against the Linux build.
+
+- **Linux&nbsp;arm64** (aarch64) — [tarball](https://apt.indri.studio/sources/llvm-mos-65816_0.0.0+git20260625.bff643e_linux-aarch64.tar.xz) (Raspberry&nbsp;Pi, ARM servers, Asahi)
+- **Windows&nbsp;x86-64** — [zip](https://apt.indri.studio/sources/llvm-mos-65816_0.0.0+git20260625.bff643e_windows-x86_64.zip) — invoke `mos-clang.exe --config bin\mos-snes.cfg`; keep the bundled `*.dll` next to the `.exe`. *Early preview — please [report](https://indri.studio/) whether it runs on your machine.*
+- macOS&nbsp;arm64 — on the way.
+
 ## Documentation
 
 - [65816 opcode reference](/docs/65816-opcodes/) — the instruction set as the backend encodes it
