@@ -40,7 +40,7 @@ tasks:
       - bash scripts/sync-65816-docs.sh {{.CLI_ARGS}}
 
   release-upload:
-    desc: "Upload llvm-mos-65816 release artifact(s) to r2://indri-apt/sources/. linux-x86_64 .tar.xz -> the Debian orig tarball (prints VERSION+SHA256 to pin in apt/packages/llvm-mos-65816/build.sh); linux-aarch64 .tar.xz + windows-x86_64 .zip -> the cross 'Other platforms' downloads, keyed to match the product-page links. Needs an R2-CAPABLE Cloudflare token (Workers R2 Storage:Edit) — the default `task secrets-pull` Pages token is NOT R2-scoped (403). Usage: task release-upload -- <artifact> [<artifact>...]"
+    desc: "Upload llvm-mos-65816 release artifact(s) to r2://indri-apt/sources/ via rclone S3. linux-x86_64 .tar.xz -> the Debian orig tarball (prints VERSION+SHA256 to pin in apt/packages/llvm-mos-65816/build.sh); linux-aarch64 .tar.xz + windows-x86_64 .zip -> the cross 'Other platforms' downloads, keyed to match the product-page links. Auth = a bucket-scoped R2 API token (Object R/W on indri-apt) exported as RCLONE_CONFIG_R2_* (least privilege; same as the apt CI). Usage: task release-upload -- <artifact> [<artifact>...]"
     cmds:
       - bash scripts/release-upload.sh {{.CLI_ARGS}}
 

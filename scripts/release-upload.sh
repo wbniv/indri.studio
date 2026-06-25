@@ -13,12 +13,17 @@
 # Accepts one or more artifacts (e.g. the linux-aarch64 .tar.xz and the
 # windows-x86_64 .zip from the llvm-mos-65816 repo's dist/).
 #
-# Auth: an R2-capable Cloudflare token — CLOUDFLARE_API_TOKEN with
-#   **Workers R2 Storage: Edit** on bucket indri-apt — plus CLOUDFLARE_ACCOUNT_ID.
-#   IMPORTANT: the default token from `task secrets-pull` is the *Pages deploy*
-#   token and is NOT R2-scoped (wrangler r2 object put -> 403). Either broaden the
-#   SSM /indri-studio/cloudflare/api_token to add R2 Edit, or export an R2 token
-#   for this run. This PUBLISHES to R2 — run deliberately.
+# Auth: the R2 S3 API via rclone — LEAST PRIVILEGE. Use an R2 API token scoped to
+#   Object Read & Write on JUST the `indri-apt` bucket (Cloudflare R2 -> Manage R2
+#   API Tokens), which yields an Access Key ID + Secret. Export them as the rclone
+#   `R2` remote (same convention as apt/.github/workflows/publish.yml), e.g. in .env:
+#     RCLONE_CONFIG_R2_TYPE=s3  RCLONE_CONFIG_R2_PROVIDER=Cloudflare  RCLONE_CONFIG_R2_REGION=auto
+#     RCLONE_CONFIG_R2_ACCESS_KEY_ID=…  RCLONE_CONFIG_R2_SECRET_ACCESS_KEY=…
+#     RCLONE_CONFIG_R2_ENDPOINT=https://<account-id>.r2.cloudflarestorage.com
+#   (We intentionally do NOT use a Cloudflare *API token* via `wrangler r2 object
+#   put`: that path only honours the account-wide "Workers R2 Storage" permission,
+#   which over-grants. The bucket-scoped S3 keys are the least-privilege fit.)
+#   This PUBLISHES to R2 — run deliberately.
 set -euo pipefail
 
 [ "$#" -ge 1 ] || {
@@ -32,9 +37,16 @@ BUCKET="${APT_BUCKET:-indri-apt}"
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 ARCHTAGS="linux-x86_64 linux-aarch64 windows-x86_64"
 
+command -v rclone >/dev/null || { echo "FATAL: rclone not installed" >&2; exit 1; }
+if ! rclone listremotes 2>/dev/null | grep -qx 'R2:' && [ -z "${RCLONE_CONFIG_R2_ACCESS_KEY_ID:-}" ]; then
+  echo "FATAL: no 'R2' rclone remote. Export RCLONE_CONFIG_R2_* (bucket-scoped indri-apt" >&2
+  echo "  R2 API token: Access Key ID / Secret / ENDPOINT) — see the header comment." >&2
+  exit 1
+fi
+
 put() {  # put <localfile> <r2-key>
-  echo "    -> r2://$BUCKET/$2"
-  ( cd "$ROOT" && pnpm exec wrangler r2 object put "$BUCKET/$2" --file="$1" --remote )
+  echo "    -> r2:$BUCKET/$2"
+  rclone copyto --s3-no-check-bucket "$1" "R2:$BUCKET/$2"
 }
 
 for ART in "$@"; do
