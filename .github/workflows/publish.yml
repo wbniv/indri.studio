@@ -36,6 +36,23 @@ jobs:
           cache-from: type=gha,scope=apt-builder
           cache-to:   type=gha,scope=apt-builder,mode=max
 
+      # Stage the llvm-mos-65816 toolchain tarball (a ~42 MB GitHub release
+      # asset on this repo — too big for git) into dist/sources/ so its
+      # build.sh can repack it into the .deb. Fetched with the built-in token
+      # (contents:read). After the first publish the tarball also lives at the
+      # /sources mirror, which build.sh falls back to if this is skipped.
+      - name: Stage llvm-mos-65816 toolchain tarball (release asset)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TOOLCHAIN_RELEASE: toolchain-20260625-c49f395
+        run: |
+          mkdir -p apt/dist/sources
+          gh release download "$TOOLCHAIN_RELEASE" \
+            --repo "${{ github.repository }}" \
+            --pattern 'llvm-mos-65816-*-linux-x86_64.tar.xz' \
+            --dir apt/dist/sources --clobber \
+          || echo "::warning::toolchain release '$TOOLCHAIN_RELEASE' not found; build.sh falls back to the /sources mirror URL"
+
       - name: Build all .debs (in container)
         run: bash apt/scripts/in-docker.sh bash scripts/build-all.sh
 

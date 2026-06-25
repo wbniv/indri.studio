@@ -20,10 +20,14 @@ set -euo pipefail
 NAME="llvm-mos-65816"
 MAINTAINER="Will Norris <wbnorris@gmail.com>"
 
-# --- release pins (set when the clean tarball is uploaded to /sources) --------
-VERSION="${LLVM_MOS_VERSION:-0.0.0+UNSET}"
-EXPECTED_SHA="${LLVM_MOS_SHA256:-}"
-SOURCE_URL="${LLVM_MOS_SOURCE_URL:-https://apt.indri.studio/sources/${NAME}_${VERSION}.orig.tar.xz}"
+# --- release pins (bump for each new toolchain build) -------------------------
+# The tarball is built by the llvm-mos-65816 repo (`task package`) and attached
+# to a GitHub release on THIS repo; the apt CI stages it into dist/sources/
+# before building (see .github/workflows/publish.yml). After a successful
+# publish it also lives at the /sources mirror URL below (CI fallback).
+VERSION="${LLVM_MOS_VERSION:-0.0.0+git20260625.c49f395}"
+EXPECTED_SHA="${LLVM_MOS_SHA256:-d6b11517bb15b9ce63deea77b105b708714917338fad0d8176a8df7b395a0954}"
+SOURCE_URL="${LLVM_MOS_SOURCE_URL:-https://apt.indri.studio/sources/${NAME}_${VERSION}.tar.xz}"
 LOCAL_TARBALL="${LLVM_MOS_TARBALL:-}"
 
 PKG_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -35,17 +39,21 @@ WORK="$(mktemp -d -t "${NAME}-build-XXXXXX")"
 # shellcheck disable=SC2064
 trap "rm -rf '$WORK'" EXIT
 
+SRC_DIST="$APT_ROOT/dist/sources"
+mkdir -p "$SRC_DIST"
+
 # --- 1. obtain the tarball --------------------------------------------------
+# Order: explicit override > a tarball staged in dist/sources/ (the apt CI
+# downloads the GitHub release asset there, see publish.yml) > the /sources
+# mirror URL (works once a prior publish has populated it).
+if [ -z "$LOCAL_TARBALL" ]; then
+  staged="$(ls "$SRC_DIST"/${NAME}-*-linux-x86_64.tar.xz 2>/dev/null | head -1 || true)"
+  [ -n "$staged" ] && LOCAL_TARBALL="$staged"
+fi
 if [ -n "$LOCAL_TARBALL" ]; then
-  echo "[$NAME] local tarball: $LOCAL_TARBALL"
+  echo "[$NAME] using tarball: $LOCAL_TARBALL"
   cp "$LOCAL_TARBALL" "$WORK/src.tar.xz"
-  if [ "$VERSION" = "0.0.0+UNSET" ]; then
-    stamp="$(basename "$LOCAL_TARBALL" | sed -E 's/^'"$NAME"'-(.+)-linux-x86_64\.tar\.xz$/\1/')"
-    VERSION="0.0.0+git$(printf '%s' "$stamp" | sed -E 's/-dirty$//; s/-/./')"
-    echo "[$NAME] derived version: $VERSION"
-  fi
 else
-  [ "$VERSION" != "0.0.0+UNSET" ] || { echo "FATAL: set LLVM_MOS_VERSION (+ LLVM_MOS_SHA256) or LLVM_MOS_TARBALL" >&2; exit 1; }
   echo "[$NAME] fetching $SOURCE_URL"
   curl -fsSL -o "$WORK/src.tar.xz" "$SOURCE_URL"
 fi
@@ -53,10 +61,15 @@ fi
 if [ -n "$EXPECTED_SHA" ]; then
   actual="$(sha256sum "$WORK/src.tar.xz" | awk '{print $1}')"
   [ "$actual" = "$EXPECTED_SHA" ] || { echo "FATAL: sha256 mismatch ($actual != $EXPECTED_SHA)" >&2; exit 1; }
-  echo "[$NAME] sha256 OK"
-elif [ -z "$LOCAL_TARBALL" ]; then
-  echo "[$NAME] WARNING: no LLVM_MOS_SHA256 pin — fetching unverified" >&2
+  echo "[$NAME] sha256 OK ($EXPECTED_SHA)"
+else
+  echo "[$NAME] WARNING: no sha256 pin — proceeding unverified" >&2
 fi
+
+# Mirror the tarball under a <pkg>_<version>.tar.xz name so publish-local
+# promotes it to public/sources/ -> apt.indri.studio/sources/ (the product
+# page's non-apt download link).
+cp "$WORK/src.tar.xz" "$SRC_DIST/${NAME}_${VERSION}.tar.xz"
 
 # --- 2. lay out the package tree --------------------------------------------
 PKG="$WORK/pkg"

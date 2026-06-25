@@ -41,9 +41,9 @@ mos-snes-clang -Os -o hello.sfc hello.c
 ```
 
 Prefer no package manager? The same build is a relocatable
-[tarball](https://apt.indri.studio/sources/) — extract anywhere and run
-`bin/mos-snes-clang`. This is an interim preview, published while the codegen
-patches make their way upstream into llvm-mos.
+[tarball](https://apt.indri.studio/sources/llvm-mos-65816_0.0.0+git20260625.c49f395.tar.xz)
+— extract anywhere and run `bin/mos-snes-clang`. This is an interim preview,
+published while the codegen patches make their way upstream into llvm-mos.
 
 ## Documentation
 

@@ -82,7 +82,7 @@ echo "=== Mirroring source tarballs ==="
 # out of every distributed artifact.
 mkdir -p public/sources
 shopt -s nullglob
-srcs=(dist/sources/*.tar.gz)
+srcs=(dist/sources/*.tar.gz dist/sources/*.tar.xz)
 shopt -u nullglob
 if [[ ${#srcs[@]} -eq 0 ]]; then
     echo "  (no source tarballs in dist/sources/ — nothing to mirror)"
@@ -93,7 +93,7 @@ else
         sha=$(sha256sum "$src" | awk '{print $1}')
         # Filename shape: <pkg>_<version>.tar.gz — same as build.sh emits.
         pkg=${base%_*}
-        version=${base#*_}; version=${version%.tar.gz}
+        version=${base#*_}; version=${version%.tar.gz}; version=${version%.tar.xz}
         cat > "public/sources/${pkg}-latest.json" <<JSON
 {
   "version": "${version}",
