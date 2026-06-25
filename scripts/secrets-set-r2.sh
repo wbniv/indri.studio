@@ -70,7 +70,7 @@ if [[ -z "$AK" || -z "$SK" ]]; then
   A bucket-scoped R2 API token's S3 keys, for uploads to r2://$BUCKET/.
   Get them in the Cloudflare dashboard:
     R2 → Manage R2 API Tokens → https://dash.cloudflare.com/${CF_ACCOUNT_ID:-<account-id>}/r2/api-tokens
-    → "Create Account API token" → Token name: anything (e.g. indri-apt-upload)
+    → "Create Account API token" → Token name: indri-apt-upload
     → Permission: Object Read & Write → Specify bucket: $BUCKET
     → Create, then copy the Access Key ID + Secret Access Key it shows once.
     (Reuse indri-apt-ci's keys if you saved them; do NOT roll it — the apt CI uses it.)
