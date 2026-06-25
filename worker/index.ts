@@ -53,7 +53,10 @@ export default {
         `default-src 'self'; ` +
         `font-src 'self' fonts.gstatic.com; ` +
         `style-src 'self' 'unsafe-inline' fonts.googleapis.com; ` +
-        `script-src 'self' 'nonce-${nonce}' 'unsafe-inline'; ` +
+        // 'wasm-unsafe-eval' lets WebAssembly.instantiate() compile the
+        // bsnes-jg core embedded on /apps/llvm-mos-65816/ — it permits WASM
+        // compilation only, NOT general eval(), so the policy stays tight.
+        `script-src 'self' 'nonce-${nonce}' 'unsafe-inline' 'wasm-unsafe-eval'; ` +
         `img-src 'self' data:; ` +
         `object-src 'none'; ` +
         `base-uri 'self'; ` +
