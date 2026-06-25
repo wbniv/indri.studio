@@ -170,6 +170,17 @@ when the card scrolls out of view.
   the *sampled* pages, unrelated to this change. (Deliberately leaving the heavy interactive page out
   of the sample rather than letting it create a standing ≥95-Perf alert.)
 
+### Follow-up tweaks (`v0.1.70`, user review)
+
+- **Aspect fixed.** The raw 512×240 buffer (lores 256 px doubled + overscan) was drawn straight,
+  making the Mandelbrot ~2× too wide and letterboxed. `present()` now collapses the horizontal
+  doubling and crops to the 224 visible lines → true **256×224**, square pixels at the SNES 8:7
+  aspect, matching `mandel-jg.png`. (Also fixed an `imageData`-null deref this exposed.)
+- **Moved to page bottom** (after the screenshots gallery), not the hero slot.
+- **Dropped** the "Host C reference vs the SNES render — pixel-for-pixel" screenshot
+  (`mandel-compare.png`) — the live emulator demonstrates it better.
+- All verified live at the production URL after the `v0.1.70` deploy.
+
 ## Verification
 
 > Run each step; paste raw output below it; PASS/FAIL; write back here.

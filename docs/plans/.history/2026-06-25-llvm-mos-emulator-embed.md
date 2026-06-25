@@ -1,8 +1,14 @@
 | Date | Change |
 |------|--------|
+| [2026-06-25](https://github.com/wbniv/indri.studio/commit/3bd1b57) | docs: record the llvm-mos emulator embed as deployed + the CSP fix |
 | [2026-06-25](https://github.com/wbniv/indri.studio/commit/6b83ec9) | apps/llvm-mos-65816: embed the live cycle-accurate SNES emulator |
 
 <!--history-meta v1
+3bd1b57	author	Will Norris
+3bd1b57	added	22
+3bd1b57	deleted	1
+3bd1b57	files	1
+3bd1b57	body	Plan → DEPLOYED/VERIFIED (v0.1.69); Results section captures the prod CSP bug\n(WebAssembly blocked by script-src; fixed with 'wasm-unsafe-eval') and that the\npage is outside the Lighthouse sample so the budget is untouched. TODO moved to\nDone.\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_012z1vSadjiUqKEsQ6dU4u3P
 6b83ec9	author	Will Norris
 6b83ec9	added	185
 6b83ec9	deleted	0
