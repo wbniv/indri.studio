@@ -6,7 +6,6 @@ draft: false
 screenshots:
   - { src: "../../assets/screenshots/llvm-mos-65816/mandel-jg.png", alt: "Mandelbrot rendered from C on the SNES (bsnes-jg)" }
   - { src: "../../assets/screenshots/llvm-mos-65816/mandel-mode7-jg.png", alt: "Mode 7 Mandelbrot rendered from C on the SNES (bsnes-jg)" }
-  - { src: "../../assets/screenshots/llvm-mos-65816/mandel-compare.png", alt: "Host C reference vs the SNES render — pixel-for-pixel" }
 ---
 
 An optimizing, open-source C compiler for the WDC&nbsp;65816 — the CPU at the

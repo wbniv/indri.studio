@@ -126,8 +126,6 @@ const ogImage = post.data.screenshots[0]?.src.src
 			<StoreBadges links={post.data.storeLinks} />
 		</header>
 
-		{post.id === 'llvm-mos-65816' && <EmulatorEmbed />}
-
 		<div class="prose">
 			<Content />
 			{post.id === 'claude-code-authoring-formats' && <script src={lightboxUrl}></script>}
@@ -150,6 +148,8 @@ const ogImage = post.data.screenshots[0]?.src.src
 				</ul>
 			</section>
 		)}
+
+		{post.id === 'llvm-mos-65816' && <EmulatorEmbed />}
 
 	</article>
 
