@@ -42,4 +42,6 @@ _Auto-added from plan "Out of scope"/"Deferred" sections at commit time. Triage 
 
 <!-- BEGIN auto-captured-deferrals (managed by audit-plan-deferrals.sh — triage these into the curated sections above; the fingerprint ledger means a deleted item is NOT re-added) -->
 - [verify] **2026-06-25-add-llvm-mos-65816-to-the-indri-studio-product-gal** — Verification section present but no PASS recorded — run + record the steps. _from [2026-06-25-add-llvm-mos-65816-to-the-indri-studio-product-gal.md](docs/plans/2026-06-25-add-llvm-mos-65816-to-the-indri-studio-product-gal.md)_  <!-- fp:b6de012c5009da31 -->
+- [ ] **(triage)** **PDF + release-bundled docs** render via a *different* path (`md-to-html.sh` in — _from [2026-06-25-mermaid-diagram-label-clipping.md](docs/plans/2026-06-25-mermaid-diagram-label-clipping.md)_  <!-- fp:f8b15c026e273ff6 -->
+- [ ] **(triage)** **Cross-OS font residual.** The label text "65816 in 6502-emulation mode (E=1)" sits — _from [2026-06-25-mermaid-diagram-label-clipping.md](docs/plans/2026-06-25-mermaid-diagram-label-clipping.md)_  <!-- fp:17fcdb9d8e3ce2cc -->
 <!-- END auto-captured-deferrals -->
