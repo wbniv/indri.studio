@@ -39,6 +39,11 @@ tasks:
     cmds:
       - bash scripts/sync-65816-docs.sh {{.CLI_ARGS}}
 
+  release-upload:
+    desc: "Upload a llvm-mos-65816 toolchain tarball to r2://indri-apt/sources/ (the .deb's source mirror). Prints the VERSION+SHA256 to pin in apt/packages/llvm-mos-65816/build.sh. Needs creds (task secrets-pull). Usage: task release-upload -- <tarball>"
+    cmds:
+      - bash scripts/release-upload.sh {{.CLI_ARGS}}
+
   secrets-pull:
     desc: "Render local .env from SSM (/indri-studio/cloudflare/*). Overwrites any existing .env."
     cmds:
