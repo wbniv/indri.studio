@@ -4,6 +4,8 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 ## Active
 
+- [ ] **2026-06-25** Publish "SNES C Compiler" (llvm-mos-65816) gallery entry — committed as `draft: true`; flip to `false` + `task publish` once `wbniv/llvm-mos-65816` is public (badge 404s until then) and any WDC outreach is settled — [plan](docs/plans/2026-06-25-add-llvm-mos-65816-to-the-indri-studio-product-gal.md)
+
 - [ ] **2026-05-22** Add `curl | bash` installer for `claude-usage` at `apt.indri.studio/install-claude-usage.sh` (thin bootstrap → upstream `install.sh`); also tighten `install.sh` pre-flight checks for `glib-compile-schemas` / `systemctl --user` / `gnome-shell` — [plan](docs/plans/2026-05-22-claude-usage-curlbash-installer.md)
 
 - [ ] **2026-05-21** Stand up a second apt repo at `apt.biohack.net` (own zone, own R2 bucket `biohack-net-secrets` + `biohack-net-apt`, own operator token). Decide whether biohack.net gets a fresh monorepo or piggy-backs on an existing biohack.net website repo. Reuse the same skill (`new-web-apt-repo`).
@@ -32,3 +34,12 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 - [x] **2026-05-13** Contact email `hello@indri.studio` via Cloudflare Email Routing, footer mail icon — [plan](docs/plans/2026-05-13-contact-email-routing.md)
 - [x] **2026-05-13** Hero: phone/tablet/console/TV/web icon strip under tagline with sequential Phosphor glow — [plan](docs/plans/2026-05-13-hero-platform-icon-strip.md)
 - [x] **2026-05-13** 404 page with ring-tailed-lemur-as-the-0 + ring-tail sweep, inverted-tagline copy — [plan](docs/plans/2026-05-13-404-page.md)
+
+
+## Inbox — auto-captured plan deferrals
+
+_Auto-added from plan "Out of scope"/"Deferred" sections at commit time. Triage each into M1/M2/etc. and delete it here — it will not come back._
+
+<!-- BEGIN auto-captured-deferrals (managed by audit-plan-deferrals.sh — triage these into the curated sections above; the fingerprint ledger means a deleted item is NOT re-added) -->
+- [verify] **2026-06-25-add-llvm-mos-65816-to-the-indri-studio-product-gal** — Verification section present but no PASS recorded — run + record the steps. _from [2026-06-25-add-llvm-mos-65816-to-the-indri-studio-product-gal.md](docs/plans/2026-06-25-add-llvm-mos-65816-to-the-indri-studio-product-gal.md)_  <!-- fp:b6de012c5009da31 -->
+<!-- END auto-captured-deferrals -->
