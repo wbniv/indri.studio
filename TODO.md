@@ -6,6 +6,8 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 - [ ] **2026-06-25** Publish "SNES C Compiler" (llvm-mos-65816) gallery entry — committed as `draft: true`; flip to `false` + `task publish` once `wbniv/llvm-mos-65816` is public (badge 404s until then) and any WDC outreach is settled — [plan](docs/plans/2026-06-25-add-llvm-mos-65816-to-the-indri-studio-product-gal.md)
 
+- [ ] **2026-06-25** Embed the live `bsnes-jg-wasm` emulator (cycle-accurate bsnes-jg running our `mandel-display` program + the `0x9103` fidelity self-check) on `/apps/llvm-mos-65816/` — click-to-launch iframe over a static bundle at `public/apps/llvm-mos-65816/play/`, synced from `../bsnes-jg-wasm`; keep the Lighthouse budget (lazy-load). Confirm embed model + check phone perf before tagging — [plan](docs/plans/2026-06-25-llvm-mos-emulator-embed.md)
+
 - [ ] **2026-05-22** Add `curl | bash` installer for `claude-usage` at `apt.indri.studio/install-claude-usage.sh` (thin bootstrap → upstream `install.sh`); also tighten `install.sh` pre-flight checks for `glib-compile-schemas` / `systemctl --user` / `gnome-shell` — [plan](docs/plans/2026-05-22-claude-usage-curlbash-installer.md)
 
 - [ ] **2026-05-21** Stand up a second apt repo at `apt.biohack.net` (own zone, own R2 bucket `biohack-net-secrets` + `biohack-net-apt`, own operator token). Decide whether biohack.net gets a fresh monorepo or piggy-backs on an existing biohack.net website repo. Reuse the same skill (`new-web-apt-repo`).

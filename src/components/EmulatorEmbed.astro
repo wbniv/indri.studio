@@ -1,0 +1,125 @@
+---
+// EmulatorEmbed.astro — inline, always-on live emulator for the SNES C Compiler
+// page. Runs our mandel-display program on a WebAssembly build of bsnes-jg 2.1.0
+// (the exact cycle-accurate core the llvm-mos-65816 differential gate trusts),
+// and exposes a "Verify fidelity" button that reproduces the gate's headless
+// WRAM assert (corpus_result == 0x9103) live in the tab.
+//
+// Assets live at /apps/llvm-mos-65816/play/ (synced from bsnes-jg-wasm by
+// scripts/sync-llvm-mos-emulator.sh). The loader there (app.js) drives the
+// <canvas>; we point it at the right base + ROM and (re)boot on astro:page-load
+// so it survives the site's view transitions. The run loop pauses when the card
+// scrolls out of view (handled in app.js via IntersectionObserver).
+---
+
+<section id="bjg-embed" class="emu" aria-label="Live SNES emulator running a C-compiled Mandelbrot">
+  <h2 class="section-label">Run it in your browser</h2>
+
+  <div class="glass-card emu-card">
+    <div id="game" class="emu-screen">
+      <canvas id="screen" width="256" height="224" aria-label="SNES screen"></canvas>
+    </div>
+
+    <div class="emu-row">
+      <span id="status" class="emu-status">loading core…</span>
+      <span id="checkresult" class="badge"></span>
+      <button id="verify" class="emu-btn" disabled>Verify fidelity</button>
+    </div>
+
+    <p class="emu-keys">
+      <b>← ↑ ↓ →</b> d-pad · <b>Z</b>/<b>X</b> = B/A · <b>A</b>/<b>S</b> = Y/X ·
+      <b>Enter</b> Start · <b>Shift</b> Select · <b>Q</b>/<b>W</b> = L/R
+    </p>
+
+    <p id="banner" class="emu-banner"></p>
+  </div>
+</section>
+
+<script>
+  // (Re)boot the emulator on every page-load so it survives view transitions.
+  // app.js is a plain static script under /apps/llvm-mos-65816/play/; we set its
+  // base + default ROM, then (re)inject it, stopping any prior run first.
+  function bootEmulator() {
+    if (!document.getElementById("bjg-embed")) return;          // only on this page
+    if (window.__bjgStop) { try { window.__bjgStop(); } catch (e) {} }
+    window.BJG_BASE = "/apps/llvm-mos-65816/play/";
+    window.BJG_DEFAULT_ROM = "mandel-display";
+    window.BsnesJg = undefined;                                 // force a fresh core module
+    window.__bjg = undefined;
+    var old = document.getElementById("bjg-appjs");
+    if (old) old.remove();
+    var s = document.createElement("script");
+    s.id = "bjg-appjs";
+    s.src = "/apps/llvm-mos-65816/play/app.js";
+    document.body.appendChild(s);
+  }
+  if (!window.__bjgReg) {
+    window.__bjgReg = true;
+    document.addEventListener("astro:page-load", bootEmulator);
+  }
+</script>
+
+<style>
+  .emu { margin: 2.5rem 0; }
+  .emu-card { padding: 1rem; }
+  .emu-screen {
+    width: 100%;
+    aspect-ratio: 8 / 7;
+    background: #000;
+    border-radius: var(--radius-DEFAULT, 8px);
+    overflow: hidden;
+    display: flex;
+  }
+  .emu-screen canvas {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+  }
+  .emu-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0.85rem;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 12px;
+    color: var(--color-on-surface-variant);
+  }
+  .emu-btn {
+    margin-left: auto;
+    background: var(--color-surface-container);
+    color: var(--color-on-surface);
+    border: 1px solid color-mix(in srgb, var(--color-primary-container) 35%, transparent);
+    border-radius: var(--radius-DEFAULT, 8px);
+    padding: 0.4rem 0.85rem;
+    font-size: 12px;
+    cursor: pointer;
+    transition: border-color 150ms ease, color 150ms ease;
+  }
+  .emu-btn:hover:not(:disabled) {
+    border-color: var(--color-primary-container);
+    color: var(--color-primary-container);
+  }
+  .emu-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .badge { font-family: var(--font-mono, ui-monospace, monospace); }
+  .badge.running { color: var(--color-primary-container); }
+  .badge.pass { background: #54d98c; color: #0c1116; font-weight: 600; padding: 2px 8px; border-radius: 5px; }
+  .badge.fail { background: #ff6b6b; color: #0c1116; font-weight: 600; padding: 2px 8px; border-radius: 5px; }
+  .emu-keys {
+    margin: 0.75rem 0 0;
+    font-size: 11.5px;
+    color: var(--color-on-surface-variant);
+  }
+  .emu-keys b { color: var(--color-on-surface); font-weight: 600; }
+  .emu-banner {
+    margin: 0.6rem 0 0;
+    font-size: 12px;
+    color: var(--color-on-surface-variant);
+  }
+  .emu-banner :global(b) { color: var(--color-on-surface); }
+  .emu-banner :global(code) {
+    font-family: var(--font-mono, ui-monospace, monospace);
+    color: var(--color-primary-fixed, var(--color-primary-container));
+  }
+</style>

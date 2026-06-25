@@ -2,6 +2,7 @@
 import AppLayout from "../../layouts/AppLayout.astro";
 import StoreBadges from "../../components/StoreBadges.astro";
 import Screenshot from "../../components/Screenshot.astro";
+import EmulatorEmbed from "../../components/EmulatorEmbed.astro";
 import MIcon from "../../components/MIcon.astro";
 import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
@@ -124,6 +125,8 @@ const ogImage = post.data.screenshots[0]?.src.src
 
 			<StoreBadges links={post.data.storeLinks} />
 		</header>
+
+		{post.id === 'llvm-mos-65816' && <EmulatorEmbed />}
 
 		<div class="prose">
 			<Content />
