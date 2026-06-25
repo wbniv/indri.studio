@@ -100,7 +100,15 @@ def svg_for(src):
     # mermaid.ink 403s the default urllib UA — send one (matches md-to-html.sh).
     req = urllib.request.Request(f"https://mermaid.ink/svg/{enc}", headers={"User-Agent": "indri-docs"})
     with urllib.request.urlopen(req, timeout=30) as r:
-        return r.read().decode("utf-8")
+        svg = r.read().decode("utf-8")
+    # mermaid.ink emits multi-line foreignObject labels as <p>a<br/>b</p>. Astro's
+    # markdown -> HTML pipeline (rehype) re-serializes that <br/> as <br></br>, which
+    # browsers parse as TWO line breaks -> every multi-line label gains a blank line
+    # and overflows its baked <foreignObject> box (the diagram clips). Split the lines
+    # into separate <p> instead (no <br> for the serializer to mangle); the docs page
+    # CSS gives mermaid labels margin:0 so the paragraphs stack tightly. See the
+    # .mermaid-diagram rules in src/pages/docs/[...slug].astro.
+    return re.sub(r'<br\s*/?>', '</p><p>', svg)
 def repl(m):
     try:
         return '\n<div class="mermaid-diagram">\n' + svg_for(m.group(1)) + '\n</div>\n'
