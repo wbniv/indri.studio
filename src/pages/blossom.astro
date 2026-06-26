@@ -270,8 +270,11 @@ const kbd = "inline-block rounded border border-outline-variant bg-surface-conta
     width: fit-content;
     max-width: 100%;
     margin-inline: auto;
-    overflow-x: auto;
-    font-size: 1.2rem;
+    /* No overflow/scrollbar — ever. The equation scales with the viewport so it
+       always fits whole and never clips. (overflow-x:auto used to force a stray
+       vertical scrollbar: a non-visible overflow on one axis makes the other
+       compute to auto, and the radical's height nudged the box past it.) */
+    font-size: clamp(0.62rem, 2.7vw, 1.2rem);
     line-height: 1.4;
     color: var(--color-on-surface);
   }
