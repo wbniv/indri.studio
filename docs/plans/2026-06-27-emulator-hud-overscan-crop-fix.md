@@ -1,9 +1,10 @@
 # Emulator HUD overscan-crop fix (`/blossom` value bar clipped)
 
 **Date:** 2026-06-27
-**Status:** indri.studio + `bsnes-jg-wasm` source fixed & live. **biohack.net regressed** — a later
-`space-invaders` bundle re-sync clobbered the per-site copy back to `yoff=8`; re-fix pending (see
-[§Regression](#regression--biohack-re-synced-back-to-yoff8)).
+**Status:** Fixed & live on both sites. biohack briefly regressed (a `space-invaders` bundle re-sync
+reverted its vendored copy to `yoff=8`) and was **re-fixed** (`fc918d5`, `v1.0.76`); see
+[§Regression](#regression--biohack-re-synced-back-to-yoff8). The durable fix lives in the
+`bsnes-jg-wasm` source, which `deploy-bundle.sh` copies into the bundle, so future syncs carry it.
 **Type:** Bug fix.
 
 Related: [llvm-mos emulator embed](2026-06-25-llvm-mos-emulator-embed.md) §"Aspect fixed" (the
@@ -170,8 +171,14 @@ durable fix lives in the **sync source** (`bsnes-jg-wasm/web/app.js` — done, `
 must then be **re-synced from the fixed bundle**, not hand-edited. Note `bsnes-jg-wasm/dist-bundle/`
 is gitignored, so confirm `deploy-bundle.sh` regenerates it from `web/app.js` before any re-sync.
 
-**To re-fix biohack** (deferred — left at `yoff=8` for now): re-sync `public/play/` from the fixed
-bundle (or re-apply `yoff=0`), then `task bump` to deploy. Tracked in `TODO.md`.
+**Resolved (`fc918d5`, `v1.0.76`).** Re-applied `yoff=0` to biohack's `public/play/app.js` and added
+a "vendored copy — keep in sync with `bsnes-jg-wasm/web/app.js`" note in-line so the next bundle pull
+is less likely to silently revert it. Verified live at 125% zoom (21 px top margin, glyph tops
+intact). The bundle source is now correct end-to-end: `bsnes-jg-wasm/web/app.js` is `yoff=0`
+(`aaacbae`) and `deploy-bundle.sh:46` does `cp web/app.js dist-bundle/app.js`, so a fresh bundle —
+and therefore any future re-sync of either site — carries the fix. (The one residual sharp edge:
+`dist-bundle/` is gitignored, so a stale, un-rebuilt bundle could still clobber a site; rebuild the
+bundle before syncing.)
 
 ---
 

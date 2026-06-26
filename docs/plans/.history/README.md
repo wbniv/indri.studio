@@ -1,11 +1,17 @@
 | Date | Change |
 |------|--------|
+| [2026-06-27](https://github.com/wbniv/indri.studio/commit/4dd7568) | docs: record biohack /blossom HUD regression (re-synced to yoff=8) |
 | [2026-06-27](https://github.com/wbniv/indri.studio/commit/c6a28d2) | docs: index the /blossom HUD overscan-crop fix plan |
 | [2026-06-26](https://github.com/wbniv/indri.studio/commit/08a6663) | docs(plans): correct more misreads (union of 2 more Opus audit passes) |
 | [2026-06-26](https://github.com/wbniv/indri.studio/commit/5916a92) | docs(plans): fix summaries/categories flagged by an Opus faithfulness audit |
 | [2026-06-26](https://github.com/wbniv/indri.studio/commit/49f6b36) | docs: add plan index (docs/plans/README.md) |
 
 <!--history-meta v1
+4dd7568	author	Will Norris
+4dd7568	added	1
+4dd7568	deleted	1
+4dd7568	files	1
+4dd7568	body	A later space-invaders commit (biohack c20b62e) re-copied the vendored player\nbundle into public/play/app.js, clobbering the yoff=0 fix (3f9c66e / v1.0.74)\nback to yoff=8 — biohack.net/blossom is clipped again on live. indri.studio and\nthe bsnes-jg-wasm source remain fixed.\n\nUpdates the plan (status + §Regression with the root lesson: fix the sync\nsource, not the vendored per-site copy), the index summary, and adds an active\nTODO to re-sync biohack from the fixed bundle. No code change here; biohack's\napp.js is left as-is pending the re-sync.\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01PUAcAwgviWnsXGBKPBiLAT
 c6a28d2	author	Will Norris
 c6a28d2	added	2
 c6a28d2	deleted	1
