@@ -286,8 +286,8 @@ const kbd = "inline-block rounded border border-outline-variant bg-surface-conta
     border-radius: var(--radius-DEFAULT, 8px);
     background: #000;
   }
-  /* emulator widget — mirrors EmulatorEmbed.astro, capped near 2x the 256x224 native */
-  .emu { max-width: 544px; }
+  /* emulator widget — mirrors EmulatorEmbed.astro, capped near 2x the 256x224 native + centred */
+  .emu { max-width: 544px; margin-inline: auto; }
   .emu-card { padding: 1rem; }
   .emu-screen {
     width: 100%;
