@@ -5,11 +5,11 @@
       "id": "mandel-display",
       "title": "Mode 7",
       "selfcheck": {
-        "off": "0x400",
+        "off": "0x200",
         "len": 2,
         "want": "0x204F",
-        "frames": 5200,
-        "label": "gate jgxcheck CRC (corpus_result @ WRAM $0400)"
+        "frames": 5800,
+        "label": "gate jgxcheck CRC (corpus_result @ WRAM $0200)"
       }
     }
   ]
