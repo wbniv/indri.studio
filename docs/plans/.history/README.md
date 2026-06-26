@@ -1,10 +1,16 @@
 | Date | Change |
 |------|--------|
+| [2026-06-27](https://github.com/wbniv/indri.studio/commit/c6a28d2) | docs: index the /blossom HUD overscan-crop fix plan |
 | [2026-06-26](https://github.com/wbniv/indri.studio/commit/08a6663) | docs(plans): correct more misreads (union of 2 more Opus audit passes) |
 | [2026-06-26](https://github.com/wbniv/indri.studio/commit/5916a92) | docs(plans): fix summaries/categories flagged by an Opus faithfulness audit |
 | [2026-06-26](https://github.com/wbniv/indri.studio/commit/49f6b36) | docs: add plan index (docs/plans/README.md) |
 
 <!--history-meta v1
+c6a28d2	author	Will Norris
+c6a28d2	added	2
+c6a28d2	deleted	1
+c6a28d2	files	1
+c6a28d2	body	Adds the plan-index row flagged by the check-plan-index.sh drift hook.\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01PUAcAwgviWnsXGBKPBiLAT
 08a6663	author	Will Norris
 08a6663	added	1
 08a6663	deleted	1
