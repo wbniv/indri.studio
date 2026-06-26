@@ -1,0 +1,280 @@
+---
+// /blossom — playable in-browser Blossom (Hopalong attractor) SNES demo + manual.
+//
+// Self-contained: it boots the shared bsnes-jg WASM player (public/apps/llvm-mos-65816/play/app.js,
+// the exact cycle-accurate core the llvm-mos-65816 gate trusts) pointed at roms/blossom.sfc, and
+// carries the full user manual (controls, the three attractors, tips). The emulator markup + boot
+// script + styles mirror EmulatorEmbed.astro; we only change the default ROM to "blossom".
+//
+// Cache-busting: hash each shared play/ asset at build time -> window.BJG_BUST (path -> short sha);
+// app.js appends "?v=<sha>" to every fetch so the edge caches them immutably yet a re-synced asset
+// still gets a fresh url. Missing files degrade to plain paths.
+import Base from "../layouts/Base.astro";
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
+
+const PLAY = "public/apps/llvm-mos-65816/play";
+const BUST_ASSETS = [
+  "app.js", "cores/bsnes_jg.js", "cores/bsnes_jg.wasm", "cores/PROVENANCE.json",
+  "roms/manifest.json", "roms/blossom.sfc", "preview/blossom.png",
+];
+const bust: Record<string, string> = {};
+for (const a of BUST_ASSETS) {
+  try { bust[a] = createHash("sha256").update(readFileSync(`${PLAY}/${a}`)).digest("hex").slice(0, 12); } catch {}
+}
+const appV = bust["app.js"] ?? "";
+
+const controls = [
+  { keys: "← ↑ ↓ →", act: "Pan the view" },
+  { keys: "Q / W", act: "Zoom out / in" },
+  { keys: "X / A", act: "Next / previous attractor (re-blooms)" },
+  { keys: "Shift", act: "Cycle colour mode" },
+  { keys: "Enter", act: "Reset view + attractor to defaults" },
+];
+
+const presets = [
+  { name: "CLASSIC", a: "7.17", b: "8.44", c: "2.56", note: "the three-lobed default" },
+  { name: "DENSE", a: "2.00", b: "5.00", c: "1.00", note: "a denser, busier cloud" },
+  { name: "BLOOM", a: "−2.00", b: "7.00", c: "5.00", note: "a tighter bloom (note the negative a)" },
+];
+
+const ogImg = new URL("/blossom/default.png", Astro.site ?? "https://indri.studio").href;
+
+const cell = "px-3 py-2 align-top";
+const kbd = "inline-block rounded border border-outline-variant bg-surface-container px-2 py-0.5 font-mono text-sm text-on-surface";
+---
+
+<Base
+  title="Blossom"
+  description="Barry Martin's Hopalong strange attractor, rendered live on the Super Nintendo in C — play it in your browser."
+  ogImage={ogImg}
+  ringFlare={false}
+>
+  <div class="mx-auto w-full max-w-[var(--container-max)] px-6 md:px-8 py-12 md:py-16">
+
+    <!-- hero ------------------------------------------------------------- -->
+    <header class="max-w-3xl">
+      <p class="font-display uppercase text-xs tracking-[0.3em] text-primary-container">
+        SNES · Mode 7 · llvm-mos-65816
+      </p>
+      <h1 class="mt-3 font-display text-5xl md:text-6xl font-black tracking-tight text-on-surface">
+        Blossom
+      </h1>
+      <p class="mt-5 text-lg leading-relaxed text-on-surface-variant">
+        Barry Martin's <em>Hopalong</em> strange attractor, rendered live on the Super Nintendo and
+        flown around with the joypad. Written in C and compiled to a real <code class="font-mono text-primary-container">.sfc</code>
+        ROM with the <a href="/apps/llvm-mos-65816/" class="text-on-surface underline decoration-primary-container/40 underline-offset-4 hover:text-primary-container">llvm-mos-65816</a>
+        toolchain — the attractor accumulates into a hit-count grid in WRAM and shows through Mode 7,
+        with the parameter panel drawn on a tiled layer spliced in by an HDMA mode-switch.
+      </p>
+      <p class="mt-3 text-sm leading-relaxed text-on-surface-variant">
+        The maths, iterated from <code class="font-mono">(0,0)</code> in Q8.8 fixed point (no FPU):
+        <code class="font-mono text-on-surface">x' = y − sign(x)·√|b·x − c|</code>,
+        <code class="font-mono text-on-surface">y' = a − x</code>. Each visited cell is a "hit"; the hit
+        count picks a colour, and the palette rotates every frame for the shimmer.
+      </p>
+    </header>
+
+    <!-- emulator --------------------------------------------------------- -->
+    <section id="bjg-embed" class="emu mt-10" aria-label="Live SNES emulator running Blossom">
+      <h2 class="font-display uppercase text-sm tracking-[0.25em] text-on-surface-variant mb-3">
+        Play it in your browser
+      </h2>
+      <div class="glass-card emu-card">
+        <div id="game" class="emu-screen">
+          <canvas id="screen" width="256" height="224" aria-label="SNES screen"></canvas>
+        </div>
+        <div class="emu-row">
+          <span id="status" class="emu-status">loading core…</span>
+          <span id="checkresult" class="badge"></span>
+          <button id="verify" class="emu-btn" disabled>Verify fidelity</button>
+        </div>
+        <p class="emu-keys">
+          <b>← ↑ ↓ →</b> pan · <b>Q</b>/<b>W</b> zoom · <b>X</b>/<b>A</b> attractor ·
+          <b>Shift</b> colour · <b>Enter</b> reset
+        </p>
+        <p id="banner" class="emu-banner"></p>
+      </div>
+      <p class="mt-2 text-xs text-on-surface-variant">
+        Click the screen, then play. It blooms in over ~10&nbsp;s, then shimmers — tab away and it pauses.
+      </p>
+    </section>
+
+    <!-- reading the screen ---------------------------------------------- -->
+    <section class="mt-14 grid gap-8 md:grid-cols-2 md:items-center">
+      <div>
+        <h2 class="font-display text-2xl font-bold text-on-surface">Reading the screen</h2>
+        <ul class="mt-4 space-y-3 text-on-surface-variant leading-relaxed">
+          <li><b class="text-on-surface">Value bar (top)</b> — the live settings: the attractor name
+            (<code class="font-mono">CLASSIC/DENSE/BLOOM</code>), its three parameters
+            <code class="font-mono">A B C</code>, the colour mode <code class="font-mono">PAL</code>,
+            and the <code class="font-mono">ZOOM</code> magnification.</li>
+          <li><b class="text-on-surface">Plot box (middle)</b> — the attractor itself, centred. It blooms
+            in over ~10&nbsp;s, then shimmers.</li>
+          <li><b class="text-on-surface">Control bar (bottom)</b> — a legend for the buttons.</li>
+        </ul>
+      </div>
+      <figure class="m-0">
+        <img src="/blossom/default.png" alt="Blossom default view — CLASSIC attractor with the value bar and control bar"
+          width="256" height="224" class="shot" loading="lazy" />
+        <figcaption class="mt-2 text-xs text-on-surface-variant">The default <b>CLASSIC</b> attractor.</figcaption>
+      </figure>
+    </section>
+
+    <!-- controls --------------------------------------------------------- -->
+    <section class="mt-14">
+      <h2 class="font-display text-2xl font-bold text-on-surface">Controls</h2>
+      <p class="mt-2 text-on-surface-variant">In-browser keys. The value bar updates the instant you press —
+        hold <span class={kbd}>W</span> and watch <code class="font-mono">ZOOM</code> climb; tap
+        <span class={kbd}>Shift</span> and <code class="font-mono">PAL</code> steps 0→3.</p>
+      <table class="mt-4 w-full max-w-xl border-collapse text-left">
+        <thead>
+          <tr class="border-b border-outline-variant text-on-surface-variant text-sm uppercase tracking-wider">
+            <th class={cell}>Keys</th><th class={cell}>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {controls.map((c) => (
+            <tr class="border-b border-outline-variant/50">
+              <td class={cell}><span class={kbd}>{c.keys}</span></td>
+              <td class={`${cell} text-on-surface-variant`}>{c.act}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+
+    <!-- the three attractors -------------------------------------------- -->
+    <section class="mt-14">
+      <h2 class="font-display text-2xl font-bold text-on-surface">The three attractors</h2>
+      <p class="mt-2 text-on-surface-variant">Cycle them with <span class={kbd}>X</span> (next) /
+        <span class={kbd}>A</span> (previous) — each is a distinct bounded Hopalong shape; switching re-blooms.</p>
+      <table class="mt-4 w-full max-w-xl border-collapse text-left">
+        <thead>
+          <tr class="border-b border-outline-variant text-on-surface-variant text-sm uppercase tracking-wider">
+            <th class={cell}>Name</th><th class={cell}>a</th><th class={cell}>b</th><th class={cell}>c</th>
+          </tr>
+        </thead>
+        <tbody>
+          {presets.map((p) => (
+            <tr class="border-b border-outline-variant/50">
+              <td class={`${cell} font-mono text-on-surface`}>{p.name}</td>
+              <td class={`${cell} font-mono text-on-surface-variant`}>{p.a}</td>
+              <td class={`${cell} font-mono text-on-surface-variant`}>{p.b}</td>
+              <td class={`${cell} font-mono text-on-surface-variant`}>{p.c}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div class="mt-6 grid gap-6 sm:grid-cols-2 max-w-2xl">
+        <figure class="m-0">
+          <img src="/blossom/default.png" alt="CLASSIC attractor" width="256" height="224" class="shot" loading="lazy" />
+          <figcaption class="mt-2 text-xs text-on-surface-variant"><b>CLASSIC</b> — the three-lobed default.</figcaption>
+        </figure>
+        <figure class="m-0">
+          <img src="/blossom/bloom.png" alt="BLOOM attractor, value bar reads BLOOM A-2.00 B7.00 C5.00" width="256" height="224" class="shot" loading="lazy" />
+          <figcaption class="mt-2 text-xs text-on-surface-variant"><b>BLOOM</b> — a tighter cloud; the bar shows the negative <code class="font-mono">A-2.00</code>.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- tips ------------------------------------------------------------- -->
+    <section class="mt-14 grid gap-8 md:grid-cols-2 md:items-center">
+      <div>
+        <h2 class="font-display text-2xl font-bold text-on-surface">Tips</h2>
+        <ul class="mt-4 space-y-3 text-on-surface-variant leading-relaxed">
+          <li><b class="text-on-surface">The bloom is the point.</b> After boot or an attractor switch the
+            cloud fills in over ~10&nbsp;s (thousands of orbit points). Once in, the motion is the palette
+            shimmer — that part is a cheap 60&nbsp;fps.</li>
+          <li><b class="text-on-surface">Zoom pivots on the attractor.</b> Q/W magnify around the centre of
+            the plot box, so it stays put as you zoom; the D-pad then slides it around. <span class={kbd}>Enter</span> snaps back.</li>
+          <li><b class="text-on-surface">Colour modes</b> (Shift, <code class="font-mono">PAL 0–3</code>) just
+            rotate where the hue wheel starts — the shape is unchanged.</li>
+        </ul>
+      </div>
+      <figure class="m-0">
+        <img src="/blossom/zoompal.png" alt="CLASSIC zoomed in with a different colour mode, value bar reads PAL2 ZOOM 4.0X"
+          width="256" height="224" class="shot" loading="lazy" />
+        <figcaption class="mt-2 text-xs text-on-surface-variant">CLASSIC zoomed in with another colour mode — <code class="font-mono">PAL2 ZOOM 4.0X</code>.</figcaption>
+      </figure>
+    </section>
+
+    <!-- closing note ---------------------------------------------------- -->
+    <section class="mt-14 max-w-3xl">
+      <p class="text-sm text-on-surface-variant leading-relaxed">
+        Built in C with the <a href="/apps/llvm-mos-65816/" class="text-on-surface underline decoration-primary-container/40 underline-offset-4 hover:text-primary-container">SNES C compiler</a>,
+        then verified pixel-for-pixel against two emulators. The player above is that exact cycle-accurate
+        core — hit <b class="text-on-surface">Verify fidelity</b> to reproduce the build gate's WRAM assert
+        (grid hash <code class="font-mono text-primary-container">0x9047</code>) live in this tab.
+      </p>
+    </section>
+
+  </div>
+</Base>
+
+<script is:inline define:vars={{ bust, appV }}>
+  // (Re)boot the bsnes-jg player on each page-load so it survives the site's view transitions.
+  function bootEmulator() {
+    if (!document.getElementById("bjg-embed")) return;
+    if (window.__bjgStop) { try { window.__bjgStop(); } catch (e) {} }
+    window.BJG_BASE = "/apps/llvm-mos-65816/play/";
+    window.BJG_DEFAULT_ROM = "blossom";
+    window.BJG_BUST = bust;
+    window.BsnesJg = undefined;
+    window.__bjg = undefined;
+    var old = document.getElementById("bjg-appjs");
+    if (old) old.remove();
+    var s = document.createElement("script");
+    s.id = "bjg-appjs";
+    s.src = "/apps/llvm-mos-65816/play/app.js" + (appV ? "?v=" + appV : "");
+    document.body.appendChild(s);
+  }
+  if (!window.__bjgReg) {
+    window.__bjgReg = true;
+    document.addEventListener("astro:page-load", bootEmulator);
+  }
+</script>
+
+<style>
+  .shot {
+    width: 100%;
+    max-width: 384px;
+    height: auto;
+    image-rendering: pixelated;
+    border-radius: var(--radius-DEFAULT, 8px);
+    background: #000;
+  }
+  /* emulator widget — mirrors EmulatorEmbed.astro */
+  .emu-card { padding: 1rem; }
+  .emu-screen {
+    width: 100%;
+    aspect-ratio: 8 / 7;
+    background: #000;
+    border-radius: var(--radius-DEFAULT, 8px);
+    overflow: hidden;
+    display: flex;
+  }
+  .emu-screen canvas { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+  .emu-row {
+    display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.85rem;
+    font-family: var(--font-mono, ui-monospace, monospace); font-size: 12px;
+    color: var(--color-on-surface-variant);
+  }
+  .emu-btn {
+    margin-left: auto; background: var(--color-surface-container); color: var(--color-on-surface);
+    border: 1px solid color-mix(in srgb, var(--color-primary-container) 35%, transparent);
+    border-radius: var(--radius-DEFAULT, 8px); padding: 0.4rem 0.85rem; font-size: 12px; cursor: pointer;
+    transition: border-color 150ms ease, color 150ms ease;
+  }
+  .emu-btn:hover:not(:disabled) { border-color: var(--color-primary-container); color: var(--color-primary-container); }
+  .emu-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+  .badge { font-family: var(--font-mono, ui-monospace, monospace); }
+  .badge.running { color: var(--color-primary-container); }
+  .badge.pass { background: #54d98c; color: #0c1116; font-weight: 600; padding: 2px 8px; border-radius: 5px; }
+  .badge.fail { background: #ff6b6b; color: #0c1116; font-weight: 600; padding: 2px 8px; border-radius: 5px; }
+  .emu-keys { margin: 0.75rem 0 0; font-size: 11.5px; color: var(--color-on-surface-variant); }
+  .emu-keys b { color: var(--color-on-surface); font-weight: 600; }
+  .emu-banner { margin: 0.6rem 0 0; font-size: 12px; color: var(--color-on-surface-variant); }
+  .emu-banner :global(b) { color: var(--color-on-surface); }
+  .emu-banner :global(code) { font-family: var(--font-mono, ui-monospace, monospace); color: var(--color-primary-fixed, var(--color-primary-container)); }
+</style>

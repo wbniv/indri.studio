@@ -11,6 +11,17 @@
         "frames": 5800,
         "label": "gate jgxcheck CRC (corpus_result @ WRAM $0200)"
       }
+    },
+    {
+      "id": "blossom",
+      "title": "Hopalong attractor",
+      "selfcheck": {
+        "off": "0x54",
+        "len": 2,
+        "want": "0x9047",
+        "frames": 3000,
+        "label": "gate grid hash (corpus_result @ WRAM $0054)"
+      }
     }
   ]
 }
