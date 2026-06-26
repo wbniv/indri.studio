@@ -19,6 +19,7 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 ## Done
 
+- [x] **2026-06-27** Fixed `/blossom` HUD clipping — `present()` cropped raw rows `[8,232)` (`yoff=8` "skip overscan"), but the active picture sits flush at the buffer top; gate refs use `[0,224)`. Set `yoff=0` across all 3 player copies (indri `7b82611`, `bsnes-jg-wasm` `aaacbae`, biohack `v1.0.74`); also centred the indri player (`82274c3`). Verified live at 125% zoom (20–21 px margin) — [plan](docs/plans/2026-06-27-emulator-hud-overscan-crop-fix.md)
 - [x] **2026-06-25** Embedded the live `bsnes-jg-wasm` emulator (cycle-accurate bsnes-jg 2.1.0, sha256-pinned) inline on `/apps/llvm-mos-65816/` running our `mandel-display` + the `0x9103` fidelity self-check; bundle at `public/apps/llvm-mos-65816/play/` (synced from `../bsnes-jg-wasm`). Found+fixed a prod CSP block (added `'wasm-unsafe-eval'`). Live + verified (`v0.1.69`); page isn't in the LH sample so the budget is untouched — [plan](docs/plans/2026-06-25-llvm-mos-emulator-embed.md)
 - [x] **2026-05-21** Bootstrap `apt.indri.studio` + publish `claude-usage` 0.11.20 (apt-v0.1.1 green; InRelease + key.gpg live; verified `apt-cache show` end-to-end from clean ubuntu:latest) — [plan](docs/plans/2026-05-21-apt-indri-studio-bootstrap.md)
 - [x] **2026-05-14** HTML cache: `no-store` via Worker (content-type check); `_headers` merges rules so `/*` catch-all broke `_astro/*` immutable cache in v0.1.35, corrected in v0.1.36 — [plan](docs/plans/2026-05-14-html-cache-no-store.md)
