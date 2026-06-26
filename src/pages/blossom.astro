@@ -69,9 +69,35 @@ const kbd = "inline-block rounded border border-outline-variant bg-surface-conta
       </p>
       <p class="mt-3 text-sm leading-relaxed text-on-surface-variant">
         The maths, iterated from <code class="font-mono">(0,0)</code> in Q8.8 fixed point (no FPU):
-        <code class="font-mono text-on-surface">x' = y − sign(x)·√|b·x − c|</code>,
-        <code class="font-mono text-on-surface">y' = a − x</code>. Each visited cell is a "hit"; the hit
-        count picks a colour, and the palette rotates every frame for the shimmer.
+      </p>
+      <math display="block" class="blossom-eq mt-3"
+            aria-label="x prime equals y minus sign of x times the square root of the absolute value of b times x minus c; and y prime equals a minus x">
+        <mrow>
+          <msup><mi>x</mi><mo>′</mo></msup>
+          <mo>=</mo>
+          <mi>y</mi>
+          <mo>−</mo>
+          <mi>sign</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo>
+          <mo>⋅</mo>
+          <msqrt>
+            <mrow>
+              <mo>|</mo>
+              <mi>b</mi><mo>⋅</mo><mi>x</mi><mo>−</mo><mi>c</mi>
+              <mo>|</mo>
+            </mrow>
+          </msqrt>
+          <mo>,</mo>
+          <mspace width="1.4em"></mspace>
+          <msup><mi>y</mi><mo>′</mo></msup>
+          <mo>=</mo>
+          <mi>a</mi>
+          <mo>−</mo>
+          <mi>x</mi>
+        </mrow>
+      </math>
+      <p class="mt-3 text-sm leading-relaxed text-on-surface-variant">
+        Each visited cell is a "hit"; the hit count picks a colour, and the palette rotates every frame
+        for the shimmer.
       </p>
     </header>
 
@@ -236,6 +262,19 @@ const kbd = "inline-block rounded border border-outline-variant bg-surface-conta
 </script>
 
 <style>
+  /* Hand-authored MathML for the Hopalong equations — native browser rendering,
+     zero dependencies (no KaTeX/MathJax). A proper build-time MathML plugin is
+     deferred to the Astro v7 upgrade (see TODO.md). Centered display block. */
+  .blossom-eq {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
+    overflow-x: auto;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    color: var(--color-on-surface);
+  }
   .shot {
     width: 100%;
     max-width: 384px;
@@ -244,17 +283,18 @@ const kbd = "inline-block rounded border border-outline-variant bg-surface-conta
     border-radius: var(--radius-DEFAULT, 8px);
     background: #000;
   }
-  /* emulator widget — mirrors EmulatorEmbed.astro */
+  /* emulator widget — mirrors EmulatorEmbed.astro, capped near 2x the 256x224 native */
+  .emu { max-width: 544px; }
   .emu-card { padding: 1rem; }
   .emu-screen {
     width: 100%;
-    aspect-ratio: 8 / 7;
     background: #000;
     border-radius: var(--radius-DEFAULT, 8px);
-    overflow: hidden;
-    display: flex;
+    line-height: 0;            /* kill the inline-image baseline gap */
   }
-  .emu-screen canvas { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+  /* Display the canvas at its NATURAL aspect, full height — no overflow:hidden / object-fit, which
+     shaved the top scanline (the HUD's first row sits flush at canvas row 0 after present()'s crop). */
+  .emu-screen canvas { display: block; width: 100%; height: auto; image-rendering: pixelated; }
   .emu-row {
     display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.85rem;
     font-family: var(--font-mono, ui-monospace, monospace); font-size: 12px;

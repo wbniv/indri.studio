@@ -4,6 +4,7 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 ## Active
 
+- [ ] **2026-06-26** **MathML build-time plugin** (do as part of the Astro 7 / Sätteri migration below) — author math as `$…$` / ```` ```math ```` in prose and emit MathML at build, replacing the hand-authored inline `<math>` block in `src/pages/blossom.astro` (the Hopalong equations). Sätteri's verbatim raw-HTML handling makes a HAST→MathML plugin clean; pair it with the `rehypeExternalLinks` port already on that item. Keep it pure MathML (no KaTeX CSS/fonts) to hold the zero-runtime-dep stance — [plan](docs/plans/2026-06-25-astro-7-migration.md)
 - [ ] **2026-06-25** Publish "SNES C Compiler" (llvm-mos-65816) gallery entry — committed as `draft: true`; flip to `false` + `task publish` once `wbniv/llvm-mos-65816` is public (badge 404s until then) and any WDC outreach is settled — [plan](docs/plans/2026-06-25-add-llvm-mos-65816-to-the-indri-studio-product-gal.md)
 
 - [ ] **2026-05-22** Add `curl | bash` installer for `claude-usage` at `apt.indri.studio/install-claude-usage.sh` (thin bootstrap → upstream `install.sh`); also tighten `install.sh` pre-flight checks for `glib-compile-schemas` / `systemctl --user` / `gnome-shell` — [plan](docs/plans/2026-05-22-claude-usage-curlbash-installer.md)
