@@ -74,6 +74,7 @@ rows on commit.*
 | [Fix Mermaid diagram label clipping + spill on /docs/ pages](2026-06-25-mermaid-diagram-label-clipping.md) | Fix two Mermaid SVG bugs on /docs/ pages: Inter font clipping foreignObject and rehype foster-parent label spill. | [`33191d7`](https://github.com/wbniv/indri.studio/commit/33191d7), [`0f75a0a`](https://github.com/wbniv/indri.studio/commit/0f75a0a) | Fix |
 | [Astro 7 migration (Sätteri pipeline)](2026-06-25-astro-7-migration.md) | Migrate indri.studio from Astro 6 to Astro 7 Sätteri (Rust) pipeline, porting rehypeExternalLinks as a HAST plugin. | [`0f75a0a`](https://github.com/wbniv/indri.studio/commit/0f75a0a) | Platform |
 | [Plan — embed the live `bsnes-jg-wasm` emulator on `/apps/llvm-mos-65816/`](2026-06-25-llvm-mos-emulator-embed.md) | Embed inline always-on bsnes-jg-wasm emulator on /apps/llvm-mos-65816/ running mandel-display with fidelity self-check. | [`6b83ec9`](https://github.com/wbniv/indri.studio/commit/6b83ec9), [`3bd1b57`](https://github.com/wbniv/indri.studio/commit/3bd1b57), [`7a3bf49`](https://github.com/wbniv/indri.studio/commit/7a3bf49) | Feature |
+| [Emulator HUD overscan-crop fix (`/blossom` value bar clipped)](2026-06-27-emulator-hud-overscan-crop-fix.md) | Fix the player's present() crop (yoff=8→0): the active picture sits flush at the buffer top, so skipping 8 "overscan" rows clipped /blossom's top value bar; rolled out to all 3 player copies. | [`9e82840`](https://github.com/wbniv/indri.studio/commit/9e82840) | Fix |
 
 ---
 
@@ -82,4 +83,4 @@ rows on commit.*
 - **Order** = each plan's *creation* commit (oldest commit that touched the file), by committer date.
 - **Commit(s)** = the full `git log --follow` set per plan, oldest → newest.
 - **Summaries / categories** auto-generated from each plan's TL;DR (Sonnet, medium effort) — refine as needed.
-- **Generated** 2026-06-26 for 65 plan(s).
+- **Generated** 2026-06-26 for 65 plan(s); 1 row added by hand 2026-06-27 (66 total).
