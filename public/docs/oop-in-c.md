@@ -8,7 +8,10 @@ pointer in a register. C++ compilers emit exactly this; you can write it by hand
 General first, then the **65816 / llvm-mos** specifics — including the *measured* assembly
 llvm-mos emits for a virtual call (this repo's bar: measure, don't assume). Written while
 building the SNES demo; it's the natural way to structure the rendering library
-(see [the rendering handoff](../handoffs/2026-06-24-snes-graphics-rendering.md)).
+(see [the rendering handoff](../handoffs/2026-06-24-snes-graphics-rendering.md)). That library —
+`snesgfx`, an OOP-in-C SNES renderer that is the first real, verified consumer of these patterns —
+is specified in [its plan](../plans/2026-06-26-snes-rendering-oop-library.md); the *measured*
+dispatch numbers from building it land back in §4–§5 here (assertion → measurement).
 
 ---
 
@@ -46,6 +49,16 @@ forward-declare the struct in the header, define it only in the `.c`. Callers ca
 /* foo.h */  typedef struct Foo Foo;   Foo *foo_new(void);   int foo_get(const Foo *);
 /* foo.c */  struct Foo { int x; };    /* definition is private to this TU */
 ```
+
+**A clean object interface is *only* constructors + methods — no bare (receiver-less) procedures.** Every
+public function takes the object it acts on as its first parameter (`Type_verb(Type *self, …)`); a global
+`do_thing()` that pokes shared state behind the caller's back is the procedural shape OOP is meant to
+replace. The payoff is that an **invariant wrapped in a constructor cannot be bypassed**: e.g. a driver whose
+hardware bring-up sequence (reset → configure → enable, *in that order*) lives in `device_open(Device *)` and
+whose only mutators are methods on `Device` makes the dangerous ordering un-expressible by the caller — they
+can't forget the reset or enable too early, because the bare register pokes aren't in the interface. (This is
+exactly how the [`snesgfx`](../plans/2026-06-26-snes-rendering-oop-library.md) rendering library hides the
+SNES boot bracket and the v-blank access-window rule: a `Display` constructor + methods, no `REG_*` in client code.)
 
 ### Inheritance — "base struct first"
 Make the base the **first member** of the derived struct. C guarantees a pointer to a struct
@@ -231,6 +244,15 @@ use a selector table. Don't pay for dynamic dispatch you don't use — the C com
 **devirtualize** a call only when it can prove the concrete type, which across translation
 units it usually can't.
 
+**Budget your dispatch coarsely — the load-bearing rule for a real-time renderer.** A virtual
+call costs ~8 ZP loads/stores + a `JMP (vector)` and **does not inline** (§4). So put the vtable
+seam where the type is genuinely unknown and call it *rarely*: in a renderer, **one virtual call
+per drawable per frame** (`drawable->emit(self, queue)` — "upload yourself"), never inside the
+per-tile/per-pixel inner loop. One indirect call decides *which kind of thing* runs; the hot loop
+after that is type-known and free (direct/inlined byte+DMA). A per-tile virtual call, by contrast,
+would let the ~8-ZP-op sequence dominate the frame. The cost of polymorphism is then `N_objects`
+indirect calls per frame — negligible — instead of `N_pixels`.
+
 Memory-model notes (this target):
 - Vtables and near method pointers are **16-bit** (bank `$00`); a `const ShapeVT` lives in
   ROM/`.rodata`. Keep the vtable and all methods in the same bank and dispatch stays 16-bit.
@@ -250,6 +272,35 @@ with the vtable pointer first, concrete types embedding the base as member 0, on
 per class, an `init` that wires it. Call through `static inline` dispatchers so the call sites
 read like methods. A heterogeneous container is then just `Shape *items[N];` and a loop calling
 `shape_draw(items[i])`.
+
+### Heterogeneous scene of drawables (the rendering library's actual shape)
+This is the canonical case where a per-object vtable *earns* its cost (§5): a frame is a list of
+**different kinds** of thing — a Mode 7 layer, a sprite set, a tiled BG — each of which knows how
+to upload itself, but the render loop doesn't know (or want to know) which is which. `Drawable` is
+the interface; every concrete layer embeds it as member 0; the scene is `Drawable *items[N]`:
+
+```c
+typedef struct Drawable Drawable;
+typedef struct { void (*emit)(Drawable *self, UploadQueue *q); } DrawableVT;  /* coarse: "upload yourself" */
+struct Drawable { const DrawableVT *vt; };
+
+typedef struct { Drawable *items[SCENE_MAX]; uint8_t n; } Scene;
+static inline void scene_emit(Scene *s, UploadQueue *q) {
+    for (uint8_t i = 0; i < s->n; i++)
+        s->items[i]->vt->emit(s->items[i], q);     /* ONE indirect call per drawable per frame */
+}
+
+/* a concrete drawable embeds Drawable first; its emit() inner loop is monomorphic & inlined */
+typedef struct { Drawable base; const M7_FAR uint8_t *src; /* … */ } Mode7Layer;
+static void mode7_emit(Drawable *self, UploadQueue *q) { Mode7Layer *m=(Mode7Layer*)self; /* tight DMA loop */ }
+static const DrawableVT MODE7_VT = { mode7_emit };
+```
+
+The vtable seam is exactly where the **dispatch-budget rule** (§5) wants it: `scene_emit` pays
+`N_drawables` indirect calls per frame (a Mode 7 layer + a sprite HUD = 2), and the expensive
+upload happens in each `emit`'s *type-known* inner loop. A single-type scene skips all of this and
+calls the concrete `mode7_emit` directly. Worked, differentially-verified end to end (CRC `0x204F`
+on both emulators) by [`snesgfx`](../plans/2026-06-26-snes-rendering-oop-library.md).
 
 ### Hand-asm selector dispatch (when you skip C for the hot path)
 ```asm

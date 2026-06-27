@@ -7,9 +7,8 @@
 #   public/docs/<slug>.md        — the raw source markdown, for download
 #   public/docs/<slug>.pdf       — a print-rendered PDF (md-to-html.sh + headless Chrome)
 #
-# Sources live across two branches of the sibling repo (default ../llvm-mos-65816):
-# the refs/ docs are on wt/321-snes-hwref, the howtos on main. This is an interim
-# publish (until #320/#321 land upstream); re-run after the source docs change.
+# Sources live on main in the sibling repo (default ../llvm-mos-65816).
+# This is an interim publish (until #320/#321 land upstream); re-run after the source docs change.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -29,9 +28,9 @@ mkdir -p "$CONTENT" "$PUBLIC"
 
 # slug | ref | path | order | title | summary
 DOCS=$(cat <<'TSV'
-65816-opcodes|wt/321-snes-hwref|docs/refs/65816/65816-reference.md|1|65816 opcode reference|The 65816 instruction set as the llvm-mos backend encodes it — every opcode, addressing mode, and byte count, cross-checked against a canonical matrix.
-snes-hardware|wt/321-snes-hwref|docs/refs/snes-hardware/snes-hardware-summary.md|2|SNES hardware summary|A compact tour of the Super Nintendo hardware the compiler targets — CPU, PPU, memory map, DMA, and the boot environment.
-snes-registers|wt/321-snes-hwref|docs/refs/snes-hardware/snes-register-map.md|3|SNES register map|The CPU-visible SNES register map — every memory-mapped I/O register, what it does, and how to drive it from C.
+65816-opcodes|main|docs/refs/65816/65816-reference.md|1|65816 opcode reference|The 65816 instruction set as the llvm-mos backend encodes it — every opcode, addressing mode, and byte count, cross-checked against a canonical matrix.
+snes-hardware|main|docs/refs/snes-hardware/snes-hardware-summary.md|2|SNES hardware summary|A compact tour of the Super Nintendo hardware the compiler targets — CPU, PPU, memory map, DMA, and the boot environment.
+snes-registers|main|docs/refs/snes-hardware/snes-register-map.md|3|SNES register map|The CPU-visible SNES register map — every memory-mapped I/O register, what it does, and how to drive it from C.
 snes-bootup|main|docs/snes-bootup-sequence.md|4|SNES bootup sequence|What happens between power-on and main() on the SNES — reset vector, native-mode switch, and crt0 init.
 emulator-screenshots|main|docs/investigations/snes-emulator-screenshots.md|5|Capturing SNES screenshots, headless|Getting a true, PPU-rendered PNG of the SNES screen out of MAME and bsnes-jg with no window or GPU — for CI.
 oop-in-c|main|docs/investigations/object-oriented-c-and-assembly.md|6|Object-oriented C and assembly|Vtables, inheritance, and polymorphism in plain C (and assembly) on a 3.58 MHz 65816 — with measured codegen.
