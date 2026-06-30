@@ -30,7 +30,7 @@ gate's headless WRAM assert (`mandel-display` → `0x9103`). That is precisely t
 ## Goal / deliverable
 
 At **[https://indri.studio/apps/llvm-mos-65816/](https://indri.studio/apps/llvm-mos-65816/)**, a
-"Run it in your browser" section that launches the cycle-accurate core running our **mandel-display**
+"Run SNES in your browser" section that launches the cycle-accurate core running our **mandel-display**
 program, with the **Verify fidelity** button front-and-centre (the `0x9103 == the gate` story). The
 landing page's Lighthouse budget (Perf/A11y/BP/SEO ≥ 95) must survive.
 
@@ -52,7 +52,7 @@ indri.studio/apps/llvm-mos-65816/
   An optimizing, open-source C compiler for the WDC 65816 …
   verified pixel-for-pixel against MAME and bsnes-jg.      ← prose (existing)
 
-  RUN IT IN YOUR BROWSER                                   ← NEW · section-label
+  RUN SNES IN YOUR BROWSER                                   ← NEW · section-label
   ╭──────────────────────────────────────────────────╮       (glass-card)
   │▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│
   │▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓◀ Mandelbrot ▶▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│   ← <canvas>, 8:7,

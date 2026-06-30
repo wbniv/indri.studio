@@ -1,9 +1,15 @@
 | Date | Change |
 |------|--------|
+| [2026-06-25](https://github.com/wbniv/indri.studio/commit/7a3bf49) | docs: record v0.1.70 tweaks (256x224 aspect, bottom placement, drop compare shot) |
 | [2026-06-25](https://github.com/wbniv/indri.studio/commit/3bd1b57) | docs: record the llvm-mos emulator embed as deployed + the CSP fix |
 | [2026-06-25](https://github.com/wbniv/indri.studio/commit/6b83ec9) | apps/llvm-mos-65816: embed the live cycle-accurate SNES emulator |
 
 <!--history-meta v1
+7a3bf49	author	Will Norris
+7a3bf49	added	11
+7a3bf49	deleted	0
+7a3bf49	files	1
+7a3bf49	body	Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_012z1vSadjiUqKEsQ6dU4u3P
 3bd1b57	author	Will Norris
 3bd1b57	added	22
 3bd1b57	deleted	1
