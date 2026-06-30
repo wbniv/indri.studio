@@ -20,7 +20,7 @@ Purple iris, dark pupil, amber outer ring:
 
 Indri-eye green iris, dark pupil, amber outer ring preserved:
 
-<img src="../src/assets/mascot-lemur.png" width="240" style="border-radius:8px;margin:8px 0">
+<img src="screenshots/mascot-after.png" width="240" style="border-radius:8px;margin:8px 0">
 
 ---
 
