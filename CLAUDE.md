@@ -37,7 +37,7 @@ Run all commands from the repo root. The `Taskfile.yml` is the canonical entry p
 
 ## Brand
 
-Greys + neon Phosphor purple, ringtail-lemur palette. **Always pull design tokens from `src/styles/global.css`** — never hardcode hex values in components.
+Greys + indri-eye neon green, ringtail-lemur palette. **Always pull design tokens from `src/styles/global.css`** — never hardcode hex values in components.
 
 | Token | Hex | Use |
 |---|---|---|
@@ -45,7 +45,7 @@ Greys + neon Phosphor purple, ringtail-lemur palette. **Always pull design token
 | `--color-grey-700` | `#4A4641` | Card surfaces |
 | `--color-grey-200` | `#C8C0B8` | Secondary text |
 | `--color-grey-50`  | `#F5F0E8` | High-emphasis text |
-| `--color-primary-container` | `#B026FF` | Phosphor neon purple — accent |
+| `--color-primary-container` | `#B8EF00` | Indri-eye neon green — accent |
 
 Authoritative values live in [`src/styles/global.css`](src/styles/global.css); this table is a convenience snapshot.
 
@@ -91,7 +91,7 @@ Frontmatter: `name`, `role`, `bio`, `order`, `featured`, optional `socials`. The
 
 Each app's landing page should render in its own brand (warm fintech for SplitLedger, retro industrial for World Foundry, parchment serif for Finding Your Way, etc.) — not the Indri studio brand. Plan §"Aesthetic strategy" + §"Mockups" cover the design intent; implementation introduces `AppLayout.astro` that reads theme tokens from frontmatter and writes them as CSS custom properties on a wrapper.
 
-Until that lands, every page inherits the studio's grey + purple palette.
+Until that lands, every page inherits the studio's grey + green palette.
 
 ## Plan-first workflow
 

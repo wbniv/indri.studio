@@ -30,7 +30,7 @@ html {
 
 /* Indri brand tokens.
  *
- * Palette: warm-tinted greys (ring-tailed-lemur lens) + neon Phosphor purple
+ * Palette: warm-tinted greys (ring-tailed-lemur lens) + indri-eye neon green
  * as the single accent. Stripe motif lives in component classes below.
  *
  * Material naming is preserved from the rapid-raccoon-site seed so existing
@@ -71,16 +71,16 @@ html {
 	--color-inverse-surface: #f5f0e8;
 	--color-inverse-on-surface: #2a2724;
 
-	/* Primary = Phosphor neon purple (#B026FF) */
-	--color-primary: #ddb3ff;
-	--color-on-primary: #3a004b;
-	--color-primary-container: #b026ff;
-	--color-on-primary-container: #1a002b;
-	--color-primary-fixed: #ddb3ff;
-	--color-primary-fixed-dim: #b026ff;
-	--color-on-primary-fixed: #1a002b;
-	--color-on-primary-fixed-variant: #5b00a3;
-	--color-inverse-primary: #6c00b0;
+	/* Primary = Indri-eye neon green (#B8EF00) */
+	--color-primary: #d4ffa0;
+	--color-on-primary: #1a3000;
+	--color-primary-container: #b8ef00;
+	--color-on-primary-container: #0d1a00;
+	--color-primary-fixed: #d4ffa0;
+	--color-primary-fixed-dim: #b8ef00;
+	--color-on-primary-fixed: #0d1a00;
+	--color-on-primary-fixed-variant: #3d6800;
+	--color-inverse-primary: #527000;
 
 	/* Secondary = neutral grey scale */
 	--color-secondary: #c8c0b8;
@@ -345,12 +345,12 @@ html {
 	}
 	.glass-card-hover:hover .app-card-title {
 		color: var(--color-primary-container);
-		/* Neon-sign physics: saturated purple core, paler lavender bloom,
-		 * widening purple halo. The white-pink tight core makes the text
+		/* Neon-sign physics: yellow-green core, lime bloom,
+		 * widening green halo. The white-green tight core makes the text
 		 * read as if lit from within instead of just being a colour swap. */
 		text-shadow:
-			0 0 4px rgba(255, 230, 255, 0.95),
-			0 0 12px rgba(221, 179, 255, 0.85),
+			0 0 4px rgba(240, 255, 190, 0.95),
+			0 0 12px rgba(210, 245, 120, 0.85),
 			0 0 24px color-mix(in srgb, var(--color-primary-container) 75%, transparent),
 			0 0 48px color-mix(in srgb, var(--color-primary-container) 45%, transparent);
 	}
@@ -410,8 +410,8 @@ html {
 		padding-bottom: calc(1.125rem - 1rem * var(--header-shrink, 0));
 	}
 
-	/* Header motion FX — Phosphor breathe, a slow screen-blended radial
-	 * glow that pulses across the purple header. Always on. */
+	/* Header motion FX — Indri-eye breathe, a slow screen-blended radial
+	 * glow that pulses across the green header. Always on. */
 	.header-fx {
 		position: relative;
 		isolation: isolate;
@@ -424,8 +424,8 @@ html {
 		pointer-events: none;
 		background: radial-gradient(
 			ellipse 50% 200% at 50% 50%,
-			rgba(255, 220, 255, 0.65) 0%,
-			rgba(255, 220, 255, 0.30) 40%,
+			rgba(220, 255, 180, 0.65) 0%,
+			rgba(220, 255, 180, 0.30) 40%,
 			transparent 75%
 		);
 		mix-blend-mode: screen;
@@ -451,7 +451,7 @@ html {
 
 	/* Sequential glow loop for the hero platform-icon strip.
 	 ~ Five icons, 6 s cycle: each icon briefly ramps from faint to full
-	 ~ Phosphor purple + neon text-shadow, 1.2 s apart. Suggests "one
+	 ~ indri-eye green + neon text-shadow, 1.2 s apart. Suggests "one
 	 ~ studio, many platforms" via the traversal.
 	 ~ Hairline behind the row threads the icons together as one axis.
 	 ~ Hover: each icon lifts + scales; transform is independent of the

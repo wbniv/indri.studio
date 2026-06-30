@@ -7,9 +7,9 @@ const linkClass =
 	"text-on-surface underline decoration-primary-container/40 underline-offset-4 hover:text-primary-container hover:decoration-primary-container transition-colors";
 
 const accent = {
-	name: "Phosphor",
-	hex: "#B026FF",
-	oklch: "oklch(0.62 0.32 305)",
+	name: "Indri-eye",
+	hex: "#B8EF00",
+	oklch: "oklch(0.91 0.22 116)",
 	cssVar: "--color-primary-container",
 };
 
@@ -65,11 +65,11 @@ const motifs = [
 	},
 	{
 		name: "Header breathe",
-		body: "The Phosphor-purple header band carries a slow radial-gradient pulse — screen-blended over the band, opacity oscillating across a 2.5-second cycle. Quiet ambient motion; off under prefers-reduced-motion: reduce.",
+		body: "The indri-eye green header band carries a slow radial-gradient pulse — screen-blended over the band, opacity oscillating across a 2.5-second cycle. Quiet ambient motion; off under prefers-reduced-motion: reduce.",
 	},
 	{
 		name: "Ring-flare",
-		body: "Studio homepage only. Sparse Phosphor-coloured rings expand and fade across the front on a long, randomised cadence. Off on per-app pages so each app's own visual identity has room.",
+		body: "Studio homepage only. Sparse indri-eye green rings expand and fade across the front on a long, randomised cadence. Off on per-app pages so each app's own visual identity has room.",
 	},
 ];
 ---
@@ -99,7 +99,7 @@ const motifs = [
 				<p
 					class="font-body text-body-lg text-on-surface-variant max-w-xl mt-5 border-l-2 border-primary-container pl-6"
 				>
-					Greys, neon purple, a ring-tailed lemur, and the open web.
+					Greys, indri-eye green, an indri lemur, and the open web.
 				</p>
 			</div>
 		</div>
@@ -209,7 +209,7 @@ const motifs = [
 			<a
 				href="https://en.wikipedia.org/wiki/Ring-tailed_lemur"
 				class={linkClass}><em>Lemur catta</em></a
-			> (the ring-tailed lemur), against a single phosphor-bright purple accent.
+			> (the ring-tailed lemur), against a single phosphor-bright green accent — the vivid chartreuse of <a href="https://en.wikipedia.org/wiki/Indri" class={linkClass}><em>Indri indri</em></a> eyes.
 		</p>
 
 		<!-- Accent -->
@@ -231,13 +231,10 @@ const motifs = [
 			<p
 				class="font-body text-body text-on-surface-variant pl-14 max-w-3xl"
 			>
-				The single accent colour. Picked from a brief of five neon-purple
-				candidates (Ultraviolet <code class="font-mono text-sm">#6600FF</code
-				>, Electric violet <code class="font-mono text-sm">#7300FF</code>,
-				Hot purple <code class="font-mono text-sm">#A020F0</code>, Phosphor
-				<code class="font-mono text-sm">#B026FF</code>, Magenta-purple
-				<code class="font-mono text-sm">#CB00FF</code>) tested against the
-				dark-grey ground for legibility and energy. Used for the header
+				The single accent colour — the vivid chartreuse of indri lemur eyes.
+				Originally picked from a brief of five neon-purple candidates; recast
+				to indri-eye green (<code class="font-mono text-sm">#B8EF00</code>)
+				to match the studio's namesake more directly. Used for the header
 				band, the wordmark's small square mark, hover glows on app cards,
 				link colour, and the uppercase section labels throughout the site.
 			</p>
@@ -457,7 +454,7 @@ const motifs = [
 	<div class="w-full flex justify-center pt-6 px-6">
 		<Image
 			src={mascotLemur}
-			alt="Indri mascot — a stylised ring-tailed lemur with neon purple eyes, tail looped over its head"
+			alt="Indri mascot — a stylised ring-tailed lemur with vivid indri-eye green irises, tail looped over its head"
 			width={384}
 			densities={[1, 2]}
 			loading="lazy"
