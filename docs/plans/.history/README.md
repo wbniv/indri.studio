@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-06-27](https://github.com/wbniv/indri.studio/commit/ef7ed8c) | docs: biohack /blossom HUD re-fixed (v1.0.76) |
 | [2026-06-27](https://github.com/wbniv/indri.studio/commit/4dd7568) | docs: record biohack /blossom HUD regression (re-synced to yoff=8) |
 | [2026-06-27](https://github.com/wbniv/indri.studio/commit/c6a28d2) | docs: index the /blossom HUD overscan-crop fix plan |
 | [2026-06-26](https://github.com/wbniv/indri.studio/commit/08a6663) | docs(plans): correct more misreads (union of 2 more Opus audit passes) |
@@ -7,6 +8,11 @@
 | [2026-06-26](https://github.com/wbniv/indri.studio/commit/49f6b36) | docs: add plan index (docs/plans/README.md) |
 
 <!--history-meta v1
+ef7ed8c	author	Will Norris
+ef7ed8c	added	1
+ef7ed8c	deleted	1
+ef7ed8c	files	1
+ef7ed8c	body	Re-applied yoff=0 to biohack's vendored player copy (regressed by the\nspace-invaders bundle re-sync) and redeployed; verified live at 125% zoom\n(21px margin). Updates the plan status + §Regression (resolved), closes the\nTODO re-fix item, and corrects the index summary. Durable path confirmed:\nbsnes-jg-wasm/web/app.js is yoff=0 and deploy-bundle.sh copies it into the\nbundle, so future syncs carry the fix.\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01PUAcAwgviWnsXGBKPBiLAT
 4dd7568	author	Will Norris
 4dd7568	added	1
 4dd7568	deleted	1
