@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-06-30](https://github.com/wbniv/indri.studio/commit/62da7eb) | feat(brand): replace Phosphor purple with indri-eye neon green (#B8EF00) |
 | [2026-05-18](https://github.com/wbniv/indri.studio/commit/58b3260) | feat: add Forge Linux app card + card-preview tool |
 | [2026-05-14](https://github.com/wbniv/indri.studio/commit/72814ea) | Doc cleanup: resolve stale deferred/pending notes across 7 plans + 2 investigations |
 | [2026-05-14](https://github.com/wbniv/indri.studio/commit/153a011) | Code review P2: doc drift — palette, wrangler v4, TF/Worker split, date doc, count |
@@ -8,6 +9,11 @@
 | [2026-05-13](https://github.com/wbniv/indri.studio/commit/272aad6) | Initial scaffold: Indri studio marketing site |
 
 <!--history-meta v1
+62da7eb	author	Will Norris
+62da7eb	added	3
+62da7eb	deleted	3
+62da7eb	files	1
+62da7eb	body	Brand accent recast from #B026FF (Phosphor purple) to #B8EF00 (vivid\nchartreuse — the signature eye colour of Indri indri). Mascot PNG irises\nhue-rotated to match; favicon updated to dark-green dome + bright-green eyes;\ntheme-color, webmanifest, colophon prose, and CLAUDE.md all updated.\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01NKj4FfbatTq4PdbSPCDgou
 58b3260	author	Will Norris
 58b3260	added	15
 58b3260	deleted	0

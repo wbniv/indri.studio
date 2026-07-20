@@ -81,4 +81,4 @@ Below: each of the fifteen rendered against one of the four authoring formats. C
 
 ## Where it lives
 
-Part of the shared `python-tui-lib` toolchain at `~/SRC/python-tui-lib/`. Drop the script into any project, point it at a Markdown file, set `FRONTMATTER_STYLE=<name>`, and ship a PDF that knows what kind of document it is.
+Part of the shared `python-tui-lib` toolchain at `~/python-tui-lib/`. Drop the script into any project, point it at a Markdown file, set `FRONTMATTER_STYLE=<name>`, and ship a PDF that knows what kind of document it is.

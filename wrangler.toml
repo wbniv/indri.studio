@@ -1,6 +1,6 @@
 # Cloudflare Workers + Static Assets config for indri.studio.
 #
-# Pattern seeded from ~/SRC/rapid-raccoon-site/wrangler.toml.
+# Pattern seeded from ~/rapid-raccoon-site/wrangler.toml.
 #
 # The [[routes]] block is deliberately omitted — Terraform owns the
 # custom-domain bindings (cloudflare_workers_custom_domain for indri.studio

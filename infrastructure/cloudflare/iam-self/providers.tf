@@ -8,7 +8,7 @@
 # deliberately CAN'T manage other tokens, so every rotation needs a fresh
 # bootstrap minted in the dashboard for the duration of the apply.
 #
-# Mirrors the iam-self pattern in ~/SRC/finding-your-way/infrastructure/aws/iam-self/
+# Mirrors the iam-self pattern in ~/finding-your-way/infrastructure/aws/iam-self/
 # — the Cloudflare equivalent of the AWS terraform-user self-narrowing.
 #
 # See ../README.md "First-apply order" and "Token rotation" for the full flow.

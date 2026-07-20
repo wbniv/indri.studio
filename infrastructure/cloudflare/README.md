@@ -1,6 +1,6 @@
 # Cloudflare infrastructure for indri.studio
 
-Terraform skeleton for the indri.studio zone, Workers custom-domain bindings, redirect rules, and self-narrowed API token. Pattern mirrors [`~/SRC/finding-your-way/infrastructure/aws/`](../../../finding-your-way/infrastructure/aws/) — only the provider differs.
+Terraform skeleton for the indri.studio zone, Workers custom-domain bindings, redirect rules, and self-narrowed API token. Pattern mirrors [`~/finding-your-way/infrastructure/aws/`](../../../finding-your-way/infrastructure/aws/) — only the provider differs.
 
 ## Layout
 

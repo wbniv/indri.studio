@@ -2,7 +2,7 @@
 
 Marketing site for **Indri**, a small studio building apps for phones, tablets, consoles, and the web. Astro 6 + Tailwind v4 + Cloudflare Workers (Static Assets), with a Terraform-managed Cloudflare infrastructure layer.
 
-Replaces `rapid-raccoon.com`. Pattern seeded from [`~/SRC/rapid-raccoon-site/`](../rapid-raccoon-site/); Terraform pattern mirrors [`~/SRC/finding-your-way/infrastructure/`](../finding-your-way/infrastructure/).
+Replaces `rapid-raccoon.com`. Pattern seeded from [`~/rapid-raccoon-site/`](../rapid-raccoon-site/); Terraform pattern mirrors [`~/finding-your-way/infrastructure/`](../finding-your-way/infrastructure/).
 
 The full project plan: [`docs/plans/2026-05-13-initial-buildout.md`](docs/plans/2026-05-13-initial-buildout.md). It's the contract — read or update it before any non-trivial change.
 
@@ -91,6 +91,6 @@ infrastructure/
 ## Convention pointers
 
 - [`CLAUDE.md`](CLAUDE.md) — project conventions for Claude Code sessions
-- [`~/SRC/CLAUDE.md`](../CLAUDE.md) — shared conventions across all SRC projects
+- [`~/CLAUDE.md`](../CLAUDE.md) — shared conventions shared by every project under `~/`
 - [`docs/plans/`](docs/plans/) — implementation plans (this project + future work)
 - [`Taskfile.yml`](Taskfile.yml) — canonical command entry point
