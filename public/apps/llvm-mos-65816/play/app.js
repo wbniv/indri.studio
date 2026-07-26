@@ -330,6 +330,120 @@
     });
     var verifyEl = document.getElementById("verify");
     if (verifyEl) verifyEl.addEventListener("click", verify);
+
+    // BEGIN SHARED FULLSCREEN CONTROLLER — keep both site copies byte-identical.
+    (function () {
+      if (window.__bjgFullscreenCleanup) window.__bjgFullscreenCleanup();
+
+      var fsEl = document.getElementById("fullscreen");
+      var wrap = canvas && canvas.parentElement;
+      if (!fsEl || !wrap) return;
+
+      var request = wrap.requestFullscreen || wrap.webkitRequestFullscreen;
+      if (!request) { fsEl.style.display = "none"; return; }
+
+      var fitRaf = 0;
+      var settleRaf = 0;
+      function activeElement() {
+        return document.fullscreenElement || document.webkitFullscreenElement;
+      }
+      function px(value) {
+        var n = parseFloat(value);
+        return Number.isFinite(n) ? n : 0;
+      }
+      function fitFullscreenCanvas() {
+        fitRaf = 0;
+        if (activeElement() !== wrap) return;
+        var style = getComputedStyle(wrap);
+        var availW = wrap.clientWidth - px(style.paddingLeft) - px(style.paddingRight);
+        var availH = wrap.clientHeight - px(style.paddingTop) - px(style.paddingBottom);
+        // The core's backing buffer can switch to a native 512x240 frame. That is storage
+        // resolution, not the intended SNES display shape; fullscreen must remain 256:224 (8:7).
+        var displayW = 8;
+        var displayH = 7;
+        var scale = Math.min(availW / displayW, availH / displayH);
+        if (!(scale > 0)) return;
+        wrap.style.setProperty("--bjg-fs-width", Math.max(1, displayW * scale) + "px");
+        wrap.style.setProperty("--bjg-fs-height", Math.max(1, displayH * scale) + "px");
+      }
+      function scheduleFullscreenFit() {
+        if (fitRaf) cancelAnimationFrame(fitRaf);
+        fitRaf = requestAnimationFrame(fitFullscreenCanvas);
+      }
+      function settleFullscreenFit() {
+        scheduleFullscreenFit();
+        if (settleRaf) cancelAnimationFrame(settleRaf);
+        settleRaf = requestAnimationFrame(function () {
+          scheduleFullscreenFit();
+          settleRaf = requestAnimationFrame(scheduleFullscreenFit);
+        });
+      }
+      function onFullscreenChange() {
+        var active = activeElement() === wrap;
+        fsEl.textContent = active ? "Exit full" : "Fullscreen";
+        if (active) settleFullscreenFit();
+        else {
+          wrap.style.removeProperty("--bjg-fs-width");
+          wrap.style.removeProperty("--bjg-fs-height");
+        }
+      }
+      function onFullscreenResize() {
+        if (activeElement() === wrap) settleFullscreenFit();
+      }
+      function onFullscreenClick() {
+        if (activeElement()) {
+          var exit = document.exitFullscreen || document.webkitExitFullscreen;
+          if (exit) Promise.resolve(exit.call(document)).catch(onFullscreenChange);
+        } else {
+          Promise.resolve(request.call(wrap)).then(settleFullscreenFit).catch(onFullscreenChange);
+        }
+      }
+
+      fsEl.addEventListener("click", onFullscreenClick);
+      document.addEventListener("fullscreenchange", onFullscreenChange);
+      document.addEventListener("webkitfullscreenchange", onFullscreenChange);
+      window.addEventListener("resize", onFullscreenResize);
+      window.addEventListener("orientationchange", onFullscreenResize);
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", onFullscreenResize);
+        window.visualViewport.addEventListener("scroll", onFullscreenResize);
+      }
+
+      var oldStyle = document.getElementById("bjg-fullscreen-style");
+      if (oldStyle) oldStyle.remove();
+      var styleEl = document.createElement("style");
+      styleEl.id = "bjg-fullscreen-style";
+      styleEl.textContent =
+        ".rp-screen:-webkit-full-screen,.rp-screen:fullscreen{" +
+          "box-sizing:border-box;display:grid;place-items:center;width:100%;height:100%;margin:0;" +
+          "padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) " +
+                  "env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);" +
+          "overflow:hidden;background:#000;border:0;border-radius:0;line-height:0;" +
+        "}" +
+        ".rp-screen:-webkit-full-screen canvas,.rp-screen:fullscreen canvas{" +
+          "display:block;width:var(--bjg-fs-width,auto);height:var(--bjg-fs-height,auto);" +
+          "max-width:100%;max-height:100%;aspect-ratio:8/7;image-rendering:pixelated;" +
+        "}";
+      document.head.appendChild(styleEl);
+
+      window.__bjgFullscreenCleanup = function () {
+        if (fitRaf) cancelAnimationFrame(fitRaf);
+        if (settleRaf) cancelAnimationFrame(settleRaf);
+        fsEl.removeEventListener("click", onFullscreenClick);
+        document.removeEventListener("fullscreenchange", onFullscreenChange);
+        document.removeEventListener("webkitfullscreenchange", onFullscreenChange);
+        window.removeEventListener("resize", onFullscreenResize);
+        window.removeEventListener("orientationchange", onFullscreenResize);
+        if (window.visualViewport) {
+          window.visualViewport.removeEventListener("resize", onFullscreenResize);
+          window.visualViewport.removeEventListener("scroll", onFullscreenResize);
+        }
+        wrap.style.removeProperty("--bjg-fs-width");
+        wrap.style.removeProperty("--bjg-fs-height");
+      };
+    }());
+    // END SHARED FULLSCREEN CONTROLLER
+
     window.addEventListener("keydown", onKey(true));
     window.addEventListener("keyup", onKey(false));
     var game = document.getElementById("game");
