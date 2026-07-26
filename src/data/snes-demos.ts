@@ -26,6 +26,7 @@ export interface SnesDemoBugFound {
 
 export interface SnesDemo {
   slug: string;
+  displayMode?: 7;
   title: string;
   desc: string;
   keys: string;
@@ -38,6 +39,7 @@ export interface SnesDemo {
 export const SNES_DEMOS: SnesDemo[] = [
   {
     "slug": "mandel-display",
+    "displayMode": 7,
     "title": "Mode 7 Mandelbrot",
     "desc": "A fixed-point Mandelbrot computed live on the 65816 and revealed through Mode 7 — every pixel round-trips through a 24-bit far pointer into high WRAM, the broadest single codegen exercise the publish gate runs. The canonical #321 tester.",
     "keys": "Self-running — reveals coarse-to-fine, then spins and zooms",
@@ -53,17 +55,18 @@ export const SNES_DEMOS: SnesDemo[] = [
   },
   {
     "slug": "mandel-oop",
+    "displayMode": 7,
     "title": "Mode 7 Mandelbrot (OOP)",
     "desc": "The same fixed-point Mandelbrot, rebuilt through the snesgfx object-oriented C interface (Mode 7 as a polymorphic Drawable) instead of procedural calls — a formal verification client proving the OOP pattern costs nothing on real hardware.",
-    "keys": "Self-running — reveals coarse-to-fine, then spins and zooms",
+    "keys": "Self-running — animated build, coarse-to-fine reveal, then Mode 7 spin and zoom",
     "category": "fractals",
     "controls": null,
     "selfcheck": {
-      "off": "0x447",
+      "off": "0x895",
       "len": 2,
       "want": "0x204F",
       "frames": 5800,
-      "label": "gate jgxcheck CRC (corpus_result @ WRAM $0447)"
+      "label": "gate jgxcheck CRC (corpus_result @ WRAM $0895)"
     }
   },
   {
@@ -1270,6 +1273,7 @@ export const SNES_DEMOS: SnesDemo[] = [
   },
   {
     "slug": "blossom",
+    "displayMode": 7,
     "title": "Blossom",
     "desc": "Barry Martin's Hopalong strange attractor rendered live on SNES and flown around with the joypad. Accumulates into a hit-count grid in WRAM, displayed through Mode 7 with an HDMA colour split.",
     "keys": "← ↑ ↓ → pan · Q/W zoom · X/A attractor · Shift colour",
@@ -1536,6 +1540,7 @@ export const SNES_DEMOS: SnesDemo[] = [
   },
   {
     "slug": "buddhabrot",
+    "displayMode": 7,
     "title": "Buddhabrot",
     "desc": "The Mandelbrot set’s ghost: random points iterated z²+c, and every escaping orbit is tallied into a 16 KiB density buffer in high WRAM via far scatter-writes. PRNG + far read-modify-write under +mos-a16. Compiler stress-test #4.",
     "keys": "Self-running — no controls",
@@ -1656,6 +1661,7 @@ export const SNES_DEMOS: SnesDemo[] = [
   },
   {
     "slug": "julia",
+    "displayMode": 7,
     "title": "Julia Set Explorer",
     "desc": "A morphing Julia fractal — z² + c in Q5.10 fixed point, three 32-bit multiplies per iteration, far-stored into high WRAM and drawn through Mode 7 as c orbits a path. The affine matrix spins it while the multiply grind morphs it. Compiler stress-test #1.",
     "keys": "Self-running — no controls",
@@ -1701,6 +1707,7 @@ export const SNES_DEMOS: SnesDemo[] = [
   },
   {
     "slug": "mandel-float",
+    "displayMode": 7,
     "title": "Soft-Float Mandelbrot",
     "desc": "The Mandelbrot set in IEEE-754 single-precision float — on a CPU with no FPU, so every multiply, add and compare is a software-float libcall. The chunky image grinds in because each fat pixel is hundreds of __mulsf3/__addsf3; bit-for-bit identical to host x86. Compiler stress-test #21.",
     "keys": "Self-running — no controls",
@@ -1716,6 +1723,7 @@ export const SNES_DEMOS: SnesDemo[] = [
   },
   {
     "slug": "mandel-double",
+    "displayMode": 7,
     "title": "Double-Precision Mandelbrot",
     "desc": "The Mandelbrot set in 64-bit IEEE-754 double (top half) beside a 32-bit float twin (bottom half). No FPU, so every double op is a soft-float libcall (__muldf3/__adddf3/__gtdf2); the escape buffer is bit-for-bit identical to host x86 across every codegen mode. Compiler stress-test #33.",
     "keys": "Self-running — no controls",
@@ -1731,6 +1739,7 @@ export const SNES_DEMOS: SnesDemo[] = [
   },
   {
     "slug": "avalanche",
+    "displayMode": 7,
     "title": "64-Bit Avalanche",
     "desc": "A 64-bit splitmix64 hash visualised as an avalanche matrix — cell (i,j) = output bit j of hash64(seed^(1<<i)). On a 16-bit CPU every op is a multi-limb libcall (__muldi3/__udivdi3/64-bit shifts); a correct mixer gives a ~50%-dense rainbow field, bit-for-bit identical to host x86. Compiler stress-test #22.",
     "keys": "Self-running — no controls",
@@ -1912,6 +1921,7 @@ export const SNES_DEMOS: SnesDemo[] = [
 ,
   {
     "slug": "lzss-gallery",
+    "displayMode": 7,
     "title": "LZSS Mode 7 Gallery",
     "desc": "A complete LZSS compressor/decompressor benchmark on the 65816. Ten CC0 artworks are decoded into far WRAM, displayed through Mode 7, recompressed on-console, compared with host goldens, decoded again, and verified byte-for-byte. Compiler stress-test #119.",
     "keys": "Self-running — progress is measured work; D/C/V report stage frames",

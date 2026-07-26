@@ -1237,11 +1237,11 @@
       "id": "mandel-oop",
       "title": "Mode 7 Mandelbrot (OOP)",
       "selfcheck": {
-        "off": "0x447",
+        "off": "0x895",
         "len": 2,
         "want": "0x204F",
         "frames": 5800,
-        "label": "gate jgxcheck CRC (corpus_result @ WRAM $0447)"
+        "label": "gate jgxcheck CRC (corpus_result @ WRAM $0895)"
       }
     },
     {

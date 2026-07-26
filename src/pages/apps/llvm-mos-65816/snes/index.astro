@@ -76,6 +76,9 @@ const bugCount = SNES_DEMOS.filter((d) => d.bugFound).length;
                 height="224"
               />
               <span class="gl-play-overlay" aria-hidden="true">▶</span>
+              {d.displayMode === 7 && (
+                <span class="gl-mode7-badge" title="Mode 7 display" aria-label="Mode 7 display">7</span>
+              )}
               {d.bugFound && <span class="gl-bug-badge" title="Caught a real compiler bug">bug found</span>}
             </div>
             <div class="gl-card-body">
@@ -181,10 +184,23 @@ const bugCount = SNES_DEMOS.filter((d) => d.bugFound).length;
     background: color-mix(in srgb, black 35%, transparent);
   }
   .gl-card:hover .gl-play-overlay { opacity: 1; }
+  .gl-mode7-badge {
+    position: absolute; z-index: 2; top: 7px; left: 7px;
+    display: grid; width: 24px; height: 24px; place-items: center;
+    border: 1px solid color-mix(in srgb, var(--color-primary-container) 88%, white);
+    border-radius: 5px;
+    background: rgba(5, 19, 33, 0.88);
+    color: var(--color-primary-container);
+    font: 700 14px/1 var(--font-mono);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
+  }
   .gl-bug-badge {
     position: absolute; top: 6px; right: 6px;
     font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.04em; text-transform: uppercase;
     color: #0c1116; background: #ffd166; padding: 2px 6px; border-radius: 4px; font-weight: 600;
+  }
+  @media (max-width: 520px) {
+    .gl-mode7-badge { width: 22px; height: 22px; font-size: 13px; }
   }
   .gl-card-body { padding: 0.75rem 0.9rem 0.9rem; }
   .gl-card-title {
