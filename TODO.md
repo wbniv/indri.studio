@@ -13,12 +13,11 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 - [ ] **2026-06-25** **Astro 7 migration (Sätteri pipeline)** — modernise the markdown pipeline; its verbatim raw-HTML handling would let inline Mermaid SVG survive uncorrupted, letting us delete the build-done `mermaid-inject` integration. Requires porting `rehypeExternalLinks` to a Sätteri HAST plugin. Major bump — branch + full Lighthouse before tagging — [plan](docs/plans/2026-06-25-astro-7-migration.md)
 
-- [ ] **2026-06-25** Fix the stale `scripts/sync-65816-docs.sh` manifest — it references the deleted `wt/321-snes-hwref` branch (worktree consolidation), so `task sync-docs` fails on `65816-opcodes`. Point the consolidated docs at `main`. Blocks regenerating the reader docs from source.
-
 - [ ] **2026-06-25** Verify the **PDF / release-bundled docs** render path (`../python-tui-lib/scripts/md-to-html.sh`, used by `../llvm-mos-65816/dev/build-release-docs.sh`) for the same Mermaid `<br></br>` double-break / label-clip the web path had — it doesn't go through Astro so it may differ, and the `sync-65816-docs.sh` `</p><p>` fix doesn't touch it. Check a generated `.pdf` before assuming clean — [plan](docs/plans/2026-06-25-mermaid-diagram-label-clipping.md)
 
 ## Done
 
+- [x] **2026-07-24** Fixed the stale `scripts/sync-65816-docs.sh` manifest — found it already pointing every doc row at `main` (no `wt/321-snes-hwref` reference remained), no code change needed; just marking the TODO done. 
 - [x] **2026-06-27** Fixed `/blossom` HUD clipping — `present()` cropped raw rows `[8,232)` (`yoff=8` "skip overscan"), but the active picture sits flush at the buffer top; gate refs use `[0,224)`. Set `yoff=0` in indri (`7b82611`), `bsnes-jg-wasm` source (`aaacbae`), and biohack (`v1.0.74`→regressed via `space-invaders` bundle re-sync→re-fixed `fc918d5`/`v1.0.76`); also centred the indri player (`82274c3`). Both sites verified live at 125% zoom (20–21 px margin) — [plan](docs/plans/2026-06-27-emulator-hud-overscan-crop-fix.md)
 - [x] **2026-06-25** Embedded the live `bsnes-jg-wasm` emulator (cycle-accurate bsnes-jg 2.1.0, sha256-pinned) inline on `/apps/llvm-mos-65816/` running our `mandel-display` + the `0x9103` fidelity self-check; bundle at `public/apps/llvm-mos-65816/play/` (synced from `../bsnes-jg-wasm`). Found+fixed a prod CSP block (added `'wasm-unsafe-eval'`). Live + verified (`v0.1.69`); page isn't in the LH sample so the budget is untouched — [plan](docs/plans/2026-06-25-llvm-mos-emulator-embed.md)
 - [x] **2026-05-21** Bootstrap `apt.indri.studio` + publish `claude-usage` 0.11.20 (apt-v0.1.1 green; InRelease + key.gpg live; verified `apt-cache show` end-to-end from clean ubuntu:latest) — [plan](docs/plans/2026-05-21-apt-indri-studio-bootstrap.md)
