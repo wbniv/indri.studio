@@ -59,9 +59,19 @@ const bugCount = SNES_DEMOS.filter((d) => d.bugFound).length;
       ))}
     </nav>
 
+    <div class="gl-mode-filter" data-total={SNES_DEMOS.length}>
+      <button type="button" class="gl-mode-toggle" aria-pressed="false" aria-label="Show Mode 7 demos only">
+        <span class="gl-mode-filter-seven" aria-hidden="true">7</span>
+        <span>Mode 7</span>
+        <span class="gl-mode-check" aria-hidden="true">✓</span>
+      </button>
+      <span class="gl-mode-count" aria-live="polite">{SNES_DEMOS.length} demos</span>
+    </div>
+    <p class="gl-empty" hidden>No Mode 7 demos in this category.</p>
+
     <ul class="gl-grid">
       {SNES_DEMOS.map((d) => (
-        <li class="gl-card-wrap" data-cat={d.category}>
+        <li class="gl-card-wrap" data-cat={d.category} data-display-mode={d.displayMode}>
           {/* blossom has a richer, hand-crafted page (custom MathML equations, a full manual) at
               /blossom -- link straight there instead of the generic gallery route (excluded from
               [slug].astro's getStaticPaths for the same reason: don't shadow it with a duplicate). */}
@@ -96,16 +106,49 @@ const bugCount = SNES_DEMOS.filter((d) => d.bugFound).length;
   document.addEventListener("astro:page-load", () => {
     const chips = document.querySelectorAll<HTMLButtonElement>(".gl-chip");
     const cards = document.querySelectorAll<HTMLLIElement>(".gl-card-wrap");
+    const modeWrap = document.querySelector<HTMLElement>(".gl-mode-filter")!;
+    const modeToggle = document.querySelector<HTMLButtonElement>(".gl-mode-toggle")!;
+    const modeCount = document.querySelector<HTMLElement>(".gl-mode-count")!;
+    const empty = document.querySelector<HTMLElement>(".gl-empty")!;
+    let category = "all";
+    let mode7 = new URL(location.href).searchParams.get("mode") === "7";
+    const applyFilters = () => {
+      let shown = 0;
+      cards.forEach((card) => {
+        const visible = (category === "all" || card.dataset.cat === category)
+          && (!mode7 || card.dataset.displayMode === "7");
+        card.hidden = !visible;
+        if (visible) shown++;
+      });
+      modeToggle.setAttribute("aria-pressed", String(mode7));
+      modeToggle.setAttribute("aria-label", mode7 ? "Show all demos" : "Show Mode 7 demos only");
+      modeCount.textContent = mode7
+        ? `${shown} Mode 7 ${category === "all" ? "demos" : "demos in this category"}`
+        : `${shown} demos`;
+      empty.hidden = shown !== 0;
+      const url = new URL(location.href);
+      if (mode7) url.searchParams.set("mode", "7"); else url.searchParams.delete("mode");
+      history.replaceState(null, "", url);
+    };
     chips.forEach((chip) => {
       chip.addEventListener("click", () => {
         chips.forEach((c) => c.classList.remove("is-active"));
         chip.classList.add("is-active");
-        const cat = chip.dataset.cat;
-        cards.forEach((card) => {
-          card.style.display = cat === "all" || card.dataset.cat === cat ? "" : "none";
-        });
+        category = chip.dataset.cat ?? "all";
+        applyFilters();
       });
     });
+    modeToggle.addEventListener("click", () => { mode7 = !mode7; applyFilters(); });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && mode7 && document.querySelector(".gl-wrap:focus-within")) {
+        mode7 = false; applyFilters(); modeToggle.focus();
+      }
+    });
+    window.addEventListener("popstate", () => {
+      mode7 = new URL(location.href).searchParams.get("mode") === "7";
+      applyFilters();
+    });
+    applyFilters();
   });
 </script>
 
@@ -164,6 +207,32 @@ const bugCount = SNES_DEMOS.filter((d) => d.bugFound).length;
     background: color-mix(in srgb, var(--color-primary-container) 14%, transparent);
     color: var(--color-primary-container);
   }
+  .gl-mode-filter {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin: -0.75rem 0 1.5rem;
+  }
+  .gl-mode-toggle {
+    min-height: 44px; display: inline-flex; align-items: center; gap: 0.55rem;
+    padding: 0.45rem 0.8rem; border: 1px solid color-mix(in srgb, var(--color-primary-container) 30%, transparent);
+    border-radius: 7px; background: var(--color-surface-container); color: var(--color-on-surface-variant);
+    font: 700 12px var(--font-mono); cursor: pointer;
+  }
+  .gl-mode-toggle[aria-pressed="true"] {
+    color: #9ffff0; border-color: #74ffe5; background: #153d39; box-shadow: inset 3px 0 #74ffe5;
+  }
+  .gl-mode-toggle:focus-visible { outline: 2px solid var(--color-primary-container); outline-offset: 3px; }
+  .gl-mode-filter-seven {
+    display: grid; width: 25px; height: 25px; place-items: center;
+    border: 1px solid #74ffe5; border-radius: 5px; background: #051321; color: #74ffe5; font-size: 14px;
+  }
+  .gl-mode-check { visibility: hidden; }
+  .gl-mode-toggle[aria-pressed="true"] .gl-mode-check { visibility: visible; }
+  .gl-mode-count { color: var(--color-on-surface-variant); font: 11px var(--font-mono); }
+  .gl-empty {
+    min-height: 9rem; display: grid; place-items: center; text-align: center;
+    border: 1px dashed color-mix(in srgb, var(--color-primary-container) 35%, transparent);
+    border-radius: 8px; color: var(--color-on-surface-variant);
+  }
+  .gl-empty[hidden] { display: none; }
   .gl-grid {
     list-style: none;
     margin: 0;
