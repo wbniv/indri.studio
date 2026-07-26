@@ -106,37 +106,9 @@ const isSelfRunning = demo.keys.toLowerCase().startsWith("self-running");
   </main>
 </AppLayout>
 
-<script is:inline>
-  // NB: this listener is registered (via window.__bjgReg) only once for the whole browsing session,
-  // and Astro's <ClientRouter /> does NOT re-run inline <script> tags on client-side view-transition
-  // navigations between /apps/llvm-mos-65816/snes/<slug>/ pages -- only the very first page load
-  // executes this <script> body. So slug/appV/bust must NOT be closed over via define:vars (that
-  // would freeze bootEmulator to whichever demo happened to load first); instead read them off the
-  // DOM at call time, since Astro's transition swap DOES correctly replace #bjg-embed's attributes
-  // with the new page's values before dispatching astro:page-load.
-  function bootEmulator() {
-    var el = document.getElementById("bjg-embed");
-    if (!el) return;
-    var slug = el.dataset.slug;
-    var appV = el.dataset.appv;
-    var bust = JSON.parse(el.dataset.bust || "{}");
-    if (window.__bjgStop) { try { window.__bjgStop(); } catch (e) {} }
-    window.BJG_BASE = "/apps/llvm-mos-65816/play/";
-    window.BJG_DEFAULT_ROM = slug;
-    window.BJG_BUST = bust;
-    window.BsnesJg = undefined;
-    window.__bjg = undefined;
-    var old = document.getElementById("bjg-appjs");
-    if (old) old.remove();
-    var s = document.createElement("script");
-    s.id = "bjg-appjs";
-    s.src = "/apps/llvm-mos-65816/play/app.js" + (appV ? "?v=" + appV : "");
-    document.body.appendChild(s);
-  }
-  if (!window.__bjgReg) { window.__bjgReg = true; document.addEventListener("astro:page-load", bootEmulator); }
-  if (document.readyState !== "loading") bootEmulator();
-  else document.addEventListener("DOMContentLoaded", bootEmulator);
-</script>
+<!-- Boot/reboot logic lives in Base.astro (shared across every #bjg-embed on the site) so the
+     astro:page-load listener is guaranteed to register on the session's first real page load,
+     regardless of which page that is -- see the comment there for why. -->
 
 <style>
   .rp-wrap { max-width: 900px; margin-inline: auto; padding: 2.5rem 1.25rem 5rem; }

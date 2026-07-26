@@ -60,45 +60,9 @@ const appV = bust["app.js"] ?? "";
   </div>
 </section>
 
-<script is:inline>
-  // (Re)boot the emulator on every page-load so it survives view transitions.
-  // app.js is a plain static script under /apps/llvm-mos-65816/play/; we set its
-  // base + default ROM + the build-time cache-bust map, then (re)inject it (with its own
-  // hash on the url), stopping any prior run first.
-  //
-  // NB: this listener is registered (via window.__bjgReg) only ONCE for the whole browsing
-  // session, and <ClientRouter /> does NOT re-run inline <script> tags on a client-side
-  // view-transition nav -- only the very first page load anywhere on the site executes this
-  // <script> body. So slug/appV/bust must NOT be closed over via define:vars (that would
-  // freeze bootEmulator to whichever page happened to load first, e.g. this one always
-  // rebooting mandel-display even after navigating to a different demo); read them off the
-  // #bjg-embed element's data-* attributes at call time instead -- the transition swap DOES
-  // correctly replace them with the new page's values before dispatching astro:page-load.
-  // Same convention as src/pages/apps/llvm-mos-65816/snes/[slug].astro and blossom.astro.
-  function bootEmulator() {
-    var el = document.getElementById("bjg-embed");
-    if (!el) return;                                             // only on a page with the embed
-    var slug = el.dataset.slug;
-    var appV = el.dataset.appv;
-    var bust = JSON.parse(el.dataset.bust || "{}");
-    if (window.__bjgStop) { try { window.__bjgStop(); } catch (e) {} }
-    window.BJG_BASE = "/apps/llvm-mos-65816/play/";
-    window.BJG_DEFAULT_ROM = slug;
-    window.BJG_BUST = bust;                                      // path -> content sha (build time)
-    window.BsnesJg = undefined;                                 // force a fresh core module
-    window.__bjg = undefined;
-    var old = document.getElementById("bjg-appjs");
-    if (old) old.remove();
-    var s = document.createElement("script");
-    s.id = "bjg-appjs";
-    s.src = "/apps/llvm-mos-65816/play/app.js" + (appV ? "?v=" + appV : "");
-    document.body.appendChild(s);
-  }
-  if (!window.__bjgReg) {
-    window.__bjgReg = true;
-    document.addEventListener("astro:page-load", bootEmulator);
-  }
-</script>
+<!-- Boot/reboot logic lives in Base.astro (shared across every #bjg-embed on the site) so the
+     astro:page-load listener is guaranteed to register on the session's first real page load,
+     regardless of which page that is -- see the comment there for why. -->
 
 <style>
   .emu { margin: 2.5rem 0; }

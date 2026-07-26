@@ -192,6 +192,52 @@ const pathname = Astro.url.pathname;
 				});
 			}
 		</script>
+		<script is:inline>
+			// Shared boot/reboot for the llvm-mos-65816 SNES emulator (bsnes-jg WASM), used by
+			// EmulatorEmbed.astro, blossom.astro, and the SNES demo gallery's [slug].astro pages --
+			// each just renders a #bjg-embed element with data-slug/data-appv/data-bust and relies on
+			// this shared script to boot it.
+			//
+			// Lives HERE, not duplicated per-page, because the astro:page-load LISTENER must be
+			// registered on the very FIRST real page load of the session -- <ClientRouter /> does not
+			// re-execute inline <script> bodies on a client-side transition, only whichever page's
+			// script happened to run first ever registers a listener. Registration used to be scoped
+			// to each component's own script (gated behind that component's #bjg-embed existing on
+			// the page), which broke whenever a session's first-ever page load had no #bjg-embed at
+			// all -- e.g. landing directly on the gallery index (a plain card grid, no player) and
+			// then only ever click-navigating after that: no script ever ran, so nothing was ever
+			// registered, and clicking into any demo page hung on "loading core..." forever. Base.astro
+			// is the one thing every page on the site shares (including the gallery index), so
+			// registering here guarantees the listener exists after the session's first real page load,
+			// whichever page that happens to be.
+			//
+			// bootEmulator reads slug/appV/bust off #bjg-embed's data-* attributes at call time (not a
+			// closure) so it always reflects whichever page is current -- the transition swap DOES
+			// correctly replace DOM attributes on every nav, only script re-execution is the gotcha.
+			function bjgBootEmulator() {
+				var el = document.getElementById("bjg-embed");
+				if (!el) return; // no-op on pages without the emulator (most of the site)
+				var slug = el.dataset.slug;
+				var appV = el.dataset.appv;
+				var bust = JSON.parse(el.dataset.bust || "{}");
+				if (window.__bjgStop) { try { window.__bjgStop(); } catch (e) {} }
+				window.BJG_BASE = "/apps/llvm-mos-65816/play/";
+				window.BJG_DEFAULT_ROM = slug;
+				window.BJG_BUST = bust;
+				window.BsnesJg = undefined; // force a fresh core module
+				window.__bjg = undefined;
+				var old = document.getElementById("bjg-appjs");
+				if (old) old.remove();
+				var s = document.createElement("script");
+				s.id = "bjg-appjs";
+				s.src = "/apps/llvm-mos-65816/play/app.js" + (appV ? "?v=" + appV : "");
+				document.body.appendChild(s);
+			}
+			if (!window.__bjgReg) {
+				window.__bjgReg = true;
+				document.addEventListener("astro:page-load", bjgBootEmulator);
+			}
+		</script>
 	</head>
 	<body class="min-h-screen flex flex-col text-on-surface font-body">
 		<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-surface-container focus:text-on-surface focus:rounded focus:ring-2 focus:ring-primary-container">
