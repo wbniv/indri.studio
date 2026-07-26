@@ -379,7 +379,7 @@
       "id": "mandel-double",
       "title": "Double-Precision Mandelbrot",
       "selfcheck": {
-        "off": "0x20",
+        "off": "0x200",
         "len": 2,
         "want": "0x0EDF",
         "frames": 2200,
@@ -797,7 +797,7 @@
       "id": "hilbert",
       "title": "Hilbert Curve",
       "selfcheck": {
-        "off": "0x200",
+        "off": "0x13ee",
         "len": 2,
         "want": "0x5999",
         "frames": 500,
@@ -929,7 +929,7 @@
       "id": "montorbit",
       "title": "Montgomery Orbit",
       "selfcheck": {
-        "off": "0x71",
+        "off": "0x31",
         "len": 2,
         "want": "0xBA9B",
         "frames": 500,
@@ -984,7 +984,7 @@
       "id": "adpcm",
       "title": "ADPCM Waverider",
       "selfcheck": {
-        "off": "0x51",
+        "off": "0x31",
         "len": 2,
         "want": "0xCA56",
         "frames": 500,
@@ -1105,7 +1105,7 @@
       "id": "ucmprank",
       "title": "Unsigned Rank Percentile Field",
       "selfcheck": {
-        "off": "0x31",
+        "off": "0x45",
         "len": 2,
         "want": "0x4CDD",
         "frames": 500,
@@ -1149,7 +1149,7 @@
       "id": "modexp256",
       "title": "256-bit Modular Exponentiation",
       "selfcheck": {
-        "off": "0x39",
+        "off": "0x31",
         "len": 2,
         "want": "0x31D4",
         "frames": 1500,
