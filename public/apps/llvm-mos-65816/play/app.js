@@ -85,10 +85,7 @@
     // this the picture is stretched 2x wide.
     var step = w >= 512 ? 2 : 1;
     var ow = (w / step) | 0;
-    var yoff = 0;                            // the gate's jgxcheck reference PNGs capture raw rows [0,224):
-                                             // the active picture already sits flush at the buffer top, so an
-                                             // 8-line "overscan skip" only shoves a top-edge HUD off the top
-                                             // (it clipped /blossom's value bar and mis-framed mandel by 8px).
+    var yoff = h >= 232 ? 8 : 0;             // match biohack.net: skip bsnes-jg's blank top overscan
     var avail = h - yoff;
     var oh = avail < 224 ? avail : 224;
     var heap = Module.HEAPU32;               // re-fetch each frame (may grow)
