@@ -26,6 +26,13 @@ The 65816 codegen is machine-agnostic, so the same compiler benefits other
 65816 platforms (Apple IIgs) too. Open source under Apache-2.0 with LLVM
 exceptions.
 
+Beyond the Mandelbrot demo above, the toolchain has been stress-tested against
+113 SNES programs — fractals, physics simulations, cellular automata,
+ciphers, a 6502 CPU simulator, a playable Space Invaders — each one built to
+exercise a different corner of the codegen and verified pixel-for-pixel
+against two emulators. 11 of them caught a real bug in the compiler along the
+way. [Browse the full demo gallery →](/apps/llvm-mos-65816/snes/)
+
 ## Install
 
 Linux x86-64. Add the apt repository, then install the toolchain:

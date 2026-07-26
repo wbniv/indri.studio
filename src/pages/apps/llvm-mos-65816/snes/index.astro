@@ -1,0 +1,199 @@
+---
+// /apps/llvm-mos-65816/snes/ — gallery of all 113 in-browser SNES demos compiled with the
+// llvm-mos-65816 toolchain. Mirrors biohack.net's /snes/ gallery (same demo set, same card-grid +
+// category-chip layout, same per-demo page anatomy via [slug].astro) but data-driven from one
+// shared module (../../../../data/snes-demos.ts) instead of 113 hand-written files, and restyled
+// to indri.studio's AppLayout/Base chrome instead of a standalone site.
+import AppLayout from "../../../../layouts/AppLayout.astro";
+import { SNES_DEMOS } from "../../../../data/snes-demos.ts";
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
+
+const PLAY = "public/apps/llvm-mos-65816/play";
+const previewV = (slug: string) => {
+  try {
+    return createHash("sha256").update(readFileSync(`${PLAY}/preview/${slug}.png`)).digest("hex").slice(0, 12);
+  } catch {
+    return "";
+  }
+};
+
+const CATEGORIES = [
+  { id: "fractals", label: "Fractals" },
+  { id: "physics", label: "Physics & Simulation" },
+  { id: "cellular", label: "Cellular Automata" },
+  { id: "motion", label: "Motion & Curves" },
+  { id: "algorithms", label: "Algorithms & Data" },
+  { id: "rendering", label: "Rendering & Graphics" },
+  { id: "signals", label: "Signals & Audio" },
+  { id: "bignums", label: "Big Numbers" },
+  { id: "ciphers", label: "Ciphers & Bit Tricks" },
+  { id: "classics", label: "Games & Classics" },
+];
+
+const bugCount = SNES_DEMOS.filter((d) => d.bugFound).length;
+---
+
+<AppLayout
+  title="SNES Demo Gallery · llvm-mos-65816"
+  description={`${SNES_DEMOS.length} in-browser Super Nintendo demos compiled from C with the llvm-mos-65816 toolchain — each a stress-test for the compiler's 16-bit-accumulator codegen. Play them in your browser.`}
+>
+  <main class="gl-wrap">
+    <a href="/apps/llvm-mos-65816/" class="gl-back">← Back to SNES C Compiler</a>
+
+    <header class="gl-hero">
+      <h1 class="gl-title">SNES Demo Gallery</h1>
+      <p class="gl-lede">
+        {SNES_DEMOS.length} in-browser Super Nintendo demos, each compiled from C with the
+        llvm-mos-65816 toolchain and verified pixel-for-pixel against two emulators (MAME and
+        bsnes-jg). Every one is a compiler stress-test that exercises a different corner of the
+        codegen — {bugCount} of them caught a real bug in the compiler along the way. Click any
+        card to play.
+      </p>
+    </header>
+
+    <nav class="gl-chips" aria-label="Filter by category">
+      <button class="gl-chip is-active" data-cat="all">All</button>
+      {CATEGORIES.map((c) => (
+        <button class="gl-chip" data-cat={c.id}>{c.label}</button>
+      ))}
+    </nav>
+
+    <ul class="gl-grid">
+      {SNES_DEMOS.map((d) => (
+        <li class="gl-card-wrap" data-cat={d.category}>
+          {/* blossom has a richer, hand-crafted page (custom MathML equations, a full manual) at
+              /blossom -- link straight there instead of the generic gallery route (excluded from
+              [slug].astro's getStaticPaths for the same reason: don't shadow it with a duplicate). */}
+          <a href={d.slug === "blossom" ? "/blossom/" : `/apps/llvm-mos-65816/snes/${d.slug}/`} class="gl-card glass-card glass-card-hover" aria-label={`Play ${d.title}`}>
+            <div class="gl-thumb-wrap">
+              <img
+                class="gl-thumb"
+                src={`/apps/llvm-mos-65816/play/preview/${d.slug}.png?v=${previewV(d.slug)}`}
+                alt=""
+                loading="lazy"
+                width="256"
+                height="224"
+              />
+              <span class="gl-play-overlay" aria-hidden="true">▶</span>
+              {d.bugFound && <span class="gl-bug-badge" title="Caught a real compiler bug">bug found</span>}
+            </div>
+            <div class="gl-card-body">
+              <h3 class="gl-card-title">{d.title}</h3>
+              <p class="gl-card-keys">{d.keys}</p>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </main>
+</AppLayout>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const chips = document.querySelectorAll<HTMLButtonElement>(".gl-chip");
+    const cards = document.querySelectorAll<HTMLLIElement>(".gl-card-wrap");
+    chips.forEach((chip) => {
+      chip.addEventListener("click", () => {
+        chips.forEach((c) => c.classList.remove("is-active"));
+        chip.classList.add("is-active");
+        const cat = chip.dataset.cat;
+        cards.forEach((card) => {
+          card.style.display = cat === "all" || card.dataset.cat === cat ? "" : "none";
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  .gl-wrap {
+    max-width: var(--container-max, 1200px);
+    margin-inline: auto;
+    padding: 2.5rem 1.25rem 5rem;
+  }
+  .gl-back {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-on-surface-variant);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+  }
+  .gl-back:hover { color: var(--color-primary-container); }
+  .gl-hero { max-width: 50rem; }
+  .gl-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-size: clamp(2rem, 6vw, 3rem);
+    color: var(--color-on-surface);
+    margin: 0 0 0.75rem;
+  }
+  .gl-lede {
+    font-family: var(--font-body);
+    color: var(--color-on-surface-variant);
+    line-height: 1.65;
+    margin: 0;
+  }
+  .gl-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 2rem 0 1.75rem;
+  }
+  .gl-chip {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-on-surface-variant);
+    background: var(--color-surface-container);
+    border: 1px solid color-mix(in srgb, var(--color-primary-container) 18%, transparent);
+    border-radius: var(--radius-DEFAULT, 6px);
+    padding: 0.4rem 0.85rem;
+    cursor: pointer;
+    transition: border-color 150ms ease, color 150ms ease, background 150ms ease;
+  }
+  .gl-chip:hover { border-color: var(--color-primary-container); color: var(--color-on-surface); }
+  .gl-chip.is-active {
+    border-color: var(--color-primary-container);
+    background: color-mix(in srgb, var(--color-primary-container) 14%, transparent);
+    color: var(--color-primary-container);
+  }
+  .gl-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  @media (min-width: 640px) { .gl-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; } }
+  @media (min-width: 1024px) { .gl-grid { grid-template-columns: repeat(4, 1fr); } }
+  .gl-card { display: block; text-decoration: none; overflow: hidden; }
+  .gl-thumb-wrap { position: relative; aspect-ratio: 8 / 7; background: #000; line-height: 0; }
+  .gl-thumb { width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; opacity: 0.88; transition: opacity 150ms ease; }
+  .gl-card:hover .gl-thumb { opacity: 1; }
+  .gl-play-overlay {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; color: var(--color-primary-container); opacity: 0; transition: opacity 150ms ease;
+    background: color-mix(in srgb, black 35%, transparent);
+  }
+  .gl-card:hover .gl-play-overlay { opacity: 1; }
+  .gl-bug-badge {
+    position: absolute; top: 6px; right: 6px;
+    font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.04em; text-transform: uppercase;
+    color: #0c1116; background: #ffd166; padding: 2px 6px; border-radius: 4px; font-weight: 600;
+  }
+  .gl-card-body { padding: 0.75rem 0.9rem 0.9rem; }
+  .gl-card-title {
+    font-family: var(--font-display); font-weight: 600; font-size: 14px;
+    color: var(--color-on-surface); margin: 0 0 0.25rem;
+  }
+  .gl-card-keys {
+    font-family: var(--font-mono); font-size: 11px; line-height: 1.4;
+    color: var(--color-on-surface-variant); margin: 0;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+</style>

@@ -1,9 +1,1230 @@
 {
-  "_comment": "Demo ROMs (homebrew built by the llvm-mos-65816 +mos-a16 toolchain) and their in-browser fidelity self-checks. A selfcheck mirrors the gate's headless dev/jgxcheck.cpp assert exactly: power on, run `frames` frames, read `len` little-endian bytes of WRAM at `off`, require == `want`. Matching values prove this wasm build is byte-for-byte the core the gate trusts.",
+  "_comment": "Demo ROMs + their in-browser fidelity self-checks for the bsnes-jg WASM player. A selfcheck powers on, runs `frames` frames, reads `len` LE bytes of WRAM at `off`, and asserts == `want` \u2014 matching the headless gate proves this wasm build is the trusted core.",
   "roms": [
     {
+      "id": "blossom",
+      "title": "Blossom",
+      "selfcheck": {
+        "off": "0x54",
+        "len": 2,
+        "want": "0x9047",
+        "frames": 3000,
+        "label": "gate grid hash (corpus @ WRAM 0x54)"
+      }
+    },
+    {
+      "id": "space-invaders",
+      "title": "Space Invaders",
+      "selfcheck": {
+        "off": "0x2c",
+        "len": 2,
+        "want": "0x9D57",
+        "frames": 1400,
+        "label": "attract CRC host==MAME==bsnes-jg"
+      }
+    },
+    {
+      "id": "spirograph",
+      "title": "Spirograph",
+      "selfcheck": {
+        "off": "0x1381",
+        "len": 2,
+        "want": "0x32D4",
+        "frames": 500,
+        "label": "curve-math hash"
+      }
+    },
+    {
+      "id": "3d-wireframe",
+      "title": "Wireframe 3-D Solid",
+      "selfcheck": {
+        "off": "0x55",
+        "len": 2,
+        "want": "0xE737",
+        "frames": 300,
+        "label": "3-D math hash"
+      }
+    },
+    {
+      "id": "spigot",
+      "title": "\u03c0 Spigot + Monte-Carlo",
+      "selfcheck": {
+        "off": "0x1698",
+        "len": 2,
+        "want": "0x7711",
+        "frames": 500,
+        "label": "pi gate CRC"
+      }
+    },
+    {
+      "id": "double-pendulum",
+      "title": "Double Pendulum (Chaos)",
+      "selfcheck": {
+        "off": "0x12e1",
+        "len": 2,
+        "want": "0xE859",
+        "frames": 500,
+        "label": "chaos gate CRC"
+      }
+    },
+    {
+      "id": "n-body",
+      "title": "N-body Orbits",
+      "selfcheck": {
+        "off": "0x1501",
+        "len": 2,
+        "want": "0xCC65",
+        "frames": 500,
+        "label": "N-body (N=3) Symplectic Euler 32 steps hash=0xCC65"
+      }
+    },
+    {
+      "id": "factorial",
+      "title": "Bignum Factorial",
+      "selfcheck": {
+        "off": "0xf46",
+        "len": 2,
+        "want": "0x772F",
+        "frames": 500,
+        "label": "factorial"
+      }
+    },
+    {
+      "id": "newton",
+      "title": "Newton's Fractal",
+      "selfcheck": {
+        "off": "0x20",
+        "len": 2,
+        "want": "0x4D8B",
+        "frames": 500,
+        "label": "newton"
+      }
+    },
+    {
+      "id": "sort-race",
+      "title": "Sorting Race",
+      "selfcheck": {
+        "off": "0x16ad",
+        "len": 2,
+        "want": "0xB28F",
+        "frames": 500,
+        "label": "race CRC host==bsnes-jg (corpus @ WRAM 0x16ad)"
+      }
+    },
+    {
+      "id": "maze",
+      "title": "Maze Generate + Solve",
+      "selfcheck": {
+        "off": "0xdbc",
+        "len": 2,
+        "want": "0x0749",
+        "frames": 400,
+        "label": "maze gen+solve gate CRC"
+      }
+    },
+    {
+      "id": "epicycles",
+      "title": "Fourier Epicycles",
+      "selfcheck": {
+        "off": "0x1366",
+        "len": 2,
+        "want": "0x4F6C",
+        "frames": 500,
+        "label": "epicycle-math gate CRC"
+      }
+    },
+    {
+      "id": "life",
+      "title": "Conway's Game of Life",
+      "selfcheck": {
+        "off": "0x68",
+        "len": 2,
+        "want": "0xDDF1",
+        "frames": 500,
+        "label": "LIFE"
+      }
+    },
+    {
+      "id": "harmonograph",
+      "title": "Lissajous Harmonograph",
+      "selfcheck": {
+        "off": "0x5a",
+        "len": 2,
+        "want": "0x0EBB",
+        "frames": 500,
+        "label": "HARMO"
+      }
+    },
+    {
+      "id": "julia",
+      "title": "Julia Set Explorer",
+      "selfcheck": {
+        "off": "0x200",
+        "len": 2,
+        "want": "0x3490",
+        "frames": 300,
+        "label": "Julia z^2+c"
+      }
+    },
+    {
+      "id": "raycaster",
+      "title": "Raycaster Maze",
+      "selfcheck": {
+        "off": "0x64",
+        "len": 2,
+        "want": "0xB200",
+        "frames": 500,
+        "label": "RAY"
+      }
+    },
+    {
+      "id": "burning-ship",
+      "title": "Burning Ship Fractal",
+      "selfcheck": {
+        "off": "0x40",
+        "len": 2,
+        "want": "0x6F2D",
+        "frames": 1500,
+        "label": "SHIP"
+      }
+    },
+    {
+      "id": "buddhabrot",
+      "title": "Buddhabrot",
+      "selfcheck": {
+        "off": "0x22",
+        "len": 2,
+        "want": "0x7C31",
+        "frames": 6000,
+        "label": "gate grid hash (corpus @ WRAM 0x22)"
+      }
+    },
+    {
+      "id": "doom-fire",
+      "title": "Doom Fire",
+      "selfcheck": {
+        "off": "0x22",
+        "len": 2,
+        "want": "0x3C59",
+        "frames": 500,
+        "label": "doom-fire"
+      }
+    },
+    {
+      "id": "rdiff",
+      "title": "Gray-Scott Reaction-Diffusion",
+      "selfcheck": {
+        "off": "0x20",
+        "len": 2,
+        "want": "0x5555",
+        "frames": 500,
+        "label": "rdiff gate"
+      }
+    },
+    {
+      "id": "1d-ca",
+      "title": "Rule 90 / Rule 110 \u2014 1-D Cellular Automaton",
+      "selfcheck": {
+        "off": "0x20",
+        "len": 2,
+        "want": "0xAB2C",
+        "frames": 400,
+        "label": "1d-ca gate"
+      }
+    },
+    {
+      "id": "avalanche",
+      "title": "64-Bit Avalanche",
+      "selfcheck": {
+        "off": "0x20",
+        "len": 2,
+        "want": "0x27EA",
+        "frames": 700,
+        "label": "64-bit"
+      }
+    },
+    {
+      "id": "boids",
+      "title": "Boids Flock",
+      "selfcheck": {
+        "off": "0x38",
+        "len": 2,
+        "want": "0xA8AB",
+        "frames": 1400,
+        "label": "struct-abi"
+      }
+    },
+    {
+      "id": "mandel-float",
+      "title": "Soft-Float Mandelbrot (IEEE-754)",
+      "selfcheck": {
+        "off": "0x200",
+        "len": 2,
+        "want": "0x4169",
+        "frames": 1700,
+        "label": "soft-float"
+      }
+    },
+    {
+      "id": "turtle-vm",
+      "title": "Bytecode-VM Turtle",
+      "selfcheck": {
+        "off": "0x20",
+        "len": 2,
+        "want": "0x4007",
+        "frames": 600,
+        "label": "vm-dispatch"
+      }
+    },
+    {
+      "id": "truchet",
+      "title": "Truchet (Packed Bitfields)",
+      "selfcheck": {
+        "off": "0x9a",
+        "len": 2,
+        "want": "0xB3E6",
+        "frames": 800,
+        "label": "bitfields"
+      }
+    },
+    {
+      "id": "cordic",
+      "title": "CORDIC Rotator",
+      "selfcheck": {
+        "off": "0x135f",
+        "len": 2,
+        "want": "0x4D41",
+        "frames": 500,
+        "label": "cordic_gate_crc"
+      }
+    },
+    {
+      "id": "fn-plot",
+      "title": "Function Plotter",
+      "selfcheck": {
+        "off": "0x002a",
+        "len": 2,
+        "want": "0x2EBE",
+        "frames": 500,
+        "label": "fn-plot"
+      }
+    },
+    {
+      "id": "cardioid",
+      "title": "Times-table Cardioid",
+      "selfcheck": {
+        "off": "0x20",
+        "len": 2,
+        "want": "0x523B",
+        "frames": 500,
+        "label": "cardioid"
+      }
+    },
+    {
+      "id": "tea",
+      "title": "TEA Cipher Avalanche",
+      "selfcheck": {
+        "off": "0x3b",
+        "len": 2,
+        "want": "0xDF0E",
+        "frames": 500,
+        "label": "tea"
+      }
+    },
+    {
+      "id": "fft",
+      "title": "FFT Spectrum Analyser",
+      "selfcheck": {
+        "off": "0x5c",
+        "len": 2,
+        "want": "0x6D7A",
+        "frames": 500,
+        "label": "fft"
+      }
+    },
+    {
+      "id": "vaprintf",
+      "title": "VA_ARG Formatter",
+      "selfcheck": {
+        "off": "0x3c",
+        "len": 2,
+        "want": "0xE1F3",
+        "frames": 500,
+        "label": "vaprintf"
+      }
+    },
+    {
+      "id": "bhut",
+      "title": "Barnes-Hut Galaxy",
+      "selfcheck": {
+        "off": "0x60",
+        "len": 2,
+        "want": "0xEF0B",
+        "frames": 500,
+        "label": "bhut"
+      }
+    },
+    {
+      "id": "lsystem",
+      "title": "L-System Plant",
+      "selfcheck": {
+        "off": "0x42",
+        "len": 2,
+        "want": "0x8073",
+        "frames": 1200,
+        "label": "lsystem"
+      }
+    },
+    {
+      "id": "mandel-double",
+      "title": "Double-Precision Mandelbrot",
+      "selfcheck": {
+        "off": "0x20",
+        "len": 2,
+        "want": "0x0EDF",
+        "frames": 2200,
+        "label": "mandel-double"
+      }
+    },
+    {
+      "id": "bf-vm",
+      "title": "Brainfuck Threaded-Code VM",
+      "selfcheck": {
+        "off": "0x51",
+        "len": 2,
+        "want": "0x9954",
+        "frames": 400,
+        "label": "bf-vm"
+      }
+    },
+    {
+      "id": "hdr-bloom",
+      "title": "HDR Additive Bloom",
+      "selfcheck": {
+        "off": "0x6a",
+        "len": 2,
+        "want": "0xF951",
+        "frames": 500,
+        "label": "hdr-bloom"
+      }
+    },
+    {
+      "id": "iir-scope",
+      "title": "IIR Resonant-Filter Scope",
+      "selfcheck": {
+        "off": "0xbe",
+        "len": 2,
+        "want": "0x49BD",
+        "frames": 700,
+        "label": "iir-scope"
+      }
+    },
+    {
+      "id": "polyfill",
+      "title": "Polygon Scanline Fill (VLA)",
+      "selfcheck": {
+        "off": "0x5c",
+        "len": 2,
+        "want": "0x8ED9",
+        "frames": 700,
+        "label": "polyfill"
+      }
+    },
+    {
+      "id": "seqvm",
+      "title": "Sparse-Switch Step-Sequencer VM",
+      "selfcheck": {
+        "off": "0x6c",
+        "len": 2,
+        "want": "0xE8C5",
+        "frames": 500,
+        "label": "seqvm"
+      }
+    },
+    {
+      "id": "divclock",
+      "title": "Constant-Divisor Clock + Odometer",
+      "selfcheck": {
+        "off": "0x57",
+        "len": 2,
+        "want": "0xF72E",
+        "frames": 500,
+        "label": "divclock"
+      }
+    },
+    {
+      "id": "crctex",
+      "title": "Table-Driven CRC32 Texture",
+      "selfcheck": {
+        "off": "0x6d",
+        "len": 2,
+        "want": "0xDBBA",
+        "frames": 500,
+        "label": "crctex"
+      }
+    },
+    {
+      "id": "poolfx",
+      "title": "Free-List Pool Allocator",
+      "selfcheck": {
+        "off": "0x72",
+        "len": 2,
+        "want": "0x2B9B",
+        "frames": 500,
+        "label": "poolfx"
+      }
+    },
+    {
+      "id": "duff",
+      "title": "Dissolve Transition (Duff's Device)",
+      "selfcheck": {
+        "off": "0x6a",
+        "len": 2,
+        "want": "0x5531",
+        "frames": 500,
+        "label": "duff"
+      }
+    },
+    {
+      "id": "sodo",
+      "title": "Signed 64-bit Odometer",
+      "selfcheck": {
+        "off": "0x3a",
+        "len": 2,
+        "want": "0xD2A2",
+        "frames": 500,
+        "label": "sodo"
+      }
+    },
+    {
+      "id": "metaball",
+      "title": "Union Type-Pun Metaballs",
+      "selfcheck": {
+        "off": "0x6e",
+        "len": 2,
+        "want": "0xAEBE",
+        "frames": 500,
+        "label": "metaball"
+      }
+    },
+    {
+      "id": "qsortviz",
+      "title": "qsort Sort Visualizer",
+      "selfcheck": {
+        "off": "0x139b",
+        "len": 2,
+        "want": "0x8EA5",
+        "frames": 500,
+        "label": "qsortviz"
+      }
+    },
+    {
+      "id": "nrecip",
+      "title": "Newton-Raphson Reciprocal Floor",
+      "selfcheck": {
+        "off": "0x6e",
+        "len": 2,
+        "want": "0x044A",
+        "frames": 500,
+        "label": "nrecip"
+      }
+    },
+    {
+      "id": "lzdec",
+      "title": "LZ77 Image-Decompress Reveal",
+      "selfcheck": {
+        "off": "0x6f",
+        "len": 2,
+        "want": "0x0100",
+        "frames": 500,
+        "label": "lzdec"
+      }
+    },
+    {
+      "id": "cgrade",
+      "title": "Many-Argument Color-Grade",
+      "selfcheck": {
+        "off": "0x77",
+        "len": 2,
+        "want": "0x783F",
+        "frames": 500,
+        "label": "cgrade"
+      }
+    },
+    {
+      "id": "critters",
+      "title": "Protothread Critter Swarm",
+      "selfcheck": {
+        "off": "0x79",
+        "len": 2,
+        "want": "0xAD9F",
+        "frames": 500,
+        "label": "critters"
+      }
+    },
+    {
+      "id": "disbits",
+      "title": "Cross-Byte Bitfield Disassembler",
+      "selfcheck": {
+        "off": "0x77",
+        "len": 2,
+        "want": "0x31D7",
+        "frames": 500,
+        "label": "disbits"
+      }
+    },
+    {
+      "id": "bitcensus",
+      "title": "Bit-Census Field",
+      "selfcheck": {
+        "off": "0x5b",
+        "len": 2,
+        "want": "0x9516",
+        "frames": 500,
+        "label": "bitcensus"
+      }
+    },
+    {
+      "id": "bitshuffle",
+      "title": "Perfect-Shuffle Transition",
+      "selfcheck": {
+        "off": "0x52",
+        "len": 2,
+        "want": "0x2A4A",
+        "frames": 500,
+        "label": "bitshuffle"
+      }
+    },
+    {
+      "id": "gf256",
+      "title": "GF(2^8) Galois Field",
+      "selfcheck": {
+        "off": "0x68",
+        "len": 2,
+        "want": "0xC028",
+        "frames": 500,
+        "label": "gf256"
+      }
+    },
+    {
+      "id": "rotozoom",
+      "title": "Rotozoom",
+      "selfcheck": {
+        "off": "0x64",
+        "len": 2,
+        "want": "0x391B",
+        "frames": 700,
+        "label": "rotozoom"
+      }
+    },
+    {
+      "id": "medfilt",
+      "title": "Median Denoiser",
+      "selfcheck": {
+        "off": "0x7b",
+        "len": 2,
+        "want": "0x87FE",
+        "frames": 500,
+        "label": "medfilt"
+      }
+    },
+    {
+      "id": "domcol",
+      "title": "Complex Domain-Colouring",
+      "selfcheck": {
+        "off": "0x72",
+        "len": 2,
+        "want": "0xF3FD",
+        "frames": 500,
+        "label": "domcol"
+      }
+    },
+    {
+      "id": "cosmzoom",
+      "title": "Cosmic Zoom Ruler",
+      "selfcheck": {
+        "off": "0x54",
+        "len": 2,
+        "want": "0x502F",
+        "frames": 500,
+        "label": "cosmzoom"
+      }
+    },
+    {
+      "id": "multibase",
+      "title": "Multi-Base Clock",
+      "selfcheck": {
+        "off": "0x46",
+        "len": 2,
+        "want": "0x371A",
+        "frames": 500,
+        "label": "multibase"
+      }
+    },
+    {
+      "id": "dhmix",
+      "title": "Diffie-Hellman Colour-Mixer",
+      "selfcheck": {
+        "off": "0x73",
+        "len": 2,
+        "want": "0x69AA",
+        "frames": 500,
+        "label": "dhmix"
+      }
+    },
+    {
+      "id": "percol",
+      "title": "Union-Find Percolation",
+      "selfcheck": {
+        "off": "0x7d",
+        "len": 2,
+        "want": "0x025B",
+        "frames": 500,
+        "label": "percol"
+      }
+    },
+    {
+      "id": "fenwick",
+      "title": "Fenwick Tree",
+      "selfcheck": {
+        "off": "0x80",
+        "len": 2,
+        "want": "0x3454",
+        "frames": 500,
+        "label": "fenwick"
+      }
+    },
+    {
+      "id": "radix",
+      "title": "Radix Sort",
+      "selfcheck": {
+        "off": "0x73",
+        "len": 2,
+        "want": "0x123E",
+        "frames": 500,
+        "label": "radix"
+      }
+    },
+    {
+      "id": "hull",
+      "title": "Convex Hull",
+      "selfcheck": {
+        "off": "0x73",
+        "len": 2,
+        "want": "0x84E3",
+        "frames": 500,
+        "label": "hull"
+      }
+    },
+    {
+      "id": "editdist",
+      "title": "Edit-Distance DP",
+      "selfcheck": {
+        "off": "0x73",
+        "len": 2,
+        "want": "0xFB59",
+        "frames": 500,
+        "label": "editdist"
+      }
+    },
+    {
+      "id": "huffman",
+      "title": "Huffman Decode",
+      "selfcheck": {
+        "off": "0x84",
+        "len": 2,
+        "want": "0xE8E4",
+        "frames": 500,
+        "label": "huffman"
+      }
+    },
+    {
+      "id": "perlin",
+      "title": "Perlin Noise",
+      "selfcheck": {
+        "off": "0x73",
+        "len": 2,
+        "want": "0xA72D",
+        "frames": 500,
+        "label": "perlin"
+      }
+    },
+    {
+      "id": "gouraud",
+      "title": "Gouraud Triangle",
+      "selfcheck": {
+        "off": "0x7c",
+        "len": 2,
+        "want": "0xC5E9",
+        "frames": 1500,
+        "label": "gouraud"
+      }
+    },
+    {
+      "id": "dither",
+      "title": "Floyd-Steinberg Dither",
+      "selfcheck": {
+        "off": "0x30",
+        "len": 2,
+        "want": "0x80C4",
+        "frames": 2000,
+        "label": "dither"
+      }
+    },
+    {
+      "id": "msquares",
+      "title": "Marching Squares",
+      "selfcheck": {
+        "off": "0x72",
+        "len": 2,
+        "want": "0x86A7",
+        "frames": 1800,
+        "label": "msquares"
+      }
+    },
+    {
+      "id": "grid3d",
+      "title": "3-D Grid Voxel Life",
+      "selfcheck": {
+        "off": "0x69",
+        "len": 2,
+        "want": "0xFCDE",
+        "frames": 800,
+        "label": "grid3d"
+      }
+    },
+    {
+      "id": "hilbert",
+      "title": "Hilbert Curve",
+      "selfcheck": {
+        "off": "0x200",
+        "len": 2,
+        "want": "0x5999",
+        "frames": 500,
+        "label": "hilbert gate CRC host==bsnes-jg"
+      }
+    },
+    {
+      "id": "funnelkal",
+      "title": "Funnel-Shift Kaleidoscope",
+      "selfcheck": {
+        "off": "0x5c",
+        "len": 2,
+        "want": "0xEED4",
+        "frames": 500,
+        "label": "funnelkal"
+      }
+    },
+    {
+      "id": "fabsridge",
+      "title": "Fabs Ridgeline",
+      "selfcheck": {
+        "off": "0x59",
+        "len": 2,
+        "want": "0x161A",
+        "frames": 500,
+        "label": "fabs-ridgeline"
+      }
+    },
+    {
+      "id": "smulorbit",
+      "title": "Signed Multiply-Overflow Orbit",
+      "selfcheck": {
+        "off": "0x57",
+        "len": 2,
+        "want": "0xD81B",
+        "frames": 500,
+        "label": "smul-overflow"
+      }
+    },
+    {
+      "id": "satcomet",
+      "title": "Saturating Comet Trails",
+      "selfcheck": {
+        "off": "0x6f",
+        "len": 2,
+        "want": "0xC2AF",
+        "frames": 500,
+        "label": "sat-comet"
+      }
+    },
+    {
+      "id": "rotkal",
+      "title": "Rotate-Register Kaleidoscope",
+      "selfcheck": {
+        "off": "0x6b",
+        "len": 2,
+        "want": "0x300C",
+        "frames": 500,
+        "label": "ROTKAL"
+      }
+    },
+    {
+      "id": "satcast",
+      "title": "Saturating-Cast Kaleidoscope",
+      "selfcheck": {
+        "off": "0x80",
+        "len": 2,
+        "want": "0xC8CF",
+        "frames": 500,
+        "label": "SATCAST"
+      }
+    },
+    {
+      "id": "sbitfld",
+      "title": "Signed-Bitfield Terrain",
+      "selfcheck": {
+        "off": "0x6b",
+        "len": 2,
+        "want": "0x40C5",
+        "frames": 500,
+        "label": "SBITFLD"
+      }
+    },
+    {
+      "id": "mvscrl",
+      "title": "Memmove Scroll Slabs",
+      "selfcheck": {
+        "off": "0x68",
+        "len": 2,
+        "want": "0x72A7",
+        "frames": 500,
+        "label": "MVSCRL"
+      }
+    },
+    {
+      "id": "compass",
+      "title": "Copysign Compass",
+      "selfcheck": {
+        "off": "0x64",
+        "len": 2,
+        "want": "0xB9CB",
+        "frames": 500,
+        "label": "corpus_result Sign-bit CRC"
+      }
+    },
+    {
+      "id": "speedcap",
+      "title": "Fmin/Fmax Speed Cap",
+      "selfcheck": {
+        "off": "0x69",
+        "len": 2,
+        "want": "0x0116",
+        "frames": 500,
+        "label": "speed-gov CRC"
+      }
+    },
+    {
+      "id": "truncstair",
+      "title": "Truncation Staircase",
+      "selfcheck": {
+        "off": "0x67",
+        "len": 2,
+        "want": "0x02CA",
+        "frames": 500,
+        "label": "rounding CRC"
+      }
+    },
+    {
+      "id": "montorbit",
+      "title": "Montgomery Orbit",
+      "selfcheck": {
+        "off": "0x69",
+        "len": 2,
+        "want": "0xBA9B",
+        "frames": 500,
+        "label": "modmul CRC"
+      }
+    },
+    {
+      "id": "ulam",
+      "title": "Ulam Prime Sieve",
+      "selfcheck": {
+        "off": "0x64",
+        "len": 2,
+        "want": "0x1F2F",
+        "frames": 500,
+        "label": "sieve CRC"
+      }
+    },
+    {
+      "id": "rangecode",
+      "title": "Range Coder",
+      "selfcheck": {
+        "off": "0x66",
+        "len": 2,
+        "want": "0x6D21",
+        "frames": 500,
+        "label": "rangecoder CRC"
+      }
+    },
+    {
+      "id": "sobel",
+      "title": "Sobelscope",
+      "selfcheck": {
+        "off": "0x66",
+        "len": 2,
+        "want": "0x2849",
+        "frames": 500,
+        "label": "edge CRC"
+      }
+    },
+    {
+      "id": "dctbloom",
+      "title": "DCT Bloom",
+      "selfcheck": {
+        "off": "0x43",
+        "len": 2,
+        "want": "0x5364",
+        "frames": 500,
+        "label": "dct CRC"
+      }
+    },
+    {
+      "id": "adpcm",
+      "title": "ADPCM Waverider",
+      "selfcheck": {
+        "off": "0x67",
+        "len": 2,
+        "want": "0xCA56",
+        "frames": 500,
+        "label": "adpcm CRC"
+      }
+    },
+    {
+      "id": "scopeguard",
+      "title": "Scope-Guard Ripple Tank",
+      "selfcheck": {
+        "off": "0x66",
+        "len": 2,
+        "want": "0x05A3",
+        "frames": 500,
+        "label": "cleanup CRC"
+      }
+    },
+    {
+      "id": "matcascade",
+      "title": "Matrix Cascade",
+      "selfcheck": {
+        "off": "0x77",
+        "len": 2,
+        "want": "0x8064",
+        "frames": 500,
+        "label": "sret CRC"
+      }
+    },
+    {
+      "id": "plyoracle",
+      "title": "PlyOracle",
+      "selfcheck": {
+        "off": "0x75",
+        "len": 2,
+        "want": "0x6146",
+        "frames": 500,
+        "label": "negamax CRC"
+      }
+    },
+    {
+      "id": "mulov64",
+      "title": "64-bit Multiply-Overflow",
+      "selfcheck": {
+        "off": "0x58",
+        "len": 2,
+        "want": "0x3A69",
+        "frames": 700,
+        "label": "mulov64 s64 mul-overflow gate CRC host==bsnes-jg"
+      }
+    },
+    {
+      "id": "ovmove",
+      "title": "Overlap-Move Mosaic",
+      "selfcheck": {
+        "off": "0x67",
+        "len": 2,
+        "want": "0xA990",
+        "frames": 500,
+        "label": "ovmove overlapping-memmove gate CRC host==bsnes-jg"
+      }
+    },
+    {
+      "id": "spaceship",
+      "title": "Width-Sweep Sort Gallery",
+      "selfcheck": {
+        "off": "0x58",
+        "len": 2,
+        "want": "0xF20F",
+        "frames": 500,
+        "label": "spaceship G_SCMP gate CRC host==bsnes-jg"
+      }
+    },
+    {
+      "id": "crcwall",
+      "title": "Bit-Serial CRC Wall",
+      "selfcheck": {
+        "off": "0x68",
+        "len": 2,
+        "want": "0x8E47",
+        "frames": 500,
+        "label": "crcwall bit-serial CRC gate host==bsnes-jg"
+      }
+    },
+    {
+      "id": "rotslab",
+      "title": "In-Place Block Rotate",
+      "selfcheck": {
+        "off": "0x69",
+        "len": 2,
+        "want": "0xB93A",
+        "frames": 500,
+        "label": "rotslab"
+      }
+    },
+    {
+      "id": "permscat",
+      "title": "Gather-Scatter Permutation",
+      "selfcheck": {
+        "off": "0x67",
+        "len": 2,
+        "want": "0x0C2C",
+        "frames": 500,
+        "label": "permscat"
+      }
+    },
+    {
+      "id": "ropeedit",
+      "title": "Gap-Buffer Rope Editor",
+      "selfcheck": {
+        "off": "0x6a",
+        "len": 2,
+        "want": "0x2361",
+        "frames": 500,
+        "label": "ropeedit"
+      }
+    },
+    {
+      "id": "ucmprank",
+      "title": "Unsigned Rank Percentile Field",
+      "selfcheck": {
+        "off": "0x67",
+        "len": 2,
+        "want": "0x4CDD",
+        "frames": 500,
+        "label": "ucmprank"
+      }
+    },
+    {
+      "id": "trimerge",
+      "title": "Three-Way Merge Diff",
+      "selfcheck": {
+        "off": "0x46",
+        "len": 2,
+        "want": "0xCCCC",
+        "frames": 500,
+        "label": "trimerge"
+      }
+    },
+    {
+      "id": "keycmp64",
+      "title": "64-bit Multi-Key Record Sort",
+      "selfcheck": {
+        "off": "0x69",
+        "len": 2,
+        "want": "0xB8AD",
+        "frames": 500,
+        "label": "keycmp64"
+      }
+    },
+    {
+      "id": "oddmask",
+      "title": "Odd-Width Mask Sculptor",
+      "selfcheck": {
+        "off": "0x6b",
+        "len": 2,
+        "want": "0x1FD9",
+        "frames": 500,
+        "label": "oddmask"
+      }
+    },
+    {
+      "id": "modexp256",
+      "title": "256-bit Modular Exponentiation",
+      "selfcheck": {
+        "off": "0x31",
+        "len": 2,
+        "want": "0x31D4",
+        "frames": 1500,
+        "label": "modexp256"
+      }
+    },
+    {
+      "id": "lfsr2",
+      "title": "Dual-LFSR Scrambler",
+      "selfcheck": {
+        "off": "0x67",
+        "len": 2,
+        "want": "0x6AA3",
+        "frames": 500,
+        "label": "lfsr2"
+      }
+    },
+    {
+      "id": "bitweave",
+      "title": "Serial Bit-Reversal Weave",
+      "selfcheck": {
+        "off": "0x6d",
+        "len": 2,
+        "want": "0x0E03",
+        "frames": 500,
+        "label": "bitweave"
+      }
+    },
+    {
+      "id": "uarteye",
+      "title": "Bit-Banged UART Eye",
+      "selfcheck": {
+        "off": "0x67",
+        "len": 2,
+        "want": "0x3F09",
+        "frames": 500,
+        "label": "uarteye"
+      }
+    },
+    {
+      "id": "pcooker",
+      "title": "Pressure-Cooker Fixed-Point Evaluator",
+      "selfcheck": {
+        "off": "0x71",
+        "len": 2,
+        "want": "0xEE6D",
+        "frames": 1500,
+        "label": "pcooker"
+      }
+    },
+    {
+      "id": "borrowlad",
+      "title": "Borrow-Ladder Odometer",
+      "selfcheck": {
+        "off": "0x6a",
+        "len": 2,
+        "want": "0x1BE3",
+        "frames": 500,
+        "label": "borrowlad"
+      }
+    },
+    {
+      "id": "cpu6502",
+      "title": "6502 CPU Simulator",
+      "selfcheck": {
+        "off": "0xADD",
+        "len": 2,
+        "want": "0xAC8A",
+        "frames": 1000,
+        "label": "corpus_result CRC"
+      }
+    },
+    {
       "id": "mandel-display",
-      "title": "Mode 7",
+      "title": "Mode 7 Mandelbrot",
       "selfcheck": {
         "off": "0x200",
         "len": 2,
@@ -13,14 +1234,14 @@
       }
     },
     {
-      "id": "blossom",
-      "title": "Hopalong attractor",
+      "id": "mandel-oop",
+      "title": "Mode 7 Mandelbrot (OOP)",
       "selfcheck": {
-        "off": "0x54",
+        "off": "0x447",
         "len": 2,
-        "want": "0x9047",
-        "frames": 3000,
-        "label": "gate grid hash (corpus_result @ WRAM $0054)"
+        "want": "0x204F",
+        "frames": 5800,
+        "label": "gate jgxcheck CRC (corpus_result @ WRAM $0447)"
       }
     }
   ]

@@ -1,0 +1,199 @@
+---
+// /apps/llvm-mos-65816/snes/<slug>/ — one playable page per demo, driven by ../../../../data/snes-demos.ts.
+// Same anatomy as biohack.net's per-demo pages (hero + centred player + controls + notes), restyled
+// to indri.studio's AppLayout/Base chrome. app.js reads selfcheck straight out of roms/manifest.json
+// (keyed by ROM id) at runtime, so the page only needs to set BJG_BASE + BJG_DEFAULT_ROM — no
+// per-page selfcheck override needed (unlike biohack.net's older per-page BJG_SELFCHECK pattern).
+import AppLayout from "../../../../layouts/AppLayout.astro";
+import { SNES_DEMOS } from "../../../../data/snes-demos.ts";
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
+
+export function getStaticPaths() {
+  // "blossom" already has a richer, hand-crafted page at /blossom (custom MathML equations, a full
+  // user manual) that predates this gallery -- don't shadow it with a generic duplicate. The gallery
+  // index links that card straight at /blossom/ instead of this route (see index.astro).
+  return SNES_DEMOS.filter((d) => d.slug !== "blossom").map((d) => ({ params: { slug: d.slug }, props: { demo: d } }));
+}
+
+const { demo } = Astro.props;
+
+const PLAY = "public/apps/llvm-mos-65816/play";
+const BUST_ASSETS = [
+  "app.js", "cores/bsnes_jg.js", "cores/bsnes_jg.wasm", "cores/PROVENANCE.json",
+  "roms/manifest.json", `roms/${demo.slug}.sfc`, `preview/${demo.slug}.png`,
+];
+const bust: Record<string, string> = {};
+for (const a of BUST_ASSETS) {
+  try { bust[a] = createHash("sha256").update(readFileSync(`${PLAY}/${a}`)).digest("hex").slice(0, 12); } catch {}
+}
+const appV = bust["app.js"] ?? "";
+
+const CATEGORY_LABELS: Record<string, string> = {
+  fractals: "Fractals", physics: "Physics & Simulation", cellular: "Cellular Automata",
+  motion: "Motion & Curves", algorithms: "Algorithms & Data", rendering: "Rendering & Graphics",
+  signals: "Signals & Audio", bignums: "Big Numbers", ciphers: "Ciphers & Bit Tricks",
+  classics: "Games & Classics",
+};
+const isSelfRunning = demo.keys.toLowerCase().startsWith("self-running");
+---
+
+<AppLayout
+  title={`${demo.title} · SNES Demo Gallery`}
+  description={demo.desc}
+  ogImage={new URL(`/apps/llvm-mos-65816/play/preview/${demo.slug}.png`, Astro.site ?? "https://indri.studio").href}
+>
+  <main class="rp-wrap">
+    <a href="/apps/llvm-mos-65816/snes/" class="rp-back">← Back to SNES gallery</a>
+
+    <header class="rp-hero">
+      <h1 class="rp-title">{demo.title}</h1>
+      <span class="rp-cat-chip">{CATEGORY_LABELS[demo.category] ?? demo.category}</span>
+      <p class="rp-lede">{demo.desc}</p>
+    </header>
+
+    <section id="bjg-embed" class="rp-player" aria-label={`Live SNES emulator running ${demo.title}`}>
+      <div class="rp-screen"><canvas id="screen" width="256" height="224" aria-label="SNES screen"></canvas></div>
+      <div class="rp-row">
+        <span id="status" class="rp-status">loading core…</span>
+        <span id="checkresult" class="rp-badge"></span>
+        <button id="verify" class="rp-btn" disabled>Verify fidelity</button>
+        <button id="fullscreen" class="rp-btn">Fullscreen</button>
+      </div>
+      <p class="rp-keys">{demo.keys}</p>
+      <p id="banner" class="rp-banner"></p>
+      <p class="rp-hint">Click the screen to focus, then {isSelfRunning ? "watch" : "play"}. Tab away and it pauses.</p>
+    </section>
+
+    <section class="rp-doc">
+      {demo.controls && (
+        <>
+          <h2>Controls</h2>
+          <table class="rp-table">
+            <thead><tr><th>Keys</th><th>Action</th></tr></thead>
+            <tbody>
+              {demo.controls.map(([k, a]) => (<tr><td><kbd>{k}</kbd></td><td>{a}</td></tr>))}
+            </tbody>
+          </table>
+        </>
+      )}
+
+      {demo.bugFound && (
+        <>
+          <h2>Compiler bug this demo guards against</h2>
+          <div class="rp-bugbox">
+            <p><b>Patch {demo.bugFound.patch}</b> — {demo.bugFound.summary}</p>
+            <p><b>Fix:</b> {demo.bugFound.fixSummary}</p>
+            <p class="rp-bug-link"><a href={demo.bugFound.fixCommitUrl}>View the fix commit →</a></p>
+          </div>
+        </>
+      )}
+
+      <p class="rp-foot">
+        Written in C with the llvm-mos 65816 toolchain and verified against bsnes-jg and MAME.
+        Hit <b>Verify fidelity</b> to reproduce the build gate's WRAM assert
+        (<code>{demo.selfcheck.label}</code>, expects <code>{demo.selfcheck.want}</code>) live in this
+        tab.
+      </p>
+    </section>
+  </main>
+</AppLayout>
+
+<script is:inline define:vars={{ bust, appV, slug: demo.slug }}>
+  function bootEmulator() {
+    if (!document.getElementById("bjg-embed")) return;
+    if (window.__bjgStop) { try { window.__bjgStop(); } catch (e) {} }
+    window.BJG_BASE = "/apps/llvm-mos-65816/play/";
+    window.BJG_DEFAULT_ROM = slug;
+    window.BJG_BUST = bust;
+    window.BsnesJg = undefined;
+    window.__bjg = undefined;
+    var old = document.getElementById("bjg-appjs");
+    if (old) old.remove();
+    var s = document.createElement("script");
+    s.id = "bjg-appjs";
+    s.src = "/apps/llvm-mos-65816/play/app.js" + (appV ? "?v=" + appV : "");
+    document.body.appendChild(s);
+  }
+  if (!window.__bjgReg) { window.__bjgReg = true; document.addEventListener("astro:page-load", bootEmulator); }
+  if (document.readyState !== "loading") bootEmulator();
+  else document.addEventListener("DOMContentLoaded", bootEmulator);
+</script>
+
+<style>
+  .rp-wrap { max-width: 900px; margin-inline: auto; padding: 2.5rem 1.25rem 5rem; }
+  .rp-back {
+    display: inline-block; font-family: var(--font-mono); font-size: 13px;
+    color: var(--color-on-surface-variant); text-decoration: none; margin-bottom: 1.5rem;
+  }
+  .rp-back:hover { color: var(--color-primary-container); }
+  .rp-cat-chip {
+    display: inline-block; margin-top: .5rem; padding: 3px 10px;
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    font-family: var(--font-mono);
+    color: var(--color-on-surface-variant); background: var(--color-surface-container);
+    border: 1px solid color-mix(in srgb, var(--color-primary-container) 18%, transparent);
+    border-radius: var(--radius-DEFAULT, 4px);
+  }
+  .rp-hero { max-width: 42rem; margin-inline: auto; text-align: center; }
+  .rp-title {
+    font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1;
+    font-size: clamp(2rem, 7vw, 3rem); margin: 0; color: var(--color-on-surface);
+  }
+  .rp-lede { margin: 1rem 0 0; color: var(--color-on-surface-variant); line-height: 1.65; }
+  .rp-player { max-width: 544px; margin: 2.25rem auto 0; }
+  .rp-screen {
+    width: 100%; background: #000; border-radius: var(--radius-DEFAULT, 8px); line-height: 0;
+    border: 1px solid var(--color-outline-variant);
+  }
+  .rp-screen canvas { display: block; width: 100%; height: auto; image-rendering: pixelated; }
+  .rp-row {
+    display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; margin-top: .85rem;
+    font: 12px/1.4 var(--font-mono); color: var(--color-on-surface-variant);
+  }
+  .rp-btn {
+    margin-left: auto; background: transparent; color: var(--color-on-surface-variant); cursor: pointer;
+    font-size: 12px; font-family: var(--font-mono);
+    border: 1px solid color-mix(in srgb, var(--color-primary-container) 35%, transparent);
+    border-radius: var(--radius-DEFAULT, 6px); padding: .4rem .85rem;
+    transition: border-color .15s, color .15s;
+  }
+  .rp-btn:hover:not(:disabled) { border-color: var(--color-primary-container); color: var(--color-primary-container); }
+  .rp-btn:disabled { opacity: .45; cursor: not-allowed; }
+  .rp-badge { font: 12px var(--font-mono); }
+  .rp-badge.running { color: var(--color-primary-container); }
+  .rp-badge.pass { background: #54d98c; color: #0c1116; font-weight: 600; padding: 2px 8px; border-radius: 5px; }
+  .rp-badge.fail { background: #ff6b6b; color: #0c1116; font-weight: 600; padding: 2px 8px; border-radius: 5px; }
+  .rp-keys { margin: .75rem 0 0; font-size: 11.5px; color: var(--color-on-surface-variant); font-style: italic; }
+  .rp-hint { margin: .5rem 0 0; font-size: 12px; color: var(--color-on-surface-variant); }
+  .rp-banner { margin: .6rem 0 0; font-size: 12px; color: var(--color-on-surface-variant); }
+  .rp-banner :global(b) { color: var(--color-on-surface); }
+  .rp-banner :global(code) { font-family: var(--font-mono); color: var(--color-primary-container); }
+  .rp-doc { max-width: 42rem; margin: 3rem auto 0; color: var(--color-on-surface); line-height: 1.7; }
+  .rp-doc h2 {
+    font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--color-primary-container); margin: 2.25rem 0 .6rem;
+  }
+  .rp-doc code { font-family: var(--font-mono); color: var(--color-primary-container); }
+  .rp-table { width: 100%; max-width: 28rem; border-collapse: collapse; margin: .5rem 0 1rem; }
+  .rp-table th {
+    text-align: left; text-transform: uppercase; font-size: .68rem; letter-spacing: .08em;
+    color: var(--color-on-surface-variant); padding: .35rem .6rem; border-bottom: 1px solid var(--color-outline-variant);
+  }
+  .rp-table td { padding: .35rem .6rem; border-bottom: 1px solid var(--color-outline-variant); }
+  .rp-doc kbd {
+    font: 600 .82em var(--font-mono); border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+    border-radius: 4px; padding: .05em .4em;
+  }
+  .rp-bugbox {
+    border: 1px solid color-mix(in srgb, var(--color-primary-container) 35%, transparent);
+    border-radius: var(--radius-DEFAULT, 8px); padding: 1rem 1.25rem; margin: .75rem 0 1.25rem;
+    background: color-mix(in srgb, var(--color-primary-container) 6%, transparent);
+  }
+  .rp-bugbox p { margin: .4rem 0; }
+  .rp-bugbox b { color: var(--color-on-surface); }
+  .rp-bug-link { margin-top: .6rem !important; }
+  .rp-bug-link a { font-family: var(--font-mono); color: var(--color-primary-container); text-decoration: none; }
+  .rp-bug-link a:hover { text-decoration: underline; }
+  .rp-foot { margin-top: 1.5rem; font-size: 13px; color: var(--color-on-surface-variant); }
+</style>
