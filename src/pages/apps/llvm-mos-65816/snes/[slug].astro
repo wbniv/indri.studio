@@ -52,7 +52,14 @@ const isSelfRunning = demo.keys.toLowerCase().startsWith("self-running");
       <p class="rp-lede">{demo.desc}</p>
     </header>
 
-    <section id="bjg-embed" class="rp-player" aria-label={`Live SNES emulator running ${demo.title}`}>
+    <section
+      id="bjg-embed"
+      class="rp-player"
+      aria-label={`Live SNES emulator running ${demo.title}`}
+      data-slug={demo.slug}
+      data-appv={appV}
+      data-bust={JSON.stringify(bust)}
+    >
       <div class="rp-screen"><canvas id="screen" width="256" height="224" aria-label="SNES screen"></canvas></div>
       <div class="rp-row">
         <span id="status" class="rp-status">loading core…</span>
@@ -99,9 +106,20 @@ const isSelfRunning = demo.keys.toLowerCase().startsWith("self-running");
   </main>
 </AppLayout>
 
-<script is:inline define:vars={{ bust, appV, slug: demo.slug }}>
+<script is:inline>
+  // NB: this listener is registered (via window.__bjgReg) only once for the whole browsing session,
+  // and Astro's <ClientRouter /> does NOT re-run inline <script> tags on client-side view-transition
+  // navigations between /apps/llvm-mos-65816/snes/<slug>/ pages -- only the very first page load
+  // executes this <script> body. So slug/appV/bust must NOT be closed over via define:vars (that
+  // would freeze bootEmulator to whichever demo happened to load first); instead read them off the
+  // DOM at call time, since Astro's transition swap DOES correctly replace #bjg-embed's attributes
+  // with the new page's values before dispatching astro:page-load.
   function bootEmulator() {
-    if (!document.getElementById("bjg-embed")) return;
+    var el = document.getElementById("bjg-embed");
+    if (!el) return;
+    var slug = el.dataset.slug;
+    var appV = el.dataset.appv;
+    var bust = JSON.parse(el.dataset.bust || "{}");
     if (window.__bjgStop) { try { window.__bjgStop(); } catch (e) {} }
     window.BJG_BASE = "/apps/llvm-mos-65816/play/";
     window.BJG_DEFAULT_ROM = slug;

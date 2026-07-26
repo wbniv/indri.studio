@@ -105,7 +105,14 @@ const kbd = "inline-block rounded border border-outline-variant bg-surface-conta
     </header>
 
     <!-- emulator --------------------------------------------------------- -->
-    <section id="bjg-embed" class="emu mt-10" aria-label="Live SNES emulator running Blossom">
+    <section
+      id="bjg-embed"
+      class="emu mt-10"
+      aria-label="Live SNES emulator running Blossom"
+      data-slug="blossom"
+      data-appv={appV}
+      data-bust={JSON.stringify(bust)}
+    >
       <h2 class="font-display uppercase text-sm tracking-[0.25em] text-on-surface-variant mb-3">
         Play it in your browser
       </h2>
@@ -241,13 +248,27 @@ const kbd = "inline-block rounded border border-outline-variant bg-surface-conta
   </div>
 </Base>
 
-<script is:inline define:vars={{ bust, appV }}>
+<script is:inline>
   // (Re)boot the bsnes-jg player on each page-load so it survives the site's view transitions.
+  //
+  // NB: this listener is registered (via window.__bjgReg) only ONCE for the whole browsing
+  // session, and <ClientRouter /> does NOT re-run inline <script> tags on a client-side
+  // view-transition nav -- only the very first page load anywhere on the site executes this
+  // <script> body. So slug/appV/bust must NOT be closed over via define:vars (that would freeze
+  // bootEmulator to whichever page happened to load first, e.g. this one always rebooting
+  // blossom even after navigating to a different demo); read them off the #bjg-embed element's
+  // data-* attributes at call time instead -- the transition swap DOES correctly replace them
+  // with the new page's values before dispatching astro:page-load. Same convention as
+  // src/components/EmulatorEmbed.astro and src/pages/apps/llvm-mos-65816/snes/[slug].astro.
   function bootEmulator() {
-    if (!document.getElementById("bjg-embed")) return;
+    var el = document.getElementById("bjg-embed");
+    if (!el) return;
+    var slug = el.dataset.slug;
+    var appV = el.dataset.appv;
+    var bust = JSON.parse(el.dataset.bust || "{}");
     if (window.__bjgStop) { try { window.__bjgStop(); } catch (e) {} }
     window.BJG_BASE = "/apps/llvm-mos-65816/play/";
-    window.BJG_DEFAULT_ROM = "blossom";
+    window.BJG_DEFAULT_ROM = slug;
     window.BJG_BUST = bust;
     window.BsnesJg = undefined;
     window.__bjg = undefined;
