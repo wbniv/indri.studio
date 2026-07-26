@@ -16,7 +16,7 @@
       "id": "space-invaders",
       "title": "Space Invaders",
       "selfcheck": {
-        "off": "0x2c",
+        "off": "0x25",
         "len": 2,
         "want": "0x9D57",
         "frames": 1400,
@@ -27,7 +27,7 @@
       "id": "spirograph",
       "title": "Spirograph",
       "selfcheck": {
-        "off": "0x1381",
+        "off": "0x1409",
         "len": 2,
         "want": "0x32D4",
         "frames": 500,
@@ -38,7 +38,7 @@
       "id": "3d-wireframe",
       "title": "Wireframe 3-D Solid",
       "selfcheck": {
-        "off": "0x55",
+        "off": "0x142a",
         "len": 2,
         "want": "0xE737",
         "frames": 300,
@@ -49,7 +49,7 @@
       "id": "spigot",
       "title": "\u03c0 Spigot + Monte-Carlo",
       "selfcheck": {
-        "off": "0x1698",
+        "off": "0x1720",
         "len": 2,
         "want": "0x7711",
         "frames": 500,
@@ -60,7 +60,7 @@
       "id": "double-pendulum",
       "title": "Double Pendulum (Chaos)",
       "selfcheck": {
-        "off": "0x12e1",
+        "off": "0x1369",
         "len": 2,
         "want": "0xE859",
         "frames": 500,
@@ -71,7 +71,7 @@
       "id": "n-body",
       "title": "N-body Orbits",
       "selfcheck": {
-        "off": "0x1501",
+        "off": "0x1589",
         "len": 2,
         "want": "0xCC65",
         "frames": 500,
@@ -82,7 +82,7 @@
       "id": "factorial",
       "title": "Bignum Factorial",
       "selfcheck": {
-        "off": "0xf46",
+        "off": "0xf49",
         "len": 2,
         "want": "0x772F",
         "frames": 500,
@@ -93,7 +93,7 @@
       "id": "newton",
       "title": "Newton's Fractal",
       "selfcheck": {
-        "off": "0x20",
+        "off": "0x994",
         "len": 2,
         "want": "0x4D8B",
         "frames": 500,
@@ -104,7 +104,7 @@
       "id": "sort-race",
       "title": "Sorting Race",
       "selfcheck": {
-        "off": "0x16ad",
+        "off": "0x1735",
         "len": 2,
         "want": "0xB28F",
         "frames": 500,
@@ -115,7 +115,7 @@
       "id": "maze",
       "title": "Maze Generate + Solve",
       "selfcheck": {
-        "off": "0xdbc",
+        "off": "0xe44",
         "len": 2,
         "want": "0x0749",
         "frames": 400,
@@ -126,7 +126,7 @@
       "id": "epicycles",
       "title": "Fourier Epicycles",
       "selfcheck": {
-        "off": "0x1366",
+        "off": "0x13ee",
         "len": 2,
         "want": "0x4F6C",
         "frames": 500,
@@ -137,7 +137,7 @@
       "id": "life",
       "title": "Conway's Game of Life",
       "selfcheck": {
-        "off": "0x68",
+        "off": "0x1386",
         "len": 2,
         "want": "0xDDF1",
         "frames": 500,
@@ -148,7 +148,7 @@
       "id": "harmonograph",
       "title": "Lissajous Harmonograph",
       "selfcheck": {
-        "off": "0x5a",
+        "off": "0x1421",
         "len": 2,
         "want": "0x0EBB",
         "frames": 500,
@@ -170,7 +170,7 @@
       "id": "raycaster",
       "title": "Raycaster Maze",
       "selfcheck": {
-        "off": "0x64",
+        "off": "0x13ea",
         "len": 2,
         "want": "0xB200",
         "frames": 500,
@@ -181,7 +181,7 @@
       "id": "burning-ship",
       "title": "Burning Ship Fractal",
       "selfcheck": {
-        "off": "0x40",
+        "off": "0x580",
         "len": 2,
         "want": "0x6F2D",
         "frames": 1500,
@@ -203,7 +203,7 @@
       "id": "doom-fire",
       "title": "Doom Fire",
       "selfcheck": {
-        "off": "0x22",
+        "off": "0x302",
         "len": 2,
         "want": "0x3C59",
         "frames": 500,
@@ -214,7 +214,7 @@
       "id": "rdiff",
       "title": "Gray-Scott Reaction-Diffusion",
       "selfcheck": {
-        "off": "0x20",
+        "off": "0x400",
         "len": 2,
         "want": "0x5555",
         "frames": 500,
@@ -225,7 +225,7 @@
       "id": "1d-ca",
       "title": "Rule 90 / Rule 110 \u2014 1-D Cellular Automaton",
       "selfcheck": {
-        "off": "0x20",
+        "off": "0x5a3",
         "len": 2,
         "want": "0xAB2C",
         "frames": 400,
@@ -247,7 +247,7 @@
       "id": "boids",
       "title": "Boids Flock",
       "selfcheck": {
-        "off": "0x38",
+        "off": "0x6c6",
         "len": 2,
         "want": "0xA8AB",
         "frames": 1400,
@@ -269,7 +269,7 @@
       "id": "turtle-vm",
       "title": "Bytecode-VM Turtle",
       "selfcheck": {
-        "off": "0x20",
+        "off": "0x171f",
         "len": 2,
         "want": "0x4007",
         "frames": 600,
@@ -280,7 +280,7 @@
       "id": "truchet",
       "title": "Truchet (Packed Bitfields)",
       "selfcheck": {
-        "off": "0x9a",
+        "off": "0x15e6",
         "len": 2,
         "want": "0xB3E6",
         "frames": 800,
@@ -291,7 +291,7 @@
       "id": "cordic",
       "title": "CORDIC Rotator",
       "selfcheck": {
-        "off": "0x135f",
+        "off": "0x1360",
         "len": 2,
         "want": "0x4D41",
         "frames": 500,
@@ -302,7 +302,7 @@
       "id": "fn-plot",
       "title": "Function Plotter",
       "selfcheck": {
-        "off": "0x002a",
+        "off": "0x13ec",
         "len": 2,
         "want": "0x2EBE",
         "frames": 500,
@@ -313,7 +313,7 @@
       "id": "cardioid",
       "title": "Times-table Cardioid",
       "selfcheck": {
-        "off": "0x20",
+        "off": "0x170d",
         "len": 2,
         "want": "0x523B",
         "frames": 500,
@@ -324,7 +324,7 @@
       "id": "tea",
       "title": "TEA Cipher Avalanche",
       "selfcheck": {
-        "off": "0x3b",
+        "off": "0x13ea",
         "len": 2,
         "want": "0xDF0E",
         "frames": 500,
@@ -335,7 +335,7 @@
       "id": "fft",
       "title": "FFT Spectrum Analyser",
       "selfcheck": {
-        "off": "0x5c",
+        "off": "0x1409",
         "len": 2,
         "want": "0x6D7A",
         "frames": 500,
@@ -346,7 +346,7 @@
       "id": "vaprintf",
       "title": "VA_ARG Formatter",
       "selfcheck": {
-        "off": "0x3c",
+        "off": "0x13ef",
         "len": 2,
         "want": "0xE1F3",
         "frames": 500,
@@ -357,7 +357,7 @@
       "id": "bhut",
       "title": "Barnes-Hut Galaxy",
       "selfcheck": {
-        "off": "0x60",
+        "off": "0x13e7",
         "len": 2,
         "want": "0xEF0B",
         "frames": 500,
@@ -368,7 +368,7 @@
       "id": "lsystem",
       "title": "L-System Plant",
       "selfcheck": {
-        "off": "0x42",
+        "off": "0x135d",
         "len": 2,
         "want": "0x8073",
         "frames": 1200,
@@ -390,7 +390,7 @@
       "id": "bf-vm",
       "title": "Brainfuck Threaded-Code VM",
       "selfcheck": {
-        "off": "0x51",
+        "off": "0xc46",
         "len": 2,
         "want": "0x9954",
         "frames": 400,
@@ -401,7 +401,7 @@
       "id": "hdr-bloom",
       "title": "HDR Additive Bloom",
       "selfcheck": {
-        "off": "0x6a",
+        "off": "0x98f",
         "len": 2,
         "want": "0xF951",
         "frames": 500,
@@ -412,7 +412,7 @@
       "id": "iir-scope",
       "title": "IIR Resonant-Filter Scope",
       "selfcheck": {
-        "off": "0xbe",
+        "off": "0x150c",
         "len": 2,
         "want": "0x49BD",
         "frames": 700,
@@ -423,7 +423,7 @@
       "id": "polyfill",
       "title": "Polygon Scanline Fill (VLA)",
       "selfcheck": {
-        "off": "0x5c",
+        "off": "0x13ea",
         "len": 2,
         "want": "0x8ED9",
         "frames": 700,
@@ -434,7 +434,7 @@
       "id": "seqvm",
       "title": "Sparse-Switch Step-Sequencer VM",
       "selfcheck": {
-        "off": "0x6c",
+        "off": "0x13f1",
         "len": 2,
         "want": "0xE8C5",
         "frames": 500,
@@ -445,7 +445,7 @@
       "id": "divclock",
       "title": "Constant-Divisor Clock + Odometer",
       "selfcheck": {
-        "off": "0x57",
+        "off": "0x13ed",
         "len": 2,
         "want": "0xF72E",
         "frames": 500,
@@ -456,7 +456,7 @@
       "id": "crctex",
       "title": "Table-Driven CRC32 Texture",
       "selfcheck": {
-        "off": "0x6d",
+        "off": "0x13e6",
         "len": 2,
         "want": "0xDBBA",
         "frames": 500,
@@ -467,7 +467,7 @@
       "id": "poolfx",
       "title": "Free-List Pool Allocator",
       "selfcheck": {
-        "off": "0x72",
+        "off": "0x1629",
         "len": 2,
         "want": "0x2B9B",
         "frames": 500,
@@ -478,7 +478,7 @@
       "id": "duff",
       "title": "Dissolve Transition (Duff's Device)",
       "selfcheck": {
-        "off": "0x6a",
+        "off": "0x13e8",
         "len": 2,
         "want": "0x5531",
         "frames": 500,
@@ -489,7 +489,7 @@
       "id": "sodo",
       "title": "Signed 64-bit Odometer",
       "selfcheck": {
-        "off": "0x3a",
+        "off": "0xa62",
         "len": 2,
         "want": "0xD2A2",
         "frames": 500,
@@ -500,7 +500,7 @@
       "id": "metaball",
       "title": "Union Type-Pun Metaballs",
       "selfcheck": {
-        "off": "0x6e",
+        "off": "0x1406",
         "len": 2,
         "want": "0xAEBE",
         "frames": 500,
@@ -511,7 +511,7 @@
       "id": "qsortviz",
       "title": "qsort Sort Visualizer",
       "selfcheck": {
-        "off": "0x139b",
+        "off": "0x2e",
         "len": 2,
         "want": "0x8EA5",
         "frames": 500,
@@ -522,7 +522,7 @@
       "id": "nrecip",
       "title": "Newton-Raphson Reciprocal Floor",
       "selfcheck": {
-        "off": "0x6e",
+        "off": "0x13e9",
         "len": 2,
         "want": "0x044A",
         "frames": 500,
@@ -533,7 +533,7 @@
       "id": "lzdec",
       "title": "LZ77 Image-Decompress Reveal",
       "selfcheck": {
-        "off": "0x6f",
+        "off": "0x14e9",
         "len": 2,
         "want": "0x0100",
         "frames": 500,
@@ -544,7 +544,7 @@
       "id": "cgrade",
       "title": "Many-Argument Color-Grade",
       "selfcheck": {
-        "off": "0x77",
+        "off": "0x13e7",
         "len": 2,
         "want": "0x783F",
         "frames": 500,
@@ -555,7 +555,7 @@
       "id": "critters",
       "title": "Protothread Critter Swarm",
       "selfcheck": {
-        "off": "0x79",
+        "off": "0x14ed",
         "len": 2,
         "want": "0xAD9F",
         "frames": 500,
@@ -566,7 +566,7 @@
       "id": "disbits",
       "title": "Cross-Byte Bitfield Disassembler",
       "selfcheck": {
-        "off": "0x77",
+        "off": "0x13e6",
         "len": 2,
         "want": "0x31D7",
         "frames": 500,
@@ -577,7 +577,7 @@
       "id": "bitcensus",
       "title": "Bit-Census Field",
       "selfcheck": {
-        "off": "0x5b",
+        "off": "0x13ec",
         "len": 2,
         "want": "0x9516",
         "frames": 500,
@@ -588,7 +588,7 @@
       "id": "bitshuffle",
       "title": "Perfect-Shuffle Transition",
       "selfcheck": {
-        "off": "0x52",
+        "off": "0x13e8",
         "len": 2,
         "want": "0x2A4A",
         "frames": 500,
@@ -599,7 +599,7 @@
       "id": "gf256",
       "title": "GF(2^8) Galois Field",
       "selfcheck": {
-        "off": "0x68",
+        "off": "0x1408",
         "len": 2,
         "want": "0xC028",
         "frames": 500,
@@ -610,7 +610,7 @@
       "id": "rotozoom",
       "title": "Rotozoom",
       "selfcheck": {
-        "off": "0x64",
+        "off": "0x13e8",
         "len": 2,
         "want": "0x391B",
         "frames": 700,
@@ -621,7 +621,7 @@
       "id": "medfilt",
       "title": "Median Denoiser",
       "selfcheck": {
-        "off": "0x7b",
+        "off": "0x14e9",
         "len": 2,
         "want": "0x87FE",
         "frames": 500,
@@ -632,7 +632,7 @@
       "id": "domcol",
       "title": "Complex Domain-Colouring",
       "selfcheck": {
-        "off": "0x72",
+        "off": "0x13e9",
         "len": 2,
         "want": "0xF3FD",
         "frames": 500,
@@ -643,7 +643,7 @@
       "id": "cosmzoom",
       "title": "Cosmic Zoom Ruler",
       "selfcheck": {
-        "off": "0x54",
+        "off": "0x13f0",
         "len": 2,
         "want": "0x502F",
         "frames": 500,
@@ -654,7 +654,7 @@
       "id": "multibase",
       "title": "Multi-Base Clock",
       "selfcheck": {
-        "off": "0x46",
+        "off": "0x835",
         "len": 2,
         "want": "0x371A",
         "frames": 500,
@@ -665,7 +665,7 @@
       "id": "dhmix",
       "title": "Diffie-Hellman Colour-Mixer",
       "selfcheck": {
-        "off": "0x73",
+        "off": "0x13ec",
         "len": 2,
         "want": "0x69AA",
         "frames": 500,
@@ -676,7 +676,7 @@
       "id": "percol",
       "title": "Union-Find Percolation",
       "selfcheck": {
-        "off": "0x7d",
+        "off": "0x16ef",
         "len": 2,
         "want": "0x025B",
         "frames": 500,
@@ -687,7 +687,7 @@
       "id": "fenwick",
       "title": "Fenwick Tree",
       "selfcheck": {
-        "off": "0x80",
+        "off": "0x142b",
         "len": 2,
         "want": "0x3454",
         "frames": 500,
@@ -698,7 +698,7 @@
       "id": "radix",
       "title": "Radix Sort",
       "selfcheck": {
-        "off": "0x73",
+        "off": "0x140a",
         "len": 2,
         "want": "0x123E",
         "frames": 500,
@@ -709,7 +709,7 @@
       "id": "hull",
       "title": "Convex Hull",
       "selfcheck": {
-        "off": "0x73",
+        "off": "0x1449",
         "len": 2,
         "want": "0x84E3",
         "frames": 500,
@@ -720,7 +720,7 @@
       "id": "editdist",
       "title": "Edit-Distance DP",
       "selfcheck": {
-        "off": "0x73",
+        "off": "0x15eb",
         "len": 2,
         "want": "0xFB59",
         "frames": 500,
@@ -731,7 +731,7 @@
       "id": "huffman",
       "title": "Huffman Decode",
       "selfcheck": {
-        "off": "0x84",
+        "off": "0x144b",
         "len": 2,
         "want": "0xE8E4",
         "frames": 500,
@@ -742,7 +742,7 @@
       "id": "perlin",
       "title": "Perlin Noise",
       "selfcheck": {
-        "off": "0x73",
+        "off": "0x13e8",
         "len": 2,
         "want": "0xA72D",
         "frames": 500,
@@ -753,7 +753,7 @@
       "id": "gouraud",
       "title": "Gouraud Triangle",
       "selfcheck": {
-        "off": "0x7c",
+        "off": "0x13e6",
         "len": 2,
         "want": "0xC5E9",
         "frames": 1500,
@@ -764,7 +764,7 @@
       "id": "dither",
       "title": "Floyd-Steinberg Dither",
       "selfcheck": {
-        "off": "0x30",
+        "off": "0x1ce7",
         "len": 2,
         "want": "0x80C4",
         "frames": 2000,
@@ -775,7 +775,7 @@
       "id": "msquares",
       "title": "Marching Squares",
       "selfcheck": {
-        "off": "0x72",
+        "off": "0x1c69",
         "len": 2,
         "want": "0x86A7",
         "frames": 1800,
@@ -786,7 +786,7 @@
       "id": "grid3d",
       "title": "3-D Grid Voxel Life",
       "selfcheck": {
-        "off": "0x69",
+        "off": "0x13e8",
         "len": 2,
         "want": "0xFCDE",
         "frames": 800,
@@ -808,7 +808,7 @@
       "id": "funnelkal",
       "title": "Funnel-Shift Kaleidoscope",
       "selfcheck": {
-        "off": "0x5c",
+        "off": "0x13ea",
         "len": 2,
         "want": "0xEED4",
         "frames": 500,
@@ -819,7 +819,7 @@
       "id": "fabsridge",
       "title": "Fabs Ridgeline",
       "selfcheck": {
-        "off": "0x59",
+        "off": "0x13ea",
         "len": 2,
         "want": "0x161A",
         "frames": 500,
@@ -830,7 +830,7 @@
       "id": "smulorbit",
       "title": "Signed Multiply-Overflow Orbit",
       "selfcheck": {
-        "off": "0x57",
+        "off": "0x1405",
         "len": 2,
         "want": "0xD81B",
         "frames": 500,
@@ -841,7 +841,7 @@
       "id": "satcomet",
       "title": "Saturating Comet Trails",
       "selfcheck": {
-        "off": "0x6f",
+        "off": "0x14ff",
         "len": 2,
         "want": "0xC2AF",
         "frames": 500,
@@ -852,7 +852,7 @@
       "id": "rotkal",
       "title": "Rotate-Register Kaleidoscope",
       "selfcheck": {
-        "off": "0x6b",
+        "off": "0x13f2",
         "len": 2,
         "want": "0x300C",
         "frames": 500,
@@ -863,7 +863,7 @@
       "id": "satcast",
       "title": "Saturating-Cast Kaleidoscope",
       "selfcheck": {
-        "off": "0x80",
+        "off": "0x41",
         "len": 2,
         "want": "0xC8CF",
         "frames": 500,
@@ -874,7 +874,7 @@
       "id": "sbitfld",
       "title": "Signed-Bitfield Terrain",
       "selfcheck": {
-        "off": "0x6b",
+        "off": "0x31",
         "len": 2,
         "want": "0x40C5",
         "frames": 500,
@@ -885,7 +885,7 @@
       "id": "mvscrl",
       "title": "Memmove Scroll Slabs",
       "selfcheck": {
-        "off": "0x68",
+        "off": "0x31",
         "len": 2,
         "want": "0x72A7",
         "frames": 500,
@@ -896,7 +896,7 @@
       "id": "compass",
       "title": "Copysign Compass",
       "selfcheck": {
-        "off": "0x64",
+        "off": "0x31",
         "len": 2,
         "want": "0xB9CB",
         "frames": 500,
@@ -907,7 +907,7 @@
       "id": "speedcap",
       "title": "Fmin/Fmax Speed Cap",
       "selfcheck": {
-        "off": "0x69",
+        "off": "0x31",
         "len": 2,
         "want": "0x0116",
         "frames": 500,
@@ -918,7 +918,7 @@
       "id": "truncstair",
       "title": "Truncation Staircase",
       "selfcheck": {
-        "off": "0x67",
+        "off": "0x31",
         "len": 2,
         "want": "0x02CA",
         "frames": 500,
@@ -929,7 +929,7 @@
       "id": "montorbit",
       "title": "Montgomery Orbit",
       "selfcheck": {
-        "off": "0x69",
+        "off": "0x71",
         "len": 2,
         "want": "0xBA9B",
         "frames": 500,
@@ -940,7 +940,7 @@
       "id": "ulam",
       "title": "Ulam Prime Sieve",
       "selfcheck": {
-        "off": "0x64",
+        "off": "0x31",
         "len": 2,
         "want": "0x1F2F",
         "frames": 500,
@@ -951,7 +951,7 @@
       "id": "rangecode",
       "title": "Range Coder",
       "selfcheck": {
-        "off": "0x66",
+        "off": "0x31",
         "len": 2,
         "want": "0x6D21",
         "frames": 500,
@@ -962,7 +962,7 @@
       "id": "sobel",
       "title": "Sobelscope",
       "selfcheck": {
-        "off": "0x66",
+        "off": "0x31",
         "len": 2,
         "want": "0x2849",
         "frames": 500,
@@ -973,7 +973,7 @@
       "id": "dctbloom",
       "title": "DCT Bloom",
       "selfcheck": {
-        "off": "0x43",
+        "off": "0x31",
         "len": 2,
         "want": "0x5364",
         "frames": 500,
@@ -984,7 +984,7 @@
       "id": "adpcm",
       "title": "ADPCM Waverider",
       "selfcheck": {
-        "off": "0x67",
+        "off": "0x51",
         "len": 2,
         "want": "0xCA56",
         "frames": 500,
@@ -995,7 +995,7 @@
       "id": "scopeguard",
       "title": "Scope-Guard Ripple Tank",
       "selfcheck": {
-        "off": "0x66",
+        "off": "0x31",
         "len": 2,
         "want": "0x05A3",
         "frames": 500,
@@ -1006,7 +1006,7 @@
       "id": "matcascade",
       "title": "Matrix Cascade",
       "selfcheck": {
-        "off": "0x77",
+        "off": "0x41",
         "len": 2,
         "want": "0x8064",
         "frames": 500,
@@ -1017,7 +1017,7 @@
       "id": "plyoracle",
       "title": "PlyOracle",
       "selfcheck": {
-        "off": "0x75",
+        "off": "0x41",
         "len": 2,
         "want": "0x6146",
         "frames": 500,
@@ -1028,7 +1028,7 @@
       "id": "mulov64",
       "title": "64-bit Multiply-Overflow",
       "selfcheck": {
-        "off": "0x58",
+        "off": "0x1435",
         "len": 2,
         "want": "0x3A69",
         "frames": 700,
@@ -1039,7 +1039,7 @@
       "id": "ovmove",
       "title": "Overlap-Move Mosaic",
       "selfcheck": {
-        "off": "0x67",
+        "off": "0x31",
         "len": 2,
         "want": "0xA990",
         "frames": 500,
@@ -1050,7 +1050,7 @@
       "id": "spaceship",
       "title": "Width-Sweep Sort Gallery",
       "selfcheck": {
-        "off": "0x58",
+        "off": "0x152f",
         "len": 2,
         "want": "0xF20F",
         "frames": 500,
@@ -1061,7 +1061,7 @@
       "id": "crcwall",
       "title": "Bit-Serial CRC Wall",
       "selfcheck": {
-        "off": "0x68",
+        "off": "0x31",
         "len": 2,
         "want": "0x8E47",
         "frames": 500,
@@ -1072,7 +1072,7 @@
       "id": "rotslab",
       "title": "In-Place Block Rotate",
       "selfcheck": {
-        "off": "0x69",
+        "off": "0x31",
         "len": 2,
         "want": "0xB93A",
         "frames": 500,
@@ -1083,7 +1083,7 @@
       "id": "permscat",
       "title": "Gather-Scatter Permutation",
       "selfcheck": {
-        "off": "0x67",
+        "off": "0x31",
         "len": 2,
         "want": "0x0C2C",
         "frames": 500,
@@ -1094,7 +1094,7 @@
       "id": "ropeedit",
       "title": "Gap-Buffer Rope Editor",
       "selfcheck": {
-        "off": "0x6a",
+        "off": "0x31",
         "len": 2,
         "want": "0x2361",
         "frames": 500,
@@ -1105,7 +1105,7 @@
       "id": "ucmprank",
       "title": "Unsigned Rank Percentile Field",
       "selfcheck": {
-        "off": "0x67",
+        "off": "0x31",
         "len": 2,
         "want": "0x4CDD",
         "frames": 500,
@@ -1116,7 +1116,7 @@
       "id": "trimerge",
       "title": "Three-Way Merge Diff",
       "selfcheck": {
-        "off": "0x46",
+        "off": "0x20",
         "len": 2,
         "want": "0xCCCC",
         "frames": 500,
@@ -1127,7 +1127,7 @@
       "id": "keycmp64",
       "title": "64-bit Multi-Key Record Sort",
       "selfcheck": {
-        "off": "0x69",
+        "off": "0x31",
         "len": 2,
         "want": "0xB8AD",
         "frames": 500,
@@ -1138,7 +1138,7 @@
       "id": "oddmask",
       "title": "Odd-Width Mask Sculptor",
       "selfcheck": {
-        "off": "0x6b",
+        "off": "0x31",
         "len": 2,
         "want": "0x1FD9",
         "frames": 500,
@@ -1149,7 +1149,7 @@
       "id": "modexp256",
       "title": "256-bit Modular Exponentiation",
       "selfcheck": {
-        "off": "0x31",
+        "off": "0x39",
         "len": 2,
         "want": "0x31D4",
         "frames": 1500,
@@ -1160,7 +1160,7 @@
       "id": "lfsr2",
       "title": "Dual-LFSR Scrambler",
       "selfcheck": {
-        "off": "0x67",
+        "off": "0x31",
         "len": 2,
         "want": "0x6AA3",
         "frames": 500,
@@ -1171,7 +1171,7 @@
       "id": "bitweave",
       "title": "Serial Bit-Reversal Weave",
       "selfcheck": {
-        "off": "0x6d",
+        "off": "0x31",
         "len": 2,
         "want": "0x0E03",
         "frames": 500,
@@ -1182,7 +1182,7 @@
       "id": "uarteye",
       "title": "Bit-Banged UART Eye",
       "selfcheck": {
-        "off": "0x67",
+        "off": "0x31",
         "len": 2,
         "want": "0x3F09",
         "frames": 500,
@@ -1193,7 +1193,7 @@
       "id": "pcooker",
       "title": "Pressure-Cooker Fixed-Point Evaluator",
       "selfcheck": {
-        "off": "0x71",
+        "off": "0x39",
         "len": 2,
         "want": "0xEE6D",
         "frames": 1500,
@@ -1204,7 +1204,7 @@
       "id": "borrowlad",
       "title": "Borrow-Ladder Odometer",
       "selfcheck": {
-        "off": "0x6a",
+        "off": "0x31",
         "len": 2,
         "want": "0x1BE3",
         "frames": 500,
@@ -1215,7 +1215,7 @@
       "id": "cpu6502",
       "title": "6502 CPU Simulator",
       "selfcheck": {
-        "off": "0xADD",
+        "off": "0xade",
         "len": 2,
         "want": "0xAC8A",
         "frames": 1000,
