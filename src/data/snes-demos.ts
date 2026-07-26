@@ -1909,4 +1909,20 @@ export const SNES_DEMOS: SnesDemo[] = [
       "label": "cardioid"
     }
   }
+,
+  {
+    "slug": "lzss-gallery",
+    "title": "LZSS Mode 7 Gallery",
+    "desc": "A complete LZSS compressor/decompressor benchmark on the 65816. Ten CC0 artworks are decoded into far WRAM, displayed through Mode 7, recompressed on-console, compared with host goldens, decoded again, and verified byte-for-byte. Compiler stress-test #119.",
+    "keys": "Self-running — progress is measured work; D/C/V report stage frames",
+    "category": "algorithms",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x5c",
+      "len": 2,
+      "want": "0x29AF",
+      "frames": 45000,
+      "label": "lzss-gallery"
+    }
+  }
 ];
