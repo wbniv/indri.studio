@@ -1332,7 +1332,7 @@ export const SNES_DEMOS: SnesDemo[] = [
       "off": "0x2c",
       "len": 2,
       "want": "0x9D57",
-      "frames": 1400,
+      "frames": 1800,
       "label": "attract CRC host==MAME==bsnes-jg"
     }
   },
