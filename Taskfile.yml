@@ -29,10 +29,37 @@ tasks:
       - pnpm preview
 
   deploy:
-    desc: "Build + wrangler deploy. Reads CLOUDFLARE_API_TOKEN from .env (regenerate via task secrets-pull)."
+    desc: "Build + wrangler deploy LOCALLY. Reads CLOUDFLARE_API_TOKEN from .env (regenerate via task secrets-pull) -- needs AWS creds for the indri-terraform profile. Prefer `task publish` -- it needs nothing but git push access."
     cmds:
       - pnpm build
       - pnpm wrangler deploy
+
+  publish:
+    desc: "Tag and push to trigger the CI deploy (usage: task publish TAG=v0.1.86). No local Cloudflare/AWS creds needed -- .github/workflows/deploy.yml holds CLOUDFLARE_API_TOKEN as a repo secret and fires on any v* tag push. Works for any contributor with push access (an SSH key registered on GitHub), not just whoever has the local AWS profile."
+    vars:
+      TAG: '{{.TAG}}'
+    preconditions:
+      - sh: '[ -n "{{.TAG}}" ]'
+        msg: "Usage: task publish TAG=v0.1.86"
+    cmds:
+      - git tag {{.TAG}}
+      - git push origin main {{.TAG}}
+
+  bump:
+    desc: "Auto-increment patch version, tag, and push to trigger the CI deploy. Same no-local-creds path as `task publish`."
+    cmds:
+      - |
+        set -euo pipefail
+        latest=$(git tag --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -1)
+        if [ -z "$latest" ]; then
+          next="v0.0.1"
+        else
+          IFS='.' read -r major minor patch <<< "${latest#v}"
+          next="v${major}.${minor}.$((patch + 1))"
+        fi
+        echo "Bumping ${latest:-<none>} -> $next"
+        git tag "$next"
+        git push origin main "$next"
 
   sync-docs:
     desc: "Snapshot the llvm-mos-65816 reader docs into src/content/docs/ (web pages) + public/docs/ (.md + .pdf downloads). Interim; re-run after the source docs change. Env: LLVM_MOS_REPO=<path>."
