@@ -355,16 +355,29 @@
         fitRaf = 0;
         if (activeElement() !== wrap) return;
         var style = getComputedStyle(wrap);
-        var availW = wrap.clientWidth - px(style.paddingLeft) - px(style.paddingRight);
-        var availH = wrap.clientHeight - px(style.paddingTop) - px(style.paddingBottom);
+        var padW = px(style.paddingLeft) + px(style.paddingRight);
+        var padH = px(style.paddingTop) + px(style.paddingBottom);
+        var availW = wrap.clientWidth - padW;
+        var availH = wrap.clientHeight - padH;
+        // Mobile landscape fullscreen can leave the layout viewport larger than
+        // the actually visible viewport while browser chrome/orientation settles.
+        // Never size against a box larger than the pixels the user can see.
+        if (window.visualViewport) {
+          availW = Math.min(availW, window.visualViewport.width - padW);
+          availH = Math.min(availH, window.visualViewport.height - padH);
+        }
+        // Leave one CSS pixel on every edge. This absorbs fractional safe-area
+        // values and device-pixel rounding instead of letting a limiting edge crop.
+        availW = Math.max(0, Math.floor(availW) - 2);
+        availH = Math.max(0, Math.floor(availH) - 2);
         // The core's backing buffer can switch to a native 512x240 frame. That is storage
         // resolution, not the intended SNES display shape; fullscreen must remain 256:224 (8:7).
         var displayW = 8;
         var displayH = 7;
         var scale = Math.min(availW / displayW, availH / displayH);
         if (!(scale > 0)) return;
-        wrap.style.setProperty("--bjg-fs-width", Math.max(1, displayW * scale) + "px");
-        wrap.style.setProperty("--bjg-fs-height", Math.max(1, displayH * scale) + "px");
+        wrap.style.setProperty("--bjg-fs-width", Math.max(1, Math.floor(displayW * scale)) + "px");
+        wrap.style.setProperty("--bjg-fs-height", Math.max(1, Math.floor(displayH * scale)) + "px");
       }
       function scheduleFullscreenFit() {
         if (fitRaf) cancelAnimationFrame(fitRaf);
