@@ -1994,7 +1994,7 @@ export const SNES_DEMOS: SnesDemo[] = [
       ["→", "Next work"]
     ],
     "selfcheck": {
-      "off": "0x376",
+      "off": "0x46e",
       "len": 2,
       "want": "0x5CF0",
       "frames": 200000,
