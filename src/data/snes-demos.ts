@@ -1924,7 +1924,7 @@ export const SNES_DEMOS: SnesDemo[] = [
     "slug": "lzss-gallery",
     "displayMode": 7,
     "title": "LZSS Mode 7 Gallery",
-    "desc": "A complete LZSS compressor/decompressor benchmark on the 65816. Thirty-six public-domain artworks use full-composition, aspect-preserving Mode 7 rasters with up to 219 artwork colors, then recompress and verify byte-for-byte on-console. Left/Right or the bounded on-screen chevrons navigate. Compiler stress-test #119.",
+    "desc": "A complete LZSS compressor/decompressor benchmark on the 65816. Sixty public-domain artworks use full-composition, aspect-preserving Mode 7 rasters with up to 219 artwork colors, then recompress and verify byte-for-byte on-console. Left/Right or the bounded on-screen chevrons navigate. Compiler stress-test #119.",
     "keys": "Left/Right or tap/click a visible chevron: previous/next work — progress is measured work; D/C/V report stage frames",
     "category": "algorithms",
     "works": [
@@ -1963,16 +1963,40 @@ export const SNES_DEMOS: SnesDemo[] = [
       ["Pieter de Hooch","Interior with Women beside a Linen Cupboard","https://id.rijksmuseum.nl/2003051"],
       ["Pieter Saenredam","Interior of the Sint-Odulphuskerk in Assendelft","https://id.rijksmuseum.nl/200107965"],
       ["Rachel Ruysch","Still Life with Flowers on a Marble Tabletop","https://id.rijksmuseum.nl/20027537"],
-      ["Jan Davidsz. de Heem","Still Life with Flowers in a Glass Vase","https://id.rijksmuseum.nl/20029045"]
+      ["Jan Davidsz. de Heem","Still Life with Flowers in a Glass Vase","https://id.rijksmuseum.nl/20029045"],
+      ["Thomas Cole","The Voyage of Life: Childhood","https://www.nga.gov/artworks/52450-voyage-life-childhood"],
+      ["Thomas Cole","The Voyage of Life: Youth","https://www.nga.gov/artworks/52451-voyage-life-youth"],
+      ["Thomas Cole","The Voyage of Life: Manhood","https://www.nga.gov/artworks/52452-voyage-life-manhood"],
+      ["Thomas Cole","The Voyage of Life: Old Age","https://www.nga.gov/artworks/52453-voyage-life-old-age"],
+      ["Thomas Cole","Tornado in an American Forest","https://www.nga.gov/artworks/195574-tornado-american-forest"],
+      ["Frederic Edwin Church","Niagara","https://www.nga.gov/artworks/166436-niagara"],
+      ["Frederic Edwin Church","Fog off Mount Desert","https://www.nga.gov/artworks/126132-fog-mount-desert"],
+      ["Albert Bierstadt","Buffalo Trail: The Impending Storm","https://www.nga.gov/artworks/166427-buffalo-trail-impending-storm"],
+      ["Albert Bierstadt","Mount Corcoran","https://www.nga.gov/artworks/166428-mount-corcoran"],
+      ["George Inness","Sunset in the Woods","https://www.nga.gov/artworks/166496-sunset-woods"],
+      ["George Inness","Harvest Moon","https://www.nga.gov/artworks/178273-harvest-moon"],
+      ["Winslow Homer","East Hampton Beach, Long Island","https://www.nga.gov/artworks/157923-east-hampton-beach-long-island"],
+      ["John Constable","Wivenhoe Park, Essex","https://www.nga.gov/artworks/1147-wivenhoe-park-essex"],
+      ["John Constable","Cloud Study: Stormy Sunset","https://www.nga.gov/artworks/104243-cloud-study-stormy-sunset"],
+      ["Joseph Mallord William Turner","Keelmen Heaving in Coals by Moonlight","https://www.nga.gov/artworks/1225-keelmen-heaving-coals-moonlight"],
+      ["Joseph Mallord William Turner","Approach to Venice","https://www.nga.gov/artworks/117-approach-venice"],
+      ["Joseph Mallord William Turner","Mortlake Terrace","https://www.nga.gov/artworks/116-mortlake-terrace"],
+      ["Giovanni Paolo Panini","Interior of the Pantheon, Rome","https://www.nga.gov/artworks/165-interior-pantheon-rome"],
+      ["Canaletto","Entrance to the Grand Canal from the Molo, Venice","https://www.nga.gov/artworks/32589-entrance-grand-canal-molo-venice"],
+      ["Camille Pissarro","The Louvre, Afternoon, Rainy Weather","https://www.nga.gov/artworks/195850-louvre-afternoon-rainy-weather"],
+      ["Alfred Sisley","Marly-le-Roi","https://www.nga.gov/artworks/177090-marly-le-roi"],
+      ["Claude Monet","The Willows","https://www.nga.gov/artworks/178254-willows"],
+      ["Ando Hiroshige","Distant View of Mount Akiha, Kakegawa","https://www.nga.gov/artworks/224457-distant-view-mount-akiha-kakegawa"],
+      ["Ando Hiroshige","Fujisawa-shuku","https://www.nga.gov/artworks/181425-fujisawa-shuku"]
     ],
     "controls": [
       ["←", "Previous work"],
       ["→", "Next work"]
     ],
     "selfcheck": {
-      "off": "0x2da",
+      "off": "0x36a",
       "len": 2,
-      "want": "0xBA3A",
+      "want": "0x1D8E",
       "frames": 200000,
       "label": "lzss-gallery"
     }
