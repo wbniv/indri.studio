@@ -1248,9 +1248,9 @@
       "id": "lzss-gallery",
       "title": "LZSS Mode 7 Gallery",
       "selfcheck": {
-        "off": "0x36a",
+        "off": "0x376",
         "len": 2,
-        "want": "0x1D8E",
+        "want": "0x5CF0",
         "frames": 200000,
         "label": "lzss-gallery"
       }
