@@ -1993,6 +1993,10 @@ export const SNES_DEMOS: SnesDemo[] = [
       ["←", "Previous work"],
       ["→", "Next work"]
     ],
+    "touchNav": {
+      "left": [0, 70, 24, 24],
+      "right": [232, 70, 24, 24]
+    },
     "selfcheck": {
       "off": "0x46e",
       "len": 2,
