@@ -85,15 +85,20 @@
     // this the picture is stretched 2x wide.
     var step = w >= 512 ? 2 : 1;
     var ow = (w / step) | 0;
-    var yoff = h >= 232 ? 8 : 0;             // match biohack.net: skip bsnes-jg's blank top overscan
+    // Skip the top NTSC overscan when the core hands us a tall buffer. Measured
+    // per-row on this build (2026-07-27, deterministic frames after _bjg_reset):
+    // the 512x240 buffer carries content in rows [8,232) — yoff=0 would add an
+    // 8px black band and crop the bottom rows instead. A 224-line buffer (h<232)
+    // is already flush, so the offset degrades to 0. Supersedes aaacbae, whose
+    // "flush at buffer top" rationale described the headless jgxcheck capture.
+    var yoff = h >= 232 ? 8 : 0;
     var avail = h - yoff;
     var oh = avail < 224 ? avail : 224;
     var heap = Module.HEAPU32;               // re-fetch each frame (may grow)
     var base = Module._bjg_video() >>> 2;    // uint32 index
-    // Hold the baked preview until the SNES emits its first non-black frame: mandel-display
-    // force-blanks (solid black) while it computes pass 1, and drawing those boot frames
-    // would flash the preview to black for ~0.3 s before the first coarse image lands.
-    // Sample a sparse grid — a revealed Mandelbrot lights up far more than one in 64 pixels.
+    // Pre-ROM only: hold the poster until the core emits a non-black frame. loadRomBytes() sets
+    // `revealed` as soon as the ROM is accepted, so from that point every frame is drawn — black
+    // boot frames included. This branch now only covers the window before a ROM is loaded.
     if (!revealed) {
       var lit = false;
       for (var sy = yoff; sy < yoff + oh && !lit; sy += 8) {
@@ -150,6 +155,17 @@
     Module.HEAPU8.set(bytes, ptr);
     var ok = Module._bjg_load(ptr, bytes.length);
     Module._free(ptr);
+    // The ROM is about to run, so the poster has done its job: clear to black and let present()
+    // draw every frame from here, including the black ones. Holding the preview until the first
+    // *lit* frame (the old `revealed` behaviour) meant the page opened on a screenshot of the
+    // FINISHED demo, which reads as leftover state from a previous session — and every demo now
+    // fades its title card up from black, so the hold fired on all 113 pages rather than just the
+    // one long-force-blanking demo it was added for.
+    if (ok === 1 && ctx) {
+      revealed = true;
+      ctx.fillStyle = "#000";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
     return ok === 1;
   }
 
@@ -167,6 +183,12 @@
         status(runLabel);
         startLoop();
         updateCheckButton(id);
+        // ?verify=1 auto-runs the fidelity self-check once the ROM is up — the
+        // hook CI's headless gate drives (poll #checkresult for PASS/MISMATCH).
+        if (new URLSearchParams(location.search).get("verify") === "1" && !window.__bjgAutoVerified) {
+          window.__bjgAutoVerified = true;
+          setTimeout(verify, 0);
+        }
       })
       .catch(function (e) { status("error: " + e.message); });
   }
@@ -302,11 +324,11 @@
     }, { threshold: 0.05 }).observe(target);
   }
 
-  // Paint the baked coarse preview onto the canvas right away, so a recognizable fractal
-  // (not a black box) shows while the ~3.9 MB core downloads and the ROM force-blanks through
-  // its first compute pass. Replaced by the live framebuffer on the first non-black frame
-  // (see `revealed` in present()). Only mandel-display ships an asset; any ROM without a
-  // preview/<id>.png just 404s the image and shows the default black — no error path needed.
+  // Paint the baked preview onto the canvas as a LOADING POSTER, so the page shows the demo
+  // rather than a black box while the ~3.9 MB core downloads. It is cleared to black the moment
+  // the ROM is accepted (see loadRomBytes), so the emulator always starts from a blank screen and
+  // the title card fades up over black. A ROM without a preview/<id>.png just 404s the image and
+  // keeps the default black — no error path needed.
   function paintPreview(id) {
     if (!id || !ctx) return;
     var img = new Image();
@@ -331,7 +353,8 @@
     var verifyEl = document.getElementById("verify");
     if (verifyEl) verifyEl.addEventListener("click", verify);
 
-    // BEGIN SHARED FULLSCREEN CONTROLLER — keep both site copies byte-identical.
+    // BEGIN SHARED FULLSCREEN CONTROLLER — canonical copy lives in bsnes-jg-wasm;
+    // sites vendor this file verbatim via `bsnes-jg-player sync`, never edit a site copy.
     (function () {
       if (window.__bjgFullscreenCleanup) window.__bjgFullscreenCleanup();
 
@@ -459,22 +482,31 @@
 
     window.addEventListener("keydown", onKey(true));
     window.addEventListener("keyup", onKey(false));
-    // The gallery's in-ROM chevrons are sprites, not DOM controls. Hit-test
-    // only their 24x24 logical squares; artwork/status taps must stay inert.
-    function galleryChevronBitAt(x, y) {
-      if (y < 70 || y >= 94) return 0;
-      if (x >= 0 && x < 24) return JOY.Left;
-      if (x >= 232 && x < 256) return JOY.Right;
+    // In-ROM touch controls (e.g. a gallery's sprite chevrons — not DOM
+    // controls). A ROM opts in via its manifest entry:
+    //   "touchNav": { "left": [x, y, w, h], "right": [x, y, w, h] }
+    // in logical canvas pixels; taps inside a rect press that pad button for
+    // one tap-length. Taps elsewhere stay inert. (Was hardcoded to the
+    // lzss-gallery slug; the rects moved into roms/manifest.json.)
+    function touchNavBits() {
+      var meta = romMeta(current);
+      return meta && meta.touchNav ? meta.touchNav : null;
+    }
+    function touchNavBitAt(tn, x, y) {
+      function hit(r) { return r && x >= r[0] && x < r[0] + r[2] && y >= r[1] && y < r[1] + r[3]; }
+      if (hit(tn.left)) return JOY.Left;
+      if (hit(tn.right)) return JOY.Right;
       return 0;
     }
     var touchRelease = 0;
     canvas.addEventListener("pointerdown", function (e) {
-      if (current !== "lzss-gallery") return;
+      var tn = touchNavBits();
+      if (!tn) return;
       var r = canvas.getBoundingClientRect();
       if (!r.width || !r.height) return;
       var x = (e.clientX - r.left) * canvas.width / r.width;
       var y = (e.clientY - r.top) * canvas.height / r.height;
-      var bit = galleryChevronBitAt(x, y);
+      var bit = touchNavBitAt(tn, x, y);
       if (!bit) return;
       e.preventDefault();
       pad |= bit;
@@ -483,7 +515,7 @@
     }, { passive: false });
     ["pointerup", "pointercancel"].forEach(function (name) {
       canvas.addEventListener(name, function () {
-        if (current !== "lzss-gallery") return;
+        if (!touchNavBits()) return;
         pad &= ~(JOY.Left | JOY.Right);
       });
     });

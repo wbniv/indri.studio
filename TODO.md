@@ -70,4 +70,5 @@ _Auto-added from plan "Out of scope"/"Deferred" sections at commit time. Triage 
 - [ ] **(triage)** **Dropped** the "Host C reference vs the SNES render — pixel-for-pixel" screenshot — _from [2026-06-25-llvm-mos-emulator-embed.md](docs/plans/2026-06-25-llvm-mos-emulator-embed.md)_  <!-- fp:31274d8cf5ae16b9 -->
 - [ ] **(triage)** All verified live at the production URL after the `v0.1.70` deploy. — _from [2026-06-25-llvm-mos-emulator-embed.md](docs/plans/2026-06-25-llvm-mos-emulator-embed.md)_  <!-- fp:46f1fe58b2ed7a39 -->
 - [verify] **2026-06-30-purple-to-indri-eye-green** — Verification section present but no PASS recorded — run + record the steps. _from [2026-06-30-purple-to-indri-eye-green.md](docs/plans/2026-06-30-purple-to-indri-eye-green.md)_  <!-- fp:94ac8eff5738263d -->
+- [verify] **2026-07-27-snes-package-adoption** — Verification section present but no PASS recorded — run + record the steps. _from [2026-07-27-snes-package-adoption.md](docs/plans/2026-07-27-snes-package-adoption.md)_  <!-- fp:261a7ed7897af318 -->
 <!-- END auto-captured-deferrals -->

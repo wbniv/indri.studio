@@ -38,6 +38,11 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      # The SNES player engine is vendored from @wbniv/bsnes-jg-player by
+      # scripts/sync-llvm-mos-emulator.sh; drift vs the installed package fails the deploy.
+      - name: Check SNES engine drift vs @wbniv/bsnes-jg-player
+        run: npx bsnes-jg-player sync --check public/apps/llvm-mos-65816/play
+
       - run: pnpm build
 
       - uses: cloudflare/wrangler-action@v4

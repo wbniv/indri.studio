@@ -1,41 +1,29 @@
 | Date | Change |
 |------|--------|
-| [2026-06-27](https://github.com/wbniv/indri.studio/commit/ef7ed8c) | docs: biohack /blossom HUD re-fixed (v1.0.76) |
-| [2026-06-27](https://github.com/wbniv/indri.studio/commit/4dd7568) | docs: record biohack /blossom HUD regression (re-synced to yoff=8) |
-| [2026-06-27](https://github.com/wbniv/indri.studio/commit/c6a28d2) | docs: index the /blossom HUD overscan-crop fix plan |
-| [2026-06-26](https://github.com/wbniv/indri.studio/commit/08a6663) | docs(plans): correct more misreads (union of 2 more Opus audit passes) |
-| [2026-06-26](https://github.com/wbniv/indri.studio/commit/5916a92) | docs(plans): fix summaries/categories flagged by an Opus faithfulness audit |
-| [2026-06-26](https://github.com/wbniv/indri.studio/commit/49f6b36) | docs: add plan index (docs/plans/README.md) |
+| [2026-07-19](https://github.com/wbniv/indri.studio/commit/3bdf885) | docs: repoint ~/SRC references to the flat ~/ layout |
+| [2026-05-14](https://github.com/wbniv/indri.studio/commit/52758d7) | Code review P4: surface-tint var, headline-sm spacing, README task-first, anchor scroll-mt |
+| [2026-05-14](https://github.com/wbniv/indri.studio/commit/a00ba62) | Code review P1: featured gate, secrets-pull doc, colophon fonts |
+| [2026-05-13](https://github.com/wbniv/indri.studio/commit/272aad6) | Initial scaffold: Indri studio marketing site |
 
 <!--history-meta v1
-ef7ed8c	author	Will Norris
-ef7ed8c	added	1
-ef7ed8c	deleted	1
-ef7ed8c	files	1
-ef7ed8c	body	Re-applied yoff=0 to biohack's vendored player copy (regressed by the\nspace-invaders bundle re-sync) and redeployed; verified live at 125% zoom\n(21px margin). Updates the plan status + §Regression (resolved), closes the\nTODO re-fix item, and corrects the index summary. Durable path confirmed:\nbsnes-jg-wasm/web/app.js is yoff=0 and deploy-bundle.sh copies it into the\nbundle, so future syncs carry the fix.\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01PUAcAwgviWnsXGBKPBiLAT
-4dd7568	author	Will Norris
-4dd7568	added	1
-4dd7568	deleted	1
-4dd7568	files	1
-4dd7568	body	A later space-invaders commit (biohack c20b62e) re-copied the vendored player\nbundle into public/play/app.js, clobbering the yoff=0 fix (3f9c66e / v1.0.74)\nback to yoff=8 — biohack.net/blossom is clipped again on live. indri.studio and\nthe bsnes-jg-wasm source remain fixed.\n\nUpdates the plan (status + §Regression with the root lesson: fix the sync\nsource, not the vendored per-site copy), the index summary, and adds an active\nTODO to re-sync biohack from the fixed bundle. No code change here; biohack's\napp.js is left as-is pending the re-sync.\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01PUAcAwgviWnsXGBKPBiLAT
-c6a28d2	author	Will Norris
-c6a28d2	added	2
-c6a28d2	deleted	1
-c6a28d2	files	1
-c6a28d2	body	Adds the plan-index row flagged by the check-plan-index.sh drift hook.\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01PUAcAwgviWnsXGBKPBiLAT
-08a6663	author	Will Norris
-08a6663	added	1
-08a6663	deleted	1
-08a6663	files	1
-08a6663	body	Two further independent Opus passes over the Sonnet summaries, unioned, caught\nmisreads the first (non-deterministic) pass missed: inverted fixes, omitted\nSUPERSEDED status, invented specifics, and Fix-vs-Feature category errors.\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
-5916a92	author	Will Norris
-5916a92	added	3
-5916a92	deleted	3
-5916a92	files	1
-5916a92	body	An Opus pass over the Sonnet-generated index flagged summaries that misread their\nplan (inverted outcomes, invented specifics, or wrong category) and supplied\ncorrections. This applies them.\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
-49f6b36	author	Will Norris
-49f6b36	added	85
-49f6b36	deleted	0
-49f6b36	files	1
-49f6b36	body	One row per docs/plans/*.md — auto-generated summary + category plus the per-plan\ncommit history — kept current by the shared check-plan-index drift hook on commit.\nSummaries auto-generated (Sonnet, medium effort); refine as needed.\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+3bdf885	author	Will Norris
+3bdf885	added	2
+3bdf885	deleted	2
+3bdf885	files	1
+3bdf885	body	The ~/SRC/<name> → ~/<name> flattening completed 2026-07-19; ~/SRC no\nlonger exists and there is no compat symlink, so every surviving\n~/SRC/... reference was dead.\n\nRewritten here:\n- wrangler.toml, infrastructure/cloudflare/iam-self/providers.tf —\n  seeded-from / mirrors-pattern comments now cite ~/rapid-raccoon-site\n  and ~/finding-your-way.\n- README.md, infrastructure/cloudflare/README.md, CLAUDE.md — link\n  labels retargeted (~/CLAUDE.md, ~/finding-your-way, …); the relative\n  link targets were already correct under the flat layout since the\n  parent of this repo is now ~.\n- src/content/apps/claude-code-authoring-formats.md — published copy\n  pointed readers at ~/SRC/python-tui-lib.\n- .claude/memory/{feedback-commit-at-confirmation,feedback-illustration-style,feedback-project-scoped-state}.md\n  — ~/SRC/CLAUDE.md → ~/CLAUDE.md, ~/SRC/free-services.md →\n  ~/docs/free-services.md (free-services.md moved under docs/),\n  ~/SRC/indri.studio → ~/indri.studio.\n\nProse reading "the SRC-level guidance" / "all SRC projects" rewritten\nrather than mechanically substituted.\n\nDeliberately untouched: dated point-in-time records under docs/plans/\nand docs/investigations/, plus .history/ sidecars — they record the\nstate at the time.\n\nVerified: every rewritten target exists on disk (~/python-tui-lib,\n~/finding-your-way, ~/rapid-raccoon-site, ~/CLAUDE.md,\n~/docs/free-services.md); wrangler.toml re-parses clean via tomllib.\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_015uDBhrHoJFYhNJkNLhve4E
+52758d7	author	Will Norris
+52758d7	added	6
+52758d7	deleted	5
+52758d7	files	1
+52758d7	body	Lowest-stakes polish, all in one pass. S4 (Screenshot.astro fail-\nloud on missing dims) was already correct — no action.\n\nS1. --color-surface-tint hardcoded #b026ff, two lines below the\nauthoritative --color-primary-container declaration of the same\nhex. If the brand colour ever shifts, the tint would silently\ndiverge. Reference the var instead so they stay in lockstep.\n\nS2. --text-headline-sm had font-size + line-height + font-weight\nbut was missing the --letter-spacing triplet that lg and md both\ncarry (-0.02em → -0.01em → 0em as the size shrinks; smaller type\nneeds more breathing room). Add 0em to complete the pattern.\n\nS3. The README's Dev section led with raw pnpm commands; the\nproject's CLAUDE.md and ~/SRC/CLAUDE.md both say task is canonical.\nFlip the ordering — task dev / task build / task preview / task\ndeploy now lead, each footnoted with the underlying pnpm call so\nreaders can still see what's happening one layer down.\n\nS5. Anchored sections on the homepage (#apps, #about, #team) and\ncolophon (#set-in, #palette, #built-with, #motifs, #references)\nwere using scroll-mt-20 — a fixed 80px scroll-margin-top. The\nsticky header shrinks from ~72px to ~40px as scroll progresses\n(--header-shrink animates 0→1). 80px is correct at the top of the\npage but lands anchors too low once the header has shrunk. Add a\n.scroll-mt-header utility that computes\n  calc(80px - 32px * var(--header-shrink, 0))\nand swap every scroll-mt-20 across both pages (3 in index, 5 in\ncolophon, 0 remaining). --header-shrink is already registered as\na @property at the top of global.css, so the calc interpolates\nsmoothly through the header transition rather than snapping.\n\nVerification:\n- task build: Complete!, 11 pages.\n- grep scroll-mt-20 src/pages/*.astro: 0.\n- grep scroll-mt-header: 3 in index, 5 in colophon, 1 in global.css.\n- --color-surface-tint resolves through to --color-primary-container.\n\nCloses out the code review batch (24 findings across 5 commits +\n1 cross-project glossary edit + 2 follow-up plans).\n\nCo-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+a00ba62	author	Will Norris
+a00ba62	added	1
+a00ba62	deleted	2
+a00ba62	files	1
+a00ba62	body	Implements the P1 user-visible items from\ndocs/investigations/2026-05-14-code-review.md (review attached). Plan:\ndocs/plans/2026-05-14-code-review-implementation.md.\n\nB1+B2 (coupled). Homepage team strip was loading every team entry\nignoring `featured`. With all four founders currently `featured: true`\nthe contract was masked, but flipping one to `false` would leak them\ninto the homepage. Add the filter at the getCollection call.\nCompanion doc fix: README and CLAUDE.md both implied /about exists\ntoday — it doesn't (only an #about anchor on the homepage). Reword so\nthe docs say /about is planned, not shipped; drop about.astro from\nthe file-tree diagram in the README.\n\nB3 (skipped per user). Store-badge `#` placeholders scroll-to-top\nrather than no-op, but the badges sit at the top of the page anyway\nso it's effectively a no-op in practice. Behaviour unchanged.\n\nB4. Taskfile's secrets-pull description claimed "Refuses on drift\nunless --force" — but the script has no drift detection or --force\nflag, only -h. The script's actual behaviour is fine; correct the\ndescription to match.\n\nB5. Colophon's SET-IN section said both display + body fonts come\nfrom Google Fonts with preconnect hints. Commit 4908df0 moved them\nto Astro's Fonts API (build-time woff2 download, served same-origin\nfrom dist/_astro/fonts/). Rewrite the bullet to describe what\nactually ships; keep the Material Symbols mention honest about\nstill being a fonts.googleapis.com request on pages that use icons.\n\nVerification:\n- task build: Complete!, 11 pages, 1.71s\n- Homepage renders all four featured founders\n- `/about` references in README + CLAUDE.md now read as "planned"\n- dist/colophon HTML contains no user-facing "Google Fonts" copy;\n  fonts.googleapis.com only mentioned in the new Material Symbols\n  sentence\n\nCo-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+272aad6	author	Will Norris
+272aad6	added	96
+272aad6	deleted	0
+272aad6	files	1
+272aad6	body	Seeded from ~/SRC/rapid-raccoon-site/ (which it replaces). Brand\nadapted to greys + neon Phosphor purple per the ringtail-lemur\npalette in docs/plans/2026-05-13-initial-buildout.md. Content\ncollections set up for apps + team; placeholder entries for the\nfive initial Indri apps (SplitLedger, Gustos Colores, ParkingSpace,\nWorld Foundry, Finding Your Way) and three founder stubs.\n\nBuild verified clean (pnpm build → 7 pages, no warnings).\n\nCo-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
 -->

@@ -1,0 +1,22 @@
+{
+  "package": "@wbniv/bsnes-jg-player",
+  "version": "1.0.0",
+  "synced": [
+    {
+      "file": "app.js",
+      "sha256": "ce57397a66aa795d69ed0ff6bbaaacd1c8cc3fe7580a13b8391d6ea99301233d"
+    },
+    {
+      "file": "cores/PROVENANCE.json",
+      "sha256": "745f5d72dd5fc25a814f46cd5f489c8c5c84c5ab6d840fa8e6cddff4d410d1df"
+    },
+    {
+      "file": "cores/bsnes_jg.js",
+      "sha256": "33078eba5c52dbf3e8c3e7c4cbaed17e8d1e4ad55bac9187525688080e8030e0"
+    },
+    {
+      "file": "cores/bsnes_jg.wasm",
+      "sha256": "61397b181bd0680f49a93b884411ef0273c7395966a7ba3866b2a17ddee3d093"
+    }
+  ]
+}

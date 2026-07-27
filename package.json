@@ -9,12 +9,14 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "sync-engine": "bash scripts/sync-llvm-mos-emulator.sh"
   },
   "dependencies": {
     "@astrojs/mdx": "^6.0.3",
     "@astrojs/sitemap": "^3.7.2",
     "@material-symbols/svg-400": "^0.44.10",
+    "@wbniv/bsnes-jg-player": "github:wbniv/bsnes-jg-wasm#npm-package",
     "astro": "^6.4.8"
   },
   "devDependencies": {

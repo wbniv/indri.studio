@@ -76,6 +76,7 @@ rows on commit.*
 | [Plan — embed the live `bsnes-jg-wasm` emulator on `/apps/llvm-mos-65816/`](2026-06-25-llvm-mos-emulator-embed.md) | Embed inline always-on bsnes-jg-wasm emulator on /apps/llvm-mos-65816/ running mandel-display with fidelity self-check. | [`6b83ec9`](https://github.com/wbniv/indri.studio/commit/6b83ec9), [`3bd1b57`](https://github.com/wbniv/indri.studio/commit/3bd1b57), [`7a3bf49`](https://github.com/wbniv/indri.studio/commit/7a3bf49) | Feature |
 | [Emulator HUD overscan-crop fix (`/blossom` value bar clipped)](2026-06-27-emulator-hud-overscan-crop-fix.md) | Fix the player's present() crop (yoff=8→0): the active picture sits flush at the buffer top, so skipping 8 "overscan" rows clipped /blossom's top value bar. Fixed on both indri + biohack and in the bsnes-jg-wasm source (biohack regressed once via a bundle re-sync, then re-fixed). | [`9e82840`](https://github.com/wbniv/indri.studio/commit/9e82840) | Fix |
 | [Replace Phosphor purple with indri-eye neon green](2026-06-30-purple-to-indri-eye-green.md) | Rebrand site accent from #B026FF (Phosphor purple) to #B8EF00 (indri-eye chartreuse); hue-rotate mascot PNG irises to match. | [`62da7eb`](https://github.com/wbniv/indri.studio/commit/62da7eb) | Feature |
+| [snes-package-adoption — indri.studio consumes @wbniv/bsnes-jg-player](2026-07-27-snes-package-adoption.md) | Vendor the SNES player engine from the @wbniv/bsnes-jg-player npm package (sync CLI + ENGINE_VERSION stamp + CI drift gate), replacing the hand-rolled dist-bundle copy; indri keeps its own embed markup/boot | [`pending`](2026-07-27-snes-package-adoption.md) | Platform |
 
 ---
 
@@ -84,4 +85,4 @@ rows on commit.*
 - **Order** = each plan's *creation* commit (oldest commit that touched the file), by committer date.
 - **Commit(s)** = the full `git log --follow` set per plan, oldest → newest.
 - **Summaries / categories** auto-generated from each plan's TL;DR (Sonnet, medium effort) — refine as needed.
-- **Generated** 2026-06-26 for 65 plan(s); rows added by hand 2026-06-27 (66), 2026-06-30 (67 total).
+- **Generated** 2026-06-26 for 65 plan(s); rows added by hand 2026-06-27 (66), 2026-06-30 (67), 2026-07-27 (68 total).

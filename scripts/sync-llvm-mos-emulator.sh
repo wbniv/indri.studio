@@ -1,45 +1,28 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# sync-llvm-mos-emulator.sh — pull the bsnes-jg-wasm single-program bundle into
-# public/ so the SNES C Compiler app page can embed the live emulator.
+# sync-llvm-mos-emulator.sh — vendor the SNES player ENGINE (app.js + cores/*)
+# from the installed @wbniv/bsnes-jg-player npm package into
+# public/apps/llvm-mos-65816/play/, via the package's own CLI.
 #
-# The bundle (cores/*.wasm+js, app.js, mandel-display.sfc, manifest, provenance)
-# is produced by bsnes-jg-wasm's `deploy-bundle.sh`. We snapshot it under
-# public/apps/llvm-mos-65816/play/; Astro copies public/ → dist/ verbatim, so it
-# serves at /apps/llvm-mos-65816/play/ and the embed loads it by absolute URL.
+# This replaced the old dist-bundle copy from a sibling bsnes-jg-wasm checkout
+# (2026-07-27): the engine is now versioned + drift-stamped (ENGINE_VERSION), and
+# CI verifies `sync --check` so a hand-edited site copy can't ship. ROMs,
+# manifest, and previews are site content — the CLI never touches them.
 
 usage() {
   cat <<EOF
-Usage: scripts/sync-llvm-mos-emulator.sh [BUNDLE_DIR]
+Usage: scripts/sync-llvm-mos-emulator.sh
 
-Copies the emulator bundle into public/apps/llvm-mos-65816/play/.
-
-  BUNDLE_DIR   path to bsnes-jg-wasm's dist-bundle
-               (DEFAULT: ../bsnes-jg-wasm/dist-bundle; built on demand if absent)
+Syncs the engine from node_modules/@wbniv/bsnes-jg-player into
+public/apps/llvm-mos-65816/play/ (run 'pnpm install' first; bump the dep to
+pick up a newer engine).
 EOF
 }
 [ "${1:-}" = "-h" ] || [ "${1:-}" = "--help" ] && { usage; exit 0; }
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SRC="${1:-$ROOT/../bsnes-jg-wasm/dist-bundle}"
-DEST="$ROOT/public/apps/llvm-mos-65816/play"
-log() { echo "[$(date -u +%Y-%m-%dT%H:%M:%SZ)] $*"; }
+SYNC="$ROOT/node_modules/@wbniv/bsnes-jg-player/bin/sync.mjs"
+[ -f "$SYNC" ] || { echo "ERROR: @wbniv/bsnes-jg-player not installed — pnpm add @wbniv/bsnes-jg-player" >&2; exit 1; }
 
-# Build the bundle if it isn't there yet.
-if [ ! -f "$SRC/cores/bsnes_jg.wasm" ]; then
-  BUILDER="$(dirname "$SRC")/deploy-bundle.sh"
-  [ -x "$BUILDER" ] || { echo "ERROR: no bundle at $SRC and no deploy-bundle.sh next to it" >&2; exit 1; }
-  log "bundle missing — building via $BUILDER"
-  "$BUILDER"
-fi
-
-log "syncing $SRC → $DEST"
-rm -rf "$DEST"
-mkdir -p "$DEST"
-cp -R "$SRC/." "$DEST/"
-
-log "done:"
-( cd "$DEST" && find . -type f | sort | sed 's/^/  /' )
-echo
-echo "Core: $(grep -o '\"version\"[^,]*' "$DEST/cores/PROVENANCE.json" 2>/dev/null || echo '?')"
+node "$SYNC" sync "$ROOT/public/apps/llvm-mos-65816/play"
