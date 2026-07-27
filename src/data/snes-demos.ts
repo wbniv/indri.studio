@@ -1924,7 +1924,7 @@ export const SNES_DEMOS: SnesDemo[] = [
     "slug": "lzss-gallery",
     "displayMode": 7,
     "title": "LZSS Mode 7 Gallery",
-    "desc": "A complete LZSS compressor/decompressor benchmark on the 65816. Sixty public-domain artworks use full-composition, aspect-preserving Mode 7 rasters with up to 219 artwork colors, then recompress and verify byte-for-byte on-console. Left/Right or the bounded on-screen chevrons navigate. Compiler stress-test #119.",
+    "desc": "A complete LZSS compressor/decompressor benchmark on the 65816. Sixty-two public-domain artworks use full-composition, aspect-preserving Mode 7 rasters with up to 219 artwork colors, then recompress and verify byte-for-byte on-console. Left/Right or the bounded on-screen chevrons navigate. Compiler stress-test #119.",
     "keys": "Left/Right or tap/click a visible chevron: previous/next work — progress is measured work; D/C/V report stage frames",
     "category": "algorithms",
     "works": [
@@ -1994,9 +1994,9 @@ export const SNES_DEMOS: SnesDemo[] = [
       ["→", "Next work"]
     ],
     "selfcheck": {
-      "off": "0x36a",
+      "off": "0x376",
       "len": 2,
-      "want": "0x1D8E",
+      "want": "0x5CF0",
       "frames": 200000,
       "label": "lzss-gallery"
     }
