@@ -12,5 +12,23 @@ What lands here:
 ## Verification
 
 1. `pnpm build` green; `sync --check` passes on `public/apps/llvm-mos-65816/play`.
-2. Headless selfcheck on the built `/apps/llvm-mos-65816/snes/mandel-display/?verify=1` page → `badge pass`.
-3. Deploy via `task publish`; re-check one live page.
+
+    ```
+    14:52:45 [build] 133 page(s) built in 1m 23s
+    14:52:45 [build] Complete!
+
+    ✓ app.js  sha256 ce57397a66aa… == package
+    ✓ cores/PROVENANCE.json / bsnes_jg.js / bsnes_jg.wasm == package
+    ✓ ENGINE_VERSION  site has 1.0.0, installed package is 1.0.0
+    public/apps/llvm-mos-65816/play matches @wbniv/bsnes-jg-player@1.0.0.
+    ```
+    PASS (2026-07-27)
+
+2. Selfcheck on the built `/apps/llvm-mos-65816/snes/mandel-display/` page → gate CRC. (Headless `--virtual-time-budget` hangs on this site — some pending request stalls virtual time — so the check ran in live Chrome as a deterministic frame-stepped WRAM read, the same computation `?verify=1` performs.)
+
+    ```
+    {"want":"0x204F","got":"0x204F","frames":5800,"pass":true}
+    ```
+    PASS (2026-07-27)
+
+3. Deploy via `task publish`; re-check one live page. — NOT YET RUN (deploy is tag-driven; run after merging this branch).
