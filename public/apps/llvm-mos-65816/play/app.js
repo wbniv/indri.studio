@@ -446,6 +446,24 @@
 
     window.addEventListener("keydown", onKey(true));
     window.addEventListener("keyup", onKey(false));
+    // The gallery's in-ROM chevrons are sprites, not DOM controls. On touch screens,
+    // make the two canvas halves act as momentary SNES Left/Right presses.
+    var touchRelease = 0;
+    canvas.addEventListener("pointerdown", function (e) {
+      if (current !== "lzss-gallery" || e.pointerType === "mouse") return;
+      e.preventDefault();
+      var r = canvas.getBoundingClientRect();
+      var bit = e.clientX < r.left + r.width / 2 ? JOY.Left : JOY.Right;
+      pad |= bit;
+      clearTimeout(touchRelease);
+      touchRelease = setTimeout(function () { pad &= ~bit; }, 120);
+    }, { passive: false });
+    ["pointerup", "pointercancel"].forEach(function (name) {
+      canvas.addEventListener(name, function () {
+        if (current !== "lzss-gallery") return;
+        pad &= ~(JOY.Left | JOY.Right);
+      });
+    });
     var game = document.getElementById("game");
     if (game) {
       ["dragover", "drop"].forEach(function (ev) {

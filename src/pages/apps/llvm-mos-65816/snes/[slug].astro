@@ -85,6 +85,22 @@ const isSelfRunning = demo.keys.toLowerCase().startsWith("self-running");
         </>
       )}
 
+      {demo.works && (
+        <>
+          <h2>Public-domain corpus</h2>
+          <p>All nineteen works preserve their complete composition. The original ten Art Institute
+          images are CC0; linked additions point to their public-domain museum records.</p>
+          <table class="rp-table">
+            <thead><tr><th>Artist</th><th>Work</th></tr></thead>
+            <tbody>{demo.works.map(([artist, work, url]) => (
+              <tr><td>{artist}</td><td>{url ? <a href={url}>{work}</a> : work}</td></tr>
+            ))}</tbody>
+          </table>
+          <img class="rp-contact" src="/apps/llvm-mos-65816/play/preview/lzss-gallery-contact-sheet.png"
+            alt="Contact sheet of all nineteen Mode 7 gallery artworks" loading="lazy" />
+        </>
+      )}
+
       {demo.bugFound && (
         <>
           <h2>Compiler bug this demo guards against</h2>
@@ -171,6 +187,7 @@ const isSelfRunning = demo.keys.toLowerCase().startsWith("self-running");
     color: var(--color-on-surface-variant); padding: .35rem .6rem; border-bottom: 1px solid var(--color-outline-variant);
   }
   .rp-table td { padding: .35rem .6rem; border-bottom: 1px solid var(--color-outline-variant); }
+  .rp-contact { display:block; width:min(100%,512px); height:auto; margin:1.5rem auto; border:1px solid #ffffff24; background:#000; }
   .rp-doc kbd {
     font: 600 .82em var(--font-mono); border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
     border-radius: 4px; padding: .05em .4em;

@@ -1250,8 +1250,8 @@
       "selfcheck": {
         "off": "0x21",
         "len": 2,
-        "want": "0xBFAB",
-        "frames": 75000,
+        "want": "0x9497",
+        "frames": 150000,
         "label": "lzss-gallery"
       }
     }

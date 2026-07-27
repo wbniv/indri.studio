@@ -34,6 +34,7 @@ export interface SnesDemo {
   controls: [string, string][] | null;
   selfcheck: SnesDemoSelfcheck;
   bugFound?: SnesDemoBugFound;
+  works?: [string, string, string?][];
 }
 
 export const SNES_DEMOS: SnesDemo[] = [
@@ -1923,9 +1924,24 @@ export const SNES_DEMOS: SnesDemo[] = [
     "slug": "lzss-gallery",
     "displayMode": 7,
     "title": "LZSS Mode 7 Gallery",
-    "desc": "A complete LZSS compressor/decompressor benchmark on the 65816. Ten CC0 artworks use aspect-preserving maximum-size Mode 7 rasters and 219 artwork colors, are recompressed on-console, compared with host goldens, decoded again, and verified byte-for-byte. Left/Right navigation preempts benchmark work. Compiler stress-test #119.",
-    "keys": "Left/Right: previous/next work — progress is measured work; D/C/V report stage frames",
+    "desc": "A complete LZSS compressor/decompressor benchmark on the 65816. Nineteen public-domain artworks use full-composition, aspect-preserving Mode 7 rasters with up to 219 artwork colors, then recompress and verify byte-for-byte on-console. Left/Right or a tap on either half of the picture navigates. Compiler stress-test #119.",
+    "keys": "Left/Right or tap left/right half: previous/next work — progress is measured work; D/C/V report stage frames",
     "category": "algorithms",
+    "works": [
+      ["Katsushika Hokusai","Under the Wave off Kanagawa"], ["Vincent van Gogh","The Bedroom"],
+      ["Georges Seurat","A Sunday on La Grande Jatte — 1884"], ["Pierre-Auguste Renoir","Two Sisters (On the Terrace)"],
+      ["Claude Monet","Water Lilies"], ["Paul Cézanne","The Basket of Apples"], ["Claude Monet","Stack of Wheat"],
+      ["Vincent van Gogh","Self-Portrait"], ["Gustave Caillebotte","Paris Street; Rainy Day"], ["Claude Monet","Poppy Field (Giverny)"],
+      ["Hieronymus Bosch","The Garden of Earthly Delights","https://www.museodelprado.es/en/the-collection/art-work/the-garden-of-earthly-delights-triptych/02388242-6d6a-4e9e-a992-e1311eab3609"],
+      ["Edvard Munch","The Scream","https://www.nasjonalmuseet.no/en/collection/object/NG.M.00939"],
+      ["Francisco de Goya","The Third of May 1808","https://www.museodelprado.es/en/the-collection/art-work/the-3rd-of-may-1808-in-madrid-or-the-executions/5e177409-2993-4240-97fb-847a02c6496c"],
+      ["Gustav Klimt","The Kiss (Lovers)","https://www.belvedere.at/en/kiss-gustav-klimt"],
+      ["Johannes Vermeer","View of Delft","https://www.mauritshuis.nl/en/our-collection/artworks/92-view-of-delft"],
+      ["Jacob van Ruisdael","The Windmill at Wijk bij Duurstede","https://www.rijksmuseum.nl/en/collection/SK-C-211"],
+      ["Ambrosius Bosschaert the Elder","Flower Still Life","https://www.getty.edu/art/collection/object/103REY"],
+      ["Piet Mondriaan","Tableau No. VII","https://commons.wikimedia.org/wiki/File:Piet_Mondrian_Tableau_N_VII.jpg"],
+      ["Hendrick Avercamp","Winter Landscape with Ice Skaters","https://www.rijksmuseum.nl/en/collection/SK-A-1718"]
+    ],
     "controls": [
       ["←", "Previous work"],
       ["→", "Next work"]
@@ -1933,8 +1949,8 @@ export const SNES_DEMOS: SnesDemo[] = [
     "selfcheck": {
       "off": "0x21",
       "len": 2,
-      "want": "0xBFAB",
-      "frames": 75000,
+      "want": "0x9497",
+      "frames": 150000,
       "label": "lzss-gallery"
     }
   }
