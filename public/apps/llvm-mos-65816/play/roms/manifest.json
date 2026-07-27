@@ -1248,10 +1248,10 @@
       "id": "lzss-gallery",
       "title": "LZSS Mode 7 Gallery",
       "selfcheck": {
-        "off": "0x3c",
+        "off": "0x29c",
         "len": 2,
-        "want": "0xB5D7",
-        "frames": 150000,
+        "want": "0x3D44",
+        "frames": 200000,
         "label": "lzss-gallery"
       }
     }

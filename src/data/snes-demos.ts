@@ -1924,7 +1924,7 @@ export const SNES_DEMOS: SnesDemo[] = [
     "slug": "lzss-gallery",
     "displayMode": 7,
     "title": "LZSS Mode 7 Gallery",
-    "desc": "A complete LZSS compressor/decompressor benchmark on the 65816. Twenty public-domain artworks use full-composition, aspect-preserving Mode 7 rasters with up to 219 artwork colors, then recompress and verify byte-for-byte on-console. Left/Right or a tap on either half of the picture navigates. Compiler stress-test #119.",
+    "desc": "A complete LZSS compressor/decompressor benchmark on the 65816. Twenty-six public-domain artworks use full-composition, aspect-preserving Mode 7 rasters with up to 219 artwork colors, then recompress and verify byte-for-byte on-console. Left/Right or a tap on either half of the picture navigates. Compiler stress-test #119.",
     "keys": "Left/Right or tap left/right half: previous/next work — progress is measured work; D/C/V report stage frames",
     "category": "algorithms",
     "works": [
@@ -1947,7 +1947,13 @@ export const SNES_DEMOS: SnesDemo[] = [
       ["Ambrosius Bosschaert the Elder","Flower Still Life","https://www.getty.edu/art/collection/object/103REY"],
       ["Vincent van Gogh","Sunflowers","https://www.nationalgallery.org.uk/paintings/vincent-van-gogh-sunflowers"],
       ["Piet Mondriaan","Tableau No. VII","https://commons.wikimedia.org/wiki/File:Piet_Mondrian_Tableau_N_VII.jpg"],
-      ["Hendrick Avercamp","Winter Landscape with Ice Skaters","https://www.rijksmuseum.nl/en/collection/SK-A-1718"]
+      ["Hendrick Avercamp","Winter Landscape with Ice Skaters","https://www.rijksmuseum.nl/en/collection/SK-A-1718"],
+      ["George Inness","The Home of the Heron","https://www.artic.edu/artworks/64724/the-home-of-the-heron"],
+      ["Artist unknown","Dragon","https://www.artic.edu/artworks/140610/dragon"],
+      ["After Gao Kegong","Scholar in Landscape","https://www.artic.edu/artworks/12314/scholar-in-landscape"],
+      ["Claude Monet","Houses of Parliament, London","https://www.artic.edu/artworks/16584/houses-of-parliament-london"],
+      ["John Singer Sargent","Thistles","https://www.artic.edu/artworks/145807/thistles"],
+      ["Vincent van Gogh","The Starry Night","https://www.moma.org/collection/works/79802"]
     ],
     "controls": [
       ["←", "Previous work"],
@@ -1956,8 +1962,8 @@ export const SNES_DEMOS: SnesDemo[] = [
     "selfcheck": {
       "off": "0x3c",
       "len": 2,
-      "want": "0xB5D7",
-      "frames": 150000,
+      "want": "0x3D44",
+      "frames": 200000,
       "label": "lzss-gallery"
     }
   }
