@@ -1215,7 +1215,7 @@
       "id": "cpu6502",
       "title": "6502 CPU Simulator",
       "selfcheck": {
-        "off": "0xade",
+        "off": "0xb6a",
         "len": 2,
         "want": "0xAC8A",
         "frames": 1000,
