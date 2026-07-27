@@ -446,11 +446,11 @@
 
     window.addEventListener("keydown", onKey(true));
     window.addEventListener("keyup", onKey(false));
-    // The gallery's in-ROM chevrons are sprites, not DOM controls. On touch screens,
-    // make the two canvas halves act as momentary SNES Left/Right presses.
+    // The gallery's in-ROM chevrons are sprites, not DOM controls. Make the two
+    // canvas halves act as momentary SNES Left/Right presses for touch and mouse.
     var touchRelease = 0;
     canvas.addEventListener("pointerdown", function (e) {
-      if (current !== "lzss-gallery" || e.pointerType === "mouse") return;
+      if (current !== "lzss-gallery") return;
       e.preventDefault();
       var r = canvas.getBoundingClientRect();
       var bit = e.clientX < r.left + r.width / 2 ? JOY.Left : JOY.Right;
