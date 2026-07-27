@@ -1924,8 +1924,8 @@ export const SNES_DEMOS: SnesDemo[] = [
     "slug": "lzss-gallery",
     "displayMode": 7,
     "title": "LZSS Mode 7 Gallery",
-    "desc": "A complete LZSS compressor/decompressor benchmark on the 65816. Twenty-six public-domain artworks use full-composition, aspect-preserving Mode 7 rasters with up to 219 artwork colors, then recompress and verify byte-for-byte on-console. Left/Right or a tap on either half of the picture navigates. Compiler stress-test #119.",
-    "keys": "Left/Right or tap left/right half: previous/next work — progress is measured work; D/C/V report stage frames",
+    "desc": "A complete LZSS compressor/decompressor benchmark on the 65816. Thirty-six public-domain artworks use full-composition, aspect-preserving Mode 7 rasters with up to 219 artwork colors, then recompress and verify byte-for-byte on-console. Left/Right or the bounded on-screen chevrons navigate. Compiler stress-test #119.",
+    "keys": "Left/Right or tap/click a visible chevron: previous/next work — progress is measured work; D/C/V report stage frames",
     "category": "algorithms",
     "works": [
       ["Katsushika Hokusai","Under the Wave off Kanagawa","https://www.artic.edu/artworks/24645"],
@@ -1953,16 +1953,26 @@ export const SNES_DEMOS: SnesDemo[] = [
       ["After Gao Kegong","Scholar in Landscape","https://www.artic.edu/artworks/12314/scholar-in-landscape"],
       ["Claude Monet","Houses of Parliament, London","https://www.artic.edu/artworks/16584/houses-of-parliament-london"],
       ["John Singer Sargent","Thistles","https://www.artic.edu/artworks/145807/thistles"],
-      ["Vincent van Gogh","The Starry Night","https://www.moma.org/collection/works/79802"]
+      ["Vincent van Gogh","The Starry Night","https://www.moma.org/collection/works/79802"],
+      ["Aert van der Neer","River View by Moonlight","https://id.rijksmuseum.nl/200107781"],
+      ["Jacob van Ruisdael","Mountainous Landscape with Waterfall","https://id.rijksmuseum.nl/200108484"],
+      ["Meindert Hobbema","Wooded Landscape with Merrymakers in a Cart","https://id.rijksmuseum.nl/200445746"],
+      ["Jan van Goyen","Panoramic View of a Wide River","https://id.rijksmuseum.nl/200109337"],
+      ["Salomon van Ruysdael","Sailing Vessels on an Inland Body of Water","https://id.rijksmuseum.nl/20026241"],
+      ["Willem van de Velde","Ships near the Coast during a Calm","https://id.rijksmuseum.nl/20026835"],
+      ["Pieter de Hooch","Interior with Women beside a Linen Cupboard","https://id.rijksmuseum.nl/2003051"],
+      ["Pieter Saenredam","Interior of the Sint-Odulphuskerk in Assendelft","https://id.rijksmuseum.nl/200107965"],
+      ["Rachel Ruysch","Still Life with Flowers on a Marble Tabletop","https://id.rijksmuseum.nl/20027537"],
+      ["Jan Davidsz. de Heem","Still Life with Flowers in a Glass Vase","https://id.rijksmuseum.nl/20029045"]
     ],
     "controls": [
       ["←", "Previous work"],
       ["→", "Next work"]
     ],
     "selfcheck": {
-      "off": "0x3c",
+      "off": "0x2da",
       "len": 2,
-      "want": "0x3D44",
+      "want": "0xBA3A",
       "frames": 200000,
       "label": "lzss-gallery"
     }
