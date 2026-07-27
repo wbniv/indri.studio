@@ -459,14 +459,24 @@
 
     window.addEventListener("keydown", onKey(true));
     window.addEventListener("keyup", onKey(false));
-    // The gallery's in-ROM chevrons are sprites, not DOM controls. Make the two
-    // canvas halves act as momentary SNES Left/Right presses for touch and mouse.
+    // The gallery's in-ROM chevrons are sprites, not DOM controls. Hit-test
+    // only their 24x24 logical squares; artwork/status taps must stay inert.
+    function galleryChevronBitAt(x, y) {
+      if (y < 70 || y >= 94) return 0;
+      if (x >= 0 && x < 24) return JOY.Left;
+      if (x >= 232 && x < 256) return JOY.Right;
+      return 0;
+    }
     var touchRelease = 0;
     canvas.addEventListener("pointerdown", function (e) {
       if (current !== "lzss-gallery") return;
-      e.preventDefault();
       var r = canvas.getBoundingClientRect();
-      var bit = e.clientX < r.left + r.width / 2 ? JOY.Left : JOY.Right;
+      if (!r.width || !r.height) return;
+      var x = (e.clientX - r.left) * canvas.width / r.width;
+      var y = (e.clientY - r.top) * canvas.height / r.height;
+      var bit = galleryChevronBitAt(x, y);
+      if (!bit) return;
+      e.preventDefault();
       pad |= bit;
       clearTimeout(touchRelease);
       touchRelease = setTimeout(function () { pad &= ~bit; }, 120);
