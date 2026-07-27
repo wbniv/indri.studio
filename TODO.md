@@ -6,10 +6,8 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 ### SNES player package
 
-- [verify T2] **2026-07-27** Deploy the `snes-package-adoption` branch (merge → `task publish`) and run
-  step 3 of [the plan](docs/plans/2026-07-27-snes-package-adoption.md) against production (steps 1–2
-  recorded PASS in the plan). After the first npm publish of `@wbniv/bsnes-jg-player`, swap the git dep
-  for the npm version.
+- [T1] **2026-07-27** After the first npm publish of `@wbniv/bsnes-jg-player`, swap the git dep
+  (`github:wbniv/bsnes-jg-wasm#npm-package`) for the npm version and re-run `pnpm run sync-engine`.
 
 ### Astro 7 Migration
 
@@ -36,6 +34,8 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 _Nothing parked._
 
 ## Done
+
+- [x] 2026-07-27 — [snes-package] Engine vendored from @wbniv/bsnes-jg-player; deployed v0.1.120; prod selfcheck PASS. See [plan](docs/plans/2026-07-27-snes-package-adoption.md).
 
 - [x] **2026-07-24** Fixed the stale `scripts/sync-65816-docs.sh` manifest — found it already pointing every doc row at `main` (no `wt/321-snes-hwref` reference remained), no code change needed; just marking the TODO done. 
 - [x] **2026-06-27** Fixed `/blossom` HUD clipping — `present()` cropped raw rows `[8,232)` (`yoff=8` "skip overscan"), but the active picture sits flush at the buffer top; gate refs use `[0,224)`. Set `yoff=0` in indri (`7b82611`), `bsnes-jg-wasm` source (`aaacbae`), and biohack (`v1.0.74`→regressed via `space-invaders` bundle re-sync→re-fixed `fc918d5`/`v1.0.76`); also centred the indri player (`82274c3`). Both sites verified live at 125% zoom (20–21 px margin) — [plan](docs/plans/2026-06-27-emulator-hud-overscan-crop-fix.md)

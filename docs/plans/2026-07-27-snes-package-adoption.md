@@ -31,4 +31,12 @@ What lands here:
     ```
     PASS (2026-07-27)
 
-3. Deploy via `task publish`; re-check one live page. — NOT YET RUN (deploy is tag-driven; run after merging this branch).
+3. Deploy via tag; re-check one live page.
+
+    ```
+    v0.1.120 deploy: success
+    prod /apps/llvm-mos-65816/snes/mandel-display/?verify=1:
+      ✓ FIDELITY 0x204F == gate (gate jgxcheck CRC, 5800 frames)  — badge pass
+    prod ENGINE_VERSION: @wbniv/bsnes-jg-player 1.0.0
+    ```
+    PASS (2026-07-27)
