@@ -93,7 +93,7 @@ const isSelfRunning = demo.keys.toLowerCase().startsWith("self-running");
           <table class="rp-table">
             <thead><tr><th>Artist</th><th>Work</th></tr></thead>
             <tbody>{demo.works.map(([artist, work, url]) => (
-              <tr><td>{artist}</td><td>{url ? <a href={url}>{work}</a> : work}</td></tr>
+              <tr><td>{url ? <a href={url}>{artist}</a> : artist}</td><td>{url ? <a href={url}>{work}</a> : work}</td></tr>
             ))}</tbody>
           </table>
           <img class="rp-contact" src="/apps/llvm-mos-65816/play/preview/lzss-gallery-contact-sheet.png"
