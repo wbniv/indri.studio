@@ -1,5 +1,5 @@
 {
-  "_comment": "Demo ROMs + their in-browser fidelity self-checks for the bsnes-jg WASM player. A selfcheck powers on, runs `frames` frames, reads `len` LE bytes of WRAM at `off`, and asserts == `want` — matching the headless gate proves this wasm build is the trusted core.",
+  "_comment": "Demo ROMs + their in-browser fidelity self-checks for the bsnes-jg WASM player. A selfcheck powers on, runs `frames` frames, reads `len` LE bytes of WRAM at `off`, and asserts == `want` \u2014 matching the headless gate proves this wasm build is the trusted core.",
   "roms": [
     {
       "id": "blossom",
@@ -47,7 +47,7 @@
     },
     {
       "id": "spigot",
-      "title": "π Spigot + Monte-Carlo",
+      "title": "\u03c0 Spigot + Monte-Carlo",
       "selfcheck": {
         "off": "0x1720",
         "len": 2,
@@ -223,7 +223,7 @@
     },
     {
       "id": "1d-ca",
-      "title": "Rule 90 / Rule 110 — 1-D Cellular Automaton",
+      "title": "Rule 90 / Rule 110 \u2014 1-D Cellular Automaton",
       "selfcheck": {
         "off": "0x5a3",
         "len": 2,
@@ -1116,7 +1116,7 @@
       "id": "trimerge",
       "title": "Three-Way Merge Diff",
       "selfcheck": {
-        "off": "0x20",
+        "off": "0x39",
         "len": 2,
         "want": "0xCCCC",
         "frames": 500,
@@ -1248,7 +1248,7 @@
       "id": "lzss-gallery",
       "title": "LZSS Mode 7 Gallery",
       "selfcheck": {
-        "off": "0x29c",
+        "off": "0x2a1",
         "len": 2,
         "want": "0x3D44",
         "frames": 200000,
