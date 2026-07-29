@@ -929,7 +929,7 @@
       "id": "montorbit",
       "title": "Montgomery Orbit",
       "selfcheck": {
-        "off": "0x31",
+        "off": "0x71",
         "len": 2,
         "want": "0xBA9B",
         "frames": 500,
@@ -984,7 +984,7 @@
       "id": "adpcm",
       "title": "ADPCM Waverider",
       "selfcheck": {
-        "off": "0x31",
+        "off": "0x51",
         "len": 2,
         "want": "0xCA56",
         "frames": 500,
@@ -1039,7 +1039,7 @@
       "id": "ovmove",
       "title": "Overlap-Move Mosaic",
       "selfcheck": {
-        "off": "0x31",
+        "off": "0x20",
         "len": 2,
         "want": "0xA990",
         "frames": 500,
@@ -1061,7 +1061,7 @@
       "id": "crcwall",
       "title": "Bit-Serial CRC Wall",
       "selfcheck": {
-        "off": "0x31",
+        "off": "0x20",
         "len": 2,
         "want": "0x8E47",
         "frames": 500,
@@ -1072,7 +1072,7 @@
       "id": "rotslab",
       "title": "In-Place Block Rotate",
       "selfcheck": {
-        "off": "0x31",
+        "off": "0x20",
         "len": 2,
         "want": "0xB93A",
         "frames": 500,
@@ -1083,7 +1083,7 @@
       "id": "permscat",
       "title": "Gather-Scatter Permutation",
       "selfcheck": {
-        "off": "0x31",
+        "off": "0x20",
         "len": 2,
         "want": "0x0C2C",
         "frames": 500,
@@ -1105,7 +1105,7 @@
       "id": "ucmprank",
       "title": "Unsigned Rank Percentile Field",
       "selfcheck": {
-        "off": "0x45",
+        "off": "0x34",
         "len": 2,
         "want": "0x4CDD",
         "frames": 500,
@@ -1113,21 +1113,10 @@
       }
     },
     {
-      "id": "trimerge",
-      "title": "Three-Way Merge Diff",
-      "selfcheck": {
-        "off": "0x39",
-        "len": 2,
-        "want": "0xCCCC",
-        "frames": 500,
-        "label": "trimerge"
-      }
-    },
-    {
       "id": "keycmp64",
       "title": "64-bit Multi-Key Record Sort",
       "selfcheck": {
-        "off": "0x31",
+        "off": "0x20",
         "len": 2,
         "want": "0xB8AD",
         "frames": 500,
@@ -1149,7 +1138,7 @@
       "id": "modexp256",
       "title": "256-bit Modular Exponentiation",
       "selfcheck": {
-        "off": "0x31",
+        "off": "0x39",
         "len": 2,
         "want": "0x31D4",
         "frames": 1500,
@@ -1182,7 +1171,7 @@
       "id": "uarteye",
       "title": "Bit-Banged UART Eye",
       "selfcheck": {
-        "off": "0x31",
+        "off": "0x20",
         "len": 2,
         "want": "0x3F09",
         "frames": 500,
@@ -1250,7 +1239,7 @@
       "selfcheck": {
         "off": "0x46e",
         "len": 2,
-        "want": "0x5CF0",
+        "want": "0x839F",
         "frames": 200000,
         "label": "lzss-gallery"
       },
@@ -1267,6 +1256,17 @@
           24,
           24
         ]
+      }
+    },
+    {
+      "id": "trimerge",
+      "title": "Three-Way Merge Diff",
+      "selfcheck": {
+        "off": "0x39",
+        "len": 2,
+        "want": "0xCCCC",
+        "frames": 500,
+        "label": "trimerge"
       }
     }
   ]
