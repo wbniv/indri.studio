@@ -1237,11 +1237,12 @@
       "id": "lzss-gallery",
       "title": "LZSS Mode 7 Gallery",
       "selfcheck": {
-        "off": "0x46e",
+        "symbol": "gallery_last_z",
+        "off": "0x473",
         "len": 2,
-        "want": "0x839F",
-        "frames": 200000,
-        "label": "lzss-gallery"
+        "want": "0x3BC9",
+        "frames": 12000,
+        "label": "work 0 repack size (decode+repack == host report.json compressed_bytes)"
       },
       "touchNav": {
         "left": [
