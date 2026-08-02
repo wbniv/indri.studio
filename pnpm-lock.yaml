@@ -19,7 +19,7 @@ importers:
         version: 0.44.10
       '@wbniv/bsnes-jg-player':
         specifier: github:wbniv/bsnes-jg-wasm#npm-package
-        version: https://codeload.github.com/wbniv/bsnes-jg-wasm/tar.gz/6edc1c3fbaa8b1f8e8b86bc86181176ec0054191(astro@6.4.8(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(supports-color@10.2.2))
+        version: https://codeload.github.com/wbniv/bsnes-jg-wasm/tar.gz/642d3c9167b5603303c9e266e94732aa32478dfc(astro@6.4.8(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(supports-color@10.2.2))
       astro:
         specifier: ^6.4.8
         version: 6.4.8(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(supports-color@10.2.2)
@@ -970,8 +970,8 @@ packages:
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
     deprecated: Potential CWE-502 - Update to 1.3.1 or higher
 
-  '@wbniv/bsnes-jg-player@https://codeload.github.com/wbniv/bsnes-jg-wasm/tar.gz/6edc1c3fbaa8b1f8e8b86bc86181176ec0054191':
-    resolution: {gitHosted: true, integrity: sha512-EuQ8Cq4Xcd/lagy1ZPE50MWP+akIHYzEOPciUZyJhj66jxFwDpWpszO16z6P+KzJhUCfOM2uTMIw+SMCnKiFAQ==, tarball: https://codeload.github.com/wbniv/bsnes-jg-wasm/tar.gz/6edc1c3fbaa8b1f8e8b86bc86181176ec0054191}
+  '@wbniv/bsnes-jg-player@https://codeload.github.com/wbniv/bsnes-jg-wasm/tar.gz/642d3c9167b5603303c9e266e94732aa32478dfc':
+    resolution: {gitHosted: true, integrity: sha512-5UZScJCQ01xgFlL1JxEsZGI6BbxNti/MXoUsjadCGSCtq3KDWBeDd+VYlzl/xPhu+gXu2BA2njAm2jY+A0E6og==, tarball: https://codeload.github.com/wbniv/bsnes-jg-wasm/tar.gz/642d3c9167b5603303c9e266e94732aa32478dfc}
     version: 1.0.0
     engines: {node: '>=20'}
     hasBin: true
@@ -2839,7 +2839,7 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
-  '@wbniv/bsnes-jg-player@https://codeload.github.com/wbniv/bsnes-jg-wasm/tar.gz/6edc1c3fbaa8b1f8e8b86bc86181176ec0054191(astro@6.4.8(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(supports-color@10.2.2))':
+  '@wbniv/bsnes-jg-player@https://codeload.github.com/wbniv/bsnes-jg-wasm/tar.gz/642d3c9167b5603303c9e266e94732aa32478dfc(astro@6.4.8(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(supports-color@10.2.2))':
     optionalDependencies:
       astro: 6.4.8(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(supports-color@10.2.2)
 
