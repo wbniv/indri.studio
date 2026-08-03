@@ -915,17 +915,6 @@
       }
     },
     {
-      "id": "truncstair",
-      "title": "Truncation Staircase",
-      "selfcheck": {
-        "off": "0x31",
-        "len": 2,
-        "want": "0x02CA",
-        "frames": 500,
-        "label": "rounding CRC"
-      }
-    },
-    {
       "id": "montorbit",
       "title": "Montgomery Orbit",
       "selfcheck": {
@@ -1260,6 +1249,72 @@
       }
     },
     {
+      "id": "trimerge",
+      "title": "Three-Way Merge Diff",
+      "selfcheck": {
+        "off": "0x39",
+        "len": 2,
+        "want": "0xCCCC",
+        "frames": 500,
+        "label": "trimerge"
+      }
+    },
+    {
+      "id": "truncstair",
+      "title": "Truncation Staircase",
+      "selfcheck": {
+        "off": "0x31",
+        "len": 2,
+        "want": "0x02CA",
+        "frames": 500,
+        "label": "rounding CRC"
+      }
+    },
+    {
+      "id": "cartsize-hirom-4m",
+      "title": "HiROM 32 Mbit Cartridge Test",
+      "selfcheck": {
+        "off": "0x53",
+        "len": 2,
+        "want": "0x48EE",
+        "frames": 1800,
+        "label": "canary oracle (corpus @ WRAM 0x53)"
+      }
+    },
+    {
+      "id": "cartsize-exhirom-6m",
+      "title": "ExHiROM 48 Mbit Cartridge Test",
+      "selfcheck": {
+        "off": "0x4c",
+        "len": 2,
+        "want": "0xA274",
+        "frames": 1800,
+        "label": "canary oracle (corpus @ WRAM 0x4c)"
+      }
+    },
+    {
+      "id": "cartsize-exhirom-8m",
+      "title": "ExHiROM 64 Mbit Cartridge Test",
+      "selfcheck": {
+        "off": "0x43",
+        "len": 2,
+        "want": "0x29B9",
+        "frames": 1800,
+        "label": "canary oracle (corpus @ WRAM 0x43)"
+      }
+    },
+    {
+      "id": "seamdemo",
+      "title": "Seam Demo \u2014 Three-Act Boundary Cartridge",
+      "selfcheck": {
+        "off": "0x65",
+        "len": 2,
+        "want": "0x3277",
+        "frames": 7200,
+        "label": "three-act fold (corpus @ WRAM 0x65)"
+      }
+    },
+    {
       "id": "svx2-fastrom-video",
       "title": "SVX2 FastROM Animated Video",
       "selfcheck": {
@@ -1272,14 +1327,14 @@
       }
     },
     {
-      "id": "trimerge",
-      "title": "Three-Way Merge Diff",
+      "id": "apollo-daylight",
+      "title": "Apollo 11 Daylight Launch",
       "selfcheck": {
-        "off": "0x39",
-        "len": 2,
-        "want": "0xCCCC",
-        "frames": 500,
-        "label": "trimerge"
+        "off": "0x2C",
+        "len": 4,
+        "want": "0x00000000",
+        "frames": 2000,
+        "label": "two clean playback loops of the 600-frame SVX2 stream at one frame per VBlank with zero decode failures (composite gate @ WRAM $002C); the whole-loop byte-for-byte check against the host oracle runs in the build gate"
       }
     }
   ]

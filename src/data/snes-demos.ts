@@ -1921,6 +1921,82 @@ export const SNES_DEMOS: SnesDemo[] = [
   }
 ,
   {
+    "slug": "apollo-daylight",
+    "displayMode": 7,
+    "title": "Apollo 11 Daylight Launch",
+    "desc": "The Saturn V climbing out of the smoke cloud on 16 mm 1969 film — the SVX2 codec's hardest realistic input, at 78.9% compression and a locked true 59.94 fps.",
+    "keys": "No controls — the 600-frame loop plays continuously at one frame per VBlank.",
+    "category": "video",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x2C",
+      "len": 4,
+      "want": "0x00000000",
+      "frames": 2000,
+      "label": "two clean playback loops with zero decode failures"
+    }
+  },
+  {
+    "slug": "cartsize-exhirom-6m",
+    "title": "ExHiROM 48 Mbit Cartridge Test",
+    "desc": "A 6 MiB extended-mapping cartridge — physically 32 Mbit + 16 Mbit — that reads across the 4 MiB device boundary the ordinary SNES maps cannot reach past. The Tales of Phantasia configuration, generated from a port of the bsnes-jg cartridge bus.",
+    "keys": "Self-running — no controls",
+    "category": "cartridge",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x4c",
+      "len": 2,
+      "want": "0xA274",
+      "frames": 1800,
+      "label": "canary oracle (corpus @ WRAM 0x4c)"
+    }
+  },
+  {
+    "slug": "cartsize-exhirom-8m",
+    "title": "ExHiROM 64 Mbit Cartridge Test",
+    "desc": "An 8 MiB ExHiROM cartridge at the extended map's ceiling — including the 64 KiB that is physically present but addressable by nothing, because banks $7E/$7F are WRAM. The model reports those holes and refuses to place data in them.",
+    "keys": "Self-running — no controls",
+    "category": "cartridge",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x43",
+      "len": 2,
+      "want": "0x29B9",
+      "frames": 1800,
+      "label": "canary oracle (corpus @ WRAM 0x43)"
+    }
+  },
+  {
+    "slug": "cartsize-hirom-4m",
+    "title": "HiROM 32 Mbit Cartridge Test",
+    "desc": "A 4 MiB HiROM cartridge that proves its own address decoder: every decoded window, every accepted mirror, and byte runs crossing one and several 64 KiB banks, all checked against a host model of the bsnes-jg cartridge bus. Green screen = every byte landed where the model said.",
+    "keys": "Self-running — no controls",
+    "category": "cartridge",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x53",
+      "len": 2,
+      "want": "0x48EE",
+      "frames": 1800,
+      "label": "canary oracle (corpus @ WRAM 0x53)"
+    }
+  },
+  {
+    "slug": "seamdemo",
+    "title": "Seam Demo — Three-Act Boundary Cartridge",
+    "desc": "A 48 Mbit ExHiROM cartridge that reads all six of its megabytes three different ways: a VM executing the cartridge as one bytecode stream, an adversarial pointer-graph walk touching every decode cell, and a Mode 7 flyover over a cart-spanning atlas. One instruction is split across the physical boundary between the two mask ROMs.",
+    "keys": "Self-running — no controls",
+    "category": "cartridge",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x65",
+      "len": 2,
+      "want": "0x3277",
+      "frames": 7200,
+      "label": "three-act fold (corpus @ WRAM 0x65)"
+    }
+  },
+  {
     "slug": "svx2-fastrom-video",
     "displayMode": 7,
     "title": "SVX2 FastROM Animated Video",
