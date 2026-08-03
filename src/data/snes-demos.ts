@@ -1921,6 +1921,27 @@ export const SNES_DEMOS: SnesDemo[] = [
   }
 ,
   {
+    "slug": "svx2-fastrom-video",
+    "displayMode": 7,
+    "title": "SVX2 FastROM Animated Video",
+    "desc": "Twenty seconds of NASA launch imagery: two Artemis animations at 2× plus genuine 59.94p Apollo 11 footage, with zero-slip SVX2 decoding.",
+    "keys": "Start pause/resume · A resume · L/R frame step · ←/→ seek or hold to shuttle",
+    "category": "rendering",
+    "controls": [
+      ["Start", "Pause or resume"],
+      ["A", "Resume after seeking"],
+      ["L / R", "Step one frame"],
+      ["← / →", "Seek one second; hold for 2×/4×/8× shuttle"]
+    ],
+    "selfcheck": {
+      "off": "0x206",
+      "len": 4,
+      "want": "0x00000000",
+      "frames": 4000,
+      "label": "1,200-frame Fast ExHiROM SVX2 composite health"
+    }
+  },
+  {
     "slug": "lzss-gallery",
     "displayMode": 7,
     "title": "LZSS Mode 7 Gallery",

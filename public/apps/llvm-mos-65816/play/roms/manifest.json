@@ -1260,6 +1260,18 @@
       }
     },
     {
+      "id": "svx2-fastrom-video",
+      "title": "SVX2 FastROM Animated Video",
+      "selfcheck": {
+        "off": "0x206",
+        "len": 4,
+        "want": "0x00000000",
+        "frames": 4000,
+        "blankscanRows": 5,
+        "label": "mixed-cadence 1200-frame Fast ExHiROM SVX2 stream, Artemis 2x plus Apollo 59.94p, dashboard reset, three cut labels, seam crossing, and zero failures (composite gate @ WRAM $0206)"
+      }
+    },
+    {
       "id": "trimerge",
       "title": "Three-Way Merge Diff",
       "selfcheck": {
