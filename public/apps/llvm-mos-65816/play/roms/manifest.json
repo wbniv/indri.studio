@@ -1402,6 +1402,17 @@
         "frames": 480,
         "label": "i64 popcount/clz/ctz tour CRC (corpus @ WRAM 0x13F1)"
       }
+    },
+    {
+      "id": "shift64seam",
+      "title": "64-Bit Limb-Seam Barrel",
+      "selfcheck": {
+        "off": "0x1409",
+        "len": 2,
+        "want": "0x2007",
+        "frames": 480,
+        "label": "variable s64 shift-seam CRC (corpus @ WRAM 0x1409)"
+      }
     }
   ]
 }

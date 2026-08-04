@@ -2191,5 +2191,20 @@ export const SNES_DEMOS: SnesDemo[] = [
       "frames": 480,
       "label": "i64 popcount/clz/ctz tour CRC (corpus @ WRAM 0x13F1)"
     }
+  },
+  {
+    "slug": "shift64seam",
+    "title": "64-Bit Limb-Seam Barrel",
+    "desc": "Variable 64-bit left, logical-right, and arithmetic-right shifts sweep the 15/16/17 and 31/32/33 limb boundaries. Three synchronized texture bands make carry and sign fill visible. Compiler stress-test #138 (Round 7).",
+    "keys": "Self-running — three shift bands sweep the highlighted limb seams",
+    "category": "ciphers",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x1409",
+      "len": 2,
+      "want": "0x2007",
+      "frames": 480,
+      "label": "variable s64 shift-seam CRC (corpus @ WRAM 0x1409)"
+    }
   }
 ];
