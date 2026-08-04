@@ -2230,11 +2230,11 @@ export const SNES_DEMOS: SnesDemo[] = [
     "category": "signals",
     "controls": null,
     "selfcheck": {
-      "off": "0x13EE",
+      "off": "0x13EC",
       "len": 2,
       "want": "0x1014",
       "frames": 1400,
-      "label": "1024-NMI native-width bracket integrity CRC (corpus @ WRAM 0x13EE)"
+      "label": "1024-NMI native-width bracket integrity CRC (corpus @ WRAM 0x13EC)"
     }
   }
 ];
