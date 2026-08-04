@@ -2269,5 +2269,14 @@ export const SNES_DEMOS: SnesDemo[] = [
     "category": "algorithms",
     "controls": null,
     "selfcheck": {"off":"0x13E6","len":2,"want":"0x5B40","frames":480,"label":"natural far-pointer comparison and ptrdiff CRC (corpus @ WRAM 0x13E6)"}
+  },
+  {
+    "slug": "brkcop",
+    "title": "Software Vectors",
+    "desc": "Real BRK and COP software interrupts enter distinct native-mode vectors from both 8-bit and 16-bit width contexts. Signature-byte return, interrupt envelopes, and handler state feed two independently moving lanes. Compiler stress-test #140 (Round 7).",
+    "keys": "Self-running — BRK and COP packets traverse their own vector lanes",
+    "category": "signals",
+    "controls": null,
+    "selfcheck": {"off":"0x39","len":2,"want":"0xA34C","frames":500,"label":"BRK/COP vector and signature-return CRC (corpus_result @ WRAM 0x39)"}
   }
 ];

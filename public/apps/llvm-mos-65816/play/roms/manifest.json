@@ -1450,6 +1450,11 @@
       "id": "farptrcmp",
       "title": "Far-Pointer Order Shuffle",
       "selfcheck": {"off":"0x13E6","len":2,"want":"0x5B40","frames":480,"label":"natural far-pointer comparison and ptrdiff CRC (corpus @ WRAM 0x13E6)"}
+    },
+    {
+      "id": "brkcop",
+      "title": "Software Vectors",
+      "selfcheck": {"off":"0x39","len":2,"want":"0xA34C","frames":500,"label":"BRK/COP vector and signature-return CRC (corpus_result @ WRAM 0x39)"}
     }
   ]
 }
