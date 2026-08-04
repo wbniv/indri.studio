@@ -1445,6 +1445,11 @@
       "id": "bankwalk",
       "title": "64K Bank-Boundary Walk",
       "selfcheck": {"off":"0x13E6","len":2,"want":"0x4ED7","frames":480,"label":"forward/index/reverse far-pointer seam CRC (corpus @ WRAM 0x13E6)"}
+    },
+    {
+      "id": "farptrcmp",
+      "title": "Far-Pointer Order Shuffle",
+      "selfcheck": {"off":"0x13E6","len":2,"want":"0x5B40","frames":480,"label":"natural far-pointer comparison and ptrdiff CRC (corpus @ WRAM 0x13E6)"}
     }
   ]
 }

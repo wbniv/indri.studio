@@ -2260,5 +2260,14 @@ export const SNES_DEMOS: SnesDemo[] = [
     "category": "signals",
     "controls": null,
     "selfcheck": {"off":"0x13E6","len":2,"want":"0x4ED7","frames":480,"label":"forward/index/reverse far-pointer seam CRC (corpus @ WRAM 0x13E6)"}
+  },
+  {
+    "slug": "farptrcmp",
+    "title": "Far-Pointer Order Shuffle",
+    "desc": "An insertion sort orders genuine 24-bit far pointers across a 64K bank boundary, then computes representable pointer differences between adjacent entries. Compiler stress-test #129 (Round 7).",
+    "keys": "Self-running — pointer lanes reorder across the bank boundary",
+    "category": "algorithms",
+    "controls": null,
+    "selfcheck": {"off":"0x13E6","len":2,"want":"0x5B40","frames":480,"label":"natural far-pointer comparison and ptrdiff CRC (corpus @ WRAM 0x13E6)"}
   }
 ];
