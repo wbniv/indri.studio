@@ -1424,6 +1424,17 @@
         "frames": 480,
         "label": "llabs and signed i64 absolute-value CRC (corpus @ WRAM 0x13F9)"
       }
+    },
+    {
+      "id": "isrbracket",
+      "title": "Mid-Bracket NMI Tunnel",
+      "selfcheck": {
+        "off": "0x13EE",
+        "len": 2,
+        "want": "0x1014",
+        "frames": 1400,
+        "label": "1024-NMI native-width bracket integrity CRC (corpus @ WRAM 0x13EE)"
+      }
     }
   ]
 }

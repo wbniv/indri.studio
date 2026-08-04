@@ -2221,5 +2221,20 @@ export const SNES_DEMOS: SnesDemo[] = [
       "frames": 480,
       "label": "llabs and signed i64 absolute-value CRC (corpus @ WRAM 0x13F9)"
     }
+  },
+  {
+    "slug": "isrbracket",
+    "title": "Mid-Bracket NMI Tunnel",
+    "desc": "A 1,024-frame interrupt torture test makes NMI repeatedly cut through long native-width arithmetic sequences. Paired computations detect any corrupted return width while a moving needle crosses the A16 tunnel. Compiler stress-test #124 (Round 7).",
+    "keys": "Self-running — NMI needle cuts through the native-width tunnel",
+    "category": "signals",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x13EE",
+      "len": 2,
+      "want": "0x1014",
+      "frames": 1400,
+      "label": "1024-NMI native-width bracket integrity CRC (corpus @ WRAM 0x13EE)"
+    }
   }
 ];
