@@ -2131,5 +2131,20 @@ export const SNES_DEMOS: SnesDemo[] = [
       "frames": 300,
       "label": "per-function A8/A16 call-boundary CRC (corpus @ WRAM 0x13E7)"
     }
+  },
+  {
+    "slug": "asmisland",
+    "title": "Inline-Asm Island",
+    "desc": "Native-width C arithmetic crosses an opaque inline-assembly island that changes M, clobbers A and flags, and uses explicitly encoded A8/A16 immediates. Compiler stress-test #125 (Round 7).",
+    "keys": "Self-running — moving scan lines cross the red assembly island",
+    "category": "signals",
+    "controls": null,
+    "selfcheck": {
+      "off": "0xBE",
+      "len": 2,
+      "want": "0x260B",
+      "frames": 300,
+      "label": "opaque inline-asm width-state CRC (corpus @ WRAM 0xBE)"
+    }
   }
 ];
