@@ -2146,5 +2146,20 @@ export const SNES_DEMOS: SnesDemo[] = [
       "frames": 300,
       "label": "opaque inline-asm width-state CRC (corpus @ WRAM 0xBE)"
     }
+  },
+  {
+    "slug": "absdiff",
+    "title": "Motion-Detect Difference Field",
+    "desc": "Three synchronized motion-detector bands exercise unsigned 8-bit, signed 16-bit, and unsigned 32-bit absolute difference. The same computed values drive the visible silhouettes and the differential CRC. Compiler stress-test #119 (Round 7).",
+    "keys": "Self-running — three width lanes track the same drifting motion silhouette",
+    "category": "signals",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x13F7",
+      "len": 2,
+      "want": "0x3482",
+      "frames": 360,
+      "label": "u8/s16/u32 absolute-difference CRC (corpus @ WRAM 0x13F7)"
+    }
   }
 ];

@@ -1369,6 +1369,17 @@
         "frames": 300,
         "label": "opaque inline-asm width-state CRC (corpus @ WRAM 0xBE)"
       }
+    },
+    {
+      "id": "absdiff",
+      "title": "Motion-Detect Difference Field",
+      "selfcheck": {
+        "off": "0x13F7",
+        "len": 2,
+        "want": "0x3482",
+        "frames": 360,
+        "label": "u8/s16/u32 absolute-difference CRC (corpus @ WRAM 0x13F7)"
+      }
     }
   ]
 }
