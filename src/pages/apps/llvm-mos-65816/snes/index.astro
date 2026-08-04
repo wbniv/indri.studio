@@ -32,6 +32,8 @@ const CATEGORIES = [
 ];
 
 const bugCount = SNES_DEMOS.filter((d) => d.bugFound).length;
+// The publisher appends demos to the registry. Present that registry newest-first in the gallery.
+const newestFirstDemos = [...SNES_DEMOS].reverse();
 ---
 
 <AppLayout
@@ -70,7 +72,7 @@ const bugCount = SNES_DEMOS.filter((d) => d.bugFound).length;
     <p class="gl-empty" hidden>No Mode 7 demos in this category.</p>
 
     <ul class="gl-grid">
-      {SNES_DEMOS.map((d) => (
+      {newestFirstDemos.map((d) => (
         <li class="gl-card-wrap" data-cat={d.category} data-display-mode={d.displayMode}>
           {/* blossom has a richer, hand-crafted page (custom MathML equations, a full manual) at
               /blossom -- link straight there instead of the generic gallery route (excluded from
