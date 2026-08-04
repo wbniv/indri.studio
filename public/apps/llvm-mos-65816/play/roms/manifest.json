@@ -1336,6 +1336,28 @@
         "frames": 2000,
         "label": "two clean playback loops of the 600-frame SVX2 stream at one frame per VBlank with zero decode failures (composite gate @ WRAM $002C); the whole-loop byte-for-byte check against the host oracle runs in the build gate"
       }
+    },
+    {
+      "id": "nmitally",
+      "title": "VBlank Interrupt Tally",
+      "selfcheck": {
+        "off": "0x34",
+        "len": 2,
+        "want": "0xDA3B",
+        "frames": 500,
+        "label": "120-NMI width-state tally (corpus @ WRAM 0x34)"
+      }
+    },
+    {
+      "id": "mixedwidth",
+      "title": "Split-Personality Link",
+      "selfcheck": {
+        "off": "0x13E7",
+        "len": 2,
+        "want": "0x83B7",
+        "frames": 300,
+        "label": "per-function A8/A16 call-boundary CRC (corpus @ WRAM 0x13E7)"
+      }
     }
   ]
 }

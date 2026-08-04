@@ -2101,5 +2101,35 @@ export const SNES_DEMOS: SnesDemo[] = [
       "frames": 200000,
       "label": "lzss-gallery"
     }
+  },
+  {
+    "slug": "nmitally",
+    "title": "VBlank Interrupt Tally",
+    "desc": "A real C VBlank interrupt handler updating 16- and 32-bit counters while native-width mainline code runs. This ROM exposed the 65816 ISR entry-width bug and now guards the fixed full-register save contract. Compiler stress-test #123 (Round 7).",
+    "keys": "Self-running — 120 interrupts fill the tally, then the verified result holds",
+    "category": "signals",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x34",
+      "len": 2,
+      "want": "0xDA3B",
+      "frames": 500,
+      "label": "120-NMI width-state tally (corpus @ WRAM 0x34)"
+    }
+  },
+  {
+    "slug": "mixedwidth",
+    "title": "Split-Personality Link",
+    "desc": "A call-ping-pong chain crossing between per-function A16 and forced-A8 code. IR and disassembly prove the feature sets differ while the shared ABI keeps every result bit-exact. Compiler stress-test #126 (Round 7).",
+    "keys": "Self-running — the split field visualizes calls crossing the A8/A16 boundary",
+    "category": "signals",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x13E7",
+      "len": 2,
+      "want": "0x83B7",
+      "frames": 300,
+      "label": "per-function A8/A16 call-boundary CRC (corpus @ WRAM 0x13E7)"
+    }
   }
 ];
