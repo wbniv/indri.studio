@@ -2176,5 +2176,20 @@ export const SNES_DEMOS: SnesDemo[] = [
       "frames": 420,
       "label": "multi-Imag32 spill/reload CRC (corpus @ WRAM 0x13E9)"
     }
+  },
+  {
+    "slug": "bitboard64",
+    "title": "Bitboard Knight Tour",
+    "desc": "A 64-bit knight-move generator uses popcountll, clzll, and ctzll to select and score each move. The three i64 intrinsics lower inline and drive both the tour and its differential CRC. Compiler stress-test #120 (Round 7).",
+    "keys": "Self-running — gold knight, cyan reachable squares, blue visited trail",
+    "category": "algorithms",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x13F1",
+      "len": 2,
+      "want": "0xC074",
+      "frames": 480,
+      "label": "i64 popcount/clz/ctz tour CRC (corpus @ WRAM 0x13F1)"
+    }
   }
 ];
