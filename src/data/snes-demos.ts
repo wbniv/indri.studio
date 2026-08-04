@@ -2236,5 +2236,20 @@ export const SNES_DEMOS: SnesDemo[] = [
       "frames": 1400,
       "label": "1024-NMI native-width bracket integrity CRC (corpus @ WRAM 0x13EC)"
     }
+  },
+  {
+    "slug": "modethread",
+    "title": "Threaded Mode Interpreter",
+    "desc": "A labels-as-values bytecode interpreter alternates byte and native-word handlers across indirect control-flow joins. Its opcode tape and output bytes draw the live glyph. Compiler stress-test #127 (Round 7).",
+    "keys": "Self-running — A8/A16 handler lanes feed an output glyph",
+    "category": "algorithms",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x13E7",
+      "len": 2,
+      "want": "0x0489",
+      "frames": 480,
+      "label": "computed-goto mixed-width handler CRC (corpus @ WRAM 0x13E7)"
+    }
   }
 ];

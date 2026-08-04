@@ -1435,6 +1435,11 @@
         "frames": 1400,
         "label": "1024-NMI native-width bracket integrity CRC (corpus @ WRAM 0x13EC)"
       }
+    },
+    {
+      "id": "modethread",
+      "title": "Threaded Mode Interpreter",
+      "selfcheck": {"off":"0x13E7","len":2,"want":"0x0489","frames":480,"label":"computed-goto mixed-width handler CRC (corpus @ WRAM 0x13E7)"}
     }
   ]
 }
