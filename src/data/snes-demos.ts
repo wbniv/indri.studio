@@ -2251,5 +2251,14 @@ export const SNES_DEMOS: SnesDemo[] = [
       "frames": 480,
       "label": "computed-goto mixed-width handler CRC (corpus @ WRAM 0x13E7)"
     }
+  },
+  {
+    "slug": "bankwalk",
+    "title": "64K Bank-Boundary Walk",
+    "desc": "Forward pointer increments, indexed offsets, and reverse pointer decrements read a far table across the C1:FFFF to C2:0000 seam. Compiler stress-test #128 (Round 7).",
+    "keys": "Self-running — two walkers cross the gold 64K bank seam",
+    "category": "signals",
+    "controls": null,
+    "selfcheck": {"off":"0x13E6","len":2,"want":"0x4ED7","frames":480,"label":"forward/index/reverse far-pointer seam CRC (corpus @ WRAM 0x13E6)"}
   }
 ];
