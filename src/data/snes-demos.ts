@@ -2161,5 +2161,20 @@ export const SNES_DEMOS: SnesDemo[] = [
       "frames": 360,
       "label": "u8/s16/u32 absolute-difference CRC (corpus @ WRAM 0x13F7)"
     }
+  },
+  {
+    "slug": "farspill",
+    "title": "Far-Pointer Spill Funnel",
+    "desc": "Ten non-rematerializable 32-bit far pointers stay live across a clobbering multiply call, forcing seven complete Imag32 stack slots and 28-byte spill/reload traffic. Compiler stress-test #131 (Round 7).",
+    "keys": "Self-running — pointer ribbons squeeze through registers and spill parking slots",
+    "category": "signals",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x13E9",
+      "len": 2,
+      "want": "0x7F3B",
+      "frames": 420,
+      "label": "multi-Imag32 spill/reload CRC (corpus @ WRAM 0x13E9)"
+    }
   }
 ];

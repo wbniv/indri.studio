@@ -1380,6 +1380,17 @@
         "frames": 360,
         "label": "u8/s16/u32 absolute-difference CRC (corpus @ WRAM 0x13F7)"
       }
+    },
+    {
+      "id": "farspill",
+      "title": "Far-Pointer Spill Funnel",
+      "selfcheck": {
+        "off": "0x13E9",
+        "len": 2,
+        "want": "0x7F3B",
+        "frames": 420,
+        "label": "multi-Imag32 spill/reload CRC (corpus @ WRAM 0x13E9)"
+      }
     }
   ]
 }
