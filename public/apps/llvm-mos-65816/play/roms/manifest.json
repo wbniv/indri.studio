@@ -1413,6 +1413,17 @@
         "frames": 480,
         "label": "variable s64 shift-seam CRC (corpus @ WRAM 0x1409)"
       }
+    },
+    {
+      "id": "llabs64",
+      "title": "Seismograph Absolute Trace",
+      "selfcheck": {
+        "off": "0x13F9",
+        "len": 2,
+        "want": "0x8490",
+        "frames": 480,
+        "label": "llabs and signed i64 absolute-value CRC (corpus @ WRAM 0x13F9)"
+      }
     }
   ]
 }

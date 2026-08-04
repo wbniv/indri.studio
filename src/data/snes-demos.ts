@@ -2206,5 +2206,20 @@ export const SNES_DEMOS: SnesDemo[] = [
       "frames": 480,
       "label": "variable s64 shift-seam CRC (corpus @ WRAM 0x1409)"
     }
+  },
+  {
+    "slug": "llabs64",
+    "title": "Seismograph Absolute Trace",
+    "desc": "The C llabs function and the signed x < 0 ? -x : x idiom rectify 64-bit samples across every 16-bit limb, including INT64_MIN+1. The tested values drive a dual-trace scope. Compiler stress-test #121 (Round 7).",
+    "keys": "Self-running — gold signed trace and cyan rectified envelope",
+    "category": "signals",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x13F9",
+      "len": 2,
+      "want": "0x8490",
+      "frames": 480,
+      "label": "llabs and signed i64 absolute-value CRC (corpus @ WRAM 0x13F9)"
+    }
   }
 ];
