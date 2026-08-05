@@ -391,7 +391,7 @@ export const SNES_DEMOS: SnesDemo[] = [
   {
     "slug": "borrowlad",
     "title": "Borrow-Ladder Odometer",
-    "desc": "A 128-bit number counting down through a limb-by-limb borrow chain, borrows rippling upward like an odometer. Re-runs the set-carry lowering that every multi-precision subtract begins with. Compiler stress-test #110 (Round 6).",
+    "desc": "A 128-bit number counting down through a limb-by-limb borrow chain, borrows rippling upward like an odometer. Exercises native-width multi-precision subtraction. Compiler stress-test #110 (Round 6).",
     "keys": "Self-running — a 128-bit binary counter ticks down",
     "category": "bignums",
     "controls": null,
@@ -401,13 +401,6 @@ export const SNES_DEMOS: SnesDemo[] = [
       "want": "0x1BE3",
       "frames": 500,
       "label": "borrowlad"
-    },
-    "bugFound": {
-      "patch": "0012",
-      "summary": "a pre-existing gap in the machine-code lowering for carry-flag immediates: the lowering only handled the encodings for \"clear\" (0) and \"set\" (-1), but a set carry-in can also arrive as the literal value 1 (e.g. the carry-in for a 16-bit subtract) — hitting an unreachable assertion on debug builds, and undefined behaviour (that happened to still produce the right instruction) on release builds. Surfaced only once a separate fix (patch 0011) let compilation reach this stage at all.",
-      "fixSummary": "Lower any nonzero carry-flag immediate as \"set carry\", not just -1 — a differential-neutral fix.",
-      "fixCommitUrl": "https://github.com/wbniv/llvm-mos-65816/commit/a320cbd",
-      "demoPlanLink": "https://github.com/wbniv/llvm-mos-65816/blob/main/docs/plans/2026-07-02-110-snes-borrowlad.md"
     }
   },
   {
