@@ -43,6 +43,14 @@ jobs:
       - name: Check SNES engine drift vs @wbniv/bsnes-jg-player
         run: npx bsnes-jg-player sync --check public/apps/llvm-mos-65816/play
 
+      # Data-contract tests (node:test, no dependencies). The Mode 7 badge/filter set drifted from
+      # 9 to 11 unnoticed because this gate did not exist — see
+      # llvm-mos-65816 docs/plans/2026-07-26-123-mode7-gallery-filter.md. The same contract also
+      # runs inside the gallery's frontmatter, so pnpm build fails on drift too; this step just
+      # reports it first, with a readable diff of the two slug sets.
+      - name: Test
+        run: pnpm test
+
       - run: pnpm build
 
       - uses: cloudflare/wrangler-action@v4

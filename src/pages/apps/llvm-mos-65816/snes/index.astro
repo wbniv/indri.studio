@@ -6,6 +6,7 @@
 // to indri.studio's AppLayout/Base chrome instead of a standalone site.
 import AppLayout from "../../../../layouts/AppLayout.astro";
 import { SNES_DEMOS } from "../../../../data/snes-demos.ts";
+import { assertMode7Contract } from "../../../../data/mode7-contract.mjs";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 
@@ -34,6 +35,17 @@ const CATEGORIES = [
 const bugCount = SNES_DEMOS.filter((d) => d.bugFound).length;
 // The publisher appends demos to the registry. Present that registry newest-first in the gallery.
 const newestFirstDemos = [...SNES_DEMOS].reverse();
+
+// Build-time Mode 7 data contract (llvm-mos-65816 plan #123, "Data contract"). Fails this build if
+// the `displayMode: 7` set drifts from the committed ledger, or if a Mode 7 demo renders no card
+// (and therefore no data-display-mode hook and no visible 7 badge). mode7.count is DERIVED from the
+// registry; no Mode 7 total is hardcoded in this page. mode7-contract.mjs is byte-identical to
+// biohack.net's copy — that is how "both sites use the same expected set" is enforced.
+const mode7 = assertMode7Contract({
+  site: "indri.studio",
+  demos: SNES_DEMOS,
+  renderedRecords: newestFirstDemos,
+});
 ---
 
 <AppLayout
@@ -61,7 +73,7 @@ const newestFirstDemos = [...SNES_DEMOS].reverse();
       ))}
     </nav>
 
-    <div class="gl-mode-filter" data-total={SNES_DEMOS.length}>
+    <div class="gl-mode-filter" data-total={SNES_DEMOS.length} data-mode7-count={mode7.count}>
       <button type="button" class="gl-mode-toggle" aria-pressed="false" aria-label="Show Mode 7 demos only">
         <span class="gl-mode-filter-seven" aria-hidden="true">7</span>
         <span>Mode 7</span>
