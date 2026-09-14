@@ -4,19 +4,19 @@
   "synced": [
     {
       "file": "app.js",
-      "sha256": "100f4b5122e43114aac833dcc11a48fd164ce2509fa4540a705f8ce95a8ab7ce"
+      "sha256": "fdb8b71ef4652ef8f036793ba0e450650b074431d09085d61aeb098d9d048f7b"
     },
     {
       "file": "cores/PROVENANCE.json",
-      "sha256": "745f5d72dd5fc25a814f46cd5f489c8c5c84c5ab6d840fa8e6cddff4d410d1df"
+      "sha256": "5927ba6e4126120f866514237979e1c026d1623025c9c5af7d80ac9b40b98634"
     },
     {
       "file": "cores/bsnes_jg.js",
-      "sha256": "33078eba5c52dbf3e8c3e7c4cbaed17e8d1e4ad55bac9187525688080e8030e0"
+      "sha256": "54e19fd849b823d87e278438fe7ec5ccaf8e526e966c8f4e007d29ccf78cdf4d"
     },
     {
       "file": "cores/bsnes_jg.wasm",
-      "sha256": "61397b181bd0680f49a93b884411ef0273c7395966a7ba3866b2a17ddee3d093"
+      "sha256": "e74dbd3d7160608dfb6e1ae2ed7ff263fafaa62b0444870530530e2e931ebeb3"
     }
   ]
 }
