@@ -1,10 +1,10 @@
 {
   "package": "@wbniv/bsnes-jg-player",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "synced": [
     {
       "file": "app.js",
-      "sha256": "fdb8b71ef4652ef8f036793ba0e450650b074431d09085d61aeb098d9d048f7b"
+      "sha256": "27ad111f56c61a36857b5487e35cd55a06b8e54f85397d1ac68f0a0d53436736"
     },
     {
       "file": "cores/PROVENANCE.json",
