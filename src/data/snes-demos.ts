@@ -63,11 +63,11 @@ export const SNES_DEMOS: SnesDemo[] = [
     "category": "fractals",
     "controls": null,
     "selfcheck": {
-      "off": "0x895",
+      "off": "0x897",
       "len": 2,
       "want": "0x204F",
       "frames": 5800,
-      "label": "gate jgxcheck CRC (corpus_result @ WRAM $0895)"
+      "label": "gate jgxcheck CRC (corpus_result @ WRAM $0897)"
     }
   },
   {
