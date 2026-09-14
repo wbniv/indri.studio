@@ -44,7 +44,7 @@ jobs:
       - name: Stage llvm-mos-65816 toolchain tarball (release asset)
         env:
           GH_TOKEN: ${{ github.token }}
-          TOOLCHAIN_RELEASE: toolchain-20260625-c49f395
+          TOOLCHAIN_RELEASE: toolchain-20260914-f9711be
         run: |
           mkdir -p apt/dist/sources
           gh release download "$TOOLCHAIN_RELEASE" \

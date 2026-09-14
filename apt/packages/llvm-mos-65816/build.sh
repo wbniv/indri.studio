@@ -25,8 +25,8 @@ MAINTAINER="Will Norris <wbnorris@gmail.com>"
 # to a GitHub release on THIS repo; the apt CI stages it into dist/sources/
 # before building (see .github/workflows/publish.yml). After a successful
 # publish it also lives at the /sources mirror URL below (CI fallback).
-VERSION="${LLVM_MOS_VERSION:-0.0.0+git20260625.c49f395}"
-EXPECTED_SHA="${LLVM_MOS_SHA256:-d6b11517bb15b9ce63deea77b105b708714917338fad0d8176a8df7b395a0954}"
+VERSION="${LLVM_MOS_VERSION:-0.0.0+git20260914.f9711be}"
+EXPECTED_SHA="${LLVM_MOS_SHA256:-76a38f3dfc0edaa72708a065620ae6522531c044acf1a241d5285a71e6064966}"
 SOURCE_URL="${LLVM_MOS_SOURCE_URL:-https://apt.indri.studio/sources/${NAME}_${VERSION}.tar.xz}"
 LOCAL_TARBALL="${LLVM_MOS_TARBALL:-}"
 
