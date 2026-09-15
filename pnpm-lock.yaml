@@ -19,7 +19,7 @@ importers:
         version: 0.44.10
       '@wbniv/bsnes-jg-player':
         specifier: github:wbniv/bsnes-jg-wasm#npm-package
-        version: https://codeload.github.com/wbniv/bsnes-jg-wasm/tar.gz/1ec048f8c16daa7d5280d786781077ef93c66afc(astro@6.4.8(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(supports-color@10.2.2))
+        version: https://codeload.github.com/wbniv/bsnes-jg-wasm/tar.gz/f1557cec7e90fb6bc75553837f6b3f3b40ce950c(astro@6.4.8(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(supports-color@10.2.2))
       astro:
         specifier: ^6.4.8
         version: 6.4.8(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(supports-color@10.2.2)
@@ -970,9 +970,9 @@ packages:
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
     deprecated: Potential CWE-502 - Update to 1.3.1 or higher
 
-  '@wbniv/bsnes-jg-player@https://codeload.github.com/wbniv/bsnes-jg-wasm/tar.gz/1ec048f8c16daa7d5280d786781077ef93c66afc':
-    resolution: {gitHosted: true, tarball: https://codeload.github.com/wbniv/bsnes-jg-wasm/tar.gz/1ec048f8c16daa7d5280d786781077ef93c66afc}
-    version: 1.0.0
+  '@wbniv/bsnes-jg-player@https://codeload.github.com/wbniv/bsnes-jg-wasm/tar.gz/f1557cec7e90fb6bc75553837f6b3f3b40ce950c':
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/wbniv/bsnes-jg-wasm/tar.gz/f1557cec7e90fb6bc75553837f6b3f3b40ce950c}
+    version: 1.1.0
     engines: {node: '>=20'}
     hasBin: true
     peerDependencies:
@@ -2839,7 +2839,7 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
-  '@wbniv/bsnes-jg-player@https://codeload.github.com/wbniv/bsnes-jg-wasm/tar.gz/1ec048f8c16daa7d5280d786781077ef93c66afc(astro@6.4.8(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(supports-color@10.2.2))':
+  '@wbniv/bsnes-jg-player@https://codeload.github.com/wbniv/bsnes-jg-wasm/tar.gz/f1557cec7e90fb6bc75553837f6b3f3b40ce950c(astro@6.4.8(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(supports-color@10.2.2))':
     optionalDependencies:
       astro: 6.4.8(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(supports-color@10.2.2)
 
