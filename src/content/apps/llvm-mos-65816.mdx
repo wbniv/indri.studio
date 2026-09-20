@@ -73,6 +73,16 @@ On Windows, invoke `mos-clang.exe --config bin\mos-snes.cfg`; keep the bundled `
 
 </details>
 
+## Upstream contributions
+
+We contribute fixes found during this work back to llvm-mos and its SDK.
+
+- **SDK [PR #450](https://github.com/llvm-mos/llvm-mos-sdk/pull/450)** — submitted
+  September 20, 2026; awaiting review. Fixes `longjmp(env, 0)` so `setjmp` returns
+  one, as required by C, instead of returning zero again. This affects the common
+  6502 runtime and is independent of SNES support. The patch includes 20 simulator
+  tests across four optimization levels; all pass with the fix.
+
 ## Documentation
 
 - [65816 opcode reference](/docs/65816-opcodes/) — the instruction set as the backend encodes it
