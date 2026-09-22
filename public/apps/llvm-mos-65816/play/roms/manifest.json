@@ -1,5 +1,5 @@
 {
-  "_comment": "Demo ROMs + their in-browser fidelity self-checks for the bsnes-jg WASM player. A selfcheck powers on, runs `frames` frames, reads `len` LE bytes of WRAM at `off`, and asserts == `want` \u2014 matching the headless gate proves this wasm build is the trusted core.",
+  "_comment": "Demo ROMs + their in-browser fidelity self-checks for the bsnes-jg WASM player. A selfcheck powers on, runs `frames` frames, reads `len` LE bytes of WRAM at `off`, and asserts == `want` — matching the headless gate proves this wasm build is the trusted core.",
   "roms": [
     {
       "id": "blossom",
@@ -47,7 +47,7 @@
     },
     {
       "id": "spigot",
-      "title": "\u03c0 Spigot + Monte-Carlo",
+      "title": "π Spigot + Monte-Carlo",
       "selfcheck": {
         "off": "0x1720",
         "len": 2,
@@ -223,7 +223,7 @@
     },
     {
       "id": "1d-ca",
-      "title": "Rule 90 / Rule 110 \u2014 1-D Cellular Automaton",
+      "title": "Rule 90 / Rule 110 — 1-D Cellular Automaton",
       "selfcheck": {
         "off": "0x5a3",
         "len": 2,
@@ -1305,7 +1305,7 @@
     },
     {
       "id": "seamdemo",
-      "title": "Seam Demo \u2014 Three-Act Boundary Cartridge",
+      "title": "Seam Demo — Three-Act Boundary Cartridge",
       "selfcheck": {
         "off": "0x65",
         "len": 2,
@@ -1439,22 +1439,255 @@
     {
       "id": "modethread",
       "title": "Threaded Mode Interpreter",
-      "selfcheck": {"off":"0x13E7","len":2,"want":"0x0489","frames":480,"label":"computed-goto mixed-width handler CRC (corpus @ WRAM 0x13E7)"}
+      "selfcheck": {
+        "off": "0x13E7",
+        "len": 2,
+        "want": "0x0489",
+        "frames": 480,
+        "label": "computed-goto mixed-width handler CRC (corpus @ WRAM 0x13E7)"
+      }
     },
     {
       "id": "bankwalk",
       "title": "64K Bank-Boundary Walk",
-      "selfcheck": {"off":"0x13E6","len":2,"want":"0x4ED7","frames":480,"label":"forward/index/reverse far-pointer seam CRC (corpus @ WRAM 0x13E6)"}
+      "selfcheck": {
+        "off": "0x13E6",
+        "len": 2,
+        "want": "0x4ED7",
+        "frames": 480,
+        "label": "forward/index/reverse far-pointer seam CRC (corpus @ WRAM 0x13E6)"
+      }
     },
     {
       "id": "farptrcmp",
       "title": "Far-Pointer Order Shuffle",
-      "selfcheck": {"off":"0x13E6","len":2,"want":"0x5B40","frames":480,"label":"natural far-pointer comparison and ptrdiff CRC (corpus @ WRAM 0x13E6)"}
+      "selfcheck": {
+        "off": "0x13E6",
+        "len": 2,
+        "want": "0x5B40",
+        "frames": 480,
+        "label": "natural far-pointer comparison and ptrdiff CRC (corpus @ WRAM 0x13E6)"
+      }
     },
     {
       "id": "brkcop",
       "title": "Software Vectors",
-      "selfcheck": {"off":"0x39","len":2,"want":"0xA34C","frames":500,"label":"BRK/COP vector and signature-return CRC (corpus_result @ WRAM 0x39)"}
+      "selfcheck": {
+        "off": "0x39",
+        "len": 2,
+        "want": "0xA34C",
+        "frames": 500,
+        "label": "BRK/COP vector and signature-return CRC (corpus_result @ WRAM 0x39)"
+      }
+    },
+    {
+      "id": "backtrack",
+      "title": "Backtracking Solver",
+      "selfcheck": {
+        "off": "0x13E7",
+        "len": 2,
+        "want": "0x7336",
+        "frames": 600,
+        "label": "Backtracking Solver CRC (corpus_result @ WRAM 0x13E7)"
+      }
+    },
+    {
+      "id": "csrjmp",
+      "title": "Callee-Saved Restore Curve",
+      "selfcheck": {
+        "off": "0x13E7",
+        "len": 2,
+        "want": "0xADD8",
+        "frames": 600,
+        "label": "Callee-Saved Restore Curve CRC (corpus_result @ WRAM 0x13E7)"
+      }
+    },
+    {
+      "id": "retryjmp",
+      "title": "Retry-On-Fault Ladder",
+      "selfcheck": {
+        "off": "0x48",
+        "len": 2,
+        "want": "0x3388",
+        "frames": 600,
+        "label": "Retry-On-Fault Ladder CRC (corpus_result @ WRAM 0x48)"
+      }
+    },
+    {
+      "id": "irqgate",
+      "title": "IRQ Gate",
+      "selfcheck": {
+        "off": "0x13EE",
+        "len": 2,
+        "want": "0x24F6",
+        "frames": 500,
+        "label": "IRQ Gate CRC (corpus_result @ WRAM 0x13EE)"
+      }
+    },
+    {
+      "id": "dpbank",
+      "title": "Bank/Direct-Page Windows",
+      "selfcheck": {
+        "off": "0x59",
+        "len": 2,
+        "want": "0x4D5F",
+        "frames": 500,
+        "label": "Bank/Direct-Page Windows CRC (corpus_result @ WRAM 0x59)"
+      }
+    },
+    {
+      "id": "jt256",
+      "title": "ISA-256 Bytecode Machine",
+      "selfcheck": {
+        "off": "0x31",
+        "len": 2,
+        "want": "0xB8CC",
+        "frames": 600,
+        "label": "ISA-256 Bytecode Machine CRC (corpus_result @ WRAM 0x31)"
+      }
+    },
+    {
+      "id": "vlastack",
+      "title": "Run-Length Scanline Decoder",
+      "selfcheck": {
+        "off": "0x31",
+        "len": 2,
+        "want": "0xD77B",
+        "frames": 600,
+        "label": "Run-Length Scanline Decoder CRC (corpus_result @ WRAM 0x31)"
+      }
+    },
+    {
+      "id": "borrowov",
+      "title": "Reservoir Ladder",
+      "selfcheck": {
+        "off": "0x13E7",
+        "len": 2,
+        "want": "0x81FB",
+        "frames": 600,
+        "label": "Reservoir Ladder CRC (corpus_result @ WRAM 0x13E7)"
+      }
+    },
+    {
+      "id": "bigbyval",
+      "title": "Affine Stage Pipeline",
+      "selfcheck": {
+        "off": "0x31",
+        "len": 2,
+        "want": "0xBD6B",
+        "frames": 600,
+        "label": "Affine Stage Pipeline CRC (corpus_result @ WRAM 0x31)"
+      }
+    },
+    {
+      "id": "dblbridge",
+      "title": "Precision Bridge",
+      "selfcheck": {
+        "off": "0x13E7",
+        "len": 2,
+        "want": "0xF829",
+        "frames": 2200,
+        "label": "Precision Bridge CRC (corpus_result @ WRAM 0x13E7)"
+      }
+    },
+    {
+      "id": "bsearchviz",
+      "title": "Bisection Oracle",
+      "selfcheck": {
+        "off": "0x13E7",
+        "len": 2,
+        "want": "0x7FF5",
+        "frames": 600,
+        "label": "Bisection Oracle CRC (corpus_result @ WRAM 0x13E7)"
+      }
+    },
+    {
+      "id": "strcmprace",
+      "title": "Lexicographic Race",
+      "selfcheck": {
+        "off": "0x13E7",
+        "len": 2,
+        "want": "0xF0BA",
+        "frames": 600,
+        "label": "Lexicographic Race CRC (corpus_result @ WRAM 0x13E7)"
+      }
+    },
+    {
+      "id": "packrec",
+      "title": "Unaligned Record Reader",
+      "selfcheck": {
+        "off": "0x13E7",
+        "len": 2,
+        "want": "0x4676",
+        "frames": 600,
+        "label": "Unaligned Record Reader CRC (corpus_result @ WRAM 0x13E7)"
+      }
+    },
+    {
+      "id": "trapguard",
+      "title": "Unreachable Sentinel",
+      "selfcheck": {
+        "off": "0x5B",
+        "len": 2,
+        "want": "0x2C2D",
+        "frames": 600,
+        "label": "Unreachable Sentinel CRC (corpus_result @ WRAM 0x5B)"
+      }
+    },
+    {
+      "id": "vlanest",
+      "title": "Nested VLA Pyramid",
+      "selfcheck": {
+        "off": "0x13E7",
+        "len": 2,
+        "want": "0x153B",
+        "frames": 600,
+        "label": "Nested VLA Pyramid CRC (corpus_result @ WRAM 0x13E7)"
+      }
+    },
+    {
+      "id": "jtedge",
+      "title": "Jump-Table Boundary Sweep",
+      "selfcheck": {
+        "off": "0x31",
+        "len": 2,
+        "want": "0xC199",
+        "frames": 600,
+        "label": "Jump-Table Boundary Sweep CRC (corpus_result @ WRAM 0x31)"
+      }
+    },
+    {
+      "id": "jtsparse",
+      "title": "Sparse Switch Ladder",
+      "selfcheck": {
+        "off": "0x13E7",
+        "len": 2,
+        "want": "0xA131",
+        "frames": 600,
+        "label": "Sparse Switch Ladder CRC (corpus_result @ WRAM 0x13E7)"
+      }
+    },
+    {
+      "id": "byvaledge",
+      "title": "By-Value Boundary Trio",
+      "selfcheck": {
+        "off": "0x13E7",
+        "len": 2,
+        "want": "0x4FAB",
+        "frames": 600,
+        "label": "By-Value Boundary Trio CRC (corpus_result @ WRAM 0x13E7)"
+      }
+    },
+    {
+      "id": "ovmatrix",
+      "title": "Overflow Family Matrix",
+      "selfcheck": {
+        "off": "0x31",
+        "len": 2,
+        "want": "0xD4D0",
+        "frames": 600,
+        "label": "Overflow Family Matrix CRC (corpus_result @ WRAM 0x31)"
+      }
     }
   ]
 }

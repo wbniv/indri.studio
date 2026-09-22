@@ -2271,5 +2271,290 @@ export const SNES_DEMOS: SnesDemo[] = [
     "category": "signals",
     "controls": null,
     "selfcheck": {"off":"0x39","len":2,"want":"0xA34C","frames":500,"label":"BRK/COP vector and signature-return CRC (corpus_result @ WRAM 0x39)"}
+  },
+  {
+    "slug": "backtrack",
+    "title": "Backtracking Solver",
+    "desc": "Watch an eight-queens search place queens, reject dead ends, and jump back to earlier choices. Each backjump discards real recursive call frames while restoring the saved stack and registers.",
+    "keys": "Self-running — no controller input required",
+    "category": "algorithms",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x13E7",
+      "len": 2,
+      "want": "0x7336",
+      "frames": 600,
+      "label": "Backtracking Solver CRC (corpus_result @ WRAM 0x13E7)"
+    }
+  },
+  {
+    "slug": "csrjmp",
+    "title": "Callee-Saved Restore Curve",
+    "desc": "Six harmonograph curves are drawn from coefficients restored after a nonlocal jump. The worker occupies the saved register slots, making the restored coefficients a direct check of longjmp.",
+    "keys": "Self-running — no controller input required",
+    "category": "motion",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x13E7",
+      "len": 2,
+      "want": "0xADD8",
+      "frames": 600,
+      "label": "Callee-Saved Restore Curve CRC (corpus_result @ WRAM 0x13E7)"
+    }
+  },
+  {
+    "slug": "retryjmp",
+    "title": "Retry-On-Fault Ladder",
+    "desc": "Twenty-four attempts climb a ladder of recursive calls. Successful attempts settle in green; faults flash red and jump back to retry, checking that repeated nonlocal returns preserve their state.",
+    "keys": "Self-running — no controller input required",
+    "category": "algorithms",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x48",
+      "len": 2,
+      "want": "0x3388",
+      "frames": 600,
+      "label": "Retry-On-Fault Ladder CRC (corpus_result @ WRAM 0x48)"
+    }
+  },
+  {
+    "slug": "irqgate",
+    "title": "IRQ Gate",
+    "desc": "A raster-timer interrupt meets the SNES vertical-blank interrupt. Moving lanes and counters expose the overlap while a C interrupt handler checks that nested interrupts preserve machine state.",
+    "keys": "Self-running — no controller input required",
+    "category": "signals",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x13EE",
+      "len": 2,
+      "want": "0x24F6",
+      "frames": 500,
+      "label": "IRQ Gate CRC (corpus_result @ WRAM 0x13EE)"
+    }
+  },
+  {
+    "slug": "dpbank",
+    "title": "Bank/Direct-Page Windows",
+    "desc": "Interrupts land while the direct-page base or data-bank register points away from the C program's normal memory. Three animated regions show the windows whose state must survive the interrupt.",
+    "keys": "Self-running — no controller input required",
+    "category": "signals",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x59",
+      "len": 2,
+      "want": "0x4D5F",
+      "frames": 500,
+      "label": "Bank/Direct-Page Windows CRC (corpus_result @ WRAM 0x59)"
+    }
+  },
+  {
+    "slug": "jt256",
+    "title": "ISA-256 Bytecode Machine",
+    "desc": "A 256-opcode virtual machine draws a phase portrait as it runs. A 16-by-16 opcode map lights up the handlers, exposing the compiler's large jump-table dispatch path.",
+    "keys": "Self-running — no controller input required",
+    "category": "algorithms",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x31",
+      "len": 2,
+      "want": "0xB8CC",
+      "frames": 600,
+      "label": "ISA-256 Bytecode Machine CRC (corpus_result @ WRAM 0x31)"
+    }
+  },
+  {
+    "slug": "vlastack",
+    "title": "Run-Length Scanline Decoder",
+    "desc": "A run-length image appears one scanline at a time. The gauge beside each row shows the runtime-sized temporary allocation needed to decode it.",
+    "keys": "Self-running — no controller input required",
+    "category": "rendering",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x31",
+      "len": 2,
+      "want": "0xD77B",
+      "frames": 600,
+      "label": "Run-Length Scanline Decoder CRC (corpus_result @ WRAM 0x31)"
+    }
+  },
+  {
+    "slug": "borrowov",
+    "title": "Reservoir Ladder",
+    "desc": "Twelve reservoirs exchange their contents through checked subtraction. A transfer that would underflow is rejected, and its reservoir flashes and bounces instead of draining.",
+    "keys": "Self-running — no controller input required",
+    "category": "algorithms",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x13E7",
+      "len": 2,
+      "want": "0x81FB",
+      "frames": 600,
+      "label": "Reservoir Ladder CRC (corpus_result @ WRAM 0x13E7)"
+    }
+  },
+  {
+    "slug": "bigbyval",
+    "title": "Affine Stage Pipeline",
+    "desc": "A matrix travels by value through six transformation stages. Each panel draws its transformed shape while the caller's original matrix must remain unchanged.",
+    "keys": "Self-running — no controller input required",
+    "category": "rendering",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x31",
+      "len": 2,
+      "want": "0xBD6B",
+      "frames": 600,
+      "label": "Affine Stage Pipeline CRC (corpus_result @ WRAM 0x31)"
+    }
+  },
+  {
+    "slug": "dblbridge",
+    "title": "Precision Bridge",
+    "desc": "Two chaotic traces begin from the same floating-point state. One computes each step in float; the other crosses into double precision and back, revealing where their paths separate.",
+    "keys": "Self-running — no controller input required",
+    "category": "bignums",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x13E7",
+      "len": 2,
+      "want": "0xF829",
+      "frames": 2200,
+      "label": "Precision Bridge CRC (corpus_result @ WRAM 0x13E7)"
+    }
+  },
+  {
+    "slug": "bsearchviz",
+    "title": "Bisection Oracle",
+    "desc": "Binary searches probe an eight-by-eight field of sorted keys. The narrowing search lights its candidates before showing a hit in green or a miss in red.",
+    "keys": "Self-running — no controller input required",
+    "category": "algorithms",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x13E7",
+      "len": 2,
+      "want": "0x7FF5",
+      "frames": 600,
+      "label": "Bisection Oracle CRC (corpus_result @ WRAM 0x13E7)"
+    }
+  },
+  {
+    "slug": "strcmprace",
+    "title": "Lexicographic Race",
+    "desc": "Twenty-four strings line up as rows of glyph blocks. Their order and highlighted deciding bytes show how strcmp, strncmp, and memcmp resolve their comparisons.",
+    "keys": "Self-running — no controller input required",
+    "category": "algorithms",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x13E7",
+      "len": 2,
+      "want": "0xF0BA",
+      "frames": 600,
+      "label": "Lexicographic Race CRC (corpus_result @ WRAM 0x13E7)"
+    }
+  },
+  {
+    "slug": "packrec",
+    "title": "Unaligned Record Reader",
+    "desc": "A binary stream becomes a ruler of colored records and fields. Seven-byte and ten-byte records make odd addresses and padding-free layouts visible.",
+    "keys": "Self-running — no controller input required",
+    "category": "algorithms",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x13E7",
+      "len": 2,
+      "want": "0x4676",
+      "frames": 600,
+      "label": "Unaligned Record Reader CRC (corpus_result @ WRAM 0x13E7)"
+    }
+  },
+  {
+    "slug": "trapguard",
+    "title": "Unreachable Sentinel",
+    "desc": "A six-state machine traces its legal transitions around a ring. Guarded impossible edges stay dim while the reachable sequence runs beside the compiled trap paths.",
+    "keys": "Self-running — no controller input required",
+    "category": "algorithms",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x5B",
+      "len": 2,
+      "want": "0x2C2D",
+      "frames": 600,
+      "label": "Unreachable Sentinel CRC (corpus_result @ WRAM 0x5B)"
+    }
+  },
+  {
+    "slug": "vlanest",
+    "title": "Nested VLA Pyramid",
+    "desc": "A pyramid of cells pictures two levels of runtime-sized arrays. Row lengths show the outer allocations, and cell heights show the independently sized inner allocations.",
+    "keys": "Self-running — no controller input required",
+    "category": "algorithms",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x13E7",
+      "len": 2,
+      "want": "0x153B",
+      "frames": 600,
+      "label": "Nested VLA Pyramid CRC (corpus_result @ WRAM 0x13E7)"
+    }
+  },
+  {
+    "slug": "jtedge",
+    "title": "Jump-Table Boundary Sweep",
+    "desc": "Three virtual machines run through switches with 127, 128, and 129 destinations. Their phase portraits overlap when both sides of the jump-table lowering boundary agree.",
+    "keys": "Self-running — no controller input required",
+    "category": "algorithms",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x31",
+      "len": 2,
+      "want": "0xC199",
+      "frames": 600,
+      "label": "Jump-Table Boundary Sweep CRC (corpus_result @ WRAM 0x31)"
+    }
+  },
+  {
+    "slug": "jtsparse",
+    "title": "Sparse Switch Ladder",
+    "desc": "Sixteen widely separated case values form an uneven ladder. A sparse comparison-tree dispatcher and a compact dispatcher draw overlapping traces of the same computation.",
+    "keys": "Self-running — no controller input required",
+    "category": "algorithms",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x13E7",
+      "len": 2,
+      "want": "0xA131",
+      "frames": 600,
+      "label": "Sparse Switch Ladder CRC (corpus_result @ WRAM 0x13E7)"
+    }
+  },
+  {
+    "slug": "byvaledge",
+    "title": "By-Value Boundary Trio",
+    "desc": "Three record shapes travel through mutating function calls. Their output traces move while the caller's original records remain steady, checking value-copy semantics across the four-to-five-byte ABI boundary.",
+    "keys": "Self-running — no controller input required",
+    "category": "algorithms",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x13E7",
+      "len": 2,
+      "want": "0x4FAB",
+      "frames": 600,
+      "label": "By-Value Boundary Trio CRC (corpus_result @ WRAM 0x13E7)"
+    }
+  },
+  {
+    "slug": "ovmatrix",
+    "title": "Overflow Family Matrix",
+    "desc": "Eighteen cells compare signed and unsigned add, subtract, and multiply at three widths. Each bar divides clean results from overflow results as all cases run together.",
+    "keys": "Self-running — no controller input required",
+    "category": "bignums",
+    "controls": null,
+    "selfcheck": {
+      "off": "0x31",
+      "len": 2,
+      "want": "0xD4D0",
+      "frames": 600,
+      "label": "Overflow Family Matrix CRC (corpus_result @ WRAM 0x31)"
+    }
   }
 ];
