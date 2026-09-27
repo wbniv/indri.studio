@@ -34,6 +34,15 @@ tasks:
       - pnpm build
       - pnpm wrangler deploy
 
+  publish-all-web-roms:
+    desc: Rebuild, verify, and deploy the paired SNES web ROM set to biohack.net and indri.studio
+    dir: ../llvm-mos-65816
+    preconditions:
+      - sh: test -x dev/publish-all-web-roms.sh
+        msg: "Requires the sibling llvm-mos-65816 checkout with dev/publish-all-web-roms.sh."
+    cmds:
+      - dev/publish-all-web-roms.sh --indri-site "{{.ROOT_DIR}}" {{.CLI_ARGS}}
+
   publish:
     desc: "Tag and push to trigger the CI deploy (usage: task publish TAG=v0.1.86). No local Cloudflare/AWS creds needed -- .github/workflows/deploy.yml holds CLOUDFLARE_API_TOKEN as a repo secret and fires on any v* tag push. Works for any contributor with push access (an SSH key registered on GitHub), not just whoever has the local AWS profile."
     vars:
