@@ -9,9 +9,10 @@
 // +mos-a16/+mos-xy16 feature, only pre-existing-compiler defects).
 
 export interface SnesDemoSelfcheck {
+  mode?: "live-record";
   off: string;
-  len: number;
-  want: string;
+  len?: number;
+  want?: string;
   frames: number;
   label: string;
 }
@@ -2088,11 +2089,10 @@ export const SNES_DEMOS: SnesDemo[] = [
       "right": [232, 70, 24, 24]
     },
     "selfcheck": {
-      "off": "0x46e",
-      "len": 2,
-      "want": "0x5CF0",
-      "frames": 200000,
-      "label": "lzss-gallery"
+      "mode": "live-record",
+      "off": "0x73",
+      "frames": 24000,
+      "label": "displayed artwork repacked on-SNES == host oracle"
     }
   },
   {

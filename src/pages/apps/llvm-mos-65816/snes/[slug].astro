@@ -29,6 +29,8 @@ for (const a of BUST_ASSETS) {
   try { bust[a] = createHash("sha256").update(readFileSync(`${PLAY}/${a}`)).digest("hex").slice(0, 12); } catch {}
 }
 const appV = bust["app.js"] ?? "";
+const manifest = JSON.parse(readFileSync(`${PLAY}/roms/manifest.json`, "utf8"));
+const selfcheck = manifest.roms.find((rom: { id: string }) => rom.id === demo.slug)?.selfcheck;
 
 const CATEGORY_LABELS: Record<string, string> = {
   fractals: "Fractals", physics: "Physics & Simulation", cellular: "Cellular Automata",
@@ -120,9 +122,11 @@ const isSelfRunning = demo.keys.toLowerCase().startsWith("self-running");
 
       <p class="rp-foot">
         Written in C with the llvm-mos 65816 toolchain and verified against bsnes-jg and MAME.
-        Hit <b>Verify fidelity</b> to reproduce the build gate's WRAM assert
-        (<code>{demo.selfcheck.label}</code>, expects <code>{demo.selfcheck.want}</code>) live in this
-        tab.
+        Hit <b>Verify fidelity</b> to {selfcheck?.mode === "live-record" ? (
+          <>check the displayed artwork's repacked size against the host oracle live in this tab.</>
+        ) : (
+          <>reproduce the build gate's WRAM assert (<code>{selfcheck?.label}</code>, expects <code>{selfcheck?.want}</code>) live in this tab.</>
+        )}
       </p>
     </section>
   </main>
