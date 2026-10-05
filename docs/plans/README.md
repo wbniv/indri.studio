@@ -78,6 +78,8 @@ rows on commit.*
 | [Replace Phosphor purple with indri-eye neon green](2026-06-30-purple-to-indri-eye-green.md) | Rebrand site accent from #B026FF (Phosphor purple) to #B8EF00 (indri-eye chartreuse); hue-rotate mascot PNG irises to match. | [`62da7eb`](https://github.com/wbniv/indri.studio/commit/62da7eb) | Feature |
 | [snes-package-adoption — indri.studio consumes @wbniv/bsnes-jg-player](2026-07-27-snes-package-adoption.md) | Vendor the SNES player engine from the @wbniv/bsnes-jg-player npm package (sync CLI + ENGINE_VERSION stamp + CI drift gate), replacing the hand-rolled dist-bundle copy; indri keeps its own embed markup/boot | [`pending`](2026-07-27-snes-package-adoption.md) | Platform |
 
+| [Finding Your Way Android milestones](2026-10-05-finding-your-way-milestones.md) | Publish compact expandable Android APK downloads with exact archived checksums and uppercase Greek pi artwork. | [`9c892ef`](https://github.com/wbniv/indri.studio/commit/9c892ef) | Feature |
+
 ---
 
 ## How this index was derived
@@ -85,4 +87,4 @@ rows on commit.*
 - **Order** = each plan's *creation* commit (oldest commit that touched the file), by committer date.
 - **Commit(s)** = the full `git log --follow` set per plan, oldest → newest.
 - **Summaries / categories** auto-generated from each plan's TL;DR (Sonnet, medium effort) — refine as needed.
-- **Generated** 2026-06-26 for 65 plan(s); rows added by hand 2026-06-27 (66), 2026-06-30 (67), 2026-07-27 (68 total).
+- **Generated** 2026-06-26 for 65 plan(s); rows added by hand 2026-06-27 (66), 2026-06-30 (67), 2026-07-27 (68), 2026-10-05 (69 total).

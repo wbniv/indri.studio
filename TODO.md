@@ -65,3 +65,12 @@ _Nothing parked._
 - [x] **2026-05-13** Hero: phone/tablet/console/TV/web icon strip under tagline with sequential Phosphor glow — [plan](docs/plans/2026-05-13-hero-platform-icon-strip.md)
 - [x] **2026-05-13** 404 page with ring-tailed-lemur-as-the-0 + ring-tail sweep, inverted-tagline copy — [plan](docs/plans/2026-05-13-404-page.md)
 
+
+
+## Inbox — auto-captured plan deferrals
+
+_Auto-added from plan "Out of scope"/"Deferred" sections at commit time. Triage each into M1/M2/etc. and delete it here — it will not come back._
+
+<!-- BEGIN auto-captured-deferrals (managed by audit-plan-deferrals.sh — triage these into the curated sections above; the fingerprint ledger means a deleted item is NOT re-added) -->
+- [verify] **2026-10-05-finding-your-way-milestones** — Verification section present but no PASS recorded — run + record the steps. _from [2026-10-05-finding-your-way-milestones.md](docs/plans/2026-10-05-finding-your-way-milestones.md)_  <!-- fp:7d70bf2ceedda743 -->
+<!-- END auto-captured-deferrals -->

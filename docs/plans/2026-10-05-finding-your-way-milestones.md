@@ -11,7 +11,7 @@ Publish the two archived Android milestones as compact expandable rows on `/apps
 - [x] Static build and existing test suite pass; 11 tests, zero failures.
 - [x] Browser checks pass at 1440 px and 390 px: summary heights 52 px and 55.5 px, direct downloads without disclosure toggling, keyboard operation, independent expansion, no horizontal overflow and all four screenshots present.
 - [x] Both archive checksum sets pass; all ten files in the built site match the source archives byte for byte.
-- [ ] Publish and verify live page and archive bytes.
+- [x] Published v0.1.161 (9c892ef); Cloudflare deployment succeeded. Live page is HTTP 200 and all ten archive files match the local archives byte for byte.
 
 ## Previews
 
@@ -28,3 +28,7 @@ The HTML files are illustrative mockups. [Actual browser checks](2026-10-05-find
 Android distribution only. Phone touch and letterboxed tablet acceptance are future build work; these historical APKs are not rebuilt or relabelled as tablet-ready. Updated native launcher art is prepared in the Finding Your Way build generator for the next build. Web/PWA icon sources are updated in that repository. This release publishes the Indri catalogue page and artwork.
 
 AI assistance: Codex. Exact model/version, tool version and reasoning effort were not available in verified session metadata and are not inferred.
+
+## Published verification
+
+[Live archive checksums and HTTP results](2026-10-05-finding-your-way-milestones/live-download-checks.json).

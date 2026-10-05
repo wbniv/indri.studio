@@ -1,0 +1,82 @@
+[
+  {
+    "milestone": "2026-10-05-love-reason-v0.2",
+    "file": "SHA256SUMS",
+    "httpStatus": 200,
+    "sha256": "187ac88f7db6cb6c9126d26466ec0260262920afe58bd9aeea6ad7b549f88ecf",
+    "bytes": 352,
+    "contentType": ""
+  },
+  {
+    "milestone": "2026-10-05-love-reason-v0.2",
+    "file": "build-receipt.json",
+    "httpStatus": 200,
+    "sha256": "61b0f2bcd582e32a40715e13d7cc14845f57fb2683873673b85a219e09f6e66b",
+    "bytes": 824,
+    "contentType": "application/json"
+  },
+  {
+    "milestone": "2026-10-05-love-reason-v0.2",
+    "file": "manifest.json",
+    "httpStatus": 200,
+    "sha256": "6d262f1ee85826e5615278139d1ed53744a2a8238f98ace6db8f27a0d88853e0",
+    "bytes": 1119,
+    "contentType": "application/json"
+  },
+  {
+    "milestone": "2026-10-05-love-reason-v0.2",
+    "file": "parmenides-a6194561e7a05eea.apk",
+    "httpStatus": 200,
+    "sha256": "a6194561e7a05eeae279a88ee495ef5a3e345340c2363e56e1ca743c1a7a6eaf",
+    "bytes": 4580216,
+    "contentType": "application/vnd.android.package-archive"
+  },
+  {
+    "milestone": "2026-10-05-love-reason-v0.2",
+    "file": "source-snapshot.tar.gz",
+    "httpStatus": 200,
+    "sha256": "0a83ea070e56931952595ffa26fd6cb5ff8fef08a9b2afcac6592b3d463b6673",
+    "bytes": 518698,
+    "contentType": "application/gzip"
+  },
+  {
+    "milestone": "2026-10-05-temple-love-v0.1",
+    "file": "SHA256SUMS",
+    "httpStatus": 200,
+    "sha256": "70da1b0fce2672732cdefcd589813f6d24f18ad9121e35c4bcd23233554b06d0",
+    "bytes": 352,
+    "contentType": ""
+  },
+  {
+    "milestone": "2026-10-05-temple-love-v0.1",
+    "file": "build-receipt.json",
+    "httpStatus": 200,
+    "sha256": "3da6f7a72c617ae59e6a1669304616d3241af8e235cdbf1e66836333409cab23",
+    "bytes": 824,
+    "contentType": "application/json"
+  },
+  {
+    "milestone": "2026-10-05-temple-love-v0.1",
+    "file": "manifest.json",
+    "httpStatus": 200,
+    "sha256": "cfa2105e63b11e881c1fe9525bfa7ba868fbae72ccd99241a96be3a370dd418c",
+    "bytes": 909,
+    "contentType": "application/json"
+  },
+  {
+    "milestone": "2026-10-05-temple-love-v0.1",
+    "file": "parmenides-b7b49515f3998c85.apk",
+    "httpStatus": 200,
+    "sha256": "b7b49515f3998c855f9935d8a2cba9dd80a9c23789a1985d2c9b370395d85316",
+    "bytes": 4526968,
+    "contentType": "application/vnd.android.package-archive"
+  },
+  {
+    "milestone": "2026-10-05-temple-love-v0.1",
+    "file": "source-snapshot.tar.gz",
+    "httpStatus": 200,
+    "sha256": "586976ba761a16b689589db14296aade76502ca3c98855f183f3b4ed45cb677d",
+    "bytes": 402145,
+    "contentType": "application/gzip"
+  }
+]
