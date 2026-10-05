@@ -59,3 +59,9 @@ AI assistance: Codex. Exact model/version, tool version and reasoning effort wer
    ```
 
 5. GitHub release workflow: PASS. Run 37300649698 completed with conclusion `success`; Cloudflare deployment step succeeded.
+
+## Versioned APK filenames
+
+Both local and published APKs are now named `parmenides-v0.1-b7b49515f3998c85.apk` and `parmenides-v0.2-a6194561e7a05eea.apk`. The manifests, archive receipt paths, checksum lists and explicit HTML download filenames match. Original build paths are retained as provenance in the receipts. APK bytes and hashes are unchanged. Old asset filenames are removed, with no redirects or aliases.
+
+Verification: PASS. Both updated archive checksum sets pass; the static build includes only the new APK filenames. Live browser download verification follows publication.

@@ -35,7 +35,7 @@ const milestones = [
           <strong>{title}</strong>
           <time datetime="2026-10-05">2026-10-05</time>
         </span>
-        <a class="milestone-download" href={apk} download aria-label={`Download ${title} Android APK (${size})`}>
+        <a class="milestone-download" href={apk} download={manifest.apk} aria-label={`Download ${title} Android APK (${size})`}>
           APK ↓ <small>{size}</small>
         </a>
       </summary>

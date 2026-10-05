@@ -2,7 +2,7 @@
   "milestone": "2026-10-05-temple-love-v0.1",
   "archivedAt": "2026-10-05T16:56:07.087505+07:00",
   "chapter": "Temple → Love → changed Temple",
-  "apk": "parmenides-b7b49515f3998c85.apk",
+  "apk": "parmenides-v0.1-b7b49515f3998c85.apk",
   "sha256": "b7b49515f3998c855f9935d8a2cba9dd80a9c23789a1985d2c9b370395d85316",
   "sourceSnapshot": "source-snapshot.tar.gz",
   "sourceSnapshotSha256": "586976ba761a16b689589db14296aade76502ca3c98855f183f3b4ed45cb677d",
@@ -18,5 +18,6 @@
     "World labels can obscure modal overlay text",
     "Face rendering issue: normals/winding/culling diagnosis unresolved"
   ],
-  "productionOrder": "Build all realms to functional completion before art passes"
+  "productionOrder": "Build all realms to functional completion before art passes",
+  "milestoneVersion": "0.1"
 }

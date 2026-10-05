@@ -1,9 +1,14 @@
 | Date | Change |
 |------|--------|
+| [2026-10-05](https://github.com/wbniv/indri.studio/commit/35ea692) | docs: mark milestone verification passed and clear captured reminder |
 | [2026-10-05](https://github.com/wbniv/indri.studio/commit/cbb9912) | docs: record live APK milestone verification and index plan |
 | [2026-10-05](https://github.com/wbniv/indri.studio/commit/9c892ef) | Publish Finding Your Way Android milestone downloads |
 
 <!--history-meta v1
+35ea692	author	Will Norris
+35ea692	added	27
+35ea692	deleted	0
+35ea692	files	1
 cbb9912	author	Will Norris
 cbb9912	added	5
 cbb9912	deleted	1

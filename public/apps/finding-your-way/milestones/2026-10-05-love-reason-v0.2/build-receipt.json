@@ -1,5 +1,5 @@
 {
-  "apk": "/home/will/finding-your-way/game/parmenides-slice/build/parmenides-a6194561e7a05eea.apk",
+  "apk": "/home/will/finding-your-way/game/milestones/2026-10-05-love-reason-v0.2/parmenides-v0.2-a6194561e7a05eea.apk",
   "sha256": "a6194561e7a05eeae279a88ee495ef5a3e345340c2363e56e1ca743c1a7a6eaf",
   "package": "org.worldfoundry.wf_game.parmenides",
   "nativeCode": true,
@@ -10,5 +10,6 @@
     "lib/armeabi-v7a/libwf_game.so": "6ab5579c342b8cc4c69fe76a28af35710ce50fe3f00d267f7cd0dd04fc354043"
   },
   "levelSha256": "216705e217268910d7ac6d75fc080a0801d0d356f69c5cb9a202281a5de1e244",
-  "engineSourceModified": false
+  "engineSourceModified": false,
+  "originalBuildApk": "/home/will/finding-your-way/game/parmenides-slice/build/parmenides-a6194561e7a05eea.apk"
 }
