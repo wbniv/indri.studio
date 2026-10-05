@@ -84,11 +84,17 @@ Verification — PASS: Astro built 172 pages, all 11 existing tests passed, and 
 
 Verification — PASS: all archive checksums pass; Astro builds 172 pages; all 11 existing tests pass. Desktop/mobile browser checks show four ascending rows with 52px/55.5px heights, collapsed downloads, independent keyboard disclosures, no overflow and all four original screenshots preserved. Live download verification follows publication.
 
-## Endings v5.0 — 2026-10-06
+## Endings v0.5 — 2026-10-06
 
-- [x] Publish the fifth milestone, after v0.4, with actual version 5.0 and versioned filename `parmenides-v5.0-7f7ba37d62c0a7dd.apk`.
+- [x] Publish the fifth milestone, after v0.4, with actual version 5.0 and versioned filename `parmenides-v0.5-7f7ba37d62c0a7dd.apk`.
 - [x] Preserve original APK, source/Blender snapshot, verification evidence, Android signatures, manifest, receipt and checksums; source checkpoint `a6363791128208bf740711d84521b9734e662fdd`.
-- [x] Describe the Being, BOTH, NonBeing and surgery scenes, full source accounts, final-Temple review and known visual/input limits. Text clipping/occlusion fixes are deferred to v5.5; durable saves, art and phone/tablet acceptance remain open.
+- [x] Describe the Being, BOTH, NonBeing and surgery scenes, full source accounts, final-Temple review and known visual/input limits. Text clipping/occlusion fixes are deferred to v0.5.5; durable saves, art and phone/tablet acceptance remain open.
 - [x] Update the compact ascending timeline, date, next-step copy and all three mockups.
 
 Verification — PASS: all archive checksums match; the static site builds; all 11 existing tests pass. Desktop/mobile browser checks confirm five ascending rows, compact heights, collapsed downloads, keyboard/independent disclosures and all four original screenshots without overflow. Live download verification follows publication.
+
+## Correct milestone numbering
+
+Endings is v0.5; the visual-correction iteration is v0.5.5. The archive path, download filename, component labels, deferred-fix copy and mockups use these versions. APK bytes remain unchanged; `originalApkVersionName` records the intrinsic historical package label. No aliases or forwarding are added.
+
+Verification — PASS: corrected archive checksums pass, the site builds, and the five-row mockups preserve ascending order, compact heights and no horizontal overflow.

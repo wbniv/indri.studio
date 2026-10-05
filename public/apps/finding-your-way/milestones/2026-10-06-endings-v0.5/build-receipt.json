@@ -1,5 +1,5 @@
 {
-  "apk": "/home/will/finding-your-way/game/milestones/2026-10-06-endings-v5.0/parmenides-v5.0-7f7ba37d62c0a7dd.apk",
+  "apk": "/home/will/finding-your-way/game/milestones/2026-10-06-endings-v0.5/parmenides-v0.5-7f7ba37d62c0a7dd.apk",
   "sha256": "7f7ba37d62c0a7dd2a0f161a5d40fceedc8eb686a67a9141eff333e7d518f151",
   "package": "org.worldfoundry.wf_game.parmenides",
   "nativeCode": true,
@@ -59,5 +59,7 @@
     "negativeCommand": "WF_ATLAS_MATERIAL_SOURCE=/tmp/fyw-material-before-texture.cc bash tests/test-texture-atlas.sh",
     "renderingCheck": "Existing prelit winding comparison with --no-fps; initial raw frame mismatch was 48 pixels confined to the changing FPS counter"
   },
-  "originalBuildApk": "/home/will/finding-your-way/game/parmenides-slice/build/parmenides-7f7ba37d62c0a7dd.apk"
+  "originalBuildApk": "/home/will/finding-your-way/game/parmenides-slice/build/parmenides-7f7ba37d62c0a7dd.apk",
+  "milestoneVersion": "0.5",
+  "originalApkVersionName": "5.0"
 }
