@@ -32,3 +32,30 @@ AI assistance: Codex. Exact model/version, tool version and reasoning effort wer
 ## Published verification
 
 [Live archive checksums and HTTP results](2026-10-05-finding-your-way-milestones/live-download-checks.json).
+
+## Verification — PASS
+
+1. Static build: PASS.
+
+   ```text
+   [build] 172 page(s) built in 15.73s
+   [build] Complete!
+   ```
+
+2. Existing test suite: PASS.
+
+   ```text
+   # tests 11
+   # pass 11
+   # fail 0
+   ```
+
+3. Desktop/mobile browser behavior: PASS. Summary heights are 52 px and 55.5 px; direct download, keyboard operation, independent expansion, preserved screenshots and overflow checks all pass. Raw results are in `browser-checks.json`.
+
+4. Live archive integrity: PASS.
+
+   ```text
+   PASS: live page contains both compact milestones and original journey text; all ten archive downloads match byte for byte.
+   ```
+
+5. GitHub release workflow: PASS. Run 37300649698 completed with conclusion `success`; Cloudflare deployment step succeeded.

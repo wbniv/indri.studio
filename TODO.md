@@ -72,5 +72,4 @@ _Nothing parked._
 _Auto-added from plan "Out of scope"/"Deferred" sections at commit time. Triage each into M1/M2/etc. and delete it here — it will not come back._
 
 <!-- BEGIN auto-captured-deferrals (managed by audit-plan-deferrals.sh — triage these into the curated sections above; the fingerprint ledger means a deleted item is NOT re-added) -->
-- [verify] **2026-10-05-finding-your-way-milestones** — Verification section present but no PASS recorded — run + record the steps. _from [2026-10-05-finding-your-way-milestones.md](docs/plans/2026-10-05-finding-your-way-milestones.md)_  <!-- fp:7d70bf2ceedda743 -->
 <!-- END auto-captured-deferrals -->
