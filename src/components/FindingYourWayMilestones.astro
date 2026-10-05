@@ -1,0 +1,106 @@
+---
+import { statSync } from 'node:fs';
+import loveReason from '../../public/apps/finding-your-way/milestones/2026-10-05-love-reason-v0.2/manifest.json';
+import templeLove from '../../public/apps/finding-your-way/milestones/2026-10-05-temple-love-v0.1/manifest.json';
+
+const milestones = [
+  {
+    title: 'Love/Reason v0.2',
+    manifest: loveReason,
+    description: 'Adds Reason encounters and four Temple return histories, plus Love feedback fixes.',
+    provenance: 'The documented 0.2-love-reason build, preserved with its original receipt and a source/Blender snapshot.',
+  },
+  {
+    title: 'Temple/Love v0.1',
+    manifest: templeLove,
+    description: 'The first playable Temple/Love chapter and its changed Temple return.',
+    provenance: 'The exact installed APK played by Will, preserved with its original build records.',
+  },
+].map((milestone) => {
+  const base = `/apps/finding-your-way/milestones/${milestone.manifest.milestone}`;
+  const apk = `${base}/${milestone.manifest.apk}`;
+  const bytes = statSync(`public${apk}`).size;
+  return { ...milestone, base, apk, size: `${(bytes / 1024 / 1024).toFixed(1)} MiB` };
+});
+---
+
+<section aria-labelledby="native-milestones-title" class="milestones">
+  <h2 id="native-milestones-title">Native adventure milestones</h2>
+  <p>Download an Android milestone or expand its row for build details.</p>
+
+  {milestones.map(({ title, manifest, description, provenance, base, apk, size }) => (
+    <details class="milestone">
+      <summary>
+        <span class="milestone-label">
+          <strong>{title}</strong>
+          <time datetime="2026-10-05">2026-10-05</time>
+        </span>
+        <a class="milestone-download" href={apk} download aria-label={`Download ${title} Android APK (${size})`}>
+          APK ↓ <small>{size}</small>
+        </a>
+      </summary>
+      <div class="milestone-body">
+        <p><strong>{manifest.chapter}</strong></p>
+        <p>{description} {provenance}</p>
+        <p>TV/remote and gamepad prototype; phone/tablet touch acceptance is pending. Progress resets on relaunch.</p>
+        <p><strong>Known issues</strong></p>
+        <ul>{manifest.knownIssues.map((issue) => <li>{issue}</li>)}</ul>
+        <p>APK SHA-256:</p>
+        <pre><code>{manifest.sha256}</code></pre>
+        <ul>
+          <li><a href={`${base}/SHA256SUMS`}>SHA256SUMS</a></li>
+          <li><a href={`${base}/manifest.json`}>Milestone manifest</a></li>
+          <li><a href={`${base}/build-receipt.json`}>Build receipt</a></li>
+          <li><a href={`${base}/${manifest.sourceSnapshot}`} download>Source and Blender snapshot</a></li>
+        </ul>
+      </div>
+    </details>
+  ))}
+
+  <p class="milestone-next">Truth is the next realm. Development focuses on functional completion before art passes.</p>
+</section>
+
+<style>
+  .milestone {
+    margin: 0;
+    min-width: 0;
+    border-bottom: 1px solid var(--color-outline-variant);
+  }
+  .milestone:first-of-type { border-top: 1px solid var(--color-outline-variant); }
+  summary {
+    display: grid;
+    grid-template-columns: 14px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    min-height: 52px;
+    list-style: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 15px;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: '▸'; color: var(--color-primary-container); }
+  details[open] summary::before { content: '▾'; }
+  summary:focus-visible {
+    outline: 2px solid var(--color-primary-container);
+    outline-offset: 3px;
+  }
+  .milestone-label { display: flex; align-items: baseline; gap: 14px; }
+  .milestone-label strong { font-size: 15px; }
+  time { font-size: 12px; color: var(--color-secondary); white-space: nowrap; }
+  .milestone-download { white-space: nowrap; font-size: 14px; }
+  .milestone-download small { font-size: 12px; color: var(--color-secondary); }
+  .milestone-body { padding: 12px 0 8px 26px; min-width: 0; }
+  .milestone-next { margin-top: 22px; }
+  @media (max-width: 600px) {
+    .milestone-label { display: block; }
+    .milestone-label strong, time { display: block; }
+    .milestone-label strong { font-size: 14px; }
+    time { font-size: 11px; line-height: 1.5; }
+    summary { gap: 8px; padding: 9px 0; }
+    .milestone-download { font-size: 13px; }
+    .milestone-download small { display: block; font-size: 11px; line-height: 1.5; }
+    .milestone-body { padding-left: 22px; }
+  }
+</style>

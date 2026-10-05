@@ -1,0 +1,26 @@
+[
+  {
+    "viewport": "desktop",
+    "summaryHeights": [
+      52,
+      52
+    ],
+    "collapsedDownload": true,
+    "keyboardExpansion": true,
+    "independentExpansion": true,
+    "noHorizontalOverflow": true,
+    "screenshotsPreserved": 4
+  },
+  {
+    "viewport": "mobile",
+    "summaryHeights": [
+      55.5,
+      55.5
+    ],
+    "collapsedDownload": true,
+    "keyboardExpansion": true,
+    "independentExpansion": true,
+    "noHorizontalOverflow": true,
+    "screenshotsPreserved": 4
+  }
+]

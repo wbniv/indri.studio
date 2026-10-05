@@ -63,7 +63,7 @@ const allApps = (await getCollection("apps", ({ data }) => !data.draft))
 				// rendered far more subdued (grayscale, lower opacity) since
 				// they're decorative, not representative of actual UI.
 				const usingPlaceholder = app.data.screenshots.length === 0;
-				const shots = usingPlaceholder ? app.data.cardImages : app.data.screenshots;
+				const shots = (usingPlaceholder || app.id === 'finding-your-way') ? app.data.cardImages : app.data.screenshots;
 				const primaryClass = usingPlaceholder
 					? "absolute inset-0 w-full h-full object-cover opacity-20 grayscale contrast-75"
 					: "absolute inset-0 w-full h-full object-cover opacity-35 saturate-50";

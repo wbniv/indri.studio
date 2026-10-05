@@ -1,0 +1,22 @@
+{
+  "milestone": "2026-10-05-love-reason-v0.2",
+  "archivedAt": "2026-10-05T17:43:10.704695+07:00",
+  "version": "0.2-love-reason",
+  "chapter": "Temple \u2192 Love \u2192 Reason \u2192 changed Temple",
+  "apk": "parmenides-a6194561e7a05eea.apk",
+  "sha256": "a6194561e7a05eeae279a88ee495ef5a3e345340c2363e56e1ca743c1a7a6eaf",
+  "levelSha256": "216705e217268910d7ac6d75fc080a0801d0d356f69c5cb9a202281a5de1e244",
+  "sourceSnapshot": "source-snapshot.tar.gz",
+  "sourceSnapshotSha256": "0a83ea070e56931952595ffa26fd6cb5ff8fef08a9b2afcac6592b3d463b6673",
+  "package": "org.worldfoundry.wf_game.parmenides",
+  "engineSourceModified": false,
+  "sourceCommit": null,
+  "sourceProvenance": "Local source snapshot; original milestone content is not present in a recorded Git commit.",
+  "knownIssues": [
+    "Face rendering issue remains unresolved",
+    "Session-local progress resets on relaunch",
+    "Phone touch and thermal acceptance remain unverified",
+    "Character animation, voice performance and journal history are pending"
+  ],
+  "productionOrder": "Build all realms to functional completion before art passes"
+}

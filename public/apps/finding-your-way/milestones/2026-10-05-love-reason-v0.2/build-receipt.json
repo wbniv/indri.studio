@@ -1,0 +1,14 @@
+{
+  "apk": "/home/will/finding-your-way/game/parmenides-slice/build/parmenides-a6194561e7a05eea.apk",
+  "sha256": "a6194561e7a05eeae279a88ee495ef5a3e345340c2363e56e1ca743c1a7a6eaf",
+  "package": "org.worldfoundry.wf_game.parmenides",
+  "nativeCode": true,
+  "runtimeApk": "/home/will/WorldFoundry-wbniv/android/app/build/outputs/apk/condo/release/worldfoundry-condo-release.apk",
+  "runtimeApkSha256": "9f587a7ba9a2e3b8f914ef8eaffe7b6c3d346b698952eb316968d5b3d7fca347",
+  "nativeLibraries": {
+    "lib/arm64-v8a/libwf_game.so": "565c5eed2c66c5b115decf322bc0cf9aa628e693e851110736ea1406f6766dc3",
+    "lib/armeabi-v7a/libwf_game.so": "6ab5579c342b8cc4c69fe76a28af35710ce50fe3f00d267f7cd0dd04fc354043"
+  },
+  "levelSha256": "216705e217268910d7ac6d75fc080a0801d0d356f69c5cb9a202281a5de1e244",
+  "engineSourceModified": false
+}

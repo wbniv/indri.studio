@@ -35,6 +35,8 @@ _Nothing parked._
 
 ## Done
 
+- [x] 2026-10-05 — Published compact Finding Your Way APK milestones with Π artwork. See [plan](docs/plans/2026-10-05-finding-your-way-milestones.md).
+
 - [x] 2026-07-27 — [snes-package] Engine vendored from @wbniv/bsnes-jg-player; deployed v0.1.120; prod selfcheck PASS. See [plan](docs/plans/2026-07-27-snes-package-adoption.md).
 
 - [x] **2026-07-24** Fixed the stale `scripts/sync-65816-docs.sh` manifest — found it already pointing every doc row at `main` (no `wt/321-snes-hwref` reference remained), no code change needed; just marking the TODO done. 
