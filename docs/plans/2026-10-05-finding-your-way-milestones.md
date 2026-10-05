@@ -83,3 +83,12 @@ Verification — PASS: Astro built 172 pages, all 11 existing tests passed, and 
 - [x] Update all three mockups and next-step copy; derive displayed dates from archive metadata and expose verification/signature links when available.
 
 Verification — PASS: all archive checksums pass; Astro builds 172 pages; all 11 existing tests pass. Desktop/mobile browser checks show four ascending rows with 52px/55.5px heights, collapsed downloads, independent keyboard disclosures, no overflow and all four original screenshots preserved. Live download verification follows publication.
+
+## Endings v5.0 — 2026-10-06
+
+- [x] Publish the fifth milestone, after v0.4, with actual version 5.0 and versioned filename `parmenides-v5.0-7f7ba37d62c0a7dd.apk`.
+- [x] Preserve original APK, source/Blender snapshot, verification evidence, Android signatures, manifest, receipt and checksums; source checkpoint `a6363791128208bf740711d84521b9734e662fdd`.
+- [x] Describe the Being, BOTH, NonBeing and surgery scenes, full source accounts, final-Temple review and known visual/input limits. Text clipping/occlusion fixes are deferred to v5.5; durable saves, art and phone/tablet acceptance remain open.
+- [x] Update the compact ascending timeline, date, next-step copy and all three mockups.
+
+Verification — PASS: all archive checksums match; the static site builds; all 11 existing tests pass. Desktop/mobile browser checks confirm five ascending rows, compact heights, collapsed downloads, keyboard/independent disclosures and all four original screenshots without overflow. Live download verification follows publication.

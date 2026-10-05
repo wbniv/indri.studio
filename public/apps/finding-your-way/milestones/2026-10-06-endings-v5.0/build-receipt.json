@@ -1,0 +1,63 @@
+{
+  "apk": "/home/will/finding-your-way/game/milestones/2026-10-06-endings-v5.0/parmenides-v5.0-7f7ba37d62c0a7dd.apk",
+  "sha256": "7f7ba37d62c0a7dd2a0f161a5d40fceedc8eb686a67a9141eff333e7d518f151",
+  "package": "org.worldfoundry.wf_game.parmenides",
+  "nativeCode": true,
+  "runtimeApk": "/home/will/WorldFoundry-wbniv/android/app/build/outputs/apk/condo/release/worldfoundry-condo-release.apk",
+  "runtimeApkSha256": "7ab2a3855d29bae2bd33a8892a8e2bce79bea7d518ff889aeb1753ba8b4379d4",
+  "nativeLibraries": {
+    "lib/arm64-v8a/libwf_game.so": "184595432bb663f0cae0004047e359e56095ac82c84b7c5b2decb82b0500c3d8",
+    "lib/armeabi-v7a/libwf_game.so": "f6abdf06d49b528288424d78fb001f3945cb3877c590507abf910cc4ec6392ec"
+  },
+  "levelSha256": "80e1bf20fe9e374cc52eb369b59174f584a14077de667b17967ec3a3985b6e54",
+  "engineSourceModified": true,
+  "engineSourceCommit": "1aecfbe5f3aeb0fc394522c4c5d35f126de551df",
+  "engineProvenance": {
+    "recordedAt": "2026-10-05T23:42:29.805538+07:00",
+    "sourceCommit": "1aecfbe5f3aeb0fc394522c4c5d35f126de551df",
+    "sourceFilesSha256": {
+      "CMakeLists.txt": "44e083ee5ae50f1c3152672409d33580a42f2a667b1e3cb49aedd21b6a8b58df",
+      "wfsource/source/gfx/material.cc": "56b61d9e28e729cb058bfdde0cd12c02e5c3ff460d6725b27b16afc4b37acfde",
+      "tests/texture_atlas_address_test.cc": "a9a208abf8e2f6b043bdf48dc098930fecc4a1c5d9001aa0abd7d5b6411a5ee5",
+      "tests/test-texture-atlas.sh": "40f572e5b80fd4b785319c499d9fa446cb5356cdaf212bbab75d05a820201443"
+    },
+    "runtimeApkSha256": "7ab2a3855d29bae2bd33a8892a8e2bce79bea7d518ff889aeb1753ba8b4379d4",
+    "nativeLibraries": {
+      "lib/arm64-v8a/libwf_game.so": "184595432bb663f0cae0004047e359e56095ac82c84b7c5b2decb82b0500c3d8",
+      "lib/armeabi-v7a/libwf_game.so": "f6abdf06d49b528288424d78fb001f3945cb3877c590507abf910cc4ec6392ec"
+    },
+    "desktopExecutableSha256": "56b13f2f466653f8cd0b11ff9aaebc4ca8030fe400148ab84a440bbbe3bc0126",
+    "enginePatchSha256": "23f8768e1ddd821915a8d48f72da1710167110f5c24a1d4baaa4dd3e137026bb",
+    "verification": {
+      "texture-unit": {
+        "path": "docs/diagnostics/parmenides/god/engine/texture-unit.log",
+        "sha256": "40ee529eda9ac2868a24f65291631a21e8a4731a8a53205f19cc2a5bb507d79c"
+      },
+      "old-material-negative": {
+        "path": "docs/diagnostics/parmenides/god/engine/old-material-negative.log",
+        "sha256": "08e107c75ad19d37f72417d509e33e4167b71c799bad34b2a43a8312c9a45463"
+      },
+      "prelit-no-fps": {
+        "path": "docs/diagnostics/parmenides/god/engine/prelit-no-fps.log",
+        "sha256": "eb73aa9d26e2282669922a83e5d50d1f3f43d57a367b0ecd14218d1686405adf"
+      },
+      "android-build": {
+        "path": "docs/diagnostics/parmenides/god/engine/android-build.log",
+        "sha256": "2761da1aa13124e357953c5f5bd153f06696deb87b4b80690f7d860d97ee0053"
+      },
+      "desktop-build": {
+        "path": "docs/diagnostics/parmenides/god/engine/desktop-build.log",
+        "sha256": "53eea6980ea1883cc857d78e3e1504b19e727c54e5e4d5d456e0b5336c5cfca6"
+      }
+    },
+    "textureCases": 80,
+    "buildCommands": [
+      "task build",
+      "cd android && ./gradlew assembleCondoRelease --offline"
+    ],
+    "textureTestCommand": "bash tests/test-texture-atlas.sh",
+    "negativeCommand": "WF_ATLAS_MATERIAL_SOURCE=/tmp/fyw-material-before-texture.cc bash tests/test-texture-atlas.sh",
+    "renderingCheck": "Existing prelit winding comparison with --no-fps; initial raw frame mismatch was 48 pixels confined to the changing FPS counter"
+  },
+  "originalBuildApk": "/home/will/finding-your-way/game/parmenides-slice/build/parmenides-7f7ba37d62c0a7dd.apk"
+}
