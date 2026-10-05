@@ -1,9 +1,16 @@
 ---
 import { statSync } from 'node:fs';
 import loveReason from '../../public/apps/finding-your-way/milestones/2026-10-05-love-reason-v0.2/manifest.json';
+import loveReasonTruth from '../../public/apps/finding-your-way/milestones/2026-10-05-love-reason-truth-v0.3/manifest.json';
 import templeLove from '../../public/apps/finding-your-way/milestones/2026-10-05-temple-love-v0.1/manifest.json';
 
 const milestones = [
+  {
+    title: 'Love/Reason/Truth v0.3',
+    manifest: loveReasonTruth,
+    description: 'Adds Truth’s courtroom, testimony, exhibits, both commitments and eight Temple return histories.',
+    provenance: 'Preserved from source checkpoint 20c4820, with native audits and completed Chromecast 1 verification.',
+  },
   {
     title: 'Love/Reason v0.2',
     manifest: loveReason,
@@ -16,7 +23,7 @@ const milestones = [
     description: 'The first playable Temple/Love chapter and its changed Temple return.',
     provenance: 'The exact installed APK played by Will, preserved with its original build records.',
   },
-].map((milestone) => {
+].sort((a, b) => a.manifest.milestoneVersion.localeCompare(b.manifest.milestoneVersion, undefined, { numeric: true })).map((milestone) => {
   const base = `/apps/finding-your-way/milestones/${milestone.manifest.milestone}`;
   const apk = `${base}/${milestone.manifest.apk}`;
   const bytes = statSync(`public${apk}`).size;
@@ -26,8 +33,9 @@ const milestones = [
 
 <section aria-labelledby="native-milestones-title" class="milestones">
   <h2 id="native-milestones-title">Android builds</h2>
-  <p>Download an Android milestone or expand its row for build details.</p>
+  <p>Oldest first. Download an APK or expand a row for build details.</p>
 
+  <div class="milestone-timeline">
   {milestones.map(({ title, manifest, description, provenance, base, apk, size }) => (
     <details class="milestone">
       <summary>
@@ -56,13 +64,26 @@ const milestones = [
       </div>
     </details>
   ))}
+  </div>
 
-  <p class="milestone-next">Truth is the next realm. Development focuses on functional completion before art passes.</p>
+  <p class="milestone-next">God is the next realm. Development focuses on functional completion before art passes.</p>
 </section>
 
 <style>
+  .milestone-timeline { padding-left: 4px; }
+  .milestone::before {
+    content: ''; position: absolute; left: -24px; top: 22px;
+    box-sizing: border-box; width: 9px; height: 9px; border: 2px solid var(--color-primary-container);
+    border-radius: 50%; background: var(--color-surface); z-index: 1;
+  }
+  .milestone:not(:last-child)::after {
+    content: ''; position: absolute; left: -20px; top: 27px; bottom: -27px;
+    width: 1px; background: var(--color-secondary);
+  }
+  .milestone:last-child::before { background: var(--color-primary-container); }
   .milestone {
-    margin: 0;
+    position: relative;
+    margin: 0 0 0 20px;
     min-width: 0;
     border-bottom: 1px solid var(--color-outline-variant);
   }

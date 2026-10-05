@@ -1,0 +1,15 @@
+{
+  "apk": "/home/will/finding-your-way/game/milestones/2026-10-05-love-reason-truth-v0.3/parmenides-v0.3-a5e28d489566587a.apk",
+  "sha256": "a5e28d489566587a2fcbbab5afb96bbbd303a40030a0060509999146d30d3ddc",
+  "package": "org.worldfoundry.wf_game.parmenides",
+  "nativeCode": true,
+  "runtimeApk": "/home/will/WorldFoundry-wbniv/android/app/build/outputs/apk/condo/release/worldfoundry-condo-release.apk",
+  "runtimeApkSha256": "9f587a7ba9a2e3b8f914ef8eaffe7b6c3d346b698952eb316968d5b3d7fca347",
+  "nativeLibraries": {
+    "lib/arm64-v8a/libwf_game.so": "565c5eed2c66c5b115decf322bc0cf9aa628e693e851110736ea1406f6766dc3",
+    "lib/armeabi-v7a/libwf_game.so": "6ab5579c342b8cc4c69fe76a28af35710ce50fe3f00d267f7cd0dd04fc354043"
+  },
+  "levelSha256": "5e5a0c493d66f2c9d4d111691d0f7f13e8c306e029d0239a80445acac37f7304",
+  "engineSourceModified": false,
+  "originalBuildApk": "/home/will/finding-your-way/game/parmenides-slice/build/parmenides-a5e28d489566587a.apk"
+}

@@ -65,3 +65,12 @@ AI assistance: Codex. Exact model/version, tool version and reasoning effort wer
 Both local and published APKs are now named `parmenides-v0.1-b7b49515f3998c85.apk` and `parmenides-v0.2-a6194561e7a05eea.apk`. The manifests, archive receipt paths, checksum lists and explicit HTML download filenames match. Original build paths are retained as provenance in the receipts. APK bytes and hashes are unchanged. Old asset filenames are removed, with no redirects or aliases.
 
 Verification: PASS. Both updated archive checksum sets pass; the static build includes only the new APK filenames. Live browser download verification follows publication.
+
+## Truth v0.3 and ascending timeline
+
+- [x] Publish the tested Love/Reason/Truth v0.3 archive with versioned filename `parmenides-v0.3-a5e28d489566587a.apk`; preserve its original bytes, source checkpoint `20c4820e263ce8c27b507e6a562008eb681feda1`, source/Blender snapshot, verification evidence and signature report.
+- [x] Sort milestones numerically by explicit version metadata, oldest first: v0.1 → v0.2 → v0.3.
+- [x] Add a thin connecting timeline rail and hollow historical dots, with a filled final dot. Keep each row compact, its download visible and its native disclosure independently expandable.
+- [x] Update desktop/mobile/expanded mockups; retain the existing introduction and four screenshots. God is the next realm.
+
+Verification — PASS: Astro built 172 pages, all 11 existing tests passed, and archive checksums passed. Desktop/mobile browser checks confirm ascending order, 52px/55.5px compact rows, collapsed downloads, keyboard/independent expansion and no horizontal overflow. Full playthrough review and phone/tablet acceptance remain open.
