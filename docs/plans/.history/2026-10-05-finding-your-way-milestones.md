@@ -1,11 +1,16 @@
 | Date | Change |
 |------|--------|
+| [2026-10-05](https://github.com/wbniv/indri.studio/commit/16a6165) | Publish Truth v0.3 in an ascending Android build timeline |
 | [2026-10-05](https://github.com/wbniv/indri.studio/commit/b2701a7) | Include milestone versions in archived APK filenames |
 | [2026-10-05](https://github.com/wbniv/indri.studio/commit/35ea692) | docs: mark milestone verification passed and clear captured reminder |
 | [2026-10-05](https://github.com/wbniv/indri.studio/commit/cbb9912) | docs: record live APK milestone verification and index plan |
 | [2026-10-05](https://github.com/wbniv/indri.studio/commit/9c892ef) | Publish Finding Your Way Android milestone downloads |
 
 <!--history-meta v1
+16a6165	author	Will Norris
+16a6165	added	9
+16a6165	deleted	0
+16a6165	files	1
 b2701a7	author	Will Norris
 b2701a7	added	6
 b2701a7	deleted	0

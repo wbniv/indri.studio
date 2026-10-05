@@ -1,10 +1,18 @@
 ---
-import { statSync } from 'node:fs';
+import { statSync, existsSync } from 'node:fs';
 import loveReason from '../../public/apps/finding-your-way/milestones/2026-10-05-love-reason-v0.2/manifest.json';
 import loveReasonTruth from '../../public/apps/finding-your-way/milestones/2026-10-05-love-reason-truth-v0.3/manifest.json';
 import templeLove from '../../public/apps/finding-your-way/milestones/2026-10-05-temple-love-v0.1/manifest.json';
 
+import fourRealms from '../../public/apps/finding-your-way/milestones/2026-10-06-four-realms-v0.4/manifest.json';
+
 const milestones = [
+  {
+    title: 'Four realms v0.4',
+    manifest: fourRealms,
+    description: 'Adds God’s guides, poster/icon inspections, hill traversal, both counsels and sixteen final Temple histories. Includes the native texture-atlas fix; ending scenes remain previews.',
+    provenance: 'Preserved from chapter checkpoint 4c8c488 and engine checkpoint 1aecfbe, with native audits and completed Chromecast 1 verification.',
+  },
   {
     title: 'Love/Reason/Truth v0.3',
     manifest: loveReasonTruth,
@@ -27,7 +35,7 @@ const milestones = [
   const base = `/apps/finding-your-way/milestones/${milestone.manifest.milestone}`;
   const apk = `${base}/${milestone.manifest.apk}`;
   const bytes = statSync(`public${apk}`).size;
-  return { ...milestone, base, apk, size: `${(bytes / 1024 / 1024).toFixed(1)} MiB` };
+  return { ...milestone, base, apk, date: milestone.manifest.milestone.slice(0, 10), testEvidence: 'testEvidence' in milestone.manifest ? milestone.manifest.testEvidence : null, signature: existsSync(`public${base}/signature-verification.txt`), size: `${(bytes / 1024 / 1024).toFixed(1)} MiB` };
 });
 ---
 
@@ -36,12 +44,12 @@ const milestones = [
   <p>Oldest first. Download an APK or expand a row for build details.</p>
 
   <div class="milestone-timeline">
-  {milestones.map(({ title, manifest, description, provenance, base, apk, size }) => (
+  {milestones.map(({ title, manifest, description, provenance, base, apk, size, date, testEvidence, signature }) => (
     <details class="milestone">
       <summary>
         <span class="milestone-label">
           <strong>{title}</strong>
-          <time datetime="2026-10-05">2026-10-05</time>
+          <time datetime={date}>{date}</time>
         </span>
         <a class="milestone-download" href={apk} download={manifest.apk} aria-label={`Download ${title} Android APK (${size})`}>
           APK ↓ <small>{size}</small>
@@ -60,13 +68,15 @@ const milestones = [
           <li><a href={`${base}/manifest.json`}>Milestone manifest</a></li>
           <li><a href={`${base}/build-receipt.json`}>Build receipt</a></li>
           <li><a href={`${base}/${manifest.sourceSnapshot}`} download>Source and Blender snapshot</a></li>
+          {testEvidence && <li><a href={`${base}/${testEvidence}`} download>Verification evidence</a></li>}
+          {signature && <li><a href={`${base}/signature-verification.txt`}>Android signature verification</a></li>}
         </ul>
       </div>
     </details>
   ))}
   </div>
 
-  <p class="milestone-next">God is the next realm. Development focuses on functional completion before art passes.</p>
+  <p class="milestone-next">Ending scenes are next. Development focuses on functional completion before art passes.</p>
 </section>
 
 <style>

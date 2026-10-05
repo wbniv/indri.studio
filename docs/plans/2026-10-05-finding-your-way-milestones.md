@@ -74,3 +74,12 @@ Verification: PASS. Both updated archive checksum sets pass; the static build in
 - [x] Update desktop/mobile/expanded mockups; retain the existing introduction and four screenshots. God is the next realm.
 
 Verification — PASS: Astro built 172 pages, all 11 existing tests passed, and archive checksums passed. Desktop/mobile browser checks confirm ascending order, 52px/55.5px compact rows, collapsed downloads, keyboard/independent expansion and no horizontal overflow. Full playthrough review and phone/tablet acceptance remain open.
+
+## Four realms v0.4 — 2026-10-06
+
+- [x] Add Four realms v0.4 after v0.3, with its actual 2026-10-06 archive date and versioned filename `parmenides-v0.4-7fd2a9d1655591d7.apk`.
+- [x] Publish original APK bytes, source/Blender snapshot, test evidence, signature report, build receipt, manifest and checksums. APK SHA-256: `7fd2a9d1655591d79a036d37d81c4566ffc34778011d6bf0055a82de8132a069`.
+- [x] Record chapter checkpoint `4c8c488` and engine checkpoint `1aecfbe`; describe God and the native texture-atlas fix accurately. Ending scenes remain previews, and phone/tablet acceptance remains pending.
+- [x] Update all three mockups and next-step copy; derive displayed dates from archive metadata and expose verification/signature links when available.
+
+Verification — PASS: all archive checksums pass; Astro builds 172 pages; all 11 existing tests pass. Desktop/mobile browser checks show four ascending rows with 52px/55.5px heights, collapsed downloads, independent keyboard disclosures, no overflow and all four original screenshots preserved. Live download verification follows publication.
