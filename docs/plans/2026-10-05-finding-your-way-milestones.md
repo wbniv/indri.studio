@@ -123,9 +123,9 @@ flowchart LR
 
 - [x] Receive archive `2026-10-06-patient-framing-v0.5.5`; SHA-256 `12116d8b40ce9fade6fc03850bbc4cc4709f8d6377dc2c6641490c1d5e418e75`. All archive checksums and 493 archived evidence files match.
 - [x] Patient framing passed native/device review in both views and reduced motion. Three surgery catalog shots replaced, 100 retained with original provenance. Exact source/camera/scripts/unrelated geometry unchanged.
-- [ ] Publish replacement as Visual fixes v0.5.5 with the versioned APK filename; describe corrected faces, hands and off-center lamp. General camera collision remains postponed.
+- [x] Published replacement as Visual fixes v0.5.5, website `627c02d` / `v0.1.170`. Corrected faces, hands and off-center lamp are described; general camera collision remains postponed.
 
-### Verification — local PASS; publication pending
+### Verification — PASS
 
 1. Run `task build` and the existing test suite.
 
@@ -161,5 +161,18 @@ flowchart LR
 
    [![Actual mobile expanded row](2026-10-05-finding-your-way-milestones/patient-framing-preview-390-expanded.png)](2026-10-05-finding-your-way-milestones/patient-framing-preview-390-expanded.png)
 3. Publish through `task publish`; verify the actual served APK checksum and that private archive files return 404.
+
+   ```text
+   publishing v0.1.170 on main (627c02d)
+   tagged v0.1.170; deploy workflow triggered.
+   HTTP/2 200
+   content-type: application/vnd.android.package-archive
+   content-length: 5043064
+   12116d8b40ce9fade6fc03850bbc4cc4709f8d6377dc2c6641490c1d5e418e75
+   "passed": true
+   ```
+
+   PASS. Deployment step succeeded. [Live browser evidence](2026-10-05-finding-your-way-milestones/patient-framing-live-browser-checks.json) verifies the actual versioned browser download and all seven private URLs returning 404. Full workflow post-deployment audit outcome is recorded separately when complete.
+
 
 Evidence and actual page screenshots will be recorded in the existing co-named plan bundle. AI assistance: Codex; exact tool/model version and reasoning effort were unavailable in verified session metadata.

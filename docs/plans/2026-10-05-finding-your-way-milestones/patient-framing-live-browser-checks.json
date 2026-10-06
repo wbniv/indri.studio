@@ -1,0 +1,47 @@
+{
+  "base": "https://indri.studio",
+  "apk": "parmenides-v0.5.5-12116d8b40ce9fad.apk",
+  "sha256": "12116d8b40ce9fade6fc03850bbc4cc4709f8d6377dc2c6641490c1d5e418e75",
+  "viewports": [
+    {
+      "width": 1440,
+      "titles": [
+        "Temple/Love v0.1",
+        "Love/Reason v0.2",
+        "Love/Reason/Truth v0.3",
+        "Four realms v0.4",
+        "Endings v0.5",
+        "Visual fixes v0.5.5"
+      ],
+      "collapsedDownload": true,
+      "keyboardAndIndependentDisclosure": true,
+      "noOverflow": true,
+      "galleryImages": 7
+    },
+    {
+      "width": 390,
+      "titles": [
+        "Temple/Love v0.1",
+        "Love/Reason v0.2",
+        "Love/Reason/Truth v0.3",
+        "Four realms v0.4",
+        "Endings v0.5",
+        "Visual fixes v0.5.5"
+      ],
+      "collapsedDownload": true,
+      "keyboardAndIndependentDisclosure": true,
+      "noOverflow": true,
+      "galleryImages": 7
+    }
+  ],
+  "privateArchiveStatuses": {
+    "manifest.json": 404,
+    "source-snapshot.tar.gz": 404,
+    "build-receipt.json": 404,
+    "test-evidence.tar.gz": 404,
+    "SHA256SUMS": 404,
+    "signature-verification.txt": 404,
+    "author-review-v0.5.5.mp4": 404
+  },
+  "passed": true
+}

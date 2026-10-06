@@ -4,7 +4,6 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 ## Open
 
-- [verify T5] Republish tested patient-framing v0.5.5 APK only; build/tests/browser pass, live publication pending. See [plan](docs/plans/2026-10-05-finding-your-way-milestones.md#patient-framing-replacement-v055--20261006).
 
 ### SNES player package
 
@@ -36,6 +35,8 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 _Nothing parked._
 
 ## Done
+
+- [x] 2026-10-06 — Republished patient-framing v0.5.5 APK only; live page/download/private boundary pass. See [plan](docs/plans/2026-10-05-finding-your-way-milestones.md).
 
 - [x] 2026-10-05 — Published compact Finding Your Way APK milestones with Π artwork. See [plan](docs/plans/2026-10-05-finding-your-way-milestones.md).
 
