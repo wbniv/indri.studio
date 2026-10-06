@@ -186,4 +186,4 @@ Publish the exact archived iteration E APK as the seventh ascending milestone. T
 - [x] Describe A–E artwork, ending effects and surgery, with source checkpoint `b90655a`, 1,960 native checks and four TV tours. Disclose pending phone acceptance and framing/culling/performance limitations.
 - [x] Update the roadmap: v0.7 polish and v0.8 optimization.
 - [x] Verify build, existing tests and seven ascending download rows. Astro built 172 pages; all 11 tests passed. Desktop (1440px) and mobile (390px) browser checks passed: ordered rows, collapsed downloads, keyboard and independent disclosures, no page overflow, exact download filename and SHA-256. [Browser evidence](2026-10-05-finding-your-way-milestones/artwork-v06-preview-checks.json).
-- [ ] Publish via the established tag-driven deployment and verify the live APK digest.
+- [x] Publish via the established tag-driven deployment and verify the live APK digest. Published as website v0.1.171; live desktop/mobile downloads match the archived APK SHA-256. [Live browser evidence](2026-10-05-finding-your-way-milestones/artwork-v06-live-checks.json).
