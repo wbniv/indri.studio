@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-10-06](https://github.com/wbniv/indri.studio/commit/36a68fd) | Publish updated v0.5.5 Android APK without private evidence |
 | [2026-10-06](https://github.com/wbniv/indri.studio/commit/60817c5) | Correct milestone labels to v0.5 and v0.5.5 |
 | [2026-10-06](https://github.com/wbniv/indri.studio/commit/4fd17ef) | Publish endings v5.0 Android milestone |
 | [2026-10-06](https://github.com/wbniv/indri.studio/commit/bb41025) | Publish four-realm v0.4 Android milestone |
@@ -10,6 +11,10 @@
 | [2026-10-05](https://github.com/wbniv/indri.studio/commit/9c892ef) | Publish Finding Your Way Android milestone downloads |
 
 <!--history-meta v1
+36a68fd	author	Will Norris
+36a68fd	added	8
+36a68fd	deleted	0
+36a68fd	files	1
 60817c5	author	Will Norris
 60817c5	added	9
 60817c5	deleted	3
