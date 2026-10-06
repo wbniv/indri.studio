@@ -104,4 +104,62 @@ Verification — PASS: corrected archive checksums pass, the site builds, and th
 - [x] Revert the sixth timeline entry, public v0.5.5 APK and six-row mockups at Will's request; restore the published timeline through Endings v0.5.
 - [x] Retain the local frozen release archives and private evidence.
 - [x] Publish the rollback using `task publish VERSION=v0.1.169`, commit `bf803a5`. Live verification passes: five ascending versions through v0.5 and withdrawn v0.5.5 APK URL returns 404.
-- [ ] Wait for the replacement v0.5.5 before preparing another publication.
+- [x] Replacement v0.5.5 received: committed source `9b5d4f3`, frozen patient-framing archive and matching verification summary.
+
+## Patient framing replacement v0.5.5 — 2026‑10‑06
+
+Publish the tested replacement requested by Will. Only its APK is public; the source snapshot, receipts, diagnostics, screenshot catalog and author movie remain in the Finding Your Way project/archive. Retain the five historical rows and their files. The withdrawn earlier v0.5.5 remains withdrawn.
+
+```mermaid
+flowchart LR
+    A[Committed patient framing source] --> B[Verified immutable v0.5.5 archive]
+    B --> C[Copy APK only]
+    C --> D[Six ascending download rows]
+    D --> E[Build and browser checks]
+    E --> F[Tag-driven deployment]
+    F --> G[Verify served APK digest]
+    B --> H[Private source and review evidence]
+```
+
+- [x] Receive archive `2026-10-06-patient-framing-v0.5.5`; SHA-256 `12116d8b40ce9fade6fc03850bbc4cc4709f8d6377dc2c6641490c1d5e418e75`. All archive checksums and 493 archived evidence files match.
+- [x] Patient framing passed native/device review in both views and reduced motion. Three surgery catalog shots replaced, 100 retained with original provenance. Exact source/camera/scripts/unrelated geometry unchanged.
+- [ ] Publish replacement as Visual fixes v0.5.5 with the versioned APK filename; describe corrected faces, hands and off-center lamp. General camera collision remains postponed.
+
+### Verification — local PASS; publication pending
+
+1. Run `task build` and the existing test suite.
+
+   ```text
+   [build] 172 page(s) built in 18.31s
+   [build] Complete!
+   # tests 11
+   # pass 11
+   # fail 0
+   ```
+
+   PASS.
+2. Review six ascending rows on desktop/mobile: download visible while collapsed, correct filename, keyboard/independent disclosures, no overflow and existing gallery preserved. Check the replacement directory contains only the APK.
+
+   ```text
+   "width": 1440 / 390
+   "collapsedDownload": true
+   "keyboardAndIndependentDisclosure": true
+   "noOverflow": true
+   "galleryImages": 7
+   "privateArchiveStatuses": {
+     "manifest.json": 404, "source-snapshot.tar.gz": 404,
+     "build-receipt.json": 404, "test-evidence.tar.gz": 404,
+     "SHA256SUMS": 404, "signature-verification.txt": 404,
+     "author-review-v0.5.5.mp4": 404
+   }
+   "passed": true
+   ```
+
+   PASS. Browser download filename and full APK SHA-256 match the immutable archive. [Full results](2026-10-05-finding-your-way-milestones/patient-framing-preview-browser-checks.json).
+
+   [![Actual desktop expanded row](2026-10-05-finding-your-way-milestones/patient-framing-preview-1440-expanded.png)](2026-10-05-finding-your-way-milestones/patient-framing-preview-1440-expanded.png)
+
+   [![Actual mobile expanded row](2026-10-05-finding-your-way-milestones/patient-framing-preview-390-expanded.png)](2026-10-05-finding-your-way-milestones/patient-framing-preview-390-expanded.png)
+3. Publish through `task publish`; verify the actual served APK checksum and that private archive files return 404.
+
+Evidence and actual page screenshots will be recorded in the existing co-named plan bundle. AI assistance: Codex; exact tool/model version and reasoning effort were unavailable in verified session metadata.

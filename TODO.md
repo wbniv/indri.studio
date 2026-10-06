@@ -4,6 +4,8 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 ## Open
 
+- [verify T5] Republish tested patient-framing v0.5.5 APK only; build/tests/browser pass, live publication pending. See [plan](docs/plans/2026-10-05-finding-your-way-milestones.md#patient-framing-replacement-v055--20261006).
+
 ### SNES player package
 
 - [T1] **2026-07-27** After the first npm publish of `@wbniv/bsnes-jg-player`, swap the git dep

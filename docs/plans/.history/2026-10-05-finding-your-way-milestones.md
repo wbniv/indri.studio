@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-10-06](https://github.com/wbniv/indri.studio/commit/b9aa0f4) | Record successful v0.5.5 publication withdrawal |
 | [2026-10-06](https://github.com/wbniv/indri.studio/commit/bf803a5) | Withdraw v0.5.5 APK publication pending its replacement |
 | [2026-10-06](https://github.com/wbniv/indri.studio/commit/9af19cf) | Record live v0.5.5 APK-only publication checks |
 | [2026-10-06](https://github.com/wbniv/indri.studio/commit/36a68fd) | Publish updated v0.5.5 Android APK without private evidence |
@@ -13,6 +14,10 @@
 | [2026-10-05](https://github.com/wbniv/indri.studio/commit/9c892ef) | Publish Finding Your Way Android milestone downloads |
 
 <!--history-meta v1
+b9aa0f4	author	Will Norris
+b9aa0f4	added	1
+b9aa0f4	deleted	1
+b9aa0f4	files	1
 bf803a5	author	Will Norris
 bf803a5	added	5
 bf803a5	deleted	6
