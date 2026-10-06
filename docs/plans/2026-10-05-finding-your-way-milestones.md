@@ -103,5 +103,5 @@ Verification — PASS: corrected archive checksums pass, the site builds, and th
 
 - [x] Revert the sixth timeline entry, public v0.5.5 APK and six-row mockups at Will's request; restore the published timeline through Endings v0.5.
 - [x] Retain the local frozen release archives and private evidence.
-- [ ] Publish the rollback using `task publish VERSION=v0.1.169` and verify the live page and withdrawn APK URL.
+- [x] Publish the rollback using `task publish VERSION=v0.1.169`, commit `bf803a5`. Live verification passes: five ascending versions through v0.5 and withdrawn v0.5.5 APK URL returns 404.
 - [ ] Wait for the replacement v0.5.5 before preparing another publication.
