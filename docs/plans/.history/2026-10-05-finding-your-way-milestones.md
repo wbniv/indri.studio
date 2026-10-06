@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-10-06](https://github.com/wbniv/indri.studio/commit/60817c5) | Correct milestone labels to v0.5 and v0.5.5 |
 | [2026-10-06](https://github.com/wbniv/indri.studio/commit/4fd17ef) | Publish endings v5.0 Android milestone |
 | [2026-10-06](https://github.com/wbniv/indri.studio/commit/bb41025) | Publish four-realm v0.4 Android milestone |
 | [2026-10-05](https://github.com/wbniv/indri.studio/commit/16a6165) | Publish Truth v0.3 in an ascending Android build timeline |
@@ -9,6 +10,10 @@
 | [2026-10-05](https://github.com/wbniv/indri.studio/commit/9c892ef) | Publish Finding Your Way Android milestone downloads |
 
 <!--history-meta v1
+60817c5	author	Will Norris
+60817c5	added	9
+60817c5	deleted	3
+60817c5	files	1
 4fd17ef	author	Will Norris
 4fd17ef	added	9
 4fd17ef	deleted	0

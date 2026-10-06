@@ -98,3 +98,11 @@ Verification — PASS: all archive checksums match; the static site builds; all 
 Endings is v0.5; the visual-correction iteration is v0.5.5. The archive path, download filename, component labels, deferred-fix copy and mockups use these versions. APK bytes remain unchanged; `originalApkVersionName` records the intrinsic historical package label. No aliases or forwarding are added.
 
 Verification — PASS: corrected archive checksums pass, the site builds, and the five-row mockups preserve ascending order, compact heights and no horizontal overflow.
+
+## Updated v0.5.5 APK — 2026-10-06
+
+- [x] Add the sixth compact ascending row, Visual fixes v0.5.5, and update desktop/mobile/expanded mockups.
+- [x] Publish only `parmenides-v0.5.5-d2e41fcbda98d784.apk`, SHA-256 `d2e41fcbda98d784566e21a20a2aa1fbbbe2f43eb01eeacca540d7c9aa54651f`, from frozen archive `2026-10-06-visual-review-v0.5.5`. Will will share evidence privately with Max; source/evidence/receipt downloads are omitted for this row.
+- [x] Describe dialogue fitting, world suppression, sphere/arch winding and reading-camera readiness/input fixes. Retain postponed camera obstruction/patient framing and incomplete phone/tablet acceptance.
+- [x] Verify the 172-page build, all 11 existing tests, six-row desktop/mobile layout, keyboard/independent expansion, visible downloads and four original screenshots without horizontal overflow.
+- [ ] Confirm the live v0.1.168 deployment and exact APK download checksum.

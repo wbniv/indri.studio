@@ -73,3 +73,5 @@ _Auto-added from plan "Out of scope"/"Deferred" sections at commit time. Triage 
 
 <!-- BEGIN auto-captured-deferrals (managed by audit-plan-deferrals.sh — triage these into the curated sections above; the fingerprint ledger means a deleted item is NOT re-added) -->
 <!-- END auto-captured-deferrals -->
+
+- [x] 2026-10-06 — Publish updated Finding Your Way v0.5.5 APK only; evidence stays private. See [plan](docs/plans/2026-10-05-finding-your-way-milestones.md).
