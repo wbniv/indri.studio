@@ -99,10 +99,9 @@ Endings is v0.5; the visual-correction iteration is v0.5.5. The archive path, do
 
 Verification — PASS: corrected archive checksums pass, the site builds, and the five-row mockups preserve ascending order, compact heights and no horizontal overflow.
 
-## Updated v0.5.5 APK — 2026-10-06
+## Withdraw v0.5.5 publication — 2026-10-06
 
-- [x] Add the sixth compact ascending row, Visual fixes v0.5.5, and update desktop/mobile/expanded mockups.
-- [x] Publish only `parmenides-v0.5.5-d2e41fcbda98d784.apk`, SHA-256 `d2e41fcbda98d784566e21a20a2aa1fbbbe2f43eb01eeacca540d7c9aa54651f`, from frozen archive `2026-10-06-visual-review-v0.5.5`. Will will share evidence privately with Max; source/evidence/receipt downloads are omitted for this row.
-- [x] Describe dialogue fitting, world suppression, sphere/arch winding and reading-camera readiness/input fixes. Retain postponed camera obstruction/patient framing and incomplete phone/tablet acceptance.
-- [x] Verify the 172-page build, all 11 existing tests, six-row desktop/mobile layout, keyboard/independent expansion, visible downloads and four original screenshots without horizontal overflow.
-- [x] Confirm the live v0.1.168 deployment and exact APK download checksum. Live checks confirm six ascending versions, the correct versioned filename, collapsed download/keyboard expansion and no evidence links for v0.5.5. Its manifest, receipt, source snapshot and evidence-part URLs return 404.
+- [x] Revert the sixth timeline entry, public v0.5.5 APK and six-row mockups at Will's request; restore the published timeline through Endings v0.5.
+- [x] Retain the local frozen release archives and private evidence.
+- [ ] Publish the rollback using `task publish VERSION=v0.1.169` and verify the live page and withdrawn APK URL.
+- [ ] Wait for the replacement v0.5.5 before preparing another publication.

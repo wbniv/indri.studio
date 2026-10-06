@@ -8,21 +8,7 @@ import fourRealms from '../../public/apps/finding-your-way/milestones/2026-10-06
 
 import endings from '../../public/apps/finding-your-way/milestones/2026-10-06-endings-v0.5/manifest.json';
 
-// v0.5.5 publishes only the APK; release evidence is shared privately.
-const visualFixes = {
-  milestone: '2026-10-06-visual-review-v0.5.5', milestoneVersion: '0.5.5',
-  chapter: 'Temple / Love / Reason / Truth / God / Endings / Surgery',
-  apk: 'parmenides-v0.5.5-d2e41fcbda98d784.apk', sha256: 'd2e41fcbda98d784566e21a20a2aa1fbbbe2f43eb01eeacca540d7c9aa54651f',
-  knownIssues: ["Session-local progress resets on relaunch", "Camera obstruction/collision postponed", "Upward surgery composition crops surgeons; framing postponed", "Sampled rendering coverage; complete remote-driven Android routes and phone acceptance remain open", "Phone touch/thermal acceptance, animation, voice and journal history remain open", "Ending dissolution/portal closure use provisional visibility; surgery uses an upward patient camera with known framing limits", "Foundation rescue is provisional invisible collision support; guide departures and aether art are provisional"],
-};
-
 const milestones = [
-  {
-    title: 'Visual fixes v0.5.5',
-    manifest: visualFixes,
-    description: 'Keeps the complete ending routes from v0.5. Fits dialogue text and controls, hides world geometry during dialogue, corrects sphere and arch winding, and waits for the reading camera before showing or advancing text. Camera obstruction and upward patient framing remain postponed.',
-    provenance: 'Native regression and sampled desktop/Chromecast rendering checks passed. Complete remote-driven Android routes and phone/tablet touch acceptance remain open.',
-  },
   {
     title: 'Endings v0.5',
     manifest: endings,
@@ -57,7 +43,7 @@ const milestones = [
   const base = `/apps/finding-your-way/milestones/${milestone.manifest.milestone}`;
   const apk = `${base}/${milestone.manifest.apk}`;
   const bytes = statSync(`public${apk}`).size;
-  return { ...milestone, archiveRecords: existsSync(`public${base}/manifest.json`), base, apk, date: milestone.manifest.milestone.slice(0, 10), testEvidence: 'testEvidence' in milestone.manifest ? milestone.manifest.testEvidence : null, signature: existsSync(`public${base}/signature-verification.txt`), size: `${(bytes / 1024 / 1024).toFixed(1)} MiB` };
+  return { ...milestone, base, apk, date: milestone.manifest.milestone.slice(0, 10), testEvidence: 'testEvidence' in milestone.manifest ? milestone.manifest.testEvidence : null, signature: existsSync(`public${base}/signature-verification.txt`), size: `${(bytes / 1024 / 1024).toFixed(1)} MiB` };
 });
 ---
 
@@ -66,7 +52,7 @@ const milestones = [
   <p>Oldest first. Download an APK or expand a row for build details.</p>
 
   <div class="milestone-timeline">
-  {milestones.map(({ title, manifest, description, provenance, base, apk, size, date, testEvidence, signature, archiveRecords }) => (
+  {milestones.map(({ title, manifest, description, provenance, base, apk, size, date, testEvidence, signature }) => (
     <details class="milestone">
       <summary>
         <span class="milestone-label">
@@ -85,20 +71,20 @@ const milestones = [
         <ul>{manifest.knownIssues.map((issue) => <li>{issue}</li>)}</ul>
         <p>APK SHA-256:</p>
         <pre><code>{manifest.sha256}</code></pre>
-        {archiveRecords && <ul>
+        <ul>
           <li><a href={`${base}/SHA256SUMS`}>SHA256SUMS</a></li>
           <li><a href={`${base}/manifest.json`}>Milestone manifest</a></li>
           <li><a href={`${base}/build-receipt.json`}>Build receipt</a></li>
           <li><a href={`${base}/${manifest.sourceSnapshot}`} download>Source and Blender snapshot</a></li>
           {testEvidence && <li><a href={`${base}/${testEvidence}`} download>Verification evidence</a></li>}
           {signature && <li><a href={`${base}/signature-verification.txt`}>Android signature verification</a></li>}
-        </ul>}
+        </ul>
       </div>
     </details>
   ))}
   </div>
 
-  <p class="milestone-next">Camera obstruction and patient framing remain postponed. Art passes and phone/tablet touch acceptance remain ahead.</p>
+  <p class="milestone-next">Visual fixes are next, followed by art passes. Development focuses on functional completion before art passes.</p>
 </section>
 
 <style>
