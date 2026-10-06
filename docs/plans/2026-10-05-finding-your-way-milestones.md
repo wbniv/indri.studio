@@ -176,3 +176,14 @@ flowchart LR
 
 
 Evidence and actual page screenshots will be recorded in the existing co-named plan bundle. AI assistance: Codex; exact tool/model version and reasoning effort were unavailable in verified session metadata.
+
+
+## Artwork v0.6 — 2026-10-07
+
+Publish the exact archived iteration E APK as the seventh ascending milestone. The package retains its intrinsic version `0.6-endings-surgery.1`; the catalogue milestone is v0.6. Source snapshots, receipts and review evidence remain in the Finding Your Way archive.
+
+- [x] Copy only `parmenides-v0.6-endings-surgery.1-ee82629373c95e6e.apk`, unchanged; SHA-256 `ee82629373c95e6e2a1e733a7e647bc52a4a653111d78172b2fffc802b6f8c6f`.
+- [x] Describe A–E artwork, ending effects and surgery, with source checkpoint `b90655a`, 1,960 native checks and four TV tours. Disclose pending phone acceptance and framing/culling/performance limitations.
+- [x] Update the roadmap: v0.7 polish and v0.8 optimization.
+- [x] Verify build, existing tests and seven ascending download rows. Astro built 172 pages; all 11 tests passed. Desktop (1440px) and mobile (390px) browser checks passed: ordered rows, collapsed downloads, keyboard and independent disclosures, no page overflow, exact download filename and SHA-256. [Browser evidence](2026-10-05-finding-your-way-milestones/artwork-v06-preview-checks.json).
+- [ ] Publish via the established tag-driven deployment and verify the live APK digest.

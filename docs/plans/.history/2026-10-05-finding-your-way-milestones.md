@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-10-06](https://github.com/wbniv/indri.studio/commit/7055989) | Record verified live patient-framing v0.5.5 replacement |
 | [2026-10-06](https://github.com/wbniv/indri.studio/commit/627c02d) | Republish v0.5.5 APK with corrected patient framing |
 | [2026-10-06](https://github.com/wbniv/indri.studio/commit/b9aa0f4) | Record successful v0.5.5 publication withdrawal |
 | [2026-10-06](https://github.com/wbniv/indri.studio/commit/bf803a5) | Withdraw v0.5.5 APK publication pending its replacement |
@@ -15,6 +16,10 @@
 | [2026-10-05](https://github.com/wbniv/indri.studio/commit/9c892ef) | Publish Finding Your Way Android milestone downloads |
 
 <!--history-meta v1
+7055989	author	Will Norris
+7055989	added	15
+7055989	deleted	2
+7055989	files	1
 627c02d	author	Will Norris
 627c02d	added	59
 627c02d	deleted	1

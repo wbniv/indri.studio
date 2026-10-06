@@ -1,0 +1,42 @@
+{
+  "base": "http://127.0.0.1:8876",
+  "passed": true,
+  "checks": [
+    {
+      "width": 1440,
+      "labels": [
+        "Temple/Love v0.1",
+        "Love/Reason v0.2",
+        "Love/Reason/Truth v0.3",
+        "Four realms v0.4",
+        "Endings v0.5",
+        "Visual fixes v0.5.5",
+        "Artwork v0.6"
+      ],
+      "download": "parmenides-v0.6-endings-surgery.1-ee82629373c95e6e.apk",
+      "sha256": "ee82629373c95e6e2a1e733a7e647bc52a4a653111d78172b2fffc802b6f8c6f",
+      "collapsedDownload": true,
+      "keyboardDisclosure": true,
+      "independentDisclosure": true,
+      "noOverflow": true
+    },
+    {
+      "width": 390,
+      "labels": [
+        "Temple/Love v0.1",
+        "Love/Reason v0.2",
+        "Love/Reason/Truth v0.3",
+        "Four realms v0.4",
+        "Endings v0.5",
+        "Visual fixes v0.5.5",
+        "Artwork v0.6"
+      ],
+      "download": "parmenides-v0.6-endings-surgery.1-ee82629373c95e6e.apk",
+      "sha256": "ee82629373c95e6e2a1e733a7e647bc52a4a653111d78172b2fffc802b6f8c6f",
+      "collapsedDownload": true,
+      "keyboardDisclosure": true,
+      "independentDisclosure": true,
+      "noOverflow": true
+    }
+  ]
+}

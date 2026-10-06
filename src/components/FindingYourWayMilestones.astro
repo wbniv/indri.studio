@@ -25,7 +25,29 @@ const visualFixes = {
   ]
 };
 
+// v0.6 also publishes only the exact archived APK.
+const graphicsReview = {
+  "milestone": "2026-10-07-v0.6-endings-surgery-review",
+  "chapter": "Temple / Love / Temple / Reason / Temple / Truth / Temple / God / Final Temple / Endings / Surgery",
+  "apk": "parmenides-v0.6-endings-surgery.1-ee82629373c95e6e.apk",
+  "sha256": "ee82629373c95e6e2a1e733a7e647bc52a4a653111d78172b2fffc802b6f8c6f",
+  "milestoneVersion": "0.6",
+  "knownIssues": [
+    "Progress resets on relaunch; current-build phone/tablet touch acceptance remains pending.",
+    "Low Chromecast frame rate remains a known limitation; performance optimization is planned for v0.8.",
+    "Camera obstruction/collision remains postponed; distant God scenery can appear when turning in the Being scene.",
+    "The combined triangle motif can clip at close first-person approaches; the centre surgeon’s lower gloves partly enter the bottom edge.",
+    "Polish is planned for v0.7; author feedback and final all-realm acceptance remain pending."
+  ]
+};
+
 const milestones = [
+  {
+    title: 'Artwork v0.6',
+    manifest: graphicsReview,
+    description: 'Includes the A–E artwork passes across Temple, Love, Reason, Truth, God, the ending scenes and surgery. Adds the Being release, combined triangle motif, NonBeing portal closure and visage, and masked surgeons with surgical lighting and instruments. Ending effects pause while reading; reduced motion uses quiet states.',
+    provenance: 'Iteration E review build (0.6-endings-surgery.1), preserved unchanged from source checkpoint b90655a. Passed 1,960 native checks and four Chromecast rendering tours; the exact archived APK and launcher artwork were verified on Chromecast1.',
+  },
   {
     title: 'Visual fixes v0.5.5',
     manifest: visualFixes,
@@ -107,7 +129,7 @@ const milestones = [
   ))}
   </div>
 
-  <p class="milestone-next">Patient framing is corrected. Camera obstruction/collision remains postponed. Art passes and phone/tablet touch acceptance remain ahead.</p>
+  <p class="milestone-next">Artwork passes A–E are available in v0.6. Polish is v0.7; performance optimization is v0.8. Phone/tablet touch acceptance and author feedback remain pending.</p>
 </section>
 
 <style>
