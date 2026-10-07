@@ -187,3 +187,17 @@ Publish the exact archived iteration E APK as the seventh ascending milestone. T
 - [x] Update the roadmap: v0.7 polish and v0.8 optimization.
 - [x] Verify build, existing tests and seven ascending download rows. Astro built 172 pages; all 11 tests passed. Desktop (1440px) and mobile (390px) browser checks passed: ordered rows, collapsed downloads, keyboard and independent disclosures, no page overflow, exact download filename and SHA-256. [Browser evidence](2026-10-05-finding-your-way-milestones/artwork-v06-preview-checks.json).
 - [x] Publish via the established tag-driven deployment and verify the live APK digest. Published as website v0.1.171; live desktop/mobile downloads match the archived APK SHA-256. [Live browser evidence](2026-10-05-finding-your-way-milestones/artwork-v06-live-checks.json).
+
+
+## Polish v0.7 — 2026-10-07
+
+Publish the exact archived iteration F APK as the eighth ascending milestone. Keep all historical downloads, including v0.6, unchanged. Only the APK is public; source and review media remain private.
+
+- [x] Copy `parmenides-v0.7-polish.2-ac1f33f51ff46a73.apk` unchanged; SHA-256 `ac1f33f51ff46a73889c65bf287cc16d4a39575e23643f478c23d0748dfe3a4a`.
+- [x] Bind the release description to the verified F archive, full native/source checks, ten TV tours and exact launcher installation. Disclose phone, Android route, camera and performance limits.
+- [x] Verify build, existing tests and eight ascending download rows at desktop/mobile widths.
+- [ ] Publish via the established tag-driven deployment; verify the actual live download digest.
+
+AI assistance: Codex; exact model revision and reasoning-effort metadata were unavailable and are not inferred.
+
+Local build and 11 existing tests pass. Preview verifies the exact APK digest, eight ascending rows, collapsed download, keyboard disclosure, independent expansion and no horizontal overflow at 1440 and 390 pixels. Evidence: `2026-10-05-finding-your-way-milestones/artwork-v07-preview/`.
