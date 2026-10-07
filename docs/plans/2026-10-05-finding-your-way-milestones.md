@@ -196,8 +196,10 @@ Publish the exact archived iteration F APK as the eighth ascending milestone. Ke
 - [x] Copy `parmenides-v0.7-polish.2-ac1f33f51ff46a73.apk` unchanged; SHA-256 `ac1f33f51ff46a73889c65bf287cc16d4a39575e23643f478c23d0748dfe3a4a`.
 - [x] Bind the release description to the verified F archive, full native/source checks, ten TV tours and exact launcher installation. Disclose phone, Android route, camera and performance limits.
 - [x] Verify build, existing tests and eight ascending download rows at desktop/mobile widths.
-- [ ] Publish via the established tag-driven deployment; verify the actual live download digest.
+- [x] Publish via the established tag-driven deployment; verify the actual live download digest.
 
 AI assistance: Codex; exact model revision and reasoning-effort metadata were unavailable and are not inferred.
 
 Local build and 11 existing tests pass. Preview verifies the exact APK digest, eight ascending rows, collapsed download, keyboard disclosure, independent expansion and no horizontal overflow at 1440 and 390 pixels. Evidence: `2026-10-05-finding-your-way-milestones/artwork-v07-preview/`.
+
+Live v0.7 download SHA-256 matches the immutable archive at both 1440 and 390 pixels; all eight ascending rows, collapsed download, keyboard disclosure, independent expansion and page width checks pass. Evidence: `2026-10-05-finding-your-way-milestones/artwork-v07-live/`.

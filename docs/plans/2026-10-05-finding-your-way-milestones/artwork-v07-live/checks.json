@@ -1,0 +1,44 @@
+{
+  "base": "https://indri.studio",
+  "passed": true,
+  "checks": [
+    {
+      "width": 1440,
+      "labels": [
+        "Temple/Love v0.1",
+        "Love/Reason v0.2",
+        "Love/Reason/Truth v0.3",
+        "Four realms v0.4",
+        "Endings v0.5",
+        "Visual fixes v0.5.5",
+        "Artwork v0.6",
+        "Polish v0.7"
+      ],
+      "download": "parmenides-v0.7-polish.2-ac1f33f51ff46a73.apk",
+      "sha256": "ac1f33f51ff46a73889c65bf287cc16d4a39575e23643f478c23d0748dfe3a4a",
+      "collapsedDownload": true,
+      "keyboardDisclosure": true,
+      "independentDisclosure": true,
+      "noOverflow": true
+    },
+    {
+      "width": 390,
+      "labels": [
+        "Temple/Love v0.1",
+        "Love/Reason v0.2",
+        "Love/Reason/Truth v0.3",
+        "Four realms v0.4",
+        "Endings v0.5",
+        "Visual fixes v0.5.5",
+        "Artwork v0.6",
+        "Polish v0.7"
+      ],
+      "download": "parmenides-v0.7-polish.2-ac1f33f51ff46a73.apk",
+      "sha256": "ac1f33f51ff46a73889c65bf287cc16d4a39575e23643f478c23d0748dfe3a4a",
+      "collapsedDownload": true,
+      "keyboardDisclosure": true,
+      "independentDisclosure": true,
+      "noOverflow": true
+    }
+  ]
+}
