@@ -135,6 +135,23 @@ const milestones = [
     </div>
   </details>
 
+  <details class="install-guide" id="chromecast-install">
+    <summary>Install on Chromecast with Google TV from your phone</summary>
+    <div class="install-body">
+      <p><strong>Before you start:</strong> use a Chromecast with Google TV or another Android TV / Google TV device that can install apps, an Android phone, and the TV remote. Connect the phone and TV to the same Wi-Fi network. The older, cast-only Chromecast cannot install an APK.</p>
+      <ol>
+        <li>Install <a href="https://play.google.com/store/apps/details?id=com.yablio.sendfilestotv">Send files to TV</a> from Google Play on both your phone and TV. On the TV, also install a file manager that can open APK files if you do not already have one.</li>
+        <li>Open this page on your phone and tap the newest <strong>APK ↓</strong> link. Keep the downloaded APK on the phone; you do not need to install it there.</li>
+        <li>On the TV, open <strong>Send files to TV</strong> and select <strong>Receive</strong>. On the phone, open the same app, select <strong>Send</strong>, choose the APK in <strong>Downloads</strong>, and select your TV. Allow the transfer app’s requested file-access permissions.</li>
+        <li>On the TV, open the received APK. If the transfer app cannot open it, use the TV file manager to open it from <strong>Download</strong> or the receiving folder you selected.</li>
+        <li>If installation is blocked, allow the app opening the APK to <strong>Install unknown apps</strong>. Look under <strong>Settings → Apps → Security &amp; restrictions → Unknown sources</strong> or <strong>Special app access → Install unknown apps</strong>; names vary by TV.</li>
+        <li>If that permission is unavailable, use the TV remote to open <strong>Settings → System → About</strong> and select <strong>Android TV OS build</strong> seven times until developer mode is enabled. On other Android TVs, look for <strong>About → Build</strong>. Return to the unknown-app setting, allow the installer app, and reopen the APK.</li>
+        <li>Select <strong>Install</strong>, then launch <strong>Finding Your Way</strong> from the TV’s apps. Use the TV remote or a connected gamepad to play.</li>
+      </ol>
+      <p>This method needs no computer, USB debugging or wireless debugging. Developer options are not needed on the phone. You can revoke the TV installer app’s unknown-app permission after installation.</p>
+    </div>
+  </details>
+
   <div class="milestone-timeline">
   {milestones.map(({ title, manifest, description, provenance, base, apk, size, date, testEvidence, signature, archiveRecords }) => (
     <details class="milestone">
