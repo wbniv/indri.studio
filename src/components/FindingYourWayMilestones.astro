@@ -105,7 +105,7 @@ const milestones = [
     description: 'The first playable Temple/Love chapter and its changed Temple return.',
     provenance: 'The exact installed APK played by Will, preserved with its original build records.',
   },
-].sort((a, b) => a.manifest.milestoneVersion.localeCompare(b.manifest.milestoneVersion, undefined, { numeric: true })).map((milestone) => {
+].sort((a, b) => b.manifest.milestoneVersion.localeCompare(a.manifest.milestoneVersion, undefined, { numeric: true })).map((milestone) => {
   const base = `/apps/finding-your-way/milestones/${milestone.manifest.milestone}`;
   const apk = `${base}/${milestone.manifest.apk}`;
   const bytes = statSync(`public${apk}`).size;
@@ -115,7 +115,7 @@ const milestones = [
 
 <section aria-labelledby="native-milestones-title" class="milestones">
   <h2 id="native-milestones-title">Android builds</h2>
-  <p>Oldest first. Download an APK or expand a row for build details.</p>
+  <p>Newest first. Download an APK or expand a row for build details.</p>
 
   <div class="milestone-timeline">
   {milestones.map(({ title, manifest, description, provenance, base, apk, size, date, testEvidence, signature, archiveRecords }) => (
