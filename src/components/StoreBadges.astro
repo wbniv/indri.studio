@@ -34,7 +34,8 @@ const entries: { key: keyof StoreLinks; src: string; alt: string; width: number 
   { key: "github",            src: githubUrl,            alt: "Get it on GitHub",                  width: 135 },
 ];
 
-const present = entries.filter((e) => links && links[e.key]);
+// Add a listing URL only after publication; placeholders stay hidden.
+const present = entries.filter((e) => /^https?:\/\//.test(links?.[e.key]?.trim() ?? ""));
 ---
 
 {present.length > 0 && (

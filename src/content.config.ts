@@ -58,14 +58,12 @@ const apps = defineCollection({
 				}),
 			)
 			.default([]),
-		// Store / download links — one URL per platform. Each present key
-		// renders the platform's badge below the app header. Use "#" as a
-		// placeholder when the actual store listing doesn't exist yet (a
-		// badge still renders, the link just no-ops).
 		// External site URL. When set the homepage card links here (new tab)
 		// instead of the internal /apps/<slug>/ page, and no static page is
 		// generated for this entry.
 		externalUrl: z.string().url().optional(),
+		// Store / download links — add the actual listing URL only after
+		// publication. Missing links and "#" placeholders render no badge.
 		storeLinks: z
 			.object({
 				appStore: z.string().optional(),
