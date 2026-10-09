@@ -4,6 +4,7 @@ import StoreBadges from "../../components/StoreBadges.astro";
 import Screenshot from "../../components/Screenshot.astro";
 import MIcon from "../../components/MIcon.astro";
 import FindingYourWayMilestones from "../../components/FindingYourWayMilestones.astro";
+import FindingYourWayInstall from "../../components/FindingYourWayInstall.astro";
 import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
@@ -128,6 +129,7 @@ const ogImage = post.data.screenshots[0]?.src.src
 
 		<div class="prose">
 			<Content />
+			{post.id === 'finding-your-way' && <FindingYourWayInstall />}
 			{post.id === 'finding-your-way' && <FindingYourWayMilestones />}
 			{post.id === 'claude-code-authoring-formats' && <script src={lightboxUrl}></script>}
 		</div>

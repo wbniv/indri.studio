@@ -6,9 +6,10 @@ type Platform = "phone" | "tablet" | "console" | "tv" | "web";
 interface Props {
 	platform: Platform;
 	class?: string;
+	size?: number;
 }
 
-const { platform, class: className = "" } = Astro.props;
+const { platform, class: className = "", size = 40 } = Astro.props;
 
 const PLATFORMS: Record<Platform, { name: string; label: string }> = {
 	phone:   { name: "mobile",         label: "Phone" },
@@ -21,4 +22,4 @@ const PLATFORMS: Record<Platform, { name: string; label: string }> = {
 const { name, label } = PLATFORMS[platform];
 ---
 
-<MIcon name={name} class:list={["platform-icon", className]} label={label} size={40} />
+<MIcon name={name} class:list={["platform-icon", className]} label={label} size={size} />
