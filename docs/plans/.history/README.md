@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-10-09](https://github.com/wbniv/indri.studio/commit/6f22214) | Update Finding Your Way plan index |
 | [2026-10-09](https://github.com/wbniv/indri.studio/commit/ce67dc8) | Index Finding Your Way layout plan |
 | [2026-10-05](https://github.com/wbniv/indri.studio/commit/cbb9912) | docs: record live APK milestone verification and index plan |
 | [2026-07-27](https://github.com/wbniv/indri.studio/commit/77b936d) | snes: vendor the player engine from @wbniv/bsnes-jg-player |
@@ -12,6 +13,10 @@
 | [2026-06-26](https://github.com/wbniv/indri.studio/commit/49f6b36) | docs: add plan index (docs/plans/README.md) |
 
 <!--history-meta v1
+6f22214	author	Will Norris
+6f22214	added	1
+6f22214	deleted	1
+6f22214	files	1
 ce67dc8	author	Will Norris
 ce67dc8	added	2
 ce67dc8	deleted	1
