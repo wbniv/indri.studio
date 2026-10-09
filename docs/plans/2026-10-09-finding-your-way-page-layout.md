@@ -10,7 +10,7 @@ Make the product page easy to scan: introduce the two editions without repeating
 2. Put **Open the web edition** in a clear link row directly between the “screenshots” label and the four images. The link goes to `https://d2cpue9r0hnyl3.cloudfront.net/` and identifies that edition as the original web/PWA journey.
 3. Show the four screenshots as compact, equal-height previews in two columns at desktop and mobile sizes. Each preview links to its complete image for reading. Preserve all four images and captions.
 4. Follow the gallery with an **Install** section containing three matching disclosure rows: **Web / PWA**, **Android phone / tablet**, and **Chromecast with Google TV**. Use the existing homepage icons at 24 px. Each row starts closed and expands to short, ordered instructions. The web link stays visible above the screenshots even while these rows are closed.
-5. Follow the installation choices with **Android builds**, newest first. The phone and Chromecast steps point to these downloads. Preserve the current release timeline and its details.
+5. Follow the installation choices with **Android builds**, newest first. The phone and Chromecast steps point to these downloads. Preserve the current release timeline and its details. Show the measured file size inside each APK link on one line at desktop and mobile widths (for example, **APK ↓ 6.8 MiB**) so the size is visibly part of the download action.
 6. Use the site's design tokens. On desktop, keep the content within the existing 720 px article column; on mobile, let the rows fill the article width without horizontal scrolling. A disclosure row has the same structure and spacing on both viewports.
 
 ## Mockups
@@ -28,8 +28,10 @@ The mockups show the intended default state, with installation details closed. T
 - [x] Add the web edition link directly above the four screenshot cards.
 - [x] Use compact screenshot previews with direct links to the complete images.
 - [x] Make Web/PWA, Android phone/tablet and Chromecast follow one disclosure pattern, using the existing platform icons and retaining their useful installation steps.
-- [x] Verify the built page at 1440, 390 and 320 px widths: web link, four screenshots with full-image links, three keyboard-operated disclosure rows, build downloads, expanded release details and no horizontal overflow. A separate app page retains its existing header.
-- [x] Publish and verify the live page as v0.1.180.
+- [x] Show each APK's computed size within its download link on both desktop and mobile; keep the release timeline layout and history.
+- [x] Verify the built page at 1440, 390 and 320 px widths: web link, four screenshots with full-image links, three keyboard-operated disclosure rows, all nine APK links with inline sizes, expanded release details and no horizontal overflow. A separate app page retains its existing header.
+- [x] Publish and verify the page layout as v0.1.180.
+- [x] Publish and verify the inline APK-size refinement as v0.1.181.
 
 ## Notes
 

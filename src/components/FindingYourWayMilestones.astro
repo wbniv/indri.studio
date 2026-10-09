@@ -147,7 +147,7 @@ const milestones = [
           <time datetime={date}>{date}</time>
         </span>
         <a class="milestone-download" href={apk} download={manifest.apk} aria-label={`Download ${title} Android APK (${size})`}>
-          APK ↓ <small>{size}</small>
+          <span>APK ↓</span><small>{size}</small>
         </a>
       </summary>
       <div class="milestone-body">
@@ -215,8 +215,8 @@ const milestones = [
   .milestone-label { display: flex; align-items: baseline; gap: 14px; }
   .milestone-label strong { font-size: 15px; }
   time { font-size: 12px; color: var(--color-secondary); white-space: nowrap; }
-  .milestone-download { white-space: nowrap; font-size: 14px; }
-  .milestone-download small { font-size: 12px; color: var(--color-secondary); }
+  .milestone-download { display: inline-flex; align-items: baseline; gap: 0.3em; white-space: nowrap; font-size: 14px; }
+  .milestone-download small { font-size: 12px; color: inherit; }
   .milestone-body { padding: 12px 0 8px 26px; min-width: 0; }
   .milestone:not([open]) .milestone-body { display: none; }
   .milestone-next { margin-top: 22px; }
@@ -226,8 +226,8 @@ const milestones = [
     .milestone-label strong { font-size: 14px; }
     time { font-size: 11px; line-height: 1.5; }
     summary { gap: 8px; padding: 9px 0; }
-    .milestone-download { font-size: 13px; }
-    .milestone-download small { display: block; font-size: 11px; line-height: 1.5; }
+    .milestone-download { font-size: 12px; }
+    .milestone-download small { font-size: 11px; line-height: 1.5; }
     .milestone-body { padding-left: 22px; }
   }
 </style>

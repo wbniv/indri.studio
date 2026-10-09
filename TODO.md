@@ -35,7 +35,7 @@ _Nothing parked._
 
 ## Done
 
-- [x] 2026-10-09 — Re-laid out Finding Your Way with the web link above four screenshots, three consistent installation guides and desktop/mobile mockups; published v0.1.180 — [plan](docs/plans/2026-10-09-finding-your-way-page-layout.md).
+- [x] 2026-10-09 — Re-laid out Finding Your Way with the web link above four screenshots, three consistent installation guides, inline APK download sizes and desktop/mobile mockups; published v0.1.180–v0.1.181 — [plan](docs/plans/2026-10-09-finding-your-way-page-layout.md).
 
 - [x] 2026-10-06 — Republished patient-framing v0.5.5 APK only; live page/download/private boundary pass. See [plan](docs/plans/2026-10-05-finding-your-way-milestones.md).
 
