@@ -56,7 +56,28 @@ const polishReview = {
   ]
 };
 
+// v0.8 publishes only the exact verified release APK.
+const optimizationReview = {
+  "milestone": "2026-10-09-v0.8-optimization",
+  "chapter": "Temple / Love / Temple / Reason / Temple / Truth / Temple / God / Final Temple / Endings / Surgery",
+  "apk": "parmenides-v0.8-d49320b3ccf8329d.apk",
+  "sha256": "d49320b3ccf8329d5becc43093736e36e8ef5a1d081242246cc37bc5c3ba2cf6",
+  "milestoneVersion": "0.8",
+  "knownIssues": [
+    "Progress resets on relaunch; complete phone/tablet touch acceptance remains pending.",
+    "Performance is improved, but sustained 60 FPS throughout the complete chapter is not established. Current-room-only rendering remains a separate acceptance step.",
+    "General camera obstruction/collision remains deferred; extreme close approaches can crop or obscure scenery.",
+    "Max’s font/sign approval, normal TV-seat readability review and longer lifecycle/memory measurements remain pending."
+  ]
+};
+
 const milestones = [
+  {
+    title: 'Optimization v0.8',
+    manifest: optimizationReview,
+    description: 'Reduces rendering work with retained static mesh buffers and a dedicated opaque-material shader. Adds crisp Atkinson dialogue and NPC signs, a larger near-full-screen reader, and smaller texture allocations. Preserves the complete journey, choices, histories, endings, reduced motion and Both-to-surgery coda.',
+    provenance: 'Release 0.8 (Android code 92). The native libraries and game assets match the verified merged candidate: 7,709 story/control assertions and 554 reader checks passed. The exact release APK passed install, remote input and Home/resume on both Chromecasts. Requires Android 8.0 or later on an ARM device.',
+  },
   {
     title: 'Polish v0.7',
     manifest: polishReview,
@@ -120,7 +141,7 @@ const milestones = [
   <details class="install-guide" id="android-install">
     <summary>Install directly on your Android phone or tablet</summary>
     <div class="install-body">
-      <p><strong>Before you start:</strong> the current APK requires Android 5.0 or later and an ARM device (32-bit or 64-bit). The same APK is packaged for Android phones, tablets and Google TV. Use the newest build below unless you want to revisit an older milestone.</p>
+      <p><strong>Before you start:</strong> the current APK requires Android 8.0 or later and an ARM device (32-bit or 64-bit). The same APK is packaged for Android phones, tablets and Google TV. Use the newest build below unless you want to revisit an older milestone.</p>
 
       <h3>Download and install on the same device</h3>
       <p>You only need the phone or tablet you want to install on, a browser and an internet connection to download the APK. Developer options and USB debugging are not required.</p>
