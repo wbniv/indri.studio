@@ -1,75 +1,95 @@
 ---
 import PlatformIcon from './PlatformIcon.astro';
-const webUrl = 'https://d2cpue9r0hnyl3.cloudfront.net/';
 ---
 
 <section aria-labelledby="install-title" class="install-options">
   <h2 id="install-title">Install</h2>
-  <div class="install-web" id="web-install">
-    <h3><PlatformIcon platform="web" size={24} />Web / PWA</h3>
-    <p><a href={webUrl}>Open the web edition</a> in your browser on a phone, tablet or computer. You can also install it as an app; it works offline after the first load.</p>
-    <ul>
-      <li><strong>Android:</strong> open the web edition in Chrome, then choose <strong>⋮ → Install and create shortcut → Install</strong> (or <strong>Add to Home screen</strong> on older versions) and follow the prompt.</li>
-      <li><strong>iPhone / iPad:</strong> open it in Safari, choose <strong>Share → Add to Home Screen</strong>, enable <strong>Open as Web App</strong> if shown, then tap <strong>Add</strong>.</li>
-      <li><strong>Computer:</strong> in Chrome or Edge, use the install button in the address bar when offered.</li>
-    </ul>
-    <p>The web edition is the original hypertext journey. The Android APKs below are the native 3D adventure.</p>
+  <div class="install-choices">
+    <details class="install-choice" id="web-install">
+      <summary>
+        <span class="install-icons"><PlatformIcon platform="web" size={24} ariaHidden /></span>
+        <span class="install-label"><strong>Web / PWA</strong><small>Play in a browser or add it to your home screen</small></span>
+        <span class="install-chevron" aria-hidden="true">▸</span>
+      </summary>
+      <div class="install-body">
+        <p>Open the web edition linked above the screenshots. It works offline after its first load and can be installed as an app:</p>
+        <ul>
+          <li><strong>Android:</strong> In Chrome, choose <strong>⋮ → Install and create shortcut → Install</strong>. Some versions show <strong>Add to Home screen</strong>.</li>
+          <li><strong>iPhone / iPad:</strong> In Safari, choose <strong>Share → Add to Home Screen</strong>, then <strong>Add</strong>.</li>
+          <li><strong>Computer:</strong> In Chrome or Edge, use the install button in the address bar when offered.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="install-choice" id="android-install">
+      <summary>
+        <span class="install-icons"><PlatformIcon platform="phone" size={24} ariaHidden /><PlatformIcon platform="tablet" size={24} ariaHidden /></span>
+        <span class="install-label"><strong>Android phone / tablet</strong><small>Download and open the APK on the same device</small></span>
+        <span class="install-chevron" aria-hidden="true">▸</span>
+      </summary>
+      <div class="install-body">
+        <p>The newest APK below requires Android 8.0 or later on an ARM phone or tablet. Developer options and USB debugging are not needed.</p>
+        <ol>
+          <li>Open this page on the device and tap the newest <a href="#native-milestones-title">APK download</a>.</li>
+          <li>Open the downloaded <code>.apk</code> from the browser’s downloads or the Files app.</li>
+          <li>If Android blocks installation, tap <strong>Settings</strong> and enable <strong>Allow from this source</strong> for the browser or Files app. You can also find it under <strong>Settings → Apps → Special app access → Install unknown apps</strong>; names vary by device.</li>
+          <li>Return to the APK, tap <strong>Install</strong>, then <strong>Open</strong>. It appears as <strong>Finding Your Way</strong>.</li>
+        </ol>
+        <p>You can turn off <strong>Allow from this source</strong> afterward. See <a href="https://support.google.com/pixelphone/answer/7391672?hl=en">Google’s APK installation instructions</a>.</p>
+      </div>
+    </details>
+
+    <details class="install-choice" id="chromecast-install">
+      <summary>
+        <span class="install-icons"><PlatformIcon platform="tv" size={24} ariaHidden /></span>
+        <span class="install-label"><strong>Chromecast with Google TV</strong><small>Send the APK from an Android phone</small></span>
+        <span class="install-chevron" aria-hidden="true">▸</span>
+      </summary>
+      <div class="install-body">
+        <p>Use a Chromecast with Google TV or another Android TV / Google TV device that can install apps. Connect it and your Android phone to the same Wi-Fi network. A cast-only Chromecast cannot install an APK.</p>
+        <ol>
+          <li>Install <a href="https://play.google.com/store/apps/details?id=com.yablio.sendfilestotv">Send files to TV</a> from Google Play on both devices. Install a TV file manager that opens APKs if needed.</li>
+          <li>Download the newest <a href="#native-milestones-title">APK below</a> on your phone. Open <strong>Send files to TV</strong> on the TV and choose <strong>Receive</strong>; on the phone, choose <strong>Send</strong>, select the APK in <strong>Downloads</strong>, and select your TV.</li>
+          <li>Open the received APK on the TV, using the TV file manager if the transfer app cannot open it.</li>
+          <li>If installation is blocked, allow the app opening the APK to <strong>Install unknown apps</strong> under <strong>Settings → Apps → Security &amp; restrictions → Unknown sources</strong> or <strong>Special app access → Install unknown apps</strong>.</li>
+          <li>If that setting is unavailable, use the TV remote to select <strong>Settings → System → About → Android TV OS build</strong> seven times to enable developer mode. On other TVs, look for <strong>About → Build</strong>. Then allow the installer app and reopen the APK.</li>
+          <li>Select <strong>Install</strong> and launch <strong>Finding Your Way</strong> from the TV’s apps. Play with the remote or a connected gamepad.</li>
+        </ol>
+        <p>This route needs no computer or debugging. You can revoke the TV installer app’s unknown-app permission afterward.</p>
+      </div>
+    </details>
   </div>
-
-  <details class="install-guide" id="android-install">
-    <summary><span class="install-icons"><PlatformIcon platform="phone" size={24} /><PlatformIcon platform="tablet" size={24} /></span><span>Android phone / tablet</span></summary>
-    <div class="install-body">
-      <p><strong>Before you start:</strong> the current APK requires Android 8.0 or later and an ARM device (32-bit or 64-bit). The same APK is packaged for Android phones, tablets and Google TV. Use the newest build below unless you want to revisit an older milestone.</p>
-
-      <h3>Download and install on the same device</h3>
-      <p>You only need the phone or tablet you want to install on, a browser and an internet connection to download the APK. Developer options and USB debugging are not required.</p>
-      <ol>
-        <li>Open this page in the browser on the phone or tablet you want to use and tap the newest <a href="#native-milestones-title">APK download below</a>.</li>
-        <li>Open the downloaded <code>.apk</code> from your browser’s downloads or the Files app.</li>
-        <li>If Android blocks installation, tap <strong>Settings</strong> in the prompt and enable <strong>Allow from this source</strong> for the app opening the APK. You can also find this under <strong>Settings → Apps → Special app access → Install unknown apps</strong>; names vary by device. On Android 5–7, look for <strong>Settings → Security → Unknown sources</strong> instead.</li>
-        <li>Return to the APK, tap <strong>Install</strong>, then <strong>Open</strong>. The app appears as <strong>Finding Your Way</strong>.</li>
-      </ol>
-      <p>You can turn off <strong>Allow from this source</strong> again after installation. See <a href="https://support.google.com/pixelphone/answer/7391672?hl=en">Google’s APK installation instructions</a>.</p>
-
-    </div>
-  </details>
-
-  <details class="install-guide" id="chromecast-install">
-    <summary><span class="install-icons"><PlatformIcon platform="tv" size={24} /></span><span>Chromecast with Google TV</span></summary>
-    <div class="install-body">
-      <p><strong>Before you start:</strong> use a Chromecast with Google TV or another Android TV / Google TV device that can install apps, an Android phone, and the TV remote. Connect the phone and TV to the same Wi-Fi network. The older, cast-only Chromecast cannot install an APK.</p>
-      <ol>
-        <li>Install <a href="https://play.google.com/store/apps/details?id=com.yablio.sendfilestotv">Send files to TV</a> from Google Play on both your phone and TV. On the TV, also install a file manager that can open APK files if you do not already have one.</li>
-        <li>Open this page on your phone and tap the newest <a href="#native-milestones-title">APK download below</a>. Keep the downloaded APK on the phone; you do not need to install it there.</li>
-        <li>On the TV, open <strong>Send files to TV</strong> and select <strong>Receive</strong>. On the phone, open the same app, select <strong>Send</strong>, choose the APK in <strong>Downloads</strong>, and select your TV. Allow the transfer app’s requested file-access permissions.</li>
-        <li>On the TV, open the received APK. If the transfer app cannot open it, use the TV file manager to open it from <strong>Download</strong> or the receiving folder you selected.</li>
-        <li>If installation is blocked, allow the app opening the APK to <strong>Install unknown apps</strong>. Look under <strong>Settings → Apps → Security &amp; restrictions → Unknown sources</strong> or <strong>Special app access → Install unknown apps</strong>; names vary by TV.</li>
-        <li>If that permission is unavailable, use the TV remote to open <strong>Settings → System → About</strong> and select <strong>Android TV OS build</strong> seven times until developer mode is enabled. On other Android TVs, look for <strong>About → Build</strong>. Return to the unknown-app setting, allow the installer app, and reopen the APK.</li>
-        <li>Select <strong>Install</strong>, then launch <strong>Finding Your Way</strong> from the TV’s apps. Use the TV remote or a connected gamepad to play.</li>
-      </ol>
-      <p>This method needs no computer, USB debugging or wireless debugging. Developer options are not needed on the phone. You can revoke the TV installer app’s unknown-app permission after installation.</p>
-    </div>
-  </details>
-
 </section>
 
 <style>
-  .install-web, .install-guide { border-bottom: 1px solid var(--color-outline-variant); }
-  .install-web { padding-bottom: 12px; }
-  .install-web h3 { display: flex; align-items: center; gap: 10px; }
-  .install-guide > summary {
-    display: grid; grid-template-columns: auto minmax(0, 1fr) auto;
-    align-items: center; gap: 10px; padding: 14px 0; cursor: pointer;
-    list-style: none; font-family: var(--font-body); font-size: 15px;
+  .install-options { margin-bottom: 34px; }
+  .install-choices { border-top: 1px solid color-mix(in srgb, var(--color-primary-container) 22%, transparent); }
+  .install-choice { border-bottom: 1px solid color-mix(in srgb, var(--color-primary-container) 22%, transparent); }
+  .install-choice > summary {
+    display: grid; grid-template-columns: 58px minmax(0, 1fr) 16px;
+    align-items: center; gap: 12px; min-height: 72px; padding: 12px 0;
+    list-style: none; cursor: pointer; font-family: var(--font-body);
   }
-  .install-guide > summary::-webkit-details-marker { display: none; }
-  .install-guide > summary::after { content: '▸'; color: var(--color-primary-container); }
-  .install-guide[open] > summary::after { content: '▾'; }
-  .install-guide > summary:focus-visible {
-    outline: 2px solid var(--color-primary-container); outline-offset: 3px;
+  .install-choice > summary::-webkit-details-marker { display: none; }
+  .install-choice > summary::before { content: none; display: none; }
+  .install-choice > summary:focus-visible { outline: 2px solid var(--color-primary-container); outline-offset: 3px; }
+  .install-icons { display: flex; gap: 4px; color: var(--color-primary-container); }
+  .install-label strong { display: block; font-size: 15px; line-height: 1.35; }
+  .install-label small { display: block; color: var(--color-on-surface-variant); font-size: 12px; line-height: 1.45; }
+  .install-chevron { color: var(--color-primary-container); transition: transform 150ms ease; }
+  .install-choice[open] .install-chevron { transform: rotate(90deg); }
+  .install-body { min-width: 0; padding: 0 0 18px 70px; font-size: 14px; line-height: 1.65; }
+  .install-body p { margin: 0 0 12px; }
+  .install-body ul, .install-body ol { padding-left: 20px; margin: 0 0 12px; }
+  .install-body ul { list-style: disc; }
+  .install-body ol { list-style: decimal; }
+  .install-body li + li { margin-top: 9px; }
+  .install-body a { color: var(--color-primary-container); text-decoration: underline; text-underline-offset: 2px; }
+  @media (max-width: 600px) {
+    .install-choice > summary { gap: 8px; grid-template-columns: 54px minmax(0, 1fr) 16px; }
+    .install-body { padding-left: 0; }
   }
-  .install-icons { display: flex; align-items: center; gap: 4px; }
-  .install-body { padding: 0 0 12px; min-width: 0; }
-  .install-body h3 { margin-top: 20px; }
-  .install-options li + li { margin-top: 8px; }
+  @media (prefers-reduced-motion: reduce) {
+    .install-chevron { transition: none; }
+  }
 </style>

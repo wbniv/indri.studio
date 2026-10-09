@@ -104,11 +104,19 @@ const ogImage = post.data.screenshots[0]?.src.src
 				</div>
 			)}
 
-			<h1 class="font-display text-headline-lg text-primary-container tracking-tighter mb-6">
-				{post.data.title}
-			</h1>
+			{post.id === 'finding-your-way' ? (
+				<div class="flex items-center gap-3 md:gap-4 mb-6">
+					{post.data.cardImages[1] && <Image src={post.data.cardImages[1].src} alt="" width={80} height={80} class="w-16 h-16 md:w-20 md:h-20 flex-none" />}
+					<div class="min-w-0">
+						<p class="font-display uppercase tracking-[0.15em] text-[10px] text-on-surface-variant mb-1">Web + Android adventure</p>
+						<h1 class="font-display text-[28px] sm:text-headline-lg text-primary-container tracking-tighter leading-tight">{post.data.title}</h1>
+					</div>
+				</div>
+			) : (
+				<h1 class="font-display text-headline-lg text-primary-container tracking-tighter mb-6">{post.data.title}</h1>
+			)}
 
-			{post.data.logo && (
+			{post.data.logo && post.id !== 'finding-your-way' && (
 				<Image
 					src={post.data.logo}
 					alt=""
@@ -129,27 +137,43 @@ const ogImage = post.data.screenshots[0]?.src.src
 
 		<div class="prose">
 			<Content />
-			{post.id === 'finding-your-way' && <FindingYourWayInstall />}
-			{post.id === 'finding-your-way' && <FindingYourWayMilestones />}
 			{post.id === 'claude-code-authoring-formats' && <script src={lightboxUrl}></script>}
 		</div>
 
 		{post.data.screenshots.length > 0 && (
-			<section class="mt-12 md:mt-16">
-				<h2 class="section-label">screenshots</h2>
-				<ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 list-none p-0 m-0">
+			<section id={post.id === 'finding-your-way' ? 'screenshots' : undefined} class:list={[post.id === 'finding-your-way' ? 'mt-10 md:mt-14' : 'mt-12 md:mt-16']}>
+				<h2 class="section-label !mb-3">screenshots</h2>
+				{post.id === 'finding-your-way' && (
+					<div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mb-5">
+						<a href="https://d2cpue9r0hnyl3.cloudfront.net/" class="font-display font-semibold text-primary-container underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-primary-container">Open the web edition ↗</a>
+						<span class="text-sm text-on-surface-variant">Original hypertext · installable PWA</span>
+					</div>
+				)}
+				<ul class:list={["grid sm:grid-cols-2 list-none p-0 m-0", post.id === 'finding-your-way' ? 'grid-cols-2 gap-2.5 md:gap-4' : 'grid-cols-1 gap-4 md:gap-6']}>
 					{post.data.screenshots.map((shot, idx) => (
-						<li class="glass-card p-3">
-							<Screenshot src={shot.src} alt={shot.alt ?? ""} loading={idx === 0 ? "eager" : "lazy"} />
-							{shot.alt && (
-								<p class="font-display uppercase tracking-[0.2em] text-[10px] text-on-surface-variant mt-3 mb-1 px-1">
-									{shot.alt}
-								</p>
+						<li class:list={["glass-card", post.id === 'finding-your-way' ? 'p-2 md:p-3' : 'p-3']}>
+							{post.id === 'finding-your-way' ? (
+								<a href={shot.src.src} target="_blank" rel="noopener noreferrer" class="fyw-shot block focus-visible:outline-2 focus-visible:outline-primary-container" aria-label={`View full screenshot: ${shot.alt ?? `image ${idx + 1}`}`}>
+									<Screenshot src={shot.src} alt={shot.alt ?? ""} loading={idx === 0 ? "eager" : "lazy"} />
+									{shot.alt && <span class="block font-display uppercase tracking-[0.14em] text-[10px] text-on-surface-variant mt-3 mb-1 px-1">{shot.alt}</span>}
+								</a>
+							) : (
+								<>
+									<Screenshot src={shot.src} alt={shot.alt ?? ""} loading={idx === 0 ? "eager" : "lazy"} />
+									{shot.alt && <p class="font-display uppercase tracking-[0.2em] text-[10px] text-on-surface-variant mt-3 mb-1 px-1">{shot.alt}</p>}
+								</>
 							)}
 						</li>
 					))}
 				</ul>
 			</section>
+		)}
+
+		{post.id === 'finding-your-way' && (
+			<div class="prose mt-12 md:mt-16">
+				<FindingYourWayInstall />
+				<FindingYourWayMilestones />
+			</div>
 		)}
 
 	</article>
@@ -432,6 +456,10 @@ const ogImage = post.data.screenshots[0]?.src.src
 	</style>
 
 	<style is:global>
+		.fyw-shot picture { display: block; aspect-ratio: 1.3; overflow: hidden; }
+		.fyw-shot picture img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+		@media (max-width: 600px) { .fyw-shot picture { aspect-ratio: .84; } }
+
 		/* View transitions between app pages. Direction comes from
 		   <html data-nav-dir="prev|next"> set by the prev/next click
 		   handler before navigation. Slide is scoped to the article

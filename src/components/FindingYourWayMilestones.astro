@@ -218,6 +218,7 @@ const milestones = [
   .milestone-download { white-space: nowrap; font-size: 14px; }
   .milestone-download small { font-size: 12px; color: var(--color-secondary); }
   .milestone-body { padding: 12px 0 8px 26px; min-width: 0; }
+  .milestone:not([open]) .milestone-body { display: none; }
   .milestone-next { margin-top: 22px; }
   @media (max-width: 600px) {
     .milestone-label { display: block; }

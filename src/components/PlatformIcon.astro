@@ -7,9 +7,10 @@ interface Props {
 	platform: Platform;
 	class?: string;
 	size?: number;
+	ariaHidden?: boolean;
 }
 
-const { platform, class: className = "", size = 40 } = Astro.props;
+const { platform, class: className = "", size = 40, ariaHidden = false } = Astro.props;
 
 const PLATFORMS: Record<Platform, { name: string; label: string }> = {
 	phone:   { name: "mobile",         label: "Phone" },
@@ -22,4 +23,4 @@ const PLATFORMS: Record<Platform, { name: string; label: string }> = {
 const { name, label } = PLATFORMS[platform];
 ---
 
-<MIcon name={name} class:list={["platform-icon", className]} label={label} size={size} />
+<MIcon name={name} class:list={["platform-icon", className]} label={label} size={size} ariaHidden={ariaHidden} />

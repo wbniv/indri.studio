@@ -1,7 +1,7 @@
 ---
 title: Finding Your Way
 date: 2026-06-01
-summary: A philosophical hypertext through Love, Reason, Truth, and God.
+summary: Journey through Love, Reason, Truth, and God on the web or Android.
 draft: false
 logo: ../../assets/branding/finding-your-way/banner.svg
 cardImages:
@@ -17,6 +17,6 @@ screenshots:
   - { src: "../../assets/screenshots/finding-your-way/god-realm.png", alt: "God realm" }
 ---
 
-A choice-based journey across 144 pages — through four realms of argument, each asking you to affirm or deny *Being*. Your accumulated choices unlock one of three endings.
+A choice-based journey across four realms of argument, each asking you to affirm or deny *Being*. Your choices unlock one of three endings.
 
-The web edition is an installable PWA and works offline after first load. A native 3D adventure is also in development, with archived Android milestones below.
+Play the original 144-page hypertext in your browser, or explore the native 3D adventure on Android.
