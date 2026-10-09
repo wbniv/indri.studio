@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-10-09](https://github.com/wbniv/indri.studio/commit/281b22b) | Update plan index for final Finding Your Way copy |
 | [2026-10-09](https://github.com/wbniv/indri.studio/commit/6f22214) | Update Finding Your Way plan index |
 | [2026-10-09](https://github.com/wbniv/indri.studio/commit/ce67dc8) | Index Finding Your Way layout plan |
 | [2026-10-05](https://github.com/wbniv/indri.studio/commit/cbb9912) | docs: record live APK milestone verification and index plan |
@@ -13,6 +14,10 @@
 | [2026-06-26](https://github.com/wbniv/indri.studio/commit/49f6b36) | docs: add plan index (docs/plans/README.md) |
 
 <!--history-meta v1
+281b22b	author	Will Norris
+281b22b	added	1
+281b22b	deleted	1
+281b22b	files	1
 6f22214	author	Will Norris
 6f22214	added	1
 6f22214	deleted	1
