@@ -1,9 +1,14 @@
 | Date | Change |
 |------|--------|
+| [2026-10-09](https://github.com/wbniv/indri.studio/commit/cc0e40c) | Use player-facing copy and two-line APK sizes |
 | [2026-10-09](https://github.com/wbniv/indri.studio/commit/b6db4b5) | Show APK sizes inside Finding Your Way download links |
 | [2026-10-09](https://github.com/wbniv/indri.studio/commit/c9d1800) | Rework Finding Your Way page layout and install guides |
 
 <!--history-meta v1
+cc0e40c	author	Will Norris
+cc0e40c	added	7
+cc0e40c	deleted	5
+cc0e40c	files	1
 b6db4b5	author	Will Norris
 b6db4b5	added	5
 b6db4b5	deleted	3
