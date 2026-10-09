@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Finding Your Way — temple mark, title, and the four realms">
+  <rect width="1200" height="630" fill="#2a2a2a"/>
+
+  <g transform="translate(75 80) scale(.88)">
+    <polygon points="72,230 256,112 440,230" fill="#e8e2d4" fill-opacity=".08" stroke="#e8e2d4" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M 210 228 Q 256 158, 302 228 L 302 232 L 210 232 Z" fill="#d6ac40"/>
+    <rect x="72" y="230" width="368" height="22" fill="#e8e2d4"/>
+    <g fill="#e8e2d4">
+      <rect x="104" y="252" width="44" height="184"/>
+      <rect x="366" y="252" width="44" height="184"/>
+    </g>
+    <text x="256" y="416" text-anchor="middle" font-family="DejaVu Serif, serif" font-weight="bold" font-size="220" fill="#d6ac40">Π</text>
+    <rect x="80" y="436" width="352" height="22" fill="#e8e2d4"/>
+    <rect x="66" y="458" width="380" height="12" fill="#e8e2d4" fill-opacity=".55"/>
+  </g>
+
+  <rect x="502" y="172" width="3" height="292" fill="#d6ac40"/>
+  <text x="538" y="218" font-family="DejaVu Sans, sans-serif" font-size="27" letter-spacing="8" fill="#d6ac40">PARMENIDES</text>
+  <text x="533" y="326" font-family="DejaVu Serif, serif" font-size="70" fill="#e8e2d4">Finding Your Way</text>
+  <rect x="538" y="369" width="574" height="2" fill="#d6ac40" fill-opacity=".65"/>
+  <text x="539" y="420" font-family="DejaVu Sans, sans-serif" font-size="22" letter-spacing="3" fill="#e8e2d4">LOVE · REASON · TRUTH · GOD</text>
+</svg>

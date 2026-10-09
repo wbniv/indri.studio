@@ -40,12 +40,12 @@ const { Content } = await render(post);
 const now = new Date();
 const upcoming = post.data.date.valueOf() > now.valueOf();
 
-// OG image: first screenshot as an absolute URL. `src.src` is the hashed
-// /_astro/*.{ext} path emitted by Astro's asset pipeline. Astro.site is
-// set in astro.config.mjs (https://indri.studio).
-const ogImage = post.data.screenshots[0]?.src.src
-	? new URL(post.data.screenshots[0].src.src, Astro.site).href
-	: undefined;
+// Finding Your Way has a share card; other app pages use their first
+// screenshot. Open Graph image URLs must be absolute for link previews.
+const ogImagePath = post.id === 'finding-your-way'
+	? '/apps/finding-your-way/share-card.png'
+	: post.data.screenshots[0]?.src.src;
+const ogImage = ogImagePath ? new URL(ogImagePath, Astro.site).href : undefined;
 ---
 
 <AppLayout

@@ -35,6 +35,8 @@ _Nothing parked._
 
 ## Done
 
+- [x] 2026-10-09 — Replaced Finding Your Way's screenshot link preview with a branded social card; published v0.1.185 — [plan](docs/plans/2026-10-09-finding-your-way-share-preview.md).
+
 - [x] 2026-10-09 — Re-laid out Finding Your Way with the web link above four screenshots, three consistent installation guides, two-line APK download sizes, World Foundry logo and desktop/mobile mockups; removed the trailing release note; published v0.1.180–v0.1.184 — [plan](docs/plans/2026-10-09-finding-your-way-page-layout.md).
 
 - [x] 2026-10-06 — Republished patient-framing v0.5.5 APK only; live page/download/private boundary pass. See [plan](docs/plans/2026-10-05-finding-your-way-milestones.md).
