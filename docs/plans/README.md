@@ -80,6 +80,7 @@ rows on commit.*
 
 | [Finding Your Way Android milestones](2026-10-05-finding-your-way-milestones.md) | Publish compact expandable Android APK downloads with exact archived checksums and uppercase Greek pi artwork. | [`9c892ef`](https://github.com/wbniv/indri.studio/commit/9c892ef) | Feature |
 | [Finding Your Way page layout](2026-10-09-finding-your-way-page-layout.md) | Rework the app page with an immediate web-edition link, compact screenshot gallery, matching installation guides, two-line APK sizes, World Foundry logo and desktop/mobile mockups. | [`c9d1800`](https://github.com/wbniv/indri.studio/commit/c9d1800), [`b6db4b5`](https://github.com/wbniv/indri.studio/commit/b6db4b5), [`cc0e40c`](https://github.com/wbniv/indri.studio/commit/cc0e40c), [`0ff88e8`](https://github.com/wbniv/indri.studio/commit/0ff88e8), [`f6ccea0`](https://github.com/wbniv/indri.studio/commit/f6ccea0) | Feature |
+| [Finding Your Way link preview](2026-10-09-finding-your-way-share-preview.md) | Replace the opening-page screenshot in shared links with a branded 1200 × 630 PNG card showing the temple mark, title and four realms. | [`4f8765e`](https://github.com/wbniv/indri.studio/commit/4f8765e) | Feature |
 
 ---
 
@@ -88,4 +89,4 @@ rows on commit.*
 - **Order** = each plan's *creation* commit (oldest commit that touched the file), by committer date.
 - **Commit(s)** = the full `git log --follow` set per plan, oldest → newest.
 - **Summaries / categories** auto-generated from each plan's TL;DR (Sonnet, medium effort) — refine as needed.
-- **Generated** 2026-06-26 for 65 plan(s); rows added by hand 2026-06-27 (66), 2026-06-30 (67), 2026-07-27 (68), 2026-10-05 (69), 2026-10-09 (70 total).
+- **Generated** 2026-06-26 for 65 plan(s); rows added by hand 2026-06-27 (66), 2026-06-30 (67), 2026-07-27 (68), 2026-10-05 (69), 2026-10-09 (71 total).
