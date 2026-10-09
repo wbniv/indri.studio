@@ -33,7 +33,7 @@ const graphicsReview = {
   "sha256": "ee82629373c95e6e2a1e733a7e647bc52a4a653111d78172b2fffc802b6f8c6f",
   "milestoneVersion": "0.6",
   "knownIssues": [
-    "Progress resets on relaunch; current-build phone/tablet touch acceptance remains pending.",
+    "Progress resets on relaunch.",
     "Low Chromecast frame rate remains a known limitation; performance optimization is planned for v0.8.",
     "Camera obstruction/collision remains postponed; distant God scenery can appear when turning in the Being scene.",
     "The combined triangle motif can clip at close first-person approaches; the centre surgeon’s lower gloves partly enter the bottom edge.",
@@ -49,7 +49,7 @@ const polishReview = {
   "sha256": "ac1f33f51ff46a73889c65bf287cc16d4a39575e23643f478c23d0748dfe3a4a",
   "milestoneVersion": "0.7",
   "knownIssues": [
-    "Progress resets on relaunch; phone/tablet touch acceptance and complete remote-driven Android routes remain pending.",
+    "Progress resets on relaunch; complete remote-driven Android routes remain pending.",
     "Low Chromecast frame rate remains a known limitation; optimization and sustained performance measurements are v0.8.",
     "General camera obstruction/collision remains deferred; extreme close approaches can crop the arch or partially obscure the combined triangle motif. Distant inherited scenery can remain visible outside Being.",
     "Author feedback from Max remains pending. The review movie uses scripted scene fixtures rather than a continuous Android playthrough."
@@ -120,7 +120,7 @@ const milestones = [
   <details class="install-guide" id="android-install">
     <summary>Install directly on your Android phone or tablet</summary>
     <div class="install-body">
-      <p><strong>Before you start:</strong> the current APK requires Android 5.0 or later and an ARM device (32-bit or 64-bit). The same APK is packaged for Android phones, tablets and Google TV. TV remote/gamepad use has been tested; phone/tablet touch controls and performance are still being verified. Use the newest build below unless you want to revisit an older milestone.</p>
+      <p><strong>Before you start:</strong> the current APK requires Android 5.0 or later and an ARM device (32-bit or 64-bit). The same APK is packaged for Android phones, tablets and Google TV. Use the newest build below unless you want to revisit an older milestone.</p>
 
       <h3>Download and install on the same device</h3>
       <p>You only need the phone or tablet you want to install on, a browser and an internet connection to download the APK. Developer options and USB debugging are not required.</p>
@@ -167,7 +167,7 @@ const milestones = [
       <div class="milestone-body">
         <p><strong>{manifest.chapter}</strong></p>
         <p>{description} {provenance}</p>
-        <p>TV/remote and gamepad prototype; phone/tablet touch acceptance is pending. Progress resets on relaunch.</p>
+        <p>Play on an Android phone or tablet, or use a TV remote or gamepad on Google TV. Progress resets on relaunch.</p>
         <p><strong>Known issues</strong></p>
         <ul>{manifest.knownIssues.map((issue) => <li>{issue}</li>)}</ul>
         <p>APK SHA-256:</p>
@@ -185,7 +185,7 @@ const milestones = [
   ))}
   </div>
 
-  <p class="milestone-next">Artwork passes A–F and polish are available in v0.7. Performance optimization is v0.8. Phone/tablet touch acceptance and Max’s feedback remain pending.</p>
+  <p class="milestone-next">Artwork passes A–F and polish are available in v0.7. Performance optimization is v0.8. Max’s feedback remains pending.</p>
 </section>
 
 <style>
