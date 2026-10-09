@@ -79,7 +79,7 @@ rows on commit.*
 | [snes-package-adoption — indri.studio consumes @wbniv/bsnes-jg-player](2026-07-27-snes-package-adoption.md) | Vendor the SNES player engine from the @wbniv/bsnes-jg-player npm package (sync CLI + ENGINE_VERSION stamp + CI drift gate), replacing the hand-rolled dist-bundle copy; indri keeps its own embed markup/boot | [`pending`](2026-07-27-snes-package-adoption.md) | Platform |
 
 | [Finding Your Way Android milestones](2026-10-05-finding-your-way-milestones.md) | Publish compact expandable Android APK downloads with exact archived checksums and uppercase Greek pi artwork. | [`9c892ef`](https://github.com/wbniv/indri.studio/commit/9c892ef) | Feature |
-| [Finding Your Way page layout](2026-10-09-finding-your-way-page-layout.md) | Rework the app page with an immediate web-edition link, compact screenshot gallery, matching installation guides, and desktop/mobile mockups. | [`c9d1800`](https://github.com/wbniv/indri.studio/commit/c9d1800) | Feature |
+| [Finding Your Way page layout](2026-10-09-finding-your-way-page-layout.md) | Rework the app page with an immediate web-edition link, compact screenshot gallery, matching installation guides, APK sizes and desktop/mobile mockups. | [`c9d1800`](https://github.com/wbniv/indri.studio/commit/c9d1800), [`b6db4b5`](https://github.com/wbniv/indri.studio/commit/b6db4b5) | Feature |
 
 ---
 
