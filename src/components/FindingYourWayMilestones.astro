@@ -117,6 +117,24 @@ const milestones = [
   <h2 id="native-milestones-title">Android builds</h2>
   <p>Newest first. Download an APK or expand a row for build details.</p>
 
+  <details class="install-guide" id="android-install">
+    <summary>Install directly on your Android phone or tablet</summary>
+    <div class="install-body">
+      <p><strong>Before you start:</strong> the current APK requires Android 5.0 or later and an ARM device (32-bit or 64-bit). The same APK is packaged for Android phones, tablets and Google TV. TV remote/gamepad use has been tested; phone/tablet touch controls and performance are still being verified. Use the newest build below unless you want to revisit an older milestone.</p>
+
+      <h3>Download and install on the same device</h3>
+      <p>You only need the phone or tablet you want to install on, a browser and an internet connection to download the APK. Developer options and USB debugging are not required.</p>
+      <ol>
+        <li>Open this page in the browser on the phone or tablet you want to use and tap the newest <strong>APK ↓</strong> link.</li>
+        <li>Open the downloaded <code>.apk</code> from your browser’s downloads or the Files app.</li>
+        <li>If Android blocks installation, tap <strong>Settings</strong> in the prompt and enable <strong>Allow from this source</strong> for the app opening the APK. You can also find this under <strong>Settings → Apps → Special app access → Install unknown apps</strong>; names vary by device. On Android 5–7, look for <strong>Settings → Security → Unknown sources</strong> instead.</li>
+        <li>Return to the APK, tap <strong>Install</strong>, then <strong>Open</strong>. The app appears as <strong>Finding Your Way</strong>.</li>
+      </ol>
+      <p>You can turn off <strong>Allow from this source</strong> again after installation. See <a href="https://support.google.com/pixelphone/answer/7391672?hl=en">Google’s APK installation instructions</a>.</p>
+
+    </div>
+  </details>
+
   <div class="milestone-timeline">
   {milestones.map(({ title, manifest, description, provenance, base, apk, size, date, testEvidence, signature, archiveRecords }) => (
     <details class="milestone">
@@ -154,6 +172,12 @@ const milestones = [
 </section>
 
 <style>
+  .install-guide { margin: 20px 0; border-block: 1px solid var(--color-outline-variant); }
+  .install-guide > summary { display: block; }
+  .install-guide > summary::before { margin-right: 10px; }
+  .install-body { padding: 0 0 12px; min-width: 0; }
+  .install-body h3 { margin-top: 20px; }
+  .install-body li + li { margin-top: 8px; }
   .milestone-timeline { padding-left: 4px; }
   .milestone::before {
     content: ''; position: absolute; left: -24px; top: 22px;
