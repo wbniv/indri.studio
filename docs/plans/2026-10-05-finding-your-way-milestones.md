@@ -11,8 +11,22 @@ Earlier dated acceptance notes below describe their original review scope.
 
 The v0.8.1 compatibility row describes only its change: native-library alignment
 for 16 KB Android memory pages. Retain v0.8 as a separate milestone. Put each
-APK SHA-256 label and digest on one line, scrolling within the row on narrow
-screens rather than widening the page.
+APK SHA-256 label and digest on one line. Per Will's subsequent correction,
+reduce the font to fit the complete text on narrow screens without scrolling,
+scrollbars, clipping or widening the page.
+
+The latest Android release and “3D game in your browser” reveal when their titles
+scroll into view. Both call the shared `revealDetailsOnScroll` function, with the
+same animation and reduced-motion behavior. Manual toggles take precedence;
+manual opening uses the same animation, and closing is immediate.
+Older release rows stay collapsed until opened. Download links remain independent
+of the disclosure.
+
+PASS: the rootless build produces 173 pages. All 19 existing tests pass. Rootless
+preview browser checks at 320, 390, 768 and 1440 px verify all ten complete hashes
+fit without scrolling or clipping, both automatic/manual opening animations,
+immediate closing and cancellation, reduced motion, keyboard controls and direct
+APK downloads. Live verification follows the tag-driven deployment.
 
 ## Implementation
 

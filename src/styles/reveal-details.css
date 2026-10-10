@@ -1,0 +1,4 @@
+/* The shared reveal handles opening; closing stays immediate. */
+details[data-scroll-reveal]::details-content { transition: none; }
+details[data-scroll-reveal]:not([open]) > summary::before,
+details[data-scroll-reveal]:not([open]) .install-chevron { transition: none; }

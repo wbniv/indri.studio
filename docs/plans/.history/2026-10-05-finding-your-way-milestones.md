@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-10-10](https://github.com/wbniv/indri.studio/commit/708e847) | Shorten Finding Your Way release copy and correct control status |
 | [2026-10-07](https://github.com/wbniv/indri.studio/commit/8192db6) | docs: record live v0.7 download verification |
 | [2026-10-07](https://github.com/wbniv/indri.studio/commit/00a4f42) | Publish the verified Finding Your Way v0.7 polish APK |
 | [2026-10-07](https://github.com/wbniv/indri.studio/commit/3ed581a) | Record verified live v0.6 APK publication |
@@ -20,6 +21,11 @@
 | [2026-10-05](https://github.com/wbniv/indri.studio/commit/9c892ef) | Publish Finding Your Way Android milestone downloads |
 
 <!--history-meta v1
+708e847	author	Will Norris
+708e847	added	16
+708e847	deleted	1
+708e847	files	1
+708e847	body	Describe v0.8.1 with its 16 KB alignment change only. Keep v0.8 available\nand put every APK checksum label and digest on one scrolling line.\nRemove the unsupported experimental label from Android and browser touch\ncontrols; record Will's acceptance in the milestone copy policy.\n\nRootless production build and desktop/mobile browser checks passed:\nten releases, concise hotfix details, one-line hashes, unchanged APK hashes,\ndisclosure/download/keyboard controls, original screenshots and no overflow.
 8192db6	author	Will Norris
 8192db6	added	3
 8192db6	deleted	1

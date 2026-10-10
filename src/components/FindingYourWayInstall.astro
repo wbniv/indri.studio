@@ -101,7 +101,6 @@ import PlatformIcon from './PlatformIcon.astro';
   .install-label small { display: block; color: var(--color-on-surface-variant); font-size: 12px; line-height: 1.45; }
   .install-chevron { color: var(--color-primary-container); transition: transform 150ms ease; }
   .install-choice[open] .install-chevron { transform: rotate(90deg); }
-  #web-3d-play[data-revealing]::details-content { transition: none; }
   .install-body { min-width: 0; padding: 0 0 18px 70px; font-size: 14px; line-height: 1.65; }
   .install-body p { margin: 0 0 12px; }
   .install-body ul, .install-body ol { padding-left: 20px; margin: 0 0 12px; }
@@ -137,63 +136,6 @@ import PlatformIcon from './PlatformIcon.astro';
 </style>
 
 <script>
-  let activeDetails: HTMLDetailsElement | null = null;
-  let cleanup = () => {};
-
-  function revealBrowserPlay() {
-    const details = document.querySelector<HTMLDetailsElement>('#web-3d-play');
-    if (details === activeDetails) return;
-    cleanup();
-    activeDetails = details;
-    const title = details?.querySelector('summary strong');
-    const summary = details?.querySelector('summary');
-    const body = details?.querySelector<HTMLElement>('.install-body');
-    if (!details || !title || !summary || !body || !('IntersectionObserver' in window)) return;
-
-    // Leave space below the title so the expansion is visible on screen.
-    const revealSpace = 96;
-    details.open = false;
-    let animation: Animation | null = null;
-    const finishReveal = () => {
-      delete details.dataset.revealing;
-      summary.removeEventListener('click', cancelReveal);
-      animation = null;
-    };
-    const cancelReveal = () => {
-      animation?.cancel();
-      finishReveal();
-    };
-    const observer = new IntersectionObserver((entries) => {
-      if (!entries.some((entry) => entry.isIntersecting)) return;
-      stopObserving();
-      const animate = !matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (animate) details.dataset.revealing = '';
-      details.open = true;
-      if (!animate) return;
-      animation = body.animate([
-        { height: '0px', opacity: 0, overflow: 'hidden' },
-        { height: `${body.getBoundingClientRect().height}px`, opacity: 1, overflow: 'hidden' },
-      ], { duration: 450, easing: 'ease-out' });
-      summary.addEventListener('click', cancelReveal, { once: true });
-      animation.finished.then(finishReveal, finishReveal);
-    }, { rootMargin: `0px 0px -${revealSpace}px 0px`, threshold: 1 });
-    const stopObserving = () => {
-      observer.disconnect();
-      summary.removeEventListener('click', stopObserving);
-    };
-    cleanup = () => {
-      stopObserving();
-      cancelReveal();
-    };
-    // Manual toggles take precedence over any later scroll reveal.
-    summary.addEventListener('click', stopObserving, { once: true });
-    observer.observe(title);
-  }
-
-  revealBrowserPlay();
-  document.addEventListener('astro:page-load', revealBrowserPlay);
-  document.addEventListener('astro:before-swap', () => {
-    cleanup();
-    activeDetails = null;
-  });
+  import { revealDetailsOnScroll } from "../scripts/reveal-details";
+  revealDetailsOnScroll("#web-3d-play", ".install-body");
 </script>
