@@ -1,3 +1,4 @@
+import { fywFrameAncestors } from './fyw-frame-policy.mjs';
 // 301-redirect www.indri.studio → indri.studio (path/query/hash preserved),
 // fall through to static-assets binding for everything else. Replaces the
 // edge-level cloudflare_ruleset that the Free-plan API token couldn't
@@ -60,7 +61,7 @@ export default {
         `img-src 'self' data:; ` +
         `object-src 'none'; ` +
         `base-uri 'self'; ` +
-        `frame-ancestors 'none'`
+        `frame-ancestors ${fywFrameAncestors(url.pathname)}`
       );
       return new HTMLRewriter()
         .on("script", {
