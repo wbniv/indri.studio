@@ -116,11 +116,11 @@ import PlatformIcon from './PlatformIcon.astro';
   .web-play-icon .icon-play { fill: currentColor; stroke: none; animation-name: play-triangle; }
   .web-play-icon .icon-controller { animation-name: play-controller; }
   .web-play-icon .icon-cube { animation-name: play-cube; }
-  /* Six two-second slots: temple, play, controller, play, cube, play. */
-  @keyframes play-temple { 0%, 100% { opacity: 1; } 16.6667% { opacity: 0; } }
-  @keyframes play-triangle { 0%, 33.3333%, 66.6667%, 100% { opacity: 0; } 16.6667%, 50%, 83.3333% { opacity: 1; } }
-  @keyframes play-controller { 0%, 50%, 100% { opacity: 0; } 33.3333% { opacity: 1; } }
-  @keyframes play-cube { 0%, 83.3333%, 100% { opacity: 0; } 66.6667% { opacity: 1; } }
+  /* Six two-second slots: play, temple, play, controller, play, cube. */
+  @keyframes play-temple { 0%, 33.3333%, 100% { opacity: 0; } 16.6667% { opacity: 1; } }
+  @keyframes play-triangle { 0%, 33.3333%, 66.6667%, 100% { opacity: 1; } 16.6667%, 50%, 83.3333% { opacity: 0; } }
+  @keyframes play-controller { 0%, 66.6667%, 100% { opacity: 0; } 50% { opacity: 1; } }
+  @keyframes play-cube { 0%, 100% { opacity: 0; } 83.3333% { opacity: 1; } }
   .web-play-button:focus-visible { outline: 3px solid var(--color-primary-container); outline-offset: 3px; }
   .web-play-button:hover { filter: brightness(1.08); }
   .install-body a { color: var(--color-primary-container); text-decoration: underline; text-underline-offset: 2px; }
