@@ -28,7 +28,12 @@ import PlatformIcon from './PlatformIcon.astro';
         <span class="install-chevron" aria-hidden="true">▸</span>
       </summary>
       <div class="install-body">
-        <p><a class="web-play-button" href="/apps/finding-your-way/play/" data-astro-reload><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7Z" /></svg><span>Play 3D in browser</span><span aria-hidden="true">→</span></a></p>
+        <p><a class="web-play-button" href="/apps/finding-your-way/play/" data-astro-reload><span class="web-play-icon" aria-hidden="true">
+          <svg class="icon-temple" data-icon="temple" viewBox="0 0 24 24"><path d="m2 8 10-6 10 6H2Zm2 3v7m5-7v7m6-7v7m5-7v7M2 21h20M3 18h18" /></svg>
+          <svg class="icon-play" data-icon="play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z" /></svg>
+          <svg class="icon-controller" data-icon="controller" viewBox="0 0 24 24"><path d="M7 7h10c3 0 4 3 5 10 .4 3-2 4-4 2l-3-3H9l-3 3c-2 2-4.4 1-4-2C3 10 4 7 7 7Z" /><path d="M6 10v5m-2.5-2.5h5M16 11h.01M19 14h.01" /></svg>
+          <svg class="icon-cube" data-icon="cube" viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7l9-5Zm0 10v10M3 7l9 5 9-5" /></svg>
+        </span><span>Play 3D in browser</span><span aria-hidden="true">→</span></a></p>
         <p>Use a browser with WebGL 2. Keyboard controls are available; gamepad and phone controls are experimental. Play opens fullscreen when supported. Use the joystick or keyboard arrows; Select is at the right edge. The player opens on its own page; no installation is needed. Progress resets when you restart.</p>
       </div>
     </details>
@@ -104,7 +109,18 @@ import PlatformIcon from './PlatformIcon.astro';
   .install-body ol { list-style: decimal; }
   .install-body li + li { margin-top: 9px; }
   .install-body .web-play-button { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 56px; padding: 14px 24px; border: 1px solid var(--color-primary-container); border-radius: 8px; background: var(--color-primary-container); color: var(--color-on-primary-container); font-size: 17px; font-weight: 600; line-height: 1.3; text-decoration: none; max-width: 100%; }
-  .web-play-button svg { width: 22px; height: 22px; flex-shrink: 0; fill: currentColor; }
+  .web-play-icon { position: relative; width: 24px; height: 24px; flex-shrink: 0; }
+  .web-play-icon svg { position: absolute; inset: 0; width: 24px; height: 24px; opacity: 0; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; animation-duration: 12s; animation-timing-function: steps(1, end); animation-iteration-count: infinite; animation-play-state: paused; }
+  .install-choice[open] .web-play-icon svg { animation-play-state: running; }
+  .web-play-icon .icon-temple { opacity: 1; animation-name: play-temple; }
+  .web-play-icon .icon-play { fill: currentColor; stroke: none; animation-name: play-triangle; }
+  .web-play-icon .icon-controller { animation-name: play-controller; }
+  .web-play-icon .icon-cube { animation-name: play-cube; }
+  /* Six two-second slots: temple, play, controller, play, cube, play. */
+  @keyframes play-temple { 0%, 100% { opacity: 1; } 16.6667% { opacity: 0; } }
+  @keyframes play-triangle { 0%, 33.3333%, 66.6667%, 100% { opacity: 0; } 16.6667%, 50%, 83.3333% { opacity: 1; } }
+  @keyframes play-controller { 0%, 50%, 100% { opacity: 0; } 33.3333% { opacity: 1; } }
+  @keyframes play-cube { 0%, 83.3333%, 100% { opacity: 0; } 66.6667% { opacity: 1; } }
   .web-play-button:focus-visible { outline: 3px solid var(--color-primary-container); outline-offset: 3px; }
   .web-play-button:hover { filter: brightness(1.08); }
   .install-body a { color: var(--color-primary-container); text-decoration: underline; text-underline-offset: 2px; }
@@ -115,6 +131,8 @@ import PlatformIcon from './PlatformIcon.astro';
   }
   @media (prefers-reduced-motion: reduce) {
     .install-chevron { transition: none; }
+    .web-play-icon svg { animation: none; opacity: 0; }
+    .web-play-icon .icon-temple { opacity: 1; }
   }
 </style>
 
