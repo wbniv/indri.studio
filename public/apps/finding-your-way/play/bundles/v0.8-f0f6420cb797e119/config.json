@@ -1,0 +1,12 @@
+{
+  "version": "0.8",
+  "arguments": [
+    "--vram-width=5120",
+    "--vram-height=2048",
+    "--vram-slot-width=256",
+    "--vram-slot-height=256",
+    "--vram-perm-width=1024",
+    "--vram-perm-height=256",
+    "-L/parmenides_slice-standalone.iff"
+  ]
+}

@@ -12,7 +12,7 @@ function fixture(t, changes = {}) {
   const args = ['-L/parmenides_slice-standalone.iff'];
   const contents = { 'config.json': JSON.stringify({version: '0.8', arguments: args, ...changes.config}),
     'frame.html': 'frame', 'player.css': 'css', 'player.js': 'player',
-    'wf_game.data': 'data', 'wf_game.js': 'runtime', 'wf_game.wasm': 'wasm' };
+    'title-preview.jpg': 'preview', 'wf_game.data': 'data', 'wf_game.js': 'runtime', 'wf_game.wasm': 'wasm' };
   const files = Object.fromEntries(Object.keys(contents).sort().map(name => [name, {bytes: Buffer.byteLength(contents[name]), sha256: hash(contents[name])}]));
   // Independent serialization, matching Python's spaces and sorted entry keys.
   const encoded = '{' + Object.entries(files).map(([name, info]) => JSON.stringify(name) + ': {"bytes": ' + info.bytes + ', "sha256": "' + info.sha256 + '"}').join(', ') + '}';
@@ -53,4 +53,11 @@ test('rejects wrong release, identity and launch configuration', t => {
 test('rejects manifest paths outside frozen bundles', t => {
   const f=fixture(t); writeFileSync(join(f.base,'manifest.json'), JSON.stringify({bundleId:'../elsewhere'}));
   assert.throws(()=>verifyFywBundle(f.base), /Invalid.*bundle ID/);
+});
+
+test('rejects altered or missing title preview', t => {
+  const f=fixture(t); writeFileSync(join(f.directory,'title-preview.jpg'),'different preview');
+  assert.throws(()=>verifyFywBundle(f.base), /artifact differs/);
+  const g=fixture(t); rmSync(join(g.directory,'title-preview.jpg'));
+  assert.throws(()=>verifyFywBundle(g.base), /bundle files/);
 });

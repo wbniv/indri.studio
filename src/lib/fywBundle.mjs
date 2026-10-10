@@ -2,7 +2,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
-const required = ['config.json', 'frame.html', 'player.css', 'player.js', 'wf_game.data', 'wf_game.js', 'wf_game.wasm'];
+const required = ['config.json', 'frame.html', 'player.css', 'player.js', 'title-preview.jpg', 'wf_game.data', 'wf_game.js', 'wf_game.wasm'];
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 // Match the build receipt's Python json.dumps(files, sort_keys=True) identity.
 const canonical = value => value && typeof value === 'object'
