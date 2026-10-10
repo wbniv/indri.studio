@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Finding Your Way · 3D game</title><link rel="stylesheet" href="player.css"></head>
+<body>
+<main id="player">
+  <div id="stage">
+    <canvas id="canvas" width="1280" height="720" tabindex="0" aria-label="Finding Your Way game. Arrow keys move; Space selects; 2 changes camera; 3 closes dialogue."></canvas>
+    <div id="overlay"><h1>Finding Your Way</h1><p>Explore the temple. Follow the arguments.</p><button id="play">Play</button><p id="status" role="status" aria-live="polite">v0.8 · Progress resets when you restart</p><progress id="progress" max="100" value="0" hidden aria-label="Loading game"></progress></div>
+    <div id="touch" hidden aria-label="Touch controls">
+      <div class="directions"><button data-code="ArrowUp" aria-label="Move forward / increase text size">↑</button><button data-code="ArrowLeft" aria-label="Turn left / close dialogue">←</button><button data-code="ArrowDown" aria-label="Move back / decrease text size">↓</button><button data-code="ArrowRight" aria-label="Turn right">→</button></div>
+      <div class="actions"><button data-code="Space">Select</button><button data-code="Digit3">Close</button><button data-code="Digit2">Camera</button><button data-code="Digit4">Motion</button></div>
+    </div>
+  </div>
+  <div class="toolbar"><button id="focus" disabled>Resume game</button><button id="fullscreen">Fullscreen</button><button id="restart" disabled>Restart</button><button id="controls" aria-expanded="false" aria-controls="help">Controls</button></div>
+  <div id="help" hidden><p><strong>Keyboard:</strong> arrows or I/J/K/L move. Space selects/interacts and continues the reader. 2 switches camera; hold 2 for the alternate camera. 4 toggles reduced motion. 3 or Left closes the reader; Up/Down changes text size.</p><p><strong>Gamepad:</strong> D-pad/left stick moves, A selects, B changes camera, X closes. Click or tap the game to resume after using the toolbar. Press Escape to leave fullscreen or release keyboard focus.</p><p>Touch controls are available on touchscreens; browser/device compatibility is still being verified.</p></div>
+  <p class="fallback"><a href="/apps/finding-your-way/" target="_top">App details, text edition and Android downloads</a></p>
+</main>
+<script src="player.js"></script>
+</body></html>

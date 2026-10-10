@@ -21,6 +21,18 @@ import PlatformIcon from './PlatformIcon.astro';
       </div>
     </details>
 
+    <details class="install-choice" id="web-3d-play">
+      <summary>
+        <span class="install-icons"><PlatformIcon platform="web" size={24} ariaHidden /><PlatformIcon platform="console" size={24} ariaHidden /></span>
+        <span class="install-label"><strong>3D game in your browser</strong><small>Explore the same chapter as the Android game</small></span>
+        <span class="install-chevron" aria-hidden="true">▸</span>
+      </summary>
+      <div class="install-body">
+        <p><a href="/apps/finding-your-way/play/" data-astro-reload>Play 3D in browser →</a></p>
+        <p>Use a keyboard or gamepad in a browser with WebGL 2. The player opens on its own page; no installation is needed. Progress resets when you restart.</p>
+      </div>
+    </details>
+
     <details class="install-choice" id="android-install">
       <summary>
         <span class="install-icons"><PlatformIcon platform="phone" size={24} ariaHidden /><PlatformIcon platform="tablet" size={24} ariaHidden /></span>
