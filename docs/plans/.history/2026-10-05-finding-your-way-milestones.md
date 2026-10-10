@@ -1,5 +1,8 @@
 | Date | Change |
 |------|--------|
+| [2026-10-07](https://github.com/wbniv/indri.studio/commit/8192db6) | docs: record live v0.7 download verification |
+| [2026-10-07](https://github.com/wbniv/indri.studio/commit/00a4f42) | Publish the verified Finding Your Way v0.7 polish APK |
+| [2026-10-07](https://github.com/wbniv/indri.studio/commit/3ed581a) | Record verified live v0.6 APK publication |
 | [2026-10-07](https://github.com/wbniv/indri.studio/commit/9a48ef0) | Publish Finding Your Way artwork v0.6 APK |
 | [2026-10-06](https://github.com/wbniv/indri.studio/commit/7055989) | Record verified live patient-framing v0.5.5 replacement |
 | [2026-10-06](https://github.com/wbniv/indri.studio/commit/627c02d) | Republish v0.5.5 APK with corrected patient framing |
@@ -17,6 +20,18 @@
 | [2026-10-05](https://github.com/wbniv/indri.studio/commit/9c892ef) | Publish Finding Your Way Android milestone downloads |
 
 <!--history-meta v1
+8192db6	author	Will Norris
+8192db6	added	3
+8192db6	deleted	1
+8192db6	files	1
+00a4f42	author	Will Norris
+00a4f42	added	14
+00a4f42	deleted	0
+00a4f42	files	1
+3ed581a	author	Will Norris
+3ed581a	added	1
+3ed581a	deleted	1
+3ed581a	files	1
 9a48ef0	author	Will Norris
 9a48ef0	added	11
 9a48ef0	deleted	0

@@ -66,7 +66,7 @@ const optimizationReview = {
   "sha256": "1ee7d292dfb793b05087bd89485a8c7b730b5fe0c9cec213ebe20eeb0078dfe5",
   "milestoneVersion": "0.8",
   "knownIssues": [
-    "Progress resets on relaunch. Phone and tablet touch controls are experimental.",
+    "Progress resets on relaunch.",
     "Performance is improved; frame rates can vary by device and scene.",
     "General camera obstruction/collision remains deferred; extreme close approaches can crop or obscure scenery.",
   ]
@@ -75,6 +75,8 @@ const optimizationReview = {
 // v0.8.1 adds a native alignment hotfix while retaining the original v0.8.
 const alignmentHotfix = {
   ...optimizationReview,
+  chapter: '',
+  knownIssues: [],
   milestone: '2026-10-10-v0.8.1-16kb',
   milestoneVersion: '0.8.1',
   apk: 'parmenides-v0.8.1-8525f4910fc01414.apk',
@@ -85,7 +87,7 @@ const milestones = [
   {
     title: '16 KB compatibility v0.8.1',
     manifest: alignmentHotfix,
-    description: 'Updates native-library alignment for Android devices using 16 KB memory pages. Retains v0.8’s rendering improvements, clearer dialogue and character signs, and larger near-full-screen reader. Preserves the complete journey, choices, histories, endings, reduced motion and Both-to-surgery coda.',
+    description: 'Aligns native libraries for Android devices with 16 KB memory pages.',
   },
   {
     title: 'Optimization v0.8',
@@ -157,13 +159,13 @@ const milestones = [
         </a>
       </summary>
       <div class="milestone-body">
-        <p><strong>{manifest.chapter}</strong></p>
+        {manifest.chapter && <p><strong>{manifest.chapter}</strong></p>}
         <p>{description}</p>
-        <p>Play on an Android phone or tablet, or use a TV remote or gamepad on Google TV. Progress resets on relaunch.</p>
-        <p><strong>Known issues</strong></p>
-        <ul>{manifest.knownIssues.map((issue) => <li>{issue}</li>)}</ul>
-        <p>APK SHA-256:</p>
-        <pre><code>{manifest.sha256}</code></pre>
+        {manifest.knownIssues.length > 0 && <>
+          <p><strong>Known issues</strong></p>
+          <ul>{manifest.knownIssues.map((issue) => <li>{issue}</li>)}</ul>
+        </>}
+        <p class="milestone-checksum"><span>APK SHA-256:</span><code>{manifest.sha256}</code></p>
         {archiveRecords && <ul>
           <li><a href={`${base}/SHA256SUMS`}>SHA256SUMS</a></li>
           <li><a href={`${base}/manifest.json`}>Milestone manifest</a></li>
@@ -230,6 +232,8 @@ const milestones = [
   .milestone-download { display: inline-flex; flex-direction: column; align-items: flex-end; white-space: nowrap; font-size: 14px; line-height: 1.3; }
   .milestone-download small { display: block; font-size: 11px; line-height: 1.4; color: inherit; opacity: 0.8; }
   .milestone-body { padding: 12px 0 8px 26px; min-width: 0; }
+  .milestone-checksum { display: flex; gap: 0.5em; white-space: nowrap; overflow-x: auto; font-size: 12px; }
+  .milestone-checksum span, .milestone-checksum code { flex-shrink: 0; }
   .milestone:not([open]) .milestone-body { display: none; }
   @media (max-width: 600px) {
     .milestone-label { display: block; }

@@ -2,6 +2,18 @@
 
 Publish the two archived Android milestones as compact expandable rows on `/apps/finding-your-way/`. Retain the original summary, journey description and four screenshots. Update the page and homepage gallery artwork with uppercase Greek pi, Π.
 
+## Current copy policy — 2026-10-10
+
+Will has tested the phone/tablet touch controls and accepts them. Describe the
+supported controls directly; do not label them experimental. The Android
+milestones, browser installation copy and browser player note follow this rule.
+Earlier dated acceptance notes below describe their original review scope.
+
+The v0.8.1 compatibility row describes only its change: native-library alignment
+for 16 KB Android memory pages. Retain v0.8 as a separate milestone. Put each
+APK SHA-256 label and digest on one line, scrolling within the row on narrow
+screens rather than widening the page.
+
 ## Implementation
 
 - [x] Add `FindingYourWayMilestones.astro`, with archive manifests, direct APK links and file sizes derived from the APK bytes.
@@ -25,7 +37,10 @@ The HTML files are illustrative mockups. [Actual browser checks](2026-10-05-find
 
 ## Scope
 
-Android distribution only. Phone touch and letterboxed tablet acceptance are future build work; these historical APKs are not rebuilt or relabelled as tablet-ready. Updated native launcher art is prepared in the Finding Your Way build generator for the next build. Web/PWA icon sources are updated in that repository. This release publishes the Indri catalogue page and artwork.
+The original release covered Android distribution and catalogue artwork.
+Archived APKs and receipts retain their original identities. Current copy uses
+the accepted touch controls described above. Native launcher art was prepared
+in the Finding Your Way build generator; Web/PWA icon sources were updated there.
 
 AI assistance: Codex. Exact model/version, tool version and reasoning effort were not available in verified session metadata and are not inferred.
 
