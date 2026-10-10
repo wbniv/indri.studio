@@ -64,3 +64,9 @@
   Cache-Control: public, max-age=31536000, immutable
 /apps/llvm-mos-65816/play/index.html
   Cache-Control: public, max-age=60, stale-while-revalidate=604800
+
+# Matching frozen JS/WASM/data are content-addressed as one verified bundle.
+/apps/finding-your-way/play/bundles/*
+  Cache-Control: public, max-age=31536000, immutable
+/apps/finding-your-way/play/manifest.json
+  Cache-Control: public, max-age=0, must-revalidate

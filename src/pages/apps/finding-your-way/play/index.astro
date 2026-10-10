@@ -1,28 +1,15 @@
 ---
-import { readFileSync } from 'node:fs';
-import { createHash } from 'node:crypto';
 import Base from '../../../../layouts/Base.astro';
-const base = 'public/apps/finding-your-way/play';
-const manifest = JSON.parse(readFileSync(`${base}/manifest.json`, 'utf8'));
-if (!/^v0\.8-[a-f0-9]{16}$/.test(manifest.bundleId)) throw new Error('Invalid Finding Your Way bundle ID');
-const receipt = JSON.parse(readFileSync(`${base}/bundles/${manifest.bundleId}/receipt.json`, 'utf8'));
-if (manifest.bundleId !== receipt.bundleId) throw new Error('Finding Your Way receipt mismatch');
-for (const [name, raw] of Object.entries(receipt.files)) {
-  const info = raw as { sha256: string; bytes: number };
-  if (!/^[a-zA-Z0-9_.-]+$/.test(name)) throw new Error('Invalid Finding Your Way artifact name');
-  const bytes = readFileSync(`${base}/bundles/${manifest.bundleId}/${name}`);
-  if (bytes.length !== info.bytes || createHash('sha256').update(bytes).digest('hex') !== info.sha256)
-    throw new Error(`Finding Your Way artifact differs: ${name}`);
-}
-const frame = `/apps/finding-your-way/play/bundles/${manifest.bundleId}/frame.html`;
+import { verifyFywBundle } from '../../../../lib/fywBundle.mjs';
+const { frame } = verifyFywBundle('public/apps/finding-your-way/play');
 ---
 <Base title="Finding Your Way — Play the 3D game" description="Explore Finding Your Way in your browser. No installation needed.">
   <main class="fyw-browser-page">
     <a href="/apps/finding-your-way/" data-astro-reload>← App details and downloads</a>
     <h1>Finding Your Way</h1>
-    <p>Play the 3D chapter in your browser. Choose Play below to load the game.</p>
-    <iframe class="fyw-browser-frame" src={frame} title="Finding Your Way 3D player" allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
-    <p class="fyw-browser-note">WebGL 2 is required. Keyboard and gamepad controls are available. Phone controls are experimental; this browser edition does not yet save your progress.</p>
+    <p>Play the 3D chapter in your browser. Choose Play below to load the game. On phones, Play opens fullscreen when your browser supports it.</p>
+    <iframe class="fyw-browser-frame" loading="eager" src={frame} title="Finding Your Way 3D player" allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
+    <p class="fyw-browser-note">WebGL 2 is required. Keyboard controls are available. Gamepad and phone controls are experimental; this browser edition does not yet save your progress.</p>
     <p><a href="/apps/finding-your-way/#android-builds-title" data-astro-reload>Android downloads</a> · <a href="/apps/finding-your-way/" data-astro-reload>Text edition and other ways to play</a></p>
   </main>
 </Base>
