@@ -140,9 +140,16 @@ const ogImage = ogImagePath ? new URL(ogImagePath, Astro.site).href : undefined;
 			{post.id === 'claude-code-authoring-formats' && <script src={lightboxUrl}></script>}
 		</div>
 
+		{post.id === 'finding-your-way' && (
+			<div class="prose mt-12 md:mt-16">
+				<FindingYourWayInstall />
+				<FindingYourWayMilestones />
+			</div>
+		)}
+
 		{post.data.screenshots.length > 0 && (
-			<section id={post.id === 'finding-your-way' ? 'screenshots' : undefined} class:list={[post.id === 'finding-your-way' ? 'mt-10 md:mt-14' : 'mt-12 md:mt-16']}>
-				<h2 class="section-label !mb-3">screenshots</h2>
+			<section id={post.id === 'finding-your-way' ? 'web-edition' : undefined} class:list={[post.id === 'finding-your-way' ? 'mt-10 md:mt-14' : 'mt-12 md:mt-16']}>
+				<h2 class="section-label !mb-3">{post.id === 'finding-your-way' ? 'Web edition' : 'screenshots'}</h2>
 				{post.id === 'finding-your-way' && (
 					<div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mb-5">
 						<a href="https://d2cpue9r0hnyl3.cloudfront.net/" class="font-display font-semibold text-primary-container underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-primary-container">Open the web edition ↗</a>
@@ -169,12 +176,6 @@ const ogImage = ogImagePath ? new URL(ogImagePath, Astro.site).href : undefined;
 			</section>
 		)}
 
-		{post.id === 'finding-your-way' && (
-			<div class="prose mt-12 md:mt-16">
-				<FindingYourWayInstall />
-				<FindingYourWayMilestones />
-			</div>
-		)}
 
 	</article>
 

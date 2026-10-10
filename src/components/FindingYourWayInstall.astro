@@ -12,7 +12,7 @@ import PlatformIcon from './PlatformIcon.astro';
         <span class="install-chevron" aria-hidden="true">▸</span>
       </summary>
       <div class="install-body">
-        <p>Open the web edition linked above the screenshots. It works offline after its first load and can be installed as an app:</p>
+        <p>Open the <a href="#web-edition">web edition below</a>. It works offline after its first load and can be installed as an app:</p>
         <ul>
           <li><strong>Android:</strong> In Chrome, choose <strong>⋮ → Install and create shortcut → Install</strong>. Some versions show <strong>Add to Home screen</strong>.</li>
           <li><strong>iPhone / iPad:</strong> In Safari, choose <strong>Share → Add to Home Screen</strong>, then <strong>Add</strong>.</li>
@@ -96,6 +96,7 @@ import PlatformIcon from './PlatformIcon.astro';
   .install-label small { display: block; color: var(--color-on-surface-variant); font-size: 12px; line-height: 1.45; }
   .install-chevron { color: var(--color-primary-container); transition: transform 150ms ease; }
   .install-choice[open] .install-chevron { transform: rotate(90deg); }
+  #web-3d-play[data-revealing]::details-content { transition: none; }
   .install-body { min-width: 0; padding: 0 0 18px 70px; font-size: 14px; line-height: 1.65; }
   .install-body p { margin: 0 0 12px; }
   .install-body ul, .install-body ol { padding-left: 20px; margin: 0 0 12px; }
@@ -128,25 +129,46 @@ import PlatformIcon from './PlatformIcon.astro';
     activeDetails = details;
     const title = details?.querySelector('summary strong');
     const summary = details?.querySelector('summary');
-    if (!details || !title || !summary || !('IntersectionObserver' in window)) return;
+    const body = details?.querySelector<HTMLElement>('.install-body');
+    if (!details || !title || !summary || !body || !('IntersectionObserver' in window)) return;
 
-    // Render open for visitors without JS; defer only offscreen titles.
-    const bounds = title.getBoundingClientRect();
-    if (bounds.bottom > 0 && bounds.top < window.innerHeight) return;
+    // Leave space below the title so the expansion is visible on screen.
+    const revealSpace = 96;
     details.open = false;
-    const observer = new IntersectionObserver((entries) => {
-      if (entries.some((entry) => entry.isIntersecting)) {
-        details.open = true;
-        cleanup();
-      }
-    });
-    const stopReveal = () => {
-      observer.disconnect();
-      summary.removeEventListener('click', stopReveal);
+    let animation: Animation | null = null;
+    const finishReveal = () => {
+      delete details.dataset.revealing;
+      summary.removeEventListener('click', cancelReveal);
+      animation = null;
     };
-    cleanup = stopReveal;
+    const cancelReveal = () => {
+      animation?.cancel();
+      finishReveal();
+    };
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      stopObserving();
+      const animate = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (animate) details.dataset.revealing = '';
+      details.open = true;
+      if (!animate) return;
+      animation = body.animate([
+        { height: '0px', opacity: 0, overflow: 'hidden' },
+        { height: `${body.getBoundingClientRect().height}px`, opacity: 1, overflow: 'hidden' },
+      ], { duration: 450, easing: 'ease-out' });
+      summary.addEventListener('click', cancelReveal, { once: true });
+      animation.finished.then(finishReveal, finishReveal);
+    }, { rootMargin: `0px 0px -${revealSpace}px 0px`, threshold: 1 });
+    const stopObserving = () => {
+      observer.disconnect();
+      summary.removeEventListener('click', stopObserving);
+    };
+    cleanup = () => {
+      stopObserving();
+      cancelReveal();
+    };
     // Manual toggles take precedence over any later scroll reveal.
-    summary.addEventListener('click', stopReveal, { once: true });
+    summary.addEventListener('click', stopObserving, { once: true });
     observer.observe(title);
   }
 

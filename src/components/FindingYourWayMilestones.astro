@@ -66,10 +66,9 @@ const optimizationReview = {
   "sha256": "1ee7d292dfb793b05087bd89485a8c7b730b5fe0c9cec213ebe20eeb0078dfe5",
   "milestoneVersion": "0.8",
   "knownIssues": [
-    "Progress resets on relaunch; complete phone/tablet touch acceptance remains pending.",
-    "Performance is improved, but sustained 60 FPS throughout the complete chapter is not established. Current-room-only rendering remains a separate acceptance step.",
+    "Progress resets on relaunch. Phone and tablet touch controls are experimental.",
+    "Performance is improved; frame rates can vary by device and scene.",
     "General camera obstruction/collision remains deferred; extreme close approaches can crop or obscure scenery.",
-    "Max’s font/sign approval, normal TV-seat readability review and longer lifecycle/memory measurements remain pending."
   ]
 };
 
@@ -77,56 +76,47 @@ const milestones = [
   {
     title: 'Optimization v0.8',
     manifest: optimizationReview,
-    description: 'Reduces rendering work with retained static mesh buffers and a dedicated opaque-material shader. Adds crisp Atkinson dialogue and NPC signs, a larger near-full-screen reader, and smaller texture allocations. Preserves the complete journey, choices, histories, endings, reduced motion and Both-to-surgery coda.',
-    provenance: 'Release 0.8 (Android code 93), with ZIP-compressed level data for a smaller download. The bundled libraries and game assets match the verified merged candidate: 7,709 story/control assertions and 554 reader checks passed. The exact release APK passed install, remote input and Home/resume on both Chromecasts. Requires Android 8.0 or later on an ARM device.',
+    description: 'Improves rendering performance. Adds clearer dialogue and character signs, plus a larger near-full-screen reader. Preserves the complete journey, choices, histories, endings, reduced motion and Both-to-surgery coda.',
   },
   {
     title: 'Polish v0.7',
     manifest: polishReview,
     description: 'Combines the A–F artwork passes. Refines complete surgeon glove framing, lowers and scales the canonical combined triangle motif, and isolates Being from inherited background scenery. Keeps dialogue readable through camera collisions with a guarded modal camera cut. Retains original dialogue, choices, histories, endings, reduced motion and the exclusive Both-to-surgery coda.',
-    provenance: 'Iteration F review build (0.7-polish.2), frozen from source checkpoint d47d821. Passed 5,690 automated checks covering all 208 source cards and 66 ending edges, 420 rendered dialogue views, and ten Chromecast scene tours. Production input/Home-resume and the exact archived APK with launcher artwork were verified on Chromecast1.',
   },
   {
     title: 'Artwork v0.6',
     manifest: graphicsReview,
     description: 'Includes the A–E artwork passes across Temple, Love, Reason, Truth, God, the ending scenes and surgery. Adds the Being release, combined triangle motif, NonBeing portal closure and visage, and masked surgeons with surgical lighting and instruments. Ending effects pause while reading; reduced motion uses quiet states.',
-    provenance: 'Iteration E review build (0.6-endings-surgery.1), preserved unchanged from source checkpoint b90655a. Passed 1,960 automated checks and four Chromecast rendering tours; the exact archived APK and launcher artwork were verified on Chromecast1.',
   },
   {
     title: 'Visual fixes v0.5.5',
     manifest: visualFixes,
     description: 'Keeps the complete ending routes from v0.5. Fits dialogue text and controls, hides world geometry during dialogue, corrects sphere and arch winding, and waits for the reading camera before showing or advancing text. Corrects patient framing so the three surgeons’ faces, hands and an off-center lamp fit the upward view. Camera obstruction/collision remains postponed.',
-    provenance: 'Patient-framing regression and desktop/Chromecast checks passed against the retained complete visual baseline. Complete remote-driven Android routes and phone/tablet touch acceptance remain open.',
   },
   {
     title: 'Endings v0.5',
     manifest: endings,
     description: 'Adds separate Being, BOTH and NonBeing ending scenes, with the patient-view surgery coda on the BOTH route. Complete source accounts and final-Temple review are included; text clipping and occlusion fixes are deferred to v0.5.5.',
-    provenance: 'Preserved from chapter checkpoint a636379, with matching tests and Chromecast 1 review. Uses the previously verified atlas-fix runtime.',
   },
   {
     title: 'Four realms v0.4',
     manifest: fourRealms,
     description: 'Adds God’s guides, poster/icon inspections, hill traversal, both counsels and sixteen final Temple histories. Includes the texture-atlas fix; ending scenes remain previews.',
-    provenance: 'Preserved from chapter checkpoint 4c8c488 and engine checkpoint 1aecfbe, with tests and completed Chromecast 1 verification.',
   },
   {
     title: 'Love/Reason/Truth v0.3',
     manifest: loveReasonTruth,
     description: 'Adds Truth’s courtroom, testimony, exhibits, both commitments and eight Temple return histories.',
-    provenance: 'Preserved from source checkpoint 20c4820, with tests and completed Chromecast 1 verification.',
   },
   {
     title: 'Love/Reason v0.2',
     manifest: loveReason,
     description: 'Adds Reason encounters and four Temple return histories, plus Love feedback fixes.',
-    provenance: 'The documented 0.2-love-reason build, preserved with its original receipt and a source/Blender snapshot.',
   },
   {
     title: 'Temple/Love v0.1',
     manifest: templeLove,
     description: 'The first playable Temple/Love chapter and its changed Temple return.',
-    provenance: 'The exact installed APK played by Will, preserved with its original build records.',
   },
 ].sort((a, b) => b.manifest.milestoneVersion.localeCompare(a.manifest.milestoneVersion, undefined, { numeric: true })).map((milestone) => {
   const base = `/apps/finding-your-way/milestones/${milestone.manifest.milestone}`;
@@ -138,10 +128,10 @@ const milestones = [
 
 <section aria-labelledby="android-builds-title" class="milestones">
   <h2 id="android-builds-title">Android builds</h2>
-  <p>Newest first. Download an APK or expand a row for build details.</p>
+  <p>Newest first. Download an APK or expand a row to see what changed.</p>
 
   <div class="milestone-timeline">
-  {milestones.map(({ title, manifest, description, provenance, base, apk, size, date, testEvidence, signature, archiveRecords }) => (
+  {milestones.map(({ title, manifest, description, base, apk, size, date, testEvidence, signature, archiveRecords }) => (
     <details class="milestone">
       <summary>
         <span class="milestone-label">
@@ -154,7 +144,7 @@ const milestones = [
       </summary>
       <div class="milestone-body">
         <p><strong>{manifest.chapter}</strong></p>
-        <p>{description} {provenance}</p>
+        <p>{description}</p>
         <p>Play on an Android phone or tablet, or use a TV remote or gamepad on Google TV. Progress resets on relaunch.</p>
         <p><strong>Known issues</strong></p>
         <ul>{manifest.knownIssues.map((issue) => <li>{issue}</li>)}</ul>
