@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "adapter": "worldfoundry",
+  "startMode": "manual",
+  "title": "Finding Your Way",
+  "subtitle": "Explore the temple. Follow the arguments.",
+  "status": "v0.8 · Progress resets when you restart",
+  "canvasLabel": "Finding Your Way game. Arrow keys move; Space selects; 2 changes camera; 3 closes dialogue.",
+  "restartPrompt": "Restart the chapter? Your current progress will be lost.",
+  "fallbackLabel": "App details, text edition and Android downloads",
+  "fallbackUrl": "/apps/finding-your-way/",
+  "poster": "title-preview.jpg",
+  "fullscreenOnPlay": true,
+  "arguments": [
+    "--vram-width=5120",
+    "--vram-height=2048",
+    "--vram-slot-width=256",
+    "--vram-slot-height=256",
+    "--vram-perm-width=1024",
+    "--vram-perm-height=256",
+    "-L/parmenides_slice-standalone.iff"
+  ],
+  "help": [
+    "Keyboard: arrows or I/J/K/L move. Space selects/interacts and continues the reader. 2 switches camera; hold 2 for the alternate camera. 3 or Left closes dialogue; Up/Down changes text size. 4 toggles reduced motion.",
+    "Joystick: drag to move or turn; release to stop. Use another finger to hold Select or another action.",
+    "Gamepad: D-pad/left stick moves, A selects, B changes camera, X closes. On phones, use the joystick and on-screen buttons.",
+    "Reduced motion quiets decorative animations and makes some visual transitions immediate. Walking and story choices remain available. Escape closes this menu first, then exits fullscreen or releases game focus."
+  ],
+  "motionCode": "Digit4",
+  "actions": [
+    {
+      "code": "Digit2",
+      "label": "Camera",
+      "caption": "Camera"
+    },
+    {
+      "code": "Digit3",
+      "label": "Close dialogue",
+      "caption": "Close"
+    },
+    {
+      "code": "Space",
+      "label": "Select",
+      "caption": "Select"
+    }
+  ]
+}

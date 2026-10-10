@@ -1,0 +1,1273 @@
+{
+  "schema": 1,
+  "protocol": 1,
+  "playerVersion": "0.1.4",
+  "bundleId": "bgp1-2c214d8824d8a5cfc6244a9a",
+  "provenance": {
+    "sourcePackage": "@wbniv/bsnes-jg-player",
+    "version": "1.1.0"
+  },
+  "files": {
+    "adapters/snes-loader.js": {
+      "bytes": 29643,
+      "sha256": "67b2b9505b46ae207b26599cede754273d81b88fdf4f8d909262d69d438983f8"
+    },
+    "adapters/snes.js": {
+      "bytes": 1409,
+      "sha256": "8787cb7aacadca7ad2a92cb9ddd81ad6eb5bd4f77c4f58eb88ca3d16688b4fda"
+    },
+    "adapters/worldfoundry.js": {
+      "bytes": 1187,
+      "sha256": "70c1bad56eaebeb0c501fa3784e4309161a81da17193ef03ecda319372b97166"
+    },
+    "config.json": {
+      "bytes": 6401,
+      "sha256": "a71f08ac239e1c653cdccc2651de5f7782816b05f214b30d1c9240b505296f6f"
+    },
+    "cores/PROVENANCE.json": {
+      "bytes": 495,
+      "sha256": "5927ba6e4126120f866514237979e1c026d1623025c9c5af7d80ac9b40b98634"
+    },
+    "cores/bsnes_jg.js": {
+      "bytes": 73360,
+      "sha256": "54e19fd849b823d87e278438fe7ec5ccaf8e526e966c8f4e007d29ccf78cdf4d"
+    },
+    "cores/bsnes_jg.wasm": {
+      "bytes": 3903269,
+      "sha256": "e74dbd3d7160608dfb6e1ae2ed7ff263fafaa62b0444870530530e2e931ebeb3"
+    },
+    "frame.html": {
+      "bytes": 8605,
+      "sha256": "dd6e979c26a0111645e4fc158c496f5f8d115e7dedae20577732c7f654214892"
+    },
+    "player.css": {
+      "bytes": 5556,
+      "sha256": "2b1044bf1a0ac4067b332e5770312573c71ab833d69d35dd20d7cc367a1de680"
+    },
+    "player.js": {
+      "bytes": 16499,
+      "sha256": "364dcf8139056f618f255c36a9a054d818f1f7ceb78a61a87da2580ca9d69fe2"
+    },
+    "preview/1d-ca.png": {
+      "bytes": 1509,
+      "sha256": "e36f45b55f9211a097f72b2934c255e13deee9ec61dcff4f9f451e5aa48a6350"
+    },
+    "preview/3d-wireframe.png": {
+      "bytes": 172334,
+      "sha256": "86f7d0bebb7cceb1c23bf20c21b42fcc7af8563419ef7adc32eafbe86b51a478"
+    },
+    "preview/absdiff.png": {
+      "bytes": 172334,
+      "sha256": "82dacae707afc031fed70dce85f34bf74cfae354bcd3c57188aa3536d38165e7"
+    },
+    "preview/adpcm.png": {
+      "bytes": 1506,
+      "sha256": "2ff1f7a1573c2c08bf97e216b0bad07f4fa76f9820573b0873bb6eb5e145a46f"
+    },
+    "preview/apollo-daylight.png": {
+      "bytes": 172334,
+      "sha256": "42dbb8946affdb554fd579e5cafd4473387041a7631ddb63d4bc2d221e2e3e3a"
+    },
+    "preview/asmisland.png": {
+      "bytes": 172334,
+      "sha256": "cb64a2d4bb3260a3b5ef10c00b0711671669888e1f524ad622a3ea15e688c753"
+    },
+    "preview/avalanche.png": {
+      "bytes": 2763,
+      "sha256": "3e7277e968c79d5500c2b4f378e0aea7d28087d10d45f7ffc2272a0ac68180ab"
+    },
+    "preview/backtrack.png": {
+      "bytes": 172334,
+      "sha256": "fd48994f8dcab858553533a386b53a2dbb944385db02e969e32a844726020b6f"
+    },
+    "preview/bankwalk.png": {
+      "bytes": 172334,
+      "sha256": "c9068454b083abc4287835375ae1ef5750f3add715fcc58a1b4709a0d77abba6"
+    },
+    "preview/bf-vm.png": {
+      "bytes": 1537,
+      "sha256": "3b3d1cda2b7a6b25a5cebf51a6d7a725f9130579675cc6745936ce10da2afeee"
+    },
+    "preview/bhut.png": {
+      "bytes": 1225,
+      "sha256": "fe4dcc58e518bb362b84d7394bf8d6fe9bd666601f289d67b693e9f4463e8a9c"
+    },
+    "preview/bigbyval.png": {
+      "bytes": 172334,
+      "sha256": "4b91b6771fb0e94137c2b472c3a1173ef5d866021bec4b826780b99bc240a63e"
+    },
+    "preview/bitboard64.png": {
+      "bytes": 172334,
+      "sha256": "1067cb646cc55ae9db7e1b2ca1681f978412c7bcf60efaf51dc0241cc85e3243"
+    },
+    "preview/bitcensus.png": {
+      "bytes": 172334,
+      "sha256": "e409e866974b5675edbec2a8643d05c370b61a170350f938f79ab3c13ce89172"
+    },
+    "preview/bitshuffle.png": {
+      "bytes": 172334,
+      "sha256": "3f5100f90efb655461f0e7ea9db53cf574c282915663450c74a79f4f8f5accd2"
+    },
+    "preview/bitweave.png": {
+      "bytes": 955,
+      "sha256": "07232c89c3c584887558d65897d3fa6d0aac7b69a60b4a44c7d56669994962db"
+    },
+    "preview/blossom.png": {
+      "bytes": 3144,
+      "sha256": "e44db4e4061eeda94e7172596f3b10a151c689760b116f872b1aaa687a52e912"
+    },
+    "preview/boids.png": {
+      "bytes": 1337,
+      "sha256": "700518a4347e975991372adaccb0b3b9560f561eb07d9d88c8cd633324ebee64"
+    },
+    "preview/borrowlad.png": {
+      "bytes": 1136,
+      "sha256": "fac7abb78ec5916c91b6381eed6ae1ce123e410bec7a7b2287035fcc2eac56f9"
+    },
+    "preview/borrowov.png": {
+      "bytes": 172334,
+      "sha256": "6abface814c5a95fbf07fa9f246765e3df8191b55481af1bad713249eaaa399f"
+    },
+    "preview/brkcop.png": {
+      "bytes": 172334,
+      "sha256": "9ae4f306aaf7bd8418b7126be12dc8bfcd219ae8126da508d12d05f7ab52d2b5"
+    },
+    "preview/bsearchviz.png": {
+      "bytes": 172334,
+      "sha256": "f7a0356bd75d71a9e8fe3a6f54fbef09a7e5cb9592527e015ae523012fdd21aa"
+    },
+    "preview/buddhabrot.png": {
+      "bytes": 5595,
+      "sha256": "e6d3b975f4d13da15c9536f1d79e7f94dc6b3bdb98d60f1b27db54d0fe812ad5"
+    },
+    "preview/burning-ship.png": {
+      "bytes": 1657,
+      "sha256": "53813637586157549af1ac250847edb5e4d313f6638303595409a3f2bd1a86df"
+    },
+    "preview/byvaledge.png": {
+      "bytes": 172334,
+      "sha256": "cae10c45ab482805349b92a0b80b860c140ac74100b9e82aa035880290f76a4d"
+    },
+    "preview/cardioid.png": {
+      "bytes": 3271,
+      "sha256": "2c5130bb2ce5804073aacaee13670ba540116fefd78c7de3522af64c6d08354c"
+    },
+    "preview/cartsize-exhirom-6m.png": {
+      "bytes": 172334,
+      "sha256": "72a48fc8d5244f272f55985ce579a7454a237063961c784669ae2a3a8d0e5bfa"
+    },
+    "preview/cartsize-exhirom-8m.png": {
+      "bytes": 172334,
+      "sha256": "72a48fc8d5244f272f55985ce579a7454a237063961c784669ae2a3a8d0e5bfa"
+    },
+    "preview/cartsize-hirom-4m.png": {
+      "bytes": 172334,
+      "sha256": "72a48fc8d5244f272f55985ce579a7454a237063961c784669ae2a3a8d0e5bfa"
+    },
+    "preview/cgrade.png": {
+      "bytes": 1061,
+      "sha256": "87d7faefabcd84d9dd16e0994198a36e2bf414dd6a00e36a525d3433a4ed25f7"
+    },
+    "preview/compass.png": {
+      "bytes": 502,
+      "sha256": "c83897055db626b03e8b8fc995fe93fa47e49a2c355449646e2a1654e05c0862"
+    },
+    "preview/cordic.png": {
+      "bytes": 1626,
+      "sha256": "50ae222110b3eff7e871db5abbd054dd258eb0bc0eb5be16bc9fc317a2029227"
+    },
+    "preview/cosmzoom.png": {
+      "bytes": 172334,
+      "sha256": "7fd41b2d9844db67581ad1be1e1c087f8ad85f3c3817c004529b190f24aeb922"
+    },
+    "preview/cpu6502.png": {
+      "bytes": 5506,
+      "sha256": "59ba24f0d565e35a7f9e99b76148cd958561bba89a66f6a7577532e6353a418b"
+    },
+    "preview/crctex.png": {
+      "bytes": 1256,
+      "sha256": "46418693625d7869521c1c009f5d814a8dac303d48ef41cb74ab1b0298d383be"
+    },
+    "preview/crcwall.png": {
+      "bytes": 172334,
+      "sha256": "26da2db79165f023174bb0205d15514a25f79363613b07bdb2c8b08ef5b18416"
+    },
+    "preview/critters.png": {
+      "bytes": 808,
+      "sha256": "c542125b6bf6568836afcb95b37db7745ac8d200bc06a9ed85ca4968ae393dc8"
+    },
+    "preview/csrjmp.png": {
+      "bytes": 172334,
+      "sha256": "03d2e9b72441b07ec58d2580ff006f3ecf32a1b10475ba42adad088e82c30714"
+    },
+    "preview/dblbridge.png": {
+      "bytes": 172334,
+      "sha256": "fe0cd39b72a9ca6e468767ef400d4ec6b7eb0d126d2f26d29ef483337a7ce192"
+    },
+    "preview/dctbloom.png": {
+      "bytes": 562,
+      "sha256": "23630011e7e4f7ea3fe8263f4ce34d29eaa7f6cf84517477b28968bd1ae1da48"
+    },
+    "preview/dhmix.png": {
+      "bytes": 172334,
+      "sha256": "f5d40edd10424092f914f796b78bf49fc8f6085f5634f2c87d37b21a057ffcdb"
+    },
+    "preview/disbits.png": {
+      "bytes": 1320,
+      "sha256": "5146375d5ca63617804b018710705ffc9675a029678d01f94d20797db6e4f0a6"
+    },
+    "preview/dither.png": {
+      "bytes": 1536,
+      "sha256": "bb2920a2071b0fd26f1753b570afbf1bc10dba3034248954c71c37cfaea50e09"
+    },
+    "preview/divclock.png": {
+      "bytes": 938,
+      "sha256": "631390b045dd640d52e9cdf67ab59c5a55f06f614a451173ee3fb6918fcf21bf"
+    },
+    "preview/domcol.png": {
+      "bytes": 172334,
+      "sha256": "c1550e2d33fa9f35f1166f4872ae76cc57934768920d9fb632b05b07cb58514a"
+    },
+    "preview/doom-fire.png": {
+      "bytes": 2249,
+      "sha256": "dd401ceeb5c0643f33855c787996214c0493edefafbe47f2d88f8112bc8209ee"
+    },
+    "preview/double-pendulum.png": {
+      "bytes": 1161,
+      "sha256": "aa58c713fc961add75a046fe13c396ebca6177f02d92e8ea639249e92dc161c0"
+    },
+    "preview/dpbank.png": {
+      "bytes": 172334,
+      "sha256": "1e09fda1b6447f8b0cee2f6254b279ae706201bc8efc371c4e891c1a5e0e95db"
+    },
+    "preview/duff.png": {
+      "bytes": 1141,
+      "sha256": "79f2fd3d76ee1f5e93eae131a047189a5a85d7d04d92d85a641611541403a747"
+    },
+    "preview/editdist.png": {
+      "bytes": 172334,
+      "sha256": "f0eac1aea8716afc0369bd496624c66429e62058d1f370f1f006e602cc583da8"
+    },
+    "preview/epicycles.png": {
+      "bytes": 1468,
+      "sha256": "486387a0479345d58c7c199c68cd0ab72a2a9bbc6bcd9d93d48869c4e5a8ff22"
+    },
+    "preview/fabsridge.png": {
+      "bytes": 809,
+      "sha256": "5808e9d379a72c5d9f177a3c2c9701508ebf7d01a199be0353581ae7079475aa"
+    },
+    "preview/factorial.png": {
+      "bytes": 172334,
+      "sha256": "b44325d57745d32abedbacb0f26afa863e47efb6ed6c892673df97371670ce6e"
+    },
+    "preview/farptrcmp.png": {
+      "bytes": 172334,
+      "sha256": "6380f16617790062a06fecde473b7b3c7bfd7477c8f565fabf972609def88839"
+    },
+    "preview/farspill.png": {
+      "bytes": 172334,
+      "sha256": "3fbe6198855c5315e6a7d0f2e1af0344332c153cd0b590d3b4995d5537ae47ab"
+    },
+    "preview/fenwick.png": {
+      "bytes": 172334,
+      "sha256": "fa58305cd9966da0fdad9e196f218f24dd332b4d0613c1a2185e346cc26b7cdb"
+    },
+    "preview/fft.png": {
+      "bytes": 931,
+      "sha256": "5879da8622a7a9d1636b78e8cd6545497fa07ee2ded2bcf879d26707e6af8a86"
+    },
+    "preview/fn-plot.png": {
+      "bytes": 829,
+      "sha256": "95f2564a20237c06a37fce52e93cf8cc73880391667a71cae61c3df8f96de726"
+    },
+    "preview/funnelkal.png": {
+      "bytes": 172334,
+      "sha256": "e6dd6a9091326559657d1a4a69542722db568d0d8f8d239b132198f189806286"
+    },
+    "preview/gf256.png": {
+      "bytes": 172334,
+      "sha256": "c9b8f1dd6e903024c4276e9a7a0d5b8adbc30779bfd12c9a9ce7b3c665fcb9f8"
+    },
+    "preview/gouraud.png": {
+      "bytes": 1255,
+      "sha256": "5e926cce982bc98d3579f5e8a317d126704fe563d11c678934f1812c02f2ccbd"
+    },
+    "preview/grid3d.png": {
+      "bytes": 1230,
+      "sha256": "54a31ebc39e176cabbdac74bc6cb4957e2b80ed89a4e4e8323473597fc2661b1"
+    },
+    "preview/harmonograph.png": {
+      "bytes": 1569,
+      "sha256": "dffab055c856e2b847a51123304a591b6b1a129611380371b085f8ee01c81200"
+    },
+    "preview/hdr-bloom.png": {
+      "bytes": 1139,
+      "sha256": "8afbf764db164faddcc013b03c96ce3f203573d733c3d8aa61d96e92c5c01f54"
+    },
+    "preview/hilbert.png": {
+      "bytes": 1249,
+      "sha256": "e15d51247651f370392fe97016e180a5e6699ab47317d61a185b20b9dc25e480"
+    },
+    "preview/huffman.png": {
+      "bytes": 172334,
+      "sha256": "d705bd740ff21418bd00e8db87e2291aa3fe1485de45b3eedfb4c0f80cc38bda"
+    },
+    "preview/hull.png": {
+      "bytes": 172334,
+      "sha256": "3001eb1d9c5f6038fda6868f3e0d351ca333531502d8193bea5888885198baab"
+    },
+    "preview/iir-scope.png": {
+      "bytes": 956,
+      "sha256": "b645147d68d6e02e401309aa375313ded256448779379f9ca053255633fdda01"
+    },
+    "preview/irqgate.png": {
+      "bytes": 172334,
+      "sha256": "3c09762da7a2c488ab4de3854959a1ad63133adc329dabfd466c95e835e103d3"
+    },
+    "preview/isrbracket.png": {
+      "bytes": 172334,
+      "sha256": "b89fcb00d1d2e865b89ecb123cd9f1041d5b935983413e495852ffd5f67afa3d"
+    },
+    "preview/jt256.png": {
+      "bytes": 172334,
+      "sha256": "a6b0f98a6460af953dcd2e1366a8098b9564b2620bf3d980cf831e4c28a9acef"
+    },
+    "preview/jtedge.png": {
+      "bytes": 172334,
+      "sha256": "4213297c23b47d22c4ca920639cbdcce7e036286fc45cee65cb73f1e70b02a91"
+    },
+    "preview/jtsparse.png": {
+      "bytes": 172334,
+      "sha256": "36a6261093c190bcc2bad1eb5a3d0fc652687bf05131de41e3691b1d5a2ca675"
+    },
+    "preview/julia.png": {
+      "bytes": 172334,
+      "sha256": "1e4042d0d32e2a0feeaf35d400b5583cee39683b6b86b319bd59c5c5ec46e67c"
+    },
+    "preview/keycmp64.png": {
+      "bytes": 957,
+      "sha256": "142cc9dd5bfa6780826a200fbd9d8e31e14edf4fdd61636edf5164fc4027978e"
+    },
+    "preview/lfsr2.png": {
+      "bytes": 1310,
+      "sha256": "2152e2439b3a78e2168853c38f791301575b589c53aedc443f36edf0af05f369"
+    },
+    "preview/life.png": {
+      "bytes": 2156,
+      "sha256": "8838052062c32de47a5de2a127766f7d540a1af7384856fd7ca3bedd9166d537"
+    },
+    "preview/llabs64.png": {
+      "bytes": 172334,
+      "sha256": "df76f4aa5982d3b9601e1151226b687bb2300bddcd0c81b6f7fb3677e1167ad7"
+    },
+    "preview/lsystem.png": {
+      "bytes": 1051,
+      "sha256": "d96e33ea61cf4d2400ee4a97c72cb365b431139e918c63e4051b078486de3bd8"
+    },
+    "preview/lzdec.png": {
+      "bytes": 1221,
+      "sha256": "25835f6081d3af8219b1de8ded81f0ae2762d2b76e4809df9a0b130bf7d6fe74"
+    },
+    "preview/lzss-gallery.png": {
+      "bytes": 19630,
+      "sha256": "a2310a947250a25e3ef8b88d296cc51cfbb2949f17a20ae932e69cf8cdada785"
+    },
+    "preview/mandel-display.png": {
+      "bytes": 120,
+      "sha256": "0b54a2732ebcba3435c7560a4cf22300b730bfa657dded8a2c83eca13a7e68c3"
+    },
+    "preview/mandel-double.png": {
+      "bytes": 1907,
+      "sha256": "95bf5131f629aa9af2a4704d191bf57f07c2da657c134c33175d587e514d3db5"
+    },
+    "preview/mandel-float.png": {
+      "bytes": 1185,
+      "sha256": "d806d1abe96218f91f5f04e6bd153a159ce4b026a8d04fb29841557be6353b6e"
+    },
+    "preview/mandel-oop.png": {
+      "bytes": 172334,
+      "sha256": "36f2fcdd32928d11bb57883f0aeca4f58021ae385909ecf68b827a1673429ee9"
+    },
+    "preview/matcascade.png": {
+      "bytes": 172334,
+      "sha256": "73219338ed77d1d4649b38f8a98da03a879ebe7f1d0c3a6839f4b74452301d44"
+    },
+    "preview/maze.png": {
+      "bytes": 1803,
+      "sha256": "a2e811e190895f14c83141c9f55e9803feb97d0bfa8b9df69cd33abf6ed9d67c"
+    },
+    "preview/medfilt.png": {
+      "bytes": 172334,
+      "sha256": "32a1155a5c13709ae608f6d785daafb5ee51ac073f89a588d04686568bd0d659"
+    },
+    "preview/metaball.png": {
+      "bytes": 983,
+      "sha256": "da6804d3e5a258a746543069b54320410b955e4f08d93c638ce8e2602d078f9c"
+    },
+    "preview/mixedwidth.png": {
+      "bytes": 172334,
+      "sha256": "97b13e5393180f9750a8cee03e0924c1e32e53c45746ddef53b7b2fd04495bfb"
+    },
+    "preview/modethread.png": {
+      "bytes": 172334,
+      "sha256": "8726d4a19472b432509fc502ab4350727a0e4d4a7043ae691ceab4769ba20a53"
+    },
+    "preview/modexp256.png": {
+      "bytes": 1368,
+      "sha256": "563e5d2cf06ed37f76e9f4e68ef8ffef0d251f1d7545846fc75522918ad3b610"
+    },
+    "preview/montorbit.png": {
+      "bytes": 3367,
+      "sha256": "85b231285b274e638e01d9c81a865c9af67a0819bd70cf973be1ff96f54c5257"
+    },
+    "preview/msquares.png": {
+      "bytes": 1453,
+      "sha256": "8e1461f6c6c0f5f733705a6240cec056e75c4509d0a33b05759caa5434edd49f"
+    },
+    "preview/mulov64.png": {
+      "bytes": 172334,
+      "sha256": "fbf82ca6857cbb668b3c9875ccce0dab3d5b673b0214a76f7a3e9d369064e879"
+    },
+    "preview/multibase.png": {
+      "bytes": 172334,
+      "sha256": "43c03f09baa5807949f03b05c3d64a4f3e697c94c8f1e53c93b86341d8601b1e"
+    },
+    "preview/mvscrl.png": {
+      "bytes": 172334,
+      "sha256": "b318bf8e649ecfad65da3884f6c04afb8a124722e27453ee98cc3d77ecf4534c"
+    },
+    "preview/n-body.png": {
+      "bytes": 1523,
+      "sha256": "da20528fc33eb6f96521049a8e832ec9e21fd649ca984d9491e6bef7f9e14126"
+    },
+    "preview/newton.png": {
+      "bytes": 172334,
+      "sha256": "16cbcd7c3fb5ad8dd2669f275d4e0722701b6effd8ef2ee7c72ed79bbc49af95"
+    },
+    "preview/nmitally.png": {
+      "bytes": 172334,
+      "sha256": "5e7bd51d262c015701ce4f878d532da55a2f305109f385e9d29e0205dca9c8b0"
+    },
+    "preview/nrecip.png": {
+      "bytes": 1088,
+      "sha256": "18003abd12de5144e0fa799d5fa8d24d87890da3be3f973721d976be12301ae3"
+    },
+    "preview/oddmask.png": {
+      "bytes": 1295,
+      "sha256": "f73bc12d8eca45e0089bbb5bdec84167d09149ec33c91c6d862098dfc7347b13"
+    },
+    "preview/ovmatrix.png": {
+      "bytes": 172334,
+      "sha256": "fc4bda1bc9344ca0cbf3cebc9f96aa389078cc4f42bf8fb73f7b4601acf010fa"
+    },
+    "preview/ovmove.png": {
+      "bytes": 172334,
+      "sha256": "2224ae2fa812ddc35fdbc79a0f633d50c4bd4815b32087a115d047b7b21f5abe"
+    },
+    "preview/packrec.png": {
+      "bytes": 172334,
+      "sha256": "5ad8b34fc9b3dcade85290f9289c2dfd9aefd4a66bf4e308352f5f32dc877941"
+    },
+    "preview/pcooker.png": {
+      "bytes": 1045,
+      "sha256": "4099913ae1101120829c831963d33f6e0c75eb2edcd8c11ddd6b269c674d0412"
+    },
+    "preview/percol.png": {
+      "bytes": 172334,
+      "sha256": "6857a3dd9ca9c170d908f876df8808e53b57a8ac10dc7a99c1cdc9933a2951f4"
+    },
+    "preview/perlin.png": {
+      "bytes": 172334,
+      "sha256": "76bdab80dbb389ddab59954c02700aa2a9f1948e0c838cd9cb3194541ca9e147"
+    },
+    "preview/permscat.png": {
+      "bytes": 968,
+      "sha256": "5e13bd6d5ec6551220e94afe1a0c490362247f750f50efaaa878e9ca387d84d0"
+    },
+    "preview/plyoracle.png": {
+      "bytes": 172334,
+      "sha256": "bade4c165dcb20e78846994a61ab00c855d5089220f4cd6d7d3fd10c259aca12"
+    },
+    "preview/polyfill.png": {
+      "bytes": 1334,
+      "sha256": "e3c480ca1701847230e99d22a994251a1f226c917df00647f10686d6453c9ddc"
+    },
+    "preview/poolfx.png": {
+      "bytes": 823,
+      "sha256": "3605942a9a0618895bbeb5e205f24c49017c7c14685862e6212c3562d8d5de47"
+    },
+    "preview/qsortviz.png": {
+      "bytes": 172334,
+      "sha256": "087c4c268a2a04af2088568ee1c75d8f83df7dbc22cbc8fd16012a7df4080627"
+    },
+    "preview/radix.png": {
+      "bytes": 172334,
+      "sha256": "07184b1fe042e1a0b15d37b69c8369e0ccd8c84bfe57e836ae45367b620e02ce"
+    },
+    "preview/rangecode.png": {
+      "bytes": 172334,
+      "sha256": "c2ed51397eb95f5c564ddce36a349c50133e1e9cd8244efcbae0dc77c8bd1168"
+    },
+    "preview/raycaster.png": {
+      "bytes": 1204,
+      "sha256": "87b66997cf7fbbb265f43241ba50280834d2b2f940d198d3a1f1e832f304ebc8"
+    },
+    "preview/rdiff.png": {
+      "bytes": 1198,
+      "sha256": "2222ed5f7aac977adbec3c7cc46b10dc10f20d2c20f1da5955dce76ae34f6cdf"
+    },
+    "preview/retryjmp.png": {
+      "bytes": 172334,
+      "sha256": "d3313a309628aa828dc038c3cadd65e8af7c2bc73f2d40f4c1dab38735b39c65"
+    },
+    "preview/ropeedit.png": {
+      "bytes": 1134,
+      "sha256": "418bcef5ba5824e5cb2709c1390b992332ac12ce8b65b027eec80cbcb8e4fef0"
+    },
+    "preview/rotkal.png": {
+      "bytes": 172334,
+      "sha256": "9f13a5afeabbde3fa29bb2d43a3fc7f109d484cde85569d49f57d8cd81167f9b"
+    },
+    "preview/rotozoom.png": {
+      "bytes": 1056,
+      "sha256": "68307cd927e6b77488e992141a7f5bd92a21959bc51ab664a19626eee4c2295a"
+    },
+    "preview/rotslab.png": {
+      "bytes": 1075,
+      "sha256": "fcf97afee538953274223afe85a1d04e7f71b9558ad70bbd90dff7ad4c44b89e"
+    },
+    "preview/satcast.png": {
+      "bytes": 830,
+      "sha256": "e175054b0d280fa8a702dad9ecd168256c4cd70aacc04812f841a66b885597a8"
+    },
+    "preview/satcomet.png": {
+      "bytes": 172334,
+      "sha256": "44ded76ae92b73507bb0c031563d66f43b2e2df2a03a271e6f216a6e8e57e95f"
+    },
+    "preview/sbitfld.png": {
+      "bytes": 172334,
+      "sha256": "16dcb8901926eaf44d586629a8d398e4b96add7160a0f69f50816ecd8d9170c2"
+    },
+    "preview/scopeguard.png": {
+      "bytes": 915,
+      "sha256": "715782e6f760daf663917a8179e8db94c40539a79b552809e5a0ca97cec3d2d0"
+    },
+    "preview/seamdemo.png": {
+      "bytes": 172334,
+      "sha256": "bebd45e5ea90385978c9a46de6c330f991a807e56c08f466a4b1d8d144209289"
+    },
+    "preview/seqvm.png": {
+      "bytes": 983,
+      "sha256": "18019d65e3fe21ef60686c07040f33071d1262460fea129583a75e352a05ecc5"
+    },
+    "preview/shift64seam.png": {
+      "bytes": 172334,
+      "sha256": "594c1335f2d590e649d87964b5095a822764a4fc3097b5be5fc75a82e4f08835"
+    },
+    "preview/smulorbit.png": {
+      "bytes": 172334,
+      "sha256": "8ee95795d0cafc3c52a7fbd4c889be9808c4233c4a8a5dc4b3e12c0a84fde649"
+    },
+    "preview/sobel.png": {
+      "bytes": 247,
+      "sha256": "0ed7b26b91b35f00cac8a9909698a5aeec7f2b425d7f4726a7fb21d0427b3bf4"
+    },
+    "preview/sodo.png": {
+      "bytes": 1828,
+      "sha256": "b64366571e21ddfd0523a8d23420280bc03ab3916c499176883e6ba751d47f1d"
+    },
+    "preview/sort-race.png": {
+      "bytes": 1595,
+      "sha256": "f57daa65fb2c4701dc9205957dfcc408901bd2bfb3582327cf5a650d5019458c"
+    },
+    "preview/space-invaders.png": {
+      "bytes": 862,
+      "sha256": "03fcf485735ed7db966f2a16b6df3af1c87532731cbc3ab9daca4af3f8872829"
+    },
+    "preview/spaceship.png": {
+      "bytes": 1124,
+      "sha256": "7ff0f79495a6f6423f20bdb534b22a378de43394a422a7f92308dbb887e4af53"
+    },
+    "preview/speedcap.png": {
+      "bytes": 172334,
+      "sha256": "dc875aa2eaab248bb61545e35d24494f92569f7b8d25932a333d76206319acca"
+    },
+    "preview/spigot.png": {
+      "bytes": 172334,
+      "sha256": "aece346dee29d33d46bb52e6bd2a55bc4468d29ad0d1c1d3a2ea0a8fb868fe6d"
+    },
+    "preview/spirograph.png": {
+      "bytes": 1659,
+      "sha256": "ad3373ed25fc47bd210dacb5a5ec394e4e56516f67aba80a1f44a566f5105aaa"
+    },
+    "preview/strcmprace.png": {
+      "bytes": 172334,
+      "sha256": "410134581fc650b28db3831ac72edc1babd0f6258aaa46164131ad46426b407f"
+    },
+    "preview/svx2-fastrom-video.png": {
+      "bytes": 172334,
+      "sha256": "513db9fd7d27ffa6ed000cab93efca2c4c6ef234f6a01d886afa5457edf0b0f7"
+    },
+    "preview/tea.png": {
+      "bytes": 1158,
+      "sha256": "4553b5706e8a58e9dee4a9191b005dc50d8961405a778639cb89d827fbb4c79a"
+    },
+    "preview/trapguard.png": {
+      "bytes": 172334,
+      "sha256": "c4fc32fc5786cecedf91c7ddb7592873cc6bc796ded6068909e90ddb85b84684"
+    },
+    "preview/trimerge.png": {
+      "bytes": 828,
+      "sha256": "45ad6ae598b3b28af21e3799aa93dc2c3eabf73eca4a5bc00401eaa4b17e14b7"
+    },
+    "preview/truchet.png": {
+      "bytes": 3491,
+      "sha256": "102ca949d970974f4d47982f5b307b2d73cd976fbb2c87816607545f7d4f7316"
+    },
+    "preview/truncstair.png": {
+      "bytes": 972,
+      "sha256": "1736a06117b4b46beb29c995aa5cb3a825cfb2a4b7df4e159441317efac5d7de"
+    },
+    "preview/turtle-vm.png": {
+      "bytes": 3461,
+      "sha256": "300717fd9154621a8c1ac629e37c9d4434fbfdbe4371c8e736a8ba226450f08e"
+    },
+    "preview/uarteye.png": {
+      "bytes": 781,
+      "sha256": "c3d263c04ff9019d61e6afade5450ce38f0e7af93c0bd8c0853f2960051eb8c2"
+    },
+    "preview/ucmprank.png": {
+      "bytes": 1453,
+      "sha256": "8294da0c83e0485131d0a5462fcbd39357565a13127f4709877c0dc41fc6c9d4"
+    },
+    "preview/ulam.png": {
+      "bytes": 172334,
+      "sha256": "78f725c3c087b981f9a3ef97d2daeddc105b73d8fcf2a8b078b3cae2c7b1fc8e"
+    },
+    "preview/vaprintf.png": {
+      "bytes": 2056,
+      "sha256": "464d8926457a8e2602a02f910cd9e835dfe4e2d6d41cd3e65e33a54d593a95aa"
+    },
+    "preview/vlanest.png": {
+      "bytes": 172334,
+      "sha256": "7476e54b5b501f8c5c5462dbbd9339712a141d1ad123f8595eb0e235cdcee8e5"
+    },
+    "preview/vlastack.png": {
+      "bytes": 172334,
+      "sha256": "bb8c6d1a01b8021fab8510672755d8dd4b787d3d210d0390831381553b926fd5"
+    },
+    "roms/1d-ca.sfc": {
+      "bytes": 32768,
+      "sha256": "c02ad01bafcd23ebfe99a2690de323a62cb6ad0e36fb265bd7dbf5af0bd90cb2"
+    },
+    "roms/3d-wireframe.sfc": {
+      "bytes": 32768,
+      "sha256": "af0560ea57cf4d55265341d517104bf6d49783e9eb9041a5f59474b0a5d4be73"
+    },
+    "roms/absdiff.sfc": {
+      "bytes": 32768,
+      "sha256": "33417c5b1ca6a35f172a1e967f3ff8b527ccac4bef8f23d422c9a1a300fae90e"
+    },
+    "roms/adpcm.sfc": {
+      "bytes": 32768,
+      "sha256": "4632565242765ce88a5ab2907256db3ab09cb58630e3d5648810a8d39586770b"
+    },
+    "roms/apollo-daylight.sfc": {
+      "bytes": 4194304,
+      "sha256": "2142f542a57af585649a6dbe244e6d42f2ffc8fcbd9472e2501b1967e9503ffd"
+    },
+    "roms/asmisland.sfc": {
+      "bytes": 32768,
+      "sha256": "180f838caa0f4b5e56adbe04bc7993f7fbce6247cb8d043edf8a3bbf02af064f"
+    },
+    "roms/avalanche.sfc": {
+      "bytes": 32768,
+      "sha256": "f0ad1db02dbfac47480613d1c3c8c2cb90954a85ad45d8528c3a319b59eefc30"
+    },
+    "roms/backtrack.sfc": {
+      "bytes": 32768,
+      "sha256": "9e1e1617821ab32e545ede3420597a891ba875e72d54bbf17b708f13228db340"
+    },
+    "roms/bankwalk.sfc": {
+      "bytes": 524288,
+      "sha256": "e12edad16aeda9f4ee5eaaf852e476e3e15ea54a690705ccc5ba1706585fb5a8"
+    },
+    "roms/bf-vm.sfc": {
+      "bytes": 32768,
+      "sha256": "fe9b1f6b07b1c5abc09bc3ba3c231a624dcbd9b755949842067930ec19d249f4"
+    },
+    "roms/bhut.sfc": {
+      "bytes": 32768,
+      "sha256": "4b5a08b9926ccb240567af6992f57f9e9629a01d990e90922a88e9c016aa3542"
+    },
+    "roms/bigbyval.sfc": {
+      "bytes": 32768,
+      "sha256": "517b37fa30518f13aea030933350e7d81ea84cfb5376b9c395e27b346f9a643c"
+    },
+    "roms/bitboard64.sfc": {
+      "bytes": 32768,
+      "sha256": "dee31a0272fd3261a1ce2dfa9e8b73c49db3c3f48e6604cf3a594f3a1ec9b574"
+    },
+    "roms/bitcensus.sfc": {
+      "bytes": 32768,
+      "sha256": "ebcf7d2874befe8e28989f9b0822539aa38ae8513643e9e0bd19c9f769e3dbf1"
+    },
+    "roms/bitshuffle.sfc": {
+      "bytes": 32768,
+      "sha256": "daea144a72a37265b6aea74d455833561df747e3742e6262bf77ba091935a4d5"
+    },
+    "roms/bitweave.sfc": {
+      "bytes": 32768,
+      "sha256": "b3f708237bac17c4c326f1ee520f6fb49c6d6ac1fe12806caa1c567e3790df0a"
+    },
+    "roms/blossom.sfc": {
+      "bytes": 32768,
+      "sha256": "cded3de225bb6e725cd51fa183c8fdb64c40a5ba1774967e2cdbd159f7925320"
+    },
+    "roms/boids.sfc": {
+      "bytes": 32768,
+      "sha256": "d1d2790a59ca4ed260f271490bac0acdd3a0a6e34b052ffb530aa47d599318f2"
+    },
+    "roms/borrowlad.sfc": {
+      "bytes": 32768,
+      "sha256": "e824aca06f72f1d17bb38b1a8987af74c9e0d94850521f08fbee9ad1e3c73fac"
+    },
+    "roms/borrowov.sfc": {
+      "bytes": 32768,
+      "sha256": "e882e2c4f7deb216f1a2b20719e084af89a5fdc4f9cdb91e2c25964289fc3325"
+    },
+    "roms/brkcop.sfc": {
+      "bytes": 32768,
+      "sha256": "a1850bbadcefde2c83625263700fd39bee495c599f4e0dd100ad662e2838b5f9"
+    },
+    "roms/bsearchviz.sfc": {
+      "bytes": 32768,
+      "sha256": "631354e5ffabe69d80599b303c6fb885f7ca0b88eae3111a6dfd1e4912d0028c"
+    },
+    "roms/buddhabrot.sfc": {
+      "bytes": 32768,
+      "sha256": "4dd71c223ee490be048f1a0c0c412b0a69b4460588769f919cc20c9460de2760"
+    },
+    "roms/burning-ship.sfc": {
+      "bytes": 32768,
+      "sha256": "f31d5de2ba3c1d098440b210cd467343d1a071526de6ea2f2f1bb0e92ff2427a"
+    },
+    "roms/byvaledge.sfc": {
+      "bytes": 32768,
+      "sha256": "33dabbc44c6bed31c20a1d1db0a954bb69b1254a6ed89f374f7b48804fa11558"
+    },
+    "roms/cardioid.sfc": {
+      "bytes": 32768,
+      "sha256": "4a4548b3074a406d9fe36d22d66c3c946ef9e8c172cd83e711e5d681dfc1feb0"
+    },
+    "roms/cartsize-exhirom-6m.sfc": {
+      "bytes": 6291456,
+      "sha256": "6cc47856250f08128fe8501d74ac0633f7374df5c4b93d959404833d5132a818"
+    },
+    "roms/cartsize-exhirom-8m.sfc": {
+      "bytes": 8388608,
+      "sha256": "1fb2cf38ff9b08122eae173157296f353b6ff7741f796a94638a6c3fdd83f5e1"
+    },
+    "roms/cartsize-hirom-4m.sfc": {
+      "bytes": 4194304,
+      "sha256": "13e72d803020ac3e3a250fc3193740626f3e46196225be03503685474ca10b3a"
+    },
+    "roms/cgrade.sfc": {
+      "bytes": 32768,
+      "sha256": "ce1bde8402e20bad58db56db91eb0f0782d94d66c4e729f316c9891a4d8ac88e"
+    },
+    "roms/compass.sfc": {
+      "bytes": 32768,
+      "sha256": "f79954146f1e1815f43ed80cbfc05fb805f0d6c8527cc86c497364f8ac7ec078"
+    },
+    "roms/cordic.sfc": {
+      "bytes": 32768,
+      "sha256": "e75de5ac1553e52117d0bb680c31fff5d229aeec9c8e6217ad05e75929355e77"
+    },
+    "roms/cosmzoom.sfc": {
+      "bytes": 32768,
+      "sha256": "69171bf328a13f0c824e604cf0726dcd9411eb915ba4210d98e97d19e5db01ab"
+    },
+    "roms/cpu6502.sfc": {
+      "bytes": 32768,
+      "sha256": "8edc3e7e1676d9d5a8688da1d42ae5a6d940b3309d0b5f1d682af09d383b1026"
+    },
+    "roms/crctex.sfc": {
+      "bytes": 32768,
+      "sha256": "2f3b4e4a2e4485802b55933a79a0c601db8f8e886eb0287d1895d0943e8e36ba"
+    },
+    "roms/crcwall.sfc": {
+      "bytes": 32768,
+      "sha256": "fc894dcbaf001af2d4b197ee97ef2af9e0649f423e317e5870b1434b8d2140df"
+    },
+    "roms/critters.sfc": {
+      "bytes": 32768,
+      "sha256": "3d7204b7b64f3800d0ae11cd2ea23988c905321df1d9ab9d5a1229bbd7fd3630"
+    },
+    "roms/csrjmp.sfc": {
+      "bytes": 32768,
+      "sha256": "42bf9a23e2d225f6a7bae76a84c198addfc8a0f3c4a4da32644f50b9b614c04a"
+    },
+    "roms/dblbridge.sfc": {
+      "bytes": 65536,
+      "sha256": "fe903ea9f510c38d7b3f25abd90b235a62671ad968ec7667b51f6bb62e75ed33"
+    },
+    "roms/dctbloom.sfc": {
+      "bytes": 32768,
+      "sha256": "7b7e1d6c0b6325fe9d56615d95bfe5a02acb6efe4a52baf69cb4090e0a69d14a"
+    },
+    "roms/dhmix.sfc": {
+      "bytes": 32768,
+      "sha256": "2b109e87d71a8fe1faff0fa38bfdc22c6f979ab6ca5c5a64601d7f69d0c85609"
+    },
+    "roms/disbits.sfc": {
+      "bytes": 32768,
+      "sha256": "0bb92618468ab0a5e4ff4fce444dfa41c55b6b425a6cf7028f65566524181a4f"
+    },
+    "roms/dither.sfc": {
+      "bytes": 32768,
+      "sha256": "45ef3b7b5c070ff253955d7a179d6b096c649219d93cb7c37548e2d9079540de"
+    },
+    "roms/divclock.sfc": {
+      "bytes": 32768,
+      "sha256": "b5ac809348f23f67d835fc3545ad7fbfe112ca9e0f63fb1646ffe93e3c08fa38"
+    },
+    "roms/domcol.sfc": {
+      "bytes": 32768,
+      "sha256": "683cf1f5ba48429fee40a2a24f64ebc9f1e8d8099703e52393c660bb4f789819"
+    },
+    "roms/doom-fire.sfc": {
+      "bytes": 32768,
+      "sha256": "cfd78ebfe50a541e3d80db9ea9aee08464c691a3b2e278c8338b941e2164b722"
+    },
+    "roms/double-pendulum.sfc": {
+      "bytes": 32768,
+      "sha256": "ef575e5e7606752ab83b37a9b6f476b0783dbf2207320dfbf4e23e2db4b933ff"
+    },
+    "roms/dpbank.sfc": {
+      "bytes": 32768,
+      "sha256": "37cfb45268b8c8436e44c8f029043046288dee426ee400b7a4ad8c613f1b4c2f"
+    },
+    "roms/duff.sfc": {
+      "bytes": 32768,
+      "sha256": "9f9d0a5e4481f65bff9d47580d1ce9ce94af0a8be4efb620da78a776148836c4"
+    },
+    "roms/editdist.sfc": {
+      "bytes": 32768,
+      "sha256": "9874fcb92e02ffcb8dfbc543ae04dc2dd5898b11880e934020c888ecb5415495"
+    },
+    "roms/epicycles.sfc": {
+      "bytes": 32768,
+      "sha256": "fd000d14b4f4d2463a273fb81d3676279840a460029c71eb5e3cdc215662dd73"
+    },
+    "roms/fabsridge.sfc": {
+      "bytes": 32768,
+      "sha256": "762dfc4078437437ed0c50a997120c88f9e923d06af68b9d084400b18d6fa613"
+    },
+    "roms/factorial.sfc": {
+      "bytes": 32768,
+      "sha256": "d383fae0faa44e8407114f77d783d9baffb1e707a9f318789119fd822e9be0cf"
+    },
+    "roms/farptrcmp.sfc": {
+      "bytes": 524288,
+      "sha256": "8e3bb8a5cb47d931de075ed7e0d93ccce6561d824e09677590944a3ef7b4d876"
+    },
+    "roms/farspill.sfc": {
+      "bytes": 65536,
+      "sha256": "d90218d7ec005e86d2cd5ebac2193fe92eb340cfda6a5ce70b2303f326dd1291"
+    },
+    "roms/fenwick.sfc": {
+      "bytes": 32768,
+      "sha256": "1eea0637de54e54d3748b618220bc4b069002d92f56fa49ed2576ab3b5c19573"
+    },
+    "roms/fft.sfc": {
+      "bytes": 32768,
+      "sha256": "cfad57b707c06546b911ad360d8a603d86ad86e6318af07793e9a57d55577921"
+    },
+    "roms/fn-plot.sfc": {
+      "bytes": 32768,
+      "sha256": "6a1fa509e8e84585d45ddd5e42f4cceb79fedb379b6dbaa8ee5423646281c194"
+    },
+    "roms/funnelkal.sfc": {
+      "bytes": 32768,
+      "sha256": "2d481cf0263fc50741b94200618bd227abd4ba625bd2a977044acc8bbaa6f54b"
+    },
+    "roms/gf256.sfc": {
+      "bytes": 32768,
+      "sha256": "18bbaaab3debd19bdc1d48cf91d7a6e2fbe725dca0a326acc5a39dba5b7a0731"
+    },
+    "roms/gouraud.sfc": {
+      "bytes": 32768,
+      "sha256": "881387a8dcf061f6fd393f490359a58b4290057193473f40c9039f2c8f0b4a3f"
+    },
+    "roms/grid3d.sfc": {
+      "bytes": 32768,
+      "sha256": "2554b5129818c7955f1f1cdfc49a097bd69dfea9e18a597fed0bd1da6337d662"
+    },
+    "roms/harmonograph.sfc": {
+      "bytes": 32768,
+      "sha256": "481404dcae0015c939bcda6ec1ca9ba0fb97df947511945bf3bf2fddc66d49a2"
+    },
+    "roms/hdr-bloom.sfc": {
+      "bytes": 32768,
+      "sha256": "457750f0190a56d9f7129a579b6dd22311eb9875df3e35aa67e55601b16fd68f"
+    },
+    "roms/hilbert.sfc": {
+      "bytes": 32768,
+      "sha256": "36a3551f238895211896974d7b0b7878db6afb21f88efa795b1ee15f9655d5f9"
+    },
+    "roms/huffman.sfc": {
+      "bytes": 32768,
+      "sha256": "46f630573a2e8beab2ef35301a9ec1f65ab134d9a6c9ca199cd043d03e24a5b8"
+    },
+    "roms/hull.sfc": {
+      "bytes": 32768,
+      "sha256": "726f68d9bdef65771840d0bec8d8549e0ded83df6cfa2a6bd284b3d564802942"
+    },
+    "roms/iir-scope.sfc": {
+      "bytes": 32768,
+      "sha256": "e1023ec03d2830a7dfd585687029612fea76367c5147a3b811c596c44fe7cc6e"
+    },
+    "roms/irqgate.sfc": {
+      "bytes": 32768,
+      "sha256": "4eaab3f64bfdd4ee6d296e6c1bf9bfc59aee79f9fe45c3bad1b31d452f46bbe4"
+    },
+    "roms/isrbracket.sfc": {
+      "bytes": 32768,
+      "sha256": "fbbdd9ed67cea2a81f73c128f9ec2ddba9c78639d076678c206dd9d6ca2d8adf"
+    },
+    "roms/jt256.sfc": {
+      "bytes": 32768,
+      "sha256": "884e3f05b181de7154275a152b776a2403a5085ececb09f6aba044688cf45dde"
+    },
+    "roms/jtedge.sfc": {
+      "bytes": 32768,
+      "sha256": "bcb35bbf9247613fb104e3b87fdb2ee6f09d286b390e2b1cd0558298fa3540b7"
+    },
+    "roms/jtsparse.sfc": {
+      "bytes": 32768,
+      "sha256": "66169fa6e6e362f52fcc3d49887bc634bd8f628551ab35c85b0c2c8e8f60f3a9"
+    },
+    "roms/julia.sfc": {
+      "bytes": 32768,
+      "sha256": "b568eedb3a8a79b852788dcbaaf32dec17920f01c1c134c2fd85c82653ae47fd"
+    },
+    "roms/keycmp64.sfc": {
+      "bytes": 32768,
+      "sha256": "bd8b6987b7d3205dc9d49e525ec4c78540e13e77f4941170f2ab2df87f362017"
+    },
+    "roms/lfsr2.sfc": {
+      "bytes": 32768,
+      "sha256": "1421157360e201ee5162bed6cd1ab780421a774ebd1413ec9fd50e05c9eedc6a"
+    },
+    "roms/life.sfc": {
+      "bytes": 32768,
+      "sha256": "bf7536426948077862ca3c157902c0154710d119e86f222e572f451d7970f2a2"
+    },
+    "roms/llabs64.sfc": {
+      "bytes": 32768,
+      "sha256": "66d4ce5560ee5d76e4c4231c1f56357c0e18bb4c50e8cd1872070f2f87219452"
+    },
+    "roms/lsystem.sfc": {
+      "bytes": 32768,
+      "sha256": "3852662174d58af7b105a6ff09ddec68836ccdd6a88f3a720b8bec96c902dafb"
+    },
+    "roms/lzdec.sfc": {
+      "bytes": 32768,
+      "sha256": "465bbe27fb990ffcd9baa972ba26b863c5937f56f42113d06c8b3e727e2f9543"
+    },
+    "roms/lzss-gallery.sfc": {
+      "bytes": 1048576,
+      "sha256": "87faf36eb71529f3107d5413659ebbdbeecc44807d54e5499d75f59b4370e3c1"
+    },
+    "roms/mandel-display.sfc": {
+      "bytes": 32768,
+      "sha256": "2635e04ebea04b8ad6ab01a9535cb72298192632ffcc2c61c5214c5e2ef005bd"
+    },
+    "roms/mandel-double.sfc": {
+      "bytes": 65536,
+      "sha256": "16a5b0b90dcdfdaf5c2184a5ea040849fb6435dc27ad31777a39151e8af72c20"
+    },
+    "roms/mandel-float.sfc": {
+      "bytes": 32768,
+      "sha256": "881d44f93a7ad16288358bf5a135acdddde5d14caee02bbaab41869b4501dc1b"
+    },
+    "roms/mandel-oop.sfc": {
+      "bytes": 32768,
+      "sha256": "3e2fd185302a3507631fb1c667c6c8588854b8edeec7f88374aa3b2402c6d2ce"
+    },
+    "roms/manifest.json": {
+      "bytes": 41220,
+      "sha256": "038a7c2192a4069bb6f709fa03ac485e0e530025f13a084f8a99ab46e30d932b"
+    },
+    "roms/matcascade.sfc": {
+      "bytes": 32768,
+      "sha256": "5e3dfaa9ff6d92a6017c552244a1b41e597a3e7897fdaaf1bfea9231baa229a8"
+    },
+    "roms/maze.sfc": {
+      "bytes": 32768,
+      "sha256": "9aea5b37220c8b11ff96f3c0b3b77660968f35a0c38955ccd19c0bfdb501ba8c"
+    },
+    "roms/medfilt.sfc": {
+      "bytes": 32768,
+      "sha256": "b33d125291344e1ebd480a23837bba3841bb9e2afc0f6cf3a35243fb1c803c01"
+    },
+    "roms/metaball.sfc": {
+      "bytes": 32768,
+      "sha256": "779a75d8c89459a0ab5b3d11ef3b90f62f0e2c5ad5e799059d9dcafc27d007a9"
+    },
+    "roms/mixedwidth.sfc": {
+      "bytes": 32768,
+      "sha256": "fec9d51d63e417d3b8b4305cabbe437bc9e91cabaf5216a5921701de76027a29"
+    },
+    "roms/modethread.sfc": {
+      "bytes": 32768,
+      "sha256": "500ead48090768b3271fc01e5134cc4fb4ca785c51c20e251adb16423a98949e"
+    },
+    "roms/modexp256.sfc": {
+      "bytes": 32768,
+      "sha256": "094984022f63cae9f063ba51c45213e3662f22119baa62375e9e1957302a9f81"
+    },
+    "roms/montorbit.sfc": {
+      "bytes": 32768,
+      "sha256": "eef3b728fe8fa08ae1cae32a8217c77335d1b81dd082518a20a30fb745248a4e"
+    },
+    "roms/msquares.sfc": {
+      "bytes": 32768,
+      "sha256": "4e948df5bd49c8a3068b7f184d8e1fd4cc886b109ecac302e9b3b7415277e244"
+    },
+    "roms/mulov64.sfc": {
+      "bytes": 32768,
+      "sha256": "feddb1ed424841322346264d8841bfbb53d326a6001946cdf7498f6a4cbf708b"
+    },
+    "roms/multibase.sfc": {
+      "bytes": 32768,
+      "sha256": "6ad722405c1f8c071227e9efa4d532ef7471ba66d9f26b91b8c1b2a5d93a7ee2"
+    },
+    "roms/mvscrl.sfc": {
+      "bytes": 32768,
+      "sha256": "36b0c8bcbb855845d04a51848ac619b9bd4af4c1eff96dfa3ef395bf3b71ccb0"
+    },
+    "roms/n-body.sfc": {
+      "bytes": 32768,
+      "sha256": "cef57c860afdd5fe9b0339223e7a693cf7931fd5967dee3e038cb194d91ef97a"
+    },
+    "roms/newton.sfc": {
+      "bytes": 32768,
+      "sha256": "843d40b82fc7a587418e37309a570cfb628c79bbcf3b228c19e81c73ede19bcd"
+    },
+    "roms/nmitally.sfc": {
+      "bytes": 32768,
+      "sha256": "3dff0442226314abad4673c0dd8a04f6ba604350918bfa1d7c50c1b6996c35d8"
+    },
+    "roms/nrecip.sfc": {
+      "bytes": 32768,
+      "sha256": "1a26f75a29e09d7b846644bb1fd4bf307b11835c8781592229e265a7140cedbc"
+    },
+    "roms/oddmask.sfc": {
+      "bytes": 32768,
+      "sha256": "3ef6716a39ba18d3a41c1b1cb662b4c789bb8b7bd8174a7e26f6bf7409c60cfc"
+    },
+    "roms/ovmatrix.sfc": {
+      "bytes": 32768,
+      "sha256": "c7bb451b447068c1f5535a41d8e6e3dad8291d9a2b804b8817d8cced0356836f"
+    },
+    "roms/ovmove.sfc": {
+      "bytes": 32768,
+      "sha256": "794321d0c6d1bf74de8730658ae38b7eb7887f5a140644b2da13c6e379ca9af6"
+    },
+    "roms/packrec.sfc": {
+      "bytes": 32768,
+      "sha256": "3888978ff76a102bb7e0dfafae23b58dc66041c3ba3569375e28958c25be1c93"
+    },
+    "roms/pcooker.sfc": {
+      "bytes": 32768,
+      "sha256": "a4864dd52427b2f345c416658799e9007c4a395ec9715bbf490fad5d1ad693d7"
+    },
+    "roms/percol.sfc": {
+      "bytes": 32768,
+      "sha256": "a3a1b52f7dfcab985f25aea3b2a2292094b9923032e1b06db7bc70273a1e0e61"
+    },
+    "roms/perlin.sfc": {
+      "bytes": 32768,
+      "sha256": "5851e5c9d3ea72c68633a91c83c23dc22ccba3ca499b2aa26749d51d175d5a01"
+    },
+    "roms/permscat.sfc": {
+      "bytes": 32768,
+      "sha256": "cbfa7ec0b2b8d8775620c2f16c6c3da39505b4e7d9a2ffc73433623168d5cafb"
+    },
+    "roms/plyoracle.sfc": {
+      "bytes": 32768,
+      "sha256": "736da8ff3ad2e83f7745c830de956367ab71a6dbc67f17d648e3f50de3d264b4"
+    },
+    "roms/polyfill.sfc": {
+      "bytes": 32768,
+      "sha256": "3b9f6228f3433d86b42d24d221240e844aa2c88fb637a450c0b7aa915de97c46"
+    },
+    "roms/poolfx.sfc": {
+      "bytes": 32768,
+      "sha256": "02e3b763cc1756464cadc1efe882b30c87746f932b1e4623268f1faf324c826a"
+    },
+    "roms/qsortviz.sfc": {
+      "bytes": 32768,
+      "sha256": "b218a8760cfb0a7fc35e5012f02c2f1b9f76f07aefb9cd40c8f452d86df04dde"
+    },
+    "roms/radix.sfc": {
+      "bytes": 32768,
+      "sha256": "aa3c9d0749bca1b468e3a60fac6a5aa931194921025807b8b10e66c0e1b57774"
+    },
+    "roms/rangecode.sfc": {
+      "bytes": 32768,
+      "sha256": "cc5b236c37fec329d4b69698fc5c276312f20d7efb839ea630cef0ef2ae227b5"
+    },
+    "roms/raycaster.sfc": {
+      "bytes": 32768,
+      "sha256": "b5085b575247e8d5c71a35f48f49e4cdead9ba32dd2bcbcd7cbb4d0955f4e109"
+    },
+    "roms/rdiff.sfc": {
+      "bytes": 32768,
+      "sha256": "11d99231712834ec2522ac58bd0b6bdabfddbddb018178e4e0b9f3162f023a4a"
+    },
+    "roms/retryjmp.sfc": {
+      "bytes": 32768,
+      "sha256": "a4d6db5388c15386202f0d7dd130b3286cd79086c9bf03c1926ad7a1e364e7d1"
+    },
+    "roms/ropeedit.sfc": {
+      "bytes": 32768,
+      "sha256": "e68b0fc0495384f4f6ac222a54910bb681826ba3be4702c20c167289026cb063"
+    },
+    "roms/rotkal.sfc": {
+      "bytes": 32768,
+      "sha256": "5a907841c956886d83d4befd453d156b8f713cb69299d2d7e820c20cf8b7b95b"
+    },
+    "roms/rotozoom.sfc": {
+      "bytes": 32768,
+      "sha256": "0158bd142f3cf69a0b691498ab717d3043288e3f83b05dd4d016d1693812bc0b"
+    },
+    "roms/rotslab.sfc": {
+      "bytes": 32768,
+      "sha256": "be1e7c90a5daff82f19733acaf7cae7c430729ccc85e7d6a2411e1d182cfd635"
+    },
+    "roms/satcast.sfc": {
+      "bytes": 32768,
+      "sha256": "9c832544110a0fbb6fd18a3b48b90bc74c043221972bb1a8d10071db9fd80f31"
+    },
+    "roms/satcomet.sfc": {
+      "bytes": 32768,
+      "sha256": "9983c26f8068b91bc6daee5372b1bc601012ec8e160cf12565369b61795590ba"
+    },
+    "roms/sbitfld.sfc": {
+      "bytes": 32768,
+      "sha256": "54afc00497bc2cd70c2cad3ac9f74ed91b476f0a71fc13d2f6a552081dcacade"
+    },
+    "roms/scopeguard.sfc": {
+      "bytes": 32768,
+      "sha256": "e64a3aa164a088f22bccbc29506d82f0ced79a8ad6e1c16ad8c720e849371479"
+    },
+    "roms/seamdemo.sfc": {
+      "bytes": 6291456,
+      "sha256": "d99df6aba03178b0916702660ec4c387f61b65a01a2fab6e5cd588bea2f4bac5"
+    },
+    "roms/seqvm.sfc": {
+      "bytes": 32768,
+      "sha256": "089875703d4b55b3022e8885b5708888ee5569306b01de372d7c73816822dff2"
+    },
+    "roms/shift64seam.sfc": {
+      "bytes": 32768,
+      "sha256": "58105520b03b37350515a95815b23b2e207c3e9b876a2855658e19681fa5297a"
+    },
+    "roms/smulorbit.sfc": {
+      "bytes": 32768,
+      "sha256": "45286b723155d181885150ae333c44dc1709cca4c35b38127e45ebf61d6f8308"
+    },
+    "roms/sobel.sfc": {
+      "bytes": 32768,
+      "sha256": "4ecf0b19353a4610543b795ca95a7b993c9d71b929e5f5f4cc1821365e219140"
+    },
+    "roms/sodo.sfc": {
+      "bytes": 32768,
+      "sha256": "76525613f1da9db5f32357af1384ecb8b3b141d9c08736e1a877368b7972ee59"
+    },
+    "roms/sort-race.sfc": {
+      "bytes": 32768,
+      "sha256": "d5a08954c5d181221e9e2fdc0a820b8c662e836efe86e6fb7c5c3b554755164b"
+    },
+    "roms/space-invaders.sfc": {
+      "bytes": 32768,
+      "sha256": "f0f7dacff55fd80feb64864a0e36cb60153dae6a077004fbfc0ad395538792c5"
+    },
+    "roms/spaceship.sfc": {
+      "bytes": 32768,
+      "sha256": "0263345a5fe8771d1b1e5dec427b2c7bd5fc1f27007f3c148adcf974c1517c5a"
+    },
+    "roms/speedcap.sfc": {
+      "bytes": 32768,
+      "sha256": "6f9fad9ad8a143142d4b732d823d19a30dfb75371dd957c8e077784e1e0ccdba"
+    },
+    "roms/spigot.sfc": {
+      "bytes": 32768,
+      "sha256": "7a9e1238a47ff61994f1501db116fce9d16dd7f0520ee87f9e828329b3b81265"
+    },
+    "roms/spirograph.sfc": {
+      "bytes": 32768,
+      "sha256": "523a39f6e4bc38739926e9fdc91f6014ee9a866cde166633aaf263aa38869b3a"
+    },
+    "roms/strcmprace.sfc": {
+      "bytes": 32768,
+      "sha256": "7111c1ec683cf11c7943aa0c2aeb7b90d6e0b178490913b82a0577a806c8cbef"
+    },
+    "roms/svx2-fastrom-video.sfc": {
+      "bytes": 8388608,
+      "sha256": "bd8a6a62d2d28c6553a22a77e849ee0ee8ac700b09dcf87963b6c86d07affe3c"
+    },
+    "roms/tea.sfc": {
+      "bytes": 32768,
+      "sha256": "a8ea49c2c9b0ddac1a58234d445d5ace0caa0785728e30c0c8c74d13e0683ee2"
+    },
+    "roms/trapguard.sfc": {
+      "bytes": 32768,
+      "sha256": "d423c313267889410eb4af4a1aeb411b27991a48385435bcbf4bea45a6cca585"
+    },
+    "roms/trimerge.sfc": {
+      "bytes": 32768,
+      "sha256": "2725bb17b277ea60a82742dab5ef330cc6168676f3de602cae881ae5da072b2f"
+    },
+    "roms/truchet.sfc": {
+      "bytes": 32768,
+      "sha256": "6caf1a8a3a9f311f0b0d9bf902b3cff29ecea8022bf501de1beda293e3012eac"
+    },
+    "roms/truncstair.sfc": {
+      "bytes": 32768,
+      "sha256": "242e5fb2d05c4f03bed9cc9579cbd9e2d7953633ef4c1109e3daf827f2826d7a"
+    },
+    "roms/turtle-vm.sfc": {
+      "bytes": 32768,
+      "sha256": "c4dba800796f8ec98baf33a6ae4af8ce448b363c69cee414d75ce1dbb0389ca9"
+    },
+    "roms/uarteye.sfc": {
+      "bytes": 32768,
+      "sha256": "adaeb92131cdc0582c324f9d114d8438d6973dab832f94eace22cd877a5207cd"
+    },
+    "roms/ucmprank.sfc": {
+      "bytes": 32768,
+      "sha256": "748877493da97a41d0284b4bbff3101729e6c2dd65d8693db18439157db55c60"
+    },
+    "roms/ulam.sfc": {
+      "bytes": 32768,
+      "sha256": "a8ce1d467d831ffb74e539649f11b0f31945364a07796fd1a846bcde2ef0fff5"
+    },
+    "roms/vaprintf.sfc": {
+      "bytes": 32768,
+      "sha256": "f12f7c2ec023b70255f863922fa1aaefbdc1c59a3b0ae439c18aa068ef77dcd5"
+    },
+    "roms/vlanest.sfc": {
+      "bytes": 32768,
+      "sha256": "81337260c502f58ca9229fc370ea67eb00881811da428db82e587ede9f9ef183"
+    },
+    "roms/vlastack.sfc": {
+      "bytes": 32768,
+      "sha256": "16355a5ab1989bfd8680e8dd20615a5c843096a4d962035ce6eb7b0dcbb6b7e2"
+    }
+  },
+  "totalBytes": 61603609
+}

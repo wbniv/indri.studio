@@ -1,5 +1,6 @@
 ---
 import Base from '../../../../layouts/Base.astro';
+import GamePlayer from '@wbniv/browser-game-player/astro';
 import { verifyFywBundle } from '../../../../lib/fywBundle.mjs';
 const { frame } = verifyFywBundle('public/apps/finding-your-way/play');
 ---
@@ -8,7 +9,7 @@ const { frame } = verifyFywBundle('public/apps/finding-your-way/play');
     <a href="/apps/finding-your-way/" data-astro-reload>← App details and downloads</a>
     <h1>Finding Your Way</h1>
     <p>Play the 3D chapter in your browser. Choose Play below to load the game. Play opens fullscreen when your browser supports it. Use the joystick or arrow keys to move and Select or Space to interact.</p>
-    <iframe class="fyw-browser-frame" loading="eager" src={frame} title="Finding Your Way 3D player" allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
+    <GamePlayer src={frame} title="Finding Your Way 3D player" class="fyw-player-host" frameClass="fyw-browser-frame" />
     <p class="fyw-browser-note">Requires WebGL 2. Play with a keyboard, gamepad or touchscreen. Progress resets on restart.</p>
     <p><a href="/apps/finding-your-way/#android-builds-title" data-astro-reload>Android downloads</a> · <a href="/apps/finding-your-way/" data-astro-reload>Text edition and other ways to play</a></p>
   </main>
@@ -17,17 +18,7 @@ const { frame } = verifyFywBundle('public/apps/finding-your-way/play');
 .fyw-browser-page { max-width: 1120px; margin: 0 auto; padding: 32px 20px; }
 .fyw-browser-page h1 { font-size: clamp(28px, 5vw, 48px); margin: 24px 0 12px; }
 .fyw-browser-page p { line-height: 1.6; }
-.fyw-browser-frame { display: block; width: 100%; height: calc(56.25vw + 144px); min-height: 320px; border: 1px solid #746f5e; border-radius: 8px; margin: 24px 0; background: #29261f; }
+:global(.fyw-browser-frame) { display: block; width: 100%; height: calc(56.25vw + 144px); min-height: 320px; border: 1px solid #746f5e; border-radius: 8px; margin: 24px 0; background: #29261f; }
 .fyw-browser-note { font-size: 0.95rem; }
 @media(max-width:600px) { .fyw-browser-page { padding: 24px 12px; } }
 </style>
-<script>
-window.addEventListener('message', (event) => {
-  if (event.origin !== location.origin || event.data?.type !== 'fyw-player-height') return;
-  const iframe = document.querySelector<HTMLIFrameElement>('.fyw-browser-frame');
-  if (!iframe || event.source !== iframe.contentWindow) return;
-  const height = event.data.height;
-  if (typeof height === 'number' && Number.isFinite(height) && height >= 200 && height <= 2000)
-    iframe.style.height = `${Math.ceil(height)}px`;
-});
-</script>

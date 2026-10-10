@@ -1,13 +1,10 @@
 ---
-// /apps/llvm-mos-65816/snes/<slug>/ — one playable page per demo, driven by ../../../../data/snes-demos.ts.
-// Same anatomy as biohack.net's per-demo pages (hero + centred player + controls + notes), restyled
-// to indri.studio's AppLayout/Base chrome. app.js reads selfcheck straight out of roms/manifest.json
-// (keyed by ROM id) at runtime, so the page only needs to set BJG_BASE + BJG_DEFAULT_ROM — no
-// per-page selfcheck override needed (unlike biohack.net's older per-page BJG_SELFCHECK pattern).
+// Shared component with site-owned SNES runtime, ROMs, controls and page content.
 import AppLayout from "../../../../layouts/AppLayout.astro";
 import { SNES_DEMOS } from "../../../../data/snes-demos.ts";
 import galleryCatalog from "../../../../data/lzss-gallery-catalog.json";
-import { createHash } from "node:crypto";
+import GamePlayer from "@wbniv/browser-game-player/astro";
+import {verifyManifest} from "@wbniv/browser-game-player/bundle";
 import { readFileSync } from "node:fs";
 
 export function getStaticPaths() {
@@ -20,15 +17,7 @@ export function getStaticPaths() {
 const { demo } = Astro.props;
 
 const PLAY = "public/apps/llvm-mos-65816/play";
-const BUST_ASSETS = [
-  "app.js", "cores/bsnes_jg.js", "cores/bsnes_jg.wasm", "cores/PROVENANCE.json",
-  "roms/manifest.json", `roms/${demo.slug}.sfc`, `preview/${demo.slug}.png`,
-];
-const bust: Record<string, string> = {};
-for (const a of BUST_ASSETS) {
-  try { bust[a] = createHash("sha256").update(readFileSync(`${PLAY}/${a}`)).digest("hex").slice(0, 12); } catch {}
-}
-const appV = bust["app.js"] ?? "";
+const {frame: playerFrame} = verifyManifest(`${PLAY}/component`, '/apps/llvm-mos-65816/play/component');
 const manifest = JSON.parse(readFileSync(`${PLAY}/roms/manifest.json`, "utf8"));
 const selfcheck = manifest.roms.find((rom: { id: string }) => rom.id === demo.slug)?.selfcheck;
 
@@ -55,23 +44,9 @@ const isSelfRunning = demo.keys.toLowerCase().startsWith("self-running");
       <p class="rp-lede">{demo.desc}</p>
     </header>
 
-    <section
-      id="bjg-embed"
-      class="rp-player"
-      aria-label={`Live SNES emulator running ${demo.title}`}
-      data-slug={demo.slug}
-      data-appv={appV}
-      data-bust={JSON.stringify(bust)}
-    >
-      <div class="rp-screen"><canvas id="screen" width="256" height="224" aria-label="SNES screen"></canvas></div>
-      <div class="rp-row">
-        <span id="status" class="rp-status">loading core…</span>
-        <span id="checkresult" class="rp-badge"></span>
-        <button id="verify" class="rp-btn" disabled>Verify fidelity</button>
-        <button id="fullscreen" class="rp-btn">Fullscreen</button>
-      </div>
+    <section class="rp-player">
+      <GamePlayer src={`${playerFrame}?game=${encodeURIComponent(demo.slug)}`} title={demo.title} />
       <p class="rp-keys">{demo.keys}</p>
-      <p id="banner" class="rp-banner"></p>
       <p class="rp-hint">Click the screen to focus, then {isSelfRunning ? "watch" : "play"}. Tab away and it pauses.</p>
     </section>
 
@@ -132,9 +107,7 @@ const isSelfRunning = demo.keys.toLowerCase().startsWith("self-running");
   </main>
 </AppLayout>
 
-<!-- Boot/reboot logic lives in Base.astro (shared across every #bjg-embed on the site) so the
-     astro:page-load listener is guaranteed to register on the session's first real page load,
-     regardless of which page that is -- see the comment there for why. -->
+<!-- Browser-game-player owns instance boot and disposal across site navigation. -->
 
 <style>
   .rp-wrap { max-width: 900px; margin-inline: auto; padding: 2.5rem 1.25rem 5rem; }

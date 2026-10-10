@@ -1,28 +1,11 @@
 ---
-// /blossom — playable in-browser Blossom (Hopalong attractor) SNES demo + manual.
-//
-// Self-contained: it boots the shared bsnes-jg WASM player (public/apps/llvm-mos-65816/play/app.js,
-// the exact cycle-accurate core the llvm-mos-65816 gate trusts) pointed at roms/blossom.sfc, and
-// carries the full user manual (controls, the three attractors, tips). The emulator markup + boot
-// script + styles mirror EmulatorEmbed.astro; we only change the default ROM to "blossom".
-//
-// Cache-busting: hash each shared play/ asset at build time -> window.BJG_BUST (path -> short sha);
-// app.js appends "?v=<sha>" to every fetch so the edge caches them immutably yet a re-synced asset
-// still gets a fresh url. Missing files degrade to plain paths.
+// Shared component with site-owned SNES runtime, ROMs, controls and page content.
 import Base from "../layouts/Base.astro";
-import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
+import GamePlayer from "@wbniv/browser-game-player/astro";
+import {verifyManifest} from "@wbniv/browser-game-player/bundle";
 
 const PLAY = "public/apps/llvm-mos-65816/play";
-const BUST_ASSETS = [
-  "app.js", "cores/bsnes_jg.js", "cores/bsnes_jg.wasm", "cores/PROVENANCE.json",
-  "roms/manifest.json", "roms/blossom.sfc", "preview/blossom.png",
-];
-const bust: Record<string, string> = {};
-for (const a of BUST_ASSETS) {
-  try { bust[a] = createHash("sha256").update(readFileSync(`${PLAY}/${a}`)).digest("hex").slice(0, 12); } catch {}
-}
-const appV = bust["app.js"] ?? "";
+const {frame: playerFrame} = verifyManifest(`${PLAY}/component`, '/apps/llvm-mos-65816/play/component');
 
 const controls = [
   { keys: "← ↑ ↓ →", act: "Pan the view" },
@@ -105,35 +88,13 @@ const kbd = "inline-block rounded border border-outline-variant bg-surface-conta
     </header>
 
     <!-- emulator --------------------------------------------------------- -->
-    <section
-      id="bjg-embed"
-      class="emu mt-10"
-      aria-label="Live SNES emulator running Blossom"
-      data-slug="blossom"
-      data-appv={appV}
-      data-bust={JSON.stringify(bust)}
-    >
-      <h2 class="font-display uppercase text-sm tracking-[0.25em] text-on-surface-variant mb-3">
-        Play it in your browser
-      </h2>
+    <section class="emu mt-10" aria-label="Live SNES emulator running Blossom">
+      <h2 class="font-display uppercase text-sm tracking-[0.25em] text-on-surface-variant mb-3">Play it in your browser</h2>
       <div class="glass-card emu-card">
-        <div id="game" class="emu-screen">
-          <canvas id="screen" width="256" height="224" aria-label="SNES screen"></canvas>
-        </div>
-        <div class="emu-row">
-          <span id="status" class="emu-status">loading core…</span>
-          <span id="checkresult" class="badge"></span>
-          <button id="verify" class="emu-btn" disabled>Verify fidelity</button>
-        </div>
-        <p class="emu-keys">
-          <b>← ↑ ↓ →</b> pan · <b>Q</b>/<b>W</b> zoom · <b>X</b>/<b>A</b> attractor ·
-          <b>Shift</b> colour · <b>Enter</b> reset
-        </p>
-        <p id="banner" class="emu-banner"></p>
+        <GamePlayer src={`${playerFrame}?game=blossom`} title="Blossom" />
+        <p class="emu-keys"><b>← ↑ ↓ →</b> pan · <b>Q</b>/<b>W</b> zoom · <b>X</b>/<b>A</b> attractor · <b>Shift</b> colour · <b>Enter</b> reset</p>
       </div>
-      <p class="mt-2 text-xs text-on-surface-variant">
-        Click the screen, then play. It blooms in over ~10&nbsp;s, then shimmers — tab away and it pauses.
-      </p>
+      <p class="mt-2 text-xs text-on-surface-variant">Click the screen, then play. It blooms in over ~10&nbsp;s, then shimmers — tab away and it pauses.</p>
     </section>
 
     <!-- reading the screen ---------------------------------------------- -->
@@ -248,9 +209,7 @@ const kbd = "inline-block rounded border border-outline-variant bg-surface-conta
   </div>
 </Base>
 
-<!-- Boot/reboot logic lives in Base.astro (shared across every #bjg-embed on the site) so the
-     astro:page-load listener is guaranteed to register on the session's first real page load,
-     regardless of which page that is -- see the comment there for why. -->
+<!-- Browser-game-player owns instance boot and disposal across site navigation. -->
 
 <style>
   /* Hand-authored MathML for the Hopalong equations — native browser rendering,

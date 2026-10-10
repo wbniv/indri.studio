@@ -1,3 +1,4 @@
+import { verifyManifest } from '@wbniv/browser-game-player/bundle';
 // Verify the frozen chapter before emitting its player page.
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
@@ -10,6 +11,21 @@ const canonical = value => value && typeof value === 'object'
   : JSON.stringify(value);
 export function verifyFywBundle(base) {
   const manifest = JSON.parse(readFileSync(join(base, 'manifest.json'), 'utf8'));
+  if (/^bgp1-[a-f0-9]{24}$/.test(manifest.bundleId)) {
+    const player = verifyManifest(base, '/apps/finding-your-way/play');
+    const source = player.receipt.provenance?.sourceBundle;
+    if (typeof source !== 'string') throw Error('Finding Your Way source provenance is required');
+    const original = verifyLegacyBundle(base, { bundleId: source });
+    for (const name of ['wf_game.js', 'wf_game.wasm', 'wf_game.data']) {
+      if (JSON.stringify(player.receipt.files[name]) !== JSON.stringify(original.receipt.files[name])) throw Error('Finding Your Way runtime differs from accepted release');
+    }
+    const config = JSON.parse(readFileSync(join(base, 'bundles', player.receipt.bundleId, 'config.json'), 'utf8'));
+    if (config.adapter !== 'worldfoundry' || JSON.stringify(config.arguments) !== JSON.stringify(original.receipt.runtimeArguments) || player.receipt.provenance.engineCommit !== original.receipt.engineCommit || player.receipt.provenance.stackBytes !== 65536) throw Error('Finding Your Way launch/provenance mismatch');
+    return player;
+  }
+  return verifyLegacyBundle(base, manifest);
+}
+function verifyLegacyBundle(base, manifest) {
   if (!/^v0\.8-[a-f0-9]{16}$/.test(manifest.bundleId)) throw Error('Invalid Finding Your Way bundle ID');
   const directory = join(base, 'bundles', manifest.bundleId);
   const receipt = JSON.parse(readFileSync(join(directory, 'receipt.json'), 'utf8'));

@@ -117,7 +117,14 @@ const mode7 = assertMode7Contract({
 </AppLayout>
 
 <script>
+  let filterEvents: AbortController | undefined;
+  document.addEventListener("astro:before-swap", () => filterEvents?.abort());
   document.addEventListener("astro:page-load", () => {
+    filterEvents?.abort();
+    const gallery = document.querySelector(".gl-wrap");
+    if (!gallery) return;
+    filterEvents = new AbortController();
+    const eventOptions = {signal: filterEvents.signal};
     const chips = document.querySelectorAll<HTMLButtonElement>(".gl-chip");
     const cards = document.querySelectorAll<HTMLLIElement>(".gl-card-wrap");
     const modeWrap = document.querySelector<HTMLElement>(".gl-mode-filter")!;
@@ -142,7 +149,8 @@ const mode7 = assertMode7Contract({
       empty.hidden = shown !== 0;
       const url = new URL(location.href);
       if (mode7) url.searchParams.set("mode", "7"); else url.searchParams.delete("mode");
-      history.replaceState(null, "", url);
+      // Retain Astro's history index and scroll state for Back/Forward.
+      history.replaceState(history.state, "", url);
     };
     chips.forEach((chip) => {
       chip.addEventListener("click", () => {
@@ -150,18 +158,18 @@ const mode7 = assertMode7Contract({
         chip.classList.add("is-active");
         category = chip.dataset.cat ?? "all";
         applyFilters();
-      });
+      }, eventOptions);
     });
-    modeToggle.addEventListener("click", () => { mode7 = !mode7; applyFilters(); });
+    modeToggle.addEventListener("click", () => { mode7 = !mode7; applyFilters(); }, eventOptions);
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && mode7 && document.querySelector(".gl-wrap:focus-within")) {
         mode7 = false; applyFilters(); modeToggle.focus();
       }
-    });
+    }, eventOptions);
     window.addEventListener("popstate", () => {
       mode7 = new URL(location.href).searchParams.get("mode") === "7";
-      applyFilters();
-    });
+      if (gallery.isConnected) applyFilters();
+    }, eventOptions);
     applyFilters();
   });
 </script>

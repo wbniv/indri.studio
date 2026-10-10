@@ -41,7 +41,9 @@ export default {
       // 'unsafe-inline' is present as a fallback for CSP-Level-1 browsers;
       // in CSP-Level-2+ browsers the nonce takes precedence and 'unsafe-inline'
       // is ignored. HTMLRewriter stamps nonce onto every <script> tag so the
-      // policy is coherent. Lighthouse's CSP audit recognises this pattern as
+      // policy is coherent. 'strict-dynamic' also trusts ClientRouter's
+      // newly inserted scripts when its destination carries a different nonce.
+      // Lighthouse's CSP audit recognises this pattern as
       // effective (nonce present → 'unsafe-inline' fallback is accepted).
       const nonce = generateNonce();
       const headers = new Headers(response.headers);
@@ -57,7 +59,7 @@ export default {
         // 'wasm-unsafe-eval' lets WebAssembly.instantiate() compile the
         // bsnes-jg core embedded on /apps/llvm-mos-65816/ — it permits WASM
         // compilation only, NOT general eval(), so the policy stays tight.
-        `script-src 'self' 'nonce-${nonce}' 'unsafe-inline' 'wasm-unsafe-eval'; ` +
+        `script-src 'self' 'strict-dynamic' 'nonce-${nonce}' 'unsafe-inline' 'wasm-unsafe-eval'; ` +
         `img-src 'self' data:; ` +
         `object-src 'none'; ` +
         `base-uri 'self'; ` +

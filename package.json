@@ -11,14 +11,16 @@
     "preview": "astro preview",
     "astro": "astro",
     "test": "node --test 'tests/*.test.mjs'",
-    "sync-engine": "bash scripts/sync-llvm-mos-emulator.sh"
+    "sync-engine": "bash scripts/sync-llvm-mos-emulator.sh",
+    "sync-browser-player": "node scripts/refresh-browser-game-player.mjs && node scripts/refresh-browser-game-player.mjs browser-player-snes.json"
   },
   "dependencies": {
     "@astrojs/mdx": "^6.0.3",
     "@astrojs/sitemap": "^3.7.2",
     "@material-symbols/svg-400": "^0.44.10",
     "@wbniv/bsnes-jg-player": "github:wbniv/bsnes-jg-wasm#npm-package",
-    "astro": "^6.4.8"
+    "astro": "^6.4.8",
+    "@wbniv/browser-game-player": "file:vendor/browser-game-player-0.1.4.tgz"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.4",

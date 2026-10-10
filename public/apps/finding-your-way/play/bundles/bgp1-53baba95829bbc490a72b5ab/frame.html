@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Browser game player</title><link rel="stylesheet" href="player.css"></head>
+<body>
+<main id="player">
+  <div id="stage">
+    <canvas id="canvas" width="1280" height="720" tabindex="0" aria-label="Finding Your Way game. Arrow keys move; Space selects; 2 changes camera; 3 closes dialogue."></canvas>
+    <div id="overlay"><h1 id="game-title">Game</h1><p id="game-subtitle"></p><button id="play">Play</button><p id="start-hint">Opens fullscreen when supported · Esc to exit</p><p id="status" role="status" aria-live="polite">Progress resets when you restart</p><progress id="progress" max="100" value="0" hidden aria-label="Loading game"></progress></div>
+    <div id="touch" hidden aria-label="Game controls">
+      <div id="joystick" aria-label="Direction joystick">
+        <span id="stick" aria-hidden="true"></span>
+        <button class="direction up" data-code="ArrowUp" aria-label="Move forward / increase text size"></button>
+        <button class="direction left" data-code="ArrowLeft" aria-label="Turn left / close dialogue"></button>
+        <button class="direction down" data-code="ArrowDown" aria-label="Move back / decrease text size"></button>
+        <button class="direction right" data-code="ArrowRight" aria-label="Turn right"></button>
+      </div>
+      <div class="utilities">
+        <button id="fullscreen" class="round utility" aria-label="Fullscreen" title="Fullscreen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg><span class="caption" id="fullscreen-caption">Fullscreen</span></button>
+        <button id="menu-toggle" class="round utility" aria-label="Game menu" aria-expanded="false" aria-controls="menu" title="Game menu"><span class="symbol" aria-hidden="true">⋯</span><span class="caption">Menu</span></button>
+      </div>
+      <span class="keyboard-hint">Arrow keys move · Space selects</span>
+      <div class="actions">
+        <button class="round" data-code="Digit2" aria-label="Camera" title="Change camera"><svg class="film-camera" viewBox="0 0 36 36" aria-hidden="true"><circle cx="9" cy="8" r="5"/><circle cx="22" cy="8" r="5"/><rect x="3" y="15" width="24" height="16" rx="2"/><path d="M27 19l7-4v16l-7-4M11 31l-3 4m12-4 3 4"/></svg><span class="caption">Camera</span></button>
+        <button class="round" data-code="Digit3" aria-label="Close dialogue" title="Close dialogue"><span class="symbol" aria-hidden="true">×</span><span class="caption">Close</span></button>
+        <button class="round primary" data-code="Space" aria-label="Select" title="Select / continue"><span class="symbol" aria-hidden="true">●</span><span class="caption">Select</span></button>
+      </div>
+    </div>
+    <section id="menu" hidden aria-label="Game menu">
+      <p class="menu-status">Game paused</p>
+      <button id="focus" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7Z"/></svg>Resume game</button>
+      <button id="controls" aria-expanded="false" aria-controls="help"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M8 10v4m-2-2h4m5-1h.1m3 3h.1"/></svg>Controls / help</button>
+      <div id="help" hidden></div>
+      <button id="motion"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8c3-4 5 4 8 0s5 4 10 0M3 16c3-4 5 4 8 0s5 4 10 0M4 21 20 3"/></svg>Toggle reduced motion</button>
+      <button id="verify" hidden disabled>Verify fidelity</button><span id="checkresult" role="status"></span>
+      <button id="restart" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/></svg>Restart…</button>
+    </section>
+  </div>
+  <p id="banner" hidden></p>
+  <p class="fallback"><a id="fallback" href="/apps/finding-your-way/" target="_top">App details, text edition and Android downloads</a></p>
+</main>
+<script type="application/json" id="wf-player-config">{"schema":1,"adapter":"worldfoundry","startMode":"manual","title":"Finding Your Way","subtitle":"Explore the temple. Follow the arguments.","status":"v0.8 · Progress resets when you restart","canvasLabel":"Finding Your Way game. Arrow keys move; Space selects; 2 changes camera; 3 closes dialogue.","restartPrompt":"Restart the chapter? Your current progress will be lost.","fallbackLabel":"App details, text edition and Android downloads","fallbackUrl":"/apps/finding-your-way/","poster":"title-preview.jpg","fullscreenOnPlay":true,"arguments":["--vram-width=5120","--vram-height=2048","--vram-slot-width=256","--vram-slot-height=256","--vram-perm-width=1024","--vram-perm-height=256","-L/parmenides_slice-standalone.iff"],"help":["Keyboard: arrows or I/J/K/L move. Space selects/interacts and continues the reader. 2 switches camera; hold 2 for the alternate camera. 3 or Left closes dialogue; Up/Down changes text size. 4 toggles reduced motion.","Joystick: drag to move or turn; release to stop. Use another finger to hold Select or another action.","Gamepad: D-pad/left stick moves, A selects, B changes camera, X closes. On phones, use the joystick and on-screen buttons.","Reduced motion quiets decorative animations and makes some visual transitions immediate. Walking and story choices remain available. Escape closes this menu first, then exits fullscreen or releases game focus."],"motionCode":"Digit4","actions":[{"code":"Digit2","label":"Camera","caption":"Camera"},{"code":"Digit3","label":"Close dialogue","caption":"Close"},{"code":"Space","label":"Select","caption":"Select"}]}</script>
+<script type="module" src="player.js"></script>
+</body></html>
