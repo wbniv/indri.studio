@@ -1,0 +1,58 @@
+{
+  "addressSanitizer": false,
+  "runtimeChecks": true,
+  "stackBytes": 65536,
+  "stackOverflowCheck": 2,
+  "bundleId": "v0.8-4ba447b54083d62e",
+  "version": "0.8",
+  "engineCommit": "c3e0a5b3b428a40e89ccd122d71a439394abbb67",
+  "apkSha256": "1ee7d292dfb793b05087bd89485a8c7b730b5fe0c9cec213ebe20eeb0078dfe5",
+  "levelSha256": "00b4ab3ce067603d993d41e11ed530eb57fe344b346fd23ce3a0ced2e94cdd4d",
+  "standaloneSha256": "5ba10be1d6e7423e757308f65e04e8f0b69db7a26e72530a9e9f5debf8d6bffe",
+  "toolchain": "emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 6.0.0 (afa15e0c56d1292e073c2c91bafc1d5e0cdf0dd3)",
+  "runtimeArguments": [
+    "--vram-width=5120",
+    "--vram-height=2048",
+    "--vram-slot-width=256",
+    "--vram-slot-height=256",
+    "--vram-perm-width=1024",
+    "--vram-perm-height=256",
+    "-L/parmenides_slice-standalone.iff"
+  ],
+  "files": {
+    "config.json": {
+      "bytes": 256,
+      "sha256": "be539e684f93216ada160fa6b7540303b59eef7b46af51a4ac607e1b46f9bfc7"
+    },
+    "frame.html": {
+      "bytes": 4630,
+      "sha256": "42616abf164089426fb3fa4d723c9db323da84c9776be63809074d83afaf9012"
+    },
+    "player.css": {
+      "bytes": 5018,
+      "sha256": "642d9e41e3904f5b7a025f79382b0e82f463da64b7bfe3a7438586773d338f0c"
+    },
+    "player.js": {
+      "bytes": 13207,
+      "sha256": "c8675cc5a7253d03fad4828d3918dcee942494be7a1749bef3afa6e5d401c349"
+    },
+    "title-preview.jpg": {
+      "bytes": 78085,
+      "sha256": "709df1fa4191ea49bdd5172895dedd5a1fc8546954726876b1840e8f47154b5e"
+    },
+    "wf_game.data": {
+      "bytes": 6164480,
+      "sha256": "5ba10be1d6e7423e757308f65e04e8f0b69db7a26e72530a9e9f5debf8d6bffe"
+    },
+    "wf_game.js": {
+      "bytes": 275764,
+      "sha256": "1fab012f287f579bcd1dfb8832425148f1375a76be9a6e6b6d69eb2143a4ecbb"
+    },
+    "wf_game.wasm": {
+      "bytes": 2361679,
+      "sha256": "1c178bcad11f8a44b267f8e0ec4ea8590b1ee4a2ba99807fc8f580d5b9a60261"
+    }
+  },
+  "totalBytes": 8903119,
+  "buildConfiguration": "Release, single-threaded WebGL2; chapter-owned CMake preload/shell overrides; pinned approved text-storage remediation"
+}
