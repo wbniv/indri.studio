@@ -72,7 +72,21 @@ const optimizationReview = {
   ]
 };
 
+// v0.8.1 adds a native alignment hotfix while retaining the original v0.8.
+const alignmentHotfix = {
+  ...optimizationReview,
+  milestone: '2026-10-10-v0.8.1-16kb',
+  milestoneVersion: '0.8.1',
+  apk: 'parmenides-v0.8.1-8525f4910fc01414.apk',
+  sha256: '8525f4910fc01414d14e96c2d7036421bd578724c1a491e6f2a7962afc6b2078',
+};
+
 const milestones = [
+  {
+    title: '16 KB compatibility v0.8.1',
+    manifest: alignmentHotfix,
+    description: 'Updates native-library alignment for Android devices using 16 KB memory pages. Retains v0.8’s rendering improvements, clearer dialogue and character signs, and larger near-full-screen reader. Preserves the complete journey, choices, histories, endings, reduced motion and Both-to-surgery coda.',
+  },
   {
     title: 'Optimization v0.8',
     manifest: optimizationReview,
