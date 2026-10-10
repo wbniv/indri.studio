@@ -30,6 +30,11 @@
       "Reduced motion quiets decorative animations and makes some visual transitions immediate. Walking and story choices remain available. Escape closes this menu first, then exits fullscreen or releases game focus."
     ],
     "motionCode": "Digit4",
+    "playIcons": [
+      "temple",
+      "controller",
+      "cube"
+    ],
     "actions": [
       {
         "code": "Digit2",

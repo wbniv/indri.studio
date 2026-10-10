@@ -18,8 +18,8 @@ importers:
         specifier: ^0.44.10
         version: 0.44.10
       '@wbniv/browser-game-player':
-        specifier: file:vendor/browser-game-player-0.1.4.tgz
-        version: file:vendor/browser-game-player-0.1.4.tgz(astro@6.4.8(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(supports-color@10.2.2))
+        specifier: file:vendor/browser-game-player-0.1.5.tgz
+        version: file:vendor/browser-game-player-0.1.5.tgz(astro@6.4.8(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(supports-color@10.2.2))
       '@wbniv/bsnes-jg-player':
         specifier: github:wbniv/bsnes-jg-wasm#npm-package
         version: https://codeload.github.com/wbniv/bsnes-jg-wasm/tar.gz/f1557cec7e90fb6bc75553837f6b3f3b40ce950c(astro@6.4.8(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(supports-color@10.2.2))
@@ -973,9 +973,9 @@ packages:
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
     deprecated: Potential CWE-502 - Update to 1.3.1 or higher
 
-  '@wbniv/browser-game-player@file:vendor/browser-game-player-0.1.4.tgz':
-    resolution: {integrity: sha512-0llZg0P5Xq0cVPboShVAWMCVQG2tyxOPL4xB0IbDk4enQie3YB9TKNxqjv75ZzdmIOQu51K1eJcKxxn9s8eTYQ==, tarball: file:vendor/browser-game-player-0.1.4.tgz}
-    version: 0.1.4
+  '@wbniv/browser-game-player@file:vendor/browser-game-player-0.1.5.tgz':
+    resolution: {integrity: sha512-5/Z0NKMvwkca9ivkYY/SC0Ei9uFvbNeAHQ9ZFr6TLevfVEPlr3eE7fbUde7qzNw/2u/8rPrtbgeTlTL31AI5+A==, tarball: file:vendor/browser-game-player-0.1.5.tgz}
+    version: 0.1.5
     engines: {node: '>=22.12.0'}
     hasBin: true
     peerDependencies:
@@ -2853,7 +2853,7 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
-  '@wbniv/browser-game-player@file:vendor/browser-game-player-0.1.4.tgz(astro@6.4.8(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(supports-color@10.2.2))':
+  '@wbniv/browser-game-player@file:vendor/browser-game-player-0.1.5.tgz(astro@6.4.8(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(supports-color@10.2.2))':
     optionalDependencies:
       astro: 6.4.8(@types/node@24.12.4)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(supports-color@10.2.2)
 

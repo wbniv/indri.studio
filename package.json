@@ -20,7 +20,7 @@
     "@material-symbols/svg-400": "^0.44.10",
     "@wbniv/bsnes-jg-player": "github:wbniv/bsnes-jg-wasm#npm-package",
     "astro": "^6.4.8",
-    "@wbniv/browser-game-player": "file:vendor/browser-game-player-0.1.4.tgz"
+    "@wbniv/browser-game-player": "file:vendor/browser-game-player-0.1.5.tgz"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.4",
