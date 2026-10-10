@@ -21,7 +21,7 @@ import PlatformIcon from './PlatformIcon.astro';
       </div>
     </details>
 
-    <details class="install-choice" id="web-3d-play">
+    <details class="install-choice" id="web-3d-play" open>
       <summary>
         <span class="install-icons"><PlatformIcon platform="web" size={24} ariaHidden /><PlatformIcon platform="console" size={24} ariaHidden /></span>
         <span class="install-label"><strong>3D game in your browser</strong><small>Explore the same chapter as the Android game</small></span>
@@ -116,3 +116,44 @@ import PlatformIcon from './PlatformIcon.astro';
     .install-chevron { transition: none; }
   }
 </style>
+
+<script>
+  let activeDetails: HTMLDetailsElement | null = null;
+  let cleanup = () => {};
+
+  function revealBrowserPlay() {
+    const details = document.querySelector<HTMLDetailsElement>('#web-3d-play');
+    if (details === activeDetails) return;
+    cleanup();
+    activeDetails = details;
+    const title = details?.querySelector('summary strong');
+    const summary = details?.querySelector('summary');
+    if (!details || !title || !summary || !('IntersectionObserver' in window)) return;
+
+    // Render open for visitors without JS; defer only offscreen titles.
+    const bounds = title.getBoundingClientRect();
+    if (bounds.bottom > 0 && bounds.top < window.innerHeight) return;
+    details.open = false;
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        details.open = true;
+        cleanup();
+      }
+    });
+    const stopReveal = () => {
+      observer.disconnect();
+      summary.removeEventListener('click', stopReveal);
+    };
+    cleanup = stopReveal;
+    // Manual toggles take precedence over any later scroll reveal.
+    summary.addEventListener('click', stopReveal, { once: true });
+    observer.observe(title);
+  }
+
+  revealBrowserPlay();
+  document.addEventListener('astro:page-load', revealBrowserPlay);
+  document.addEventListener('astro:before-swap', () => {
+    cleanup();
+    activeDetails = null;
+  });
+</script>
