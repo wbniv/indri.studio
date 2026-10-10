@@ -70,6 +70,11 @@ import PlatformIcon from './PlatformIcon.astro';
         <p>This route needs no computer or debugging. You can revoke the TV installer app’s unknown-app permission afterward.</p>
       </div>
     </details>
+
+    <div class="install-choice install-choice-soon">
+      <span class="install-icons"><PlatformIcon platform="phone" size={24} ariaHidden /><PlatformIcon platform="tablet" size={24} ariaHidden /></span>
+      <span class="install-label"><strong>iPhone / iPad (iOS)</strong><small>Coming soon</small></span>
+    </div>
   </div>
 </section>
 
@@ -85,6 +90,7 @@ import PlatformIcon from './PlatformIcon.astro';
   .install-choice > summary::-webkit-details-marker { display: none; }
   .install-choice > summary::before { content: none; display: none; }
   .install-choice > summary:focus-visible { outline: 2px solid var(--color-primary-container); outline-offset: 3px; }
+  .install-choice-soon { display: grid; grid-template-columns: 58px minmax(0, 1fr); align-items: center; gap: 12px; min-height: 72px; padding: 12px 0; }
   .install-icons { display: flex; gap: 4px; color: var(--color-primary-container); }
   .install-label strong { display: block; font-size: 15px; line-height: 1.35; }
   .install-label small { display: block; color: var(--color-on-surface-variant); font-size: 12px; line-height: 1.45; }
@@ -99,6 +105,7 @@ import PlatformIcon from './PlatformIcon.astro';
   .install-body a { color: var(--color-primary-container); text-decoration: underline; text-underline-offset: 2px; }
   @media (max-width: 600px) {
     .install-choice > summary { gap: 8px; grid-template-columns: 54px minmax(0, 1fr) 16px; }
+    .install-choice-soon { gap: 8px; grid-template-columns: 54px minmax(0, 1fr); }
     .install-body { padding-left: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
