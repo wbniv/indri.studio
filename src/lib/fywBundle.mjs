@@ -7,6 +7,7 @@ const releases = {
   '0.8': { apk: '1ee7d292dfb793b05087bd89485a8c7b730b5fe0c9cec213ebe20eeb0078dfe5' },
   '0.9': { apk: '3ef29dc87d55934a98d844e489f701c4d0c0893537ba6a5bd567ea609ddfb25b', engine: 'ba25f99bea241403c2865622c675711c7aaf0176' },
   '0.9.1': { apk: 'c3ad1ffac1cc5ffe0f52873549aaa35d00ef4d4400518abdfccf098069baec54', engine: 'ba25f99bea241403c2865622c675711c7aaf0176' },
+  '0.9.2': { apk: 'f704f5a2648cbb8e8c8f604b0d7ce9292e2b0dfb28e8066d7a2a9668f4b6bde0', engine: 'ba25f99bea241403c2865622c675711c7aaf0176' },
 };
 const required = ['config.json', 'frame.html', 'player.css', 'player.js', 'title-preview.jpg', 'wf_game.data', 'wf_game.js', 'wf_game.wasm'];
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -31,7 +32,7 @@ export function verifyFywBundle(base) {
   return verifyLegacyBundle(base, manifest);
 }
 function verifyLegacyBundle(base, manifest) {
-  if (!/^v0\.(?:8|9|9\.1)-[a-f0-9]{16}$/.test(manifest.bundleId)) throw Error('Invalid Finding Your Way bundle ID');
+  if (!/^v0\.(?:8|9|9\.1|9\.2)-[a-f0-9]{16}$/.test(manifest.bundleId)) throw Error('Invalid Finding Your Way bundle ID');
   const directory = join(base, 'bundles', manifest.bundleId);
   const receipt = JSON.parse(readFileSync(join(directory, 'receipt.json'), 'utf8'));
   const release = releases[receipt.version];
