@@ -83,7 +83,22 @@ const alignmentHotfix = {
   sha256: '8525f4910fc01414d14e96c2d7036421bd578724c1a491e6f2a7962afc6b2078',
 };
 
+// v0.9 publishes the verified Temple and Goddess artwork release APK.
+const templeGoddessRelease = {
+  milestone: '2026-10-14-v0.9-temple-goddess',
+  milestoneVersion: '0.9',
+  chapter: 'Temple / Love / Temple / Reason / Temple / Truth / Temple / God / Final Temple / Endings / Surgery',
+  apk: 'parmenides-v0.9-3ef29dc87d55934a.apk',
+  sha256: '3ef29dc87d55934a98d844e489f701c4d0c0893537ba6a5bd567ea609ddfb25b',
+  knownIssues: ['Progress resets on relaunch.'],
+};
+
 const milestones = [
+  {
+    title: 'Temple and Goddess artwork v0.9',
+    manifest: templeGoddessRelease,
+    description: 'Adds the new shrine, banners, piers, braziers, sky and Goddess artwork in the Temple. Includes the complete nine-room chapter; the other realms retain their existing artwork.',
+  },
   {
     title: '16 KB compatibility v0.8.1',
     manifest: alignmentHotfix,
