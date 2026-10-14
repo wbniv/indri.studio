@@ -5,6 +5,7 @@ import worldFoundryLogo from '../assets/screenshots/world-foundry/logo.png';
 import templeGoddessScreenshot from '../assets/screenshots/finding-your-way/temple-goddess-v0.9.jpg';
 import loveStreetScreenshot from '../assets/screenshots/finding-your-way/love-street-v0.9.1.png';
 import truthCourtScreenshot from '../assets/screenshots/finding-your-way/truth-court-v0.9.2.png';
+import v08FpsScreenshot from '../assets/screenshots/finding-your-way/v0.8-fps-improvement.png';
 import loveReason from '../../public/apps/finding-your-way/milestones/2026-10-05-love-reason-v0.2/manifest.json';
 import loveReasonTruth from '../../public/apps/finding-your-way/milestones/2026-10-05-love-reason-truth-v0.3/manifest.json';
 import templeLove from '../../public/apps/finding-your-way/milestones/2026-10-05-temple-love-v0.1/manifest.json';
@@ -132,6 +133,11 @@ const milestones = [
     title: 'Optimization v0.8',
     manifest: optimizationReview,
     description: 'Improves rendering performance and adds clearer dialogue, character signs and a larger reader.',
+    // Matched Chromecast HD, all-active world-heavy windows: 29.97 FPS before
+    // versus 59.94, 54.73 and 57.94 after on g2, g3 and g4. Source:
+    // finding-your-way/docs/diagnostics/parmenides/current-baseline-2026-10-09/
+    // opaque-material-production/comparison.md (integrated v0.8 shader).
+    screenshot: { src: v08FpsScreenshot, alt: 'Chromecast HD benchmark: three world-scene tours improved from about 30 FPS to 55–60 FPS with the v0.8 shader optimization' },
   },
   {
     title: 'Polish v0.7',
@@ -280,14 +286,13 @@ const milestones = [
     border-radius: 6px;
   }
   .milestone-body .milestone-checksum {
-    display: flex;
-    gap: 0.5em;
-    white-space: nowrap;
+    clear: both;
+    overflow-wrap: anywhere;
     font-family: monospace;
-    font-size: min(10px, calc(2.0833vw - 2.1667px));
+    font-size: 11px;
     letter-spacing: 0;
   }
-  .milestone-checksum span, .milestone-checksum code { flex-shrink: 0; }
+  .milestone-checksum span { margin-right: 0.5em; }
   .milestone-checksum code { font: inherit; padding: 0; border: 0; background: none; }
   .milestone:not([open]) .milestone-body { display: none; }
   @media (max-width: 600px) {
@@ -299,8 +304,8 @@ const milestones = [
     .milestone-download { font-size: 13px; }
     .milestone-body { padding-left: 22px; }
     .milestone-body .milestone-screenshot { width: min(44%, 168px); margin-left: 12px; }
-    .milestone-body .milestone-checksum { display: block; font-size: 10px; white-space: normal; }
-    .milestone-checksum span, .milestone-checksum code { display: block; overflow-wrap: anywhere; }
+    .milestone-body .milestone-checksum { font-size: 10px; }
+    .milestone-checksum span, .milestone-checksum code { display: block; }
   }
 </style>
 
