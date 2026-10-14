@@ -18,16 +18,16 @@
   "sourceSnapshot": "source-snapshot.tar.gz",
   "sourceSnapshotSha256": "fdb0d0b46627762310292479163b28df9ba3c2bbe44a1b3c5b81bee125a02080",
   "testEvidence": "test-evidence.tar.gz",
-  "testEvidenceSha256": "44d26b07951038129716bfbd3d46c604eed9543931ba833900fc15d02c4896a9",
+  "testEvidenceSha256": "d09668bbec15d67441808a761772cfbef605e2a91b0e432092300da35ce54dfe",
   "checks": {
     "sourceContent": 358,
     "exportedAssetsAndUV": 1314,
     "nativeReasonTruth": 153,
     "artUV": "passed",
     "meshWinding": "passed",
-    "cast1Job": null,
-    "cast1Status": "pending local setup",
-    "cast1Cleanup": null
+    "cast1Job": "J-1b56c372dbd1",
+    "cast1Status": "completed",
+    "cast1Cleanup": "restored"
   },
   "knownIssues": [],
   "publishedFiles": [
