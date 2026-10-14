@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import { statSync, existsSync } from 'node:fs';
 import worldFoundryLogo from '../assets/screenshots/world-foundry/logo.png';
 import templeGoddessScreenshot from '../assets/screenshots/finding-your-way/temple-goddess-v0.9.jpg';
+import loveStreetScreenshot from '../assets/screenshots/finding-your-way/love-street-v0.9.1.png';
 import loveReason from '../../public/apps/finding-your-way/milestones/2026-10-05-love-reason-v0.2/manifest.json';
 import loveReasonTruth from '../../public/apps/finding-your-way/milestones/2026-10-05-love-reason-truth-v0.3/manifest.json';
 import templeLove from '../../public/apps/finding-your-way/milestones/2026-10-05-temple-love-v0.1/manifest.json';
@@ -85,7 +86,22 @@ const templeGoddessRelease = {
   knownIssues: [],
 };
 
+// v0.9.1 adds the Love street artwork to the existing Temple and Goddess art.
+const loveStreetRelease = {
+  milestone: '2026-10-14-v0.9.1-love-street',
+  milestoneVersion: '0.9.1',
+  apk: 'parmenides-v0.9.1-c3ad1ffac1cc5ffe.apk',
+  sha256: 'c3ad1ffac1cc5ffe0f52873549aaa35d00ef4d4400518abdfccf098069baec54',
+  knownIssues: [],
+};
+
 const milestones = [
+  {
+    title: 'Love street artwork v0.9.1',
+    manifest: loveStreetRelease,
+    description: 'Love gains warm paving, balcony plants, shutters, lanterns, and a distant street under a daytime sky. The Temple and Goddess artwork from v0.9 remains, and the full story is still playable.',
+    screenshot: { src: loveStreetScreenshot, alt: 'The Love street in v0.9.1, with warm paving, balcony plants and lanterns' },
+  },
   {
     title: 'Temple and Goddess artwork v0.9',
     manifest: templeGoddessRelease,
