@@ -108,19 +108,19 @@ const milestones = [
   {
     title: 'Reason and Truth artwork v0.9.2',
     manifest: reasonTruthRelease,
-    description: 'Reason gains a pale tiled horizon and a fuller grove. Truth gains warm wood flooring, courtroom paneling, windows and a ceiling. Earlier artwork and the full story remain available.',
+    description: 'Adds a pale tiled horizon and fuller grove in Reason, plus wood flooring, paneling, windows and a ceiling in Truth.',
     screenshot: { src: truthCourtScreenshot, alt: 'The timber courtroom in Truth, with its wood floor, windows and ceiling' },
   },
   {
     title: 'Love street artwork v0.9.1',
     manifest: loveStreetRelease,
-    description: 'Love gains warm paving, balcony plants, shutters, lanterns, and a distant street under a daytime sky. The Temple and Goddess artwork from v0.9 remains, and the full story is still playable.',
+    description: 'Adds warm paving, balcony plants, shutters, lanterns and a distant daytime street to Love.',
     screenshot: { src: loveStreetScreenshot, alt: 'The Love street in v0.9.1, with warm paving, balcony plants and lanterns' },
   },
   {
     title: 'Temple and Goddess artwork v0.9',
     manifest: templeGoddessRelease,
-    description: 'Adds a new shrine, banners, piers, braziers, sky and Goddess artwork in the Temple. Play the full story through the Temple, Love, Reason, Truth and God, then the endings and surgery. Other areas keep their existing artwork.',
+    description: 'Adds a new Temple shrine, banners, piers, braziers, sky and Goddess artwork.',
     screenshot: { src: templeGoddessScreenshot, alt: 'The Temple in v0.9, with its new shrine, banners, braziers and Goddess artwork' },
   },
   {
@@ -131,32 +131,32 @@ const milestones = [
   {
     title: 'Optimization v0.8',
     manifest: optimizationReview,
-    description: 'Improves rendering performance. Adds clearer dialogue and character signs, plus a larger near-full-screen reader. Preserves the complete journey, choices, histories, endings, reduced motion and Both-to-surgery coda.',
+    description: 'Improves rendering performance and adds clearer dialogue, character signs and a larger reader.',
   },
   {
     title: 'Polish v0.7',
     manifest: polishReview,
-    description: 'Combines the A–F artwork passes. Refines complete surgeon glove framing, lowers and scales the canonical combined triangle motif, and isolates Being from inherited background scenery. Keeps dialogue readable through camera collisions with a guarded modal camera cut. Retains original dialogue, choices, histories, endings, reduced motion and the exclusive Both-to-surgery coda.',
+    description: 'Refines surgeon framing, the combined triangle motif, Being’s background and camera behavior during dialogue.',
   },
   {
     title: 'Artwork v0.6',
     manifest: graphicsReview,
-    description: 'Includes the A–E artwork passes across Temple, Love, Reason, Truth, God, the ending scenes and surgery. Adds the Being release, combined triangle motif, NonBeing portal closure and visage, and masked surgeons with surgical lighting and instruments. Ending effects pause while reading; reduced motion uses quiet states.',
+    description: 'Adds ending effects, the combined triangle motif, masked surgeons and broader artwork throughout the chapter.',
   },
   {
     title: 'Visual fixes v0.5.5',
     manifest: visualFixes,
-    description: 'Keeps the complete ending routes from v0.5. Fits dialogue text and controls, hides world geometry during dialogue, corrects sphere and arch winding, and waits for the reading camera before showing or advancing text. Corrects patient framing so the three surgeons’ faces, hands and an off-center lamp fit the upward view. Camera obstruction/collision remains postponed.',
+    description: 'Fixes dialogue layout, sphere and arch winding, and patient-view surgery framing.',
   },
   {
     title: 'Endings v0.5',
     manifest: endings,
-    description: 'Adds separate Being, BOTH and NonBeing ending scenes, with the patient-view surgery coda on the BOTH route. Complete source accounts and final-Temple review are included; text clipping and occlusion fixes are deferred to v0.5.5.',
+    description: 'Adds Being, Both and NonBeing ending scenes, with surgery after the Both route.',
   },
   {
     title: 'Four realms v0.4',
     manifest: fourRealms,
-    description: 'Adds God’s guides, poster/icon inspections, hill traversal, both counsels and sixteen final Temple histories. Includes the texture-atlas fix; ending scenes remain previews.',
+    description: 'Adds God’s guides, poster and icon inspections, hill traversal, both counsels and sixteen final Temple histories.',
   },
   {
     title: 'Love/Reason/Truth v0.3',
@@ -171,14 +171,14 @@ const milestones = [
   {
     title: 'Temple/Love v0.1',
     manifest: templeLove,
-    description: 'The first playable Temple/Love chapter and its changed Temple return.',
+    description: 'Adds the first playable Temple and Love chapter and its changed Temple return.',
   },
 ].sort((a, b) => b.manifest.milestoneVersion.localeCompare(a.manifest.milestoneVersion, undefined, { numeric: true })).map((milestone) => {
   const base = `/apps/finding-your-way/milestones/${milestone.manifest.milestone}`;
   const apk = `${base}/${milestone.manifest.apk}`;
   const bytes = statSync(`public${apk}`).size;
   const knownIssues = milestone.manifest.knownIssues.filter((issue) => !/^(?:Session-local )?progress resets on relaunch\.?$/i.test(issue));
-  return { ...milestone, knownIssues, archiveRecords: existsSync(`public${base}/manifest.json`), base, apk, date: milestone.manifest.milestone.slice(0, 10), testEvidence: 'testEvidence' in milestone.manifest ? milestone.manifest.testEvidence : null, signature: existsSync(`public${base}/signature-verification.txt`), size: `${(bytes / 1024 / 1024).toFixed(1)} MiB` };
+  return { ...milestone, knownIssues, archiveRecords: existsSync(`public${base}/manifest.json`), base, apk, date: milestone.manifest.milestone.slice(0, 10), testEvidence: 'testEvidence' in milestone.manifest ? milestone.manifest.testEvidence : null, size: `${(bytes / 1024 / 1024).toFixed(1)} MiB` };
 });
 ---
 
@@ -187,7 +187,7 @@ const milestones = [
   <p>Newest first. Download an APK or expand a row to see what changed.</p>
 
   <div class="milestone-timeline">
-  {milestones.map(({ title, manifest, description, screenshot, base, apk, size, date, testEvidence, signature, archiveRecords, knownIssues }, index) => (
+  {milestones.map(({ title, manifest, description, screenshot, base, apk, size, date, testEvidence, archiveRecords, knownIssues }, index) => (
     <details class="milestone" id={index === 0 ? 'latest-android-release' : undefined} open={index === 0}>
       <summary>
         <span class="milestone-label">
@@ -206,13 +206,8 @@ const milestones = [
           <ul>{knownIssues.map((issue) => <li>{issue}</li>)}</ul>
         </>}
         <p class="milestone-checksum"><span>APK SHA-256:</span><code>{manifest.sha256}</code></p>
-        {archiveRecords && <ul>
-          <li><a href={`${base}/SHA256SUMS`}>SHA256SUMS</a></li>
-          <li><a href={`${base}/manifest.json`}>Milestone manifest</a></li>
-          <li><a href={`${base}/build-receipt.json`}>Build receipt</a></li>
-          <li><a href={`${base}/${manifest.sourceSnapshot}`} download>Source and Blender snapshot</a></li>
-          {testEvidence && <li><a href={`${base}/${testEvidence}`} download>Verification evidence</a></li>}
-          {signature && <li><a href={`${base}/signature-verification.txt`}>Android signature verification</a></li>}
+        {archiveRecords && testEvidence && <ul>
+          <li><a href={`${base}/${testEvidence}`} download>Verification evidence</a></li>
         </ul>}
       </div>
     </details>
