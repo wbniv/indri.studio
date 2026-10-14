@@ -14,11 +14,9 @@ import endings from '../../public/apps/finding-your-way/milestones/2026-10-06-en
 const visualFixes = {
   "milestone": "2026-10-06-patient-framing-v0.5.5",
   "milestoneVersion": "0.5.5",
-  "chapter": "Temple / Love / Temple / Reason / Temple / Truth / Temple / God / Final Temple / Endings / Surgery",
   "apk": "parmenides-v0.5.5-12116d8b40ce9fad.apk",
   "sha256": "12116d8b40ce9fade6fc03850bbc4cc4709f8d6377dc2c6641490c1d5e418e75",
   "knownIssues": [
-    "Session-local progress resets on relaunch",
     "Camera obstruction/collision postponed",
     "Provisional models and effects; full remote-driven Android routes and phone acceptance remain open",
     "Phone touch/thermal acceptance, animation, voice and journal history remain open",
@@ -30,12 +28,10 @@ const visualFixes = {
 // v0.6 also publishes only the exact archived APK.
 const graphicsReview = {
   "milestone": "2026-10-07-v0.6-endings-surgery-review",
-  "chapter": "Temple / Love / Temple / Reason / Temple / Truth / Temple / God / Final Temple / Endings / Surgery",
   "apk": "parmenides-v0.6-endings-surgery.1-ee82629373c95e6e.apk",
   "sha256": "ee82629373c95e6e2a1e733a7e647bc52a4a653111d78172b2fffc802b6f8c6f",
   "milestoneVersion": "0.6",
   "knownIssues": [
-    "Progress resets on relaunch.",
     "Low Chromecast frame rate remains a known limitation; performance optimization is planned for v0.8.",
     "Camera obstruction/collision remains postponed; distant God scenery can appear when turning in the Being scene.",
     "The combined triangle motif can clip at close first-person approaches; the centre surgeon’s lower gloves partly enter the bottom edge.",
@@ -46,12 +42,11 @@ const graphicsReview = {
 // v0.7 publishes only the verified archived APK.
 const polishReview = {
   "milestone": "2026-10-07-v0.7-polish-review",
-  "chapter": "Temple / Love / Temple / Reason / Temple / Truth / Temple / God / Final Temple / Endings / Surgery",
   "apk": "parmenides-v0.7-polish.2-ac1f33f51ff46a73.apk",
   "sha256": "ac1f33f51ff46a73889c65bf287cc16d4a39575e23643f478c23d0748dfe3a4a",
   "milestoneVersion": "0.7",
   "knownIssues": [
-    "Progress resets on relaunch; complete remote-driven Android routes remain pending.",
+    "Complete remote-driven Android routes remain pending.",
     "Low Chromecast frame rate remains a known limitation; optimization and sustained performance measurements are v0.8.",
     "General camera obstruction/collision remains deferred; extreme close approaches can crop the arch or partially obscure the combined triangle motif. Distant inherited scenery can remain visible outside Being.",
     "Author feedback from Max remains pending. The review movie uses scripted scene fixtures rather than a continuous Android playthrough."
@@ -61,12 +56,10 @@ const polishReview = {
 // v0.8 publishes only the exact verified release APK.
 const optimizationReview = {
   "milestone": "2026-10-09-v0.8-optimization",
-  "chapter": "Temple / Love / Temple / Reason / Temple / Truth / Temple / God / Final Temple / Endings / Surgery",
   "apk": "parmenides-v0.8-1ee7d292dfb793b0.apk",
   "sha256": "1ee7d292dfb793b05087bd89485a8c7b730b5fe0c9cec213ebe20eeb0078dfe5",
   "milestoneVersion": "0.8",
   "knownIssues": [
-    "Progress resets on relaunch.",
     "Performance is improved; frame rates can vary by device and scene.",
     "General camera obstruction/collision remains deferred; extreme close approaches can crop or obscure scenery.",
   ]
@@ -75,7 +68,6 @@ const optimizationReview = {
 // v0.8.1 adds a native alignment hotfix while retaining the original v0.8.
 const alignmentHotfix = {
   ...optimizationReview,
-  chapter: '',
   knownIssues: [],
   milestone: '2026-10-10-v0.8.1-16kb',
   milestoneVersion: '0.8.1',
@@ -87,10 +79,9 @@ const alignmentHotfix = {
 const templeGoddessRelease = {
   milestone: '2026-10-14-v0.9-temple-goddess',
   milestoneVersion: '0.9',
-  chapter: 'Temple / Love / Temple / Reason / Temple / Truth / Temple / God / Final Temple / Endings / Surgery',
   apk: 'parmenides-v0.9-3ef29dc87d55934a.apk',
   sha256: '3ef29dc87d55934a98d844e489f701c4d0c0893537ba6a5bd567ea609ddfb25b',
-  knownIssues: ['Progress resets on relaunch.'],
+  knownIssues: [],
 };
 
 const milestones = [
@@ -153,7 +144,8 @@ const milestones = [
   const base = `/apps/finding-your-way/milestones/${milestone.manifest.milestone}`;
   const apk = `${base}/${milestone.manifest.apk}`;
   const bytes = statSync(`public${apk}`).size;
-  return { ...milestone, archiveRecords: existsSync(`public${base}/manifest.json`), base, apk, date: milestone.manifest.milestone.slice(0, 10), testEvidence: 'testEvidence' in milestone.manifest ? milestone.manifest.testEvidence : null, signature: existsSync(`public${base}/signature-verification.txt`), size: `${(bytes / 1024 / 1024).toFixed(1)} MiB` };
+  const knownIssues = milestone.manifest.knownIssues.filter((issue) => !/^(?:Session-local )?progress resets on relaunch\.?$/i.test(issue));
+  return { ...milestone, knownIssues, archiveRecords: existsSync(`public${base}/manifest.json`), base, apk, date: milestone.manifest.milestone.slice(0, 10), testEvidence: 'testEvidence' in milestone.manifest ? milestone.manifest.testEvidence : null, signature: existsSync(`public${base}/signature-verification.txt`), size: `${(bytes / 1024 / 1024).toFixed(1)} MiB` };
 });
 ---
 
@@ -162,7 +154,7 @@ const milestones = [
   <p>Newest first. Download an APK or expand a row to see what changed.</p>
 
   <div class="milestone-timeline">
-  {milestones.map(({ title, manifest, description, base, apk, size, date, testEvidence, signature, archiveRecords }, index) => (
+  {milestones.map(({ title, manifest, description, base, apk, size, date, testEvidence, signature, archiveRecords, knownIssues }, index) => (
     <details class="milestone" id={index === 0 ? 'latest-android-release' : undefined} open={index === 0}>
       <summary>
         <span class="milestone-label">
@@ -174,11 +166,10 @@ const milestones = [
         </a>
       </summary>
       <div class="milestone-body">
-        {manifest.chapter && <p><strong>{manifest.chapter}</strong></p>}
         <p>{description}</p>
-        {manifest.knownIssues.length > 0 && <>
+        {knownIssues.length > 0 && <>
           <p><strong>Known issues</strong></p>
-          <ul>{manifest.knownIssues.map((issue) => <li>{issue}</li>)}</ul>
+          <ul>{knownIssues.map((issue) => <li>{issue}</li>)}</ul>
         </>}
         <p class="milestone-checksum"><span>APK SHA-256:</span><code>{manifest.sha256}</code></p>
         {archiveRecords && <ul>

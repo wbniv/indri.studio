@@ -2,7 +2,7 @@
 import Base from '../../../../layouts/Base.astro';
 import GamePlayer from '@wbniv/browser-game-player/astro';
 import { verifyFywBundle } from '../../../../lib/fywBundle.mjs';
-const { frame } = verifyFywBundle('public/apps/finding-your-way/play');
+const { frame, version } = verifyFywBundle('public/apps/finding-your-way/play');
 ---
 <Base title="Finding Your Way — Play the 3D game" description="Explore Finding Your Way in your browser. No installation needed.">
   <main class="fyw-browser-page">
@@ -10,7 +10,8 @@ const { frame } = verifyFywBundle('public/apps/finding-your-way/play');
     <h1>Finding Your Way</h1>
     <p>Play the 3D chapter in your browser. Choose Play below to load the game. Play opens fullscreen when your browser supports it. Use the joystick or arrow keys to move and Select or Space to interact.</p>
     <GamePlayer src={frame} title="Finding Your Way 3D player" class="fyw-player-host" frameClass="fyw-browser-frame" />
-    <p class="fyw-browser-note">Requires WebGL 2. Play with a keyboard, gamepad or touchscreen. Progress resets on restart.</p>
+    <p class="fyw-browser-version">v{version}</p>
+    <p class="fyw-browser-note">Requires WebGL 2. Play with a keyboard, gamepad or touchscreen.</p>
     <p><a href="/apps/finding-your-way/#android-builds-title" data-astro-reload>Android downloads</a> · <a href="/apps/finding-your-way/" data-astro-reload>Text edition and other ways to play</a></p>
   </main>
 </Base>
@@ -21,6 +22,7 @@ const { frame } = verifyFywBundle('public/apps/finding-your-way/play');
 :global(.fyw-player-host) { margin: 24px 0; border: 1px solid #746f5e; border-radius: 8px; overflow: hidden; }
 /* No border on the frame itself: the player reports its content height, and a frame border would clip it. */
 :global(.fyw-browser-frame) { display: block; width: 100%; height: calc(56.25vw + 144px); min-height: 320px; border: 0; background: #29261f; }
+.fyw-browser-version { margin: -12px 0 20px; text-align: right; font-size: 0.875rem; opacity: 0.75; }
 .fyw-browser-note { font-size: 0.95rem; }
 @media(max-width:600px) { .fyw-browser-page { padding: 24px 12px; } }
 </style>

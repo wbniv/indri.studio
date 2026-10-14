@@ -3,6 +3,10 @@ import { verifyManifest } from '@wbniv/browser-game-player/bundle';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
+const releases = {
+  '0.8': { apk: '1ee7d292dfb793b05087bd89485a8c7b730b5fe0c9cec213ebe20eeb0078dfe5' },
+  '0.9': { apk: '3ef29dc87d55934a98d844e489f701c4d0c0893537ba6a5bd567ea609ddfb25b', engine: 'ba25f99bea241403c2865622c675711c7aaf0176' },
+};
 const required = ['config.json', 'frame.html', 'player.css', 'player.js', 'title-preview.jpg', 'wf_game.data', 'wf_game.js', 'wf_game.wasm'];
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 // Match the build receipt's Python json.dumps(files, sort_keys=True) identity.
@@ -21,24 +25,26 @@ export function verifyFywBundle(base) {
     }
     const config = JSON.parse(readFileSync(join(base, 'bundles', player.receipt.bundleId, 'config.json'), 'utf8'));
     if (config.adapter !== 'worldfoundry' || JSON.stringify(config.arguments) !== JSON.stringify(original.receipt.runtimeArguments) || player.receipt.provenance.engineCommit !== original.receipt.engineCommit || player.receipt.provenance.stackBytes !== 65536) throw Error('Finding Your Way launch/provenance mismatch');
-    return player;
+    return { ...player, version: original.receipt.version };
   }
   return verifyLegacyBundle(base, manifest);
 }
 function verifyLegacyBundle(base, manifest) {
-  if (!/^v0\.8-[a-f0-9]{16}$/.test(manifest.bundleId)) throw Error('Invalid Finding Your Way bundle ID');
+  if (!/^v0\.(8|9)-[a-f0-9]{16}$/.test(manifest.bundleId)) throw Error('Invalid Finding Your Way bundle ID');
   const directory = join(base, 'bundles', manifest.bundleId);
   const receipt = JSON.parse(readFileSync(join(directory, 'receipt.json'), 'utf8'));
-  if (receipt.bundleId !== manifest.bundleId || receipt.version !== '0.8' ||
+  const release = releases[receipt.version];
+  if (!release || receipt.bundleId !== manifest.bundleId ||
       !/^[a-f0-9]{40}$/.test(receipt.engineCommit) ||
-      receipt.apkSha256 !== '1ee7d292dfb793b05087bd89485a8c7b730b5fe0c9cec213ebe20eeb0078dfe5')
+      receipt.apkSha256 !== release.apk ||
+      (release.engine && receipt.engineCommit !== release.engine))
     throw Error('Finding Your Way release provenance mismatch');
   if (receipt.addressSanitizer !== false || receipt.stackBytes !== 65536 || receipt.stackOverflowCheck !== 2)
     throw Error('Finding Your Way requires the remediated 64 KiB release configuration');
   if (!receipt.files || Object.keys(receipt.files).sort().join() !== required.join() ||
       readdirSync(directory).sort().join() !== [...required, 'receipt.json'].sort().join())
     throw Error('Incomplete or unexpected Finding Your Way bundle files');
-  if ('v0.8-' + digest(canonical(receipt.files)).slice(0, 16) !== receipt.bundleId)
+  if ('v' + receipt.version + '-' + digest(canonical(receipt.files)).slice(0, 16) !== receipt.bundleId)
     throw Error('Finding Your Way bundle identity mismatch');
   let total = 0;
   for (const name of required) {
@@ -52,9 +58,9 @@ function verifyLegacyBundle(base, manifest) {
   }
   if (receipt.totalBytes !== total) throw Error('Finding Your Way bundle size mismatch');
   const config = JSON.parse(readFileSync(join(directory, 'config.json'), 'utf8'));
-  if (config.version !== '0.8' || !Array.isArray(config.arguments) ||
+  if (config.version !== receipt.version || !Array.isArray(config.arguments) ||
       !config.arguments.every(arg => typeof arg === 'string') ||
       JSON.stringify(config.arguments) !== JSON.stringify(receipt.runtimeArguments))
     throw Error('Finding Your Way launch configuration mismatch');
-  return { receipt, frame: `/apps/finding-your-way/play/bundles/${receipt.bundleId}/frame.html` };
+  return { receipt, version: receipt.version, frame: `/apps/finding-your-way/play/bundles/${receipt.bundleId}/frame.html` };
 }
