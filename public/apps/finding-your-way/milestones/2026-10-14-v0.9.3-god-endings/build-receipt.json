@@ -1,0 +1,2669 @@
+{
+  "apk": "/home/will/finding-your-way/game/milestones/2026-10-14-v0.9.3-god-endings/parmenides-v0.9.3-5a3f879c1a0be268.apk",
+  "sha256": "5a3f879c1a0be268709e213305c0bcc5569e2caf90b00ba06004be601806a72a",
+  "package": "org.worldfoundry.wf_game.parmenides",
+  "nativeCode": true,
+  "runtimeApk": "/tmp/fyw-v09-release/runtime-template-16k.apk",
+  "runtimeApkSha256": "d4a48003dd706489930a9f65580360143b7ebebfb167bec141e405f8f0551e95",
+  "nativeLibraries": {
+    "lib/arm64-v8a/libwf_game.so": "fd09e2590b50205fe4892e3df57d97aafcf63b33bebf02db7d2cca0997fe18ae",
+    "lib/armeabi-v7a/libwf_game.so": "56d118c344716da80fa1a4b22ac2b0b493654512c0e7e6b21a30d24e39e20c42"
+  },
+  "levelSha256": "2a1232a9bcf12d95d313c9d1a8803269e468864e44d1ac63d4d97d6bb92ae237",
+  "engineSourceModified": true,
+  "engineSourceCommit": "ba25f99bea241403c2865622c675711c7aaf0176",
+  "engineProvenance": {
+    "sourceCommit": "ba25f99bea241403c2865622c675711c7aaf0176",
+    "sourceFilesSha256": {
+      "CMakeLists.txt": "605bb14bb44bbe67904fa2be1ae14e4dd7fe7f74f705448e21075f67e2adf7b4",
+      "engine/runtime_diagnostics.cpp": "452b67e1de18d57d34afe52d8f4257a4d4649a3ded080605c012b7690978c674",
+      "engine/runtime_diagnostics.hpp": "e9fa4939fa99151479f913bcaff072e2496732c079d665052abeeedce483cc98",
+      "engine/runtime_options.hpp": "166c0229acaddb237bae71e3b947dddf00b42f68fadd6e88b44fda21d8377af1",
+      "engine/runtime_properties.cpp": "4343e39c2ff31e4753a18d187c07eb48fd7ba8d39c2bd81f82da91c902a59ced",
+      "engine/runtime_property_form.hpp": "51569e6cb3946f402b11d2ee7bf603f1cdc5d7597fa96d3747623b98398bd96a",
+      "engine/stubs/runtime_diagnostics_adapter.cc": "6ca6a1dc8f8ecdfff701eebb342a7d15894a93e58ef52fd47d95d849e5abca94",
+      "engine/stubs/scripting_zforth.cc": "f0a327ef72bdee0393f0c84c9db466a85f1513b3872ca39d7429fd188bb61f1e",
+      "scripts/check-baseline-runtime-desktop.py": "50ce5ef2ecca764353cf5b455ff4941cb1f762725050a83eb3b6e1491fd7bec2",
+      "scripts/check-sea-urchin-runtime.py": "d1c1246f5a36ed8afb6d5daa3ce76e350883a3927c4dc8a531afa50a9fa2cc5c",
+      "scripts/package-growing-plants-profiles.py": "b23e837f5e03aa06ef9a088cccee4e1a3f032f3dbbbd76dbd13aa3dcbea1dec4",
+      "scripts/package-plant-resolution-comparison.py": "da08600cd4b3cebf668f620250e18e82bc4e0a5de9e8eb4ccfd44b133a0861e8",
+      "scripts/package-sea-urchin-phase.py": "8ae1ab9cbcdef3eae71c2eabab7f700c645607d5b34891996cce170f1adcb56e",
+      "scripts/plant_settings_catalog.py": "5cb4fb38ecc4c6f6479588ef2d90dfd61c7484d048000a90e83823c7483c266b",
+      "scripts/summarise-plant-resolution-comparison.py": "fc990ba4fd350a0c870a6a22832a50f34532082aa0d3a1d34e5ca1a5b7bae270",
+      "tests/bitmap_text_test.cc": "709c6acb5458f49720d856c62ab0355fa430e95410ab7ca88c70dc0c57d3b9eb",
+      "tests/opaque_material_gl.cc": "9aae677c5c265f9d4aef821f4502946ea772f9b99e3323c6e218445f1a278848",
+      "tests/plant_catalog_test.cpp": "fd5a5817fd189ccdef613a08125a7d156420d8da4c325431a8d4527156c43d3e",
+      "tests/runtime_diagnostics_host.cc": "4a5083de31ebc7c8ebafb0c0ea2df8dfdcc7b094cc5cddcadb7dc1ca415fd178",
+      "tests/runtime_options_test.cpp": "c5b86792b45899b676b84e9c0c65ab2df0d46a0c57df9309f46aa81e74f5176a",
+      "tests/runtime_property_host_test.cpp": "971573e218b133eabd930b856fcf9c72bcc12e549c10ab12b80891c5a19c692e",
+      "tests/test_aquarium_plants.py": "668598a002a2187f4b7d1763f6f15cc3595903b9cfd8e7ae0ee25f31fea8536c",
+      "tests/test_plant_catalog.py": "bef37a6426090dc7b42c3cf70c34a54f21fb6fd433a7dabfeec72f5933b8531d",
+      "tests/test_runtime_diagnostics.py": "47ee4fd42d67b38284c029550f184264c76fc45ac6cd38c05f9ac804887e64e4",
+      "tests/test_runtime_options.py": "24a79cc58aea697d2322dc87b9f8cafde09c5667cb81ce4549be42c8ae2b927d",
+      "wflevels/aquarium-menu-cd.iff": "81484c94935fa41ff5488c3a2721b781e5cf7fdf5c67e667fd0f62d4c63603b4",
+      "wflevels/aquarium_plants-standalone.iff": "dfeaa1add1bf75f573226067d4f9f3a64dcf66a5ca540ac522efe862ee727c35",
+      "wflevels/aquarium_plants/build.sh": "b2ccbcf2a9b8ad47ec4b9694ff1085d44e7769ebe4fae51c35d158fbcc5fb142",
+      "wflevels/aquarium_plants/settings-bindings.json": "b29e592e7814ce0df087fcca72f3ac07438152c4ac470cf16a6f26febe84292f",
+      "wflevels/aquarium_plants/settings-catalog.inc": "62c9cbf8833528952533c51978c2b7d4f8f23da346aa0cc65ab86c081fcfccff",
+      "wflevels/aquarium_plants/settings.oad": "fa451d3cdcae61ff77acc021966dd3233319eaf4756064f2f16f48913e64d777",
+      "wflevels/aquarium_plants/settings.oas": "868bf8626775b00c83ddc35bd553465d42ed08ef889d2255a39aed7e8aebf566",
+      "wflevels/aquarium_plants/settings.rprp": "e532d70af79ee364b72dc10c620ee21376ac2643841341ad9eb2cb7d6efaf35e",
+      "wflevels/baseline-standalone.iff": "08226eba8bc6e7469ed595c55c0ec57b517d21fc6fb226149cdaae5c0dd06120",
+      "wflevels/baseline/build.py": "eb7878710f3b743f184899c81af132a17cc68969582df94bb8395db603670d21",
+      "wflevels/baseline/docs/generic-settings-integration.md": "ce6d3d5b75fafeabeda02c8ce7f9b146e09a16d7001b502ece0e2da62969c1a7",
+      "wflevels/baseline/runtime-options.json": "37b768a2fdb3dff7beb11e887aa696df87d0653a4321b4810ea83ccabb01e3da",
+      "wflevels/baseline/runtime_options_fixture.py": "0a76c435f18d917aec8ae767e37e8b4896a22648c2da66f416337ce1a288e509",
+      "wflevels/baseline/settings-bindings.json": "bb08102ff85df4b69a23554046091fa1151722165c93f5430aa295c406b5b630",
+      "wflevels/baseline/settings-gallery-bindings.json": "e93aa8dc665088ded69bbcae9dbe6b14b07166a42b6297833e9fdb9492aa996f",
+      "wflevels/baseline/settings-gallery.oad": "aaf5f949a5d5d9d69046178cb26eff7458ae939905aa699edcfd2f1881e59297",
+      "wflevels/baseline/settings-gallery.oas": "5f162a8f1ae76ce8af30e15d427ff8356f89aef88c2f0e2c0cd90fb226cee45f",
+      "wflevels/baseline/settings.oad": "71a614f8a553d402328706b136109434d64dd6451f2743f3496035fe5c96f4d0",
+      "wflevels/baseline/settings.oas": "c8b65157cd7426968f82c78ed03f98cdd106d9cfb8d42310c0a02a03468bdcdd",
+      "wflevels/baseline/settings_fixture.py": "9751d141002cc235561eb6f74683e05446515d3eb4661084356633147dff2915",
+      "wfsource/source/cpplib/stdstrm.cc": "4d0589c53a8dab4b03946cf9ef161bb8966ed3ca740497ae7f6b661cafeb28ea",
+      "wfsource/source/cpplib/stdstrm.hp": "6e03cc1614830e8f458167058f59617bef955fcbcb13f830815b94c874d2ee51",
+      "wfsource/source/game/bitmap_presenter.cc": "913f67e234e43c1ef51890ee0e953102a1c55ad951dd4a2b11035ade757df9e9",
+      "wfsource/source/game/bitmap_presenter.hp": "a9ef8b8f30ba30b9c024a4b25903faab7626dfca700ec50f829926f4f05c757d",
+      "wfsource/source/game/bitmap_text.cc": "ee3f9b0a754d78f1947775ab13398636f5025fd841dd7b220d6eb4b312229b39",
+      "wfsource/source/game/bitmap_text.hp": "39e4b924b7bb2dac5a532bbff3e439fb178aba12feadf3875cdbf549e5947cfc",
+      "wfsource/source/game/fps_overlay.cc": "dfc053020730872d1ee8b57006056d4212bf85cd1ab4d69f52ae1d66e8eeb33f",
+      "wfsource/source/game/fps_overlay.hp": "864787e7339cb14a8334a831cf2d9f46b8344e5a4f6174b9779546529087042f",
+      "wfsource/source/game/game.cc": "3cdcab971622aab603fa80edf72d4831eaa5ec7ae8f9bd28e65b856f55eb2fdc",
+      "wfsource/source/game/level.cc": "69607e33924156a91cd47065d73c7caa59c6d8390b09a6e7f3d338fd4987a2a8",
+      "wfsource/source/game/level.hp": "d5b20e07dccde90b2da6166db4392e4c989b199b9ed2b3a779d6c2cadcc6be06",
+      "wfsource/source/game/main.cc": "2b52830a96c1b435425a3a88c29a722a0e7ea31979a5a46b25c431891210a893",
+      "wfsource/source/game/plant_settings.h": "28f9692666904ed4d437e534a7761dbd02d313fb1b23be7931237d895735df9a",
+      "wfsource/source/game/plant_ui.cc": "0ec71ccc84fa12da6b9a1eb19d5905a51fdd876edc95704b97ebb6431fdaae5d",
+      "wfsource/source/game/runtime_options.cc": "42f9690f8989a44d5228649d9d7dabd375fb6a5120f03896190722664c52997b",
+      "wfsource/source/game/runtime_profile.hp": "7fb670505b4519b681cea23d167d2638359a57345fb6a33869b42b6ddd1ca7d6",
+      "wfsource/source/game/runtime_property_ui.cc": "5deb4117b755641763e379761cac36ee698270150799bf84c3ae3435592c4883",
+      "wfsource/source/game/runtime_settings_ui.cc": "582438b88fa2e545709511837c4537b70d554390e23750a4cb33d49a511116b9",
+      "wfsource/source/gfx/camera.cc": "a4583f77361714d1f2b059d4d4ce98014c4d25ea7396a51fdad227552ae86c29",
+      "wfsource/source/gfx/gl/mesa.cc": "e9907833ea769c56494c729372a44899921e9dcd8baf61d860a810b96ad4557e",
+      "wfsource/source/gfx/glpipeline/backend_factory.cc": "1676ece7d5a3751fc224eb41280765474ffaba17d11dcfdfd8d7ee6b0e9d661f",
+      "wfsource/source/gfx/glpipeline/backend_modern.cc": "418f144abffbcf65b298408111e01f50c4548f99b5b665688d3faeb5f34b3582",
+      "wfsource/source/gfx/glpipeline/static_mesh.cc": "63ea07269ba4a955aca2079a322309453a0609551d50bbfc2f76e9ef312aa508",
+      "wfsource/source/gfx/metal/backend_metal.mm": "ce36d1729fa9f4c03e55a26c12be4ea7680e8e38bf5d39268b71a5396f5773de",
+      "wfsource/source/gfx/renderer_backend.hp": "6d0f0c581ea68c0d69ba8df519b6fd6ba5fc88757cca266ef15fa34bd6d98035",
+      "wfsource/source/gfx/static_mesh.hp": "a8fdc3968a94c6b990c40126b1c8e1f62a73efe09f281a06a6cdfcaaf0b604bd",
+      "wfsource/source/hal/android/native_app_entry.cc": "52a943624b31f9f9cb5b7a4367cfadaa241ced240e0c9fb2d1cf2c591f9ec866"
+    },
+    "runtimeApkSha256": "d4a48003dd706489930a9f65580360143b7ebebfb167bec141e405f8f0551e95",
+    "nativeLibraries": {
+      "lib/arm64-v8a/libwf_game.so": "fd09e2590b50205fe4892e3df57d97aafcf63b33bebf02db7d2cca0997fe18ae",
+      "lib/armeabi-v7a/libwf_game.so": "56d118c344716da80fa1a4b22ac2b0b493654512c0e7e6b21a30d24e39e20c42"
+    },
+    "desktopExecutableSha256": "28b0df43cb1e7904eeb40a46104547e6b9251515ca5c8b7f0238743b56dc1dc2",
+    "baseShellApkSha256": "88417d9d590dc35eb74b10451522bf03255501edbd71e2a4843496ac4b5e57c6",
+    "unchangedDexSha256": {},
+    "build": {
+      "container": "wf-e3-merge-test:local",
+      "ndk": "26.2.11394342",
+      "rust": "1.97.1",
+      "api": 26,
+      "configuration": "Release, Forth-only, Jolt, GL/GLES, no runtime font rasterizer"
+    },
+    "verification": {
+      "desktop": "See font-runtime-evidence/results.json; device validation pending"
+    },
+    "originalDesktopExecutableSha256": "ceb0bf33a95ebdedbc0560f17220be1ccda080f6826b792d5ba52dfc60828c67",
+    "desktopRebuild": {
+      "sourceCommit": "6459b76cbae73ef3141a55b8ca3134c84351f34c",
+      "sourceArchiveSha256": "c00b82fea35349d9b28524bfe25206c94cf18fdd5180c982885ef9369c3897e8",
+      "executable": "/home/will/fyw-style-proof/game/parmenides-slice/build/desktop-runtime/6459b76cbae7-fast-debug/engine/wf_game",
+      "sha256": "28b0df43cb1e7904eeb40a46104547e6b9251515ca5c8b7f0238743b56dc1dc2",
+      "unchangedEngineSource": true,
+      "environment": {
+        "WF_ENABLE_FENNEL": "0",
+        "WF_JS_ENGINE": "none",
+        "WF_WASM_ENGINE": "none",
+        "WF_ENABLE_WREN": "0",
+        "WF_FORTH_ENGINE": "zforth",
+        "WF_PILOT_ENGINE": "builtin",
+        "WF_PHYSICS_ENGINE": "jolt",
+        "WF_ASAN": "0"
+      }
+    },
+    "enginePatchSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "releaseRuntimeSource": "/tmp/fyw-v09-release/runtime-template-16k.apk",
+    "arm64LinkerFlags": "-Wl,-z,max-page-size=16384"
+  },
+  "version": "0.9.3",
+  "versionCode": 107,
+  "artStage": "chapter-art",
+  "roomLayout": "scene9",
+  "detailScale": 1.0,
+  "levelDataCompression": "stored",
+  "runtimeArguments": [
+    "--vram-width=5120",
+    "--vram-height=2048",
+    "--vram-slot-width=1024",
+    "--vram-slot-height=512",
+    "--vram-perm-width=2048",
+    "--vram-perm-height=1024",
+    "--static-mesh=1",
+    "--static-mesh-shared-index=1"
+  ],
+  "textureSlots": {
+    "permanent": [
+      2048,
+      1024
+    ],
+    "transient": [
+      1024,
+      512
+    ],
+    "rounding": "power-of-two",
+    "exportedImages": {
+      "Perm": [
+        2048,
+        1024
+      ],
+      "Room0": [
+        1024,
+        512
+      ],
+      "Room1": [
+        512,
+        256
+      ]
+    },
+    "display": [
+      5120,
+      2048
+    ]
+  },
+  "art": {
+    "stage": "chapter-art",
+    "base": "polish",
+    "disposition": {
+      "stage": "chapter-art",
+      "areas": [
+        "Being",
+        "Both",
+        "NotBeing",
+        "surgery"
+      ],
+      "added": [
+        "being_sky",
+        "being_hall_dressing",
+        "both_hall_dressing",
+        "void_shards_dressing",
+        "surgery_room_dressing"
+      ],
+      "painted": {
+        "being_ocean": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "both_floor": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "surgery_ceiling": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "visibility": {
+        "being": 255,
+        "both": 256,
+        "void": 258,
+        "surgery": 159
+      },
+      "collision": "new visual meshes have unreachable bounds; existing support, doors and encounters unchanged",
+      "sources": [
+        "art_being_sky.tga",
+        "art_being_marble.tga",
+        "art_both_floor.tga",
+        "art_surgery_tile.tga"
+      ],
+      "previousIteration": {
+        "stage": "chapter-art",
+        "areas": [
+          "God ascent and summit"
+        ],
+        "added": [
+          "god_sky",
+          "god_landscape"
+        ],
+        "painted": {
+          "god_path_sides": [
+            2,
+            3
+          ],
+          "god_rising_path": [
+            0,
+            1
+          ],
+          "god_entry_landing": [
+            2,
+            3
+          ],
+          "god_upper_landing": [
+            2,
+            3
+          ]
+        },
+        "visibility": {
+          "god": 495
+        },
+        "collision": "existing slope and landings unchanged; new landscape has nonphysical bounds outside the route",
+        "sources": [
+          "art_god_sky.tga",
+          "art_god_path.tga"
+        ],
+        "previousIteration": {
+          "stage": "chapter-art",
+          "areas": [
+            "Reason ordered",
+            "Reason grove",
+            "Truth court"
+          ],
+          "added": [
+            "reason_sky",
+            "reason_grove_dressing",
+            "truth_court_dressing"
+          ],
+          "painted": {
+            "reason_floor": [
+              2,
+              3
+            ],
+            "court_floor": [
+              2,
+              3
+            ]
+          },
+          "visibility": {
+            "reason": 493,
+            "grove": 163,
+            "truth": 494
+          },
+          "collision": "new dressing has explicit unreachable platform bounds; existing floor and encounter bounds unchanged",
+          "sources": [
+            "art_reason_sky.tga",
+            "art_reason_tile.tga",
+            "art_truth_wood.tga"
+          ],
+          "previousIteration": {
+            "stage": "chapter-art",
+            "area": "Love street",
+            "added": [
+              "love_sky",
+              "love_street_dressing"
+            ],
+            "painted": {
+              "love_road": [
+                2,
+                3
+              ],
+              "pavement94": [
+                2,
+                3
+              ],
+              "pavement106": [
+                2,
+                3
+              ]
+            },
+            "labels_scaled": [
+              "first_sign",
+              "starlet_sign",
+              "paper_sign"
+            ],
+            "sky_visibility": {
+              "mailbox": 492,
+              "forth": "102 read-mailbox 1 = 492 write-mailbox"
+            },
+            "collision": "new visual dressing uses explicit unreachable platform bounds; existing street and encounter colliders unchanged",
+            "sources": [
+              "art_love_sky.tga",
+              "art_love_paving.tga",
+              "art_surfaces.tga"
+            ],
+            "previousIteration": {
+              "stage": "style-proof",
+              "base": "polish",
+              "added": [
+                "temple_sky",
+                "temple_shell",
+                "temple_shrine",
+                "temple_pier_0",
+                "temple_pier_1",
+                "temple_pier_shells",
+                "temple_torch_0",
+                "temple_torch_1",
+                "temple_dais"
+              ],
+              "replaced": [
+                "pillar0",
+                "pillar1",
+                "pillar2",
+                "pillar3",
+                "cloth0v0",
+                "cloth0v1",
+                "cloth1v0",
+                "cloth1v1",
+                "cloth2v0",
+                "cloth2v1",
+                "cloth3v0",
+                "cloth3v1",
+                "Goddess",
+                "GoddessWingL",
+                "GoddessWingR"
+              ],
+              "removed": [
+                "temple_mosaic_courses"
+              ],
+              "sheets": {
+                "art_sky": {
+                  "size": [
+                    256,
+                    128
+                  ],
+                  "prelit": true,
+                  "meshes": [
+                    "temple_sky"
+                  ],
+                  "regions": {
+                    "sky": [
+                      0,
+                      0,
+                      256,
+                      128
+                    ]
+                  },
+                  "continuous": [
+                    "sky"
+                  ]
+                },
+                "art_temple": {
+                  "size": [
+                    512,
+                    512
+                  ],
+                  "prelit": true,
+                  "meshes": [
+                    "temple_shell",
+                    "temple_shrine",
+                    "temple_pier_0",
+                    "temple_pier_1",
+                    "temple_pier_shells",
+                    "temple_torch_0",
+                    "temple_torch_1",
+                    "temple_dais"
+                  ],
+                  "regions": {
+                    "smart": [
+                      0,
+                      4,
+                      480,
+                      196
+                    ],
+                    "shrine": [
+                      0,
+                      196,
+                      512,
+                      512
+                    ],
+                    "swatch_gold": [
+                      484,
+                      4,
+                      508,
+                      23
+                    ],
+                    "swatch_gold_dark": [
+                      484,
+                      27,
+                      508,
+                      46
+                    ],
+                    "swatch_bronze": [
+                      484,
+                      50,
+                      508,
+                      69
+                    ],
+                    "swatch_iron": [
+                      484,
+                      73,
+                      508,
+                      92
+                    ],
+                    "swatch_flame": [
+                      484,
+                      96,
+                      508,
+                      115
+                    ],
+                    "swatch_ember": [
+                      484,
+                      119,
+                      508,
+                      138
+                    ],
+                    "swatch_stone_light": [
+                      484,
+                      142,
+                      508,
+                      161
+                    ]
+                  },
+                  "continuous": []
+                },
+                "art_tapestries": {
+                  "size": [
+                    512,
+                    256
+                  ],
+                  "prelit": true,
+                  "meshes": [
+                    "cloth0v0",
+                    "cloth0v1",
+                    "cloth1v0",
+                    "cloth1v1",
+                    "cloth2v0",
+                    "cloth2v1",
+                    "cloth3v0",
+                    "cloth3v1"
+                  ],
+                  "regions": {
+                    "banner_0": [
+                      0,
+                      0,
+                      64,
+                      256
+                    ],
+                    "banner_1": [
+                      64,
+                      0,
+                      128,
+                      256
+                    ],
+                    "banner_2": [
+                      128,
+                      0,
+                      192,
+                      256
+                    ],
+                    "banner_3": [
+                      192,
+                      0,
+                      256,
+                      256
+                    ],
+                    "banner_4": [
+                      256,
+                      0,
+                      320,
+                      256
+                    ],
+                    "banner_5": [
+                      320,
+                      0,
+                      384,
+                      256
+                    ],
+                    "banner_6": [
+                      384,
+                      0,
+                      448,
+                      256
+                    ],
+                    "banner_7": [
+                      448,
+                      0,
+                      512,
+                      256
+                    ]
+                  },
+                  "continuous": [
+                    "banner_0",
+                    "banner_1",
+                    "banner_2",
+                    "banner_3",
+                    "banner_4",
+                    "banner_5",
+                    "banner_6",
+                    "banner_7"
+                  ]
+                },
+                "art_temple_floor": {
+                  "size": [
+                    512,
+                    512
+                  ],
+                  "prelit": true,
+                  "meshes": [
+                    "temple_floor",
+                    "temple_walk"
+                  ],
+                  "regions": {
+                    "floor": [
+                      0,
+                      0,
+                      512,
+                      512
+                    ]
+                  },
+                  "continuous": [
+                    "floor"
+                  ]
+                },
+                "art_goddess": {
+                  "size": [
+                    512,
+                    512
+                  ],
+                  "prelit": true,
+                  "meshes": [
+                    "Goddess",
+                    "GoddessWingL",
+                    "GoddessWingR"
+                  ],
+                  "regions": {
+                    "body": [
+                      0,
+                      0,
+                      512,
+                      352
+                    ],
+                    "wings (L/R shared, mirrored)": [
+                      0,
+                      352,
+                      512,
+                      512
+                    ]
+                  }
+                }
+              },
+              "exposure": 0.14823254544307696,
+              "floorReferenceLight": 6.2064642906188965,
+              "bakeSeconds": {
+                "goddess": 29.7,
+                "total": 102.1
+              },
+              "skyVisibility": {
+                "mailbox": 227,
+                "forth": "102 read-mailbox 0 = 207 read-mailbox & 227 write-mailbox"
+              },
+              "detailScale": 1.0,
+              "detailTable": {
+                "sky_azimuth": 16,
+                "sky_rings": 7,
+                "vault_segments": 16,
+                "end_wall_segments": 16,
+                "niche_segments": 12,
+                "crown_segments": 24,
+                "crown_chunks": 18,
+                "pier_courses": 3,
+                "pillar_sides": 12,
+                "brazier_sides": 12,
+                "flame_cards": 3,
+                "flame_points": 7,
+                "banner_hem_points": 1,
+                "gown_sides": 28,
+                "gown_sections": 7,
+                "bodice_sides": 16,
+                "belt_sides": 16,
+                "sleeve_sides": 12,
+                "arm_sides": 8,
+                "hand_sides": 8,
+                "finger_segments": 2,
+                "face_sides": 14,
+                "face_rings": 7,
+                "feature_sides": 8,
+                "ear_sides": 8,
+                "hair_tiers": 7,
+                "hair_sides": 8,
+                "hair_lock_rings": 4,
+                "circlet_sides": 16,
+                "gem_sides": 8,
+                "gem_rings": 4,
+                "ear_rings": 3,
+                "finger_sides": 5,
+                "palm_rings": 4,
+                "halo_segments": 16,
+                "halo_points": 4,
+                "wing_primaries": 7,
+                "wing_secondaries": 6,
+                "wing_coverts": 5,
+                "wing_scapulars": 4,
+                "feather_points": 6,
+                "wing_arm_sides": 8,
+                "cape_rows": 5,
+                "cape_cols": 7,
+                "sash_rows": 5,
+                "sash_cols": 3
+              },
+              "collision": "Replaced goddess/wings and the eight banner actors keep their polish bboxes via replace(); two new niche piers are platform with 0.9 m boxes clear of the routes; braziers keep the torches' 0.5 m boxes (moved); the stair is a statplat mesh collider inside the phase 1 dais box (0.15 m rises under the 0.4 m step-up); shell, sky, shrine wall/crown and nave pier shells have boxes out of reach; nave pillar cores keep their 0.52 m base; floor triangles unchanged (UV/material only)",
+              "lighting": "All slice materials prelit: sky painted; floor, shell, dressing and goddess carry Cycles-baked light (crown key, torch pools, night ambient, occlusion); room lights and fog unchanged",
+              "originality": "Procedural original Blender geometry, PIL-painted motifs and Cycles bakes; no external imagery",
+              "previousIteration": {
+                "stage": "polish",
+                "replaced": [
+                  "surgeon_1",
+                  "surgeon_2",
+                  "surgeon_3",
+                  "both_triangles"
+                ],
+                "added": [],
+                "presentationMasked": [
+                  "temple_floor",
+                  "temple_walk",
+                  "temple_walls",
+                  "stained_glass",
+                  "temple_structure",
+                  "love_portal",
+                  "love_sign",
+                  "reason_purple",
+                  "reason_blue",
+                  "reason_sign",
+                  "truth_portal",
+                  "truth_sign",
+                  "Goddess",
+                  "GoddessWingL",
+                  "GoddessWingR",
+                  "goddess_sign",
+                  "pillar0",
+                  "cloth0v0",
+                  "cloth0v1",
+                  "pillar1",
+                  "cloth1v0",
+                  "cloth1v1",
+                  "pillar2",
+                  "cloth2v0",
+                  "cloth2v1",
+                  "pillar3",
+                  "cloth3v0",
+                  "cloth3v1",
+                  "love_floor",
+                  "love_road",
+                  "pavement94",
+                  "pavement106",
+                  "street_buildings",
+                  "FirstLove",
+                  "Starlet",
+                  "first_sign",
+                  "starlet_sign",
+                  "newspaper",
+                  "paper_sign",
+                  "biology_book",
+                  "being_exit",
+                  "being_sign",
+                  "notbeing_exit",
+                  "notbeing_sign",
+                  "back_portal",
+                  "back_sign",
+                  "reason_floor",
+                  "WhiteSelf",
+                  "white_sign",
+                  "WildSelf",
+                  "wild_sign",
+                  "YoungerSelf",
+                  "child_sign",
+                  "weather_machine",
+                  "apparatus_sign",
+                  "weather_order",
+                  "reason_grove",
+                  "reason_being",
+                  "rbeing_sign",
+                  "reason_notbeing",
+                  "rnotbeing_sign",
+                  "reason_back",
+                  "rback_sign",
+                  "court_floor",
+                  "court_structure",
+                  "gallery_bench_292_-5",
+                  "gallery_bench_292_-2",
+                  "gallery_bench_308_-5",
+                  "gallery_bench_308_-2",
+                  "OldLady",
+                  "purple_bag",
+                  "Prosecutor",
+                  "prosecutor_sign",
+                  "prosecutor_lectern",
+                  "DefenceAttorney",
+                  "defence_sign",
+                  "defenceattorney_lectern",
+                  "Student",
+                  "student_sign",
+                  "facts_table",
+                  "facts_document",
+                  "facts_lines",
+                  "facts_sign",
+                  "interpretations_table",
+                  "interpretations_document",
+                  "interpretations_lines",
+                  "interpretations_sign",
+                  "hearing_bench",
+                  "Judge",
+                  "judge_sign",
+                  "gavel",
+                  "presented_exhibits",
+                  "truth_being_exit",
+                  "tbeing_sign",
+                  "truth_notbeing_exit",
+                  "tnotbeing_sign",
+                  "truth_back_portal",
+                  "tback_sign",
+                  "god_portal",
+                  "god_sign",
+                  "mosaic_dim",
+                  "mosaic_lit",
+                  "god_path_sides",
+                  "god_rising_path",
+                  "god_entry_landing",
+                  "god_upper_landing",
+                  "god_poster_landing",
+                  "god_icon_landing",
+                  "god_question_landing",
+                  "god_forest",
+                  "god_distant_peak",
+                  "YoungMan",
+                  "young_sign",
+                  "HolyMan",
+                  "holy_sign",
+                  "god_poster",
+                  "god_poster_sign",
+                  "god_icon",
+                  "god_icon_sign",
+                  "god_question_plinth",
+                  "question_sign",
+                  "god_gbeing",
+                  "gbeing_sign",
+                  "god_gnotbeing",
+                  "gnotbeing_sign",
+                  "god_back",
+                  "gback_sign",
+                  "final_being",
+                  "final_being_sign",
+                  "final_both",
+                  "final_both_sign",
+                  "final_notbeing",
+                  "final_notbeing_sign",
+                  "aether_rings",
+                  "both_floor",
+                  "both_passage",
+                  "both_triangles",
+                  "void_darkness",
+                  "void_closing_portal",
+                  "void_visage",
+                  "surgery_floor",
+                  "patient_bed",
+                  "surgery_ceiling",
+                  "surgical_lamp",
+                  "surgeon_1",
+                  "surgeon_2",
+                  "surgeon_3",
+                  "surgical_instrument_tray",
+                  "proof_love_door",
+                  "proof_love_bench",
+                  "proof_newspaper_leaf",
+                  "temple_mosaic_courses",
+                  "love_door_-1_0",
+                  "love_door_-1_1",
+                  "love_door_-1_3",
+                  "love_door_1_0",
+                  "love_door_1_1",
+                  "love_door_1_2",
+                  "love_door_1_3",
+                  "LoveCrowd0",
+                  "LoveCrowd1",
+                  "LoveCrowd2",
+                  "LoveCrowd3",
+                  "DefenceAttorneyChair",
+                  "JudgeChair",
+                  "ReasonRain0",
+                  "ReasonRain1",
+                  "ReasonRain2",
+                  "ReasonCanopy5",
+                  "ReasonCanopy6",
+                  "ReasonCanopy7",
+                  "ReasonCanopy8",
+                  "ReasonCanopy9",
+                  "ReasonCanopy10",
+                  "ReasonCrack",
+                  "CourtGallery0",
+                  "CourtGallery1",
+                  "CourtGallery2",
+                  "GodCanopy0",
+                  "GodCanopy1",
+                  "GodCanopy2",
+                  "GodCanopy3",
+                  "GodCanopy4",
+                  "GodCanopy5",
+                  "GodCanopy6",
+                  "GodCanopy7",
+                  "GodCanopy8",
+                  "GodCanopy9",
+                  "GodCanopy10",
+                  "GodCanopy11",
+                  "GodCanopy12",
+                  "GodCanopy13",
+                  "GodCanopy14",
+                  "GodCanopy15",
+                  "GodCanopy16",
+                  "GodCanopy17",
+                  "GodCanopy18",
+                  "GodCanopy19",
+                  "GodCanopy20",
+                  "GodCanopy21",
+                  "GodCanopy22",
+                  "GodCanopy23",
+                  "GodRouteEdges",
+                  "GodSummitShrine",
+                  "AetherShell1",
+                  "AetherShell2",
+                  "final_beingCrown",
+                  "final_bothCrown",
+                  "final_notbeingCrown"
+                ],
+                "maskMailbox": 490,
+                "signMaskMailbox": 491,
+                "reused": [
+                  "A\u2013E painted materials, faces, architecture and exact source signage",
+                  "all actor transforms, authored collision fields and exact invisible support triangles",
+                  "fixed patient camera, lateral lamp and bounded E rigid motion",
+                  "canonical filled downward / outlined upward Both motif"
+                ],
+                "intentionallyInvisible": [
+                  "being_support",
+                  "void_support",
+                  "voice-only Old Woman"
+                ],
+                "limits": [
+                  "Extremely close or inside a threshold can still crop its geometry; camera collision is deferred",
+                  "Changed surgeon/Both render triangles may also change native statplat mesh collision; unchanged fields alone do not prove identical colliders",
+                  "No performance improvement or sustained measurement claimed"
+                ],
+                "pending": [
+                  "Actual native glove/motif framing and Being turn review",
+                  "Full both-view regression, matched media, device review and immutable archive"
+                ],
+                "previousIteration": {
+                  "stage": "endings-surgery",
+                  "replaced": [
+                    "being_ocean",
+                    "being_ripples",
+                    "being_light",
+                    "being_threshold",
+                    "both_passage",
+                    "both_triangles",
+                    "void_closing_portal",
+                    "void_visage",
+                    "surgeon_1",
+                    "surgeon_2",
+                    "surgeon_3",
+                    "surgical_lamp",
+                    "surgical_instrument_tray"
+                  ],
+                  "added": [],
+                  "reused": [
+                    "exact invisible Being/NotBeing support triangles and actor transforms",
+                    "unchanged surgery floor, bed, ceiling and fixed upward patient camera",
+                    "all A\u2013D artwork and complete source cards",
+                    "existing ending visibility and only 10b \u2192 101b coda routing"
+                  ],
+                  "intentionallyInvisible": [
+                    "being_support",
+                    "void_support",
+                    "voice-only Old Woman"
+                  ],
+                  "pending": [
+                    "Native export/render inspection, motion extremes and patient margins",
+                    "Both perspectives and all four source accounts with cancel/reopen/completion",
+                    "Exact production archive and coordinator-owned Chromecast installation"
+                  ],
+                  "originality": "Original procedural closed meshes and the established original painted atlas; no borrowed likeness or imagery",
+                  "previousIteration": {
+                    "stage": "god-final",
+                    "replaced": [
+                      "YoungMan",
+                      "HolyMan",
+                      "god_forest",
+                      "god_distant_peak",
+                      "god_poster",
+                      "god_icon",
+                      "aether_rings"
+                    ],
+                    "added": [
+                      "GodCanopy0",
+                      "GodCanopy1",
+                      "GodCanopy2",
+                      "GodCanopy3",
+                      "GodCanopy4",
+                      "GodCanopy5",
+                      "GodCanopy6",
+                      "GodCanopy7",
+                      "GodCanopy8",
+                      "GodCanopy9",
+                      "GodCanopy10",
+                      "GodCanopy11",
+                      "GodCanopy12",
+                      "GodCanopy13",
+                      "GodCanopy14",
+                      "GodCanopy15",
+                      "GodCanopy16",
+                      "GodCanopy17",
+                      "GodCanopy18",
+                      "GodCanopy19",
+                      "GodCanopy20",
+                      "GodCanopy21",
+                      "GodCanopy22",
+                      "GodCanopy23",
+                      "GodRouteEdges",
+                      "GodSummitShrine",
+                      "AetherShell1",
+                      "AetherShell2",
+                      "final_beingCrown",
+                      "final_bothCrown",
+                      "final_notbeingCrown"
+                    ],
+                    "reused": [
+                      "unchanged navigation triangles, path actor transforms and safe landings",
+                      "A\u2013C original artwork and all source dialogue",
+                      "sixteen exact final Temple histories and source-derived door links",
+                      "unchanged pinned runtime and heap limits"
+                    ],
+                    "originality": "Original closed geometry and original painted inspection atlas; no borrowed model, logo or likeness",
+                    "collision": "Existing path/landing render triangles unchanged. New dressing is mass-zero platform; inherited replacement boxes alone do not prove identical statplat collision.",
+                    "pending": [
+                      "Native/device review and phone budget",
+                      "Complete ending/surgery iteration E",
+                      "Final matching movie/catalog and Max feedback"
+                    ],
+                    "previousIteration": {
+                      "stage": "reason-truth",
+                      "replaced": [
+                        "WhiteSelf",
+                        "WildSelf",
+                        "YoungerSelf",
+                        "Prosecutor",
+                        "DefenceAttorney",
+                        "Student",
+                        "Judge",
+                        "OldLady",
+                        "purple_bag",
+                        "weather_machine",
+                        "weather_order",
+                        "reason_grove",
+                        "court_structure",
+                        "gallery_bench_292_-5",
+                        "gallery_bench_292_-2",
+                        "gallery_bench_308_-5",
+                        "gallery_bench_308_-2",
+                        "prosecutor_lectern",
+                        "defenceattorney_lectern",
+                        "facts_table",
+                        "interpretations_table",
+                        "facts_document",
+                        "interpretations_document",
+                        "facts_lines",
+                        "interpretations_lines",
+                        "hearing_bench",
+                        "gavel",
+                        "presented_exhibits"
+                      ],
+                      "added": [
+                        "DefenceAttorneyChair",
+                        "JudgeChair",
+                        "ReasonRain0",
+                        "ReasonRain1",
+                        "ReasonRain2",
+                        "ReasonCanopy5",
+                        "ReasonCanopy6",
+                        "ReasonCanopy7",
+                        "ReasonCanopy8",
+                        "ReasonCanopy9",
+                        "ReasonCanopy10",
+                        "ReasonCrack",
+                        "CourtGallery0",
+                        "CourtGallery1",
+                        "CourtGallery2"
+                      ],
+                      "reused": [
+                        "Player",
+                        "Goddess",
+                        "Temple and Love iteration-B kit",
+                        "all source dialogue meshes",
+                        "all narrative actor names and original collision bounds",
+                        "unchanged 8MiB Room0 / 16MiB permanent heap limits"
+                      ],
+                      "pending": [
+                        "Native/device rendering and phone cost",
+                        "God/final hub iteration D",
+                        "Endings/surgery iteration E",
+                        "Max feedback after all iterations"
+                      ],
+                      "originality": "Original procedural Blender closed solids; shared original painted diffuse; no borrowed likeness or unreported evidence",
+                      "collision": "All existing replacement collision boxes retained; new canopy, rain, chairs and gallery dressing mass zero",
+                      "previousIteration": {
+                        "stage": "temple-love",
+                        "scope": "Temple and Love; later realms retain baseline art",
+                        "replaced": [
+                          "temple_structure",
+                          "temple_walls",
+                          "stained_glass",
+                          "pillar0",
+                          "pillar1",
+                          "pillar2",
+                          "pillar3",
+                          "cloth0v0",
+                          "cloth0v1",
+                          "cloth1v0",
+                          "cloth1v1",
+                          "cloth2v0",
+                          "cloth2v1",
+                          "cloth3v0",
+                          "cloth3v1",
+                          "street_buildings",
+                          "FirstLove",
+                          "Starlet",
+                          "biology_book"
+                        ],
+                        "reused": [
+                          "Player",
+                          "Goddess",
+                          "GoddessWingL",
+                          "GoddessWingR",
+                          "proof_love_door",
+                          "proof_love_bench",
+                          "newspaper",
+                          "proof_newspaper_leaf"
+                        ],
+                        "pending": [
+                          "Pixel input/performance and Will style acceptance",
+                          "Final aether/foundation history art in iteration D",
+                          "Later realm/ending roster in iterations C\u2013E"
+                        ],
+                        "collision": "Existing replacement bounds and player footprint preserved; decorative crowd and kits are mass-zero",
+                        "originality": "Procedural original Blender geometry and painted diffuse; no celebrity likeness or external assets"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "acceptance": "review candidate; phone pending",
+    "textures": {
+      "textures": {
+        "art_surfaces.tga": {
+          "size": [
+            256,
+            256
+          ],
+          "sha256": "cb2f4449c23beacfe63cc404a43e2565dd2a083a06671ec656aacc50a3e6f36b"
+        },
+        "art_newspaper.tga": {
+          "size": [
+            128,
+            128
+          ],
+          "sha256": "dbe516ab841a01a0ff85cdf0c2448628e5ffb0b6d97478a21b3aeebc11cee5ac"
+        },
+        "art_tapestries.tga": {
+          "size": [
+            512,
+            256
+          ],
+          "sha256": "62765610c8320616edb78b704bd6550d0ef5cc0cd007cfcf709d1051a3e310be",
+          "note": "style proof: the four realm banners (target match)"
+        },
+        "art_god_inspections.tga": {
+          "size": [
+            128,
+            64
+          ],
+          "sha256": "8f94a0939b2818884db5885a69e237181a868b7d91295e94db006f7bbf33f63c"
+        }
+      },
+      "tiles": [
+        "stone",
+        "cream",
+        "gold",
+        "ink",
+        "blue",
+        "skin",
+        "hair",
+        "brown",
+        "red",
+        "street",
+        "green",
+        "purple",
+        "plaster",
+        "glass",
+        "steel",
+        "paper"
+      ],
+      "padding": 4
+    },
+    "motion": [
+      {
+        "name": "player rigid-part gait",
+        "actors": [
+          "PlayerArmL",
+          "PlayerArmR",
+          "PlayerLegL",
+          "PlayerLegR"
+        ],
+        "trigger": "native horizontal speed squared > 0.01; no modal dialogue/patient view",
+        "representation": "level Forth actor position and rotation; editable pivot geometry",
+        "timingHz": 0.9,
+        "amplitudeTurns": {
+          "arm": 0.022,
+          "leg": 0.032
+        },
+        "loop": true,
+        "reduced": "meaningful locomotion retained; idle neutral",
+        "measuredCost": "pending"
+      },
+      {
+        "name": "goddess wing settling",
+        "actors": [
+          "GoddessWingL",
+          "GoddessWingR"
+        ],
+        "trigger": "normal motion and no modal dialogue",
+        "representation": "level Forth rigid transform",
+        "timingHz": 0.1,
+        "amplitudeTurns": 0.006,
+        "phaseTurns": [
+          0.13,
+          0.31
+        ],
+        "loop": true,
+        "reduced": "neutral wing pose",
+        "measuredCost": "pending"
+      },
+      {
+        "name": "Love arrival dispersal",
+        "actors": [
+          "LoveCrowd0",
+          "LoveCrowd1",
+          "LoveCrowd2",
+          "LoveCrowd3"
+        ],
+        "trigger": "enter Love; quiet while a modal sheet is open",
+        "loop": false,
+        "timingSeconds": 3.2,
+        "representation": "level rigid translation toward four distinct street doors; staggered starts",
+        "reduced": "crowd immediately absent, doors closed",
+        "measuredCost": "phone pending"
+      },
+      {
+        "name": "First Love withdrawal and door closure",
+        "actors": [
+          "FirstLove",
+          "proof_love_door"
+        ],
+        "trigger": "complete First Love account; replay restores pose",
+        "loop": false,
+        "timingSeconds": 1.2,
+        "representation": "level position interpolation into actual west doorway; door opens then closes",
+        "reduced": "immediate final absent speaker/closed door; progression never waits",
+        "measuredCost": "phone pending"
+      },
+      {
+        "name": "Starlet withdrawal",
+        "actors": [
+          "Starlet",
+          "biology_book"
+        ],
+        "trigger": "complete starlet account; replay restores seated pose",
+        "loop": false,
+        "timingSeconds": 1.4,
+        "representation": "level rigid withdrawal toward east doorway; book follows exact actor transform",
+        "reduced": "immediate final absent speaker/book",
+        "measuredCost": "phone pending"
+      },
+      {
+        "name": "Readable street and Temple signs",
+        "actors": [
+          "love_sign",
+          "reason_sign",
+          "truth_sign",
+          "being_sign",
+          "notbeing_sign",
+          "back_sign"
+        ],
+        "trigger": "player heading",
+        "loop": false,
+        "representation": "eye-height billboard with unchanged sign pixels",
+        "reduced": "same wayfinding response",
+        "measuredCost": "phone pending"
+      },
+      {
+        "name": "Reason root/grove arrival",
+        "actors": [
+          "reason_grove",
+          "ReasonCanopy*"
+        ],
+        "trigger": "White-Clad Self completion; no modal sheet",
+        "loop": false,
+        "timingSeconds": 2.4,
+        "representation": "level rigid Z-scale from grounded contact; decorative progress cannot choose or gate a route",
+        "reduced": "immediate full grove",
+        "measuredCost": "phone pending"
+      },
+      {
+        "name": "Reason cloud and rain",
+        "actors": [
+          "ReasonRain0",
+          "ReasonRain1",
+          "ReasonRain2"
+        ],
+        "trigger": "apparatus operated; no modal sheet",
+        "loop": true,
+        "timingHz": 0.35,
+        "amplitudeMeters": 0.28,
+        "representation": "three staggered rigid drops",
+        "reduced": "stable illustrative drops",
+        "measuredCost": "phone pending"
+      },
+      {
+        "name": "Reason canopy settling",
+        "actors": [
+          "ReasonCanopy*"
+        ],
+        "trigger": "revealed grove; normal motion; no modal sheet",
+        "loop": true,
+        "timingHz": 0.07,
+        "amplitudeTurns": 0.002,
+        "representation": "local-pivot rigid yaw, staggered phases",
+        "reduced": "still canopy",
+        "measuredCost": "phone pending"
+      },
+      {
+        "name": "Court evidence/gavel response",
+        "actors": [
+          "gavel",
+          "presented_exhibits"
+        ],
+        "trigger": "both exhibits presented",
+        "loop": false,
+        "timingSeconds": 0.8,
+        "representation": "bounded meaningful grip rotation, returns to rest; exhibits use existing presentation visibility",
+        "reduced": "stable resting gavel and complete documents",
+        "measuredCost": "phone pending"
+      },
+      {
+        "name": "God canopy settling",
+        "actors": [
+          "GodCanopy*"
+        ],
+        "trigger": "God realm; normal motion; no modal sheet",
+        "loop": true,
+        "timingHz": 0.045,
+        "amplitudeTurns": 0.0015,
+        "representation": "24 independent local-pivot rigid yaw transforms",
+        "reduced": "stable canopy",
+        "measuredCost": "phone pending"
+      },
+      {
+        "name": "Aether shell rotation",
+        "actors": [
+          "aether_rings",
+          "AetherShell1",
+          "AetherShell2"
+        ],
+        "trigger": "source-affirmed God return; normal motion; no modal sheet",
+        "loop": true,
+        "timingHz": [
+          0.025,
+          -0.016,
+          0.009
+        ],
+        "representation": "three sparse opaque crystal arcs and embedded planets",
+        "reduced": "stable composed shells; visibility remains source-correct",
+        "measuredCost": "phone pending"
+      },
+      {
+        "name": "Bright release",
+        "actors": [
+          "being_light",
+          "being_ripples",
+          "being_threshold"
+        ],
+        "trigger": "Being only; normal motion; source completion remains independent",
+        "representation": "Four simulation seconds of rising/opening opaque geometry, followed by quiet contour/ocean endpoint; paused during source reading",
+        "reduced": "stable bright fragments and stationary contours",
+        "status": "native verification pending"
+      },
+      {
+        "name": "Closing portal and visage",
+        "actors": [
+          "void_closing_portal",
+          "void_visage"
+        ],
+        "trigger": "NotBeing entry; single restrained reveal; no repeat scare loop",
+        "representation": "1.5 simulation seconds of arch squeeze, then four seconds of original visage release; visual time advances only while the sheet is closed",
+        "reduced": "quiet original visage pose; full caption remains available",
+        "status": "native verification pending"
+      },
+      {
+        "name": "Surgeon breathing",
+        "actors": [
+          "surgeon_1",
+          "surgeon_2",
+          "surgeon_3"
+        ],
+        "trigger": "Surgery source account only; existing asynchronous idle",
+        "representation": "Asynchronous \u00b10.012 m breathing, \u00b10.0015/0.0008-turn rigid lean and glove repositioning; +0.7 m raise stays in vertices; paused during reading",
+        "reduced": "stable masked faces and lamp",
+        "status": "native motion extremes pending"
+      }
+    ],
+    "models": [
+      {
+        "name": "Player",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 504,
+        "triangles": 832,
+        "bbox": [
+          -0.27,
+          -0.3979422748,
+          0.0,
+          0.27,
+          0.3979422748,
+          1.8200000525
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "PlayerLegL",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 80,
+        "triangles": 144,
+        "bbox": [],
+        "pivot": "hip"
+      },
+      {
+        "name": "PlayerArmL",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 170,
+        "triangles": 252,
+        "bbox": [],
+        "pivot": "shoulder"
+      },
+      {
+        "name": "PlayerLegR",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 80,
+        "triangles": 144,
+        "bbox": [],
+        "pivot": "hip"
+      },
+      {
+        "name": "PlayerArmR",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 170,
+        "triangles": 252,
+        "bbox": [],
+        "pivot": "shoulder"
+      },
+      {
+        "name": "temple_floor",
+        "role": "environment/prop",
+        "materials": 2,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 36,
+        "triangles": 12,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "temple_walk",
+        "role": "environment/prop",
+        "materials": 2,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 36,
+        "triangles": 12,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "love_portal",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 612,
+        "triangles": 204,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "reason_purple",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 612,
+        "triangles": 204,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "reason_blue",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 612,
+        "triangles": 204,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "truth_portal",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 612,
+        "triangles": 204,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "Goddess",
+        "role": "principal (style proof remodel)",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 1608,
+        "triangles": 2700,
+        "bbox": [
+          -0.2549999952316284,
+          -0.40700000524520874,
+          0.054999999701976776,
+          0.410003125667572,
+          0.4934999942779541,
+          1.9073866605758667
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "GoddessWingL",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 472,
+        "triangles": 852,
+        "bbox": [
+          -0.15950000286102295,
+          -1.1080000400543213,
+          -0.23000000417232513,
+          0.10000000149011612,
+          0.09000000357627869,
+          0.8999999761581421
+        ],
+        "pivot": "wing root"
+      },
+      {
+        "name": "GoddessWingR",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 472,
+        "triangles": 852,
+        "bbox": [
+          -0.15950000286102295,
+          -0.09000000357627869,
+          -0.23000000417232513,
+          0.10000000149011612,
+          1.1080000400543213,
+          0.8999999761581421
+        ],
+        "pivot": "wing root"
+      },
+      {
+        "name": "pillar0",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 48,
+        "triangles": 88,
+        "bbox": [
+          -0.8500000238418579,
+          -0.375,
+          0.0,
+          0.8500000238418579,
+          0.375,
+          4.224999904632568
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "cloth0v0",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 38,
+        "triangles": 59,
+        "bbox": [
+          -0.75,
+          -0.45750001072883606,
+          1.0499999523162842,
+          0.75,
+          -0.4074999988079071,
+          3.950000047683716
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "cloth0v1",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 38,
+        "triangles": 59,
+        "bbox": [
+          -0.75,
+          -0.45750001072883606,
+          1.0499999523162842,
+          0.75,
+          -0.4074999988079071,
+          3.950000047683716
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "pillar1",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 48,
+        "triangles": 88,
+        "bbox": [
+          -0.8500000238418579,
+          -0.375,
+          0.0,
+          0.8500000238418579,
+          0.375,
+          4.224999904632568
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "cloth1v0",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 38,
+        "triangles": 59,
+        "bbox": [
+          -0.75,
+          -0.45750001072883606,
+          1.0499999523162842,
+          0.75,
+          -0.4074999988079071,
+          3.950000047683716
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "cloth1v1",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 38,
+        "triangles": 59,
+        "bbox": [
+          -0.75,
+          -0.45750001072883606,
+          1.0499999523162842,
+          0.75,
+          -0.4074999988079071,
+          3.950000047683716
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "pillar2",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 48,
+        "triangles": 88,
+        "bbox": [
+          -0.8500000238418579,
+          -0.375,
+          0.0,
+          0.8500000238418579,
+          0.375,
+          4.224999904632568
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "cloth2v0",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 38,
+        "triangles": 59,
+        "bbox": [
+          -0.75,
+          -0.45750001072883606,
+          1.0499999523162842,
+          0.75,
+          -0.4074999988079071,
+          3.950000047683716
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "cloth2v1",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 38,
+        "triangles": 59,
+        "bbox": [
+          -0.75,
+          -0.45750001072883606,
+          1.0499999523162842,
+          0.75,
+          -0.4074999988079071,
+          3.950000047683716
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "pillar3",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 48,
+        "triangles": 88,
+        "bbox": [
+          -0.8500000238418579,
+          -0.375,
+          0.0,
+          0.8500000238418579,
+          0.375,
+          4.224999904632568
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "cloth3v0",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 38,
+        "triangles": 59,
+        "bbox": [
+          -0.75,
+          -0.45750001072883606,
+          1.0499999523162842,
+          0.75,
+          -0.4074999988079071,
+          3.950000047683716
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "cloth3v1",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 38,
+        "triangles": 59,
+        "bbox": [
+          -0.75,
+          -0.45750001072883606,
+          1.0499999523162842,
+          0.75,
+          -0.4074999988079071,
+          3.950000047683716
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "love_floor",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 36,
+        "triangles": 12,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "love_road",
+        "role": "environment/prop",
+        "materials": 2,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 36,
+        "triangles": 12,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "pavement94",
+        "role": "environment/prop",
+        "materials": 2,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 36,
+        "triangles": 12,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "pavement106",
+        "role": "environment/prop",
+        "materials": 2,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 36,
+        "triangles": 12,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "being_exit",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 612,
+        "triangles": 204,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "notbeing_exit",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 612,
+        "triangles": 204,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "back_portal",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 612,
+        "triangles": 204,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "reason_floor",
+        "role": "environment/prop",
+        "materials": 2,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 36,
+        "triangles": 12,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "reason_being",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 612,
+        "triangles": 204,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "reason_notbeing",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 612,
+        "triangles": 204,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "reason_back",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 612,
+        "triangles": 204,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "court_floor",
+        "role": "environment/prop",
+        "materials": 2,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 36,
+        "triangles": 12,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "truth_being_exit",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 612,
+        "triangles": 204,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "truth_notbeing_exit",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 612,
+        "triangles": 204,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "truth_back_portal",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 612,
+        "triangles": 204,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "god_path_sides",
+        "role": "environment/prop",
+        "materials": 2,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 36,
+        "triangles": 12,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "god_rising_path",
+        "role": "environment/prop",
+        "materials": 2,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 6,
+        "triangles": 2,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "god_entry_landing",
+        "role": "environment/prop",
+        "materials": 2,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 36,
+        "triangles": 12,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "god_upper_landing",
+        "role": "environment/prop",
+        "materials": 2,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 36,
+        "triangles": 12,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "god_poster_landing",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 36,
+        "triangles": 12,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "god_icon_landing",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 36,
+        "triangles": 12,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "god_question_landing",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 36,
+        "triangles": 12,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "god_question_plinth",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 36,
+        "triangles": 12,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "god_gbeing",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 612,
+        "triangles": 204,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "god_gnotbeing",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 612,
+        "triangles": 204,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "god_back",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 612,
+        "triangles": 204,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "final_being",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 612,
+        "triangles": 204,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "final_both",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 612,
+        "triangles": 204,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "final_notbeing",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 612,
+        "triangles": 204,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "both_triangles",
+        "role": "combined motif lowered into normal close approach framing",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 30,
+        "triangles": 44,
+        "bbox": [
+          -1.2999999523162842,
+          0.0,
+          0.0,
+          1.2999999523162842,
+          0.07999999821186066,
+          2.0
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "surgeon_1",
+        "role": "patient-readable glove and sleeve pose",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 528,
+        "triangles": 796,
+        "bbox": [
+          -0.4480738937854767,
+          -0.28999999165534973,
+          2.5899999141693115,
+          0.4480738937854767,
+          0.49000000953674316,
+          4.175000190734863
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "surgeon_2",
+        "role": "patient-readable glove and sleeve pose",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 528,
+        "triangles": 796,
+        "bbox": [
+          -0.4480738937854767,
+          -0.28999999165534973,
+          2.5899999141693115,
+          0.4480738937854767,
+          0.49000000953674316,
+          4.175000190734863
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "surgeon_3",
+        "role": "patient-readable glove and sleeve pose",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 528,
+        "triangles": 796,
+        "bbox": [
+          -0.4480738937854767,
+          -0.28999999165534973,
+          2.5899999141693115,
+          0.4480738937854767,
+          0.49000000953674316,
+          4.175000190734863
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "proof_love_door",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 96,
+        "triangles": 132,
+        "bbox": [],
+        "pivot": "west hinge"
+      },
+      {
+        "name": "proof_love_bench",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 96,
+        "triangles": 144,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "proof_newspaper_leaf",
+        "role": "environment/prop",
+        "materials": 2,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 8,
+        "triangles": 12,
+        "bbox": [],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "love_door_-1_0",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 54,
+        "triangles": 72,
+        "bbox": [],
+        "pivot": "door hinge"
+      },
+      {
+        "name": "love_door_-1_1",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 54,
+        "triangles": 72,
+        "bbox": [],
+        "pivot": "door hinge"
+      },
+      {
+        "name": "love_door_-1_3",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 54,
+        "triangles": 72,
+        "bbox": [],
+        "pivot": "door hinge"
+      },
+      {
+        "name": "love_door_1_0",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 54,
+        "triangles": 72,
+        "bbox": [],
+        "pivot": "door hinge"
+      },
+      {
+        "name": "love_door_1_1",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 54,
+        "triangles": 72,
+        "bbox": [],
+        "pivot": "door hinge"
+      },
+      {
+        "name": "love_door_1_2",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 54,
+        "triangles": 72,
+        "bbox": [],
+        "pivot": "door hinge"
+      },
+      {
+        "name": "love_door_1_3",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 54,
+        "triangles": 72,
+        "bbox": [],
+        "pivot": "door hinge"
+      },
+      {
+        "name": "temple_sky",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 432,
+        "triangles": 208,
+        "bbox": [
+          -0.05,
+          -0.05,
+          30.0,
+          0.05,
+          0.05,
+          30.1
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "temple_shell",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 656,
+        "triangles": 520,
+        "bbox": [
+          -0.05,
+          -0.05,
+          15.6,
+          0.05,
+          0.05,
+          15.7
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "temple_shrine",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 600,
+        "triangles": 900,
+        "bbox": [
+          -0.05,
+          -0.05,
+          9.0,
+          0.05,
+          0.05,
+          9.1
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "temple_pier_0",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 72,
+        "triangles": 108,
+        "bbox": [
+          -0.45,
+          -0.45,
+          0.0,
+          0.45,
+          0.45,
+          6.5
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "temple_pier_1",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 72,
+        "triangles": 108,
+        "bbox": [
+          -0.45,
+          -0.45,
+          0.0,
+          0.45,
+          0.45,
+          6.5
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "temple_pier_shells",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 288,
+        "triangles": 432,
+        "bbox": [
+          -0.05,
+          -0.05,
+          9.2,
+          0.05,
+          0.05,
+          9.3
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "temple_torch_0",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 180,
+        "triangles": 315,
+        "bbox": [
+          -0.25,
+          -0.25,
+          0.0,
+          0.25,
+          0.25,
+          1.25
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "temple_torch_1",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 180,
+        "triangles": 315,
+        "bbox": [
+          -0.25,
+          -0.25,
+          0.0,
+          0.25,
+          0.25,
+          1.25
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "temple_dais",
+        "role": "environment/prop",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 80,
+        "triangles": 120,
+        "bbox": [
+          1.6,
+          1.5999999999999996,
+          0.0,
+          4.4,
+          4.6,
+          0.75
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "love_sky",
+        "role": "warm sky above the Love street",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 432,
+        "triangles": 208,
+        "bbox": [
+          -0.05,
+          -0.05,
+          30.0,
+          0.05,
+          0.05,
+          30.1
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "love_street_dressing",
+        "role": "balconies, shutters, lanterns, planters and foliage",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 6704,
+        "triangles": 8764,
+        "bbox": [
+          -0.05,
+          -0.05,
+          13.0,
+          0.05,
+          0.05,
+          13.1
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "reason_sky",
+        "role": "pale open sky and distant mountains above Reason",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 432,
+        "triangles": 208,
+        "bbox": [
+          -0.05,
+          -0.05,
+          30.0,
+          0.05,
+          0.05,
+          30.1
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "reason_grove_dressing",
+        "role": "revealed grove undergrowth and roots",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 816,
+        "triangles": 1152,
+        "bbox": [
+          -0.05,
+          -0.05,
+          12.0,
+          0.05,
+          0.05,
+          12.1
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "truth_court_dressing",
+        "role": "timber court paneling, beams, windows and witness lights",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 664,
+        "triangles": 1004,
+        "bbox": [
+          -0.05,
+          -0.05,
+          12.0,
+          0.05,
+          0.05,
+          12.1
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "god_sky",
+        "role": "painted daylight and distant forest at the God ascent",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 432,
+        "triangles": 208,
+        "bbox": [
+          -0.05,
+          -0.05,
+          49.0,
+          0.05,
+          0.05,
+          49.1
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "god_landscape",
+        "role": "visual forest floor, stones and low growth beyond the route",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 4192,
+        "triangles": 4572,
+        "bbox": [
+          -0.05,
+          -0.05,
+          49.0,
+          0.05,
+          0.05,
+          49.1
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "being_sky",
+        "role": "warm luminous horizon behind the Being threshold",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 432,
+        "triangles": 208,
+        "bbox": [
+          -0.05,
+          -0.05,
+          49.0,
+          0.05,
+          0.05,
+          49.1
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "being_hall_dressing",
+        "role": "pale colonnade and gold courses around the bright ending",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 192,
+        "triangles": 288,
+        "bbox": [
+          -0.05,
+          -0.05,
+          12.0,
+          0.05,
+          0.05,
+          12.1
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "both_hall_dressing",
+        "role": "paired light and dark stone walls around the combined passage",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 200,
+        "triangles": 300,
+        "bbox": [
+          -0.05,
+          -0.05,
+          12.0,
+          0.05,
+          0.05,
+          12.1
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "void_shards_dressing",
+        "role": "restrained suspended fragments and distant portal edges",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 592,
+        "triangles": 888,
+        "bbox": [
+          -0.05,
+          -0.05,
+          12.0,
+          0.05,
+          0.05,
+          12.1
+        ],
+        "pivot": "floor/contact"
+      },
+      {
+        "name": "surgery_room_dressing",
+        "role": "tiled operating room ceiling, wall panels and monitor",
+        "materials": 1,
+        "source": "Original procedural Blender",
+        "phoneAcceptance": "pending",
+        "vertices": 208,
+        "triangles": 312,
+        "bbox": [
+          -0.05,
+          -0.05,
+          8.0,
+          0.05,
+          0.05,
+          8.1
+        ],
+        "pivot": "floor/contact"
+      }
+    ],
+    "sources": {
+      "blender_scene.py": "13c08b1859616d0f22a3df0a6a0551ef90eafa235c98db5ca02e9634e9cbc985",
+      "art_materials.py": "f39f052c7caa9e3699846d44e20ad3c8e7edab5ae547f0a036af74828f7ac0eb",
+      "art_models.py": "b79ad576ba26ebd425736b3e97d7ced66d959530c8e2e526fb76d5f71ce5ad67",
+      "art_motion.py": "23152913264cc369785db2334139904537d35254208db7309869ec92c0849163",
+      "art_temple_love.py": "133219530074c38dfe273d7b9a68316f86d627fdfe7d50bdfebde810239113e9",
+      "art_reason_truth.py": "01d932bc74625f67c33cb129ec43ae868c91ca1f121bbe4ddbf9901222720473",
+      "chapter_script.py": "1e92bfa652e4e0ecf387fedfe1df3c842d324b3f1d668f41182d8139df7f6ba9",
+      "art_god.py": "0e7d080de83ca5f51588a7668e51461952a7ac04d1f19395e38547663497a120",
+      "art_endings.py": "b01010b042b49f4cbeff648ec3216e915ac77cafab658c53f4e83383ea67efbc",
+      "ending_script.py": "b496fb48249b22a4d7da39efcc046a1663f383b58c4e99802776e78130202fef",
+      "art_polish.py": "5a37e3efee197cd7e45ab6508749e317c8320e381022c48174d5278a1a79b575",
+      "art_style_proof.py": "7fc7918330acb728af8456becb759e79225bbad5f7b76734b845ce4464caafc6",
+      "art_love_style.py": "520d5a4d768c0a245edcdee63214ee7dd7250cbda49cb05ff20a9309807fb33c",
+      "art_reason_truth_style.py": "c351804beb5bdfba74726fd396748d547d1c9f2765fde7ae710a640cce2ec877",
+      "art_god_style.py": "fc24978bc94190c2b3aa581af89b4e39e46baf008c58338cd2227925e7e3d50c",
+      "art_ending_style.py": "570c1275a53298b5e1399c2b87815b0a0fcafd6671b510acfbad48a5447d8a99"
+    }
+  },
+  "artUVConvention": "Editable Blender bottom-up V; converted once to native top-down V at export. Shared native-pixel glyph atlas for dialogue/signs.",
+  "exporterSha256": "97cc219f31850ba5d851e0e646827c6cdce1cd62a2c4f94d3e2013ae95926dfc",
+  "originalBuildApk": "/home/will/finding-your-way/game/parmenides-slice/build/v0.9.3-god-endings/parmenides-5a3f879c1a0be268.apk"
+}

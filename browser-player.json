@@ -1,5 +1,5 @@
 {
-  "runtimeDirectory": "public/apps/finding-your-way/play/bundles/v0.9.2-4e2e428eaf39f590",
+  "runtimeDirectory": "public/apps/finding-your-way/play/bundles/v0.9.3-609f90eb74a35d9a",
   "siteDestination": "public/apps/finding-your-way/play",
   "config": {
     "schema": 1,
@@ -7,7 +7,7 @@
     "startMode": "manual",
     "title": "Finding Your Way",
     "subtitle": "Explore the temple. Follow the arguments.",
-    "status": "v0.9.2 · Progress lasts for this play session",
+    "status": "v0.9.3 \u00b7 Progress lasts for this play session",
     "canvasLabel": "Finding Your Way game. Arrow keys move; Space selects; 2 changes camera; 3 closes dialogue.",
     "restartPrompt": "Restart the chapter? Your current progress will be lost.",
     "fallbackLabel": "App details, text edition and Android downloads",
@@ -56,9 +56,9 @@
     ]
   },
   "provenance": {
-    "sourceBundle": "v0.9.2-4e2e428eaf39f590",
+    "sourceBundle": "v0.9.3-609f90eb74a35d9a",
     "engineCommit": "ba25f99bea241403c2865622c675711c7aaf0176",
     "stackBytes": 65536
   },
-  "poster": "public/apps/finding-your-way/play/bundles/v0.9.2-4e2e428eaf39f590/title-preview.jpg"
+  "poster": "public/apps/finding-your-way/play/bundles/v0.9.3-609f90eb74a35d9a/title-preview.jpg"
 }

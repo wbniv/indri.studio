@@ -1,0 +1,37 @@
+{
+  "milestone": "2026-10-14-v0.9.3-god-endings",
+  "version": "0.9.3",
+  "milestoneVersion": "0.9.3",
+  "versionCode": 107,
+  "apk": "parmenides-v0.9.3-5a3f879c1a0be268.apk",
+  "sha256": "5a3f879c1a0be268709e213305c0bcc5569e2caf90b00ba06004be601806a72a",
+  "levelSha256": "2a1232a9bcf12d95d313c9d1a8803269e468864e44d1ac63d4d97d6bb92ae237",
+  "sourceCommit": "cb5e85b76c99fd1590861ca7bea2622921a67b48",
+  "engineSourceCommit": "ba25f99bea241403c2865622c675711c7aaf0176",
+  "nativeLibraries": {
+    "lib/arm64-v8a/libwf_game.so": "fd09e2590b50205fe4892e3df57d97aafcf63b33bebf02db7d2cca0997fe18ae",
+    "lib/armeabi-v7a/libwf_game.so": "56d118c344716da80fa1a4b22ac2b0b493654512c0e7e6b21a30d24e39e20c42"
+  },
+  "artScope": "God ascent, Being, Both, NotBeing and surgery over the v0.9.2 chapter art",
+  "roomLayout": "scene9",
+  "roomRenderScope": "all-active",
+  "sourceSnapshot": "source-snapshot.tar.gz",
+  "sourceSnapshotSha256": "8451ddfcaa889a2dfc1855019d1a07f1a3c62bc79e66b6093597fb58339e7976",
+  "testEvidence": "test-evidence.tar.gz",
+  "testEvidenceSha256": "59ea8a68d3afeb6d16489d44c13a08703882ffa5b0b852c3290684fda2589872",
+  "checks": {
+    "exportedAssetsAndUV": 2228,
+    "artUV": "passed",
+    "meshWinding": "passed",
+    "nativeGod": 164,
+    "nativeEndings": 266,
+    "cast1Job": "J-4c04740b08a5",
+    "cast1Status": "completed",
+    "cast1Cleanup": "restored"
+  },
+  "knownIssues": [],
+  "publishedFiles": [
+    "parmenides-v0.9.3-5a3f879c1a0be268.apk"
+  ],
+  "archivedAt": "2026-10-14T14:20:19.230661+00:00"
+}
