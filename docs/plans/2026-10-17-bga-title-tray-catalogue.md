@@ -42,7 +42,7 @@ The release URL is stable across versions. The detail page should link to `https
 - [x] Copy the real tray screenshot into `src/assets/screenshots/bga-title-tray/` and show it with descriptive alt text near the top of the detail page. Use dedicated SVG card art because the 900 × 54 screenshot becomes unreadable as a card background; preview the art in its actual grid slot.
 - [x] Write the detail page with a concrete use case, what flashes and when it stops, supported platforms, a clear release CTA, and the three essential installation stages: download/check archive, run installer, load the unpacked extension. Link Board Game Arena, the GitHub release, the repository, the full screenshot, and the browser extension page where possible.
 - [x] Keep product copy accurate to the published archive and its documented default-profile install path. Use the stable latest-release URL so version-specific commands stay in the archive's illustrated guide.
-- [ ] Add a `TODO.md` pointer to this plan per the Indri workflow and, after the creation commit exists, update `docs/plans/README.md` with its commit reference.
+- [x] Add a `TODO.md` pointer to this plan per the Indri workflow and, after the creation commit exists, update `docs/plans/README.md` with its commit reference.
 - [x] Build with `task build`, inspect the rendered catalogue at desktop and mobile widths, and verify the card, detail page, screenshot, links, keyboard focus, and no horizontal overflow. Compare release text against the actual archive and installed guide.
 - [ ] Publish through the repository's normal tag-driven deployment and verify the live `/#apps` card, `/apps/bga-title-tray/` page, image, and release link.
 

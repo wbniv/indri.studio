@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-10-09](https://github.com/wbniv/indri.studio/commit/0e1969d) | Index Finding Your Way share preview plan |
 | [2026-10-09](https://github.com/wbniv/indri.studio/commit/b5588e6) | Index World Foundry logo page update |
 | [2026-10-09](https://github.com/wbniv/indri.studio/commit/ce66a02) | Index release-note cleanup in Finding Your Way plan |
 | [2026-10-09](https://github.com/wbniv/indri.studio/commit/281b22b) | Update plan index for final Finding Your Way copy |
@@ -16,6 +17,10 @@
 | [2026-06-26](https://github.com/wbniv/indri.studio/commit/49f6b36) | docs: add plan index (docs/plans/README.md) |
 
 <!--history-meta v1
+0e1969d	author	Will Norris
+0e1969d	added	2
+0e1969d	deleted	1
+0e1969d	files	1
 b5588e6	author	Will Norris
 b5588e6	added	1
 b5588e6	deleted	1
