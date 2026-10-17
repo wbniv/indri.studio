@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">Board Game Arena Title Tray catalogue mockups</title>
+  <desc id="desc">A desktop Indri catalogue row with the new Board Game Arena Title Tray card between Blender Asset Searcher and Claude Code Authoring Formats, and a narrow mobile card.</desc>
+  <defs>
+    <style>
+      text{font-family:Arial,Helvetica,sans-serif;fill:#f5f0e8} .muted{fill:#c8c0b8} .green{fill:#b8ef00} .eyebrow{font-size:17px;font-weight:bold;letter-spacing:3px} .small{font-size:14px} .body{font-size:19px} .heading{font-size:26px;font-weight:900} .label{font-size:16px;fill:#3d3833;font-weight:bold}
+    </style>
+    <pattern id="stripe" width="14" height="14" patternUnits="userSpaceOnUse"><rect width="14" height="14" fill="#4a4641"/><rect width="5" height="14" fill="#5b5650"/></pattern>
+  </defs>
+  <rect width="1200" height="680" fill="#e7e1d6"/>
+  <text x="42" y="43" class="label">DESKTOP · CATALOGUE /#apps</text>
+  <rect x="38" y="65" width="820" height="530" rx="14" fill="#3d3833"/>
+  <rect x="38" y="65" width="820" height="50" rx="14" fill="#0a0908"/>
+  <circle cx="67" cy="90" r="7" fill="#c8c0b8"/><circle cx="91" cy="90" r="7" fill="#c8c0b8"/><circle cx="115" cy="90" r="7" fill="#c8c0b8"/>
+  <text x="149" y="96" class="small muted">indri.studio/#apps</text>
+  <text x="70" y="161" class="eyebrow green">OUR APPS</text>
+  <rect x="68" y="188" width="245" height="343" fill="#4a4641" stroke="#6b655f"/>
+  <rect x="333" y="188" width="245" height="343" fill="#4a4641" stroke="#b8ef00" stroke-width="3"/>
+  <rect x="598" y="188" width="225" height="343" fill="#4a4641" stroke="#6b655f"/>
+  <rect x="351" y="208" width="209" height="78" fill="#0a0908"/>
+  <text x="365" y="254" class="small">◢ Play • Board Game Arena</text>
+  <rect x="86" y="302" width="28" height="28" fill="#6b655f"/><rect x="351" y="302" width="28" height="28" fill="#b8ef00"/><rect x="616" y="302" width="28" height="28" fill="#6b655f"/>
+  <text x="86" y="367" class="heading" font-size="23">BLENDER ASSET</text><text x="86" y="396" class="heading" font-size="23">SEARCHER</text>
+  <text x="86" y="430" class="small muted">Licensed 3D asset search</text><text x="86" y="451" class="small muted">inside Blender.</text>
+  <text x="351" y="367" class="heading">BOARD GAME</text><text x="351" y="397" class="heading">ARENA TITLE</text><text x="351" y="427" class="heading">TRAY</text>
+  <text x="351" y="460" class="small muted">See your BGA tab beside the</text><text x="351" y="481" class="small muted">KDE tray. Catch game offers.</text>
+  <text x="616" y="367" class="heading" font-size="22">CLAUDE CODE</text><text x="616" y="396" class="heading" font-size="22">AUTHORING</text><text x="616" y="425" class="heading" font-size="22">FORMATS</text>
+  <text x="616" y="459" class="small muted">Type-aware rendering</text><text x="616" y="480" class="small muted">for authoring formats.</text>
+  <rect x="382" y="548" width="240" height="31" rx="5" fill="#b8ef00"/><text x="392" y="569" class="label" font-size="14">CLICK → PRODUCT PAGE</text>
+  <text x="897" y="43" class="label">MOBILE · 390 PX</text>
+  <rect x="891" y="65" width="271" height="530" rx="18" fill="#3d3833"/>
+  <rect x="891" y="65" width="271" height="50" rx="18" fill="#0a0908"/>
+  <text x="915" y="96" class="small muted">indri.studio/#apps</text>
+  <text x="914" y="152" class="eyebrow green">OUR APPS</text>
+  <rect x="911" y="177" width="231" height="364" fill="#4a4641" stroke="#b8ef00" stroke-width="2"/>
+  <rect x="929" y="195" width="195" height="75" fill="#0a0908"/>
+  <text x="940" y="237" class="small">◢ Play • Board Game Arena</text>
+  <rect x="929" y="290" width="28" height="28" fill="#b8ef00"/>
+  <text x="929" y="357" class="heading">BOARD GAME</text><text x="929" y="388" class="heading">ARENA TITLE</text><text x="929" y="419" class="heading">TRAY</text>
+  <text x="929" y="458" class="small muted">See your BGA tab beside</text><text x="929" y="480" class="small muted">the KDE tray. Catch game</text><text x="929" y="502" class="small muted">offers while you browse.</text>
+  <text x="41" y="640" class="label">Placement and copy are concrete; use the existing glass-card component and actual screenshot asset in implementation.</text>
+</svg>

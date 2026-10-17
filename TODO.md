@@ -4,6 +4,10 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 ## Open
 
+### Board Game Arena Title Tray
+
+- [ ] Add the released KDE/Chrome utility to the Indri catalogue, verify its card and installation page, and publish it — [plan](docs/plans/2026-10-17-bga-title-tray-catalogue.md).
+
 ### SNES player package
 
 - [T1] **2026-07-27** After the first npm publish of `@wbniv/bsnes-jg-player`, swap the git dep
