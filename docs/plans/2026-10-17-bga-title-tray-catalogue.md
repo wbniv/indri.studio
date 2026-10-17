@@ -54,6 +54,7 @@ Will reported that the “View the full panel screenshot” link was bad. The fo
 
 - [x] Published the screenshot-link correction as [`v0.1.213`](https://github.com/wbniv/indri.studio/tree/v0.1.213). The live detail page linked directly to the 30,630-byte PNG; its CI deploy and Lighthouse audit passed.
 - [x] After seeing the full image, Will found the separate link redundant. Removed the link and duplicate public PNG, kept the embedded image, and published [`v0.1.214`](https://github.com/wbniv/indri.studio/tree/v0.1.214). The live detail page shows the tray image and release CTA without the extra screenshot link.
+- [x] For [`v0.1.215`](https://github.com/wbniv/indri.studio/tree/v0.1.215), removed the gratuitous Markdown-viewer sentence and fixed the installation-notes link to the repository-root `INSTALL.md`. Verified HTTP 200 for Board Game Arena, the project repository, latest release, and installation notes; the built page's local routes and anchors exist. The live detail page contains the corrected link and copy.
 
 ## Acceptance checks
 

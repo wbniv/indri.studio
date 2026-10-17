@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-10-17](https://github.com/wbniv/indri.studio/commit/cde0c49) | Close BGA catalogue plan after final publish |
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/292ffae) | Record BGA catalogue publication and screenshot fix |
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/e9ad774) | Index Board Game Arena catalogue plan |
 | [2026-10-09](https://github.com/wbniv/indri.studio/commit/0e1969d) | Index Finding Your Way share preview plan |
@@ -19,6 +20,10 @@
 | [2026-06-26](https://github.com/wbniv/indri.studio/commit/49f6b36) | docs: add plan index (docs/plans/README.md) |
 
 <!--history-meta v1
+cde0c49	author	Will Norris
+cde0c49	added	1
+cde0c49	deleted	1
+cde0c49	files	1
 292ffae	author	Will Norris
 292ffae	added	1
 292ffae	deleted	1
