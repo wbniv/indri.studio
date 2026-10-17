@@ -1,10 +1,15 @@
 | Date | Change |
 |------|--------|
+| [2026-10-17](https://github.com/wbniv/indri.studio/commit/292ffae) | Record BGA catalogue publication and screenshot fix |
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/aa2045e) | Serve full BGA tray screenshot from Indri |
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/e9ad774) | Index Board Game Arena catalogue plan |
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/96dd577) | Add Board Game Arena Title Tray to Indri catalogue |
 
 <!--history-meta v1
+292ffae	author	Will Norris
+292ffae	added	2
+292ffae	deleted	2
+292ffae	files	1
 aa2045e	author	Will Norris
 aa2045e	added	10
 aa2045e	deleted	2

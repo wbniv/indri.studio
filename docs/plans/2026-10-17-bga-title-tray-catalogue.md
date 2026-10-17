@@ -40,7 +40,7 @@ The release URL is stable across versions. The detail page should link to `https
 
 - [x] Add `src/content/apps/bga-title-tray.md` with the title, date, concise summary, GitHub link, and an internal detail page. The existing collection supplies alphabetical catalogue ordering.
 - [x] Copy the real tray screenshot into `src/assets/screenshots/bga-title-tray/` and show it with descriptive alt text near the top of the detail page. Use dedicated SVG card art because the 900 × 54 screenshot becomes unreadable as a card background; preview the art in its actual grid slot.
-- [x] Write the detail page with a concrete use case, what flashes and when it stops, supported platforms, a clear release CTA, and the three essential installation stages: download/check archive, run installer, load the unpacked extension. Link Board Game Arena, the GitHub release, the repository, a site-hosted full screenshot, and the browser extension page where possible.
+- [x] Write the detail page with a concrete use case, what flashes and when it stops, supported platforms, a clear release CTA, and the three essential installation stages: download/check archive, run installer, load the unpacked extension. Link Board Game Arena, the GitHub release, the repository, and the browser extension page where possible.
 - [x] Keep product copy accurate to the published archive and its documented default-profile install path. Use the stable latest-release URL so version-specific commands stay in the archive's illustrated guide.
 - [x] Add a `TODO.md` pointer to this plan per the Indri workflow and, after the creation commit exists, update `docs/plans/README.md` with its commit reference.
 - [x] Build with `task build`, inspect the rendered catalogue at desktop and mobile widths, and verify the card, detail page, screenshot, links, keyboard focus, and no horizontal overflow. Compare release text against the actual archive and installed guide.
@@ -52,7 +52,8 @@ Published as Indri [`v0.1.212`](https://github.com/wbniv/indri.studio/tree/v0.1.
 
 Will reported that the “View the full panel screenshot” link was bad. The follow-up change copies the PNG into the site's public assets and points that link to `/bga-title-tray-working.png`. The rebuilt site contains both the linked page and the 30,630-byte image.
 
-- [x] Published the screenshot-link correction as [`v0.1.213`](https://github.com/wbniv/indri.studio/tree/v0.1.213). The live detail page links directly to the [full-size image](https://indri.studio/bga-title-tray-working.png), which returns HTTP 200 as a 30,630-byte PNG.
+- [x] Published the screenshot-link correction as [`v0.1.213`](https://github.com/wbniv/indri.studio/tree/v0.1.213). The live detail page linked directly to the 30,630-byte PNG; its CI deploy and Lighthouse audit passed.
+- [ ] After seeing the full image, Will found the separate link redundant. Remove the link and duplicate public PNG, keep the embedded image, publish `v0.1.214`, and verify the live page.
 
 ## Acceptance checks
 
