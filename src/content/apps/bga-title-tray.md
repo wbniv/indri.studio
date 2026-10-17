@@ -11,7 +11,7 @@ cardImages:
 
 ![KDE Plasma panel showing “Play • Board Game Arena” beside the system tray](../../assets/screenshots/bga-title-tray/tray.png)
 
-[View the full panel screenshot](https://github.com/wbniv/bga-title-tray/blob/main/codex/screenshots/bga-title-tray-working.png).
+[View the full panel screenshot](/bga-title-tray-working.png).
 
 The title of your selected [Board Game Arena](https://boardgamearena.com/) tab lives beside the KDE system tray. When a game offer arrives while BGA is in the background, the padded title area flashes white with black text. It keeps flashing until the BGA tab is focused or the offer goes away. Click the title to bring that existing tab to the front.
 
