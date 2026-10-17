@@ -4,10 +4,6 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 ## Open
 
-### Board Game Arena Title Tray
-
-- [ ] Publish and verify the direct full-size screenshot link in v0.1.213 — [plan](docs/plans/2026-10-17-bga-title-tray-catalogue.md).
-
 ### SNES player package
 
 - [T1] **2026-07-27** After the first npm publish of `@wbniv/bsnes-jg-player`, swap the git dep
@@ -39,7 +35,7 @@ _Nothing parked._
 
 ## Done
 
-- [x] 2026-10-17 — Added Board Game Arena Title Tray to the Indri catalogue; published v0.1.212 and prepared the screenshot-link correction for v0.1.213 — [plan](docs/plans/2026-10-17-bga-title-tray-catalogue.md).
+- [x] 2026-10-17 — Added Board Game Arena Title Tray to the Indri catalogue; published v0.1.212 and v0.1.213, with the direct full-size screenshot link verified live — [plan](docs/plans/2026-10-17-bga-title-tray-catalogue.md).
 
 - [x] 2026-10-09 — Replaced Finding Your Way's screenshot link preview with a branded social card; published v0.1.185 — [plan](docs/plans/2026-10-09-finding-your-way-share-preview.md).
 

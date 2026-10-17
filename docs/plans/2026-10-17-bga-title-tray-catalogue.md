@@ -48,11 +48,11 @@ The release URL is stable across versions. The detail page should link to `https
 
 ## Publication check
 
-Published as Indri [`v0.1.212`](https://github.com/wbniv/indri.studio/releases/tag/v0.1.212) on 2026-10-17; its CI deploy and Lighthouse audit passed. The live [catalogue](https://indri.studio/#apps) contains the card, and the [detail page](https://indri.studio/apps/bga-title-tray/) contains the supported setup, installation path, screenshot, and release link. The served screenshot returns HTTP 200, and the latest-release link resolves to the BGA Title Tray `v0.4.3` release. The local build generated 174 pages; 19 tests passed. Desktop and 390 px mobile views were inspected for legibility and horizontal overflow.
+Published as Indri [`v0.1.212`](https://github.com/wbniv/indri.studio/tree/v0.1.212) on 2026-10-17; its CI deploy and Lighthouse audit passed. The live [catalogue](https://indri.studio/#apps) contains the card, and the [detail page](https://indri.studio/apps/bga-title-tray/) contains the supported setup, installation path, screenshot, and release link. The served screenshot returns HTTP 200, and the latest-release link resolves to the BGA Title Tray `v0.4.3` release. The local build generated 174 pages; 19 tests passed. Desktop and 390 px mobile views were inspected for legibility and horizontal overflow.
 
 Will reported that the “View the full panel screenshot” link was bad. The follow-up change copies the PNG into the site's public assets and points that link to `/bga-title-tray-working.png`. The rebuilt site contains both the linked page and the 30,630-byte image.
 
-- [ ] Publish the screenshot-link correction as `v0.1.213` and verify the live image URL.
+- [x] Published the screenshot-link correction as [`v0.1.213`](https://github.com/wbniv/indri.studio/tree/v0.1.213). The live detail page links directly to the [full-size image](https://indri.studio/bga-title-tray-working.png), which returns HTTP 200 as a 30,630-byte PNG.
 
 ## Acceptance checks
 
