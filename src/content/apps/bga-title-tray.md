@@ -12,7 +12,7 @@ cardImages:
 <figure class="bga-demo" data-bga-demo>
   <div class="bga-demo-stage">
     <a class="bga-demo-launch" href="/apps/bga-title-tray/bga-title-tray-demo.mp4" aria-label="Play the Board Game Arena Title Tray demo">
-      <img src="/apps/bga-title-tray/bga-title-tray-demo-poster.jpg" alt="Illustrative Play alert flashing white on captured KDE panel frames">
+      <img src="/apps/bga-title-tray/bga-title-tray-demo-poster.jpg" alt="Game ready caption and illustrative Play alert on the captured KDE panel">
       <span class="bga-demo-play" aria-hidden="true">
         <svg viewBox="0 0 48 48" focusable="false" aria-hidden="true"><path d="M15 8v32l27-16z" fill="currentColor"/></svg>
       </span>
@@ -22,7 +22,7 @@ cardImages:
       <p>Your browser cannot play this video. <a href="/apps/bga-title-tray/bga-title-tray-demo.mp4">Download the demo</a>.</p>
     </video>
   </div>
-  <figcaption>Silent illustration on captured KDE panel frames. The countdown and alert titles are composited.</figcaption>
+  <figcaption>Silent illustration using captured KDE panel frames and Will's BGA browser screenshot. Window cards, countdown, and alert titles are composited.</figcaption>
 </figure>
 
 The title of your selected [Board Game Arena](https://boardgamearena.com/) tab lives beside the KDE system tray. When a game offer arrives while BGA is in the background, the padded title area flashes white with black text. It pauses when you focus BGA and stops when the offer disappears, even if Chrome still calls the tab “Play.” Click the title to bring that existing tab to the front, or right-click it to choose a BGA tab and refresh. The panel shows “Play now!” when BGA returns to its lobby while Chrome still reports “Play.”

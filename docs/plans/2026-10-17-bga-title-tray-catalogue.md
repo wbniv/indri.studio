@@ -108,6 +108,13 @@ Blender keyframes now animate a queue progress line, Play alert brackets, a clic
 
 Indri [`v0.1.224`](https://github.com/wbniv/indri.studio/tree/v0.1.224) serves the motion cut. The live MP4 matches the local build by SHA-256 (`410a5cc77f4f51a599f7263557897a96c6346478134b58d8a646abf2f33a9052`). The live page retains the video player and has no transcript block.
 
+## 2026-10-18 motion redesign
+
+Will found that the Blender accents added little to the product story. The revised 22-second video moves the tray, illustrative browser and foreground windows, searching count, alert, pointer, and final BGA screenshot through the workflow. The window cards are abstract illustrations; the panel and final browser frame are captured. The detail-page caption names these sources.
+
+- [x] Render the video and poster; inspect waiting, Play, move alert, click, and BGA return at desktop and 390 px player sizes.
+- [ ] Publish the revised video and poster, then verify the live page and MP4 checksum.
+
 ## Acceptance checks
 
 | View | Expected result |
