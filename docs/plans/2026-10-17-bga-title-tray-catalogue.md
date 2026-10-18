@@ -8,7 +8,7 @@ This is a catalogue and documentation change. The download stays on the [project
 
 ## Existing site pattern
 
-The homepage's “our apps” grid reads `src/content/apps/*.md`, sorts entries alphabetically, and links each card to `/apps/<slug>/` unless `externalUrl` is set. The shared detail page renders the entry's summary, body, screenshot gallery, and optional GitHub badge. The [current live catalogue](https://indri.studio/#apps) has no entry for this utility. Add an ordinary internal detail page so the user can review platform support and installation steps before following the release link. Keep the existing Indri palette and card component; no new catalogue UI component is needed.
+The homepage's “our apps” grid reads `src/content/apps/*.md`, sorts entries alphabetically, and links each card to `/apps/<slug>/` unless `externalUrl` is set. The shared detail page renders the entry's summary, body, screenshot gallery, and optional GitHub badge. At planning time, the [live catalogue](https://indri.studio/#apps) had no entry for this utility. The published internal detail page lets visitors review platform support and installation steps before following the release link. It uses the existing Indri palette and card component.
 
 ## Published archive check
 
@@ -28,7 +28,7 @@ These are layout contracts, not screenshots of a deployed page. Green follows In
 
 [![Desktop product page and mobile install view mockups](2026-10-17-bga-title-tray-catalogue/detail-mockups.svg)](2026-10-17-bga-title-tray-catalogue/detail-mockups.svg)
 
-The card title is **Board Game Arena Title Tray**; proposed summary: “See your Board Game Arena tab beside the KDE tray. A game offer flashes there while you browse.” The detail page starts with the real working panel image and a short explanation, then shows the supported setup and an obvious **Download latest release** link. Installation is a short ordered path with a link to the package's illustrated `START_HERE.html` guide after download; do not make the visitor read Markdown. Show that Chrome's **Load unpacked** step is required, and make `chrome://extensions/` easy to copy if a browser blocks the link.
+The card title is **Board Game Arena Title Tray**. The detail page now starts with a silent video built from captured panel frames and illustrative titles, then shows the supported setup and a release download link. Installation is a short ordered path with a link to the package's illustrated `START_HERE.html` guide after download. Chrome's **Load unpacked** step is explicit, and `chrome://extensions/` is easy to copy if a browser blocks the link.
 
 ## Visitor and release flow
 
@@ -68,18 +68,18 @@ Version 0.4.7 removes the separate tray icon. The panel label now handles focus 
 
 ## 2026-10-18 product video
 
-The still image could not show the panel flash. The [video plan and storyboard](https://github.com/wbniv/bga-title-tray/blob/main/docs/plans/2026-10-18-promo-video.md) show the planned shots and viewer flow. The source uses two cropped frames from the installed 0.4.7 widget's manual flash preview; no full desktop capture is published. The 18-second, silent H.264 demo has on-screen copy, a poster, and a text transcript. The revised edit composites illustrative countdown, Play, and move-alert titles onto those real panel frames. It holds each flash state for 0.5 seconds for clarity; the widget's timing is unchanged. It does not claim to depict one live game.
+The still image could not show the panel flash. The [video plan and storyboard](https://github.com/wbniv/bga-title-tray/blob/main/docs/plans/2026-10-18-promo-video.md) track the finished shots and viewer flow. The current 22-second silent H.264 demo uses cropped frames from the installed 0.4.7 widget, with illustrative queue, Play, and move-alert titles composited over them. A composited pointer clicks the panel title, then the video cuts to Will's one-tab BGA browser screenshot. The page has a brief caption identifying the composited titles and no expandable transcript. Each video flash state lasts 0.5 seconds; the installed widget's timing is unchanged. The sequence does not depict one live game.
 
 Player states:
 
 ```text
-[Real poster with Play button] → [Inline video controls] → [Transcript below]
+[Real poster with large centered Play button] → [Muted inline playback fades in] → [Video controls and product details]
 ```
 
 The poster is a link to the MP4 when scripts are unavailable. With scripts, the same click starts the inline player. The video waits for that click, so the page opens on a clear poster without a loading spinner.
 
 - [x] Build the video and inspect opening, flashing, and closing frames.
-- [x] Add the video, poster, and transcript above the app description.
+- [x] Add the video and poster above the app description; remove the transcript after Will's review.
 - [x] Build, inspect desktop and mobile layouts, publish, and verify the live asset.
 
 Indri v0.1.219 serves the slower video and the updated caption. The live MP4 matches the local build by SHA-256 (`138c67f3390f49c9a7e1eed4cf5c31ca79a83f28e3467d586409c21681e580c6`).
@@ -93,9 +93,18 @@ Will also asked for the searching count to descend 3 → 2 → 1 → 0 without f
 
 Indri v0.1.221 serves the revised sequence. Its live MP4 matches the local build by SHA-256 (`8bf23e2589b4bddd85b31dba7594baf6b3c30f364055ebb51309e751df1086dc`).
 
-The [video plan](https://github.com/wbniv/bga-title-tray/blob/main/docs/plans/2026-10-18-promo-video.md) now calls for a waiting-for-game sequence and a real click-to-focus shot. It should show that Will can use another window while the panel displays the BGA waiting status, then click the panel title to bring the existing BGA window and tab forward when the game is ready. The current video shows the searching title and only states the click feature in text.
+The current cut shows the illustrative 3 → 2 → 1 → 0 waiting sequence, then a flashing Play alert. Its final pointer click cuts to Will's BGA browser screenshot. This illustrates the click-to-focus result without presenting it as a continuous recording of a live game.
 
-- [ ] Capture, edit, and publish the waiting and click-to-focus shots after reviewing desktop content in the recording.
+- [x] Edit and publish the waiting sequence, pointer click, and cropped browser screenshot after reviewing the visible desktop content.
+
+Indri [`v0.1.222`](https://github.com/wbniv/indri.studio/tree/v0.1.222) published that 22-second cut with a large centered Play button. [`v0.1.223`](https://github.com/wbniv/indri.studio/tree/v0.1.223) removed the expandable transcript. The Blender motion revision is tracked in the [video plan](https://github.com/wbniv/bga-title-tray/blob/main/docs/plans/2026-10-18-promo-video.md).
+
+## 2026-10-18 motion revision
+
+Blender keyframes now animate a queue progress line, Play alert brackets, a click ripple, and a thin accent on the browser cut. The transparent motion layer is composited by the reproducible FFmpeg build. The video remains silent and 22 seconds long; its captured panel frames, illustrative titles, click, and browser screenshot remain identified in the product page caption and project video plan.
+
+- [x] Render the motion layer and inspect opening, countdown, Play, click, and browser frames at desktop and 390 px viewport player sizes.
+- [ ] Publish the revised MP4 and poster, then verify the live asset and page.
 
 ## Acceptance checks
 
@@ -103,7 +112,7 @@ The [video plan](https://github.com/wbniv/bga-title-tray/blob/main/docs/plans/20
 |---|---|
 | Desktop catalogue | Card appears alphabetically between Blender Asset Searcher and Claude Code Authoring Formats; title and teaser remain legible over the illustrated card background. |
 | Mobile catalogue | One-column card fits a 390 px viewport; image crop leaves the title and teaser clear. |
-| Detail page | Real tray screenshot is visible near the top, with KDE/Chrome support adjacent and a prominent latest-release link. |
+| Detail page | The video poster shows the captured tray near the top, with KDE/Chrome support and a prominent latest-release link below. |
 | Install path | A reader can locate the archive, checksum, `START_HERE.html`, installer, Chrome extensions page, and success cue without a Markdown viewer. |
 | Claims | Board Game Arena affiliation and unsupported platforms are not implied; version-specific commands match the archive. |
 
