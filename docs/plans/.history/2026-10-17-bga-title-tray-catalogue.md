@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-10-18](https://github.com/wbniv/indri.studio/commit/7f1f2dc) | Publish motion-led BGA tray video |
 | [2026-10-18](https://github.com/wbniv/indri.studio/commit/eea1506) | Record live verification of BGA motion cut |
 | [2026-10-18](https://github.com/wbniv/indri.studio/commit/2540ec1) | Publish Blender motion cut for BGA tray demo |
 | [2026-10-18](https://github.com/wbniv/indri.studio/commit/2c685f9) | Record BGA demo publication verification |
@@ -21,6 +22,10 @@
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/96dd577) | Add Board Game Arena Title Tray to Indri catalogue |
 
 <!--history-meta v1
+7f1f2dc	author	Will Norris
+7f1f2dc	added	7
+7f1f2dc	deleted	0
+7f1f2dc	files	1
 eea1506	author	Will Norris
 eea1506	added	3
 eea1506	deleted	1

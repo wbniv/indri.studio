@@ -68,7 +68,7 @@ Version 0.4.7 removes the separate tray icon. The panel label now handles focus 
 
 ## 2026-10-18 product video
 
-The still image could not show the panel flash. The [video plan and storyboard](https://github.com/wbniv/bga-title-tray/blob/main/docs/plans/2026-10-18-promo-video.md) track the finished shots and viewer flow. The current 22-second silent H.264 demo uses cropped frames from the installed 0.4.7 widget, with illustrative queue, Play, and move-alert titles composited over them. A composited pointer clicks the panel title, then the video cuts to Will's one-tab BGA browser screenshot. The page has a brief caption identifying the composited titles and no expandable transcript. Each video flash state lasts 0.5 seconds; the installed widget's timing is unchanged. The sequence does not depict one live game.
+The still image could not show the panel flash. The [video plan and storyboard](https://github.com/wbniv/bga-title-tray/blob/main/docs/plans/2026-10-18-promo-video.md) track the finished shots and viewer flow. The current 22-second silent H.264 demo uses cropped frames from the installed 0.4.7 widget, with illustrative queue, Play, and move-alert titles composited over them. Animated window cards show BGA behind another task while the tray stays visible. A composited pointer clicks the panel title, then Will's one-tab BGA browser screenshot comes forward. The page has a brief caption identifying captured and illustrative elements and no expandable transcript. Each video flash state lasts 0.5 seconds; the installed widget's timing is unchanged. The sequence does not depict one live game.
 
 Player states:
 
@@ -93,7 +93,7 @@ Will also asked for the searching count to descend 3 → 2 → 1 → 0 without f
 
 Indri v0.1.221 serves the revised sequence. Its live MP4 matches the local build by SHA-256 (`8bf23e2589b4bddd85b31dba7594baf6b3c30f364055ebb51309e751df1086dc`).
 
-The current cut shows the illustrative 3 → 2 → 1 → 0 waiting sequence, then a flashing Play alert. Its final pointer click cuts to Will's BGA browser screenshot. This illustrates the click-to-focus result without presenting it as a continuous recording of a live game.
+The sequence shows the illustrative 3 → 2 → 1 → 0 wait, then a flashing Play alert. Its final pointer click brings Will's BGA browser screenshot to the foreground. This illustrates the click-to-focus result without presenting it as a continuous recording of a live game.
 
 - [x] Edit and publish the waiting sequence, pointer click, and cropped browser screenshot after reviewing the visible desktop content.
 
@@ -101,7 +101,7 @@ Indri [`v0.1.222`](https://github.com/wbniv/indri.studio/tree/v0.1.222) publishe
 
 ## 2026-10-18 motion revision
 
-Blender keyframes now animate a queue progress line, Play alert brackets, a click ripple, and a thin accent on the browser cut. The transparent motion layer is composited by the reproducible FFmpeg build. The video remains silent and 22 seconds long; its captured panel frames, illustrative titles, click, and browser screenshot remain identified in the product page caption and project video plan.
+For v0.1.224, Blender keyframes animated a queue progress line, Play alert brackets, a click ripple, and a thin accent on the browser cut. The transparent motion layer was composited by FFmpeg. This version was silent and 22 seconds long; its captured panel frames, illustrative titles, click, and browser screenshot were identified in the product page caption and project video plan.
 
 - [x] Render the motion layer and inspect opening, countdown, Play, click, and browser frames at desktop and 390 px viewport player sizes.
 - [x] Publish the revised MP4 and poster, then verify the live asset and page.
@@ -113,7 +113,9 @@ Indri [`v0.1.224`](https://github.com/wbniv/indri.studio/tree/v0.1.224) serves t
 Will found that the Blender accents added little to the product story. The revised 22-second video moves the tray, illustrative browser and foreground windows, searching count, alert, pointer, and final BGA screenshot through the workflow. The window cards are abstract illustrations; the panel and final browser frame are captured. The detail-page caption names these sources.
 
 - [x] Render the video and poster; inspect waiting, Play, move alert, click, and BGA return at desktop and 390 px player sizes.
-- [ ] Publish the revised video and poster, then verify the live page and MP4 checksum.
+- [x] Publish the revised video and poster, then verify the live page and MP4 checksum.
+
+Indri [`v0.1.225`](https://github.com/wbniv/indri.studio/tree/v0.1.225) serves the redesigned video. The live MP4 matches the local build by SHA-256 (`902541f01bcdf2adcaac044bc102bd80cc4875271c902c293e921fd3e6a05d49`), and the live page displays the revised source caption without a transcript.
 
 ## Acceptance checks
 
