@@ -9,6 +9,7 @@ import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import lightboxUrl from "../../scripts/cca-lightbox.js?url";
+import bgaDemoUrl from "../../scripts/bga-demo-player.js?url";
 
 export async function getStaticPaths() {
 	// Same sort as the homepage gallery — alphabetical with finding-your-way
@@ -138,6 +139,7 @@ const ogImage = ogImagePath ? new URL(ogImagePath, Astro.site).href : undefined;
 		<div class="prose">
 			<Content />
 			{post.id === 'claude-code-authoring-formats' && <script src={lightboxUrl}></script>}
+			{post.id === 'bga-title-tray' && <script src={bgaDemoUrl}></script>}
 		</div>
 
 		{post.id === 'finding-your-way' && (
@@ -377,18 +379,62 @@ const ogImage = ogImagePath ? new URL(ogImagePath, Astro.site).href : undefined;
 			border: 1px solid var(--color-outline-variant);
 			margin: 1.5em 0;
 		}
-		/* Keep the real panel title at its native size. The older capture also
-		   contains a BGA tray icon that the current release has removed. */
-		.prose :global(p:has(> img[src*="/tray."])) {
-			width: min(100%, 310px);
-			overflow: hidden;
-			margin: 0 0 1.5em;
+		.prose :global(.bga-demo) {
+			margin: 1.5em 0 1em;
 		}
-		.prose :global(img[src*="/tray."]) {
-			max-width: none;
-			width: 900px;
-			height: 55px;
+		.prose :global(.bga-demo-launch) {
+			position: relative;
+			display: block;
+			border: 1px solid var(--color-outline-variant);
+		}
+		.prose :global(.bga-demo-launch[hidden]) {
+			display: none;
+		}
+		.prose :global(.bga-demo-launch img) {
+			display: block;
+			width: 100%;
+			aspect-ratio: 16 / 9;
 			margin: 0;
+			border: 0;
+		}
+		.prose :global(.bga-demo-launch span) {
+			position: absolute;
+			right: 1rem;
+			bottom: 1rem;
+			padding: 0.55rem 0.85rem;
+			background: var(--color-primary-container);
+			color: var(--color-grey-900);
+			font-weight: 700;
+		}
+		@media (max-width: 639px) {
+			.prose :global(.bga-demo-launch span) {
+				position: static;
+				display: block;
+				text-align: center;
+				font-size: 0.9rem;
+			}
+		}
+		.prose :global(.bga-demo video) {
+			display: block;
+			width: 100%;
+			aspect-ratio: 16 / 9;
+			background: var(--color-grey-900);
+			border: 1px solid var(--color-outline-variant);
+		}
+		.prose :global(.bga-demo video[hidden]) {
+			display: none;
+		}
+		.prose :global(.bga-demo figcaption) {
+			margin-top: 0.75em;
+			font-size: 0.875em;
+			color: var(--color-on-surface-variant);
+		}
+		.prose :global(.bga-demo-transcript) {
+			margin-bottom: 1.5em;
+		}
+		.prose :global(.bga-demo-transcript summary) {
+			cursor: pointer;
+			color: var(--color-primary-container);
 		}
 		.prose :global(strong) {
 			color: var(--color-on-surface);

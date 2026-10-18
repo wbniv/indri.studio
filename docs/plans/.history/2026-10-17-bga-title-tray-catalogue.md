@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-10-18](https://github.com/wbniv/indri.studio/commit/bbed501) | Use real panel capture on BGA app page |
 | [2026-10-18](https://github.com/wbniv/indri.studio/commit/ca0fb50) | Update BGA Title Tray page for v0.4.7 |
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/6fc88ea) | Record BGA link audit and copy correction |
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/cde0c49) | Close BGA catalogue plan after final publish |
@@ -10,6 +11,11 @@
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/96dd577) | Add Board Game Arena Title Tray to Indri catalogue |
 
 <!--history-meta v1
+bbed501	author	Will Norris
+bbed501	added	3
+bbed501	deleted	2
+bbed501	files	1
+bbed501	body	Replace the oversized illustration with a native-size panel title crop and verify desktop and mobile layouts.\n\nAI-assisted with Codex CLI 0.163.0, GPT-6; reasoning effort unavailable in session metadata.
 ca0fb50	author	Will Norris
 ca0fb50	added	11
 ca0fb50	deleted	0

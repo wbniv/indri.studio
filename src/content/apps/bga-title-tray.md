@@ -9,7 +9,22 @@ cardImages:
   - { src: "../../assets/screenshots/bga-title-tray/card.svg", alt: "" }
 ---
 
-![Actual KDE Plasma panel title showing “Play • Board Game Arena”](../../assets/screenshots/bga-title-tray/tray.png)
+<figure class="bga-demo" data-bga-demo>
+  <a class="bga-demo-launch" href="/apps/bga-title-tray/bga-title-tray-demo.mp4" aria-label="Play the 18-second Board Game Arena Title Tray demo">
+    <img src="/apps/bga-title-tray/bga-title-tray-demo-poster.jpg" alt="Real KDE panel title flashing white in the Board Game Arena Title Tray video">
+    <span aria-hidden="true">▶ Play 18-second demo</span>
+  </a>
+  <video controls playsinline preload="none" hidden aria-label="Board Game Arena Title Tray demonstration">
+    <source src="/apps/bga-title-tray/bga-title-tray-demo.mp4" type="video/mp4">
+    <p>Your browser cannot play this video. <a href="/apps/bga-title-tray/bga-title-tray-demo.mp4">Download the 18-second demo</a>.</p>
+  </video>
+  <figcaption>18-second silent demo with real KDE panel frames. The flashing footage uses the app's manual preview.</figcaption>
+</figure>
+
+<details class="bga-demo-transcript">
+  <summary>Video transcript</summary>
+  <p>Board Game Arena Title Tray keeps the selected tab title beside the KDE system tray. The real panel appears at rest, then alternates between its normal and white alert frames during a manual flash preview. Left-clicking the panel title focuses the existing tab. There is no separate tray icon. The app supports Linux with KDE Plasma 6 and Chrome or Chromium.</p>
+</details>
 
 The title of your selected [Board Game Arena](https://boardgamearena.com/) tab lives beside the KDE system tray. When a game offer arrives while BGA is in the background, the padded title area flashes white with black text. It pauses when you focus BGA and stops when the offer disappears, even if Chrome still calls the tab “Play.” Click the title to bring that existing tab to the front, or right-click it to choose a BGA tab and refresh. The panel shows “Play now!” when BGA returns to its lobby while Chrome still reports “Play.”
 

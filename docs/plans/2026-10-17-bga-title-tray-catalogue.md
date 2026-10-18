@@ -66,6 +66,22 @@ Version 0.4.7 removes the separate tray icon. The panel label now handles focus 
 - [x] Build and preview the updated Markdown.
 - [x] Publish the Indri page and verify the live copy.
 
+## 2026-10-18 product video
+
+The still image could not show the panel flash. The [video plan and storyboard](https://github.com/wbniv/bga-title-tray/blob/main/docs/plans/2026-10-18-promo-video.md) show four shots and the viewer flow. The source uses two cropped frames from the installed 0.4.7 widget's manual flash preview; no full desktop capture is published. The 18-second, silent H.264 demo has on-screen copy, a poster, and a text transcript. It does not claim that the captured searching state triggered a real alert.
+
+Player states:
+
+```text
+[Real poster with Play button] → [Inline video controls] → [Transcript below]
+```
+
+The poster is a link to the MP4 when scripts are unavailable. With scripts, the same click starts the inline player. The video waits for that click, so the page opens on a clear poster without a loading spinner.
+
+- [x] Build the video and inspect opening, flashing, and closing frames.
+- [x] Add the video, poster, and transcript above the app description.
+- [ ] Build, inspect desktop and mobile layouts, publish, and verify the live asset.
+
 ## Acceptance checks
 
 | View | Expected result |
