@@ -68,7 +68,7 @@ Version 0.4.7 removes the separate tray icon. The panel label now handles focus 
 
 ## 2026-10-18 product video
 
-The still image could not show the panel flash. The [video plan and storyboard](https://github.com/wbniv/bga-title-tray/blob/main/docs/plans/2026-10-18-promo-video.md) show the planned shots and viewer flow. The source uses two cropped frames from the installed 0.4.7 widget's manual flash preview; no full desktop capture is published. The 18-second, silent H.264 demo has on-screen copy, a poster, and a text transcript. The edit holds each flash state for 0.5 seconds for clarity; the widget's timing is unchanged. It does not claim that the captured searching state triggered a real alert.
+The still image could not show the panel flash. The [video plan and storyboard](https://github.com/wbniv/bga-title-tray/blob/main/docs/plans/2026-10-18-promo-video.md) show the planned shots and viewer flow. The source uses two cropped frames from the installed 0.4.7 widget's manual flash preview; no full desktop capture is published. The 18-second, silent H.264 demo has on-screen copy, a poster, and a text transcript. The revised edit composites illustrative countdown, Play, and move-alert titles onto those real panel frames. It holds each flash state for 0.5 seconds for clarity; the widget's timing is unchanged. It does not claim to depict one live game.
 
 Player states:
 
@@ -85,6 +85,11 @@ The poster is a link to the MP4 when scripts are unavailable. With scripts, the 
 Indri v0.1.219 serves the slower video and the updated caption. The live MP4 matches the local build by SHA-256 (`138c67f3390f49c9a7e1eed4cf5c31ca79a83f28e3467d586409c21681e580c6`).
 
 Will flagged “No separate tray icon” as a poor line for an app whose whole purpose is to live beside the tray. Indri v0.1.220 replaces it in the video with “No window or tab hunting.” The revised transcript and page copy describe the one-click return to the existing BGA tab. The live MP4 matches the revised local build by SHA-256 (`05648648f6f1792399d56fbfd1d7de289e4288740aeb762f08f30e9fb00a62ff`).
+
+Will also asked for the searching count to descend 3 → 2 → 1 → 0 without flashing, followed by a flashing Play title. The closing “Stay in the game” shot should flash a generic “You must make your move” title. Both sequences are illustrative composites over the captured panel; the captions and transcript identify them as such.
+
+- [x] Rebuild and inspect the countdown, Play flash, and move flash frames.
+- [ ] Publish the revised poster, video, and transcript, then verify the live assets.
 
 The [video plan](https://github.com/wbniv/bga-title-tray/blob/main/docs/plans/2026-10-18-promo-video.md) now calls for a waiting-for-game sequence and a real click-to-focus shot. It should show that Will can use another window while the panel displays the BGA waiting status, then click the panel title to bring the existing BGA window and tab forward when the game is ready. The current video shows the searching title and only states the click feature in text.
 

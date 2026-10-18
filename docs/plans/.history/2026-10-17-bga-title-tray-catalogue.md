@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-10-18](https://github.com/wbniv/indri.studio/commit/4b3e124) | Record corrected BGA demo publication |
 | [2026-10-18](https://github.com/wbniv/indri.studio/commit/183a0f1) | Fix BGA demo tray messaging |
 | [2026-10-18](https://github.com/wbniv/indri.studio/commit/4384416) | Add waiting-for-game story to video plan |
 | [2026-10-18](https://github.com/wbniv/indri.studio/commit/ceb939d) | Plan click-to-focus demo shot |
@@ -16,6 +17,10 @@
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/96dd577) | Add Board Game Arena Title Tray to Indri catalogue |
 
 <!--history-meta v1
+4b3e124	author	Will Norris
+4b3e124	added	1
+4b3e124	deleted	1
+4b3e124	files	1
 183a0f1	author	Will Norris
 183a0f1	added	2
 183a0f1	deleted	0
