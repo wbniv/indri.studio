@@ -68,7 +68,7 @@ Version 0.4.7 removes the separate tray icon. The panel label now handles focus 
 
 ## 2026-10-18 product video
 
-The still image could not show the panel flash. The [video plan and storyboard](https://github.com/wbniv/bga-title-tray/blob/main/docs/plans/2026-10-18-promo-video.md) show four shots and the viewer flow. The source uses two cropped frames from the installed 0.4.7 widget's manual flash preview; no full desktop capture is published. The 18-second, silent H.264 demo has on-screen copy, a poster, and a text transcript. The edit holds each flash state for 0.5 seconds for clarity; the widget's timing is unchanged. It does not claim that the captured searching state triggered a real alert.
+The still image could not show the panel flash. The [video plan and storyboard](https://github.com/wbniv/bga-title-tray/blob/main/docs/plans/2026-10-18-promo-video.md) show the planned shots and viewer flow. The source uses two cropped frames from the installed 0.4.7 widget's manual flash preview; no full desktop capture is published. The 18-second, silent H.264 demo has on-screen copy, a poster, and a text transcript. The edit holds each flash state for 0.5 seconds for clarity; the widget's timing is unchanged. It does not claim that the captured searching state triggered a real alert.
 
 Player states:
 
@@ -84,9 +84,9 @@ The poster is a link to the MP4 when scripts are unavailable. With scripts, the 
 
 Indri v0.1.219 serves the slower video and the updated caption. The live MP4 matches the local build by SHA-256 (`138c67f3390f49c9a7e1eed4cf5c31ca79a83f28e3467d586409c21681e580c6`).
 
-The [video plan](https://github.com/wbniv/bga-title-tray/blob/main/docs/plans/2026-10-18-promo-video.md) now calls for a real click-to-focus shot. It should show that clicking the panel title brings the existing BGA window and tab forward; the current video only states that feature in text.
+The [video plan](https://github.com/wbniv/bga-title-tray/blob/main/docs/plans/2026-10-18-promo-video.md) now calls for a waiting-for-game sequence and a real click-to-focus shot. It should show that Will can use another window while the panel displays the BGA waiting status, then click the panel title to bring the existing BGA window and tab forward when the game is ready. The current video shows the searching title and only states the click feature in text.
 
-- [ ] Capture, edit, and publish the click-to-focus shot after reviewing desktop content in the recording.
+- [ ] Capture, edit, and publish the waiting and click-to-focus shots after reviewing desktop content in the recording.
 
 ## Acceptance checks
 
