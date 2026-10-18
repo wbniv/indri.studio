@@ -89,7 +89,9 @@ Will flagged “No separate tray icon” as a poor line for an app whose whole p
 Will also asked for the searching count to descend 3 → 2 → 1 → 0 without flashing, followed by a flashing Play title. The closing “Stay in the game” shot should flash a generic “You must make your move” title. Both sequences are illustrative composites over the captured panel; the captions and transcript identify them as such.
 
 - [x] Rebuild and inspect the countdown, Play flash, and move flash frames.
-- [ ] Publish the revised poster, video, and transcript, then verify the live assets.
+- [x] Publish the revised poster, video, and transcript, then verify the live assets.
+
+Indri v0.1.221 serves the revised sequence. Its live MP4 matches the local build by SHA-256 (`8bf23e2589b4bddd85b31dba7594baf6b3c30f364055ebb51309e751df1086dc`).
 
 The [video plan](https://github.com/wbniv/bga-title-tray/blob/main/docs/plans/2026-10-18-promo-video.md) now calls for a waiting-for-game sequence and a real click-to-focus shot. It should show that Will can use another window while the panel displays the BGA waiting status, then click the panel title to bring the existing BGA window and tab forward when the game is ready. The current video shows the searching title and only states the click feature in text.
 
