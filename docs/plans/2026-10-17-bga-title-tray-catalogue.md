@@ -68,7 +68,7 @@ Version 0.4.7 removes the separate tray icon. The panel label now handles focus 
 
 ## 2026-10-18 product video
 
-The still image could not show the panel flash. The [video plan and storyboard](https://github.com/wbniv/bga-title-tray/blob/main/docs/plans/2026-10-18-promo-video.md) show four shots and the viewer flow. The source uses two cropped frames from the installed 0.4.7 widget's manual flash preview; no full desktop capture is published. The 18-second, silent H.264 demo has on-screen copy, a poster, and a text transcript. It does not claim that the captured searching state triggered a real alert.
+The still image could not show the panel flash. The [video plan and storyboard](https://github.com/wbniv/bga-title-tray/blob/main/docs/plans/2026-10-18-promo-video.md) show four shots and the viewer flow. The source uses two cropped frames from the installed 0.4.7 widget's manual flash preview; no full desktop capture is published. The 18-second, silent H.264 demo has on-screen copy, a poster, and a text transcript. The edit holds each flash state for 0.5 seconds for clarity; the widget's timing is unchanged. It does not claim that the captured searching state triggered a real alert.
 
 Player states:
 

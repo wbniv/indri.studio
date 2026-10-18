@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-10-18](https://github.com/wbniv/indri.studio/commit/b3ca1b6) | Add BGA Title Tray demo video to app page |
 | [2026-10-18](https://github.com/wbniv/indri.studio/commit/bbed501) | Use real panel capture on BGA app page |
 | [2026-10-18](https://github.com/wbniv/indri.studio/commit/ca0fb50) | Update BGA Title Tray page for v0.4.7 |
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/6fc88ea) | Record BGA link audit and copy correction |
@@ -11,6 +12,11 @@
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/96dd577) | Add Board Game Arena Title Tray to Indri catalogue |
 
 <!--history-meta v1
+b3ca1b6	author	Will Norris
+b3ca1b6	added	16
+b3ca1b6	deleted	0
+b3ca1b6	files	1
+b3ca1b6	body	Show real panel flash-preview frames in an 18-second silent demo with a clear poster, inline playback, and transcript.\n\nAI-assisted with Codex CLI 0.163.0, GPT-6; reasoning effort unavailable in session metadata.
 bbed501	author	Will Norris
 bbed501	added	3
 bbed501	deleted	2
