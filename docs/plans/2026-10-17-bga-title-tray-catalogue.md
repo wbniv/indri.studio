@@ -56,6 +56,15 @@ Will reported that the “View the full panel screenshot” link was bad. The fo
 - [x] After seeing the full image, Will found the separate link redundant. Removed the link and duplicate public PNG, kept the embedded image, and published [`v0.1.214`](https://github.com/wbniv/indri.studio/tree/v0.1.214). The live detail page shows the tray image and release CTA without the extra screenshot link.
 - [x] For [`v0.1.215`](https://github.com/wbniv/indri.studio/tree/v0.1.215), removed the gratuitous Markdown-viewer sentence and fixed the installation-notes link to the repository-root `INSTALL.md`. Verified HTTP 200 for Board Game Arena, the project repository, latest release, and installation notes; the built page's local routes and anchors exist. The live detail page contains the corrected link and copy.
 
+## 2026-10-18 release and page update
+
+Version 0.4.7 removes the separate tray icon. The panel label now handles focus on left-click and tab selection or refresh on right-click. Will watched a canceled offer stop flashing even though Chrome retained a Play title; [the live verification](https://github.com/wbniv/bga-title-tray/blob/main/docs/verification/2026-10-18-play-offer-cancellation.md) records the host states. The older screenshot above and earlier publication checks describe historical releases. The current detail page uses the existing panel illustration so it no longer shows the removed icon.
+
+- [x] Publish and verify the [v0.4.7 BGA release](https://github.com/wbniv/bga-title-tray/releases/tag/v0.4.7).
+- [x] Update the detail page's controls, alert behavior, download label, and illustration.
+- [x] Build and preview the updated Markdown.
+- [x] Publish the Indri page and verify the live copy.
+
 ## Acceptance checks
 
 | View | Expected result |
@@ -73,3 +82,5 @@ Will reported that the “View the full panel screenshot” link was bad. The fo
 - The live [Indri catalogue](https://indri.studio/#apps) as checked on 2026-10-17.
 
 AI assistance: Codex. Exact current CLI, model version, and reasoning-effort metadata were not available to verify in this session and are not inferred.
+
+2026-10-18 update prepared with Codex CLI 0.163.0, GPT-6; reasoning-effort metadata was unavailable.

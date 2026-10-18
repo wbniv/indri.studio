@@ -9,13 +9,13 @@ cardImages:
   - { src: "../../assets/screenshots/bga-title-tray/card.svg", alt: "" }
 ---
 
-![KDE Plasma panel showing “Play • Board Game Arena” beside the system tray](../../assets/screenshots/bga-title-tray/tray.png)
+![Illustration of a Board Game Arena title label beside the KDE Plasma system tray](../../assets/screenshots/bga-title-tray/card.svg)
 
-The title of your selected [Board Game Arena](https://boardgamearena.com/) tab lives beside the KDE system tray. When a game offer arrives while BGA is in the background, the padded title area flashes white with black text. It keeps flashing until the BGA tab is focused or the offer goes away. Click the title to bring that existing tab to the front.
+The title of your selected [Board Game Arena](https://boardgamearena.com/) tab lives beside the KDE system tray. When a game offer arrives while BGA is in the background, the padded title area flashes white with black text. It pauses when you focus BGA and stops when the offer disappears, even if Chrome still calls the tab “Play.” Click the title to bring that existing tab to the front, or right-click it to choose a BGA tab and refresh. The panel shows “Play now!” when BGA returns to its lobby while Chrome still reports “Play.”
 
-This is an independent companion for Board Game Arena, not a Board Game Arena product. It uses a Chrome extension to read the tab title and the visible game-offer and lobby states, plus a small local host and Plasma widget to display them. It does not show a separate desktop notification.
+This is an independent companion for Board Game Arena, not a Board Game Arena product. It uses a Chrome extension to read the tab title and the visible game-offer and lobby states, plus a small local host and Plasma widget to display them. The panel label is the only desktop entry; there is no separate tray icon or desktop notification.
 
-<p><a class="download-cta" href="https://github.com/wbniv/bga-title-tray/releases/latest">Download the latest release ↗</a></p>
+<p><a class="download-cta" href="https://github.com/wbniv/bga-title-tray/releases/latest">Download v0.4.7 ↗</a></p>
 
 ## Supported setup
 
@@ -27,4 +27,4 @@ Linux with **KDE Plasma 6** and **Google Chrome or Chromium**. The installer als
 2. Extract the archive and open `START_HERE.html` in your browser. It shows the commands and screenshots for your browser. Run `./bin/install.sh --browser chrome` from the extracted folder, or choose `chromium` for Chromium. The installer prints the extension folder to select.
 3. Open Chrome's [Extensions page](chrome://extensions/), enable **Developer mode**, click **Load unpacked**, and choose the printed folder. If that link is blocked, paste `chrome://extensions/` into Chrome's address bar. Open or refresh a [Board Game Arena](https://boardgamearena.com/) tab; its title should appear beside the Plasma system tray.
 
-The release archive includes an illustrated HTML guide with screenshots of the installed extension and the working tray. For updates and removal, follow that guide or the [project's installation notes](https://github.com/wbniv/bga-title-tray/blob/main/INSTALL.md).
+The release archive includes an illustrated HTML guide with screenshots of the installed extension and panel. For updates and removal, follow that guide or the [project's installation notes](https://github.com/wbniv/bga-title-tray/blob/main/INSTALL.md).
