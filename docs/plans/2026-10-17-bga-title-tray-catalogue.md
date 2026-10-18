@@ -104,7 +104,9 @@ Indri [`v0.1.222`](https://github.com/wbniv/indri.studio/tree/v0.1.222) publishe
 Blender keyframes now animate a queue progress line, Play alert brackets, a click ripple, and a thin accent on the browser cut. The transparent motion layer is composited by the reproducible FFmpeg build. The video remains silent and 22 seconds long; its captured panel frames, illustrative titles, click, and browser screenshot remain identified in the product page caption and project video plan.
 
 - [x] Render the motion layer and inspect opening, countdown, Play, click, and browser frames at desktop and 390 px viewport player sizes.
-- [ ] Publish the revised MP4 and poster, then verify the live asset and page.
+- [x] Publish the revised MP4 and poster, then verify the live asset and page.
+
+Indri [`v0.1.224`](https://github.com/wbniv/indri.studio/tree/v0.1.224) serves the motion cut. The live MP4 matches the local build by SHA-256 (`410a5cc77f4f51a599f7263557897a96c6346478134b58d8a646abf2f33a9052`). The live page retains the video player and has no transcript block.
 
 ## Acceptance checks
 
