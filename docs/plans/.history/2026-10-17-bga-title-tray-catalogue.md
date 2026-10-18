@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-10-18](https://github.com/wbniv/indri.studio/commit/d5debb3) | Slow BGA demo flash and explain pacing |
 | [2026-10-18](https://github.com/wbniv/indri.studio/commit/b3ca1b6) | Add BGA Title Tray demo video to app page |
 | [2026-10-18](https://github.com/wbniv/indri.studio/commit/bbed501) | Use real panel capture on BGA app page |
 | [2026-10-18](https://github.com/wbniv/indri.studio/commit/ca0fb50) | Update BGA Title Tray page for v0.4.7 |
@@ -12,6 +13,10 @@
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/96dd577) | Add Board Game Arena Title Tray to Indri catalogue |
 
 <!--history-meta v1
+d5debb3	author	Will Norris
+d5debb3	added	1
+d5debb3	deleted	1
+d5debb3	files	1
 b3ca1b6	author	Will Norris
 b3ca1b6	added	16
 b3ca1b6	deleted	0

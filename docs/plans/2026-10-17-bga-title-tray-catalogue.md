@@ -80,7 +80,13 @@ The poster is a link to the MP4 when scripts are unavailable. With scripts, the 
 
 - [x] Build the video and inspect opening, flashing, and closing frames.
 - [x] Add the video, poster, and transcript above the app description.
-- [ ] Build, inspect desktop and mobile layouts, publish, and verify the live asset.
+- [x] Build, inspect desktop and mobile layouts, publish, and verify the live asset.
+
+Indri v0.1.219 serves the slower video and the updated caption. The live MP4 matches the local build by SHA-256 (`138c67f3390f49c9a7e1eed4cf5c31ca79a83f28e3467d586409c21681e580c6`).
+
+The [video plan](https://github.com/wbniv/bga-title-tray/blob/main/docs/plans/2026-10-18-promo-video.md) now calls for a real click-to-focus shot. It should show that clicking the panel title brings the existing BGA window and tab forward; the current video only states that feature in text.
+
+- [ ] Capture, edit, and publish the click-to-focus shot after reviewing desktop content in the recording.
 
 ## Acceptance checks
 
