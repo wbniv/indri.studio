@@ -84,6 +84,8 @@ The poster is a link to the MP4 when scripts are unavailable. With scripts, the 
 
 Indri v0.1.219 serves the slower video and the updated caption. The live MP4 matches the local build by SHA-256 (`138c67f3390f49c9a7e1eed4cf5c31ca79a83f28e3467d586409c21681e580c6`).
 
+Will flagged “No separate tray icon” as a poor line for an app whose whole purpose is to live beside the tray. The revised video and transcript describe the benefit: one click returns to BGA without searching through windows or tabs.
+
 The [video plan](https://github.com/wbniv/bga-title-tray/blob/main/docs/plans/2026-10-18-promo-video.md) now calls for a waiting-for-game sequence and a real click-to-focus shot. It should show that Will can use another window while the panel displays the BGA waiting status, then click the panel title to bring the existing BGA window and tab forward when the game is ready. The current video shows the searching title and only states the click feature in text.
 
 - [ ] Capture, edit, and publish the waiting and click-to-focus shots after reviewing desktop content in the recording.

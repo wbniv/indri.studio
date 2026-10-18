@@ -23,12 +23,12 @@ cardImages:
 
 <details class="bga-demo-transcript">
   <summary>Video transcript</summary>
-  <p>Board Game Arena Title Tray keeps the selected tab title beside the KDE system tray. The real panel appears at rest, then alternates between its normal and white alert frames from a manual flash preview, slowed for clarity in this video. Left-clicking the panel title focuses the existing tab. There is no separate tray icon. The app supports Linux with KDE Plasma 6 and Chrome or Chromium.</p>
+  <p>Board Game Arena Title Tray keeps the selected tab title beside the KDE system tray. The real panel appears at rest, then alternates between its normal and white alert frames from a manual flash preview, slowed for clarity in this video. Left-clicking the panel title focuses the existing BGA tab, so there is no window or tab hunting. The app supports Linux with KDE Plasma 6 and Chrome or Chromium.</p>
 </details>
 
 The title of your selected [Board Game Arena](https://boardgamearena.com/) tab lives beside the KDE system tray. When a game offer arrives while BGA is in the background, the padded title area flashes white with black text. It pauses when you focus BGA and stops when the offer disappears, even if Chrome still calls the tab “Play.” Click the title to bring that existing tab to the front, or right-click it to choose a BGA tab and refresh. The panel shows “Play now!” when BGA returns to its lobby while Chrome still reports “Play.”
 
-This is an independent companion for Board Game Arena, not a Board Game Arena product. It uses a Chrome extension to read the tab title and the visible game-offer and lobby states, plus a small local host and Plasma widget to display them. The panel label is the only desktop entry; there is no separate tray icon or desktop notification.
+This is an independent companion for Board Game Arena, not a Board Game Arena product. It uses a Chrome extension to read the tab title and the visible game-offer and lobby states, plus a small local host and Plasma widget to display them. The panel title is the alert and click target. Clicking it brings the existing BGA window and tab forward.
 
 <p><a class="download-cta" href="https://github.com/wbniv/bga-title-tray/releases/latest">Download v0.4.7 ↗</a></p>
 

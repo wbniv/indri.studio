@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-10-18](https://github.com/wbniv/indri.studio/commit/4384416) | Add waiting-for-game story to video plan |
 | [2026-10-18](https://github.com/wbniv/indri.studio/commit/ceb939d) | Plan click-to-focus demo shot |
 | [2026-10-18](https://github.com/wbniv/indri.studio/commit/d5debb3) | Slow BGA demo flash and explain pacing |
 | [2026-10-18](https://github.com/wbniv/indri.studio/commit/b3ca1b6) | Add BGA Title Tray demo video to app page |
@@ -14,6 +15,10 @@
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/96dd577) | Add Board Game Arena Title Tray to Indri catalogue |
 
 <!--history-meta v1
+4384416	author	Will Norris
+4384416	added	3
+4384416	deleted	3
+4384416	files	1
 ceb939d	author	Will Norris
 ceb939d	added	7
 ceb939d	deleted	1
