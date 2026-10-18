@@ -10,20 +10,24 @@ cardImages:
 ---
 
 <figure class="bga-demo" data-bga-demo>
-  <a class="bga-demo-launch" href="/apps/bga-title-tray/bga-title-tray-demo.mp4" aria-label="Play the 18-second Board Game Arena Title Tray demo">
-    <img src="/apps/bga-title-tray/bga-title-tray-demo-poster.jpg" alt="Illustrative Play alert flashing white on captured KDE panel frames">
-    <span aria-hidden="true">▶ Play 18-second demo</span>
-  </a>
-  <video controls playsinline preload="none" hidden aria-label="Board Game Arena Title Tray demonstration">
-    <source src="/apps/bga-title-tray/bga-title-tray-demo.mp4" type="video/mp4">
-    <p>Your browser cannot play this video. <a href="/apps/bga-title-tray/bga-title-tray-demo.mp4">Download the 18-second demo</a>.</p>
-  </video>
-  <figcaption>18-second silent illustration on captured KDE panel frames. The countdown and alert titles are composited; flashing is slowed for clarity. The installed widget's timing is unchanged.</figcaption>
+  <div class="bga-demo-stage">
+    <a class="bga-demo-launch" href="/apps/bga-title-tray/bga-title-tray-demo.mp4" aria-label="Play the Board Game Arena Title Tray demo">
+      <img src="/apps/bga-title-tray/bga-title-tray-demo-poster.jpg" alt="Illustrative Play alert flashing white on captured KDE panel frames">
+      <span class="bga-demo-play" aria-hidden="true">
+        <svg viewBox="0 0 48 48" focusable="false" aria-hidden="true"><path d="M15 8v32l27-16z" fill="currentColor"/></svg>
+      </span>
+    </a>
+    <video controls playsinline muted preload="none" hidden poster="/apps/bga-title-tray/bga-title-tray-demo-poster.jpg" aria-label="Board Game Arena Title Tray demonstration">
+      <source src="/apps/bga-title-tray/bga-title-tray-demo.mp4" type="video/mp4">
+      <p>Your browser cannot play this video. <a href="/apps/bga-title-tray/bga-title-tray-demo.mp4">Download the demo</a>.</p>
+    </video>
+  </div>
+  <figcaption>Silent illustration on captured KDE panel frames. The countdown and alert titles are composited.</figcaption>
 </figure>
 
 <details class="bga-demo-transcript">
   <summary>Video transcript</summary>
-  <p>Board Game Arena Title Tray keeps the selected tab title beside the KDE system tray. An illustrative search count goes from three players to zero without flashing. Then “Play • Board Game Arena” flashes between normal and white alert states. The closing “Stay in the game” shot flashes the generic “You must make your move • Board Game Arena” title. These titles are composited on captured panel frames, and the flash is slowed for the video. Left-clicking the panel title focuses the existing BGA tab, so there is no window or tab hunting. The app supports Linux with KDE Plasma 6 and Chrome or Chromium.</p>
+  <p>Board Game Arena Title Tray keeps the selected tab title beside the KDE system tray. An illustrative search count goes from three players to zero without flashing. Then “Play • Board Game Arena” flashes between normal and white alert states. The “Stay in the game” shot flashes the generic “You must make your move • Board Game Arena” title. These titles are composited on captured panel frames. A pointer clicks the panel title, then the video cuts to Will's BGA browser screenshot to illustrate how a click brings the existing tab forward. The app supports Linux with KDE Plasma 6 and Chrome or Chromium.</p>
 </details>
 
 The title of your selected [Board Game Arena](https://boardgamearena.com/) tab lives beside the KDE system tray. When a game offer arrives while BGA is in the background, the padded title area flashes white with black text. It pauses when you focus BGA and stops when the offer disappears, even if Chrome still calls the tab “Play.” Click the title to bring that existing tab to the front, or right-click it to choose a BGA tab and refresh. The panel shows “Play now!” when BGA returns to its lobby while Chrome still reports “Play.”

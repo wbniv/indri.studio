@@ -3,19 +3,29 @@ function initBgaDemo() {
   if (!player || player.dataset.ready === "true") return;
 
   const launch = player.querySelector(".bga-demo-launch");
+  const stage = player.querySelector(".bga-demo-stage");
   const video = player.querySelector("video");
-  if (!launch || !video) return;
+  if (!launch || !stage || !video) return;
   player.dataset.ready = "true";
 
-  launch.addEventListener("click", async (event) => {
+  const reveal = () => {
+    if (stage.dataset.revealed === "true") return;
+    stage.dataset.revealed = "true";
+    launch.tabIndex = -1;
+    launch.setAttribute("aria-hidden", "true");
+  };
+
+  launch.addEventListener("click", (event) => {
     event.preventDefault();
-    launch.hidden = true;
+    if (stage.dataset.loading === "true") return;
+    stage.dataset.loading = "true";
+    video.muted = true;
     video.hidden = false;
-    try {
-      await video.play();
-    } catch {
+    video.addEventListener("playing", reveal, { once: true });
+    video.play().catch(() => {
+      reveal();
       video.focus();
-    }
+    });
   });
 }
 
