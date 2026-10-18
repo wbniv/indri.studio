@@ -35,6 +35,7 @@ _Nothing parked._
 
 ## Done
 
+- [x] 2026-10-18 — Replaced the oversized BGA page illustration with a compact actual panel capture — [plan](docs/plans/2026-10-17-bga-title-tray-catalogue.md).
 - [x] 2026-10-18 — Updated the Board Game Arena Title Tray page for v0.4.7, the panel-only controls, and canceled-offer behavior — [plan](docs/plans/2026-10-17-bga-title-tray-catalogue.md).
 - [x] 2026-10-17 — Added Board Game Arena Title Tray to the Indri catalogue and published v0.1.214; kept the embedded tray image and removed the redundant full-image link — [plan](docs/plans/2026-10-17-bga-title-tray-catalogue.md).
 

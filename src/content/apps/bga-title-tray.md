@@ -9,7 +9,7 @@ cardImages:
   - { src: "../../assets/screenshots/bga-title-tray/card.svg", alt: "" }
 ---
 
-![Illustration of a Board Game Arena title label beside the KDE Plasma system tray](../../assets/screenshots/bga-title-tray/card.svg)
+![Actual KDE Plasma panel title showing “Play • Board Game Arena”](../../assets/screenshots/bga-title-tray/tray.png)
 
 The title of your selected [Board Game Arena](https://boardgamearena.com/) tab lives beside the KDE system tray. When a game offer arrives while BGA is in the background, the padded title area flashes white with black text. It pauses when you focus BGA and stops when the offer disappears, even if Chrome still calls the tab “Play.” Click the title to bring that existing tab to the front, or right-click it to choose a BGA tab and refresh. The panel shows “Play now!” when BGA returns to its lobby while Chrome still reports “Play.”
 

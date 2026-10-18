@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-10-18](https://github.com/wbniv/indri.studio/commit/ca0fb50) | Update BGA Title Tray page for v0.4.7 |
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/6fc88ea) | Record BGA link audit and copy correction |
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/cde0c49) | Close BGA catalogue plan after final publish |
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/17c4ebb) | Remove redundant full tray screenshot link |
@@ -9,6 +10,11 @@
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/96dd577) | Add Board Game Arena Title Tray to Indri catalogue |
 
 <!--history-meta v1
+ca0fb50	author	Will Norris
+ca0fb50	added	11
+ca0fb50	deleted	0
+ca0fb50	files	1
+ca0fb50	body	Describe panel-only controls and verified offer cancellation, and replace the old icon screenshot with the current illustration.\n\nAI-assisted with Codex CLI 0.163.0, GPT-6; reasoning effort unavailable in session metadata.
 6fc88ea	author	Will Norris
 6fc88ea	added	1
 6fc88ea	deleted	0

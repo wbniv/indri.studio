@@ -58,10 +58,11 @@ Will reported that the “View the full panel screenshot” link was bad. The fo
 
 ## 2026-10-18 release and page update
 
-Version 0.4.7 removes the separate tray icon. The panel label now handles focus on left-click and tab selection or refresh on right-click. Will watched a canceled offer stop flashing even though Chrome retained a Play title; [the live verification](https://github.com/wbniv/bga-title-tray/blob/main/docs/verification/2026-10-18-play-offer-cancellation.md) records the host states. The older screenshot above and earlier publication checks describe historical releases. The current detail page uses the existing panel illustration so it no longer shows the removed icon.
+Version 0.4.7 removes the separate tray icon. The panel label now handles focus on left-click and tab selection or refresh on right-click. Will watched a canceled offer stop flashing even though Chrome retained a Play title; [the live verification](https://github.com/wbniv/bga-title-tray/blob/main/docs/verification/2026-10-18-play-offer-cancellation.md) records the host states. The older screenshot above and earlier publication checks describe historical releases. The 0.1.216 detail page used an oversized panel illustration; Will rejected its appearance. The follow-up restores the actual narrow panel capture at native size and shows only the title portion, so the removed icon is not presented as current UI.
 
 - [x] Publish and verify the [v0.4.7 BGA release](https://github.com/wbniv/bga-title-tray/releases/tag/v0.4.7).
-- [x] Update the detail page's controls, alert behavior, download label, and illustration.
+- [x] Update the detail page's controls, alert behavior, and download label.
+- [x] Replace the oversized illustration with the actual panel title capture at native size, with the removed icon outside the displayed area.
 - [x] Build and preview the updated Markdown.
 - [x] Publish the Indri page and verify the live copy.
 
