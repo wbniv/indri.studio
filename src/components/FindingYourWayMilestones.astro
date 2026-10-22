@@ -6,6 +6,7 @@ import templeGoddessScreenshot from '../assets/screenshots/finding-your-way/temp
 import loveStreetScreenshot from '../assets/screenshots/finding-your-way/love-street-v0.9.1.png';
 import truthCourtScreenshot from '../assets/screenshots/finding-your-way/truth-court-v0.9.2.png';
 import godAscentScreenshot from '../assets/screenshots/finding-your-way/god-ascent-v0.9.3.png';
+import v010GodSummitScreenshot from '../assets/screenshots/finding-your-way/god-summit-v0.10.png';
 import v08FpsScreenshot from '../assets/screenshots/finding-your-way/v0.8-fps-improvement.png';
 import v081TempleScreenshot from '../assets/screenshots/finding-your-way/temple-v0.8-family.jpg';
 import v07BothScreenshot from '../assets/screenshots/finding-your-way/both-v0.7.png';
@@ -125,7 +126,22 @@ const godEndingsRelease = {
   knownIssues: [],
 };
 
+// v0.10 promotes the exact RC4 gameplay payload with release Android metadata.
+const currentRoomRelease = {
+  milestone: '2026-10-22-v0.10-rc4-promotion',
+  milestoneVersion: '0.10',
+  apk: 'parmenides-v0.10-48b88f03ae26bc9a.apk',
+  sha256: '48b88f03ae26bc9a6ce5212f9dd5624587c4d72f59d91db124b22d558c2c3527',
+  knownIssues: [],
+};
+
 const milestones = [
+  {
+    title: 'Consistent arches and current-room rendering v0.10',
+    manifest: currentRoomRelease,
+    description: 'Improves the God ascent and tree placement, removes rectangular decorations above the final Temple arches, and renders the current room.',
+    screenshot: { src: v010GodSummitScreenshot, alt: 'The God summit in v0.10 with the path, trees and final doorways' },
+  },
   {
     title: 'God and endings artwork v0.9.3',
     manifest: godEndingsRelease,
