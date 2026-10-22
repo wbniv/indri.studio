@@ -137,9 +137,15 @@ const currentRoomRelease = {
 
 const milestones = [
   {
-    title: 'Fuller trees and cleaner arches v0.10',
+    title: 'Chapter refinements v0.10',
     manifest: currentRoomRelease,
-    description: 'The God ascent and Reason grove have fuller trees that can face different directions each time you start. The three final Temple doorways now have clean curved arches.',
+    description: 'A broader update to the forests, Temple architecture and 3D rendering.',
+    highlights: [
+      'The God ascent and Reason grove have fuller 3D trees that can face different directions each time you start.',
+      'Dark patches on the Temple floor are gone. Portal panels follow their arch curves, the goddess stairs have clean sides, and the three final doors no longer have rectangular pieces above them.',
+      'The game draws the area you are visiting, keeping distant scenery out of view and reducing work each frame.',
+      'The game reuses matching 3D models, skips hidden arch surfaces and draws ordinary painted surfaces more efficiently.',
+    ],
     screenshot: { src: v010GodSummitScreenshot, alt: 'The God summit in v0.10 with the path, trees and final doorways' },
   },
   {
@@ -246,7 +252,7 @@ const milestones = [
   <p>Newest first. Download an APK or expand a row to see what changed.</p>
 
   <div class="milestone-timeline">
-  {milestones.map(({ title, manifest, description, screenshot, base, apk, size, date, testEvidence, archiveRecords, knownIssues }, index) => (
+  {milestones.map(({ title, manifest, description, highlights, screenshot, base, apk, size, date, testEvidence, archiveRecords, knownIssues }, index) => (
     <details class="milestone" id={index === 0 ? 'latest-android-release' : undefined} open={index === 0}>
       <summary>
         <span class="milestone-label">
@@ -260,6 +266,7 @@ const milestones = [
       <div class="milestone-body">
         {screenshot && <Image src={screenshot.src} alt={screenshot.alt} width={224} height={126} loading="lazy" class="milestone-screenshot" />}
         <p>{description}</p>
+        {highlights && <ul class="milestone-highlights">{highlights.map((highlight) => <li>{highlight}</li>)}</ul>}
         {knownIssues.length > 0 && <>
           <p><strong>Known issues</strong></p>
           <ul>{knownIssues.map((issue) => <li>{issue}</li>)}</ul>
@@ -338,6 +345,8 @@ const milestones = [
     border: 1px solid var(--color-outline-variant);
     border-radius: 6px;
   }
+  .milestone-body .milestone-highlights { padding-left: 20px; margin: 0 0 14px; }
+  .milestone-body .milestone-highlights li + li { margin-top: 5px; }
   .milestone-body .milestone-checksum {
     clear: both;
     overflow-wrap: anywhere;
