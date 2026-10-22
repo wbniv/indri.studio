@@ -11,11 +11,13 @@ import v081TempleScreenshot from '../assets/screenshots/finding-your-way/temple-
 import v07BothScreenshot from '../assets/screenshots/finding-your-way/both-v0.7.png';
 import v06SurgeryScreenshot from '../assets/screenshots/finding-your-way/surgery-v0.6.png';
 import v055SurgeryScreenshot from '../assets/screenshots/finding-your-way/surgery-v0.5.5.png';
-import v05TempleScreenshot from '../assets/screenshots/finding-your-way/temple-v0.5.png';
-import v04TempleScreenshot from '../assets/screenshots/finding-your-way/temple-v0.4.png';
-import v03TempleScreenshot from '../assets/screenshots/finding-your-way/temple-v0.3.png';
-import v02TempleScreenshot from '../assets/screenshots/finding-your-way/temple-v0.2.png';
-import v01TempleScreenshot from '../assets/screenshots/finding-your-way/temple-v0.1.png';
+// These five scenes use the level data extracted from each archived release APK,
+// rendered with the desktop engine at the relevant realm fixture without overlays.
+import v05NotBeingScreenshot from '../assets/screenshots/finding-your-way/notbeing-ending-v0.5.png';
+import v04GodScreenshot from '../assets/screenshots/finding-your-way/god-ascent-v0.4.png';
+import v03TruthScreenshot from '../assets/screenshots/finding-your-way/truth-court-v0.3.png';
+import v02ReasonScreenshot from '../assets/screenshots/finding-your-way/reason-grove-v0.2.png';
+import v01LoveScreenshot from '../assets/screenshots/finding-your-way/love-street-v0.1.png';
 import loveReason from '../../public/apps/finding-your-way/milestones/2026-10-05-love-reason-v0.2/manifest.json';
 import loveReasonTruth from '../../public/apps/finding-your-way/milestones/2026-10-05-love-reason-truth-v0.3/manifest.json';
 import templeLove from '../../public/apps/finding-your-way/milestones/2026-10-05-temple-love-v0.1/manifest.json';
@@ -188,31 +190,31 @@ const milestones = [
     title: 'Endings v0.5',
     manifest: endings,
     description: 'Adds Being, Both and NonBeing ending scenes, with surgery after the Both route.',
-    screenshot: { src: v05TempleScreenshot, alt: 'The Temple in the v0.5 Android release' },
+    screenshot: { src: v05NotBeingScreenshot, alt: 'The new NonBeing ending chamber in v0.5, with a pale floating face against dark walls' },
   },
   {
     title: 'Four realms v0.4',
     manifest: fourRealms,
     description: 'Adds God’s guides, poster and icon inspections, hill traversal, both counsels and sixteen final Temple histories.',
-    screenshot: { src: v04TempleScreenshot, alt: 'The Temple with its realm banners and Goddess in the v0.4 Android release' },
+    screenshot: { src: v04GodScreenshot, alt: 'The new God ascent in v0.4, with the Young Man, model poster, forest and mountain' },
   },
   {
     title: 'Love/Reason/Truth v0.3',
     manifest: loveReasonTruth,
     description: 'Adds Truth’s courtroom, testimony, exhibits, both commitments and eight Temple return histories.',
-    screenshot: { src: v03TempleScreenshot, alt: 'The Temple introduction in the v0.3 Android release' },
+    screenshot: { src: v03TruthScreenshot, alt: 'The new Truth courtroom in v0.3, with exhibit stands, counsel doors and presentation desk' },
   },
   {
     title: 'Love/Reason v0.2',
     manifest: loveReason,
     description: 'Adds Reason encounters and four Temple return histories, plus Love feedback fixes.',
-    screenshot: { src: v02TempleScreenshot, alt: 'The Temple in the v0.2 Android release' },
+    screenshot: { src: v02ReasonScreenshot, alt: 'The new Reason grove in v0.2, with the White-Clad Self, weather apparatus and two choices' },
   },
   {
     title: 'Temple/Love v0.1',
     manifest: templeLove,
     description: 'Adds the first playable Temple and Love chapter and its changed Temple return.',
-    screenshot: { src: v01TempleScreenshot, alt: 'The Temple introduction in the first Android release' },
+    screenshot: { src: v01LoveScreenshot, alt: 'The original Love street in v0.1, with First Love, the Starlet and an advice column' },
   },
 ].sort((a, b) => b.manifest.milestoneVersion.localeCompare(a.manifest.milestoneVersion, undefined, { numeric: true })).map((milestone) => {
   const base = `/apps/finding-your-way/milestones/${milestone.manifest.milestone}`;
