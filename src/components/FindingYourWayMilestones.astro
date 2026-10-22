@@ -7,6 +7,15 @@ import loveStreetScreenshot from '../assets/screenshots/finding-your-way/love-st
 import truthCourtScreenshot from '../assets/screenshots/finding-your-way/truth-court-v0.9.2.png';
 import godAscentScreenshot from '../assets/screenshots/finding-your-way/god-ascent-v0.9.3.png';
 import v08FpsScreenshot from '../assets/screenshots/finding-your-way/v0.8-fps-improvement.png';
+import v081TempleScreenshot from '../assets/screenshots/finding-your-way/temple-v0.8-family.jpg';
+import v07BothScreenshot from '../assets/screenshots/finding-your-way/both-v0.7.png';
+import v06SurgeryScreenshot from '../assets/screenshots/finding-your-way/surgery-v0.6.png';
+import v055SurgeryScreenshot from '../assets/screenshots/finding-your-way/surgery-v0.5.5.png';
+import v05TempleScreenshot from '../assets/screenshots/finding-your-way/temple-v0.5.png';
+import v04TempleScreenshot from '../assets/screenshots/finding-your-way/temple-v0.4.png';
+import v03TempleScreenshot from '../assets/screenshots/finding-your-way/temple-v0.3.png';
+import v02TempleScreenshot from '../assets/screenshots/finding-your-way/temple-v0.2.png';
+import v01TempleScreenshot from '../assets/screenshots/finding-your-way/temple-v0.1.png';
 import loveReason from '../../public/apps/finding-your-way/milestones/2026-10-05-love-reason-v0.2/manifest.json';
 import loveReasonTruth from '../../public/apps/finding-your-way/milestones/2026-10-05-love-reason-truth-v0.3/manifest.json';
 import templeLove from '../../public/apps/finding-your-way/milestones/2026-10-05-temple-love-v0.1/manifest.json';
@@ -143,6 +152,9 @@ const milestones = [
     title: '16 KB compatibility v0.8.1',
     manifest: alignmentHotfix,
     description: 'Aligns native libraries for Android devices with 16 KB memory pages.',
+    // v0.8.1 retains the v0.8 game assets; this clean v0.8 preview shows the
+    // shared Temple scene while the native alignment change is invisible.
+    screenshot: { src: v081TempleScreenshot, alt: 'The Temple scene shared by v0.8 and the v0.8.1 compatibility release' },
   },
   {
     title: 'Optimization v0.8',
@@ -158,41 +170,49 @@ const milestones = [
     title: 'Polish v0.7',
     manifest: polishReview,
     description: 'Refines surgeon framing, the combined triangle motif, Being’s background and camera behavior during dialogue.',
+    screenshot: { src: v07BothScreenshot, alt: 'The combined triangle motif beneath the arch in the v0.7 Both passage' },
   },
   {
     title: 'Artwork v0.6',
     manifest: graphicsReview,
     description: 'Adds ending effects, the combined triangle motif, masked surgeons and broader artwork throughout the chapter.',
+    screenshot: { src: v06SurgeryScreenshot, alt: 'Three masked surgeons seen from the patient’s view in v0.6' },
   },
   {
     title: 'Visual fixes v0.5.5',
     manifest: visualFixes,
     description: 'Fixes dialogue layout, sphere and arch winding, and patient-view surgery framing.',
+    screenshot: { src: v055SurgeryScreenshot, alt: 'The corrected patient view of three surgeons in v0.5.5' },
   },
   {
     title: 'Endings v0.5',
     manifest: endings,
     description: 'Adds Being, Both and NonBeing ending scenes, with surgery after the Both route.',
+    screenshot: { src: v05TempleScreenshot, alt: 'The Temple in the v0.5 Android release' },
   },
   {
     title: 'Four realms v0.4',
     manifest: fourRealms,
     description: 'Adds God’s guides, poster and icon inspections, hill traversal, both counsels and sixteen final Temple histories.',
+    screenshot: { src: v04TempleScreenshot, alt: 'The Temple with its realm banners and Goddess in the v0.4 Android release' },
   },
   {
     title: 'Love/Reason/Truth v0.3',
     manifest: loveReasonTruth,
     description: 'Adds Truth’s courtroom, testimony, exhibits, both commitments and eight Temple return histories.',
+    screenshot: { src: v03TempleScreenshot, alt: 'The Temple introduction in the v0.3 Android release' },
   },
   {
     title: 'Love/Reason v0.2',
     manifest: loveReason,
     description: 'Adds Reason encounters and four Temple return histories, plus Love feedback fixes.',
+    screenshot: { src: v02TempleScreenshot, alt: 'The Temple in the v0.2 Android release' },
   },
   {
     title: 'Temple/Love v0.1',
     manifest: templeLove,
     description: 'Adds the first playable Temple and Love chapter and its changed Temple return.',
+    screenshot: { src: v01TempleScreenshot, alt: 'The Temple introduction in the first Android release' },
   },
 ].sort((a, b) => b.manifest.milestoneVersion.localeCompare(a.manifest.milestoneVersion, undefined, { numeric: true })).map((milestone) => {
   const base = `/apps/finding-your-way/milestones/${milestone.manifest.milestone}`;
