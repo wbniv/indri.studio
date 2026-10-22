@@ -19,4 +19,4 @@ screenshots:
 
 A choice-based journey across four realms of argument, each asking you to affirm or deny *Being*. Your choices unlock one of three endings.
 
-Play the original 144-page hypertext in your browser, or explore the 3D adventure on Android.
+Play the original 144-page hypertext, or explore the 3D adventure in your browser or on Android.
