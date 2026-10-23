@@ -26,8 +26,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         # Package building
         build-essential \
         debhelper \
-        dpkg-dev \
         devscripts \
+        dpkg-dev \
         fakeroot \
         lintian \
         # APT repo management + signing + upload
@@ -43,8 +43,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         # Utilities
         ca-certificates \
         curl \
-        jq \
         git \
+        jq \
     && rm -rf /var/lib/apt/lists/*
 
 # Tailwind CSS standalone binary — single executable, no Node.js required.
