@@ -1,7 +1,11 @@
 name: Build, sign, and publish APT repo
 
-# Build/sign/publish runs entirely inside the apt-builder Docker image
-# (apt/Dockerfile). The GitHub-hosted runner only needs docker + gh.
+# Build/sign/publish runs entirely inside the apt-builder Docker image. The
+# GitHub-hosted runner only needs docker + gh. It builds apt/Dockerfile.github
+# (FROM ubuntu:26.04), not apt/Dockerfile: that one inherits home-lab's
+# stack-deb from registry.lab.home.arpa:5000, which only the lab can reach.
+# This workflow is the optional path until CI runs inside the lab; the primary
+# one is `task apt:publish-local` on a lab machine.
 
 on:
   push:
@@ -17,6 +21,9 @@ on:
 permissions:
   contents: read
 
+env:
+  APT_DOCKERFILE: Dockerfile.github
+
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
@@ -30,7 +37,7 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           context: ./apt
-          file: ./apt/Dockerfile
+          file: ./apt/Dockerfile.github
           tags: apt-builder:local
           load: true
           cache-from: type=gha,scope=apt-builder

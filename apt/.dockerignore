@@ -1,5 +1,6 @@
 # The build context is `apt/`; nothing in dist/, public/, or .aptly/ should
-# end up in the image. We only need the Dockerfile itself for the image build.
+# end up in the image. We only need the Dockerfiles themselves for the image build.
 # The repo tree is bind-mounted at runtime, not COPYed in.
 *
 !Dockerfile
+!Dockerfile.github

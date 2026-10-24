@@ -12,11 +12,15 @@
 #
 # Forwards GPG_PRIVATE_KEY / GPG_KEY / R2_* env vars if set, so CI and local
 # runs use the same script invocation surface.
+#
+# APT_DOCKERFILE picks the image definition (default Dockerfile, which inherits
+# home-lab's stack-deb from registry.lab.home.arpa:5000, reachable only inside
+# the lab). The GitHub workflow sets APT_DOCKERFILE=Dockerfile.github.
 
 set -eo pipefail
 
 if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
-    sed -n '2,16p' "$0" | sed 's/^# \{0,1\}//'
+    sed -n '2,18p' "$0" | sed 's/^# \{0,1\}//'
     exit 0
 fi
 
@@ -32,9 +36,10 @@ APT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 REPO_ROOT="$(cd "$APT_DIR/.." && pwd)"
 
 IMG="apt-builder:local"
+DOCKERFILE="${APT_DOCKERFILE:-Dockerfile}"
 
 # Build image (silent — heavy on first run, ~instant after).
-docker build -q -f "$APT_DIR/Dockerfile" -t "$IMG" "$APT_DIR" >/dev/null
+docker build -q -f "$APT_DIR/$DOCKERFILE" -t "$IMG" "$APT_DIR" >/dev/null
 
 # Conditional GPG keyring mount (skipped in CI, used locally).
 gnupg_mount=()
