@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>bsnes-jg-wasm page layout plan</title>
+<style>
+:root{color-scheme:dark;--bg:#393530;--panel:#433f39;--panel2:#211f1d;--line:#5b574f;--text:#f1eee8;--muted:#c4c0b9;--lime:#c4f000;--warm:#a7a096}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,sans-serif}.page{max-width:1540px;width:88%;margin:auto;padding:54px 0 90px}.eyebrow{margin:0;color:var(--warm);font-size:.8rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase}.chrome-note{margin:1.5rem 0 3.4rem;padding:1.25rem 1.5rem;border:1px solid var(--line);border-radius:14px;background:#302d29}.chrome-note strong{color:var(--lime)}.chrome-items{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem}.chrome-items span{padding:.4rem .75rem;border:1px solid #615c54;border-radius:999px;color:var(--muted);font-size:.88rem}h1{margin:.4rem 0 1rem;color:var(--lime);font-size:clamp(2.5rem,6vw,5.5rem);line-height:1.02;letter-spacing:-.045em}h2{margin:0 0 .65rem;font-size:clamp(1.65rem,3.3vw,2.6rem);line-height:1.1}h3{margin:0 0 .6rem;font-size:1.35rem}.lede{max-width:850px;color:var(--muted);font-size:1.2rem}.meta{display:grid;grid-template-columns:repeat(4,1fr);margin:3rem 0 4.5rem;border:1px solid var(--line);border-radius:16px;overflow:hidden}.meta div{min-height:104px;padding:1.25rem 1.5rem;border-right:1px solid var(--line)}.meta div:last-child{border:0}.meta small{display:block;color:var(--warm);font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}.meta b{display:block;margin-top:.5rem;font-size:1.15rem}.section{margin:4.6rem 0}.section-head{margin-bottom:1.4rem}.section-head p{max-width:760px;color:var(--muted)}.lime{color:var(--lime)}.hero-demo{display:flex;align-items:center;gap:1rem;margin:2rem 0 4rem}.github{padding:.7rem 1.1rem;border:1px solid #aaa49b;border-radius:9px;background:#111;color:white;font-weight:700}.demo-screen{width:min(240px,28vw);aspect-ratio:4/3;border:1px solid #827c72;border-radius:8px;background:repeating-linear-gradient(135deg,#1529dd 0 24px,#2d72b9 24px 48px,#68c690 48px 72px,#a9ef4c 72px 96px)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem}.card{padding:2rem;border:1px solid #656057;border-radius:17px;background:var(--panel);min-width:0}.card p{color:var(--muted)}.facts{margin:1.25rem 0;color:#ddd8cf;font-size:.9rem}.button{display:inline-block;margin-top:.7rem;padding:.7rem 1rem;border:1px solid var(--lime);border-radius:8px;color:var(--lime);font-weight:750;text-decoration:none}.preview{width:min(100%,690px);height:240px;border:1px solid #706a60;border-radius:14px;background:radial-gradient(ellipse at center,#33484b,#171a1d 70%);display:grid;place-items:center;color:#aaa}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin:1.5rem 0 .75rem}.controls{display:flex;align-items:center;gap:.9rem;flex-wrap:wrap}.select,.copy{padding:.7rem 1rem;border:1px solid #777168;border-radius:9px;background:#4a463f;color:var(--text)}.copy{color:var(--lime);font-weight:800}.code{overflow:hidden;border:1px solid #666057;border-radius:14px;background:var(--panel2)}.codebar{padding:.75rem 1rem;border-bottom:1px solid #4b4741;color:var(--muted);font-size:.9rem}.code pre{max-height:330px;overflow:auto;margin:0;padding:1.25rem;white-space:pre-wrap;overflow-wrap:anywhere;color:#f4f0e9;font:14px/1.6 ui-monospace,monospace}.rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.rule{padding:1.2rem 1.35rem;border-left:3px solid var(--lime);background:#302d29;color:var(--muted)}.rule b{color:var(--text)}.footer{padding-top:1.5rem;border-top:1px solid var(--line);color:var(--warm);font-size:.9rem}.footer a{color:var(--lime)}@media(max-width:760px){.page{width:auto;padding:28px 18px 64px}.meta{grid-template-columns:repeat(2,1fr);margin:2rem 0 3rem}.meta div:nth-child(2){border-right:0}.meta div:nth-child(-n+2){border-bottom:1px solid var(--line)}.cards,.rules{grid-template-columns:1fr}.card{padding:1.35rem}.hero-demo{margin:1.5rem 0 3rem}.demo-screen{width:38vw}.toolbar{align-items:flex-end}.preview{height:190px}}
+</style>
+</head>
+<body>
+<main class="page">
+<p class="eyebrow">Layout plan · proposed · 29 October 2026</p>
+<h1>bsnes-jg-wasm</h1>
+<p class="lede">Embed the SNES emulator in your browser. Make the browser player and its integration examples easy to see, understand, and copy. Use the Claude artifact as a guide for the content area below the existing Indri chrome.</p>
+
+<section class="chrome-note" aria-labelledby="chrome-title">
+<p class="eyebrow" id="chrome-title">Preserve this existing page chrome unchanged</p>
+<strong>Do not redesign, restyle, reorder, replace, or add to this area.</strong>
+<div class="chrome-items"><span>INDRI</span><span>Previous</span><span>Board Game Arena Title Tray</span><span>All apps</span><span>Next</span><span>Claude Code Authoring Formats</span></div>
+</section>
+
+<div class="meta" aria-label="At a glance"><div><small>Player</small><b>Browser WebAssembly</b></div><div><small>Package</small><b>browser-game-player</b></div><div><small>Also runs on</small><b>Android · Google TV</b></div><div><small>Source</small><b>GitHub repository</b></div></div>
+
+<section class="section">
+<p class="eyebrow">Browser player</p>
+<h2>Play the SNES emulator in your browser</h2>
+<p class="lede">Keep the current title and lead. Describe the Native apps as example integrations; the reusable browser player remains the product.</p>
+<div class="hero-demo"><span class="github">GitHub</span><div class="demo-screen" role="img" aria-label="Compact bare Mandelbrot SNES preview"></div></div>
+</section>
+
+<section class="section">
+<div class="section-head"><p class="eyebrow">Native Android examples</p><h2 class="lime">Download the APKs</h2><p>Use the spacious two-card layout from the reference. Explain each APK's purpose first; keep package, version, size, and hash available but visually secondary.</p></div>
+<div class="cards">
+<article class="card"><p class="eyebrow">Native suite APK</p><h3>LLVM 65816 torture-test suite</h3><p>Browse the suite chooser, then select and run a test ROM.</p><div class="facts">Package · version · file size · SHA-256</div><a class="button" href="#">Download suite</a></article>
+<article class="card"><p class="eyebrow">Native Mandelbrot APK</p><h3>Standalone Mandelbrot player</h3><p>Launch the Mandelbrot ROM directly in the Native player.</p><div class="facts">Package · version · file size · SHA-256</div><a class="button" href="#">Download Mandelbrot</a></article>
+</div>
+</section>
+
+<section class="section">
+<div class="section-head"><p class="eyebrow">Integrate the player</p><h2>Choose your format</h2><p>Keep format and control settings together. Show the running example first, followed by source that uses the full available content width.</p></div>
+<div class="toolbar"><div class="controls"><span class="select">Format · HTML ▾</span><span>☑ Include controls</span></div><span class="copy">▢ Copy</span></div>
+<div class="preview" role="img" aria-label="Live player preview, placed above the source">Live player preview · follows selected format and controls</div>
+<div class="code" style="margin-top:1rem"><div class="codebar">with-controls.html</div><pre>&lt;div id="player"&gt;&lt;/div&gt;
+&lt;script type="module"&gt;
+  import { mountPlayer } from '/player/browser-game-player/src/embed.mjs';
+  mountPlayer(document.querySelector('#player'), { game: 'mandel-display' });
+&lt;/script&gt;</pre></div>
+</section>
+
+<section class="section">
+<p class="eyebrow">Responsive behavior</p><h2>Keep the same reading order on every screen</h2>
+<div class="rules"><div class="rule"><b>Desktop</b><br>Four-column facts strip; two APK cards side by side; centered, compact bare-player preview; full-width source below.</div><div class="rule"><b>Phone</b><br>Stack facts and APK cards. Keep the live preview above the full-width source; wrap source lines rather than adding horizontal scroll.</div><div class="rule"><b>Display ratio</b><br>The raw SNES framebuffer is 256×224 (8:7 sample grid). Display the complete picture in its traditional 4:3 television ratio.</div><div class="rule"><b>Release accuracy</b><br>Keep existing working downloads until each replacement R2 object is uploaded and verified. Do not present a 404 URL as a working APK link.</div></div>
+</section>
+
+<p class="footer">Plan source: <a href="2026-10-29-bsnes-jg-wasm-page-layout.md">Markdown plan</a> · Reference: <a href="https://claude.ai/artifact/JsE14DkmWqdDewN722ibmK#page-dcb81aee8d83">Claude artifact</a></p>
+</main>
+</body>
+</html>

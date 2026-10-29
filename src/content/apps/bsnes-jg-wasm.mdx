@@ -7,34 +7,6 @@ storeLinks:
   github: https://github.com/wbniv/bsnes-jg-wasm
 ---
 
-import BsnesEmbedExamples from '../../components/BsnesEmbedExamples.astro';
+import BsnesWasmPageContent from '../../components/BsnesWasmPageContent.astro';
 
-## Native suite APK
-
-Install the Native suite APK to browse and run the LLVM 65816 torture-test ROMs on Android and Google TV. It opens the suite chooser, like the Mandelbrot APK opens its standalone player.
-
-Package ID: `org.bsnesjg.tv.native.phase2` · File size: **26,811,243 bytes** (25.57 MiB).
-
-**[Download the Native suite APK](https://downloads.biohack.net/bsnes-jg-wasm/releases/0.1.8/bsnes-jg_llvm-65816-torture-test-suite-on-snes-v0.1.8.apk)**
-
-SHA-256: `55eca48e96cd2ba8d359689c5001fd62a4255af133bafe475fa43c4744a0f468`
-
-## Embed it in your project
-
-The reusable [`browser-game-player` package](https://github.com/wbniv/browser-game-player/releases/tag/v0.1.11) powers these examples. Pick your format, choose whether to include controls, then copy the source.
-
-<BsnesEmbedExamples />
-
-## Native Mandelbrot APK — version 0.1.8
-
-Runs the standalone Mandelbrot player. Package ID: `org.bsnesjg.tv.native`. File size: **26,809,995 bytes** (25.57 MiB).
-
-**[Download the Native player APK](https://downloads.biohack.net/bsnes-jg-wasm/releases/0.1.8/bsnes-jg_mandelbrot-v0.1.8.apk)**
-
-SHA-256: `907511eeaa8a77279a7c5e8a597b4b410ff94415ce637183aef1a56c3f2c21d3`
-
-The [release manifest](https://downloads.biohack.net/bsnes-jg-wasm/current.json) records the current version, file sizes, package IDs, and hashes. There is no previous public release yet. The Android WASM builds are not offered here because the native engine is the intended Android release.
-
-## Source and updates
-
-The [bsnes-jg-wasm repository](https://github.com/wbniv/bsnes-jg-wasm) contains the browser integration and Android examples. The browser SNES gallery at [biohack.net/snes](https://biohack.net/snes/) runs without installing an APK. Future Android versions will keep these two package IDs and use the same release signing identity so normal Android updates can install over this release.
+<BsnesWasmPageContent />
