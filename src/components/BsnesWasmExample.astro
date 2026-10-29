@@ -1,0 +1,25 @@
+---
+import GamePlayer from '@wbniv/browser-game-player/astro';
+import { verifyManifest } from '@wbniv/browser-game-player/bundle';
+
+interface Props {
+  slug: string;
+  title: string;
+}
+
+const { slug, title } = Astro.props;
+const { frame } = verifyManifest(
+  'public/apps/llvm-mos-65816/play/component',
+  '/apps/llvm-mos-65816/play/component',
+);
+---
+
+<section class="bsnes-wasm-example" aria-label={`${title} WebAssembly example`}>
+  <h4>{title}</h4>
+  <GamePlayer src={`${frame}?game=${encodeURIComponent(slug)}`} title={title} />
+</section>
+
+<style>
+  .bsnes-wasm-example { margin: 1.25rem 0 1.75rem; }
+  .bsnes-wasm-example h4 { margin: 0 0 .65rem; font: 600 .95rem/1.4 var(--font-body, system-ui, sans-serif); }
+</style>

@@ -7,7 +7,7 @@ storeLinks:
   github: https://github.com/wbniv/bsnes-jg-wasm
 ---
 
-import SnesPlayer from '@wbniv/bsnes-jg-player/SnesPlayer.astro';
+import BsnesWasmExample from '../../components/BsnesWasmExample.astro';
 
 **bsnes-jg-wasm** is a browser-first SNES player and reusable integration of the bsnes-jg core. It runs the core compiled to WebAssembly in web browsers; no Android install is needed for browser play. The project also distributes Native Android apps: choose the **Native library** to browse and play the published homebrew ROM collection offline, or the **Native player** for the standalone Mandelbrot experience. They are separate Android apps with different package IDs.
 
@@ -25,9 +25,13 @@ Includes the published SNES library: 152 ROM files plus catalog artwork. Package
 
 SHA-256: `55eca48e96cd2ba8d359689c5001fd62a4255af133bafe475fa43c4744a0f468`
 
-**WebAssembly example — play Mandelbrot in the browser:**
+**WebAssembly examples — the same player, different ROM parameters:**
 
-<SnesPlayer slug="mandel-display" title="Mandelbrot · bsnes-jg WebAssembly example" playBase="/apps/llvm-mos-65816/play" keys="Arrow keys: D-pad · Z/X: B/A · Enter: Start · Shift: Select" />
+Each embed passes a ROM slug to the browser player. The first uses Mandelbrot; the second uses `byvaledge`, a ROM from the published library.
+
+<BsnesWasmExample slug="mandel-display" title="Mandelbrot" />
+
+<BsnesWasmExample slug="byvaledge" title="By-Value Boundary Trio · library ROM" />
 
 ### Native player
 
