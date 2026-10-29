@@ -7,14 +7,14 @@ storeLinks:
   github: https://github.com/wbniv/bsnes-jg-wasm
 ---
 
-import BsnesSuiteChooser from '../../components/BsnesSuiteChooser.astro';
 import BsnesEmbedExamples from '../../components/BsnesEmbedExamples.astro';
+import BsnesWasmExample from '../../components/BsnesWasmExample.astro';
 
-## Try the browser player
+## Try a torture-test ROM
 
-Choose a ROM from the LLVM 65816 torture-test suite and play it here. This is the same browser player you can embed in your own site.
+This self-running **By-Value Boundary Trio** ROM is one of the LLVM 65816 torture tests. It exercises value-copy semantics across the compiler's ABI boundary in the same browser player you can embed in your own site.
 
-<BsnesSuiteChooser />
+<BsnesWasmExample slug="byvaledge" title="By-Value Boundary Trio — LLVM 65816 torture-test ROM" size="compact" />
 
 ## Embed it in your project
 
