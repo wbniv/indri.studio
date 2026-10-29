@@ -1,4 +1,4 @@
-import { fywFrameAncestors } from './fyw-frame-policy.mjs';
+import { contentSecurityPolicy } from './content-security-policy.mjs';
 // 301-redirect www.indri.studio → indri.studio (path/query/hash preserved),
 // fall through to static-assets binding for everything else. Replaces the
 // edge-level cloudflare_ruleset that the Free-plan API token couldn't
@@ -51,20 +51,7 @@ export default {
       headers.set("X-Content-Type-Options", "nosniff");
       headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
       headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
-      headers.set(
-        "Content-Security-Policy",
-        `default-src 'self'; ` +
-        `font-src 'self' fonts.gstatic.com; ` +
-        `style-src 'self' 'unsafe-inline' fonts.googleapis.com; ` +
-        // 'wasm-unsafe-eval' lets WebAssembly.instantiate() compile the
-        // bsnes-jg core embedded on /apps/llvm-mos-65816/ — it permits WASM
-        // compilation only, NOT general eval(), so the policy stays tight.
-        `script-src 'self' 'strict-dynamic' 'nonce-${nonce}' 'unsafe-inline' 'wasm-unsafe-eval'; ` +
-        `img-src 'self' data:; ` +
-        `object-src 'none'; ` +
-        `base-uri 'self'; ` +
-        `frame-ancestors ${fywFrameAncestors(url.pathname)}`
-      );
+      headers.set("Content-Security-Policy", contentSecurityPolicy(nonce, url.pathname));
       return new HTMLRewriter()
         .on("script", {
           element(el) { el.setAttribute("nonce", nonce); },

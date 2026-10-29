@@ -7,6 +7,7 @@ import wordpressControls from '@wbniv/browser-game-player/examples/wordpress/wit
 import wordpressBare from '@wbniv/browser-game-player/examples/wordpress/bare-display.html?raw';
 import claude from '@wbniv/browser-game-player/examples/agent-instructions/CLAUDE.md?raw';
 import codex from '@wbniv/browser-game-player/examples/agent-instructions/AGENTS.md?raw';
+import MIcon from './MIcon.astro';
 
 const examples = {
   html: { controls: htmlControls, bare: htmlBare },
@@ -19,75 +20,94 @@ const examples = {
 
 <section class="embed-examples" aria-labelledby="embed-examples-title">
   <div class="section-heading">
-    <div>
-      <p class="eyebrow">Integrate the player</p>
-      <h2 id="embed-examples-title">Choose your format</h2>
-      <p>Copy a working example for your site or coding assistant. Examples use the shared browser player and frozen SNES bundle.</p>
-    </div>
-    <div class="example-selectors">
-      <label>Format
-        <select id="example-format" aria-label="Example format">
-          <option value="html">HTML</option>
-          <option value="astro">Astro</option>
-          <option value="wordpress">WordPress</option>
-          <option value="claude">Claude Code</option>
-          <option value="codex">Codex / AGENTS.md</option>
-        </select>
-      </label>
-      <label id="mode-label">Display
-        <select id="example-mode" aria-label="Display mode">
-          <option value="controls">With controls</option>
-          <option value="bare">Bare display</option>
-        </select>
-      </label>
-    </div>
+    <p class="eyebrow">Integrate the player</p>
+    <h2 id="embed-examples-title">Choose your format</h2>
+    <p>Copy a working example for your site or coding assistant. Examples use the shared browser player and frozen SNES bundle.</p>
   </div>
-  <div class="code-card">
-    <div class="code-toolbar"><span id="example-filename">with-controls.html</span><button type="button" id="copy-example">Copy source</button></div>
-    <pre><code id="example-source"></code></pre>
+  <div class="example-layout">
+    <nav class="format-picker" aria-label="Example format">
+      <button type="button" class="format-option" data-format="html" aria-pressed="true">HTML</button>
+      <button type="button" class="format-option" data-format="astro" aria-pressed="false">Astro</button>
+      <button type="button" class="format-option" data-format="wordpress" aria-pressed="false">WordPress</button>
+      <button type="button" class="format-option" data-format="claude" aria-pressed="false">Claude Code</button>
+      <button type="button" class="format-option" data-format="codex" aria-pressed="false">Codex / AGENTS.md</button>
+      <label id="mode-label" class="controls-toggle">
+        <input id="example-controls" type="checkbox" checked />
+        <span>Include controls</span>
+      </label>
+    </nav>
+    <div class="code-card">
+      <div class="code-toolbar">
+        <span id="example-filename">with-controls.html</span>
+        <span class="copy-action">
+          <span id="copy-toast" class="copy-toast" role="status" aria-live="polite"></span>
+          <button type="button" id="copy-example" aria-label="Copy source"><MIcon name="content_copy" size={20} ariaHidden /></button>
+        </span>
+      </div>
+      <pre><code id="example-source"></code></pre>
+    </div>
   </div>
 </section>
 
 <script define:vars={{ examples }}>
-  const format = document.querySelector('#example-format');
-  const mode = document.querySelector('#example-mode');
+  const formatOptions = [...document.querySelectorAll('.format-option')];
+  const controls = document.querySelector('#example-controls');
   const modeLabel = document.querySelector('#mode-label');
   const source = document.querySelector('#example-source');
   const filename = document.querySelector('#example-filename');
   const copy = document.querySelector('#copy-example');
+  const toast = document.querySelector('#copy-toast');
   const names = { html: ['with-controls.html', 'bare-display.html'], astro: ['WithControls.astro', 'BareDisplay.astro'], wordpress: ['with-controls.html', 'bare-display.html'], claude: ['CLAUDE.md', 'CLAUDE.md'], codex: ['AGENTS.md', 'AGENTS.md'] };
+  let selectedFormat = 'html';
   function renderExample() {
-    const isAgent = format.value === 'claude' || format.value === 'codex';
+    const isAgent = selectedFormat === 'claude' || selectedFormat === 'codex';
     modeLabel.hidden = isAgent;
-    const selectedMode = isAgent ? 'controls' : mode.value;
-    source.textContent = examples[format.value][selectedMode];
-    filename.textContent = names[format.value][selectedMode];
-    copy.textContent = 'Copy source';
+    const selectedMode = isAgent || controls.checked ? 'controls' : 'bare';
+    source.textContent = examples[selectedFormat][selectedMode];
+    filename.textContent = names[selectedFormat][selectedMode];
+    formatOptions.forEach((option) => option.setAttribute('aria-pressed', String(option.dataset.format === selectedFormat)));
   }
-  format.addEventListener('change', renderExample);
-  mode.addEventListener('change', renderExample);
+  formatOptions.forEach((option) => option.addEventListener('click', () => {
+    selectedFormat = option.dataset.format;
+    renderExample();
+  }));
+  controls.addEventListener('change', renderExample);
   copy.addEventListener('click', async () => {
     await navigator.clipboard.writeText(source.textContent);
-    copy.textContent = 'Copied';
-    setTimeout(() => { copy.textContent = 'Copy source'; }, 1600);
+    toast.textContent = 'Copied!';
+    toast.classList.remove('visible');
+    requestAnimationFrame(() => toast.classList.add('visible'));
+    clearTimeout(toast.dismissTimer);
+    toast.dismissTimer = setTimeout(() => toast.classList.remove('visible'), 1500);
   });
   renderExample();
 </script>
 
 <style>
   .embed-examples { margin: 4rem 0; }
-  .section-heading { display:flex; justify-content:space-between; align-items:end; gap:2rem; margin-bottom:1.25rem; }
+  .section-heading { margin-bottom:1.25rem; }
   .section-heading h2 { margin:.25rem 0 .5rem; font-size:clamp(1.6rem,4vw,2.2rem); color:var(--color-primary-container); }
   .section-heading p:not(.eyebrow) { max-width:38rem; margin:0; opacity:.8; }
   .eyebrow { margin:0; font-size:.75rem; text-transform:uppercase; letter-spacing:.12em; opacity:.7; }
-  .example-selectors { display:flex; gap:.75rem; flex-wrap:wrap; }
   [hidden] { display:none !important; }
-  label { display:grid; gap:.35rem; font-size:.75rem; opacity:.9; }
-  select, button { font:inherit; color:inherit; background:var(--color-surface-container-high,#38342f); border:1px solid currentColor; border-radius:.5rem; padding:.6rem .8rem; }
+  .example-layout { display:grid; grid-template-columns:12rem minmax(0,1fr); gap:1rem; align-items:start; }
+  .format-picker { display:grid; gap:.3rem; }
+  .format-option { text-align:left; font:inherit; color:inherit; background:transparent; border:1px solid transparent; border-radius:.5rem; padding:.65rem .75rem; cursor:pointer; }
+  .format-option:hover { background:var(--color-surface-container-high,#38342f); }
+  .format-option[aria-pressed="true"] { color:var(--color-primary-container); border-color:currentColor; background:var(--color-surface-container-high,#38342f); font-weight:650; }
+  .controls-toggle { display:flex; gap:.55rem; align-items:center; margin:.75rem .75rem 0; font-size:.9rem; cursor:pointer; }
+  .controls-toggle input { width:1.1rem; height:1.1rem; accent-color:var(--color-primary-container); }
+  .copy-action { position:relative; display:inline-flex; }
+  button#copy-example { display:grid; place-items:center; width:2.4rem; height:2.4rem; padding:.4rem; color:inherit; background:var(--color-surface-container-high,#38342f); border:1px solid currentColor; border-radius:.5rem; cursor:pointer; }
+  button#copy-example:hover { color:var(--color-primary-container); }
+  .copy-toast { position:absolute; z-index:2; right:50%; bottom:calc(100% + .45rem); transform:translate(50%,.45rem); opacity:0; pointer-events:none; white-space:nowrap; padding:.35rem .55rem; border-radius:.4rem; background:#f2eee8; color:#181715; font-size:.78rem; font-weight:600; box-shadow:0 2px 8px #0005; transition:opacity .22s ease,transform .22s ease; }
+  .copy-toast.visible { opacity:1; transform:translate(50%,0); }
+  .copy-toast::after { content:""; position:absolute; top:100%; left:50%; border:.3rem solid transparent; border-top-color:#f2eee8; transform:translateX(-50%); }
   .code-card { border:1px solid #77736d; border-radius:.75rem; overflow:hidden; background:#181715; color:#f2eee8; }
   .code-toolbar { display:flex; justify-content:space-between; align-items:center; padding:.55rem .8rem; border-bottom:1px solid #55514c; font-size:.85rem; }
   .code-toolbar button { cursor:pointer; padding:.35rem .7rem; }
   pre { margin:0; padding:1rem; max-height:30rem; overflow:auto; font-size:.82rem; line-height:1.55; tab-size:2; }
   code { white-space:pre; }
-  @media(max-width:700px) { .section-heading { display:block; } .example-selectors { margin-top:1rem; } .example-selectors label { flex:1; } }
+  @media(max-width:700px) { .example-layout { grid-template-columns:1fr; } .format-picker { grid-template-columns:repeat(2,minmax(0,1fr)); } .controls-toggle { grid-column:1 / -1; margin:.5rem .25rem 0; } .code-card { min-width:0; } }
+  @media(prefers-reduced-motion:reduce) { .copy-toast { transition:none; } }
 </style>
