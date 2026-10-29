@@ -8,8 +8,9 @@ storeLinks:
 ---
 
 import BsnesWasmExample from '../../components/BsnesWasmExample.astro';
+import BsnesSuiteChooser from '../../components/BsnesSuiteChooser.astro';
 
-**bsnes-jg-wasm** is a browser-first SNES player and reusable integration of the bsnes-jg core. It runs the core compiled to WebAssembly in web browsers; no Android install is needed for browser play. The project also distributes Native Android apps: choose the **Native library** to browse and play the published homebrew ROM collection offline, or the **Native player** for the standalone Mandelbrot experience. They are separate Android apps with different package IDs.
+**bsnes-jg-wasm** is a browser-first SNES player and reusable integration of the bsnes-jg core. It runs the core compiled to WebAssembly in web browsers; no Android install is needed for browser play. The project also distributes Native Android apps: choose the **Native suite** to browse and play the LLVM 65816 torture-test ROMs offline, or the **Native player** for the standalone Mandelbrot experience. They are separate Android apps with different package IDs.
 
 [Browse the SNES demos in your browser](https://biohack.net/snes/) · [View the source on GitHub](https://github.com/wbniv/bsnes-jg-wasm)
 
@@ -17,21 +18,21 @@ import BsnesWasmExample from '../../components/BsnesWasmExample.astro';
 
 These are signed release APKs for direct installation on Android. Download the variant you want, compare its SHA-256 with the value below, then approve installation in Android.
 
-### Native library
+### Native suite
 
-Includes the published SNES library: 152 ROM files plus catalog artwork. Package ID: `org.bsnesjg.tv.native.phase2`. File size: **26,811,243 bytes** (25.57 MiB).
+Includes 152 ROMs from the LLVM 65816 torture-test suite plus catalog artwork. Package ID: `org.bsnesjg.tv.native.phase2`. File size: **26,811,243 bytes** (25.57 MiB).
 
-**[Download the Native library APK](https://downloads.biohack.net/bsnes-jg-wasm/releases/0.1.8/bsnes-jg_llvm-65816-torture-test-suite-on-snes-v0.1.8.apk)**
+**[Download the Native suite APK](https://downloads.biohack.net/bsnes-jg-wasm/releases/0.1.8/bsnes-jg_llvm-65816-torture-test-suite-on-snes-v0.1.8.apk)**
 
 SHA-256: `55eca48e96cd2ba8d359689c5001fd62a4255af133bafe475fa43c4744a0f468`
 
 **WebAssembly examples — the same player, different ROM parameters:**
 
-Each embed passes a ROM slug to the browser player. The first uses Mandelbrot; the second uses `byvaledge`, a ROM from the published library.
+Each player embed accepts a ROM slug. Mandelbrot appears first in a compact player. The full-width suite example opens the SNES chooser so visitors can pick a torture-test ROM before playing.
 
-<BsnesWasmExample slug="mandel-display" title="Mandelbrot" />
+<BsnesWasmExample slug="mandel-display" title="Mandelbrot" size="compact" />
 
-<BsnesWasmExample slug="byvaledge" title="By-Value Boundary Trio · library ROM" />
+<BsnesSuiteChooser />
 
 ### Native player
 
