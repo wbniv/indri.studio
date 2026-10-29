@@ -1,13 +1,13 @@
 ---
-title: bsnes-jg for Android
+title: bsnes-jg-wasm
 date: 2026-10-29
-summary: Play the published SNES homebrew library offline on Android, or install the standalone Mandelbrot player.
+summary: A browser-first SNES player built with WebAssembly, with Native Android apps for offline play.
 draft: false
 storeLinks:
   github: https://github.com/wbniv/bsnes-jg-wasm
 ---
 
-bsnes-jg brings the project's SNES player to Android. Choose the **Native library** to browse and play the published homebrew ROM collection offline. Choose the **Native player** for the standalone Mandelbrot experience. They are separate Android apps with different package IDs.
+**bsnes-jg-wasm** is a browser-first SNES player and reusable integration of the bsnes-jg core. It runs the core compiled to WebAssembly in web browsers; no Android install is needed for browser play. The project also distributes Native Android apps: choose the **Native library** to browse and play the published homebrew ROM collection offline, or the **Native player** for the standalone Mandelbrot experience. They are separate Android apps with different package IDs.
 
 [Browse the SNES demos in your browser](https://biohack.net/snes/) · [View the source on GitHub](https://github.com/wbniv/bsnes-jg-wasm)
 
