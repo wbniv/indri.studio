@@ -1,0 +1,38 @@
+---
+title: bsnes-jg for Android
+date: 2026-10-29
+summary: Play the published SNES homebrew library offline on Android, or install the standalone Mandelbrot player.
+draft: false
+storeLinks:
+  github: https://github.com/wbniv/bsnes-jg-wasm
+---
+
+bsnes-jg brings the project's SNES player to Android. Choose the **Native library** to browse and play the published homebrew ROM collection offline. Choose the **Native player** for the standalone Mandelbrot experience. They are separate Android apps with different package IDs.
+
+[Browse the SNES demos in your browser](https://biohack.net/snes/) · [View the source on GitHub](https://github.com/wbniv/bsnes-jg-wasm)
+
+## Android APKs — version 0.1.8
+
+These are signed release APKs for direct installation on Android. Download the variant you want, compare its SHA-256 with the value below, then approve installation in Android.
+
+### Native library
+
+Includes the published SNES library: 152 ROM files plus catalog artwork. Package ID: `org.bsnesjg.tv.native.phase2`. File size: **26,811,243 bytes** (25.57 MiB).
+
+**[Download the Native library APK](https://downloads.biohack.net/bsnes-jg-wasm/releases/0.1.8/bsnes-jg_llvm-65816-torture-test-suite-on-snes-v0.1.8.apk)**
+
+SHA-256: `55eca48e96cd2ba8d359689c5001fd62a4255af133bafe475fa43c4744a0f468`
+
+### Native player
+
+Runs the standalone Mandelbrot player. Package ID: `org.bsnesjg.tv.native`. File size: **26,809,995 bytes** (25.57 MiB).
+
+**[Download the Native player APK](https://downloads.biohack.net/bsnes-jg-wasm/releases/0.1.8/bsnes-jg_mandelbrot-v0.1.8.apk)**
+
+SHA-256: `907511eeaa8a77279a7c5e8a597b4b410ff94415ce637183aef1a56c3f2c21d3`
+
+The [release manifest](https://downloads.biohack.net/bsnes-jg-wasm/current.json) records the current version, file sizes, package IDs, and hashes. There is no previous public release yet. The Android WASM builds are not offered here because the native engine is the intended Android release.
+
+## Source and updates
+
+The [bsnes-jg-wasm repository](https://github.com/wbniv/bsnes-jg-wasm) contains the player source and build instructions. The browser SNES gallery at [biohack.net/snes](https://biohack.net/snes/) runs without installing an APK. Future Android versions will keep these two package IDs and use the same release signing identity so normal Android updates can install over this release.
