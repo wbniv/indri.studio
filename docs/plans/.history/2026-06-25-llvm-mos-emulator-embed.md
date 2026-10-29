@@ -1,10 +1,16 @@
 | Date | Change |
 |------|--------|
+| [2026-06-30](https://github.com/wbniv/indri.studio/commit/774cdf8) | fix(emulator): rename section label to "Run SNES in your browser" |
 | [2026-06-25](https://github.com/wbniv/indri.studio/commit/7a3bf49) | docs: record v0.1.70 tweaks (256x224 aspect, bottom placement, drop compare shot) |
 | [2026-06-25](https://github.com/wbniv/indri.studio/commit/3bd1b57) | docs: record the llvm-mos emulator embed as deployed + the CSP fix |
 | [2026-06-25](https://github.com/wbniv/indri.studio/commit/6b83ec9) | apps/llvm-mos-65816: embed the live cycle-accurate SNES emulator |
 
 <!--history-meta v1
+774cdf8	author	Will Norris
+774cdf8	added	2
+774cdf8	deleted	2
+774cdf8	files	1
+774cdf8	body	Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01NKj4FfbatTq4PdbSPCDgou
 7a3bf49	author	Will Norris
 7a3bf49	added	11
 7a3bf49	deleted	0

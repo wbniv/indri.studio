@@ -83,4 +83,6 @@ _Nothing parked._
 _Auto-added from plan "Out of scope"/"Deferred" sections at commit time. Triage each into M1/M2/etc. and delete it here — it will not come back._
 
 <!-- BEGIN auto-captured-deferrals (managed by audit-plan-deferrals.sh — triage these into the curated sections above; the fingerprint ledger means a deleted item is NOT re-added) -->
+- [ ] **(triage)** **Aspect fixed.** The raw framebuffer is **256×224** samples (8:7 grid). `present()` corrects the horizontal pixel aspect for the traditional **4:3 SNES television picture**, matching the displayed game image. (Also fixed an `imageData`-null deref this exposed.) — _from [2026-06-25-llvm-mos-emulator-embed.md](docs/plans/2026-06-25-llvm-mos-emulator-embed.md)_  <!-- fp:cc0400430a355c48 -->
+- [ ] **(triage)** **Dropped** the "Host C reference vs the SNES render — pixel-for-pixel" screenshot (`mandel-compare.png`) — the live emulator demonstrates it better. — _from [2026-06-25-llvm-mos-emulator-embed.md](docs/plans/2026-06-25-llvm-mos-emulator-embed.md)_  <!-- fp:0963b00889e45689 -->
 <!-- END auto-captured-deferrals -->

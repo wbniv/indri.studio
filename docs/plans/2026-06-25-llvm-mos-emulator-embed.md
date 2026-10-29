@@ -38,7 +38,7 @@ landing page's Lighthouse budget (Perf/A11y/BP/SEO ≥ 95) must survive.
 
 The new section sits in the existing `SNES C Compiler` app page, after the intro prose and before
 the `Install` heading (so a visitor sees the live proof of "verified pixel-for-pixel" immediately).
-It's a `glass-card` with a `section-label`, the live `<canvas>` at 8:7, a minimal control row, and a
+It's a `glass-card` with a `section-label`, the live `<canvas>` at the corrected 4:3 SNES display ratio, a minimal control row, and a
 provenance caption — all in the studio's dark theme.
 
 ```
@@ -55,7 +55,7 @@ indri.studio/apps/llvm-mos-65816/
   RUN SNES IN YOUR BROWSER                                   ← NEW · section-label
   ╭──────────────────────────────────────────────────╮       (glass-card)
   │▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│
-  │▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓◀ Mandelbrot ▶▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│   ← <canvas>, 8:7,
+  │▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓◀ Mandelbrot ▶▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│   ← <canvas>, 4:3,
   │▓▓▓▓▓▓▓ cycle-accurate SNES render, live ▓▓▓▓▓▓▓▓▓▓│      auto-boots
   │▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│      mandel-display
   ╰──────────────────────────────────────────────────╯
@@ -132,7 +132,7 @@ when the card scrolls out of view.
 
 ### C. `indri.studio` — the embed component
 - `src/components/EmulatorEmbed.astro`: `glass-card` figure with the poster image + "▶ Run it live"
-  button; on click, replace the poster with a same-origin `<iframe>` (8:7 aspect, `loading="lazy"`,
+  button; on click, replace the poster with a same-origin `<iframe>` (4:3 display, `loading="lazy"`,
   `title="bsnes-jg running mandel-display"`). Caption links the provenance / the
   `bsnes-jg-wasm` repo. Respect `prefers-reduced-motion`; keyboard-focusable button.
 - Render it in `src/pages/apps/[...slug].astro` for `post.id === 'llvm-mos-65816'`, placed after the
@@ -172,10 +172,9 @@ when the card scrolls out of view.
 
 ### Follow-up tweaks (`v0.1.70`, user review)
 
-- **Aspect fixed.** The raw 512×240 buffer (lores 256 px doubled + overscan) was drawn straight,
-  making the Mandelbrot ~2× too wide and letterboxed. `present()` now collapses the horizontal
-  doubling and crops to the 224 visible lines → true **256×224**, square pixels at the SNES 8:7
-  aspect, matching `mandel-jg.png`. (Also fixed an `imageData`-null deref this exposed.)
+- **Aspect fixed.** The raw framebuffer is **256×224** samples (8:7 grid). `present()` corrects
+  the horizontal pixel aspect for the traditional **4:3 SNES television picture**, matching the
+  displayed game image. (Also fixed an `imageData`-null deref this exposed.)
 - **Moved to page bottom** (after the screenshots gallery), not the hero slot.
 - **Dropped** the "Host C reference vs the SNES render — pixel-for-pixel" screenshot
   (`mandel-compare.png`) — the live emulator demonstrates it better.
