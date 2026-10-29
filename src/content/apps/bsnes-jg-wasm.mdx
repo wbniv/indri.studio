@@ -8,16 +8,17 @@ storeLinks:
 ---
 
 import BsnesSuiteChooser from '../../components/BsnesSuiteChooser.astro';
+import BsnesEmbedExamples from '../../components/BsnesEmbedExamples.astro';
 
-## Embed the SNES emulator in your browser
+## Play the torture-test suite
 
-Choose a ROM from the LLVM 65816 torture-test suite and play it in the browser. The small Mandelbrot screen beside the GitHub badge is a bare display with no player controls.
+Choose a ROM from the LLVM 65816 torture-test suite and play it here in your browser.
 
 <BsnesSuiteChooser />
 
-## Build with the browser player
+The reusable [`browser-game-player` package](https://github.com/wbniv/browser-game-player/releases/tag/v0.1.10) powers these integrations.
 
-The reusable browser player is available as the separately versioned [`browser-game-player` package](https://github.com/wbniv/browser-game-player/releases/tag/v0.1.9). Its examples include HTML and Astro embeds with and without touch controls, WordPress Custom HTML blocks, and setup notes for Claude Code and Codex.
+<BsnesEmbedExamples />
 
 ## Native Android examples — version 0.1.8
 
