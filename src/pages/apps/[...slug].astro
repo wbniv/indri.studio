@@ -1,6 +1,7 @@
 ---
 import AppLayout from "../../layouts/AppLayout.astro";
 import StoreBadges from "../../components/StoreBadges.astro";
+import BsnesWasmExample from "../../components/BsnesWasmExample.astro";
 import Screenshot from "../../components/Screenshot.astro";
 import MIcon from "../../components/MIcon.astro";
 import FindingYourWayMilestones from "../../components/FindingYourWayMilestones.astro";
@@ -133,7 +134,12 @@ const ogImage = ogImagePath ? new URL(ogImagePath, Astro.site).href : undefined;
 				</p>
 			)}
 
-			<StoreBadges links={post.data.storeLinks} />
+			{post.id === 'bsnes-jg-wasm' ? (
+				<div class="bsnes-header-demo">
+					<StoreBadges links={post.data.storeLinks} />
+					<BsnesWasmExample slug="mandel-display" title="Mandelbrot preview" size="micro" displayOnly />
+				</div>
+			) : <StoreBadges links={post.data.storeLinks} />}
 		</header>
 
 		<div class="prose">
@@ -621,3 +627,8 @@ const ogImage = ogImagePath ? new URL(ogImagePath, Astro.site).href : undefined;
 		@keyframes app-fade-in         { from { opacity: 0; } to { opacity: 1; } }
 	</style>
 </AppLayout>
+
+<style>
+	.bsnes-header-demo { display: flex; align-items: flex-start; gap: 0.75rem; }
+	.bsnes-header-demo :global(.store-badges) { margin-top: 0; }
+</style>

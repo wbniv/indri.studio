@@ -1,22 +1,27 @@
 ---
 title: bsnes-jg-wasm
 date: 2026-10-29
-summary: A browser-first SNES player built with WebAssembly, with Native Android apps for offline play.
+summary: Embed the SNES emulator in your browser with WebAssembly. Browse the LLVM 65816 torture-test suite or explore Native Android examples.
 draft: false
 storeLinks:
   github: https://github.com/wbniv/bsnes-jg-wasm
 ---
 
-import BsnesWasmExample from '../../components/BsnesWasmExample.astro';
 import BsnesSuiteChooser from '../../components/BsnesSuiteChooser.astro';
 
-**bsnes-jg-wasm** is a browser-first SNES player and reusable integration of the bsnes-jg core. It runs the core compiled to WebAssembly in web browsers; no Android install is needed for browser play. The project also distributes Native Android apps: choose the **Native suite** to browse and play the LLVM 65816 torture-test ROMs offline, or the **Native player** for the standalone Mandelbrot experience. They are separate Android apps with different package IDs.
+## Embed the SNES emulator in your browser
 
-[Browse the SNES demos in your browser](https://biohack.net/snes/) · [View the source on GitHub](https://github.com/wbniv/bsnes-jg-wasm)
+Choose a ROM from the LLVM 65816 torture-test suite and play it in the browser. The small Mandelbrot screen beside the GitHub badge is a bare display with no player controls.
 
-## Android APKs — version 0.1.8
+<BsnesSuiteChooser />
 
-These are signed release APKs for direct installation on Android. Download the variant you want, compare its SHA-256 with the value below, then approve installation in Android.
+## Build with the browser player
+
+The reusable browser player is available as the separately versioned [`browser-game-player` package](https://github.com/wbniv/browser-game-player/releases/tag/v0.1.9). Its examples include HTML and Astro embeds with and without touch controls, WordPress Custom HTML blocks, and setup notes for Claude Code and Codex.
+
+## Native Android examples — version 0.1.8
+
+Each APK demonstrates a separate integration of the reusable project. Download the variant you want, compare its SHA-256 with the value below, then install it on Android.
 
 ### Native suite
 
@@ -25,14 +30,6 @@ Includes 152 ROMs from the LLVM 65816 torture-test suite plus catalog artwork. P
 **[Download the Native suite APK](https://downloads.biohack.net/bsnes-jg-wasm/releases/0.1.8/bsnes-jg_llvm-65816-torture-test-suite-on-snes-v0.1.8.apk)**
 
 SHA-256: `55eca48e96cd2ba8d359689c5001fd62a4255af133bafe475fa43c4744a0f468`
-
-**WebAssembly examples — the same player, different ROM parameters:**
-
-Each player embed accepts a ROM slug. Mandelbrot appears first in a compact player. The full-width suite example opens the SNES chooser so visitors can pick a torture-test ROM before playing.
-
-<BsnesWasmExample slug="mandel-display" title="Mandelbrot" size="compact" />
-
-<BsnesSuiteChooser />
 
 ### Native player
 
@@ -46,4 +43,4 @@ The [release manifest](https://downloads.biohack.net/bsnes-jg-wasm/current.json)
 
 ## Source and updates
 
-The [bsnes-jg-wasm repository](https://github.com/wbniv/bsnes-jg-wasm) contains the player source and build instructions. The browser SNES gallery at [biohack.net/snes](https://biohack.net/snes/) runs without installing an APK. Future Android versions will keep these two package IDs and use the same release signing identity so normal Android updates can install over this release.
+The [bsnes-jg-wasm repository](https://github.com/wbniv/bsnes-jg-wasm) contains the browser integration and Android examples. The browser SNES gallery at [biohack.net/snes](https://biohack.net/snes/) runs without installing an APK. Future Android versions will keep these two package IDs and use the same release signing identity so normal Android updates can install over this release.

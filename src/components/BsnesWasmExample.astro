@@ -5,10 +5,11 @@ import { verifyManifest } from '@wbniv/browser-game-player/bundle';
 interface Props {
   slug: string;
   title: string;
-  size?: 'compact' | 'full';
+  size?: 'compact' | 'full' | 'micro';
+  displayOnly?: boolean;
 }
 
-const { slug, title, size = 'full' } = Astro.props;
+const { slug, title, size = 'full', displayOnly = false } = Astro.props;
 const { frame } = verifyManifest(
   'public/apps/llvm-mos-65816/play/component',
   '/apps/llvm-mos-65816/play/component',
@@ -16,12 +17,14 @@ const { frame } = verifyManifest(
 ---
 
 <section class:list={['bsnes-wasm-example', `bsnes-wasm-example--${size}`]} aria-label={`${title} WebAssembly example`}>
-  <h4>{title}</h4>
-  <GamePlayer src={`${frame}?game=${encodeURIComponent(slug)}`} title={title} />
+  {size !== 'micro' && <h4>{title}</h4>}
+  <GamePlayer src={`${frame}?game=${encodeURIComponent(slug)}${displayOnly ? '&display=bare' : ''}`} title={title} />
 </section>
 
 <style>
   .bsnes-wasm-example { margin: 1.25rem 0 1.75rem; }
   .bsnes-wasm-example--compact { max-width: 420px; margin-inline: auto; }
+  .bsnes-wasm-example--micro { width: clamp(112px, 32vw, 180px); margin: 0; }
+  .bsnes-wasm-example--micro :global(.browser-game-player > iframe) { min-height: 0; height: auto; aspect-ratio: 8 / 7; }
   .bsnes-wasm-example h4 { margin: 0 0 .65rem; font: 600 .95rem/1.4 var(--font-body, system-ui, sans-serif); }
 </style>
