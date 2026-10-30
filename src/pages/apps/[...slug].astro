@@ -118,28 +118,37 @@ const ogImage = ogImagePath ? new URL(ogImagePath, Astro.site).href : undefined;
 				<h1 class="font-display text-headline-lg text-primary-container tracking-tighter mb-6">{post.data.title}</h1>
 			)}
 
-			{post.data.logo && post.id !== 'finding-your-way' && (
-				<Image
-					src={post.data.logo}
-					alt=""
-					class="mb-6"
-					loading="eager"
-					fetchpriority="high"
-				/>
-			)}
-
-			{post.data.summary && (
-				<p class="font-body text-body-lg text-secondary border-l-2 border-primary-container pl-6">
-					{post.data.summary}
-				</p>
-			)}
-
 			{post.id === 'bsnes-jg-wasm' ? (
-				<div class="bsnes-header-demo">
+				<section class="bsnes-hero" aria-label="Browser SNES player">
+					<div class="bsnes-hero-copy">
+						<p class="bsnes-hero-lead">{post.data.summary}</p>
+						<StoreBadges links={post.data.storeLinks} />
+					</div>
+					<figure class="bsnes-hero-preview">
+						<figcaption>Live SNES · Mandelbrot</figcaption>
+						<BsnesWasmExample slug="mandel-display" title="Mandelbrot preview" size="micro" displayOnly />
+					</figure>
+				</section>
+			) : (
+				<>
+					{post.data.logo && post.id !== 'finding-your-way' && (
+						<Image
+							src={post.data.logo}
+							alt=""
+							class="mb-6"
+							loading="eager"
+							fetchpriority="high"
+						/>
+					)}
+
+					{post.data.summary && (
+						<p class="font-body text-body-lg text-secondary border-l-2 border-primary-container pl-6">
+							{post.data.summary}
+						</p>
+					)}
 					<StoreBadges links={post.data.storeLinks} />
-					<BsnesWasmExample slug="mandel-display" title="Mandelbrot preview" size="micro" displayOnly />
-				</div>
-			) : <StoreBadges links={post.data.storeLinks} />}
+				</>
+			)}
 		</header>
 
 		<div class="prose">
@@ -629,6 +638,43 @@ const ogImage = ogImagePath ? new URL(ogImagePath, Astro.site).href : undefined;
 </AppLayout>
 
 <style>
-	.bsnes-header-demo { display: flex; align-items: flex-start; gap: 0.75rem; }
-	.bsnes-header-demo :global(.store-badges) { margin-top: 0; }
+	.bsnes-hero {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 13rem;
+		align-items: center;
+		gap: 1.25rem;
+		padding: clamp(1rem, 2.5vw, 1.5rem);
+		border: 1px solid #625e58;
+		border-radius: 1rem;
+		background: linear-gradient(135deg, #413d37, #302d29);
+	}
+	.bsnes-hero-copy { min-width: 0; }
+	.bsnes-hero-lead {
+		max-width: 42ch;
+		margin: 0;
+		color: #e1dcd4;
+		font: 500 clamp(1rem, 1.8vw, 1.25rem)/1.55 var(--font-body, system-ui, sans-serif);
+	}
+	.bsnes-hero :global(.store-badges) { margin: 1.2rem 0 0; }
+	.bsnes-hero-preview {
+		min-width: 0;
+		margin: 0;
+		padding: .65rem;
+		border: 1px solid #5c574f;
+		border-radius: .75rem;
+		background: #211f1d;
+	}
+	.bsnes-hero-preview figcaption {
+		margin-bottom: .45rem;
+		color: #c4beb6;
+		font: 600 .62rem/1.3 var(--font-display, system-ui, sans-serif);
+		letter-spacing: .1em;
+		text-align: center;
+		text-transform: uppercase;
+	}
+	.bsnes-hero-preview :global(.bsnes-wasm-example--micro) { width: min(100%, 180px); margin-inline: auto; }
+	@media (max-width: 560px) {
+		.bsnes-hero { grid-template-columns: minmax(0, 1fr); align-items: start; }
+		.bsnes-hero-preview { width: min(100%, 220px); }
+	}
 </style>
