@@ -9,51 +9,31 @@ import BsnesPlayerActivity from './BsnesPlayerActivity.astro';
     <div class="section-heading">
       <p class="eyebrow">Example integrations</p>
       <h2 id="download-title">Native Android APK examples</h2>
-      <p>Two signed Native examples: the full LLVM 65816 suite app and a compact standalone Raycaster Maze player.</p>
+      <p>Two signed Native examples: the full LLVM 65816 suite app and a compact standalone Raycaster Maze player. More at <a href="https://biohack.net/snes/">biohack.net/snes</a>.</p>
     </div>
     <div class="download-grid">
-      <article class="download-card">
+      <article class="download-card suite-download-card">
         <p class="eyebrow">LLVM 65816 suite</p>
         <h3>Torture-test suite</h3>
         <p>Opens the suite chooser so you can select and run a test ROM.</p>
         <BsnesSuiteChooser />
-        <dl>
+        <dl class="suite-facts">
           <div><dt>Package</dt><dd><code>org.bsnesjg.tv.native.phase2</code></dd></div>
           <div><dt>Version</dt><dd>0.1.9</dd></div>
-          <div><dt>APK size</dt><dd>26,814,539 bytes · 25.57 MiB</dd></div>
+          <div><dt>APK size</dt><dd>25.57 MiB</dd></div>
         </dl>
         <a class="download-link" href="https://downloads.biohack.net/bsnes-jg/releases/0.1.9/bsnes-jg_llvm-65816-torture-test-suite-on-snes-v0.1.9.apk">Download suite APK <span aria-hidden="true">↓</span></a>
-        <details><summary>SHA-256</summary><code class="hash">c04666f5abe7f6865b4e2cfdd695cf47c238e06a78a50a4a8e7d27e73532f88c</code></details>
-      </article>
-      <article class="download-card">
-        <p class="eyebrow">Standalone player</p>
-        <h3>Raycaster Maze</h3>
-        <p class="standalone-description"><img src="/apps/bsnes-jg-wasm/raycaster.png" alt="Raycaster Maze rendered on the SNES" loading="lazy" />Runs the compact maze ROM in the Native player. The APK includes the emulator runtime and only this 32 KiB demo ROM.</p>
-        <dl>
-          <div><dt>Package</dt><dd><code>org.bsnesjg.tv.native</code></dd></div>
-          <div><dt>Version</dt><dd>0.1.9</dd></div>
-          <div><dt>APK size</dt><dd>7,156,299 bytes · 6.82 MiB</dd></div>
-        </dl>
-        <a class="download-link" href="https://downloads.biohack.net/bsnes-jg/releases/0.1.9/bsnes-jg_raycaster-maze-v0.1.9.apk">Download Raycaster Maze APK <span aria-hidden="true">↓</span></a>
-        <details><summary>SHA-256</summary><code class="hash">0d6e3583c127e6642514cee0d530213867c3ebe946799005c34f58b6f7837b76</code></details>
+        <details><summary>SHA-256 · 26,814,539 bytes</summary><code class="hash">c04666f5abe7f6865b4e2cfdd695cf47c238e06a78a50a4a8e7d27e73532f88c</code></details>
       </article>
     </div>
-    <details class="previous-release">
-      <summary>Previous release · version 0.1.8</summary>
-      <p>Retained for rollback and existing-install recovery.</p>
-      <ul>
-        <li><a href="https://downloads.biohack.net/bsnes-jg/releases/0.1.8/bsnes-jg_llvm-65816-torture-test-suite-on-snes-v0.1.8.apk">Native library · suite APK</a> · 26,811,243 bytes · SHA-256 <code>55eca48e96cd2ba8d359689c5001fd62a4255af133bafe475fa43c4744a0f468</code></li>
-        <li><a href="https://downloads.biohack.net/bsnes-jg/releases/0.1.8/bsnes-jg_mandelbrot-v0.1.8.apk">Native player · Mandelbrot (previous demo)</a> · 26,809,995 bytes · SHA-256 <code>907511eeaa8a77279a7c5e8a597b4b410ff94415ce637183aef1a56c3f2c21d3</code></li>
-      </ul>
-    </details>
-    <p class="release-note">The <a href="https://downloads.biohack.net/bsnes-jg/current.json">release manifest</a> records current and previous versions, sizes, package IDs, and hashes. The stable download URL <a href="https://downloads.biohack.net/bsnes-jg/">redirects here</a>.</p>
+    <p class="release-note">The <a href="https://downloads.biohack.net/bsnes-jg/current.json">release manifest</a> records current and previous versions, sizes, package IDs, and hashes. The stable download URL redirects here.</p>
   </section>
 
   <BsnesEmbedExamples />
   <BsnesPlayerActivity />
 
   <footer class="source-links">
-    <a href="https://github.com/wbniv/bsnes-jg-wasm">Source repository <span aria-hidden="true">↗</span></a>
+    <a href="https://github.com/wbniv/bsnes-jg-player">Source repository <span aria-hidden="true">↗</span></a>
     <a href="https://github.com/wbniv/browser-game-player/releases/tag/v0.1.12">Player package · v0.1.12 <span aria-hidden="true">↗</span></a>
     <a href="https://biohack.net/snes/">SNES browser demos <span aria-hidden="true">↗</span></a>
   </footer>
@@ -62,35 +42,33 @@ import BsnesPlayerActivity from './BsnesPlayerActivity.astro';
 <style>
   .product-body { width:100%; min-width:0; color:#f2eee8; }
   .eyebrow { color:#c4beb6; font-size:.72rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; }
-  .downloads { margin:4rem 0 5rem; }
-  .section-heading { margin-bottom:1.4rem; }
+  .downloads { margin:2.7rem 0 3.8rem; }
+  .section-heading { margin-bottom:1.15rem; }
   .section-heading h2 { margin:.3rem 0 .65rem; color:var(--color-primary-container,#b8f400); font-size:clamp(1.8rem,4vw,2.8rem); line-height:1.1; }
-  .section-heading p:last-child { max-width:52rem; margin:0; color:#c4beb6; font-size:1.05rem; line-height:1.6; }
+  .section-heading p:last-child { max-width:52rem; margin:0; color:#c4beb6; font-size:.95rem; line-height:1.55; }
   .download-grid { display:grid; grid-template-columns:minmax(0,1fr); gap:1.25rem; }
-  .download-card { display:flex; flex-direction:column; align-items:flex-start; min-width:0; padding:clamp(1.25rem,3vw,2.25rem); border:1px solid #625e58; border-radius:.8rem; background:#302d29; }
+  .download-card { display:flex; flex-direction:column; align-items:flex-start; min-width:0; padding:clamp(1rem,2.4vw,1.5rem); border:1px solid #514d47; border-radius:.8rem; background:#302d29; }
   .download-card .eyebrow { margin:0 0 .55rem; }
-  .download-card h3 { margin:0 0 .5rem; font-size:clamp(1.35rem,2.6vw,2rem); }
-  .download-card > p:not(.eyebrow) { max-width:38rem; margin:0 0 1rem; color:#c4beb6; line-height:1.55; }
-  .download-card > .standalone-description { display:flow-root; width:100%; max-width:none; min-height:9rem; }
-  .standalone-description img { float:right; width:min(43%,17rem); min-width:10rem; aspect-ratio:4/3; object-fit:contain; margin:0 0 .7rem 1rem; border:1px solid #625e58; border-radius:.5rem; background:#080c12; image-rendering:pixelated; }
-  dl { width:100%; margin:0 0 1.25rem; }
+  .download-card h3 { margin:0 0 .4rem; font-size:clamp(1.25rem,2.3vw,1.7rem); }
+  .download-card > p:not(.eyebrow) { max-width:38rem; margin:0 0 .85rem; color:#c4beb6; line-height:1.5; }
+  dl { width:100%; margin:0 0 1rem; }
   dl div { display:grid; grid-template-columns:minmax(5.5rem,.55fr) minmax(0,1fr); gap:.8rem; padding:.45rem 0; border-bottom:1px solid #514d47; }
-  dt { color:#c4beb6; }
+  dt { color:#a9a39b; font-size:.78rem; }
   dd { min-width:0; margin:0; overflow-wrap:anywhere; }
-  .download-card a.download-link { display:inline-flex; align-items:center; gap:.6rem; margin-top:auto; padding:.75rem 1rem; border:1px solid #17190e; border-radius:.45rem; background:#b8f400; color:#17190e !important; font-weight:750; text-decoration:none; text-shadow:none; }
+  .download-card a.download-link { display:flex; width:100%; align-items:center; justify-content:center; gap:.6rem; margin-top:auto; padding:.68rem 1rem; border:1px solid #17190e; border-radius:.45rem; background:#b8f400; color:#17190e !important; font-weight:750; text-decoration:none; text-shadow:none; }
   .download-card a.download-link:hover { background:#d4ff24; color:#11130b !important; }
   .download-card a.download-link:focus-visible { outline:3px solid #fff; outline-offset:3px; }
   details { width:100%; margin-top:1rem; color:#c4beb6; font-size:.8rem; }
   summary { cursor:pointer; }
   .hash { display:block; margin-top:.45rem; overflow-wrap:anywhere; color:#f2eee8; }
-  .release-note { margin:1rem 0 0; color:#c4beb6; font-size:.9rem; }
-  .previous-release { width:100%; margin-top:1.2rem; padding:1rem; border:1px solid #514d47; border-radius:.55rem; color:#c4beb6; font-size:.85rem; }
-  .previous-release p { margin:.7rem 0; }
-  .previous-release ul { margin:.5rem 0 0; padding-left:1.2rem; }
-  .previous-release li { margin:.6rem 0; overflow-wrap:anywhere; }
+  .release-note { margin:.85rem 0 0; color:#c4beb6; font-size:.78rem; line-height:1.55; }
   a { color:inherit; text-underline-offset:.18em; }
   .source-links { display:flex; flex-wrap:wrap; gap:.75rem 1.5rem; padding:1.25rem 0 2rem; border-top:1px solid #625e58; }
   .source-links a { color:var(--color-primary-container,#b8f400); font-weight:600; }
-  @media (max-width:640px) { .download-grid { grid-template-columns:1fr; } .downloads { margin:3rem 0; } }
-  @media (max-width:420px) { .standalone-description img { float:none; display:block; width:min(100%,17rem); margin:0 0 .75rem; } }
+  .suite-facts { display:grid; grid-template-columns:1fr 1fr; column-gap:1rem; }
+  .suite-facts div { display:flex; flex-direction:column; gap:.15rem; min-width:0; padding:.4rem 0; border-bottom:0; }
+  .suite-facts div:first-child { grid-column:1/-1; border-bottom:1px solid #514d47; }
+  .suite-facts dd { font-size:.82rem; }
+  .suite-facts code { font-size:.8rem; }
+  @media (max-width:640px) { .download-grid { grid-template-columns:1fr; } .downloads { margin:2.5rem 0 3.2rem; } }
 </style>

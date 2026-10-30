@@ -105,7 +105,13 @@ const ogImage = ogImagePath ? new URL(ogImagePath, Astro.site).href : undefined;
 				</div>
 			)}
 
-			{post.id === 'finding-your-way' ? (
+			{post.id === 'bsnes-jg-player' ? (
+				<div class="bsnes-page-heading">
+					<p class="bsnes-page-kicker">SNES emulator · WebAssembly</p>
+					<h1 class="font-display text-headline-lg text-primary-container tracking-tighter">{post.data.title}</h1>
+					<p class="bsnes-page-summary">{post.data.summary}</p>
+				</div>
+			) : post.id === 'finding-your-way' ? (
 				<div class="flex items-center gap-3 md:gap-4 mb-6">
 					{post.data.cardImages[1] && <Image src={post.data.cardImages[1].src} alt="" width={80} height={80} class="w-16 h-16 md:w-20 md:h-20 flex-none" />}
 					<div class="min-w-0">
@@ -117,18 +123,23 @@ const ogImage = ogImagePath ? new URL(ogImagePath, Astro.site).href : undefined;
 				<h1 class="font-display text-headline-lg text-primary-container tracking-tighter mb-6">{post.data.title}</h1>
 			)}
 
-			{post.id === 'bsnes-jg-wasm' ? (
-				<section class="bsnes-hero" aria-label="Browser SNES player">
-					<div class="bsnes-hero-copy">
-						<p class="bsnes-hero-lead">{post.data.summary}</p>
-						<StoreBadges links={post.data.storeLinks} />
-					</div>
+			{post.id === 'bsnes-jg-player' ? (
+				<section class="bsnes-landing" aria-label="Browser SNES player">
 					<figure class="bsnes-hero-preview">
-						<figcaption>Raycaster Maze · gameplay loop</figcaption>
-						<video class="bsnes-hero-video" autoplay muted loop playsinline preload="none" poster="/apps/bsnes-jg-wasm/raycaster.png" aria-label="Looping Raycaster Maze gameplay">
+						<video class="bsnes-hero-video" autoplay muted loop playsinline preload="metadata" poster="/apps/bsnes-jg-wasm/raycaster.png" aria-label="Looping Raycaster Maze gameplay">
 							<source src="/apps/bsnes-jg-wasm/raycaster-loop.mp4" type="video/mp4" />
 						</video>
+						<figcaption><span>Raycaster Maze · gameplay loop</span><span class="bsnes-live"><i></i>Live</span></figcaption>
 					</figure>
+					<div class="bsnes-npm-install">
+						<p class="bsnes-install-label">Install from npm</p>
+						<div class="bsnes-command-row"><code>npm i @wbniv/bsnes-jg-player</code><button type="button" data-copy-install aria-label="Copy npm install command"><MIcon name="content_copy" size={20} ariaHidden /></button><span data-copy-install-status role="status" aria-live="polite"></span></div>
+					</div>
+					<nav class="bsnes-hero-links" aria-label="Player links">
+						<a href="#embed-examples-title">Embed player <MIcon name="code" size={18} ariaHidden /></a>
+						<a href="https://github.com/wbniv/bsnes-jg-player">GitHub <MIcon name="open_in_new" size={17} ariaHidden /></a>
+					</nav>
+					<a class="bsnes-android-link" href="#download-title">Also available as an Android app <MIcon name="chevron_right" size={20} ariaHidden /></a>
 				</section>
 			) : (
 				<>
@@ -639,43 +650,56 @@ const ogImage = ogImagePath ? new URL(ogImagePath, Astro.site).href : undefined;
 </AppLayout>
 
 <style>
-	.bsnes-hero {
-		display: grid;
-		grid-template-columns: minmax(0, 1fr) 13rem;
-		align-items: center;
-		gap: 1.25rem;
-		padding: clamp(1rem, 2.5vw, 1.5rem);
-		border: 1px solid #625e58;
-		border-radius: 1rem;
-		background: linear-gradient(135deg, #413d37, #302d29);
-	}
-	.bsnes-hero-copy { min-width: 0; }
-	.bsnes-hero-lead {
-		max-width: 42ch;
-		margin: 0;
-		color: #e1dcd4;
-		font: 500 clamp(1rem, 1.8vw, 1.25rem)/1.55 var(--font-body, system-ui, sans-serif);
-	}
-	.bsnes-hero :global(.store-badges) { margin: 1.2rem 0 0; }
+	.bsnes-page-heading { margin-bottom: 1rem; }
+	.bsnes-page-kicker { margin:0 0 .4rem; color:#c4beb6; font:600 .72rem/1.4 var(--font-display,system-ui,sans-serif); letter-spacing:.15em; text-transform:uppercase; }
+	.bsnes-page-heading h1 { margin:0 0 .35rem; font-size:clamp(2rem,5vw,3rem); line-height:1.08; }
+	.bsnes-page-summary { max-width:54rem; margin:0; color:#e1dcd4; font-size:clamp(.95rem,1.6vw,1.08rem); line-height:1.45; }
+	.bsnes-landing { margin:0 0 2.5rem; }
 	.bsnes-hero-preview {
-		min-width: 0;
-		margin: 0;
-		padding: .65rem;
-		border: 1px solid #5c574f;
-		border-radius: .75rem;
-		background: #211f1d;
+		width:100%; margin:0; overflow:hidden; border:1px solid #252628; border-radius:.65rem; background:#05080c;
 	}
-	.bsnes-hero-preview figcaption {
-		margin-bottom: .45rem;
-		color: #c4beb6;
-		font: 600 .62rem/1.3 var(--font-display, system-ui, sans-serif);
-		letter-spacing: .1em;
-		text-align: center;
-		text-transform: uppercase;
-	}
-	.bsnes-hero-video { display:block; width:100%; aspect-ratio:4/3; object-fit:contain; background:#000; image-rendering:pixelated; }
+	.bsnes-hero-video { display:block; width:100%; aspect-ratio:16/9; object-fit:contain; background:#05080c; image-rendering:pixelated; }
+	.bsnes-hero-preview figcaption { display:flex; justify-content:space-between; align-items:center; min-height:1.45rem; padding:.25rem .65rem; color:#bdb8b0; font:600 .58rem/1.2 var(--font-display,system-ui,sans-serif); letter-spacing:.13em; text-transform:uppercase; }
+	.bsnes-live { display:inline-flex; align-items:center; gap:.35rem; color:#b8f400; }
+	.bsnes-live i { width:.38rem; height:.38rem; border-radius:50%; background:#b8f400; box-shadow:0 0 .5rem #b8f477; }
+	.bsnes-npm-install { margin: .8rem 0 .55rem; padding:.7rem .8rem; border-radius:.7rem; background:#b8f400; color:#181b10; }
+	.bsnes-install-label { margin:0 0 .3rem; color:#4a551e; font:700 .64rem/1.3 var(--font-display,system-ui,sans-serif); letter-spacing:.13em; text-transform:uppercase; }
+	.bsnes-command-row { position:relative; display:flex; align-items:center; gap:.5rem; min-width:0; }
+	.bsnes-command-row code { min-width:0; flex:1; overflow-wrap:anywhere; color:#17190f; font:600 .82rem/1.3 ui-monospace,SFMono-Regular,Consolas,monospace; }
+	.bsnes-command-row button { display:grid; place-items:center; flex:none; width:2rem; height:2rem; padding:0; border:0; border-radius:.4rem; background:#a8df00; color:#28300e; cursor:pointer; }
+	.bsnes-command-row button:hover { background:#d2ff34; }
+	.bsnes-command-row button:focus-visible,.bsnes-hero-links a:focus-visible,.bsnes-android-link:focus-visible { outline:2px solid currentColor; outline-offset:2px; }
+	.bsnes-command-row [data-copy-install-status] { position:absolute; z-index:2; right:0; bottom:calc(100% + .3rem); transform:translateY(.3rem); opacity:0; pointer-events:none; padding:.3rem .5rem; border-radius:.35rem; background:#f2eee8; color:#171715; font-size:.72rem; font-weight:700; transition:opacity .2s,transform .2s; }
+	.bsnes-command-row [data-copy-install-status].visible { opacity:1; transform:translateY(0); }
+	.bsnes-hero-links { display:grid; grid-template-columns:1fr 1fr; gap:.5rem; }
+	.bsnes-hero-links a { display:flex; align-items:center; justify-content:space-between; gap:.5rem; min-height:2.7rem; padding:.55rem .7rem; border:1px solid #514d47; border-radius:.55rem; color:#ece7df; font-size:.82rem; font-weight:650; text-decoration:none; }
+	.bsnes-hero-links a:hover { border-color:#b8f400; color:#b8f400; }
+	.bsnes-android-link { display:flex; align-items:center; justify-content:space-between; gap:.75rem; width:100%; margin-top:.45rem; padding:.65rem 0; border-bottom:1px solid #514d47; color:#e5e0d8; font-size:.78rem; font-weight:600; text-decoration:none; }
+	.bsnes-android-link MIcon { color:#c4beb6; }
 	@media (max-width: 560px) {
-		.bsnes-hero { grid-template-columns: minmax(0, 1fr); align-items: start; }
-		.bsnes-hero-preview { width: min(100%, 220px); }
+		.bsnes-page-heading { margin-bottom:.85rem; }
+		.bsnes-page-heading h1 { margin-bottom:.3rem; }
+		.bsnes-hero-preview { width:100vw; margin-inline:calc(50% - 50vw); border-right:0; border-left:0; border-radius:0; }
+		.bsnes-npm-install { margin-top:.65rem; }
+		.bsnes-landing { margin-bottom:2.1rem; }
 	}
 </style>
+
+<script>
+	const installCommand = 'npm i @wbniv/bsnes-jg-player';
+	function bindNpmCopy() {
+		for (const button of document.querySelectorAll<HTMLButtonElement>('[data-copy-install]')) {
+			if (button.dataset.bound === 'true') continue;
+			button.dataset.bound = 'true';
+			button.addEventListener('click', async () => {
+				const status = button.parentElement?.querySelector<HTMLElement>('[data-copy-install-status]');
+				try {
+					await navigator.clipboard.writeText(installCommand);
+					if (status) { status.textContent = 'Copied!'; status.classList.add('visible'); window.setTimeout(() => status.classList.remove('visible'), 1300); }
+				} catch { if (status) { status.textContent = 'Copy unavailable'; status.classList.add('visible'); window.setTimeout(() => status.classList.remove('visible'), 1800); } }
+			});
+		}
+	}
+	bindNpmCopy();
+	document.addEventListener('astro:page-load', bindNpmCopy);
+</script>

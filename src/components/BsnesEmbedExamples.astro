@@ -88,7 +88,7 @@ const examples = {
   function renderExample() {
     const selectedMode = controls.checked ? 'controls' : 'bare';
     source.textContent = examples[format.value][selectedMode];
-    filename.textContent = names[format.value][selectedMode];
+    filename.textContent = names[format.value][controls.checked ? 0 : 1];
     previewFormat.textContent = `${labels[format.value]} · ${controls.checked ? 'with controls' : 'bare display'}`;
     if (previewFocused) {
       previewStarted = true;
@@ -98,7 +98,7 @@ const examples = {
   format.addEventListener('change', renderExample);
   controls.addEventListener('change', renderExample);
   window.addEventListener('bsnes-player-focus', event => {
-    previewFocused = (event as CustomEvent<{id:string|null}>).detail?.id === 'format-preview';
+    previewFocused = event.detail?.id === 'format-preview';
     if (previewFocused) {
       if (!previewStarted) {
         previewStarted = true;
