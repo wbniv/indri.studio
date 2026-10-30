@@ -96,7 +96,7 @@ body.playing #hud>div{max-width:100%;overflow-wrap:break-word;word-break:normal}
 .rom-list{overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain}
 .preview{grid-template-columns:minmax(0,1.8fr) minmax(0,1fr)}
 
-@media(max-width:760px),(max-aspect-ratio:1/1){
+@media(max-width:640px),(max-aspect-ratio:1/1){
   .top{grid-template-columns:auto minmax(0,1fr);grid-template-areas:"identity identity" "lucky search";gap:.8vh 8px;min-height:0}
   .top h1{font-size:clamp(14px,4.5vw,18px);line-height:1.18}
   .top p{font-size:clamp(10px,3vw,12px);line-height:1.2}
@@ -213,7 +213,7 @@ body.playing #hud>div{max-width:100%;overflow-wrap:break-word;word-break:normal}
 #cartridge-play{border-color:#4d95bc;background:#17374d}
 #cartridge-empty{margin:auto;text-align:center;color:var(--muted)}
 #cartridge-empty[hidden]{display:none}
-@media(max-width:760px),(max-aspect-ratio:1/1){
+@media(max-width:640px),(max-aspect-ratio:1/1){
   .launcher-view{min-height:30px;padding:3px 8px;font-size:10px}
   .cartridge-stage{grid-template-columns:minmax(0,1fr);padding:0 8%;}
   .cartridge-card.neighbor{display:none}
@@ -258,7 +258,7 @@ body.playing #hud>div{max-width:100%;overflow-wrap:break-word;word-break:normal}
 #treemap-play{border-color:#4d95bc;background:#17374d}
 #treemap-empty{margin:auto;text-align:center;color:var(--muted)}
 #treemap-empty[hidden],#treemap-content[hidden]{display:none}
-@media(max-width:760px),(max-aspect-ratio:1/1){
+@media(max-width:640px),(max-aspect-ratio:1/1){
 
   .treemap-content{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;overflow:auto}
   .treemap-map-column{min-height:38vh}
@@ -270,7 +270,7 @@ body.playing #hud>div{max-width:100%;overflow-wrap:break-word;word-break:normal}
 }
 
 /* In phone landscape, reclaim vertical room from launcher chrome for the map. */
-@media (orientation:landscape) and (max-height:520px) and (max-width:1000px){
+@media (orientation:landscape) and (max-height:520px) and (max-width:640px){
   #library{padding:1vh 3vw .8vh;gap:.55vh}
   .top{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(150px,28vw);grid-template-areas:"identity lucky search";align-items:center;gap:8px;height:auto;min-height:30px;flex:0 0 auto}
   .top>div{grid-area:identity;min-width:0}
@@ -293,7 +293,7 @@ body.playing #hud>div{max-width:100%;overflow-wrap:break-word;word-break:normal}
   .treemap-details{padding:5px}
 }
 
-@media (orientation:portrait) and (max-width:760px){
+@media (orientation:portrait) and (max-width:640px){
   .treemap-content{grid-template-rows:minmax(0,1fr) minmax(0,28vh);overflow:hidden}
   .treemap-map-column{min-height:0}
   .treemap-details{min-height:0;overflow:auto}
@@ -303,7 +303,7 @@ body.playing #hud>div{max-width:100%;overflow-wrap:break-word;word-break:normal}
 #tv-actions button:focus{transform:none;outline-offset:-3px}
 #tv-verify,#tv-cancel,.menu-section-label,#checkresult{display:none!important}
 
-@media(orientation:portrait) and (max-width:760px){
+@media(orientation:portrait) and (max-width:640px){
   .launcher-view .view-number{display:none}
   .launcher-view{padding-inline:6px;gap:4px;font-size:10px}
   .treemap-total{display:none!important}
