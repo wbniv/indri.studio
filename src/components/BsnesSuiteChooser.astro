@@ -2,46 +2,24 @@
 import { readFileSync } from 'node:fs';
 
 const projectRoot = process.cwd();
-const romManifest = JSON.parse(readFileSync(`${projectRoot}/public/apps/llvm-mos-65816/play/roms/manifest.json`, 'utf8'));
 const bundleManifest = JSON.parse(readFileSync(`${projectRoot}/public/apps/llvm-mos-65816/play/component/manifest.json`, 'utf8'));
-const initialGame = 'byvaledge';
 const frame = `/apps/llvm-mos-65816/play/component/bundles/${bundleManifest.bundleId}/frame.html`;
 ---
-<section class="suite-chooser" aria-label="Live LLVM 65816 torture-test suite player" data-player-base={frame}>
-  <div class="chooser-header">
+<section class="suite-chooser" aria-label="By-Value Boundary Trio browser preview">
+  <div class="preview-heading">
     <div>
-      <h4>Play the LLVM 65816 torture-test suite</h4>
-      <p>Choose a test ROM to run it here in the browser.</p>
+      <h4>By-Value Boundary Trio</h4>
+      <p>The APK opens the in-app suite chooser. This is a fixed browser preview of one test ROM.</p>
     </div>
-    <label for="suite-rom">Test ROM</label>
-    <select id="suite-rom" aria-label="Choose a torture-test ROM">
-      {romManifest.roms.map((rom) => <option value={rom.id} selected={rom.id === initialGame}>{rom.title}</option>)}
-    </select>
   </div>
-  <iframe id="suite-player" src={`${frame}?game=${initialGame}`} title="By-Value Boundary Trio, running in the SNES emulator" loading="lazy" allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
+  <iframe src={`${frame}?game=byvaledge`} title="By-Value Boundary Trio running in the SNES emulator" loading="lazy" allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
 </section>
 
-<script>
-  const container = document.querySelector<HTMLElement>('.suite-chooser');
-  const playerBase = container?.dataset.playerBase;
-  const picker = document.querySelector<HTMLSelectElement>('#suite-rom');
-  const player = document.querySelector<HTMLIFrameElement>('#suite-player');
-  picker?.addEventListener('change', () => {
-    if (!player || !playerBase) return;
-    const game = encodeURIComponent(picker.value);
-    const title = picker.selectedOptions[0]?.textContent?.trim() || 'SNES test ROM';
-    player.src = `${playerBase}?game=${game}`;
-    player.title = `${title}, running in the SNES emulator`;
-  });
-</script>
-
 <style>
-  .suite-chooser { width:100%; margin: 1.5rem 0 1rem; overflow:hidden; border:1px solid #625e58; border-radius:.8rem; background:#181715; }
-  .chooser-header { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(14rem, min(34rem, 48%)); align-items:center; gap:.75rem 1rem; padding:1rem 1.15rem; }
-  .chooser-header h4 { margin:0; color:#f2eee8; font-size:1.1rem; }
-  .chooser-header p { margin:.25rem 0 0; color:#c4beb6; font-size:.9rem; }
-  .chooser-header label { color:#c4beb6; font-size:.86rem; }
-  .chooser-header select { width:100%; min-width:0; padding:.65rem .75rem; border:1px solid #77736d; border-radius:.45rem; color:#f2eee8; background:#302d29; font:inherit; }
+  .suite-chooser { width:100%; margin:1.5rem 0 1rem; overflow:hidden; border:1px solid #625e58; border-radius:.8rem; background:#181715; }
+  .preview-heading { padding:1rem 1.15rem; }
+  .preview-heading h4 { margin:0; color:#f2eee8; font-size:1.1rem; }
+  .preview-heading p { margin:.25rem 0 0; color:#c4beb6; font-size:.9rem; }
   .suite-chooser iframe { display:block; width:100%; height:min(75vh, 720px); min-height:28rem; border:0; border-top:1px solid #625e58; background:#111820; }
-  @media(max-width:680px) { .chooser-header { grid-template-columns:minmax(0,1fr); } .chooser-header label { margin-top:.2rem; } .suite-chooser iframe { height:65vh; min-height:24rem; } }
+  @media(max-width:680px) { .suite-chooser iframe { height:65vh; min-height:24rem; } }
 </style>
