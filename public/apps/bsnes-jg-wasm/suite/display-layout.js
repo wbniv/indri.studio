@@ -119,23 +119,24 @@
           height: height
         };
       } else {
-        var railWidth = Math.max(metadataMinimum, performanceMinimum) + gap * 2;
+        var railWidth = Math.min(width * 0.42, Math.max(120, width * 0.22) + gap * 2);
         var gameAreaWidth = Math.max(1, width - railWidth);
         var railGameWidth = Math.min(maxWidth, gameAreaWidth);
         var railGameHeight = railGameWidth / aspect;
         var railX = safe.left + width - railWidth;
+        var performanceHeight = Math.min(132, Math.max(96, height * 0.3));
         game = {
           x: safe.left + (gameAreaWidth - railGameWidth) / 2,
           y: safe.top + (height - railGameHeight) / 2,
           width: railGameWidth,
           height: railGameHeight
         };
-        metadata = { x: railX, y: safe.top + gap, width: railWidth, height: height * 0.46 };
+        metadata = { x: railX, y: safe.top + gap, width: railWidth, height: Math.max(1, height - performanceHeight - gap * 2) };
         performance = {
           x: railX,
-          y: safe.top + height * 0.48,
+          y: safe.top + height - performanceHeight,
           width: railWidth,
-          height: height * 0.52 - gap
+          height: performanceHeight
         };
       }
       hud.style.padding = "8px";

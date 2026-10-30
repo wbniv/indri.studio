@@ -309,3 +309,17 @@ body.playing #hud>div{max-width:100%;overflow-wrap:break-word;word-break:normal}
   .treemap-total{display:none!important}
   .treemap-palette-control{margin-left:auto}
 }
+
+
+/* Keep the embedded TV HUD legible in landscape page columns. */
+@media (orientation:landscape) and (max-width:1100px) and (max-height:560px){
+  #brand{font-size:clamp(16px,2.2vw,22px)}
+  #brand .brand-name{font-size:clamp(12px,1.8vw,18px);line-height:1.08}
+  #remote-hint{display:none}
+  #performance-overlay{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-content:start;gap:4px;overflow:hidden!important;padding:4px}
+  #performance-overlay .perf-heading{grid-column:1/-1;margin:0;font-size:8px}
+  #performance-overlay .perf-rate{grid-template-columns:minmax(0,1fr);gap:2px;margin:0;padding:4px;border:1px solid #34465b;border-radius:5px;background:#101721}
+  #performance-overlay .perf-rate span{grid-column:1;grid-row:1;font-size:8px}
+  #performance-overlay .perf-rate strong{grid-column:1;grid-row:2;font-size:clamp(12px,2.4vw,18px)}
+  #performance-overlay .perf-rate small,#performance-overlay .perf-sparkline,#performance-overlay .perf-detail,#performance-overlay .perf-backlog,#performance-overlay .perf-footnote{display:none}
+}
