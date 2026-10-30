@@ -28,36 +28,36 @@ const examples = {
   <div class="section-heading">
     <p class="eyebrow">Integrate the player</p>
     <h2 id="embed-examples-title">Choose your format</h2>
-    <p>Copy a working example for your site or coding assistant. The HTML samples import <code>mountPlayer</code> from the shared package at <code>/player/browser-game-player/src/embed.mjs</code>; host that module and the frozen SNES bundle on your own site.</p>
-  </div>
-  <div class="example-toolbar">
-    <div class="format-settings">
-      <label class="format-select-label" for="example-format">Format</label>
-      <select id="example-format" aria-label="Example format">
-        <option value="html">HTML</option>
-        <option value="astro">Astro 5–7</option>
-        <option value="wordpress">WordPress</option>
-        <option value="claude">Claude Code</option>
-        <option value="codex">Codex / AGENTS.md</option>
-      </select>
-      <label id="mode-label" class="controls-toggle">
-        <input id="example-controls" type="checkbox" />
-        <span>Include controls</span>
-      </label>
-    </div>
-    <span class="copy-action">
-      <span id="copy-toast" class="copy-toast" role="status" aria-live="polite"></span>
-      <button type="button" id="copy-example" aria-label="Copy source"><MIcon name="content_copy" size={20} ariaHidden /></button>
-    </span>
+    <p>Copy a working example for your site or coding assistant. WordPress 5.0+ uses a Gutenberg Custom HTML block; the editing account must be allowed to save iframe markup. The HTML samples import <code>mountPlayer</code> from the shared package at <code>/player/browser-game-player/src/embed.mjs</code>; host that module and the frozen SNES bundle on your own site.</p>
   </div>
   <div class="example-layout">
     <section class="preview-card" aria-label="Live player preview">
-      <div class="preview-heading"><span>Live preview</span><span id="preview-format">HTML · with controls</span></div>
-      <iframe id="example-preview" src={`${frame}?game=mandel-display`} title="SNES player preview" loading="lazy" allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
+      <div class="preview-heading"><span>Live preview</span><span id="preview-format">HTML · bare display</span></div>
+      <iframe id="example-preview" src={`${frame}?game=mandel-display&display=bare`} title="SNES player preview" loading="lazy" allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
     </section>
     <div class="code-card">
       <div class="code-toolbar">
-        <span id="example-filename">with-controls.html</span>
+        <div class="format-settings">
+          <div class="format-control-row">
+            <label class="format-select-label" for="example-format">Format</label>
+            <select id="example-format" aria-label="Example format">
+              <option value="html">HTML</option>
+              <option value="astro">Astro 5–7</option>
+              <option value="wordpress">WordPress 5.0+</option>
+              <option value="claude">Claude Code</option>
+              <option value="codex">Codex / AGENTS.md</option>
+            </select>
+          </div>
+          <label id="mode-label" class="controls-toggle">
+            <input id="example-controls" type="checkbox" />
+            <span>Include controls</span>
+          </label>
+          <span id="example-filename" class="code-filename">bare-display.html</span>
+        </div>
+        <span class="copy-action">
+          <span id="copy-toast" class="copy-toast" role="status" aria-live="polite"></span>
+          <button type="button" id="copy-example" aria-label="Copy source"><MIcon name="content_copy" size={20} ariaHidden /></button>
+        </span>
       </div>
       <pre><code id="example-source"></code></pre>
     </div>
@@ -74,7 +74,7 @@ const examples = {
   const copy = document.querySelector('#copy-example');
   const toast = document.querySelector('#copy-toast');
   const names = { html: ['with-controls.html', 'bare-display.html'], astro: ['WithControls.astro', 'BareDisplay.astro'], wordpress: ['with-controls.html', 'bare-display.html'], claude: ['CLAUDE.md', 'CLAUDE.md'], codex: ['AGENTS.md', 'AGENTS.md'] };
-  const labels = { html: 'HTML', astro: 'Astro 5–7', wordpress: 'WordPress', claude: 'Claude Code', codex: 'Codex / AGENTS.md' };
+  const labels = { html: 'HTML', astro: 'Astro 5–7', wordpress: 'WordPress 5.0+', claude: 'Claude Code', codex: 'Codex / AGENTS.md' };
   function renderExample() {
     const selectedMode = controls.checked ? 'controls' : 'bare';
     source.textContent = examples[format.value][selectedMode];
@@ -102,13 +102,13 @@ const examples = {
   .section-heading p:not(.eyebrow) { max-width:38rem; margin:0; opacity:.8; }
   .eyebrow { margin:0; font-size:.75rem; text-transform:uppercase; letter-spacing:.12em; opacity:.7; }
   [hidden] { display:none !important; }
-  .example-toolbar { display:flex; align-items:start; justify-content:space-between; gap:1rem; margin:1.25rem 0 .8rem; }
-  .format-settings { display:grid; justify-items:start; gap:.35rem; }
-  .format-select-label { font-size:.75rem; opacity:.8; }
-  select { min-width:12rem; font:inherit; color:inherit; background:var(--color-surface-container-high,#38342f); border:1px solid #77736d; border-radius:.5rem; padding:.55rem .75rem; }
-  .controls-toggle { display:flex; gap:.55rem; align-items:center; margin:.25rem 0 0 .1rem; font-size:.9rem; cursor:pointer; }
+  .format-settings { display:flex; flex-direction:column; align-items:flex-start; gap:.35rem; min-width:0; }
+  .format-control-row { display:flex; align-items:center; flex-wrap:wrap; gap:.65rem; }
+  .format-select-label { font-size:.8rem; font-weight:650; opacity:.9; }
+  select { min-width:12rem; max-width:100%; font:inherit; color:inherit; background:var(--color-surface-container-high,#38342f); border:1px solid #77736d; border-radius:.5rem; padding:.55rem .75rem; }
+  .controls-toggle { display:flex; gap:.55rem; align-items:center; margin:.1rem 0 0 .1rem; font-size:.9rem; cursor:pointer; }
   .controls-toggle input { width:1.1rem; height:1.1rem; accent-color:var(--color-primary-container); }
-  .copy-action { position:relative; display:inline-flex; }
+  .copy-action { position:relative; display:inline-flex; justify-self:end; grid-row:1; grid-column:2; }
   button#copy-example { display:grid; place-items:center; width:2.4rem; height:2.4rem; padding:.4rem; color:inherit; background:var(--color-surface-container-high,#38342f); border:1px solid currentColor; border-radius:.5rem; cursor:pointer; }
   button#copy-example:hover { color:var(--color-primary-container); }
   .copy-toast { position:absolute; z-index:2; right:50%; bottom:calc(100% + .45rem); transform:translate(50%,.45rem); opacity:0; pointer-events:none; white-space:nowrap; padding:.35rem .55rem; border-radius:.4rem; background:#f2eee8; color:#181715; font-size:.78rem; font-weight:600; box-shadow:0 2px 8px #0005; transition:opacity .22s ease,transform .22s ease; }
@@ -120,10 +120,10 @@ const examples = {
   .preview-heading span:last-child { opacity:.7; text-align:right; }
   .preview-card iframe { display:block; width:100%; height:clamp(24rem,42vw,34rem); border:0; background:#111820; }
   .code-card { border:1px solid #77736d; border-radius:.75rem; overflow:visible; background:#181715; color:#f2eee8; }
-  .code-toolbar { display:flex; justify-content:space-between; align-items:center; padding:.55rem .8rem; border-bottom:1px solid #55514c; border-radius:.75rem .75rem 0 0; font-size:.85rem; }
-  .code-toolbar button { cursor:pointer; padding:.35rem .7rem; }
+  .code-toolbar { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:start; gap:1rem; padding:.7rem .8rem; border-bottom:1px solid #55514c; border-radius:.75rem .75rem 0 0; background:#11100f; font-size:.85rem; }
+  .code-filename { color:#bbb5ad; font-size:.74rem; }
   pre { margin:0; padding:1rem; max-height:34rem; overflow-x:hidden; overflow-y:auto; border-radius:0 0 .75rem .75rem; font-size:.82rem; line-height:1.55; tab-size:2; }
   code { white-space:pre-wrap; overflow-wrap:anywhere; }
-  @media(max-width:700px) { .preview-card { width:100%; } .preview-card iframe { height:30rem; } }
+  @media(max-width:700px) { .preview-card { width:100%; } .preview-card iframe { height:30rem; } .code-toolbar { gap:.5rem; } select { min-width:min(12rem, 100%); } }
   @media(prefers-reduced-motion:reduce) { .copy-toast { transition:none; } }
 </style>

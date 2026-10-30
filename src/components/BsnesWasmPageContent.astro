@@ -1,19 +1,21 @@
 ---
 import BsnesEmbedExamples from './BsnesEmbedExamples.astro';
+import BsnesSuiteChooser from './BsnesSuiteChooser.astro';
 ---
 
 <div class="product-body">
   <section class="downloads" aria-labelledby="download-title">
     <div class="section-heading">
       <p class="eyebrow">Example integrations</p>
-      <h2 id="download-title">Native Android APKs</h2>
-      <p>The browser player is the reusable product. These APKs show how the project integrates with native Android apps.</p>
+      <h2 id="download-title">Native suite APK</h2>
+      <p>Native Android example: it opens the suite chooser so you can select and run a test ROM.</p>
     </div>
     <div class="download-grid">
       <article class="download-card">
         <p class="eyebrow">LLVM 65816 suite</p>
         <h3>Torture-test suite</h3>
         <p>Opens the suite chooser so you can select and run a test ROM.</p>
+        <BsnesSuiteChooser />
         <dl>
           <div><dt>Package</dt><dd><code>org.bsnesjg.tv.native.phase2</code></dd></div>
           <div><dt>Version</dt><dd>0.1.8</dd></div>
@@ -22,18 +24,7 @@ import BsnesEmbedExamples from './BsnesEmbedExamples.astro';
         <a class="download-link" href="https://downloads.biohack.net/bsnes-jg-wasm/releases/0.1.8/bsnes-jg_llvm-65816-torture-test-suite-on-snes-v0.1.8.apk">Download suite APK <span aria-hidden="true">↓</span></a>
         <details><summary>SHA-256</summary><code class="hash">55eca48e96cd2ba8d359689c5001fd62a4255af133bafe475fa43c4744a0f468</code></details>
       </article>
-      <article class="download-card">
-        <p class="eyebrow">Standalone demo</p>
-        <h3>Mandelbrot player</h3>
-        <p>Launches the standalone Mandelbrot ROM. The APK includes the Native emulator runtime and libraries.</p>
-        <dl>
-          <div><dt>Package</dt><dd><code>org.bsnesjg.tv.native</code></dd></div>
-          <div><dt>Version</dt><dd>0.1.8</dd></div>
-          <div><dt>APK size</dt><dd>26,809,995 bytes · 25.57 MiB</dd></div>
-        </dl>
-        <a class="download-link" href="https://downloads.biohack.net/bsnes-jg-wasm/releases/0.1.8/bsnes-jg_mandelbrot-v0.1.8.apk">Download Mandelbrot APK <span aria-hidden="true">↓</span></a>
-        <details><summary>SHA-256</summary><code class="hash">907511eeaa8a77279a7c5e8a597b4b410ff94415ce637183aef1a56c3f2c21d3</code></details>
-      </article>
+
     </div>
     <p class="release-note">The <a href="https://downloads.biohack.net/bsnes-jg-wasm/current.json">release manifest</a> records published versions, sizes, package IDs, and hashes.</p>
   </section>
@@ -54,7 +45,7 @@ import BsnesEmbedExamples from './BsnesEmbedExamples.astro';
   .section-heading { margin-bottom:1.4rem; }
   .section-heading h2 { margin:.3rem 0 .65rem; color:var(--color-primary-container,#b8f400); font-size:clamp(1.8rem,4vw,2.8rem); line-height:1.1; }
   .section-heading p:last-child { max-width:52rem; margin:0; color:#c4beb6; font-size:1.05rem; line-height:1.6; }
-  .download-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.25rem; }
+  .download-grid { display:grid; grid-template-columns:minmax(0,1fr); gap:1.25rem; }
   .download-card { display:flex; flex-direction:column; align-items:flex-start; min-width:0; padding:clamp(1.25rem,3vw,2.25rem); border:1px solid #625e58; border-radius:.8rem; background:#302d29; }
   .download-card .eyebrow { margin:0 0 .55rem; }
   .download-card h3 { margin:0 0 .5rem; font-size:clamp(1.35rem,2.6vw,2rem); }
@@ -63,8 +54,9 @@ import BsnesEmbedExamples from './BsnesEmbedExamples.astro';
   dl div { display:grid; grid-template-columns:minmax(5.5rem,.55fr) minmax(0,1fr); gap:.8rem; padding:.45rem 0; border-bottom:1px solid #514d47; }
   dt { color:#c4beb6; }
   dd { min-width:0; margin:0; overflow-wrap:anywhere; }
-  .download-link { display:inline-flex; align-items:center; gap:.6rem; margin-top:auto; padding:.75rem 1rem; border-radius:.45rem; background:var(--color-primary-container,#b8f400); color:#191a13; font-weight:700; text-decoration:none; }
-  .download-link:hover { filter:brightness(1.08); }
+  .download-card a.download-link { display:inline-flex; align-items:center; gap:.6rem; margin-top:auto; padding:.75rem 1rem; border:1px solid #17190e; border-radius:.45rem; background:#b8f400; color:#17190e !important; font-weight:750; text-decoration:none; text-shadow:none; }
+  .download-card a.download-link:hover { background:#d4ff24; color:#11130b !important; }
+  .download-card a.download-link:focus-visible { outline:3px solid #fff; outline-offset:3px; }
   details { width:100%; margin-top:1rem; color:#c4beb6; font-size:.8rem; }
   summary { cursor:pointer; }
   .hash { display:block; margin-top:.45rem; overflow-wrap:anywhere; color:#f2eee8; }
