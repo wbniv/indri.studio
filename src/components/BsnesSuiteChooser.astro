@@ -1,8 +1,7 @@
 ---
 import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
 
-const projectRoot = fileURLToPath(new URL('../../', import.meta.url));
+const projectRoot = process.cwd();
 const romManifest = JSON.parse(readFileSync(`${projectRoot}/public/apps/llvm-mos-65816/play/roms/manifest.json`, 'utf8'));
 const bundleManifest = JSON.parse(readFileSync(`${projectRoot}/public/apps/llvm-mos-65816/play/component/manifest.json`, 'utf8'));
 const initialGame = 'byvaledge';
