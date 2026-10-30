@@ -33,7 +33,7 @@ const examples = {
   <div class="example-layout">
     <section class="preview-card" aria-label="Live player preview">
       <div class="preview-heading"><span>Live preview</span><span id="preview-format">HTML · bare display</span></div>
-      <iframe id="example-preview" src={`${frame}?game=mandel-display&display=bare`} title="SNES player preview" loading="lazy" allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
+      <iframe id="example-preview" title="SNES player preview" loading="lazy" allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
     </section>
     <div class="code-card">
       <div class="code-toolbar">
@@ -73,14 +73,19 @@ const examples = {
   const previewFormat = document.querySelector('#preview-format');
   const copy = document.querySelector('#copy-example');
   const toast = document.querySelector('#copy-toast');
+  let previewStarted = false;
   const names = { html: ['with-controls.html', 'bare-display.html'], astro: ['WithControls.astro', 'BareDisplay.astro'], wordpress: ['with-controls.html', 'bare-display.html'], claude: ['CLAUDE.md', 'CLAUDE.md'], codex: ['AGENTS.md', 'AGENTS.md'] };
   const labels = { html: 'HTML', astro: 'Astro 5–7', wordpress: 'WordPress 5.0+', claude: 'Claude Code', codex: 'Codex / AGENTS.md' };
+  function previewSource() {
+    const selectedMode = controls.checked ? 'controls' : 'bare';
+    return `${frame}?game=mandel-display${selectedMode === 'bare' ? '&display=bare' : ''}`;
+  }
   function renderExample() {
     const selectedMode = controls.checked ? 'controls' : 'bare';
     source.textContent = examples[format.value][selectedMode];
     filename.textContent = names[format.value][selectedMode];
     previewFormat.textContent = `${labels[format.value]} · ${controls.checked ? 'with controls' : 'bare display'}`;
-    preview.src = `${frame}?game=mandel-display${controls.checked ? '' : '&display=bare'}`;
+    if (previewStarted) preview.src = previewSource();
   }
   format.addEventListener('change', renderExample);
   controls.addEventListener('change', renderExample);
@@ -93,6 +98,18 @@ const examples = {
     toast.dismissTimer = setTimeout(() => toast.classList.remove('visible'), 1500);
   });
   renderExample();
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= 0.2)) return;
+      previewStarted = true;
+      preview.src = previewSource();
+      observer.disconnect();
+    }, { threshold: 0.2 });
+    observer.observe(document.querySelector('.preview-card'));
+  } else {
+    previewStarted = true;
+    preview.src = previewSource();
+  }
 </script>
 
 <style>
