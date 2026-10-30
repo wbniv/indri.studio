@@ -96,7 +96,7 @@ body.playing #hud>div{max-width:100%;overflow-wrap:break-word;word-break:normal}
 .rom-list{overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain}
 .preview{grid-template-columns:minmax(0,1.8fr) minmax(0,1fr)}
 
-@media(max-width:640px),(max-aspect-ratio:1/1){
+@media(max-width:760px),(max-aspect-ratio:1/1){
   .top{grid-template-columns:auto minmax(0,1fr);grid-template-areas:"identity identity" "lucky search";gap:.8vh 8px;min-height:0}
   .top h1{font-size:clamp(14px,4.5vw,18px);line-height:1.18}
   .top p{font-size:clamp(10px,3vw,12px);line-height:1.2}
@@ -213,7 +213,7 @@ body.playing #hud>div{max-width:100%;overflow-wrap:break-word;word-break:normal}
 #cartridge-play{border-color:#4d95bc;background:#17374d}
 #cartridge-empty{margin:auto;text-align:center;color:var(--muted)}
 #cartridge-empty[hidden]{display:none}
-@media(max-width:640px),(max-aspect-ratio:1/1){
+@media(max-width:760px),(max-aspect-ratio:1/1){
   .launcher-view{min-height:30px;padding:3px 8px;font-size:10px}
   .cartridge-stage{grid-template-columns:minmax(0,1fr);padding:0 8%;}
   .cartridge-card.neighbor{display:none}
@@ -247,6 +247,7 @@ body.playing #hud>div{max-width:100%;overflow-wrap:break-word;word-break:normal}
 .treemap-hint{position:absolute;right:6px;bottom:6px;z-index:4;padding:3px 6px;border:1px solid #66798d;border-radius:4px;background:#101923e8;color:#d3dfeb;font:8px ui-monospace,monospace;pointer-events:none}
 .treemap-details{display:flex;flex-direction:column;min-width:0;min-height:0;overflow-x:hidden;overflow-y:auto;padding:9px;border:1px solid var(--line);border-radius:10px;background:linear-gradient(145deg,#172331,#0f151e)}
 .treemap-details img{display:block;width:100%;max-height:25vh;aspect-ratio:8/7;object-fit:contain;background:#070a10;border-radius:5px;image-rendering:pixelated}
+#hero[hidden],#treemap-hero[hidden]{display:none!important}
 .treemap-eyeline{margin-top:7px;color:#a3c8df;font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
 .treemap-details h3{margin:2px 0;font-size:15px;line-height:1.2;overflow-wrap:anywhere}
 .treemap-details #treemap-category{color:var(--muted);font-size:10px}
@@ -258,7 +259,7 @@ body.playing #hud>div{max-width:100%;overflow-wrap:break-word;word-break:normal}
 #treemap-play{border-color:#4d95bc;background:#17374d}
 #treemap-empty{margin:auto;text-align:center;color:var(--muted)}
 #treemap-empty[hidden],#treemap-content[hidden]{display:none}
-@media(max-width:640px),(max-aspect-ratio:1/1){
+@media(max-width:760px),(max-aspect-ratio:1/1){
 
   .treemap-content{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;overflow:auto}
   .treemap-map-column{min-height:38vh}
@@ -270,7 +271,7 @@ body.playing #hud>div{max-width:100%;overflow-wrap:break-word;word-break:normal}
 }
 
 /* In phone landscape, reclaim vertical room from launcher chrome for the map. */
-@media (orientation:landscape) and (max-height:520px) and (max-width:640px){
+@media (orientation:landscape) and (max-height:520px) and (max-width:1000px){
   #library{padding:1vh 3vw .8vh;gap:.55vh}
   .top{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(150px,28vw);grid-template-areas:"identity lucky search";align-items:center;gap:8px;height:auto;min-height:30px;flex:0 0 auto}
   .top>div{grid-area:identity;min-width:0}
@@ -293,7 +294,7 @@ body.playing #hud>div{max-width:100%;overflow-wrap:break-word;word-break:normal}
   .treemap-details{padding:5px}
 }
 
-@media (orientation:portrait) and (max-width:640px){
+@media (orientation:portrait) and (max-width:760px){
   .treemap-content{grid-template-rows:minmax(0,1fr) minmax(0,28vh);overflow:hidden}
   .treemap-map-column{min-height:0}
   .treemap-details{min-height:0;overflow:auto}
@@ -303,7 +304,7 @@ body.playing #hud>div{max-width:100%;overflow-wrap:break-word;word-break:normal}
 #tv-actions button:focus{transform:none;outline-offset:-3px}
 #tv-verify,#tv-cancel,.menu-section-label,#checkresult{display:none!important}
 
-@media(orientation:portrait) and (max-width:640px){
+@media(orientation:portrait) and (max-width:760px){
   .launcher-view .view-number{display:none}
   .launcher-view{padding-inline:6px;gap:4px;font-size:10px}
   .treemap-total{display:none!important}
@@ -322,4 +323,37 @@ body.playing #hud>div{max-width:100%;overflow-wrap:break-word;word-break:normal}
   #performance-overlay .perf-rate span{grid-column:1;grid-row:1;font-size:8px}
   #performance-overlay .perf-rate strong{grid-column:1;grid-row:2;font-size:clamp(12px,2.4vw,18px)}
   #performance-overlay .perf-rate small,#performance-overlay .perf-sparkline,#performance-overlay .perf-detail,#performance-overlay .perf-backlog,#performance-overlay .perf-footnote{display:none}
+}
+
+
+/* In a narrow landscape embed, keep the cartridge preview in its own compact
+   row so its card cannot cover the selected ROM details or action buttons. */
+@media (orientation:landscape) and (max-width:900px) and (max-height:520px){
+  .cartridge-view{gap:4px}
+  .cartridge-heading{flex:0 0 auto}
+  .cartridge-heading h2{margin:0;font-size:12px;line-height:1.2}
+  .cartridge-stage{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:0;flex:0 0 clamp(76px,22vh,108px);padding:0;overflow:hidden}
+  .cartridge-card.neighbor{display:none}
+  .cartridge-card.center{display:grid;width:100%;height:100%;grid-template-columns:minmax(76px,24%) minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;align-items:center;gap:2px 8px;padding:5px}
+  .cartridge-card.center img{grid-column:1;grid-row:1/3;width:100%;height:100%;min-height:0;max-height:calc(22vh - 12px);aspect-ratio:8/7}
+  .cartridge-card.center strong{grid-column:2;grid-row:1;align-self:end;margin:0;white-space:normal;font-size:14px;line-height:1.15}
+  .cartridge-card.center small{grid-column:2;grid-row:2;align-self:start;white-space:normal}
+  .cartridge-details{grid-template-columns:minmax(0,1fr) auto;align-items:start;flex:1 1 auto;min-height:0;gap:6px;padding-top:5px;overflow:hidden}
+  .cartridge-copy{min-height:0;overflow:hidden}
+  .cartridge-copy strong{font-size:15px}
+  .cartridge-copy p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+  .cartridge-copy small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .cartridge-actions{flex-direction:column;gap:4px}
+  .cartridge-actions button{min-height:30px;padding:3px 7px;font-size:10px;white-space:normal}
+}
+
+@media (orientation:landscape) and (max-width:900px) and (max-height:280px){
+  .cartridge-stage{flex-basis:48px}
+  .cartridge-card.center{grid-template-columns:minmax(48px,18%) minmax(0,1fr);gap:0 6px;padding:3px}
+  .cartridge-card.center img{max-height:calc(22vh - 8px)}
+  .cartridge-card.center strong{font-size:12px}
+  .cartridge-details{display:flex;flex:0 0 auto;gap:0;padding-top:2px}
+  .cartridge-copy{display:none}
+  .cartridge-actions{width:100%;flex-direction:row;gap:6px}
+  .cartridge-actions button{flex:1;min-height:25px;padding:2px 5px;font-size:9px}
 }
