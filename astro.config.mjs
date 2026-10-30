@@ -9,7 +9,6 @@ import mermaidInject from './src/mermaid-inject-integration.mjs';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://indri.studio',
-	redirects: { '/apps/bsnes-jg-wasm/': '/apps/bsnes-jg-player/' },
 	integrations: [mdx(), sitemap(), mermaidInject()],
 	build: {
 		// Inline all compiled CSS into each HTML response. Eliminates the
