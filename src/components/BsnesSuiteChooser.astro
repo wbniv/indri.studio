@@ -15,7 +15,7 @@
   const frame = viewport?.querySelector<HTMLIFrameElement>('iframe');
   const scaleForTvViewport = () => {
     if (!viewport || !frame) return;
-    frame.style.transform = `scale(${viewport.clientWidth / 1920})`;
+    frame.style.transform = `scale(${viewport.clientWidth / 1280})`;
   };
   if (viewport && 'ResizeObserver' in window) new ResizeObserver(scaleForTvViewport).observe(viewport);
   scaleForTvViewport();
@@ -24,5 +24,5 @@
 <style>
   .suite-app { width:100%; margin:1.5rem 0 1rem; overflow:hidden; border:1px solid #625e58; border-radius:.8rem; background:#080c12; }
   .suite-app__viewport { position:relative; width:100%; aspect-ratio:16 / 9; overflow:hidden; }
-  .suite-app iframe { position:absolute; top:0; left:0; display:block; width:1920px; height:1080px; border:0; background:#080c12; transform-origin:top left; }
+  .suite-app iframe { position:absolute; top:0; left:0; display:block; width:1280px; height:720px; border:0; background:#080c12; transform-origin:top left; }
 </style>
