@@ -46,6 +46,7 @@
   var pad = 0;             // port-0 button mask
   var touchRelease = 0;    // timer for a manifest-driven synthetic D-pad tap
   var touchNavPressed = 0; // synthetic bit currently owned by that timer
+  var hostPaused = window.parent !== window && window.__indriSuiteActive === false;
   var running = false;     // RAF loop active
   var rafId = 0;
   var verification = null; // active, cancellable fidelity run
@@ -291,7 +292,7 @@
   }
 
   function startLoop() {
-    if (running) return;
+    if (running || hostPaused) return;
     if (window.BJG_TV_MODE) {
       tvMetrics.core.length = 0; tvMetrics.canvas.length = 0; tvMetrics.draw.length = 0; tvMetrics.raf.length = 0;
       tvMetrics.drawSubmissions = 0;
@@ -644,8 +645,8 @@
 
   function init() {
     window.BJGTV = {
-      pause: function () { stopLoop(); },
-      resume: function () { if (!verification && Module && current) startLoop(); },
+      pause: function () { hostPaused = true; stopLoop(); },
+      resume: function () { hostPaused = false; if (!verification && Module && current) startLoop(); },
       restart: function () { if (verification) verification.cancelled = true; verification = null; return playUrl(current || DEFAULT_ROM); },
       play: playUrl,
       lastLoadFailure: null,

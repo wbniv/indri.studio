@@ -1,6 +1,7 @@
-<section class="suite-app" aria-label="LLVM 65816 torture-test suite running in WebAssembly">
+<section class="suite-app" data-bsnes-player-id="suite" aria-label="LLVM 65816 torture-test suite running in WebAssembly">
+  <span class="player-fps" aria-label="Suite animation rate">FPS —</span>
   <iframe
-    src="/apps/bsnes-jg-wasm/suite/index.html"
+    data-src="/apps/bsnes-jg-wasm/suite/index.html"
     title="LLVM 65816 torture-test suite WASM app"
     loading="lazy"
     allow="fullscreen; autoplay; gamepad"
@@ -9,7 +10,24 @@
 </section>
 
 <style>
-  .suite-app { width:100%; margin:1.5rem 0 1rem; overflow:hidden; border:1px solid #625e58; border-radius:.8rem; background:#080c12; }
+  .suite-app { position:relative; width:100%; margin:1.5rem 0 1rem; overflow:hidden; border:1px solid #625e58; border-radius:.8rem; background:#080c12; }
   .suite-app iframe { display:block; width:100%; height:auto; aspect-ratio:16 / 10; border:0; background:#080c12; }
+  .player-fps { position:absolute; z-index:2; top:.55rem; right:.6rem; padding:.25rem .45rem; border:1px solid #516174; border-radius:.35rem; background:#101824e8; color:#dce7f0; font:600 .7rem/1.2 ui-monospace,monospace; font-variant-numeric:tabular-nums; pointer-events:none; }
   @media (max-width:760px) { .suite-app iframe { aspect-ratio:16 / 9; } }
 </style>
+
+<script>
+  const section = document.querySelector('.suite-app[data-bsnes-player-id="suite"]');
+  const frame = section?.querySelector('iframe');
+  let active = false;
+  function sendActivity() {
+    frame?.contentWindow?.postMessage({ type: 'indri-bsnes-activity', active }, location.origin);
+  }
+  window.addEventListener('bsnes-player-focus', event => {
+    active = (event as CustomEvent<{id:string|null}>).detail?.id === 'suite';
+    if (active && frame && !frame.hasAttribute('src')) {
+      frame.addEventListener('load', sendActivity, { once:true });
+      frame.src = frame.dataset.src;
+    } else sendActivity();
+  });
+</script>

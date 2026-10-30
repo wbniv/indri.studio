@@ -1,7 +1,6 @@
 ---
 import AppLayout from "../../layouts/AppLayout.astro";
 import StoreBadges from "../../components/StoreBadges.astro";
-import BsnesWasmExample from "../../components/BsnesWasmExample.astro";
 import Screenshot from "../../components/Screenshot.astro";
 import MIcon from "../../components/MIcon.astro";
 import FindingYourWayMilestones from "../../components/FindingYourWayMilestones.astro";
@@ -125,8 +124,10 @@ const ogImage = ogImagePath ? new URL(ogImagePath, Astro.site).href : undefined;
 						<StoreBadges links={post.data.storeLinks} />
 					</div>
 					<figure class="bsnes-hero-preview">
-						<figcaption>Live SNES · Raycaster Maze</figcaption>
-						<BsnesWasmExample slug="raycaster" title="Raycaster Maze preview" size="micro" displayOnly />
+						<figcaption>Raycaster Maze · gameplay loop</figcaption>
+						<video class="bsnes-hero-video" autoplay muted loop playsinline preload="none" poster="/apps/bsnes-jg-wasm/raycaster.png" aria-label="Looping Raycaster Maze gameplay">
+							<source src="/apps/bsnes-jg-wasm/raycaster-loop.mp4" type="video/mp4" />
+						</video>
 					</figure>
 				</section>
 			) : (
@@ -672,7 +673,7 @@ const ogImage = ogImagePath ? new URL(ogImagePath, Astro.site).href : undefined;
 		text-align: center;
 		text-transform: uppercase;
 	}
-	.bsnes-hero-preview :global(.bsnes-wasm-example--micro) { width: min(100%, 180px); margin-inline: auto; }
+	.bsnes-hero-video { display:block; width:100%; aspect-ratio:4/3; object-fit:contain; background:#000; image-rendering:pixelated; }
 	@media (max-width: 560px) {
 		.bsnes-hero { grid-template-columns: minmax(0, 1fr); align-items: start; }
 		.bsnes-hero-preview { width: min(100%, 220px); }

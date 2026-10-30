@@ -1,0 +1,91 @@
+<script>
+  type PlayerState = {
+    id: string;
+    root: HTMLElement;
+    frame: HTMLIFrameElement | null;
+    badge: HTMLElement | null;
+    ratio: number;
+    lastCallbacks: number;
+  };
+
+  const players: PlayerState[] = Array.from(document.querySelectorAll<HTMLElement>('[data-bsnes-player-id]')).map(root => ({
+    id: root.dataset.bsnesPlayerId || '',
+    root,
+    frame: root.querySelector('iframe'),
+    badge: root.querySelector('.player-fps'),
+    ratio: 0,
+    lastCallbacks: 0,
+  }));
+  let activeId: string | null = null;
+
+  function dispatchFocus(id: string | null) {
+    if (activeId === id) return;
+    activeId = id;
+    window.dispatchEvent(new CustomEvent('bsnes-player-focus', { detail: { id } }));
+  }
+
+  function reconcileFocus() {
+    if (document.visibilityState !== 'visible') {
+      dispatchFocus(null);
+      return;
+    }
+    const visible = players.filter(player => player.ratio >= 0.12);
+    const focused = visible.find(player => player.root.contains(document.activeElement));
+    const best = visible.sort((a, b) => b.ratio - a.ratio)[0];
+    const current = visible.find(player => player.id === activeId);
+    const selected = focused || (current && best && current.ratio >= best.ratio - 0.08 ? current : best);
+    dispatchFocus(selected?.id || null);
+  }
+
+  function meterFrame(player: PlayerState) {
+    const child = player.frame?.contentWindow;
+    if (!child || child.__indriFpsMeterInstalled) return;
+    try {
+      const request = child.requestAnimationFrame.bind(child);
+      child.__indriFpsMeterInstalled = true;
+      child.__indriFpsCallbacks = 0;
+      child.requestAnimationFrame = callback => request(time => {
+        child.__indriFpsCallbacks++;
+        callback(time);
+      });
+    } catch {
+      // Keep the page usable if a browser refuses same-origin frame instrumentation.
+    }
+  }
+
+  players.forEach(player => {
+    player.frame?.addEventListener('load', () => meterFrame(player));
+    if (player.frame?.contentDocument?.readyState === 'complete') meterFrame(player);
+  });
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const player = players.find(candidate => candidate.root === entry.target);
+        if (player) player.ratio = entry.isIntersecting ? entry.intersectionRatio : 0;
+      });
+      reconcileFocus();
+    }, { threshold: [0, 0.12, 0.25, 0.5, 0.75] });
+    players.forEach(player => observer.observe(player.root));
+  } else {
+    players.forEach(player => {
+      const rect = player.root.getBoundingClientRect();
+      player.ratio = rect.top < innerHeight && rect.bottom > 0 ? 1 : 0;
+    });
+    window.addEventListener('scroll', reconcileFocus, { passive: true });
+    window.addEventListener('resize', reconcileFocus);
+  }
+
+  document.addEventListener('visibilitychange', reconcileFocus);
+  window.addEventListener('focus', reconcileFocus);
+  window.addEventListener('astro:page-load', reconcileFocus);
+
+  setInterval(() => {
+    players.forEach(player => {
+      const callbacks = player.frame?.contentWindow?.__indriFpsCallbacks || 0;
+      const fps = activeId === player.id && document.visibilityState === 'visible' ? Math.max(0, callbacks - player.lastCallbacks) : 0;
+      player.lastCallbacks = callbacks;
+      if (player.badge) player.badge.textContent = `FPS ${fps}`;
+    });
+  }, 1000);
+</script>

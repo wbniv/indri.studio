@@ -34,8 +34,8 @@ const examples = {
     <p>Copy a working example for your site or coding assistant. WordPress 5.0+ uses a Gutenberg Custom HTML block; the editing account must be allowed to save iframe markup. The HTML samples import <code>mountPlayer</code> from the shared package at <code>/player/browser-game-player/src/embed.mjs</code>; host that module and the frozen SNES bundle on your own site.</p>
   </div>
   <div class="example-layout">
-    <section class="preview-card" aria-label="Live player preview">
-      <div class="preview-heading"><span>Raycaster Maze · live preview</span><span id="preview-format">HTML · bare display</span></div>
+    <section class="preview-card" data-bsnes-player-id="format-preview" aria-label="Live player preview">
+      <div class="preview-heading"><span>Raycaster Maze · live preview</span><span id="preview-format">HTML · bare display</span><span id="preview-fps" class="player-fps" aria-label="Preview animation rate">FPS —</span></div>
       <iframe id="example-preview" title="SNES player preview" loading="lazy" allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
     </section>
     <div class="code-card">
@@ -77,24 +77,43 @@ const examples = {
   const copy = document.querySelector('#copy-example');
   const toast = document.querySelector('#copy-toast');
   let previewStarted = false;
+  let previewFocused = false;
+  const previewInstance = 'indri-format-preview';
   const names = { html: ['with-controls.html', 'bare-display.html'], astro: ['WithControls.astro', 'BareDisplay.astro'], wordpress: ['with-controls.html', 'bare-display.html'], claude: ['CLAUDE.md', 'CLAUDE.md'], codex: ['AGENTS.md', 'AGENTS.md'] };
   const labels = { html: 'HTML', astro: 'Astro 5–7', wordpress: 'WordPress 5.0+', claude: 'Claude Code', codex: 'Codex / AGENTS.md' };
   function previewSource() {
     const selectedMode = controls.checked ? 'controls' : 'bare';
-    return `${frame}?game=raycaster${selectedMode === 'bare' ? '&display=bare' : ''}`;
+    return `${frame}?game=raycaster${selectedMode === 'bare' ? '&display=bare' : ''}&instance=${previewInstance}`;
   }
   function renderExample() {
     const selectedMode = controls.checked ? 'controls' : 'bare';
     source.textContent = examples[format.value][selectedMode];
     filename.textContent = names[format.value][selectedMode];
     previewFormat.textContent = `${labels[format.value]} · ${controls.checked ? 'with controls' : 'bare display'}`;
-    if (previewStarted) preview.src = previewSource();
+    if (previewFocused) {
+      previewStarted = true;
+      preview.src = previewSource();
+    }
   }
   format.addEventListener('change', renderExample);
   controls.addEventListener('change', renderExample);
+  window.addEventListener('bsnes-player-focus', event => {
+    previewFocused = (event as CustomEvent<{id:string|null}>).detail?.id === 'format-preview';
+    if (previewFocused) {
+      if (!previewStarted) {
+        previewStarted = true;
+        preview.src = previewSource();
+      } else preview.contentWindow?.postMessage({ type:'browser-game-player', protocol:1, instanceId:previewInstance, command:'resume' }, location.origin);
+    } else if (previewStarted) {
+      preview.contentWindow?.postMessage({ type:'browser-game-player', protocol:1, instanceId:previewInstance, command:'pause' }, location.origin);
+    }
+  });
+  preview.addEventListener('load', () => {
+    if (!previewFocused) preview.contentWindow?.postMessage({ type:'browser-game-player', protocol:1, instanceId:previewInstance, command:'pause' }, location.origin);
+  });
   window.addEventListener('message', event => {
     const data = event.data;
-    if (event.source !== preview.contentWindow || event.origin !== location.origin ||
+    if (event.source !== preview.contentWindow || event.origin !== location.origin || data?.instanceId !== previewInstance ||
         data?.type !== 'browser-game-player' || data.protocol !== 1 || data.event !== 'height' ||
         !Number.isFinite(data.height)) return;
     preview.style.height = `${Math.max(180, Math.ceil(data.height))}px`;
@@ -108,18 +127,6 @@ const examples = {
     toast.dismissTimer = setTimeout(() => toast.classList.remove('visible'), 1500);
   });
   renderExample();
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(entries => {
-      if (!entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= 0.2)) return;
-      previewStarted = true;
-      preview.src = previewSource();
-      observer.disconnect();
-    }, { threshold: 0.2 });
-    observer.observe(document.querySelector('.preview-card'));
-  } else {
-    previewStarted = true;
-    preview.src = previewSource();
-  }
 </script>
 
 <style>
@@ -143,8 +150,9 @@ const examples = {
   .copy-toast::after { content:""; position:absolute; top:100%; left:50%; border:.3rem solid transparent; border-top-color:#f2eee8; transform:translateX(-50%); }
   .example-layout { display:flex; flex-direction:column; gap:1rem; align-items:stretch; }
   .preview-card { width:min(100%,38rem); min-width:0; overflow:hidden; border:1px solid #77736d; border-radius:.75rem; background:#181715; }
-  .preview-heading { display:flex; justify-content:space-between; gap:.6rem; padding:.6rem .75rem; border-bottom:1px solid #55514c; font-size:.8rem; }
+  .preview-heading { display:flex; align-items:center; justify-content:space-between; gap:.6rem; padding:.6rem .75rem; border-bottom:1px solid #55514c; font-size:.8rem; }
   .preview-heading span:last-child { opacity:.7; text-align:right; }
+  .preview-heading .player-fps { flex:none; padding:.2rem .4rem; border:1px solid #516174; border-radius:.35rem; background:#101824e8; color:#dce7f0; font:600 .68rem/1.2 ui-monospace,monospace; font-variant-numeric:tabular-nums; white-space:nowrap; }
   .preview-card iframe { display:block; width:100%; height:clamp(24rem,42vw,34rem); border:0; background:#111820; }
   .code-card { border:1px solid #77736d; border-radius:.75rem; overflow:visible; background:#181715; color:#f2eee8; }
   .code-toolbar { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:start; gap:1rem; padding:.7rem .8rem; border-bottom:1px solid #55514c; border-radius:.75rem .75rem 0 0; background:#11100f; font-size:.85rem; }

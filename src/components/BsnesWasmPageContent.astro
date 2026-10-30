@@ -1,6 +1,7 @@
 ---
 import BsnesEmbedExamples from './BsnesEmbedExamples.astro';
 import BsnesSuiteChooser from './BsnesSuiteChooser.astro';
+import BsnesPlayerActivity from './BsnesPlayerActivity.astro';
 ---
 
 <div class="product-body">
@@ -27,7 +28,7 @@ import BsnesSuiteChooser from './BsnesSuiteChooser.astro';
       <article class="download-card">
         <p class="eyebrow">Standalone player</p>
         <h3>Raycaster Maze</h3>
-        <p>Runs the compact maze ROM in the Native player. The APK includes the emulator runtime and only this 32 KiB demo ROM.</p>
+        <p class="standalone-description"><img src="/apps/bsnes-jg-wasm/raycaster.png" alt="Raycaster Maze rendered on the SNES" loading="lazy" />Runs the compact maze ROM in the Native player. The APK includes the emulator runtime and only this 32 KiB demo ROM.</p>
         <dl>
           <div><dt>Package</dt><dd><code>org.bsnesjg.tv.native</code></dd></div>
           <div><dt>Version</dt><dd>0.1.9</dd></div>
@@ -49,6 +50,7 @@ import BsnesSuiteChooser from './BsnesSuiteChooser.astro';
   </section>
 
   <BsnesEmbedExamples />
+  <BsnesPlayerActivity />
 
   <footer class="source-links">
     <a href="https://github.com/wbniv/bsnes-jg-wasm">Source repository <span aria-hidden="true">↗</span></a>
@@ -69,6 +71,8 @@ import BsnesSuiteChooser from './BsnesSuiteChooser.astro';
   .download-card .eyebrow { margin:0 0 .55rem; }
   .download-card h3 { margin:0 0 .5rem; font-size:clamp(1.35rem,2.6vw,2rem); }
   .download-card > p:not(.eyebrow) { max-width:38rem; margin:0 0 1rem; color:#c4beb6; line-height:1.55; }
+  .download-card > .standalone-description { display:flow-root; width:100%; max-width:none; min-height:9rem; }
+  .standalone-description img { float:right; width:min(43%,17rem); min-width:10rem; aspect-ratio:4/3; object-fit:contain; margin:0 0 .7rem 1rem; border:1px solid #625e58; border-radius:.5rem; background:#080c12; image-rendering:pixelated; }
   dl { width:100%; margin:0 0 1.25rem; }
   dl div { display:grid; grid-template-columns:minmax(5.5rem,.55fr) minmax(0,1fr); gap:.8rem; padding:.45rem 0; border-bottom:1px solid #514d47; }
   dt { color:#c4beb6; }
@@ -88,4 +92,5 @@ import BsnesSuiteChooser from './BsnesSuiteChooser.astro';
   .source-links { display:flex; flex-wrap:wrap; gap:.75rem 1.5rem; padding:1.25rem 0 2rem; border-top:1px solid #625e58; }
   .source-links a { color:var(--color-primary-container,#b8f400); font-weight:600; }
   @media (max-width:640px) { .download-grid { grid-template-columns:1fr; } .downloads { margin:3rem 0; } }
+  @media (max-width:420px) { .standalone-description img { float:none; display:block; width:min(100%,17rem); margin:0 0 .75rem; } }
 </style>
