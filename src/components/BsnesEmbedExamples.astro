@@ -30,8 +30,9 @@ const examples = {
 <section class="embed-examples" aria-labelledby="embed-examples-title">
   <div class="section-heading">
     <p class="eyebrow">Integrate the player</p>
-    <h2 id="embed-examples-title">Choose your format</h2>
-    <p>Copy a working example for your site or coding assistant. WordPress 5.0+ uses a Gutenberg Custom HTML block; the editing account must be allowed to save iframe markup. The HTML samples import <code>mountPlayer</code> from the shared package at <code>/player/browser-game-player/src/embed.mjs</code>; host that module and the frozen SNES bundle on your own site.</p>
+    <h2 id="embed-examples-title">Embed the player</h2>
+    <p>Browse copy-ready examples for websites and coding assistants. Select a format to preview its player and source. The HTML examples use <code>mountPlayer</code> from the shared package at <code>/player/browser-game-player/src/embed.mjs</code>; host that module and the frozen SNES bundle on your own site.</p>
+    <p id="wordpress-guidance" hidden>For WordPress 5.0+, use a Gutenberg Custom HTML block. The editing account must be allowed to save iframe markup.</p>
   </div>
   <div class="example-layout">
     <section class="preview-card" data-bsnes-player-id="format-preview" aria-label="Live player preview">
@@ -73,6 +74,7 @@ const examples = {
   const source = document.querySelector('#example-source');
   const filename = document.querySelector('#example-filename');
   const preview = document.querySelector('#example-preview');
+  const wordpressGuidance = document.querySelector('#wordpress-guidance');
   const previewFormat = document.querySelector('#preview-format');
   const copy = document.querySelector('#copy-example');
   const toast = document.querySelector('#copy-toast');
@@ -87,6 +89,7 @@ const examples = {
   }
   function renderExample() {
     const selectedMode = controls.checked ? 'controls' : 'bare';
+    wordpressGuidance.hidden = format.value !== 'wordpress';
     source.textContent = examples[format.value][selectedMode];
     filename.textContent = names[format.value][controls.checked ? 0 : 1];
     previewFormat.textContent = `${labels[format.value]} · ${controls.checked ? 'with controls' : 'bare display'}`;
