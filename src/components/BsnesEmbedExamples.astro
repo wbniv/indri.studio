@@ -15,12 +15,15 @@ const { frame } = verifyManifest(
   '/apps/llvm-mos-65816/play/component',
 );
 
+const useRaycasterDemo = (source: string) =>
+  source.replaceAll('mandel-display', 'raycaster').replaceAll('Mandelbrot', 'Raycaster Maze');
+
 const examples = {
-  html: { controls: htmlControls, bare: htmlBare },
-  astro: { controls: astroControls, bare: astroBare },
-  wordpress: { controls: wordpressControls, bare: wordpressBare },
-  claude: { controls: claude, bare: claude },
-  codex: { controls: codex, bare: codex },
+  html: { controls: useRaycasterDemo(htmlControls), bare: useRaycasterDemo(htmlBare) },
+  astro: { controls: useRaycasterDemo(astroControls), bare: useRaycasterDemo(astroBare) },
+  wordpress: { controls: useRaycasterDemo(wordpressControls), bare: useRaycasterDemo(wordpressBare) },
+  claude: { controls: useRaycasterDemo(claude), bare: useRaycasterDemo(claude) },
+  codex: { controls: useRaycasterDemo(codex), bare: useRaycasterDemo(codex) },
 };
 ---
 
@@ -32,7 +35,7 @@ const examples = {
   </div>
   <div class="example-layout">
     <section class="preview-card" aria-label="Live player preview">
-      <div class="preview-heading"><span>Live preview</span><span id="preview-format">HTML · bare display</span></div>
+      <div class="preview-heading"><span>Raycaster Maze · live preview</span><span id="preview-format">HTML · bare display</span></div>
       <iframe id="example-preview" title="SNES player preview" loading="lazy" allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
     </section>
     <div class="code-card">
@@ -78,7 +81,7 @@ const examples = {
   const labels = { html: 'HTML', astro: 'Astro 5–7', wordpress: 'WordPress 5.0+', claude: 'Claude Code', codex: 'Codex / AGENTS.md' };
   function previewSource() {
     const selectedMode = controls.checked ? 'controls' : 'bare';
-    return `${frame}?game=mandel-display${selectedMode === 'bare' ? '&display=bare' : ''}`;
+    return `${frame}?game=raycaster${selectedMode === 'bare' ? '&display=bare' : ''}`;
   }
   function renderExample() {
     const selectedMode = controls.checked ? 'controls' : 'bare';
