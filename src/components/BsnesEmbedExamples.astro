@@ -50,11 +50,11 @@ const examples = {
               <option value="claude">Claude Code</option>
               <option value="codex">Codex / AGENTS.md</option>
             </select>
+            <label id="mode-label" class="controls-toggle">
+              <input id="example-controls" type="checkbox" />
+              <span>Include controls</span>
+            </label>
           </div>
-          <label id="mode-label" class="controls-toggle">
-            <input id="example-controls" type="checkbox" />
-            <span>Include controls</span>
-          </label>
           <span id="example-filename" class="code-filename">bare-display.html</span>
         </div>
         <span class="copy-action">
@@ -92,6 +92,13 @@ const examples = {
   }
   format.addEventListener('change', renderExample);
   controls.addEventListener('change', renderExample);
+  window.addEventListener('message', event => {
+    const data = event.data;
+    if (event.source !== preview.contentWindow || event.origin !== location.origin ||
+        data?.type !== 'browser-game-player' || data.protocol !== 1 || data.event !== 'height' ||
+        !Number.isFinite(data.height)) return;
+    preview.style.height = `${Math.max(180, Math.ceil(data.height))}px`;
+  });
   copy.addEventListener('click', async () => {
     await navigator.clipboard.writeText(source.textContent);
     toast.textContent = 'Copied!';
@@ -123,10 +130,10 @@ const examples = {
   .eyebrow { margin:0; font-size:.75rem; text-transform:uppercase; letter-spacing:.12em; opacity:.7; }
   [hidden] { display:none !important; }
   .format-settings { display:flex; flex-direction:column; align-items:flex-start; gap:.35rem; min-width:0; }
-  .format-control-row { display:flex; align-items:center; flex-wrap:wrap; gap:.65rem; }
+  .format-control-row { display:flex; align-items:center; flex-wrap:wrap; gap:.65rem 1rem; }
   .format-select-label { font-size:.8rem; font-weight:650; opacity:.9; }
   select { min-width:12rem; max-width:100%; font:inherit; color:inherit; background:var(--color-surface-container-high,#38342f); border:1px solid #77736d; border-radius:.5rem; padding:.55rem .75rem; }
-  .controls-toggle { display:flex; gap:.55rem; align-items:center; margin:.1rem 0 0 .1rem; font-size:.9rem; cursor:pointer; }
+  .controls-toggle { display:flex; gap:.55rem; align-items:center; margin:0; font-size:.9rem; cursor:pointer; white-space:nowrap; }
   .controls-toggle input { width:1.1rem; height:1.1rem; accent-color:var(--color-primary-container); }
   .copy-action { position:relative; display:inline-flex; justify-self:end; grid-row:1; grid-column:2; }
   button#copy-example { display:grid; place-items:center; width:2.4rem; height:2.4rem; padding:.4rem; color:inherit; background:var(--color-surface-container-high,#38342f); border:1px solid currentColor; border-radius:.5rem; cursor:pointer; }
