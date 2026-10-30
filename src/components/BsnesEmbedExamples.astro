@@ -35,13 +35,13 @@ const examples = {
       <label class="format-select-label" for="example-format">Format</label>
       <select id="example-format" aria-label="Example format">
         <option value="html">HTML</option>
-        <option value="astro">Astro</option>
+        <option value="astro">Astro 5–6</option>
         <option value="wordpress">WordPress</option>
         <option value="claude">Claude Code</option>
         <option value="codex">Codex / AGENTS.md</option>
       </select>
       <label id="mode-label" class="controls-toggle">
-        <input id="example-controls" type="checkbox" checked />
+        <input id="example-controls" type="checkbox" />
         <span>Include controls</span>
       </label>
     </div>
@@ -74,7 +74,7 @@ const examples = {
   const copy = document.querySelector('#copy-example');
   const toast = document.querySelector('#copy-toast');
   const names = { html: ['with-controls.html', 'bare-display.html'], astro: ['WithControls.astro', 'BareDisplay.astro'], wordpress: ['with-controls.html', 'bare-display.html'], claude: ['CLAUDE.md', 'CLAUDE.md'], codex: ['AGENTS.md', 'AGENTS.md'] };
-  const labels = { html: 'HTML', astro: 'Astro', wordpress: 'WordPress', claude: 'Claude Code', codex: 'Codex / AGENTS.md' };
+  const labels = { html: 'HTML', astro: 'Astro 5–6', wordpress: 'WordPress', claude: 'Claude Code', codex: 'Codex / AGENTS.md' };
   function renderExample() {
     const selectedMode = controls.checked ? 'controls' : 'bare';
     source.textContent = examples[format.value][selectedMode];
