@@ -7,8 +7,8 @@ import BsnesSuiteChooser from './BsnesSuiteChooser.astro';
   <section class="downloads" aria-labelledby="download-title">
     <div class="section-heading">
       <p class="eyebrow">Example integrations</p>
-      <h2 id="download-title">Native suite APK</h2>
-      <p>Native Android example: it opens the suite chooser so you can select and run a test ROM.</p>
+      <h2 id="download-title">Native Android APK examples</h2>
+      <p>Two signed Native examples: the full LLVM 65816 suite app and a compact standalone Raycaster Maze player.</p>
     </div>
     <div class="download-grid">
       <article class="download-card">
@@ -18,15 +18,34 @@ import BsnesSuiteChooser from './BsnesSuiteChooser.astro';
         <BsnesSuiteChooser />
         <dl>
           <div><dt>Package</dt><dd><code>org.bsnesjg.tv.native.phase2</code></dd></div>
-          <div><dt>Version</dt><dd>0.1.8</dd></div>
-          <div><dt>APK size</dt><dd>26,811,243 bytes · 25.57 MiB</dd></div>
+          <div><dt>Version</dt><dd>0.1.9</dd></div>
+          <div><dt>APK size</dt><dd>26,814,539 bytes · 25.57 MiB</dd></div>
         </dl>
-        <a class="download-link" href="https://downloads.biohack.net/bsnes-jg-wasm/releases/0.1.8/bsnes-jg_llvm-65816-torture-test-suite-on-snes-v0.1.8.apk">Download suite APK <span aria-hidden="true">↓</span></a>
-        <details><summary>SHA-256</summary><code class="hash">55eca48e96cd2ba8d359689c5001fd62a4255af133bafe475fa43c4744a0f468</code></details>
+        <a class="download-link" href="https://downloads.biohack.net/bsnes-jg/releases/0.1.9/bsnes-jg_llvm-65816-torture-test-suite-on-snes-v0.1.9.apk">Download suite APK <span aria-hidden="true">↓</span></a>
+        <details><summary>SHA-256</summary><code class="hash">c04666f5abe7f6865b4e2cfdd695cf47c238e06a78a50a4a8e7d27e73532f88c</code></details>
       </article>
-
+      <article class="download-card">
+        <p class="eyebrow">Standalone player</p>
+        <h3>Raycaster Maze</h3>
+        <p>Runs the compact maze ROM in the Native player. The APK includes the emulator runtime and only this 32 KiB demo ROM.</p>
+        <dl>
+          <div><dt>Package</dt><dd><code>org.bsnesjg.tv.native</code></dd></div>
+          <div><dt>Version</dt><dd>0.1.9</dd></div>
+          <div><dt>APK size</dt><dd>7,156,299 bytes · 6.82 MiB</dd></div>
+        </dl>
+        <a class="download-link" href="https://downloads.biohack.net/bsnes-jg/releases/0.1.9/bsnes-jg_raycaster-maze-v0.1.9.apk">Download Raycaster Maze APK <span aria-hidden="true">↓</span></a>
+        <details><summary>SHA-256</summary><code class="hash">0d6e3583c127e6642514cee0d530213867c3ebe946799005c34f58b6f7837b76</code></details>
+      </article>
     </div>
-    <p class="release-note">The <a href="https://downloads.biohack.net/bsnes-jg-wasm/current.json">release manifest</a> records published versions, sizes, package IDs, and hashes.</p>
+    <details class="previous-release">
+      <summary>Previous release · version 0.1.8</summary>
+      <p>Retained for rollback and existing-install recovery.</p>
+      <ul>
+        <li><a href="https://downloads.biohack.net/bsnes-jg/releases/0.1.8/bsnes-jg_llvm-65816-torture-test-suite-on-snes-v0.1.8.apk">Native library · suite APK</a> · 26,811,243 bytes · SHA-256 <code>55eca48e96cd2ba8d359689c5001fd62a4255af133bafe475fa43c4744a0f468</code></li>
+        <li><a href="https://downloads.biohack.net/bsnes-jg/releases/0.1.8/bsnes-jg_mandelbrot-v0.1.8.apk">Native player · Mandelbrot (previous demo)</a> · 26,809,995 bytes · SHA-256 <code>907511eeaa8a77279a7c5e8a597b4b410ff94415ce637183aef1a56c3f2c21d3</code></li>
+      </ul>
+    </details>
+    <p class="release-note">The <a href="https://downloads.biohack.net/bsnes-jg/current.json">release manifest</a> records current and previous versions, sizes, package IDs, and hashes. The stable download URL <a href="https://downloads.biohack.net/bsnes-jg/">redirects here</a>.</p>
   </section>
 
   <BsnesEmbedExamples />
@@ -61,6 +80,10 @@ import BsnesSuiteChooser from './BsnesSuiteChooser.astro';
   summary { cursor:pointer; }
   .hash { display:block; margin-top:.45rem; overflow-wrap:anywhere; color:#f2eee8; }
   .release-note { margin:1rem 0 0; color:#c4beb6; font-size:.9rem; }
+  .previous-release { width:100%; margin-top:1.2rem; padding:1rem; border:1px solid #514d47; border-radius:.55rem; color:#c4beb6; font-size:.85rem; }
+  .previous-release p { margin:.7rem 0; }
+  .previous-release ul { margin:.5rem 0 0; padding-left:1.2rem; }
+  .previous-release li { margin:.6rem 0; overflow-wrap:anywhere; }
   a { color:inherit; text-underline-offset:.18em; }
   .source-links { display:flex; flex-wrap:wrap; gap:.75rem 1.5rem; padding:1.25rem 0 2rem; border-top:1px solid #625e58; }
   .source-links a { color:var(--color-primary-container,#b8f400); font-weight:600; }
