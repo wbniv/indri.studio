@@ -1,0 +1,84 @@
+---
+title: World Foundry v2
+date: 2026-12-01
+summary: Big worlds. Small machines.
+draft: false
+storeLinks:
+  github: "https://github.com/wbniv/WorldFoundry"
+logo: ../../assets/screenshots/world-foundry/logo.png
+screenshots:
+  - { src: "../../assets/screenshots/world-foundry/stained-glass-temple.png", alt: "Stained-glass windows in Finding Your Way’s temple" }
+  - { src: "../../assets/screenshots/world-foundry/clownfish-anemone.png", alt: "Clownfish and sea anemone rendered in World Foundry" }
+  - { src: "../../assets/screenshots/world-foundry/treemap.png", alt: "A file hierarchy visualized as a 3D treemap" }
+  - { src: "../../assets/screenshots/world-foundry/uv-seams.png", alt: "UV seam handling" }
+  - { src: "../../assets/screenshots/world-foundry/smb_firestar_03_star_enemy_defeated.png", alt: "Star + fire power defeats enemy" }
+  - { src: "../../assets/screenshots/world-foundry/2026-05-22-undo-del.png", alt: "Editor: undo delete" }
+---
+
+World Foundry v2 is a 3D engine built with small machines in mind. Its roots are in early PlayStation-class hardware, where memory and CPU budgets were tiny by today’s standards. That resource-conscious design is central to v2, alongside modern rendering backends, programmable behavior, and live controls.
+
+## Modern rendering, more places to run
+
+<img src="/apps/world-foundry-v2/rendering.svg" alt="World Foundry rendering backends" width="640" height="318" loading="lazy" decoding="async" />
+
+The engine runs through OpenGL on Linux, OpenGL ES on Android, and WebGL 2 in the browser through WebAssembly. A shared native Metal renderer brings textured, depth-tested rendering to macOS and iOS. The iOS port is under active development, with device validation still in progress.
+
+## Modern physics, connected to gameplay
+
+<img src="/apps/world-foundry-v2/physics.svg" alt="From collision to behavior" width="640" height="240" loading="lazy" decoding="async" />
+
+**Jolt physics** powers collision and movement, with contact events connected to actor behavior. Scripts can respond to collisions, move actors through their position properties, and spawn or remove objects at runtime.
+
+## Better tools for understanding each frame
+
+<img src="/apps/world-foundry-v2/debug.svg" alt="Debugging and repeatable verification" width="640" height="258" loading="lazy" decoding="async" />
+
+The **debug bridge** is a small TCP server inside the running engine. Any tool that can send a line of JSON can connect: Blender, a test script, or a hand-typed session. It listens on `127.0.0.1:7777` by default, and both the address and port are command-line switches. It is compiled in only when a build enables it.
+
+- **Watch the game live.** The engine streams actor positions and frame timing about ten times a second, and you can subscribe to individual mailboxes to see a script’s variables change as they happen.
+- **Change things while it runs.** Move an actor, set an object property, or write any mailbox directly. Undo a step, or revert everything back to the level as loaded.
+- **Pick from the screen.** Cast a ray into the scene and the engine reports which actor it hit, which is how an editor selects objects in the live view.
+- **Drive it like a player.** Inject joystick input, held for an exact number of frames, ahead of the real controller. A test can press a button the same way every run.
+- **Pause and step.** Freeze the simulation, advance exactly *N* frames, then resume. Scripted runs stay repeatable because they step frames rather than waiting on wall-clock time.
+- **Hot-reload without restarting.** Recompile an actor’s zForth script in place, or swap in new GLSL shaders. Broken shader source returns a structured error and the previous shader keeps running.
+- **Capture the frame.** Ask for a screenshot to a named file and get a confirmation when it is written. Comparing captures across backends is how rendering regressions get caught.
+
+Every request and reply is one line of JSON, so the same bridge serves the Blender live-edit link and the automated level checks.
+
+<img src="/apps/world-foundry-v2/profiling.svg" alt="Inspect buffers, geometry and timing" width="640" height="268" loading="lazy" decoding="async" />
+
+Frame profiling reports rendering work and separates static vertex-buffer memory from index-buffer memory. Back-face counters show which culling paths are doing the work, and a fixed-pitch FPS display keeps changing values from shifting the layout.
+
+## Small scripts, expressive behavior
+
+<img src="/apps/world-foundry-v2/scripting.svg" alt="Actor behavior in Forth" width="640" height="268" loading="lazy" decoding="async" />
+
+**Forth scripting** gives actors their own behavior, with access to engine properties and cross-actor communication. Per-actor scaling supports squash-and-stretch animation, and the debug bridge can reload zForth scripts during development without restarting the whole game.
+
+<img src="/apps/world-foundry-v2/neural.svg" alt="Forth and Neural Forth" width="640" height="300" loading="lazy" decoding="async" />
+
+The optional **Neural Forth** module adds fuzzy logic, neural-network operations, automatic differentiation, and trainable slots to zForth. It provides building blocks for experimenting with adaptive behavior directly in the scripting environment.
+
+## Live settings, defined by the world
+
+<img src="/apps/world-foundry-v2/settings.svg" alt="Properties become runtime controls" width="640" height="332" loading="lazy" decoding="async" />
+
+The runtime builds settings forms from authored object-property definitions. Choices, toggles, sliders, text and number fields, and color controls let creators expose meaningful adjustments without hand-building a separate interface for every scene.
+
+<img src="/apps/world-foundry-v2/input.svg" alt="Touch and controller settings" width="640" height="276" loading="lazy" decoding="async" />
+
+Controller navigation is joined by direct touch controls and responsive phone and tablet layouts. Android text and number entry use native editors, while Apply and Cancel keep changes explicit. Touch support is implemented; deeper device checks are still in progress.
+
+## Built for modern Android devices
+
+<img src="/apps/world-foundry-v2/android.svg" alt="Android input and screensaver hosting" width="640" height="242" loading="lazy" decoding="async" />
+
+The Android runtime supports TV remotes and touch input, alongside a screensaver host for running engine worlds while a TV is idle. Runtime settings can be exposed through a common catalog, and screensaver orientation is configurable.
+
+## Compact geometry, less per-frame work
+
+<img src="/apps/world-foundry-v2/compact.svg" alt="Compact meshes and parallel culling" width="640" height="244" loading="lazy" decoding="async" />
+
+Baked OpenGL meshes use a compact **28-byte vertex format** where supported, with a fallback for incompatible data or custom shaders. Static back-face culling uses precomputed triangle data, and the 32-bit ARM path tests four faces at a time with NEON. These changes reduce storage and repeated per-frame work while retaining the existing streaming path for dynamic geometry.
+
+World Foundry v2 is in active development. Explore the [engine source](https://github.com/wbniv/WorldFoundry) or [run the browser build](https://worldfoundry.org/v2/play/) to follow its progress.

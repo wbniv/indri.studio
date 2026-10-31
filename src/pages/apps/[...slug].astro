@@ -97,7 +97,7 @@ const ogImage = ogImagePath ? new URL(ogImagePath, Astro.site).href : undefined;
 		</nav>
 
 		<header class="mb-10">
-			{post.id === 'world-foundry' ? (
+			{post.id === 'world-foundry-v2' ? (
 				<WorldFoundryHero title={post.data.title} summary={post.data.summary} logo={post.data.logo} upcoming={upcoming} github={post.data.storeLinks?.github} />
 			) : (
 			<>

@@ -33,6 +33,13 @@ export default {
       url.hostname = APEX;
       return Response.redirect(url.toString(), 301);
     }
+    // World Foundry's page moved to /apps/world-foundry-v2/ (2026-10-31);
+    // keep old links and bookmarks working.
+    const moved = url.pathname.match(/^\/apps\/world-foundry(\/.*)?$/);
+    if (moved) {
+      url.pathname = `/apps/world-foundry-v2${moved[1] ?? "/"}`;
+      return Response.redirect(url.toString(), 301);
+    }
     const response = await env.ASSETS.fetch(request);
     const ct = response.headers.get("content-type") ?? "";
     if (ct.includes("text/html")) {

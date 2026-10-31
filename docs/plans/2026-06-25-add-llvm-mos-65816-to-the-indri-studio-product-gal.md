@@ -58,7 +58,7 @@ required.
 - `src/content.config.ts:15` — `apps` schema already supports every field used
   below (`title`, `date`, `summary`, `screenshots`, `storeLinks.github`, …).
 
-Closest existing analog: `src/content/apps/world-foundry.md` (open-source dev
+Closest existing analog: `src/content/apps/world-foundry-v2.md` (open-source dev
 tool, GitHub badge, screenshots, internal detail page).
 
 ## Changes
