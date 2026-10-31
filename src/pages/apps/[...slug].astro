@@ -1,5 +1,6 @@
 ---
 import AppLayout from "../../layouts/AppLayout.astro";
+import WorldFoundryHero from "../../components/WorldFoundryHero.astro";
 import StoreBadges from "../../components/StoreBadges.astro";
 import Screenshot from "../../components/Screenshot.astro";
 import MIcon from "../../components/MIcon.astro";
@@ -96,6 +97,10 @@ const ogImage = ogImagePath ? new URL(ogImagePath, Astro.site).href : undefined;
 		</nav>
 
 		<header class="mb-10">
+			{post.id === 'world-foundry' ? (
+				<WorldFoundryHero title={post.data.title} summary={post.data.summary} logo={post.data.logo} upcoming={upcoming} github={post.data.storeLinks?.github} />
+			) : (
+			<>
 			{upcoming && (
 				<div class="flex flex-wrap items-center gap-3 mb-6">
 					<span class="pill-purple">
@@ -160,6 +165,8 @@ const ogImage = ogImagePath ? new URL(ogImagePath, Astro.site).href : undefined;
 					)}
 					<StoreBadges links={post.data.storeLinks} />
 				</>
+			)}
+			</>
 			)}
 		</header>
 

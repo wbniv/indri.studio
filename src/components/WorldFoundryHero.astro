@@ -1,0 +1,65 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import MIcon from './MIcon.astro';
+import githubBadge from '../assets/store-badges/github.svg?url';
+interface Props {
+  title: string;
+  summary?: string;
+  logo?: ImageMetadata;
+  upcoming: boolean;
+  github?: string;
+}
+const { title, summary, logo, upcoming, github } = Astro.props;
+---
+<div class="wf-hero">
+  <div class="wf-hero-topline">
+    <span class="wf-eyebrow">A 3D engine for small machines</span>
+    {upcoming && <span class="wf-status"><span aria-hidden="true"></span>Launching soon</span>}
+  </div>
+  <div class="wf-identity">
+    {logo && <Image src={logo} alt="" width={88} class="wf-logo" loading="eager" />}
+    <div class="wf-title-block">
+      <h1>{title}</h1>
+      {summary && <p class="wf-summary">{summary}</p>}
+    </div>
+  </div>
+  <nav class="wf-actions" aria-label="Explore World Foundry">
+    <a class="wf-action wf-action-primary" href="https://worldfoundry.org/v2/play/">
+      <MIcon name="play_arrow" size={21} ariaHidden />Try the browser build
+    </a>
+    {github && <a class="wf-github-badge" href={github}>
+      <img src={githubBadge} alt="Get it on GitHub" width="135" height="40" />
+    </a>}
+  </nav>
+</div>
+<style>
+  .wf-hero { padding: 0 0 2rem; border-bottom: 1px solid var(--color-outline-variant); }
+  .wf-hero-topline { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:1.5rem; flex-wrap:wrap; }
+  .wf-eyebrow { font-family:var(--font-display); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--color-on-surface-variant); }
+  .wf-status { display:inline-flex; align-items:center; gap:.45rem; color:var(--color-primary-container); font-family:var(--font-display); font-size:.7rem; white-space:nowrap; }
+  .wf-status span { width:6px; height:6px; border-radius:50%; background:currentColor; }
+  .wf-identity { display:flex; align-items:center; gap:1.5rem; }
+  .wf-hero .wf-logo { width:88px; height:auto; flex:none; box-shadow:0 4px 16px color-mix(in srgb, var(--color-surface-container-lowest) 25%, transparent); }
+  .wf-title-block { min-width:0; }
+  h1 { font-family:var(--font-display); color:var(--color-primary-container); font-size:clamp(1.9rem, 4vw, 2.8rem); font-weight:700; line-height:1.08; letter-spacing:-.045em; margin:0; text-wrap:balance; }
+  .wf-summary { font-size:1.25rem; line-height:1.5; color:var(--color-on-surface); margin:.75rem 0 0; max-width:30rem; }
+  .wf-actions { display:flex; align-items:center; flex-wrap:wrap; gap:.75rem; margin-top:1.75rem; }
+  .wf-action { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; min-height:44px; padding:.65rem .9rem; border-radius:6px; font-family:var(--font-display); font-size:.8rem; font-weight:600; text-decoration:none; border:1px solid var(--color-outline-variant); }
+  .wf-action-primary { color:var(--color-on-primary-container); background:var(--color-primary-container); border-color:var(--color-primary-container); }
+  .wf-github-badge { display:inline-flex; align-items:center; min-height:44px; }
+  .wf-github-badge img { display:block; width:135px; height:40px; }
+  .wf-github-badge:focus-visible { outline:2px solid var(--color-primary-container); outline-offset:4px; border-radius:5px; }
+  .wf-action:hover { filter:brightness(1.08); }
+  .wf-action:focus-visible { outline:2px solid var(--color-primary-container); outline-offset:4px; }
+  @media(max-width:480px) {
+    .wf-identity { gap:1rem; align-items:flex-start; }
+    .wf-hero .wf-logo { width:60px; }
+    h1 { font-size:1.9rem; }
+    .wf-summary { font-size:.95rem; margin-top:.6rem; }
+    .wf-eyebrow { font-size:.6rem; letter-spacing:.08em; }
+    .wf-hero-topline { gap:.65rem; margin-bottom:1.25rem; }
+    .wf-actions { gap:.6rem; }
+    .wf-action { flex:1 1 100%; }
+  }
+</style>
