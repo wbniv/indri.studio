@@ -1,9 +1,15 @@
 | Date | Change |
 |------|--------|
+| [2026-10-31](https://github.com/wbniv/indri.studio/commit/8d6327f) | Debug bridge page: real settings dialog, drop view 6, fix phone overflow |
 | [2026-10-31](https://github.com/wbniv/indri.studio/commit/60a01a2) | Record debug-bridge page verification; index the plan; mark done |
 | [2026-10-31](https://github.com/wbniv/indri.studio/commit/d74480f) | Add World Foundry debug bridge page; icon rows in the bridge section |
 
 <!--history-meta v1
+8d6327f	author	Will Norris
+8d6327f	added	78
+8d6327f	deleted	12
+8d6327f	files	1
+8d6327f	body	- View 5 is now the engine's real "Baseline settings" dialog, captured on a\n  Chromecast HD running the baseline level, replacing the placeholder.\n- View 6 ("This page, in the wild") is removed: it only pictured the page\n  that links here. The page has five views and no placeholders.\n- Phone width: the page measured 560 px on a 390 px screen. The container\n  sits in the layout's flex column with auto margins and sized itself from\n  its content (the transcript's unwrapped lines), so it now has width: 100%.\n  An earlier fix (min-width: 0, image max-width) did not cure it; the new\n  guard caught that.\n- scripts/check-mobile-overflow.mjs loads pages at 390 px in headless\n  Chrome and exits 1 on horizontal overflow. Run against the buggy build\n  (FAIL), the first fix (FAIL) and the final build (PASS).\n- Gallery on the World Foundry page: cropped the black padding baked into\n  the Star + Fire screenshot (640x640 -> 640x322) and the treemap's border.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01YEenqRBjdJpGEUgxdZ9651
 60a01a2	author	Will Norris
 60a01a2	added	64
 60a01a2	deleted	3

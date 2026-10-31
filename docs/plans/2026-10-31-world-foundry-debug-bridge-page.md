@@ -14,7 +14,7 @@ Five ways to see it ended up on the page (a sixth, a screenshot of the bridge se
 | 2 | `wf-edit` editor | **Existing screenshot**, and **not the TCP bridge** | `engine/wf_edit/engine_bridge.h` describes a separate in-process "CRDT→engine bridge" that calls `wfmut::` directly |
 | 3 | Terminal session | **Captured** | ping, pause, step, watch, set_mailbox, screenshot, resume against a live engine |
 | 4 | Frames captured through the bridge | **Captured** | `frame.png`, written by the bridge's `screenshot` op |
-| 5 | In-game settings dialog | **Captured on a device** (updated after `v0.1.277`; first a placeholder) | `ingame-settings.png`, the "Baseline settings" dialog from `docs/diagnostics/baseline/generic-settings/default-devices-v2/cast1/tv-form-screenshot.png`, a Chromecast HD running the baseline level. The earlier design mockup (`editor.png`, "MOCKUP – NOT SHIPPED") is still not used |
+| 5 | In-game settings dialog | **Captured on a device** (updated after `v0.1.277`; first a placeholder) | `ingame-settings.png`, the "Baseline settings" dialog from `docs/diagnostics/apk-font-refresh-2026-10-19/baseline-settings-cast1-final/tv-form-screenshot.png`, a Chromecast HD running the baseline level with the refreshed UI font (all 21 assertions in that run's `baseline-checks.json` true). The earlier design mockup (`editor.png`, "MOCKUP – NOT SHIPPED") is still not used |
 
 ## Approach
 
@@ -273,3 +273,7 @@ Actual cause: `main.bridge-page` sits in the layout's flex column with `margin: 
     ```
 
     **PASS**: no page scrolls sideways at 390 px. A full-page phone-width screenshot, scrolled so the lazy images load, shows all five views fitting the screen with the transcript scrolling inside its own box.
+
+## Update: view 5 re-captured with the current font
+
+Will pointed out that the view 5 screenshot used the old low-resolution bitmap font. It came from `generic-settings/default-devices-v2`, captured before the UI font refresh. It is replaced by the capture from the refreshed build (`apk-font-refresh-2026-10-19/baseline-settings-cast1-final`), which uses the current font and shows the dialog as it ships now: titled "Baseline settings 2", with a Runtime Options tab beside Sample Settings. The alt text was updated to match. No other step changes.
