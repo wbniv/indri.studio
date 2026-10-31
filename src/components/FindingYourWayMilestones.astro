@@ -280,14 +280,35 @@ const milestones = [
   ))}
   </div>
 
-  <a class="world-foundry-credit" href="/apps/world-foundry/">
-    <Image src={worldFoundryLogo} alt="World Foundry logo" width={108} height={133} loading="lazy" />
-  </a>
+  <div class="catalogue-and-credit">
+    <a class="world-foundry-credit" href="/apps/world-foundry/">
+      <Image src={worldFoundryLogo} alt="World Foundry logo" width={108} height={133} loading="lazy" />
+    </a>
+    <a class="art-catalogue-download" href="/apps/finding-your-way/finding-your-way_art-catalogue.pdf" download aria-label="Download the Finding Your Way art catalogue PDF">
+      <span class="art-catalogue-previews">
+        <img src="/apps/finding-your-way/art-catalogue-characters.png" alt="Player and goddess character views" width="600" height="464" loading="lazy" />
+        <img src="/apps/finding-your-way/art-catalogue-objects.png" alt="First page of the object catalogue" width="600" height="464" loading="lazy" />
+      </span>
+      <strong>Download art catalogue ↓</strong>
+      <span class="art-catalogue-details">PDF · 13 pages · 4.6 MB</span>
+    </a>
+  </div>
 
 </section>
 
 <style>
-  .world-foundry-credit { display: block; width: max-content; margin: 36px auto 0; }
+  .catalogue-and-credit { display: flex; align-items: center; justify-content: center; gap: 32px; margin-top: 36px; }
+  .world-foundry-credit { display: block; width: max-content; margin: 0; flex: none; }
+  .art-catalogue-download { display: block; box-sizing: border-box; width: 283px; flex: none; padding-left: 32px; border-left: 1px solid var(--color-on-surface-variant); text-decoration: none; }
+  .art-catalogue-previews { display: flex; gap: 10px; margin-bottom: 10px; }
+  .art-catalogue-previews img { display: block; width: 120px; height: auto; margin: 0; border: 1px solid var(--color-on-surface-variant); border-radius: 4px; box-shadow: 0 3px 10px #0003; }
+  .art-catalogue-download strong { display: block; font-size: 15px; line-height: 1.5; color: var(--color-primary-container); }
+  .art-catalogue-details { display: block; margin-top: 4px; font-size: 12px; line-height: 1.5; color: var(--color-on-surface-variant); }
+  .art-catalogue-download:focus-visible { outline: 2px solid var(--color-primary-container); outline-offset: 6px; }
+  @media (max-width: 520px) {
+    .catalogue-and-credit { flex-direction: column; gap: 30px; }
+    .art-catalogue-download { width: 250px; max-width: 100%; padding: 24px 0 0; border-left: 0; border-top: 1px solid var(--color-on-surface-variant); }
+  }
   .world-foundry-credit img { display: block; width: 108px; height: 133px; }
   .world-foundry-credit:focus-visible { outline: 2px solid var(--color-primary-container); outline-offset: 6px; }
   .milestone-timeline { padding-left: 4px; }
