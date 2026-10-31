@@ -83,6 +83,7 @@ rows on commit.*
 | [Finding Your Way link preview](2026-10-09-finding-your-way-share-preview.md) | Replace the opening-page screenshot in shared links with a branded 1200 × 630 PNG card showing the temple mark, title and four realms. | [`4f8765e`](https://github.com/wbniv/indri.studio/commit/4f8765e) | Feature |
 | [bsnes-jg-wasm product page layout](2026-10-29-bsnes-jg-wasm-page-layout.md) | Rework the bsnes-jg-wasm app page around the browser player, paired Native APK examples, and responsive integration samples while preserving the existing Indri chrome. | [`653a9f8`](https://github.com/wbniv/indri.studio/commit/653a9f8) | Feature |
 | [Board Game Arena Title Tray in the Indri catalogue](2026-10-17-bga-title-tray-catalogue.md) | Add the KDE/Chrome tray utility to the app catalogue with a real panel capture, illustrated card, installation path, and desktop/mobile mockups. | [`96dd577`](https://github.com/wbniv/indri.studio/commit/96dd577), [`e9ad774`](https://github.com/wbniv/indri.studio/commit/e9ad774), [`aa2045e`](https://github.com/wbniv/indri.studio/commit/aa2045e), [`292ffae`](https://github.com/wbniv/indri.studio/commit/292ffae), [`17c4ebb`](https://github.com/wbniv/indri.studio/commit/17c4ebb), [`d3b52d5`](https://github.com/wbniv/indri.studio/commit/d3b52d5) | Feature |
+| [World Foundry debug bridge page](2026-10-31-world-foundry-debug-bridge-page.md) | Add a standalone page showing the engine's debug bridge six ways (Blender panel, editor, terminal session, bridge frames, two placeholders), linked from the World Foundry v2 page. | [`d74480f`](https://github.com/wbniv/indri.studio/commit/d74480f) | Feature |
 
 ---
 
@@ -91,4 +92,4 @@ rows on commit.*
 - **Order** = each plan's *creation* commit (oldest commit that touched the file), by committer date.
 - **Commit(s)** = the full `git log --follow` set per plan, oldest → newest.
 - **Summaries / categories** auto-generated from each plan's TL;DR (Sonnet, medium effort) — refine as needed.
-- **Generated** 2026-06-26 for 65 plan(s); rows added by hand 2026-06-27 (66), 2026-06-30 (67), 2026-07-27 (68), 2026-10-05 (69), 2026-10-09 (71), 2026-10-17 (72 total), 2026-10-29 (73 total).
+- **Generated** 2026-06-26 for 65 plan(s); rows added by hand 2026-06-27 (66), 2026-06-30 (67), 2026-07-27 (68), 2026-10-05 (69), 2026-10-09 (71), 2026-10-17 (72 total), 2026-10-29 (73 total), 2026-10-31 (74 total).

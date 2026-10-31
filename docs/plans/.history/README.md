@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-10-30](https://github.com/wbniv/indri.studio/commit/cbf89de) | Index bsnes-jg-wasm page layout plan |
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/6fc88ea) | Record BGA link audit and copy correction |
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/cde0c49) | Close BGA catalogue plan after final publish |
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/292ffae) | Record BGA catalogue publication and screenshot fix |
@@ -21,6 +22,10 @@
 | [2026-06-26](https://github.com/wbniv/indri.studio/commit/49f6b36) | docs: add plan index (docs/plans/README.md) |
 
 <!--history-meta v1
+cbf89de	author	Will Norris
+cbf89de	added	2
+cbf89de	deleted	1
+cbf89de	files	1
 6fc88ea	author	Will Norris
 6fc88ea	added	1
 6fc88ea	deleted	1

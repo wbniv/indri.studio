@@ -102,11 +102,20 @@ Decision for you: the wording of the status chips and of view 2's caption (the "
 
 ## Verification
 
+Run 2026‑10‑31 after `v0.1.277` deployed. Step 3's command was corrected from `grep -c` to `grep -o … | wc -l`: the built HTML is a single line, so `-c` would always print 1.
+
 1. **Regenerate the mockups from the real captures.** Expect two `.html` files, each under 512 KB.
 
     ```
     python3 -I docs/plans/2026-10-31-world-foundry-debug-bridge-page/build-mockups.py
     ```
+
+    ```
+    wrote bridge-page-desktop.html bridge-page-narrow.html
+    123723 bridge-page-desktop.png    (html files: ~109 KB each)
+    ```
+
+    **PASS**: both files written, about 109 KB each, under the 512 KB budget.
 
 2. **Build the site.** Expect exit 0 and `dist/apps/world-foundry-v2/debug-bridge/index.html`.
 
@@ -114,18 +123,40 @@ Decision for you: the wording of the status chips and of view 2's caption (the "
     task build
     ```
 
+    ```
+    build exit=0
+    13:45:30 [build] 176 page(s) built in 3m 4s
+    dist/apps/world-foundry-v2/debug-bridge/index.html
+    ```
+
+    **PASS**: exit 0 and the page exists.
+
 3. **The built page has six views, and the two placeholders.** Expect `6` then `2`.
 
     ```
-    grep -c 'class="view"' dist/apps/world-foundry-v2/debug-bridge/index.html
-    grep -c 'class="ph"' dist/apps/world-foundry-v2/debug-bridge/index.html
+    grep -o 'class="view[^"]*"' dist/apps/world-foundry-v2/debug-bridge/index.html | wc -l
+    grep -o 'class="ph[^"]*"' dist/apps/world-foundry-v2/debug-bridge/index.html | wc -l
     ```
 
-4. **The World Foundry v2 page links to it.** Expect one `href`.
+    ```
+    6
+    2
+    ```
+
+    **PASS**: six views, two placeholders.
+
+4. **The World Foundry v2 page links to it.** Expect the link to appear.
 
     ```
     grep -o 'href="/apps/world-foundry-v2/debug-bridge/"' dist/apps/world-foundry-v2/index.html | sort -u
     ```
+
+    ```
+          2 href="/apps/world-foundry-v2/debug-bridge/"     (counted with sort | uniq -c)
+    <a href="/apps/world-foundry-v2/debug-bridge/"><strong>debug bridge</strong></a>
+    ```
+
+    **PASS**: two links: the bold "debug bridge" in the first sentence and the "See it in use" line.
 
 5. **It is not a homepage card.** Expect `0`.
 
@@ -133,11 +164,27 @@ Decision for you: the wording of the status chips and of view 2's caption (the "
     grep -c 'debug-bridge' dist/index.html
     ```
 
+    ```
+    0
+    ```
+
+    **PASS**: not on the homepage.
+
 6. **Captures regenerate from the scripts.** Needs `engine/wf_game` built; expect `frame.png` and a transcript in the output directory.
 
     ```
     BRIDGE_OUT=$(mktemp -d) python3 -I scripts/wf-bridge-captures/terminal_session.py
     ```
+
+    ```
+    < {"op":"screenshot_done","filename":".../frame.png","w":640,"h":480}
+    > {"op":"resume"}
+    < {"op":"resumed"}
+    frame.png exists: True
+    53952 frame.png    1240 transcript.txt    (engine stopped afterwards)
+    ```
+
+    **PASS**: the script drove a live engine and wrote `frame.png` and `transcript.txt`. The Blender capture (`blender_panel.py`) was run earlier in the session, not in this step.
 
 7. **After deploy the page is live and the old path still redirects.** Expect `200`, then `301` to the v2 URL.
 
@@ -146,3 +193,17 @@ Decision for you: the wording of the status chips and of view 2's caption (the "
     ```
 
     Then request `https://indri.studio/apps/world-foundry-v2/debug-bridge/` and `https://indri.studio/apps/world-foundry/` and read the status codes.
+
+    ```
+    tagged v0.1.277; deploy workflow triggered.      (deploy run: completed success)
+    WF page: icon-list 1 tiles 7 svgs 7 | bold link to bridge page: true | see-it-in-use link: true
+    bridge page: 200 views 6 placeholders 2 imgs 3 title ok: true
+    old page: 301 https://indri.studio/apps/world-foundry-v2/
+    old asset: 301 https://indri.studio/apps/world-foundry-v2/debug.svg
+    homepage mentions debug-bridge: false
+    img 200 image/webp /_astro/blender-bridge-panel.C1Y7YKaZ_hiICS.webp
+    img 200 image/webp /_astro/wfedit-properties.BicWLD14_Z1hFmxI.webp
+    img 200 image/webp /_astro/frame.DDJKmGqb_ZBfbuI.webp
+    ```
+
+    **PASS**: the page is live with all three images loading, the icon rows are on the World Foundry page, and the old page and asset paths redirect with a 301.
