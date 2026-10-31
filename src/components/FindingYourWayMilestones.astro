@@ -297,8 +297,8 @@ const milestones = [
 </section>
 
 <style>
-  .catalogue-and-credit { display: flex; align-items: center; justify-content: center; gap: 32px; margin-top: 36px; }
-  .world-foundry-credit { display: block; width: max-content; margin: 0; flex: none; }
+  .catalogue-and-credit { display: flex; align-items: stretch; justify-content: center; gap: 32px; margin-top: 36px; }
+  .world-foundry-credit { display: block; position: relative; width: 120px; margin: 0; flex: none; }
   .art-catalogue-download { display: block; box-sizing: border-box; width: 283px; flex: none; padding-left: 32px; border-left: 1px solid var(--color-on-surface-variant); text-decoration: none; }
   .art-catalogue-previews { display: flex; gap: 10px; margin-bottom: 10px; }
   .art-catalogue-previews img { display: block; width: 120px; height: auto; margin: 0; border: 1px solid var(--color-on-surface-variant); border-radius: 4px; box-shadow: 0 3px 10px #0003; }
@@ -306,10 +306,11 @@ const milestones = [
   .art-catalogue-details { display: block; margin-top: 4px; font-size: 12px; line-height: 1.5; color: var(--color-on-surface-variant); }
   .art-catalogue-download:focus-visible { outline: 2px solid var(--color-primary-container); outline-offset: 6px; }
   @media (max-width: 520px) {
-    .catalogue-and-credit { flex-direction: column; gap: 30px; }
+    .catalogue-and-credit { flex-direction: column; align-items: center; gap: 30px; }
+    .world-foundry-credit { aspect-ratio: 108 / 133; }
     .art-catalogue-download { width: 250px; max-width: 100%; padding: 24px 0 0; border-left: 0; border-top: 1px solid var(--color-on-surface-variant); }
   }
-  .world-foundry-credit img { display: block; width: 108px; height: 133px; }
+  .world-foundry-credit img { display: block; position: absolute; top: 0; right: 0; width: auto; max-width: none; height: 100%; margin: 0; }
   .world-foundry-credit:focus-visible { outline: 2px solid var(--color-primary-container); outline-offset: 6px; }
   .milestone-timeline { padding-left: 4px; }
   .milestone::before {
