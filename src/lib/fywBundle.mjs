@@ -10,6 +10,7 @@ const releases = {
   '0.9.2': { apk: 'f704f5a2648cbb8e8c8f604b0d7ce9292e2b0dfb28e8066d7a2a9668f4b6bde0', engine: 'ba25f99bea241403c2865622c675711c7aaf0176' },
   '0.9.3': { apk: '5a3f879c1a0be268709e213305c0bcc5569e2caf90b00ba06004be601806a72a', engine: 'ba25f99bea241403c2865622c675711c7aaf0176' },
   '0.10': { apk: '48b88f03ae26bc9a6ce5212f9dd5624587c4d72f59d91db124b22d558c2c3527', engine: 'ef45ca330129462c5167f843e718f3bc2295215c' },
+  '0.11': { apk: 'b984f5ec395c618e9d12036f7575c77aa66fe0cf698b5e8cb3a574663a3e376f', engine: '5538a0c8863cd4944b166474ec41dafe64bfbfbf' },
 };
 const required = ['config.json', 'frame.html', 'player.css', 'player.js', 'title-preview.jpg', 'wf_game.data', 'wf_game.js', 'wf_game.wasm'];
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -34,7 +35,7 @@ export function verifyFywBundle(base) {
   return verifyLegacyBundle(base, manifest);
 }
 function verifyLegacyBundle(base, manifest) {
-  if (!/^v0\.(?:8|9|9\.1|9\.2|9\.3|10)-[a-f0-9]{16}$/.test(manifest.bundleId)) throw Error('Invalid Finding Your Way bundle ID');
+  if (!/^v0\.(?:8|9|9\.1|9\.2|9\.3|10|11)-[a-f0-9]{16}$/.test(manifest.bundleId)) throw Error('Invalid Finding Your Way bundle ID');
   const directory = join(base, 'bundles', manifest.bundleId);
   const receipt = JSON.parse(readFileSync(join(directory, 'receipt.json'), 'utf8'));
   const release = releases[receipt.version];

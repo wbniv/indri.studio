@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "protocol": 1,
+  "playerVersion": "0.1.11",
+  "bundleId": "bgp1-67bdc68704fc9b1fd622587d",
+  "provenance": {
+    "sourceBundle": "v0.11-c732b135255844a5",
+    "engineCommit": "5538a0c8863cd4944b166474ec41dafe64bfbfbf",
+    "stackBytes": 65536
+  },
+  "files": {
+    "adapters/snes-loader.js": {
+      "bytes": 29683,
+      "sha256": "b217568fa562a32f8b13342649c4f494b8df1594fc6d9e3279887757e25cb028"
+    },
+    "adapters/snes.js": {
+      "bytes": 1409,
+      "sha256": "8787cb7aacadca7ad2a92cb9ddd81ad6eb5bd4f77c4f58eb88ca3d16688b4fda"
+    },
+    "adapters/worldfoundry.js": {
+      "bytes": 1187,
+      "sha256": "70c1bad56eaebeb0c501fa3784e4309161a81da17193ef03ecda319372b97166"
+    },
+    "config.json": {
+      "bytes": 1958,
+      "sha256": "079123910dd7e9bf029e19d1a9d8d04d9454a4cfad5a033a4123b2aa338ab96a"
+    },
+    "frame.html": {
+      "bytes": 6593,
+      "sha256": "ef26c850f8de19c58d3836dbab122f77e97aaec76b82ad753a5af1ab268fdb35"
+    },
+    "player.css": {
+      "bytes": 8547,
+      "sha256": "cf1cb9f76f6844d5cc5cdeefaec0577c788afabdbecefc498bc279c81c7e9fcf"
+    },
+    "player.js": {
+      "bytes": 17246,
+      "sha256": "c7741387ce1b76a7b35f05ca15c2aea438e3386c1a86946dd1c5700cf1a0afdb"
+    },
+    "title-preview.jpg": {
+      "bytes": 136311,
+      "sha256": "5edf375c97817c3dcd9c726b9d657057a3204c331779ceb0877d4fd633a5cb51"
+    },
+    "wf_game.data": {
+      "bytes": 17397248,
+      "sha256": "2def8df96ebf7be0d8cefadfff4f2e494e7d11b2d822d1d6e50fdcdbf60af175"
+    },
+    "wf_game.js": {
+      "bytes": 277733,
+      "sha256": "84cbe2482f85af74a2f1b7325708ac26e7d0848b14f6a2dd5c9f37f9fb6f35c7"
+    },
+    "wf_game.wasm": {
+      "bytes": 2457927,
+      "sha256": "e76e94e3e537b47111988b7366557a87a4feafdfa8c02cfe05a39769a7c4787f"
+    }
+  },
+  "totalBytes": 20335842
+}
