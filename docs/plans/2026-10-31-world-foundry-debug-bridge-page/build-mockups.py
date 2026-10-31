@@ -28,6 +28,7 @@ def data_uri(path: Path, jpeg_width: int | None = None) -> str:
 BLENDER = data_uri(IMG / "blender-bridge-panel.png")
 FRAME = data_uri(IMG / "frame.png", 560)
 WFEDIT = data_uri(IMG / "wfedit-properties.png", 760)
+SETTINGS = data_uri(IMG / "ingame-settings.png", 760)
 
 TRANSCRIPT = """> {"op":"ping"}
 < {"op":"pong"}
@@ -66,8 +67,6 @@ h2{font-size:24px;margin:0;text-transform:uppercase;letter-spacing:-.01em}
 .fig{background:var(--card);border-radius:14px;padding:14px;overflow:hidden}
 .fig img{display:block;max-width:100%;height:auto;border-radius:8px;margin:0 auto}
 pre{margin:0;background:#2c2925;border-radius:10px;padding:16px;overflow-x:auto;font:13px/1.6 ui-monospace,monospace;color:#e8e2d8}
-.ph{display:grid;place-items:center;text-align:center;min-height:230px;border:2px dashed var(--line);border-radius:12px;color:var(--sec);padding:20px}
-.ph b{display:block;color:var(--text);margin-bottom:4px}
 """
 
 BODY = f"""
@@ -95,13 +94,10 @@ These are the ways to look at it: tools that connect to it, and what comes back.
 <p class="cap">The frame the engine wrote when asked for a screenshot, which is how renders get compared across backends.</p>
 <div class="fig"><img src="{FRAME}" alt="Engine frame: blue shrimp in an aquarium" style="max-width:480px"></div></section>
 
-<section class="view"><div class="head"><span class="num">5</span><h2>In-game settings forms</h2><span class="chip">Placeholder · not shipped</span></div>
-<p class="cap">Editable-object screens for TV and phone. Designed, not built yet.</p>
-<div class="ph"><div><b>Placeholder</b>Screenshot to come once the feature ships</div></div></section>
+<section class="view"><div class="head"><span class="num">5</span><h2>In-game settings forms</h2><span class="chip ok">Captured on a device</span></div>
+<p class="cap">The settings dialog the engine builds from a level's object-property definitions, as it renders on a Chromecast running the baseline level. Numbers, sliders, choices, toggles and text, navigated with the arrow keys, edited with A and applied with Back.</p>
+<div class="fig"><img src="{SETTINGS}" alt="The engine's Baseline settings dialog on a TV"></div></section>
 
-<section class="view"><div class="head"><span class="num">6</span><h2>This page, in the wild</h2><span class="chip">Placeholder · to be captured</span></div>
-<p class="cap">The bridge section of the World Foundry v2 page, as a visitor sees it.</p>
-<div class="ph"><div><b>Placeholder</b>Screenshot to come</div></div></section>
 </div>
 """
 

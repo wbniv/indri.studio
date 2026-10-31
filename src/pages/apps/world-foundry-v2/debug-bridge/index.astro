@@ -4,6 +4,7 @@ import { Image } from 'astro:assets';
 import blenderPanel from '../../../../assets/screenshots/world-foundry/bridge/blender-bridge-panel.png';
 import bridgeFrame from '../../../../assets/screenshots/world-foundry/bridge/frame.png';
 import editorProperties from '../../../../assets/screenshots/world-foundry/bridge/wfedit-properties.png';
+import settingsDialog from '../../../../assets/screenshots/world-foundry/bridge/ingame-settings.png';
 
 // Real exchange with a running engine (scripts/wf-bridge-captures/terminal_session.py).
 // ~10 Hz perf/state broadcasts are trimmed; `step` has no direct reply.
@@ -87,20 +88,12 @@ const transcript = `> {"op":"ping"}
       <header>
         <span class="num" aria-hidden="true">5</span>
         <h2>In-game settings forms</h2>
-        <span class="chip">Placeholder · not shipped</span>
+        <span class="chip ok">Captured on a device</span>
       </header>
-      <p class="cap">Editable-object screens for TV and phone. Designed, not built yet.</p>
-      <div class="ph"><div><b>Placeholder</b>Screenshot to come once the feature ships</div></div>
-    </section>
-
-    <section class="view">
-      <header>
-        <span class="num" aria-hidden="true">6</span>
-        <h2>This page, in the wild</h2>
-        <span class="chip">Placeholder · to be captured</span>
-      </header>
-      <p class="cap">The bridge section of the World Foundry v2 page, as a visitor sees it.</p>
-      <div class="ph"><div><b>Placeholder</b>Screenshot to come</div></div>
+      <p class="cap">The settings dialog the engine builds from a level’s object-property definitions, as it renders on a Chromecast running the baseline level. Numbers, sliders, choices, toggles and text, navigated with the arrow keys, edited with A and applied with Back.</p>
+      <div class="fig">
+        <Image src={settingsDialog} alt="The engine’s Baseline settings dialog on a TV: a number field, a slider, Low / Medium / High choices, an On checkbox and a text field, with Apply / close at the bottom" width={960} loading="lazy" decoding="async" />
+      </div>
     </section>
 
     <p class="foot">
@@ -111,7 +104,10 @@ const transcript = `> {"op":"ping"}
 </Base>
 
 <style>
-  .bridge-page { max-width: 960px; margin: 0 auto; padding: 32px 24px 72px; }
+  /* This sits in the layout's flex column. With `margin: 0 auto` and no width it sizes to fit its content, and the
+     transcript's longest unwrapped line would then hold it wider than a phone. A definite width stops that; the
+     transcript scrolls inside its own box instead. */
+  .bridge-page { width: 100%; max-width: 960px; min-width: 0; margin: 0 auto; padding: 32px 24px 72px; }
   .back { font-size: 14px; }
   h1 {
     font-family: var(--font-display);
@@ -155,18 +151,12 @@ const transcript = `> {"op":"ping"}
   .cap b { color: var(--color-on-surface); }
   .fig { background: var(--color-surface-container-low); border-radius: 14px; padding: 14px; overflow: hidden; }
   .fig :global(img) { display: block; max-width: 100%; height: auto; border-radius: 8px; margin: 0 auto; }
-  .fig :global(img.frame) { max-width: 480px; }
+  .fig :global(img.frame) { max-width: min(480px, 100%); }
   pre {
     margin: 0; padding: 16px; overflow-x: auto; border-radius: 10px;
     background: var(--color-surface-container-lowest);
     font: 13px/1.6 ui-monospace, monospace;
     color: var(--color-on-surface);
   }
-  .ph {
-    display: grid; place-items: center; text-align: center; min-height: 230px; padding: 20px;
-    border: 2px dashed var(--color-surface-container-high); border-radius: 12px;
-    color: var(--color-secondary);
-  }
-  .ph b { display: block; color: var(--color-on-surface); margin-bottom: 4px; }
   .foot { font-family: var(--font-body); color: var(--color-secondary); margin-top: 8px; }
 </style>

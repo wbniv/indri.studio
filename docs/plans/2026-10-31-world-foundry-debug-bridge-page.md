@@ -1,12 +1,12 @@
 # World Foundry debug bridge page
 
-31 October 2026 · **Proposed.** A dedicated page at `/apps/world-foundry-v2/debug-bridge/` that shows the engine's debug bridge from six angles, linked quietly from the World Foundry v2 page.
+31 October 2026 · **Proposed.** A dedicated page at `/apps/world-foundry-v2/debug-bridge/` that shows the engine's debug bridge from five angles, linked quietly from the World Foundry v2 page.
 
 ## Context
 
 The World Foundry v2 page has a "Better tools for understanding each frame" section. On 2026‑10‑31 it was expanded to describe what the debug bridge does (watch, change, pick, drive input, pause and step, hot-reload, capture), from the engine source `engine/stubs/debug_server.cc`. A paragraph and a list say what it does but show nothing, and the bridge has no screen of its own. Will asked for a page that shows it.
 
-Six ways to see it came up while looking for a bridge UI. They are not all equally real, and the page must say which are which:
+Five ways to see it ended up on the page (a sixth, a screenshot of the bridge section on the World Foundry page, was dropped: it only showed the page you came from). They are not all equally real, and the page must say which are which:
 
 | # | View | Status today | Evidence |
 |---|---|---|---|
@@ -14,15 +14,14 @@ Six ways to see it came up while looking for a bridge UI. They are not all equal
 | 2 | `wf-edit` editor | **Existing screenshot**, and **not the TCP bridge** | `engine/wf_edit/engine_bridge.h` describes a separate in-process "CRDT→engine bridge" that calls `wfmut::` directly |
 | 3 | Terminal session | **Captured** | ping, pause, step, watch, set_mailbox, screenshot, resume against a live engine |
 | 4 | Frames captured through the bridge | **Captured** | `frame.png`, written by the bridge's `screenshot` op |
-| 5 | In-game settings forms (TV picker) | **Placeholder** | exists only as a design mockup labelled "MOCKUP – NOT SHIPPED" |
-| 6 | The bridge section as a visitor sees it | **Placeholder** | needs a browser capture of the live page; none was possible this session |
+| 5 | In-game settings dialog | **Captured on a device** (updated after `v0.1.277`; first a placeholder) | `ingame-settings.png`, the "Baseline settings" dialog from `docs/diagnostics/baseline/generic-settings/default-devices-v2/cast1/tv-form-screenshot.png`, a Chromecast HD running the baseline level. The earlier design mockup (`editor.png`, "MOCKUP – NOT SHIPPED") is still not used |
 
 ## Approach
 
 One new standalone Astro page, `src/pages/apps/world-foundry-v2/debug-bridge/index.astro`, on the `Base` layout. This is the same pattern as `src/pages/apps/finding-your-way/play/index.astro`. A standalone page, not an `apps` collection entry, because every collection entry becomes a homepage card and joins the app prev/next cycle (`src/pages/index.astro`, `src/pages/apps/[...slug].astro`). That would make the bridge look like an app. I rejected a nested collection entry for that reason.
 
-- **Layout.** A back link, a title, a short lede, three small "at a glance" chips (`127.0.0.1:7777`, one JSON line per message, compiled in only when enabled), then six numbered views. Each view has a heading, a status chip (Captured, Existing screenshot or Placeholder), a one-line caption and its figure.
-- **Honesty is the design.** Chips say what each view is. View 2's caption says it sits beside the debug bridge rather than being it. Placeholders are dashed boxes that say "Screenshot to come", never a fake image. The mockup file `editor.png` in the engine repo is not used: it is labelled not shipped.
+- **Layout.** A back link, a title, a short lede, three small "at a glance" chips (`127.0.0.1:7777`, one JSON line per message, compiled in only when enabled), then fix numbered views. Each view has a heading, a status chip (Captured, Existing screenshot or Placeholder), a one-line caption and its figure.
+- **Honesty is the design.** Chips say what each view is. View 2's caption says it sits beside the debug bridge rather than being it. Where a capture does not exist, the page uses a dashed "Screenshot to come" box rather than a fake image (none ship at present). The mockup file `editor.png` in the engine repo is not used: it is labelled not shipped.
 - **Images** go through `astro:assets` like the other screenshots, from `src/assets/screenshots/world-foundry/bridge/` (`blender-bridge-panel.png`, `frame.png`, `wfedit-properties.png`, already copied in).
 - **Narrow screens.** The Blender panel is captured at Blender's own narrow Properties-editor width (339 px), not a maximised area, so there is no blank space between the controls and it fits a phone with no scrolling or scaling. An earlier full-width capture (1030 px) was rejected: its buttons stretched across the area and the text became unreadable on a phone.
 - **Terminal transcript** is a constant in the frontmatter rendered in a `<pre>`, because braces in an Astro template body are expressions.
@@ -39,8 +38,7 @@ flowchart LR
   B --> V2["2 wf-edit editor<br/>existing, separate bridge"]
   B --> V3["3 Terminal session<br/>captured"]
   B --> V4["4 Frames via bridge<br/>captured"]
-  B --> V5["5 Settings forms<br/>placeholder"]
-  B --> V6["6 Page in the wild<br/>placeholder"]
+  B --> V5["5 Settings dialog<br/>captured on device"]
   B -->|"back link"| A
 ```
 
@@ -80,11 +78,11 @@ stateDiagram-v2
 
 ## Mockups
 
-The page has a visible surface, so both states are mocked up with the real captures embedded. The desktop mockup is a live, scrollable page (all six views); the thumbnail is its first screen. The narrow one is the same page at phone width. Rebuild with `python3 -I docs/plans/2026-10-31-world-foundry-debug-bridge-page/build-mockups.py`.
+The page has a visible surface, so both states are mocked up with the real captures embedded. The desktop mockup is a live, scrollable page (all five views); the thumbnail is its first screen. The narrow one is the same page at phone width. Rebuild with `python3 -I docs/plans/2026-10-31-world-foundry-debug-bridge-page/build-mockups.py`.
 
 [![Desktop: title, at-a-glance chips, Blender panel, start of the editor view](2026-10-31-world-foundry-debug-bridge-page/bridge-page-desktop.png)](2026-10-31-world-foundry-debug-bridge-page/bridge-page-desktop.html)
 
-**Desktop.** [Open the interactive mockup](2026-10-31-world-foundry-debug-bridge-page/bridge-page-desktop.html) to scroll through all six views, including the terminal transcript, the engine frame and the two placeholders.
+**Desktop.** [Open the interactive mockup](2026-10-31-world-foundry-debug-bridge-page/bridge-page-desktop.html) to scroll through all five views, including the terminal transcript, the engine frame and the settings dialog.
 
 [![Narrow: the same page at 390 px wide](2026-10-31-world-foundry-debug-bridge-page/bridge-page-narrow.png)](2026-10-31-world-foundry-debug-bridge-page/bridge-page-narrow.html)
 
@@ -94,8 +92,6 @@ Decision for you: the wording of the status chips and of view 2's caption (the "
 
 ## Out of scope
 
-- Replacing placeholder 5 (settings forms). Blocked until the runtime object-editing feature ships; see the engine plan `2026-10-16-runtime-object-editing.md`.
-- Replacing placeholder 6 with a real screenshot of the live page. Do it after the page is deployed; needs a working browser capture.
 - A fresh capture of the Blender panel showing the Frame / Step / Resume row. The panel code draws it under conditions the capture did not hit.
 - A capture of `wf-edit` going through its own bridge, or a build of `wf-edit` (no binary was found).
 - A write-up of the bridge protocol on the page. The page shows it; the command reference lives in the engine repo.
@@ -207,3 +203,73 @@ Run 2026‑10‑31 after `v0.1.277` deployed. Step 3's command was corrected fro
     ```
 
     **PASS**: the page is live with all three images loading, the icon rows are on the World Foundry page, and the old page and asset paths redirect with a 301.
+
+## Update: view 5 replaced with a real capture
+
+After `v0.1.277`, Will asked for the real in-game settings dialog from the baseline level in place of the placeholder. View 5 now shows `tv-form-screenshot.png` from the baseline device evidence, and the page has one placeholder left (view 6). Step 3 expects `6` views and `1` placeholder from this change on.
+
+3. **The built page has six views, and the one placeholder.** Expect `6` then `1`.
+
+    ```
+    grep -o 'class="view[^"]*"' dist/apps/world-foundry-v2/debug-bridge/index.html | wc -l
+    grep -o 'class="ph[^"]*"' dist/apps/world-foundry-v2/debug-bridge/index.html | wc -l
+    ```
+
+    ```
+    views: 6  placeholders: 1  imgs: 4  device-chip: 1
+    ```
+
+    **PASS**: six views, one placeholder, four images, and the "Captured on a device" chip present. This build was checked but not published on its own: view 6 was removed before release (next update).
+
+## Update: view 6 removed
+
+Will asked for view 6 ("This page, in the wild") to be deleted: it was a screenshot of the page that links here and showed a visitor nothing about the bridge. The page now has five views and no placeholders. Step 3 expects `5` views and `0` placeholders from this change on.
+
+3. **The built page has five views, and no placeholders.** Expect `5` then `0`.
+
+    ```
+    grep -o 'class="view[^"]*"' dist/apps/world-foundry-v2/debug-bridge/index.html | wc -l
+    grep -o 'class="ph[^"]*"' dist/apps/world-foundry-v2/debug-bridge/index.html | wc -l
+    ```
+
+    _Result pending the build._
+
+## Update: phone-width overflow fix
+
+Will reported the page needed horizontal scrolling on a phone. It measured 560 px wide on a 390 px screen. The first fix (`min-width: 0` on the container, `max-width: min(480px, 100%)` on the frame image) was built and the guard still failed with identical numbers, so that diagnosis was incomplete.
+
+Actual cause: `main.bridge-page` sits in the layout's flex column with `margin: 0 auto` and no width, so it sizes to fit its content. Its minimum content width includes the unwrapped transcript lines (and, originally, the frame image's fixed `max-width: 480px`), and a nested `overflow: auto` box does not hide that from its parent. Fix: a definite `width: 100%` (capped at 960 px) on the container, so it can no longer size itself from its content; the transcript then scrolls inside its own box. Regression guard: `scripts/check-mobile-overflow.mjs`, which loads pages at 390 px in headless Chrome and exits 1 on any horizontal overflow. It was run against the buggy build first to prove it catches the bug, and against the first fix, where it correctly kept failing.
+
+8. **No page scrolls sideways at phone width.** Serve the build, then run the guard. Expect `PASS` for each page and exit 0.
+
+    ```
+    python3 -m http.server 4324 --bind 127.0.0.1 --directory dist
+    node scripts/check-mobile-overflow.mjs http://127.0.0.1:4324 /apps/world-foundry-v2/debug-bridge/ /apps/world-foundry-v2/
+    ```
+
+    Before the fix (buggy build):
+
+    ```
+    FAIL  /apps/world-foundry-v2/debug-bridge/  viewport=390 scrollWidth=560
+          main.bridge-page right=560
+    PASS  /apps/world-foundry-v2/  viewport=390 scrollWidth=390
+    exit=1
+    ```
+
+    After the first fix (`min-width: 0` plus the image cap): still failing, identical numbers.
+
+    ```
+    FAIL  /apps/world-foundry-v2/debug-bridge/  viewport=390 scrollWidth=560
+          main.bridge-page right=560
+    ```
+
+    After the real fix (`width: 100%` on the container):
+
+    ```
+    PASS  /apps/world-foundry-v2/debug-bridge/  viewport=390 scrollWidth=390
+    PASS  /apps/world-foundry-v2/  viewport=390 scrollWidth=390
+    PASS  /  viewport=390 scrollWidth=390
+    guard exit=0
+    ```
+
+    **PASS**: no page scrolls sideways at 390 px. A full-page phone-width screenshot, scrolled so the lazy images load, shows all five views fitting the screen with the transcript scrolling inside its own box.
