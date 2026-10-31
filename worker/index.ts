@@ -40,6 +40,19 @@ export default {
       url.pathname = `/apps/world-foundry-v2${moved[1] ?? "/"}`;
       return Response.redirect(url.toString(), 301);
     }
+    if (url.pathname === '/api/bsnes-releases.json') {
+      if (request.method !== 'GET') return new Response('Method not allowed', { status: 405 });
+      try {
+        const upstream = await fetch('https://downloads.biohack.net/bsnes-jg/current.json', { signal: AbortSignal.timeout(10000) });
+        if (!upstream.ok) throw new Error('Manifest unavailable');
+        const body = await upstream.text();
+        if (body.length > 128 * 1024) throw new Error('Manifest too large');
+        JSON.parse(body);
+        return new Response(body, { headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
+      } catch {
+        return new Response(JSON.stringify({ error: 'Release details temporarily unavailable' }), { status: 503, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
+      }
+    }
     const response = await env.ASSETS.fetch(request);
     const ct = response.headers.get("content-type") ?? "";
     if (ct.includes("text/html")) {

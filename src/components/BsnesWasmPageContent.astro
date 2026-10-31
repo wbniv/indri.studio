@@ -2,6 +2,7 @@
 import BsnesEmbedExamples from './BsnesEmbedExamples.astro';
 import BsnesSuiteChooser from './BsnesSuiteChooser.astro';
 import BsnesPlayerActivity from './BsnesPlayerActivity.astro';
+import BsnesReleaseDownloads from './BsnesReleaseDownloads.astro';
 ---
 
 <div class="product-body">
@@ -11,21 +12,8 @@ import BsnesPlayerActivity from './BsnesPlayerActivity.astro';
       <h2 id="download-title">Native Android APK examples</h2>
       <p>Two signed Native examples: the full LLVM 65816 suite app and a compact standalone Raycaster Maze player. More at <a href="https://biohack.net/snes/">biohack.net/snes</a>.</p>
     </div>
-    <div class="download-grid">
-      <article class="download-card suite-download-card">
-        <p class="eyebrow">LLVM 65816 suite</p>
-        <h3>Torture-test suite</h3>
-        <p>Opens the suite chooser so you can select and run a test ROM.</p>
-        <BsnesSuiteChooser />
-        <dl class="suite-facts">
-          <div><dt>Package</dt><dd><code>org.bsnesjg.tv.native.phase2</code></dd></div>
-          <div><dt>Version</dt><dd>0.1.9</dd></div>
-          <div><dt>APK size</dt><dd>25.57 MiB</dd></div>
-        </dl>
-        <a class="download-link" href="https://downloads.biohack.net/bsnes-jg/releases/0.1.9/bsnes-jg_llvm-65816-torture-test-suite-on-snes-v0.1.9.apk">Download suite APK <span aria-hidden="true">↓</span></a>
-        <details><summary>SHA-256 · 26,814,539 bytes</summary><code class="hash">c04666f5abe7f6865b4e2cfdd695cf47c238e06a78a50a4a8e7d27e73532f88c</code></details>
-      </article>
-    </div>
+    <BsnesReleaseDownloads />
+    <BsnesSuiteChooser />
     <p class="release-note">The <a href="https://downloads.biohack.net/bsnes-jg/current.json">release manifest</a> records current and previous versions, sizes, package IDs, and hashes. The stable download URL redirects here.</p>
   </section>
 

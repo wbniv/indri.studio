@@ -1,0 +1,54 @@
+---
+// Release source: canonical player manifest; runtime validation below constrains links.
+---
+<div data-bsnes-releases aria-live="polite">
+  <p>Loading signed Android releases… <a href="https://downloads.biohack.net/bsnes-jg/current.json">View release manifest</a></p>
+</div>
+<script>
+  const origin = 'https://downloads.biohack.net';
+  const manifest = origin + '/bsnes-jg/current.json';
+  for (const root of document.querySelectorAll<HTMLElement>('[data-bsnes-releases]')) {
+    fetch('/api/bsnes-releases.json', { cache: 'no-store' }).then(async response => {
+      if (!response.ok) throw new Error('Release manifest unavailable');
+      const data = await response.json();
+      const fragment = document.createDocumentFragment();
+      for (const [label, release] of [['Current', data.current], ['Previous', data.previous]] as const) {
+        if (!release) { if (label === 'Current') throw new Error('Missing current release'); continue; }
+        if (!/^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$/.test(release.versionName) ||
+            !Array.isArray(release.artifacts) || release.artifacts.length !== 2) throw new Error('Invalid release');
+        const section = document.createElement('section');
+        const heading = document.createElement('h3');
+        heading.textContent = `${label} · ${release.versionName}`; section.append(heading);
+        const kinds = new Set();
+        for (const apk of release.artifacts) {
+          const expected = apk.type === 'library' ? 'org.bsnesjg.tv.native.phase2' : apk.type === 'player' ? 'org.bsnesjg.tv.native' : null;
+          const url = new URL(apk.url);
+          if (!expected || apk.packageId !== expected || apk.engine !== 'native' || kinds.has(apk.type) ||
+              !/^[a-zA-Z0-9][a-zA-Z0-9._-]*\.apk$/.test(apk.filename) ||
+              url.href !== `${origin}/bsnes-jg/releases/${release.versionName}/${apk.filename}` ||
+              !/^[0-9a-f]{64}$/.test(apk.sha256) || !Number.isSafeInteger(apk.bytes) || apk.bytes <= 0) throw new Error('Invalid APK');
+          kinds.add(apk.type);
+          const item = document.createElement('article');
+          const link = document.createElement('a'); link.href = url.href;
+          link.textContent = apk.type === 'library' ? 'Download Native ROM library' : 'Download Native player';
+          const size = document.createElement('p'); size.textContent = `${apk.bytes.toLocaleString()} bytes · ${apk.packageId}`;
+          const hash = document.createElement('code'); hash.textContent = `SHA-256 ${apk.sha256}`;
+          item.append(link, size, hash); section.append(item);
+        }
+        fragment.append(section);
+      }
+      root.replaceChildren(fragment);
+    }).catch(() => {
+      root.replaceChildren();
+      const message = document.createElement('p'); message.textContent = 'Release details are temporarily unavailable. ';
+      const link = document.createElement('a'); link.href = manifest; link.textContent = 'View the release manifest';
+      message.append(link); root.append(message);
+    });
+  }
+</script>
+<style>
+  [data-bsnes-releases] :global(section) { margin: 1.5rem 0; }
+  [data-bsnes-releases] :global(article) { border: 1px solid #625e58; border-radius: .6rem; padding: 1rem; margin: .75rem 0; }
+  [data-bsnes-releases] :global(a) { color: #b8f400; font-weight: 700; }
+  [data-bsnes-releases] :global(code) { display: block; overflow-wrap: anywhere; font-size: .8rem; }
+</style>
