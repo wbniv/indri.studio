@@ -7,6 +7,7 @@ import loveStreetScreenshot from '../assets/screenshots/finding-your-way/love-st
 import truthCourtScreenshot from '../assets/screenshots/finding-your-way/truth-court-v0.9.2.png';
 import godAscentScreenshot from '../assets/screenshots/finding-your-way/god-ascent-v0.9.3.png';
 import v010GodSummitScreenshot from '../assets/screenshots/finding-your-way/god-summit-v0.10.png';
+import v011TempleScreenshot from '../assets/screenshots/finding-your-way/temple-fire-v0.11.png';
 import v08FpsScreenshot from '../assets/screenshots/finding-your-way/v0.8-fps-improvement.png';
 import v081TempleScreenshot from '../assets/screenshots/finding-your-way/temple-v0.8-family.jpg';
 import v07BothScreenshot from '../assets/screenshots/finding-your-way/both-v0.7.png';
@@ -135,7 +136,29 @@ const currentRoomRelease = {
   knownIssues: [],
 };
 
+// v0.11 promotes the exact RC1 gameplay payload with release Android metadata.
+const motionLightRelease = {
+  milestone: '2026-10-31-v0.11-rc1-promotion',
+  milestoneVersion: '0.11',
+  apk: 'parmenides-v0.11-b984f5ec395c618e.apk',
+  sha256: 'b984f5ec395c618e9d12036f7575c77aa66fe0cf698b5e8cb3a574663a3e376f',
+  knownIssues: [],
+};
+
 const milestones = [
+  {
+    title: 'Motion and light v0.11',
+    manifest: motionLightRelease,
+    description: 'Brings fire, coloured light and gentle movement to the chapter.',
+    highlights: [
+      'The Temple braziers have reshaped bowls and stands, and burn with a rising, flickering fire.',
+      'Once the stained glass appears in the Temple, coloured light streams through four of its windows.',
+      'The goddess floats, banners sway, portal rings turn and speakers turn toward you. Skies and the distant God peak shift as you move. Reduced motion keeps these still.',
+      'Temple window frames, column bases and cornices fit cleanly. Walking off a floor in the Temple, Love, Reason or Truth returns you to that area’s entrance.',
+      'Static scenery uses a smaller vertex format that needs less graphics memory, and 32-bit Android devices check what is visible faster.',
+    ],
+    screenshot: { src: v011TempleScreenshot, alt: 'The goddess in v0.11 between the two Temple braziers, each burning with a rising orange fire' },
+  },
   {
     title: 'Chapter refinements v0.10',
     manifest: currentRoomRelease,
