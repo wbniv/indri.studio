@@ -15,6 +15,8 @@ screenshots:
   - { src: "../../assets/screenshots/world-foundry/2026-05-22-undo-del.png", alt: "Editor: undo delete" }
 ---
 
+import MIcon from '../../components/MIcon.astro';
+
 World Foundry v2 is a 3D engine built with small machines in mind. Its roots are in early PlayStation-class hardware, where memory and CPU budgets were tiny by today’s standards. That resource-conscious design is central to v2, alongside modern rendering backends, programmable behavior, and live controls.
 
 ## Modern rendering, more places to run
@@ -33,15 +35,40 @@ The engine runs through OpenGL on Linux, OpenGL ES on Android, and WebGL 2 in th
 
 <img src="/apps/world-foundry-v2/debug.svg" alt="Debugging and repeatable verification" width="640" height="258" loading="lazy" decoding="async" />
 
-The **debug bridge** is a small TCP server inside the running engine. Any tool that can send a line of JSON can connect: Blender, a test script, or a hand-typed session. It listens on `127.0.0.1:7777` by default, and both the address and port are command-line switches. It is compiled in only when a build enables it.
+The [**debug bridge**](/apps/world-foundry-v2/debug-bridge/) is a small TCP server inside the running engine. Any tool that can send a line of JSON can connect: Blender, a test script, or a hand-typed session. It listens on `127.0.0.1:7777` by default, and both the address and port are command-line switches. It is compiled in only when a build enables it.
 
-- **Watch the game live.** The engine streams actor positions and frame timing about ten times a second, and you can subscribe to individual mailboxes to see a script’s variables change as they happen.
-- **Change things while it runs.** Move an actor, set an object property, or write any mailbox directly. Undo a step, or revert everything back to the level as loaded.
-- **Pick from the screen.** Cast a ray into the scene and the engine reports which actor it hit, which is how an editor selects objects in the live view.
-- **Drive it like a player.** Inject joystick input, held for an exact number of frames, ahead of the real controller. A test can press a button the same way every run.
-- **Pause and step.** Freeze the simulation, advance exactly *N* frames, then resume. Scripted runs stay repeatable because they step frames rather than waiting on wall-clock time.
-- **Hot-reload without restarting.** Recompile an actor’s zForth script in place, or swap in new GLSL shaders. Broken shader source returns a structured error and the previous shader keeps running.
-- **Capture the frame.** Ask for a screenshot to a named file and get a confirmation when it is written. Comparing captures across backends is how rendering regressions get caught.
+<ul class="icon-list">
+  <li>
+    <span class="icon-tile"><MIcon name="visibility" size={28} ariaHidden /></span>
+    <span><strong>Watch the game live.</strong> The engine streams actor positions and frame timing about ten times a second, and you can subscribe to individual mailboxes to see a script’s variables change as they happen.</span>
+  </li>
+  <li>
+    <span class="icon-tile"><MIcon name="edit" size={28} ariaHidden /></span>
+    <span><strong>Change things while it runs.</strong> Move an actor, set an object property, or write any mailbox directly. Undo a step, or revert everything back to the level as loaded.</span>
+  </li>
+  <li>
+    <span class="icon-tile"><MIcon name="ads_click" size={28} ariaHidden /></span>
+    <span><strong>Pick from the screen.</strong> Cast a ray into the scene and the engine reports which actor it hit, which is how an editor selects objects in the live view.</span>
+  </li>
+  <li>
+    <span class="icon-tile"><MIcon name="sports_esports" size={28} ariaHidden /></span>
+    <span><strong>Drive it like a player.</strong> Inject joystick input, held for an exact number of frames, ahead of the real controller. A test can press a button the same way every run.</span>
+  </li>
+  <li>
+    <span class="icon-tile"><MIcon name="play_pause" size={28} ariaHidden /></span>
+    <span><strong>Pause and step.</strong> Freeze the simulation, advance exactly <em>N</em> frames, then resume. Scripted runs stay repeatable because they step frames rather than waiting on wall-clock time.</span>
+  </li>
+  <li>
+    <span class="icon-tile"><MIcon name="autorenew" size={28} ariaHidden /></span>
+    <span><strong>Hot-reload without restarting.</strong> Recompile an actor’s zForth script in place, or swap in new GLSL shaders. Broken shader source returns a structured error and the previous shader keeps running.</span>
+  </li>
+  <li>
+    <span class="icon-tile"><MIcon name="photo_camera" size={28} ariaHidden /></span>
+    <span><strong>Capture the frame.</strong> Ask for a screenshot to a named file and get a confirmation when it is written. Comparing captures across backends is how rendering regressions get caught.</span>
+  </li>
+</ul>
+
+See it in use: [a Blender panel, a live terminal session and more](/apps/world-foundry-v2/debug-bridge/).
 
 Every request and reply is one line of JSON, so the same bridge serves the Blender live-edit link and the automated level checks.
 

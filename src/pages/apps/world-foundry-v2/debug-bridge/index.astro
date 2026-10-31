@@ -1,0 +1,172 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import blenderPanel from '../../../../assets/screenshots/world-foundry/bridge/blender-bridge-panel.png';
+import bridgeFrame from '../../../../assets/screenshots/world-foundry/bridge/frame.png';
+import editorProperties from '../../../../assets/screenshots/world-foundry/bridge/wfedit-properties.png';
+
+// Real exchange with a running engine (scripts/wf-bridge-captures/terminal_session.py).
+// ~10 Hz perf/state broadcasts are trimmed; `step` has no direct reply.
+const transcript = `> {"op":"ping"}
+< {"op":"pong"}
+> {"op":"pause"}
+< {"op":"paused"}
+> {"op":"step","frames":5}
+> {"op":"watch","idx":9,"mailbox":1906}
+< {"op":"mailbox","idx":9,"mailbox":1906,"value":7.250010}
+> {"op":"set_mailbox","idx":9,"mailbox":1906,"value":0}
+> {"op":"screenshot","filename":"frame.png"}
+< {"op":"screenshot_done","filename":"frame.png",...}
+> {"op":"resume"}
+< {"op":"resumed"}`;
+---
+<Base
+  title="The debug bridge, up close — World Foundry v2"
+  description="How a running World Foundry engine is inspected and driven from outside, one line of JSON at a time: a Blender panel, a terminal session, captured frames and more."
+>
+  <main class="bridge-page">
+    <a class="back" href="/apps/world-foundry-v2/">← World Foundry v2</a>
+    <h1>The debug bridge, up close</h1>
+    <p class="lede">
+      A running World Foundry engine can be inspected and driven from outside, one line of JSON at a time.
+      These are the ways to look at it: tools that connect to it, and what comes back.
+    </p>
+    <ul class="glance" aria-label="At a glance">
+      <li>127.0.0.1:7777</li>
+      <li>one JSON line per message</li>
+      <li>compiled in only when enabled</li>
+    </ul>
+
+    <section class="view">
+      <header>
+        <span class="num" aria-hidden="true">1</span>
+        <h2>Blender live panel</h2>
+        <span class="chip ok">Captured from a live engine</span>
+      </header>
+      <p class="cap">Blender connected to a running game. Connection status, the engine’s CPU time and actor count, Pause and Pick Object, and the mailbox watch list.</p>
+      <div class="fig">
+        <Image src={blenderPanel} alt="Blender’s WF Live Bridge panel: connected to localhost:7777, CPU 34.5 ms, 360 actors, Pause and Pick Object buttons, and a mailbox watch list" width={299} height={226} loading="lazy" decoding="async" />
+      </div>
+    </section>
+
+    <section class="view">
+      <header>
+        <span class="num" aria-hidden="true">2</span>
+        <h2>The editor</h2>
+        <span class="chip old">Existing screenshot</span>
+      </header>
+      <p class="cap">The in-engine editor, with outliner, live viewport and properties. It reaches the engine through its own in-process bridge rather than this TCP one, so it sits beside the debug bridge.</p>
+      <div class="fig">
+        <Image src={editorProperties} alt="The World Foundry editor with an actor selected: outliner on the left, live viewport in the middle, properties on the right" width={760} loading="lazy" decoding="async" />
+      </div>
+    </section>
+
+    <section class="view">
+      <header>
+        <span class="num" aria-hidden="true">3</span>
+        <h2>A terminal session</h2>
+        <span class="chip ok">Captured from a live engine</span>
+      </header>
+      <p class="cap">Ping, pause, step, watch a mailbox, write one, take a screenshot, resume. Lines starting with <b>&gt;</b> are sent; <b>&lt;</b> are replies.</p>
+      <div class="fig"><pre><code>{transcript}</code></pre></div>
+    </section>
+
+    <section class="view">
+      <header>
+        <span class="num" aria-hidden="true">4</span>
+        <h2>Frames through the bridge</h2>
+        <span class="chip ok">Captured from a live engine</span>
+      </header>
+      <p class="cap">The frame the engine wrote when asked for a screenshot, which is how renders get compared across backends.</p>
+      <div class="fig">
+        <Image class="frame" src={bridgeFrame} alt="A frame captured through the bridge: blue shrimp among plants and driftwood in an aquarium" width={560} loading="lazy" decoding="async" />
+      </div>
+    </section>
+
+    <section class="view">
+      <header>
+        <span class="num" aria-hidden="true">5</span>
+        <h2>In-game settings forms</h2>
+        <span class="chip">Placeholder · not shipped</span>
+      </header>
+      <p class="cap">Editable-object screens for TV and phone. Designed, not built yet.</p>
+      <div class="ph"><div><b>Placeholder</b>Screenshot to come once the feature ships</div></div>
+    </section>
+
+    <section class="view">
+      <header>
+        <span class="num" aria-hidden="true">6</span>
+        <h2>This page, in the wild</h2>
+        <span class="chip">Placeholder · to be captured</span>
+      </header>
+      <p class="cap">The bridge section of the World Foundry v2 page, as a visitor sees it.</p>
+      <div class="ph"><div><b>Placeholder</b>Screenshot to come</div></div>
+    </section>
+
+    <p class="foot">
+      The bridge is part of the open-source <a href="https://github.com/wbniv/WorldFoundry">World Foundry engine</a>.
+      <a href="/apps/world-foundry-v2/">Back to World Foundry v2</a>.
+    </p>
+  </main>
+</Base>
+
+<style>
+  .bridge-page { max-width: 960px; margin: 0 auto; padding: 32px 24px 72px; }
+  .back { font-size: 14px; }
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(30px, 5vw, 42px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--color-on-surface);
+    margin: 14px 0 12px;
+  }
+  .lede { font-family: var(--font-body); color: var(--color-secondary); max-width: 760px; margin: 0 0 20px; line-height: 1.7; }
+  .glance { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; padding: 0; margin: 0 0 36px; }
+  .glance li {
+    background: var(--color-surface-container-low);
+    border: 1px solid var(--color-surface-container-high);
+    border-radius: 999px;
+    padding: 5px 14px;
+    font: 13px ui-monospace, monospace;
+    color: var(--color-secondary);
+  }
+  .view { margin: 0 0 44px; }
+  .view header { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; margin-bottom: 6px; }
+  .num {
+    width: 34px; height: 34px; border-radius: 10px; flex: none;
+    display: grid; place-items: center; font-weight: 700;
+    background: var(--color-surface-container-low);
+    color: var(--color-primary-container);
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 3vw, 24px);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-on-surface);
+    margin: 0;
+  }
+  .chip { font-size: 12px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--color-surface-container-high); color: var(--color-secondary); }
+  .chip.ok { border-color: var(--color-primary-container); color: var(--color-primary-container); }
+  .chip.old { border-color: var(--color-tertiary-container); color: var(--color-tertiary-container); }
+  .cap { font-family: var(--font-body); color: var(--color-secondary); max-width: 780px; margin: 6px 0 14px; line-height: 1.65; }
+  .cap b { color: var(--color-on-surface); }
+  .fig { background: var(--color-surface-container-low); border-radius: 14px; padding: 14px; overflow: hidden; }
+  .fig :global(img) { display: block; max-width: 100%; height: auto; border-radius: 8px; margin: 0 auto; }
+  .fig :global(img.frame) { max-width: 480px; }
+  pre {
+    margin: 0; padding: 16px; overflow-x: auto; border-radius: 10px;
+    background: var(--color-surface-container-lowest);
+    font: 13px/1.6 ui-monospace, monospace;
+    color: var(--color-on-surface);
+  }
+  .ph {
+    display: grid; place-items: center; text-align: center; min-height: 230px; padding: 20px;
+    border: 2px dashed var(--color-surface-container-high); border-radius: 12px;
+    color: var(--color-secondary);
+  }
+  .ph b { display: block; color: var(--color-on-surface); margin-bottom: 4px; }
+  .foot { font-family: var(--font-body); color: var(--color-secondary); margin-top: 8px; }
+</style>

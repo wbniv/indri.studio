@@ -372,6 +372,29 @@ const ogImage = ogImagePath ? new URL(ogImagePath, Astro.site).href : undefined;
 		.prose :global(li::marker) {
 			color: var(--color-primary-container);
 		}
+		.prose :global(ul.icon-list) {
+			list-style: none;
+			padding-left: 0;
+			margin: 1.75em 0;
+			display: grid;
+			gap: 1.75rem;
+		}
+		.prose :global(ul.icon-list > li) {
+			display: grid;
+			grid-template-columns: 48px 1fr;
+			column-gap: 1.25rem;
+			align-items: start;
+			margin: 0;
+		}
+		.prose :global(.icon-tile) {
+			display: grid;
+			place-items: center;
+			width: 48px;
+			height: 48px;
+			border-radius: 12px;
+			background: var(--color-surface-container-low);
+			color: var(--color-primary-container);
+		}
 		.prose :global(blockquote) {
 			border-left: 2px solid var(--color-primary-container);
 			padding-left: 1.25rem;

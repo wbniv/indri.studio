@@ -4,6 +4,10 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 ## Open
 
+### World Foundry
+
+- [T3] **2026-10-31** **World Foundry debug bridge page** — new standalone page `/apps/world-foundry-v2/debug-bridge/` showing the bridge six ways (Blender panel, editor, terminal session, bridge frames, settings forms, the page itself); views 5 and 6 are placeholders; link it from the "Better tools" section. T3 because the design is settled in the plan and it spans a page, a content link and capture scripts — [plan](docs/plans/2026-10-31-world-foundry-debug-bridge-page.md)
+
 ### SNES player package
 
 - [T1] **2026-07-27** After the first npm publish of `@wbniv/bsnes-jg-player`, swap the git dep
@@ -85,4 +89,10 @@ _Auto-added from plan "Out of scope"/"Deferred" sections at commit time. Triage 
 <!-- BEGIN auto-captured-deferrals (managed by audit-plan-deferrals.sh — triage these into the curated sections above; the fingerprint ledger means a deleted item is NOT re-added) -->
 - [ ] **(triage)** **Aspect fixed.** The raw framebuffer is **256×224** samples (8:7 grid). `present()` corrects the horizontal pixel aspect for the traditional **4:3 SNES television picture**, matching the displayed game image. (Also fixed an `imageData`-null deref this exposed.) — _from [2026-06-25-llvm-mos-emulator-embed.md](docs/plans/2026-06-25-llvm-mos-emulator-embed.md)_  <!-- fp:cc0400430a355c48 -->
 - [ ] **(triage)** **Dropped** the "Host C reference vs the SNES render — pixel-for-pixel" screenshot (`mandel-compare.png`) — the live emulator demonstrates it better. — _from [2026-06-25-llvm-mos-emulator-embed.md](docs/plans/2026-06-25-llvm-mos-emulator-embed.md)_  <!-- fp:0963b00889e45689 -->
+- [ ] **(triage)** Replacing placeholder 5 (settings forms). Blocked until the runtime object-editing feature ships; see the engine plan `2026-10-16-runtime-object-editing.md`. — _from [2026-10-31-world-foundry-debug-bridge-page.md](docs/plans/2026-10-31-world-foundry-debug-bridge-page.md)_  <!-- fp:1d172184255aaa83 -->
+- [ ] **(triage)** Replacing placeholder 6 with a real screenshot of the live page. Do it after the page is deployed; needs a working browser capture. — _from [2026-10-31-world-foundry-debug-bridge-page.md](docs/plans/2026-10-31-world-foundry-debug-bridge-page.md)_  <!-- fp:ee74050fb0b438e4 -->
+- [ ] **(triage)** A fresh capture of the Blender panel showing the Frame / Step / Resume row. The panel code draws it under conditions the capture did not hit. — _from [2026-10-31-world-foundry-debug-bridge-page.md](docs/plans/2026-10-31-world-foundry-debug-bridge-page.md)_  <!-- fp:36845d9b8617177d -->
+- [ ] **(triage)** A capture of `wf-edit` going through its own bridge, or a build of `wf-edit` (no binary was found). — _from [2026-10-31-world-foundry-debug-bridge-page.md](docs/plans/2026-10-31-world-foundry-debug-bridge-page.md)_  <!-- fp:9b9579c2ffaca1bf -->
+- [ ] **(triage)** A write-up of the bridge protocol on the page. The page shows it; the command reference lives in the engine repo. — _from [2026-10-31-world-foundry-debug-bridge-page.md](docs/plans/2026-10-31-world-foundry-debug-bridge-page.md)_  <!-- fp:5e32792e8e5cdc1e -->
+- [verify] **2026-10-31-world-foundry-debug-bridge-page** — Verification section present but no PASS recorded — run + record the steps. _from [2026-10-31-world-foundry-debug-bridge-page.md](docs/plans/2026-10-31-world-foundry-debug-bridge-page.md)_  <!-- fp:da2241a53ad06560 -->
 <!-- END auto-captured-deferrals -->
