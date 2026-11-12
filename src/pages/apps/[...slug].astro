@@ -20,15 +20,19 @@ export async function getStaticPaths() {
 		if (b.id === "finding-your-way") return -1;
 		return a.data.title.localeCompare(b.data.title);
 	});
-	return posts.map((post, i) => ({
-		params: { slug: post.id },
-		props: {
-			post,
-			// Wrap around at the edges so the catalogue cycles continuously.
-			prev: posts[(i - 1 + posts.length) % posts.length],
-			next: posts[(i + 1) % posts.length],
-		},
-	}));
+	// Entries with a hand-written route stay in the prev/next cycle but get
+	// no generated page here.
+	return posts
+		.map((post, i) => ({
+			params: { slug: post.id },
+			props: {
+				post,
+				// Wrap around at the edges so the catalogue cycles continuously.
+				prev: posts[(i - 1 + posts.length) % posts.length],
+				next: posts[(i + 1) % posts.length],
+			},
+		}))
+		.filter(({ props }) => !props.post.data.customPage);
 }
 
 interface Props {

@@ -1,0 +1,340 @@
+---
+// Erawan landing page — implements docs/plans/2026-11-12-erawan-landing-page.md
+// in the Erawan repo. Static HTML + CSS only; navigation and essential content
+// work without JavaScript. Interface excerpts are enlarged fragments of the
+// real renderers, drawn from labelled demo data (see scripts/sync-erawan-docs.sh).
+import AppLayout from "../../../layouts/AppLayout.astro";
+
+const quickStart = "/docs/erawan-quick-start/";
+const a4 = "/apps/erawan/erawan-a4.pdf";
+
+const workflows = [
+	{
+		id: "backup",
+		tone: "blue",
+		title: "Back up & watch",
+		outcome: "Give selected files another home; follow copying and verification.",
+		examples: ["Photos to a mounted USB disk", "A large overnight upload", "One SFTP server to another"],
+		guide: { label: "Backup guide", href: `${quickStart}#backup` },
+	},
+	{
+		id: "consolidate",
+		tone: "green",
+		title: "Compare & consolidate",
+		outcome: "Gather scattered collections into one chosen KEEP location.",
+		examples: ["Bring in an old laptop", "Gather scattered photo drives", "Keep both conflicting versions"],
+		guide: { label: "Consolidation guide", href: `${quickStart}#consolidate` },
+	},
+	{
+		id: "duplicates",
+		tone: "purple",
+		title: "Find repeated files",
+		outcome: "Find identical bytes, then choose the copies and paths to retain.",
+		examples: ["Repeated camera imports", "Downloads saved twice", "Identical development files"],
+		guide: { label: "Duplicate guide", href: `${quickStart}#duplicates` },
+	},
+] as const;
+
+const matrix = [
+	["Local folders & mounted disks", "Yes", "Yes*", "Includes mounted USB drives and shares"],
+	["SFTP servers (over SSH)", "Yes", "Yes", "One configured SFTP server to another"],
+	["Cloudflare R2 & Amazon S3", "Yes", "Yes", "To: a dedicated prefix inside a bucket"],
+	["SMB, WebDAV & FTP", "Yes", "Yes", "Configured rclone routes; backend evidence varies"],
+	["Running Docker containers", "Yes", "Yes", "Filesystem accessible from this host"],
+	["Google Drive", "Yes†", "Planned", "Read-only source setup"],
+	["Other rclone remotes", "Check", "Check", "Backend-specific validation needed"],
+	["Linux SSH peer (rsync)", "No", "Yes", "Requires a local source"],
+] as const;
+---
+
+<AppLayout
+	title="Erawan"
+	description="A visual terminal tool for backing up files, consolidating folders, and finding duplicates — with verification in plain view."
+	theme={{ background: "#f4f7fb", text: "#16253b" }}
+>
+	<div class="erawan">
+		<header class="e-top">
+			<a class="e-mark" href="/apps/erawan/">Erawan</a>
+			<nav aria-label="Erawan">
+				<a href="#workflows">Workflows</a>
+				<a href={quickStart}>Quick Start</a>
+				<span class="e-nav-note">Source: private repository</span>
+			</nav>
+		</header>
+
+		<section class="e-hero" aria-labelledby="e-title">
+			<div class="e-hero-copy">
+				<h1 id="e-title">See your files move.<br />Know what was verified.</h1>
+				<p class="e-lede">A visual terminal tool for backing up files, consolidating folders, and finding duplicates.</p>
+				<p class="e-actions">
+					<a class="e-btn e-btn-primary" href={quickStart}>Read Quick Start</a>
+					<a class="e-btn e-btn-quiet" href="#workflows">Explore workflows</a>
+				</p>
+				<p class="e-status">Linux · Python 3.10+ · development software</p>
+			</div>
+			<figure class="e-hero-shot">
+				<img
+					src="/apps/erawan/watch-detail.svg"
+					width="358"
+					height="146"
+					alt="Erawan's live backup view, enlarged: 162 of 240 paths done on a blue-to-cyan bar, 544 of 800 MiB on an amber-to-green bar, 3 active files at 20.7 MiB per second."
+					fetchpriority="high"
+				/>
+				<figcaption>Actual interface · demo data · <a href={`${quickStart}#backup`}>See the full view →</a></figcaption>
+			</figure>
+		</section>
+
+		<nav class="e-pick" aria-label="Pick your workflow">
+			<h2>Pick your workflow</h2>
+			<ul>
+				<li><a href="#backup">Back up</a></li>
+				<li><a href="#consolidate">Consolidate</a></li>
+				<li><a href="#duplicates">Duplicates</a></li>
+			</ul>
+		</nav>
+
+		<section id="workflows" class="e-workflows" aria-labelledby="e-workflows-title">
+			<p class="e-kicker">Versatile</p>
+			<h2 id="e-workflows-title">Start with a job you recognize.</h2>
+			<div class="e-cards">
+				{workflows.map((w) => (
+					<article id={w.id} class={`e-card e-${w.tone}`}>
+						<h3>{w.title}</h3>
+						<p class="e-outcome">{w.outcome}</p>
+						<ul class="e-examples">
+							{w.examples.map((x) => <li>{x}</li>)}
+						</ul>
+
+						{w.id === "backup" && (
+							<div class="e-diagram" role="img" aria-label="Example: back up SFTP A, folder /srv/photos, to SFTP B, folder /srv/archive. Copy, then verify. Choose endpoints and review before running.">
+								<p class="e-d-label">Example · server archive</p>
+								<p class="e-d-line">SFTP A <code>/srv/photos</code></p>
+								<p class="e-d-flow">↓ Erawan: copy → verify ↓</p>
+								<p class="e-d-line">SFTP B <code>/srv/archive</code></p>
+								<p class="e-d-note">Choose endpoints; review before running.</p>
+							</div>
+						)}
+						{w.id === "consolidate" && (
+							<div class="e-diagram" role="img" aria-label="Example: consolidating FROM into a local KEEP folder. garden.jpg is missing from KEEP, so it is added and verified. proposal.pdf has different bytes in the two folders, so it needs review. Keep both: the second version gets a new name, proposal-client-b.pdf. Review the new name, then apply.">
+								<p class="e-d-label">Example · FROM → local KEEP</p>
+								<p class="e-d-line">garden.jpg <span class="e-d-ok">→ missing: add + verify</span></p>
+								<p class="e-d-line">proposal.pdf <span class="e-d-warn">→ different bytes: review</span></p>
+								<p class="e-d-line">Keep both: <code>proposal-client-b.pdf</code></p>
+								<p class="e-d-note">Review the new name, then apply.</p>
+							</div>
+						)}
+						{w.id === "duplicates" && (
+							<div class="e-diagram" role="img" aria-label="Example: three paths share the same full SHA-256. Photos/beach.jpg is marked as the copy to keep. Imports/IMG_0421.jpg and Downloads/beach-copy.jpg are repeats. Review link or delete, then dry run, then apply.">
+								<p class="e-d-label">Example · same full SHA-256</p>
+								<p class="e-d-line">★ <code>Photos/beach.jpg</code> <strong>KEEP</strong></p>
+								<p class="e-d-line"><code>Imports/IMG_0421.jpg</code></p>
+								<p class="e-d-line"><code>Downloads/beach-copy.jpg</code></p>
+								<p class="e-d-ok">Review link / delete → dry run → apply</p>
+							</div>
+						)}
+
+						<p><a class="e-btn e-btn-quiet" href={w.guide.href}>{w.guide.label} →</a></p>
+					</article>
+				))}
+			</div>
+		</section>
+
+		<section class="e-matrix" aria-labelledby="e-matrix-title">
+			<h2 id="e-matrix-title">Backup connectivity</h2>
+			<p class="e-sub">Choose the endpoints for your backup. Other workflows have different coverage.</p>
+			<table>
+				<thead>
+					<tr><th scope="col">Endpoint type</th><th scope="col">From</th><th scope="col">To</th><th scope="col" class="e-detail">Key detail</th></tr>
+				</thead>
+				<tbody>
+					{matrix.map(([type, from, to, detail]) => (
+						<tr>
+							<th scope="row">{type}</th>
+							<td data-label="From">{from}</td>
+							<td data-label="To">{to}</td>
+							<td class="e-detail">{detail}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+			<p class="e-fine">* Local destinations: below a non-root mount. † Drive source verification is in progress. Routes are not an exhaustive tested-pair list.</p>
+		</section>
+
+		<section class="e-split" aria-labelledby="e-visual-title">
+			<div>
+				<p class="e-kicker">Visual</p>
+				<h2 id="e-visual-title">Choose your source, destination, and options visually.</h2>
+				<p>Start with <code>erawan wizard</code>. Choose a task, browse your locations, then review the next action.</p>
+				<ul class="e-plain">
+					<li>Backup / consolidation → review printed commands</li>
+					<li>Duplicates → scan, inspect groups, review changes</li>
+				</ul>
+			</div>
+			<figure>
+				<img
+					src="/apps/erawan/wizard-choices.svg"
+					width="358"
+					height="140"
+					loading="lazy"
+					alt="Erawan wizard, Choose a task: Back up one source (highlighted), Compare and consolidate directories, Find duplicate files."
+				/>
+				<figcaption>Current task menu · actual renderer</figcaption>
+			</figure>
+		</section>
+
+		<section class="e-split e-split-flip" aria-labelledby="e-verified-title">
+			<figure>
+				<img
+					src="/apps/erawan/verification-excerpt.svg"
+					width="358"
+					height="146"
+					loading="lazy"
+					alt="Erawan's verification view, enlarged: 172 of 240 files verified on a cyan-green bar, 1.1 of 1.6 GiB of content read on a purple-to-cyan bar, verification in progress."
+				/>
+				<figcaption>Verification excerpt · demo data · <a href={`${quickStart}#backup`}>Full view and check details →</a></figcaption>
+			</figure>
+			<div>
+				<p class="e-kicker">Verified</p>
+				<h2 id="e-verified-title">Copying finishes. Verification follows.</h2>
+				<p>Follow the checks as their own stage. See what was copied and what was checked.</p>
+				<p class="e-fine">Content checks and filesystem metadata fidelity answer different questions.</p>
+			</div>
+		</section>
+
+		<section class="e-cta" aria-labelledby="e-cta-title">
+			<h2 id="e-cta-title">Ready to choose your first job?</h2>
+			<p>Set up from source on Linux, then open <code>erawan wizard</code>. The source repository is private for now, so there is no public download yet.</p>
+			<p class="e-actions">
+				<a class="e-btn e-btn-primary" href={quickStart}>Read Quick Start</a>
+				<a class="e-btn e-btn-light" href={a4} download>Download A4 overview</a>
+				<span class="e-status e-status-dark">Two pages · overview and examples</span>
+			</p>
+		</section>
+
+		<footer class="e-foot">
+			Erawan · MIT · Source: private repository · <a href={quickStart}>Quick Start</a>
+		</footer>
+	</div>
+</AppLayout>
+
+<style>
+	.erawan {
+		--e-ink: #16253b;
+		--e-muted: #4b5b72;
+		--e-line: #cdd8e6;
+		--e-panel: #0f1f35;
+		--e-teal: #0b7f86;
+		--e-teal-text: #086a70;
+		--e-blue: #2a9ccf;
+		--e-green: #3fb27f;
+		--e-purple: #8d6fe0;
+		background: #f4f7fb;
+		color: var(--e-ink);
+		font-family: var(--font-body);
+		line-height: 1.55;
+		width: 100%;
+		padding: 0 max(16px, calc((100% - 1312px) / 2)) 48px;
+		font-size: 16px;
+	}
+	.erawan :global(a) { color: var(--e-teal-text); }
+	.erawan :global(a:focus-visible) { outline: 3px solid var(--e-teal); outline-offset: 3px; border-radius: 4px; }
+	.erawan code { font-family: var(--font-mono); font-size: 0.92em; }
+	.erawan h1, .erawan h2, .erawan h3 { font-family: var(--font-display); color: var(--e-ink); letter-spacing: -0.01em; font-weight: 700; margin: 0; }
+
+	.e-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 28px 0 8px; }
+	.e-mark { font-family: var(--font-display); font-weight: 700; font-size: 28px; color: var(--e-ink) !important; text-decoration: none; }
+	.e-top nav { display: flex; flex-wrap: wrap; gap: 8px 28px; align-items: center; }
+	.e-top nav a { color: var(--e-ink); text-decoration: none; padding: 8px 0; }
+	.e-top nav a:hover { text-decoration: underline; }
+	.e-nav-note { color: var(--e-muted); font-size: 14px; }
+	.e-mark { letter-spacing: 0; }
+
+	.e-hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; padding: 48px 0 56px; }
+	.e-hero h1 { font-size: clamp(32px, 4.4vw, 52px); line-height: 1.15; }
+	.e-lede { font-size: clamp(18px, 1.8vw, 21px); margin: 20px 0 28px; max-width: 34ch; }
+	.e-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 0; }
+	.e-btn { display: inline-flex; align-items: center; min-height: 48px; padding: 0 20px; border-radius: 6px; font-weight: 700; font-size: 15px; text-decoration: none; }
+	.e-btn-primary { background: var(--e-teal-text); color: #fff !important; }
+	.e-btn-primary:hover { background: #065a60; }
+	.e-btn-quiet { background: #e4ebf4; color: var(--e-ink) !important; }
+	.e-btn-quiet:hover { background: #d6e0ee; }
+	.e-btn-light { background: #e4ebf4; color: var(--e-ink) !important; }
+	.e-status { color: var(--e-muted); font-size: 14px; margin: 16px 0 0; }
+	.e-actions .e-status { margin: 0 0 0 8px; }
+	.e-status-dark { color: #c4d2e6; }
+	.e-hero-shot { margin: 0; }
+	.e-hero-shot img, .e-split img { display: block; width: 100%; height: auto; border-radius: 22px; }
+	.e-hero-shot figcaption, .e-split figcaption { margin-top: 10px; font-size: 14px; color: var(--e-muted); }
+
+	.e-pick { display: none; }
+
+	.e-kicker { color: var(--e-teal-text); font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; margin: 0 0 6px; }
+	.e-workflows { padding-top: 8px; scroll-margin-top: 80px; }
+	.e-workflows > h2 { font-size: clamp(26px, 3vw, 34px); margin-bottom: 24px; }
+	.e-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; }
+	.e-card { background: #fff; border-top: 4px solid var(--e-blue); border-radius: 4px 4px 12px 12px; padding: 24px 22px 26px; scroll-margin-top: 80px; display: flex; flex-direction: column; gap: 14px; }
+	.e-green { border-top-color: var(--e-green); }
+	.e-purple { border-top-color: var(--e-purple); }
+	.e-card h3 { font-size: 24px; }
+	.e-outcome { color: var(--e-muted); margin: 0; }
+	.e-examples { margin: 0; padding-left: 20px; list-style: disc; }
+	.e-diagram { background: var(--e-panel); color: #e6eefb; border-radius: 12px; padding: 16px 18px; margin: 4px 0; }
+	.e-diagram p { margin: 0 0 6px; }
+	.e-diagram code { color: #fff; }
+	.e-d-label { color: #6fe0c4; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; }
+	.e-d-line { font-size: 16px; }
+	.e-d-flow { color: #b4c6de; font-size: 15px; }
+	.e-d-note { color: #c4d2e6; font-size: 13px; margin: 8px 0 0 !important; }
+	.e-d-ok { color: #8be3b6; }
+	.e-d-warn { color: #ffcf6e; }
+	.e-card > p:last-child { margin: auto 0 0; padding-top: 6px; }
+
+	.e-matrix { margin-top: 64px; }
+	.e-matrix h2, .e-split h2, .e-cta h2 { font-size: clamp(24px, 2.6vw, 32px); }
+	.e-sub { color: var(--e-muted); margin: 8px 0 20px; }
+	.e-matrix table { width: 100%; border-collapse: collapse; background: #fff; }
+	.e-matrix thead th { background: var(--e-panel); color: #fff; text-align: left; padding: 12px 16px; }
+	.e-matrix tbody th { text-align: left; font-weight: 400; }
+	.e-matrix td, .e-matrix tbody th { padding: 11px 16px; vertical-align: top; }
+	.e-matrix tbody tr:nth-child(even) { background: #eaf0f8; }
+	.e-fine { color: var(--e-muted); font-size: 14px; margin: 12px 0 0; }
+
+	.e-split { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 72px; }
+	.e-split h2 { margin-bottom: 14px; }
+	.e-split p { margin: 0 0 12px; }
+	.e-split figure { margin: 0; }
+	.e-plain { list-style: none; padding: 0; margin: 0; }
+	.e-plain li { margin-bottom: 6px; }
+
+	.e-cta { margin-top: 72px; background: var(--e-panel); color: #e6eefb; border-radius: 14px; padding: 30px 34px 34px; }
+	.e-cta h2 { color: #fff; margin-bottom: 10px; }
+	.e-cta p { margin: 0 0 22px; max-width: 62ch; }
+	.e-cta .e-actions { margin: 0; }
+	.e-cta code { color: #fff; }
+	.e-foot { margin-top: 36px; color: var(--e-muted); font-size: 14px; }
+
+	@media (max-width: 900px) {
+		.e-top { padding: 16px 0 0; }
+		.e-nav-note, .e-hero .e-btn-quiet { display: none; }
+		.e-hero { grid-template-columns: 1fr; gap: 20px; padding: 16px 0 24px; }
+		.e-hero h1 { font-size: 30px; }
+		.e-lede { margin: 12px 0 18px; }
+		.e-status { margin-top: 10px; }
+		.e-pick { display: block; margin-bottom: 28px; }
+		.e-pick h2 { font-size: 22px; margin-bottom: 12px; }
+		.e-pick ul { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; list-style: none; margin: 0; padding: 0; }
+		.e-pick a { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 6px; background: #e4ebf4; color: var(--e-ink); font-weight: 700; font-size: 14px; border-radius: 6px; text-decoration: none; text-align: center; }
+		.e-cards { grid-template-columns: 1fr; }
+		.e-split, .e-split-flip { grid-template-columns: 1fr; gap: 24px; margin-top: 56px; }
+		.e-split-flip figure { order: 2; }
+		.e-cta { padding: 24px 20px 28px; }
+		/* Backup matrix: keep the three-column table, drop the notes column
+		   under each row so nothing scrolls sideways or shrinks. */
+		.e-matrix table, .e-matrix tbody { display: block; }
+		.e-matrix thead { display: grid; grid-template-columns: minmax(0, 1fr) 5.25rem 5.25rem; background: var(--e-panel); }
+		.e-matrix thead .e-detail { display: none; }
+		.e-matrix tbody tr { display: grid; grid-template-columns: minmax(0, 1fr) 5.25rem 5.25rem; }
+		.e-matrix tbody th, .e-matrix tbody td { padding: 12px 16px 4px; }
+		.e-matrix td.e-detail { grid-column: 1 / -1; padding: 0 16px 12px; color: var(--e-muted); font-size: 14px; }
+	}
+</style>

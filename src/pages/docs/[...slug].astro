@@ -45,10 +45,12 @@ const pdfHref = `/docs/${doc.id}.pdf`;
 					{doc.data.summary}
 				</p>
 			)}
-			<div class="doc-downloads">
-				<a href={mdHref} download class="doc-dl"><MIcon name="description" size={16} ariaHidden /> Markdown</a>
-				<a href={pdfHref} download class="doc-dl"><MIcon name="picture_as_pdf" size={16} ariaHidden /> PDF</a>
-			</div>
+			{doc.data.downloads && (
+				<div class="doc-downloads">
+					<a href={mdHref} download class="doc-dl"><MIcon name="description" size={16} ariaHidden /> Markdown</a>
+					<a href={pdfHref} download class="doc-dl"><MIcon name="picture_as_pdf" size={16} ariaHidden /> PDF</a>
+				</div>
+			)}
 		</header>
 
 		<div class="prose">
@@ -58,7 +60,7 @@ const pdfHref = `/docs/${doc.id}.pdf`;
 		{doc.data.sourceCommit && (
 			<footer class="doc-provenance">
 				Snapshot from <code>{doc.data.sourceRepo ?? "llvm-mos-65816"}</code>
-				@ <code>{doc.data.sourceCommit}</code>. Apache-2.0 with LLVM exceptions.
+				@ <code>{doc.data.sourceCommit}</code>. {doc.data.license}.
 			</footer>
 		)}
 	</article>

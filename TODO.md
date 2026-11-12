@@ -35,6 +35,7 @@ _Nothing parked._
 
 ## Done
 
+- ✅ 2026-11-12 — [erawan-landing] Erawan landing page at /apps/erawan/, gallery card, Quick Start at /docs/erawan-quick-start/. See [plan](/home/will/erawan/docs/plans/2026-11-12-erawan-landing-page.md).
 - ✅ 2026-10-31 — [debug-bridge-page] Live at /apps/world-foundry-v2/debug-bridge/, with five bridge views. See [plan](docs/plans/2026-10-31-world-foundry-debug-bridge-page.md).
 - [x] 2026-10-18 — Added a real-panel demo video and transcript to the BGA app page — [plan](docs/plans/2026-10-17-bga-title-tray-catalogue.md).
 - [x] 2026-10-18 — Replaced the oversized BGA page illustration with a compact actual panel capture — [plan](docs/plans/2026-10-17-bga-title-tray-catalogue.md).

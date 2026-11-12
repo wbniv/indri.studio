@@ -62,6 +62,10 @@ const apps = defineCollection({
 		// instead of the internal /apps/<slug>/ page, and no static page is
 		// generated for this entry.
 		externalUrl: z.string().url().optional(),
+		// The app's page is a hand-written route under src/pages/apps/<slug>/
+		// (not the shared [...slug].astro detail template). The gallery card
+		// still links to /apps/<slug>/; the template skips generating it.
+		customPage: z.boolean().default(false),
 		// Store / download links — add the actual listing URL only after
 		// publication. Missing links and "#" placeholders render no badge.
 		storeLinks: z
@@ -150,6 +154,12 @@ const docs = defineCollection({
 		sourceCommit: z.string().optional(),
 		// Sort order within the product's documentation list (ascending).
 		order: z.number().default(0),
+		// Licence line shown in the provenance footer (default: the
+		// llvm-mos-65816 licence, which the first docs were published under).
+		license: z.string().default("Apache-2.0 with LLVM exceptions"),
+		// Offer .md/.pdf downloads from public/docs/<slug>.*. Off for docs
+		// that publish no such files.
+		downloads: z.boolean().default(true),
 	}),
 });
 
