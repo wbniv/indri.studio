@@ -1,0 +1,755 @@
+[
+  {
+    "id": "B01",
+    "title": "Give photos a second home",
+    "family": "backup",
+    "left": "Laptop /Photos",
+    "right": "Mounted USB /Photos",
+    "source": [
+      {
+        "name": "beach.jpg",
+        "size": 40,
+        "hash": "A"
+      },
+      {
+        "name": "garden.raw",
+        "size": 120,
+        "hash": "B"
+      },
+      {
+        "name": "sunrise.jpg",
+        "size": 80,
+        "hash": "C"
+      }
+    ],
+    "dest": [],
+    "note": "Local backup destination: a dedicated directory below a non-root mount.",
+    "stages": [
+      {
+        "label": "Before",
+        "kind": "before",
+        "caption": "Inspect the selected source and destination.",
+        "duration": 2400
+      },
+      {
+        "label": "Review",
+        "kind": "review",
+        "caption": "Copy the three selected photos to a dedicated directory on the mounted USB disk.",
+        "duration": 0
+      },
+      {
+        "label": "Copy",
+        "kind": "copy",
+        "caption": "Selected files are copied; content verification follows.",
+        "duration": 4200
+      },
+      {
+        "label": "Verify",
+        "kind": "verify",
+        "caption": "Read back the retained content in a separate verification stage.",
+        "duration": 3400
+      },
+      {
+        "label": "Result",
+        "kind": "done",
+        "caption": "Inspect the verified result of this illustrative job.",
+        "duration": 0
+      }
+    ]
+  },
+  {
+    "id": "B04",
+    "title": "See the overnight upload",
+    "family": "backup",
+    "left": "Local /Video",
+    "right": "S3 bucket /video",
+    "source": [
+      {
+        "name": "interview.mov",
+        "size": 180,
+        "hash": "A"
+      },
+      {
+        "name": "cutaway.mov",
+        "size": 60,
+        "hash": "B"
+      }
+    ],
+    "dest": [],
+    "note": "The clock is compressed for the demo. A run window does not launch recurring jobs.",
+    "stages": [
+      {
+        "label": "Before",
+        "kind": "before",
+        "caption": "Inspect the selected source and destination.",
+        "duration": 2400
+      },
+      {
+        "label": "Review",
+        "kind": "review",
+        "caption": "Use the 22:00\u201307:00 window and a chosen rate limit for this already-started job.",
+        "duration": 0
+      },
+      {
+        "label": "Wait for window",
+        "kind": "waiting",
+        "caption": "21:55 \u2192 22:00. Copying starts when the permitted window opens.",
+        "duration": 3600
+      },
+      {
+        "label": "Copy",
+        "kind": "copy",
+        "caption": "Selected files are copied; content verification follows.",
+        "duration": 4200
+      },
+      {
+        "label": "Verify",
+        "kind": "verify",
+        "caption": "Read back the retained content in a separate verification stage.",
+        "duration": 3400
+      },
+      {
+        "label": "Result",
+        "kind": "done",
+        "caption": "Inspect the verified result of this illustrative job.",
+        "duration": 0
+      }
+    ]
+  },
+  {
+    "id": "B06",
+    "title": "One SFTP server to another",
+    "family": "backup",
+    "left": "SFTP A /srv/photos",
+    "right": "SFTP B /srv/archive",
+    "source": [
+      {
+        "name": "temple.raw",
+        "size": 120,
+        "hash": "A"
+      },
+      {
+        "name": "garden.jpg",
+        "size": 40,
+        "hash": "B"
+      },
+      {
+        "name": "coast.jpg",
+        "size": 80,
+        "hash": "C"
+      }
+    ],
+    "dest": [],
+    "note": "SFTP \u2192 SFTP uses the rclone route through Erawan; this is not the local-source-only rsync mode.",
+    "stages": [
+      {
+        "label": "Before",
+        "kind": "before",
+        "caption": "Inspect the selected source and destination.",
+        "duration": 2400
+      },
+      {
+        "label": "Review",
+        "kind": "review",
+        "caption": "Review both configured SFTP remotes and the reported uncertainty about original filesystem attributes.",
+        "duration": 0
+      },
+      {
+        "label": "Copy",
+        "kind": "copy",
+        "caption": "Selected files are copied; content verification follows.",
+        "duration": 4200
+      },
+      {
+        "label": "Verify",
+        "kind": "verify",
+        "caption": "Read back the retained content in a separate verification stage.",
+        "duration": 3400
+      },
+      {
+        "label": "Result",
+        "kind": "done",
+        "caption": "Inspect the verified result of this illustrative job.",
+        "duration": 0
+      }
+    ],
+    "relay": true
+  },
+  {
+    "id": "B15",
+    "title": "Resume an interrupted job",
+    "family": "backup",
+    "left": "Saved photo backup",
+    "right": "Same bound destination",
+    "source": [
+      {
+        "name": "beach.jpg",
+        "size": 40,
+        "hash": "A"
+      },
+      {
+        "name": "garden.raw",
+        "size": 120,
+        "hash": "B"
+      },
+      {
+        "name": "sunrise.jpg",
+        "size": 80,
+        "hash": "C"
+      }
+    ],
+    "dest": [
+      {
+        "name": "beach.jpg",
+        "size": 40,
+        "hash": "A"
+      }
+    ],
+    "note": "Completed files remain; interrupted-file behaviour depends on transport. No universal byte-level resume claim.",
+    "stages": [
+      {
+        "label": "Before",
+        "kind": "before",
+        "caption": "Inspect the selected source and destination.",
+        "duration": 2400
+      },
+      {
+        "label": "Review",
+        "kind": "review",
+        "caption": "Keep the completed file and resume the same job. This example restarts its interrupted file from the beginning.",
+        "duration": 0
+      },
+      {
+        "label": "Copy",
+        "kind": "copy",
+        "caption": "Selected files are copied; content verification follows.",
+        "duration": 4200
+      },
+      {
+        "label": "Verify",
+        "kind": "verify",
+        "caption": "Read back the retained content in a separate verification stage.",
+        "duration": 3400
+      },
+      {
+        "label": "Result",
+        "kind": "done",
+        "caption": "Inspect the verified result of this illustrative job.",
+        "duration": 0
+      }
+    ],
+    "resume": true
+  },
+  {
+    "id": "C01",
+    "title": "Bring in the old laptop",
+    "family": "consolidate",
+    "left": "Old laptop /Documents",
+    "right": "Local KEEP /Archive",
+    "source": [
+      {
+        "name": "notes.txt",
+        "size": 5,
+        "hash": "A"
+      },
+      {
+        "name": "contract.pdf",
+        "size": 10,
+        "hash": "B"
+      },
+      {
+        "name": "sketch.png",
+        "size": 25,
+        "hash": "C"
+      }
+    ],
+    "dest": [
+      {
+        "name": "notes.txt",
+        "size": 5,
+        "hash": "A"
+      }
+    ],
+    "note": "File consolidation does not migrate application settings.",
+    "stages": [
+      {
+        "label": "Before",
+        "kind": "before",
+        "caption": "Inspect the selected source and destination.",
+        "duration": 2400
+      },
+      {
+        "label": "Review",
+        "kind": "review",
+        "caption": "KEEP already has notes.txt. Copy contract.pdf and sketch.png, then verify retained content.",
+        "duration": 0
+      },
+      {
+        "label": "Copy",
+        "kind": "copy",
+        "caption": "Selected files are copied; content verification follows.",
+        "duration": 4200
+      },
+      {
+        "label": "Verify",
+        "kind": "verify",
+        "caption": "Read back the retained content in a separate verification stage.",
+        "duration": 3400
+      },
+      {
+        "label": "Result",
+        "kind": "done",
+        "caption": "Inspect the verified result of this illustrative job.",
+        "duration": 0
+      }
+    ]
+  },
+  {
+    "id": "C02",
+    "title": "Gather scattered photos",
+    "family": "consolidate",
+    "left": "USB A + USB B",
+    "right": "Local KEEP /Photos",
+    "source": [
+      {
+        "name": "beach.jpg",
+        "size": 40,
+        "hash": "A",
+        "origin": "USB A"
+      },
+      {
+        "name": "garden.jpg",
+        "size": 40,
+        "hash": "B",
+        "origin": "USB A"
+      },
+      {
+        "name": "beach.jpg",
+        "size": 40,
+        "hash": "A",
+        "origin": "USB B"
+      },
+      {
+        "name": "birthday.jpg",
+        "size": 40,
+        "hash": "C",
+        "origin": "USB B"
+      }
+    ],
+    "dest": [
+      {
+        "name": "beach.jpg",
+        "size": 40,
+        "hash": "A"
+      }
+    ],
+    "note": "Selected roots do not overlap. Both source collections remain in place.",
+    "stages": [
+      {
+        "label": "Before",
+        "kind": "before",
+        "caption": "Inspect the selected source and destination.",
+        "duration": 2400
+      },
+      {
+        "label": "Review",
+        "kind": "review",
+        "caption": "Choose the local KEEP. The shared beach.jpg needs no extra copy; add the two missing photos.",
+        "duration": 0
+      },
+      {
+        "label": "Copy",
+        "kind": "copy",
+        "caption": "Selected files are copied; content verification follows.",
+        "duration": 4200
+      },
+      {
+        "label": "Verify",
+        "kind": "verify",
+        "caption": "Read back the retained content in a separate verification stage.",
+        "duration": 3400
+      },
+      {
+        "label": "Result",
+        "kind": "done",
+        "caption": "Inspect the verified result of this illustrative job.",
+        "duration": 0
+      }
+    ]
+  },
+  {
+    "id": "C05",
+    "title": "Finish a partial copy",
+    "family": "consolidate",
+    "left": "Original collection",
+    "right": "Part-filled local KEEP",
+    "source": [
+      {
+        "name": "01.jpg",
+        "size": 40,
+        "hash": "A"
+      },
+      {
+        "name": "02.jpg",
+        "size": 40,
+        "hash": "B"
+      },
+      {
+        "name": "03.jpg",
+        "size": 40,
+        "hash": "C"
+      },
+      {
+        "name": "04.jpg",
+        "size": 40,
+        "hash": "D"
+      }
+    ],
+    "dest": [
+      {
+        "name": "01.jpg",
+        "size": 40,
+        "hash": "A"
+      },
+      {
+        "name": "02.jpg",
+        "size": 40,
+        "hash": "B"
+      }
+    ],
+    "note": "A same-path file with different content would remain a conflict.",
+    "stages": [
+      {
+        "label": "Before",
+        "kind": "before",
+        "caption": "Inspect the selected source and destination.",
+        "duration": 2400
+      },
+      {
+        "label": "Review",
+        "kind": "review",
+        "caption": "The first two files already match. Copy only 03.jpg and 04.jpg before verification.",
+        "duration": 0
+      },
+      {
+        "label": "Copy",
+        "kind": "copy",
+        "caption": "Selected files are copied; content verification follows.",
+        "duration": 4200
+      },
+      {
+        "label": "Verify",
+        "kind": "verify",
+        "caption": "Read back the retained content in a separate verification stage.",
+        "duration": 3400
+      },
+      {
+        "label": "Result",
+        "kind": "done",
+        "caption": "Inspect the verified result of this illustrative job.",
+        "duration": 0
+      }
+    ]
+  },
+  {
+    "id": "C16",
+    "title": "Keep both conflicting files",
+    "family": "consolidate",
+    "left": "FROM /Documents",
+    "right": "Local KEEP /Archive",
+    "source": [
+      {
+        "name": "proposal.pdf",
+        "size": 10,
+        "hash": "B"
+      }
+    ],
+    "dest": [
+      {
+        "name": "proposal.pdf",
+        "size": 10,
+        "hash": "A"
+      }
+    ],
+    "note": "This demonstration requires an explicit new name; it does not choose a newest or better version.",
+    "stages": [
+      {
+        "label": "Before",
+        "kind": "before",
+        "caption": "Inspect the selected source and destination.",
+        "duration": 2400
+      },
+      {
+        "label": "Review",
+        "kind": "review",
+        "caption": "The same filename has different content. Choose a fresh destination name for the incoming version.",
+        "duration": 0
+      },
+      {
+        "label": "Copy",
+        "kind": "copy",
+        "caption": "Selected files are copied; content verification follows.",
+        "duration": 4200
+      },
+      {
+        "label": "Verify",
+        "kind": "verify",
+        "caption": "Read back the retained content in a separate verification stage.",
+        "duration": 3400
+      },
+      {
+        "label": "Result",
+        "kind": "done",
+        "caption": "Inspect the verified result of this illustrative job.",
+        "duration": 0
+      }
+    ],
+    "resolution": true
+  },
+  {
+    "id": "D01",
+    "title": "Repeated camera imports",
+    "family": "duplicates",
+    "left": "Selected local roots",
+    "right": "Retained paths",
+    "source": [
+      {
+        "name": "Photos/beach.jpg",
+        "size": 40,
+        "hash": "A"
+      },
+      {
+        "name": "Imports/IMG_0421.jpg",
+        "size": 40,
+        "hash": "A"
+      },
+      {
+        "name": "Downloads/beach-copy.jpg",
+        "size": 40,
+        "hash": "A"
+      }
+    ],
+    "dest": [],
+    "note": "Full-hash equality is not visual similarity. The apply and its journal are simulated.",
+    "stages": [
+      {
+        "label": "Before",
+        "kind": "before",
+        "caption": "Independent files occupy separate storage.",
+        "duration": 2400
+      },
+      {
+        "label": "Full-hash groups",
+        "kind": "scan",
+        "caption": "The example reads complete file content before grouping matches.",
+        "duration": 3200
+      },
+      {
+        "label": "Review",
+        "kind": "review",
+        "caption": "Choose the organized copy to keep. Review deletion of the other two byte-identical copies.",
+        "duration": 0
+      },
+      {
+        "label": "Dry run",
+        "kind": "dryrun",
+        "caption": "Review the exact marked actions before the simulated apply.",
+        "duration": 2400
+      },
+      {
+        "label": "Apply",
+        "kind": "apply",
+        "caption": "Apply only the action approved in this demonstration.",
+        "duration": 3200
+      },
+      {
+        "label": "Result",
+        "kind": "done",
+        "caption": "Inspect the retained paths and the resulting storage relationship.",
+        "duration": 0
+      }
+    ],
+    "action": "delete"
+  },
+  {
+    "id": "D02",
+    "title": "Downloads saved twice",
+    "family": "duplicates",
+    "left": "Selected download folders",
+    "right": "Retained paths",
+    "source": [
+      {
+        "name": "Downloads/setup.iso",
+        "size": 800,
+        "hash": "A"
+      },
+      {
+        "name": "Old/setup (1).iso",
+        "size": 800,
+        "hash": "A"
+      }
+    ],
+    "dest": [],
+    "note": "The files are already local. This simulation neither downloads nor deletes anything.",
+    "stages": [
+      {
+        "label": "Before",
+        "kind": "before",
+        "caption": "Independent files occupy separate storage.",
+        "duration": 2400
+      },
+      {
+        "label": "Full-hash groups",
+        "kind": "scan",
+        "caption": "The example reads complete file content before grouping matches.",
+        "duration": 3200
+      },
+      {
+        "label": "Review",
+        "kind": "review",
+        "caption": "Choose one installer to retain, then inspect the dry run before applying the demo deletion.",
+        "duration": 0
+      },
+      {
+        "label": "Dry run",
+        "kind": "dryrun",
+        "caption": "Review the exact marked actions before the simulated apply.",
+        "duration": 2400
+      },
+      {
+        "label": "Apply",
+        "kind": "apply",
+        "caption": "Apply only the action approved in this demonstration.",
+        "duration": 3200
+      },
+      {
+        "label": "Result",
+        "kind": "done",
+        "caption": "Inspect the retained paths and the resulting storage relationship.",
+        "duration": 0
+      }
+    ],
+    "action": "delete"
+  },
+  {
+    "id": "D03",
+    "title": "Repeats in backup folders",
+    "family": "duplicates",
+    "left": "Two local backup folders",
+    "right": "Retained paths",
+    "source": [
+      {
+        "name": "Backup-1/photo.jpg",
+        "size": 40,
+        "hash": "A"
+      },
+      {
+        "name": "Backup-2/photo.jpg",
+        "size": 40,
+        "hash": "A"
+      }
+    ],
+    "dest": [],
+    "note": "Keeping independent backups is a valid outcome: identical content does not automatically mean clutter.",
+    "stages": [
+      {
+        "label": "Before",
+        "kind": "before",
+        "caption": "Independent files occupy separate storage.",
+        "duration": 2400
+      },
+      {
+        "label": "Full-hash groups",
+        "kind": "scan",
+        "caption": "The example reads complete file content before grouping matches.",
+        "duration": 3200
+      },
+      {
+        "label": "Review",
+        "kind": "review",
+        "caption": "These copies may be intentional backups. Choose whether to retain both or review removal of one.",
+        "duration": 0
+      },
+      {
+        "label": "Dry run",
+        "kind": "dryrun",
+        "caption": "Review the exact marked actions before the simulated apply.",
+        "duration": 2400
+      },
+      {
+        "label": "Apply",
+        "kind": "apply",
+        "caption": "Apply only the action approved in this demonstration.",
+        "duration": 3200
+      },
+      {
+        "label": "Result",
+        "kind": "done",
+        "caption": "Inspect the retained paths and the resulting storage relationship.",
+        "duration": 0
+      }
+    ],
+    "action": "retain",
+    "redundancy": true
+  },
+  {
+    "id": "D04",
+    "title": "Copies across worktrees",
+    "family": "duplicates",
+    "left": "Eligible local worktree assets",
+    "right": "Paths and shared content",
+    "source": [
+      {
+        "name": "Worktree-A/assets/model.bin",
+        "size": 240,
+        "hash": "A"
+      },
+      {
+        "name": "Worktree-B/assets/model.bin",
+        "size": 240,
+        "hash": "A"
+      }
+    ],
+    "dest": [],
+    "note": "Both paths remain, one inode supplies the content, and linked files become read-only. Git-tracked deletion is not offered.",
+    "stages": [
+      {
+        "label": "Before",
+        "kind": "before",
+        "caption": "Independent files occupy separate storage.",
+        "duration": 2400
+      },
+      {
+        "label": "Full-hash groups",
+        "kind": "scan",
+        "caption": "The example reads complete file content before grouping matches.",
+        "duration": 3200
+      },
+      {
+        "label": "Review",
+        "kind": "review",
+        "caption": "The example files pass same-filesystem, ownership, mode and attribute checks. Review replacing the extra copy with a hard link.",
+        "duration": 0
+      },
+      {
+        "label": "Dry run",
+        "kind": "dryrun",
+        "caption": "Review the exact marked actions before the simulated apply.",
+        "duration": 2400
+      },
+      {
+        "label": "Apply",
+        "kind": "apply",
+        "caption": "Apply only the action approved in this demonstration.",
+        "duration": 3200
+      },
+      {
+        "label": "Result",
+        "kind": "done",
+        "caption": "Inspect the retained paths and the resulting storage relationship.",
+        "duration": 0
+      }
+    ],
+    "action": "link"
+  }
+]

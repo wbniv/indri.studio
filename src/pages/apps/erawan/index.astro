@@ -1,6 +1,7 @@
 ---
 // Erawan landing page — implements docs/plans/2026-11-12-erawan-landing-page-visual-plan-v2.md
-// ("situations first") in the Erawan repo, carrying over the revisions Will accepted on the
+// ("situations first") and, on top of it, the v4 plan's animated simulations (ErawanSimulation)
+// and the v3 background shortlist (ErawanMotion), all in the Erawan repo, carrying over the revisions Will accepted on the
 // published v1 page: the site's own palette, status pills in the matrix, and a Source link
 // with the GitHub mark. Navigation and every example work without JavaScript: the situation
 // choosers are native radio groups styled with CSS, and without CSS scripting support
@@ -9,6 +10,7 @@
 import AppLayout from "../../../layouts/AppLayout.astro";
 import ErawanCap from "../../../components/ErawanCap.astro";
 import ErawanMotion from "../../../components/ErawanMotion.astro";
+import ErawanSimulation from "../../../components/ErawanSimulation.astro";
 
 const quickStart = "/docs/erawan-quick-start/";
 const a4 = "/apps/erawan/erawan-a4.pdf";
@@ -175,6 +177,7 @@ const routes = [
 								</section>
 							))}
 						</div>
+						<ErawanSimulation family={w.id} />
 					</fieldset>
 				</article>
 			))}
@@ -374,6 +377,11 @@ const routes = [
 	.e-green .e-panels { border-left-color: var(--e-green); }
 	.e-purple .e-panels { border-left-color: var(--e-purple); }
 
+	/* With JavaScript the simulation player replaces the static panels (v4). */
+	.e-sim-on .e-situ { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+	.e-sim-on .e-panels { display: none; }
+	.e-sim-on .e-chips { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+	.e-sim-on .e-hint { margin: 14px 0 10px; }
 	.e-panel { display: none; }
 	/* Show the panel that matches the checked radio (the Nth input shows the Nth panel). */
 	.e-situ input:nth-of-type(1):checked ~ .e-panels .e-panel:nth-child(1),
@@ -453,6 +461,7 @@ const routes = [
 		.e-wf { padding: 20px 16px 24px; }
 		.e-situ { grid-template-columns: minmax(0, 1fr); gap: 16px; }
 		.e-chip { font-size: 14px; padding: 6px 10px; }
+		.e-sim-on .e-chips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 		.e-hint { margin: 14px 0 10px; }
 		.e-panels { border-left: 0; padding-left: 0; border-top: 4px solid var(--e-blue); padding-top: 16px; }
 		.e-green .e-panels { border-top-color: var(--e-green); }

@@ -1,0 +1,532 @@
+---
+// Erawan v4: animated situation simulations. A progressive enhancement of the v2
+// situation choosers: with JavaScript, the selected radio loads a controlled,
+// compressed-time simulation of that situation (play, pause, step, restart, review
+// gate, outcome). Without JavaScript the static examples stay as they are. The
+// simulation never operates on files: every name and size is fictional.
+// Plan: docs/plans/2026-11-12-erawan-landing-page-visual-plan-v4.md (Erawan repo).
+interface Props {
+	family: "backup" | "consolidate" | "duplicates";
+}
+const { family } = Astro.props;
+---
+
+<erawan-sim data-family={family} hidden></erawan-sim>
+
+<script>
+	import scenarios from "../data/erawan-scenarios.json";
+
+	type Stage = { label: string; kind: string; caption: string; duration: number };
+	type FileItem = { name: string; size: number; hash: string; origin?: string };
+	type Scenario = {
+		id: string;
+		title: string;
+		family: string;
+		left: string;
+		right: string;
+		source: FileItem[];
+		dest: FileItem[];
+		note: string;
+		stages: Stage[];
+		relay?: boolean;
+		resolution?: boolean;
+		redundancy?: boolean;
+		action?: string;
+	};
+
+	const esc = (s: unknown) =>
+		String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] as string);
+	let instances = 0;
+
+	class ErawanSim extends HTMLElement {
+		private teardown: (() => void) | null = null;
+
+		connectedCallback() {
+			if (this.teardown) return;
+			this.teardown = this.start();
+		}
+
+		disconnectedCallback() {
+			this.teardown?.();
+			this.teardown = null;
+		}
+
+		private start(): () => void {
+			const all = (scenarios as Scenario[]).filter((s) => s.family === this.dataset.family);
+			const wf = this.closest<HTMLElement>(".e-wf");
+			const group = this.closest<HTMLElement>(".e-situ");
+			if (!all.length || !wf || !group) return () => {};
+			// Nested function declarations below have no `this`; they use `host`.
+			const host: HTMLElement = this;
+			const uid = `sim${++instances}`;
+			const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+
+			this.innerHTML = `
+<div class="sim" role="group" aria-labelledby="${uid}-title">
+ <div class="sim-head"><h4 id="${uid}-title" class="js-title"></h4><span class="sim-badge">SIMULATION · FICTIONAL FILES · COMPRESSED TIME</span></div>
+ <ol class="sim-steps js-steps" aria-label="Simulation stages"></ol>
+ <section class="sim-stage" aria-label="Current stage"><h5 class="js-stage-title"></h5><p class="js-caption"></p></section>
+ <div class="sim-scene">
+  <section class="sim-end" aria-labelledby="${uid}-src"><span class="sim-end-label">STARTING FILES</span><h5 id="${uid}-src" class="js-source-title"></h5><div class="js-source-files"></div></section>
+  <div class="sim-transit" aria-hidden="true"><span class="sim-relay js-relay">Erawan</span><div class="sim-track"><span class="sim-packet"></span><span class="sim-packet sim-packet-2"></span></div><span class="js-transit-label"></span></div>
+  <section class="sim-end" aria-labelledby="${uid}-dst"><span class="sim-end-label">DESTINATION / RETAINED PATHS</span><h5 id="${uid}-dst" class="js-dest-title"></h5><div class="js-dest-files"></div><div class="sim-storage js-storage"></div></section>
+ </div>
+ <section class="sim-metrics" aria-label="Simulation progress">
+  <div><div class="sim-metric-label"><span id="${uid}-cl" class="js-copy-label">Files present</span><span class="js-copy-value"></span></div><div class="sim-bar js-copy-progress" role="progressbar" aria-labelledby="${uid}-cl" aria-valuemin="0" aria-valuemax="100"><span></span></div><small class="js-copy-note"></small></div>
+  <div><div class="sim-metric-label"><span id="${uid}-vl" class="js-verify-label">Content verified</span><span class="js-verify-value"></span></div><div class="sim-bar sim-bar-verify js-verify-progress" role="progressbar" aria-labelledby="${uid}-vl" aria-valuemin="0" aria-valuemax="100"><span></span></div><small class="js-verify-note"></small></div>
+ </section>
+ <section class="sim-review js-review" hidden aria-labelledby="${uid}-rh"><h5 id="${uid}-rh">Review decision · demo paused</h5><p class="js-review-text"></p><div class="sim-review-fields js-review-fields"></div><p class="sim-error js-review-error" role="alert"></p><button type="button" class="sim-btn sim-primary js-approve">Approve in demo &amp; continue</button></section>
+ <p class="sim-decision js-decision"></p>
+ <section class="sim-outcome js-outcome" hidden aria-label="Simulation result"><h5>Illustrative outcome</h5><p class="js-outcome-text"></p></section>
+ <div class="sim-controls"><button type="button" class="sim-btn sim-primary js-play">Play simulation</button><button type="button" class="sim-btn js-next">Next stage</button><button type="button" class="sim-btn js-restart">Restart</button><label class="sim-seek">Stage position <input class="js-seek" type="range" min="0" max="100" value="0" aria-label="Current stage position"></label></div>
+ <div class="sim-status js-status" role="status" aria-live="polite"></div>
+ <p class="sim-note js-note"></p>
+</div>`;
+
+			const $ = <T extends HTMLElement = HTMLElement>(sel: string) => this.querySelector<T>(sel)!;
+			let current: Scenario = all[0];
+			let index = 0, elapsed = 0, playing = false, approved = false, keeper = 0;
+			let action = "copy", resolution = "proposal-client-b.pdf";
+			let lastTime = 0, raf = 0, renderKey = "", announcement = "";
+
+			const kind = () => current.stages[index].kind;
+			const duration = () => current.stages[index].duration;
+			const fraction = () => (duration() ? Math.min(1, elapsed / duration()) : 0);
+			const reached = (k: string) => {
+				const at = current.stages.findIndex((s) => s.kind === k);
+				return at >= 0 && index > at;
+			};
+			const say = (s: string) => {
+				if (s !== announcement) {
+					$(".js-status").textContent = s;
+					announcement = s;
+				}
+			};
+			const incoming = () => {
+				const found = new Set(current.dest.map((f) => f.name + "|" + f.hash));
+				return current.source
+					.map((f) => ({ ...f, name: current.resolution ? resolution : f.name }))
+					.filter((f) => {
+						const key = f.name + "|" + f.hash;
+						if (found.has(key)) return false;
+						found.add(key);
+						return true;
+					});
+			};
+			const targetFiles = () => current.dest.concat(incoming());
+			const row = (f: FileItem, note: string, cls = "", pct = 0) =>
+				`<li class="sim-file ${cls}">${pct > 0 ? `<span class="sim-fill" style="width:${pct}%"></span>` : ""}<span class="sim-filename">${esc(f.origin ? f.origin + " / " + f.name : f.name)}</span><span class="sim-file-note">${esc(note)}</span></li>`;
+			const list = (rows: string[], empty = "No destination files yet.") =>
+				rows.length ? `<ul class="sim-files">${rows.join("")}</ul>` : `<div class="sim-empty">${esc(empty)}</div>`;
+			const progress = (sel: string, value: number, label: string) => {
+				const e = $(sel);
+				e.setAttribute("aria-valuenow", String(Math.round(value)));
+				e.setAttribute("aria-valuetext", label);
+				(e.firstElementChild as HTMLElement).style.width = value + "%";
+			};
+
+			function renderFiles() {
+				const k = kind(), p = fraction(), dup = current.family === "duplicates";
+				if (!dup) {
+					const inc = incoming(), every = targetFiles();
+					const copying = k === "copy", copyDone = reached("copy"), checking = k === "verify", verified = k === "done";
+					const units = copying ? p * inc.length : copyDone ? inc.length : 0;
+					const count = Math.floor(units + 1e-8);
+					const verifyUnits = checking ? p * every.length : verified ? every.length : 0;
+					$(".js-source-files").innerHTML = list(
+						current.source.map((f) =>
+							row(f, `${f.size} MiB · ${current.resolution ? "content " + f.hash : "source retained"}`, current.resolution ? "conflict" : ""),
+						),
+					);
+					const rows = current.dest.map((f, i) =>
+						row(
+							f,
+							(verified || verifyUnits >= i + 1 ? "Content verified · " : "Already present · ") +
+								(current.resolution ? "original content " + f.hash : "no new copy"),
+							verified || verifyUnits >= i + 1 ? "verified" : "",
+						),
+					);
+					inc.forEach((f, i) => {
+						const amount = Math.max(0, Math.min(1, units - i));
+						const isVerified = verified || verifyUnits >= current.dest.length + i + 1;
+						if (amount > 0 || copyDone)
+							rows.push(
+								row(
+									f,
+									isVerified ? "Content verified" : amount >= 1 ? "Copied · awaiting verification" : `Copying ${Math.round(amount * 100)}%`,
+									isVerified ? "verified" : "",
+									amount * 100,
+								),
+							);
+					});
+					$(".js-dest-files").innerHTML = list(rows);
+					$(".js-storage").textContent = current.resolution ? "Original file preserved; incoming file uses the reviewed name." : "";
+					$(".js-copy-label").textContent = "Files present";
+					$(".js-copy-value").textContent = `${current.dest.length + count} / ${every.length}`;
+					progress(".js-copy-progress", ((current.dest.length + units) / every.length) * 100, `${current.dest.length + count} of ${every.length} files present`);
+					$(".js-copy-note").textContent = `${current.dest.length} already present · ${inc.length} selected for copying`;
+					$(".js-verify-label").textContent = "Content verified";
+					$(".js-verify-value").textContent = `${Math.floor(verifyUnits)} / ${every.length}`;
+					progress(".js-verify-progress", (verifyUnits / every.length) * 100, `${Math.floor(verifyUnits)} of ${every.length} files verified`);
+					$(".js-verify-note").textContent = verified
+						? "Demo verification complete."
+						: copyDone
+							? "Copying complete; verification is a separate step."
+							: "No verification result claimed while copying.";
+					$(".js-outcome-text").textContent = current.resolution
+						? `Both proposal.pdf (original content A) and ${resolution} (incoming content B) remain. The new copy is verified in this demo.`
+						: `${every.length} retained files; ${inc.length} copied in this demo, ${current.dest.length} already present. Verification is complete; source files remain.`;
+				} else {
+					const scanned = reached("scan");
+					const scanUnits = k === "scan" ? p * current.source.length : scanned ? current.source.length : 0;
+					const applying = k === "apply", done = k === "done", affected = current.source.length - 1;
+					const applied = action === "retain" ? 0 : done ? affected : applying ? Math.floor(p * affected + 1e-8) : 0;
+					$(".js-source-files").innerHTML = list(
+						current.source.map((f, i) =>
+							row(
+								f,
+								scanUnits >= i + 1 ? "Full-hash match · illustrative content A" : k === "scan" ? "Reading complete content…" : "Independent file copy",
+								scanUnits >= i + 1 ? "verified" : "",
+							),
+						),
+					);
+					let cursor = 0;
+					const rows = current.source.map((f, i) => {
+						const chosen = i === keeper, changed = !chosen && cursor++ < applied;
+						if (changed && action === "delete") return row(f, "Removed in demo · journal records this path", "removed");
+						if ((changed || (chosen && applied > 0)) && action === "link") return row(f, "Shared inode A · read-only · path retained", "shared");
+						return row(f, action === "retain" && done ? "Independent backup intentionally retained" : chosen && approved ? "Chosen keeper" : "Independent copy");
+					});
+					$(".js-dest-files").innerHTML = list(rows);
+					$(".js-storage").textContent = done
+						? action === "link"
+							? `${current.source.length} paths → 1 shared inode · read-only`
+							: action === "retain"
+								? `${current.source.length} independent copies retained · 0 MiB reclaimed`
+								: `${current.source.length - applied} retained copy · ${applied} removed path(s) recorded in demo journal`
+						: scanned
+							? "All listed files share one complete illustrative hash."
+							: "";
+					$(".js-copy-label").textContent = "Files fully hashed";
+					$(".js-copy-value").textContent = `${Math.floor(scanUnits)} / ${current.source.length}`;
+					progress(".js-copy-progress", (scanUnits / current.source.length) * 100, "Illustrative complete-content scan progress");
+					$(".js-copy-note").textContent = "Exact content equality; no visual-similarity matching.";
+					$(".js-verify-label").textContent = action === "retain" ? "Changes requested" : "Reviewed changes";
+					$(".js-verify-value").textContent = action === "retain" ? "None" : `${applied} / ${affected}`;
+					progress(".js-verify-progress", action === "retain" ? 0 : (applied / affected) * 100, "Approved demo action progress");
+					$(".js-verify-note").textContent = action === "retain" ? "Retaining both backups is a valid result." : "Actions follow full-hash grouping, explicit review and a dry run.";
+					$(".js-outcome-text").textContent =
+						action === "retain"
+							? "Both independent backups remain. No storage is reclaimed and no cleanup is implied."
+							: action === "link"
+								? "Both paths remain, sharing one inode. Linked files are read-only. A demo journal records the change; undo would need surviving content and free space."
+								: `The selected keeper ${current.source[keeper].name} remains. ${affected} extra path(s) are removed only inside this fictional demonstration; a demo journal records them.`;
+				}
+				$(".js-transit-label").textContent =
+					k === "copy"
+						? current.relay ? "A → Erawan → B" : "Copy selected files"
+						: k === "verify" ? "Read back content"
+						: k === "scan" ? "Full-content hash"
+						: k === "apply" ? (action === "retain" ? "Keep independent copies" : action === "link" ? "Share one inode" : "Reviewed deletion")
+						: k === "waiting" ? "Waiting for window"
+						: k === "review" ? "Review first"
+						: k === "done" ? "Inspect result"
+						: "Inspect locations";
+				$(".js-relay").textContent = current.relay ? "Erawan relay" : "Erawan";
+			}
+
+			function renderReview() {
+				const isReview = kind() === "review";
+				$(".js-review").hidden = !isReview;
+				if (!isReview) return;
+				$(".js-review-text").textContent = current.stages[index].caption;
+				let fields = "";
+				if (current.resolution)
+					fields = `<label>Fresh destination filename<input class="js-filename" maxlength="80" value="${esc(resolution)}"></label>`;
+				if (current.family === "duplicates")
+					fields = `<label>Keep this copy<select class="js-keeper">${current.source
+						.map((f, i) => `<option value="${i}" ${keeper === i ? "selected" : ""}>${esc(f.name)}</option>`)
+						.join("")}</select></label>`;
+				if (current.redundancy)
+					fields += `<label>Intent<select class="js-action"><option value="retain" ${action === "retain" ? "selected" : ""}>Retain both independent backups</option><option value="delete" ${action === "delete" ? "selected" : ""}>Review deletion of the extra copy</option></select></label>`;
+				$(".js-review-fields").innerHTML = fields;
+				$(".js-review-error").textContent = "";
+				host.querySelector<HTMLInputElement>(".js-filename")?.addEventListener("input", (e) => (resolution = (e.target as HTMLInputElement).value));
+				host.querySelector<HTMLSelectElement>(".js-keeper")?.addEventListener("change", (e) => {
+					keeper = Number((e.target as HTMLSelectElement).value);
+					renderFiles();
+				});
+				host.querySelector<HTMLSelectElement>(".js-action")?.addEventListener("change", (e) => {
+					action = (e.target as HTMLSelectElement).value;
+					renderFiles();
+				});
+			}
+
+			function render(full = false) {
+				const k = kind(), key = current.id + "-" + index;
+				if (full || key !== renderKey) {
+					$(".js-title").textContent = current.id + " · " + current.title;
+					$(".js-source-title").textContent = current.left;
+					$(".js-dest-title").textContent = current.right;
+					$(".js-note").textContent = current.note;
+					$(".js-steps").innerHTML = current.stages
+						.map((s, i) => `<li class="${i === index ? "current" : i < index ? "past" : ""}" ${i === index ? 'aria-current="step"' : ""}>${i + 1} · ${esc(s.label)}</li>`)
+						.join("");
+					$(".js-stage-title").textContent = current.stages[index].label;
+					$(".js-caption").textContent = current.stages[index].caption;
+					renderReview();
+					renderKey = key;
+				}
+				if (k === "waiting") {
+					const mins = 21 * 60 + 55 + Math.floor(fraction() * 5);
+					$(".js-caption").textContent = `Simulated ${String(Math.floor(mins / 60)).padStart(2, "0")}:${String(mins % 60).padStart(2, "0")} · window opens at 22:00. Five minutes are compressed into this short scene.`;
+				}
+				if (k === "dryrun")
+					$(".js-caption").textContent =
+						action === "retain"
+							? "Dry run: retain both independent copies; no changes requested."
+							: action === "link"
+								? "Dry run: retain both paths; link the eligible extra file to the keeper; linked files will be read-only."
+								: `Dry run: retain ${current.source[keeper].name}; remove ${current.source.length - 1} explicitly reviewed extra copy/copies.`;
+				if (k === "apply" && current.family === "duplicates")
+					$(".js-caption").textContent =
+						action === "retain"
+							? "No change is applied. The reviewed intention is to keep both backups."
+							: action === "link"
+								? "The eligible extra path changes to the keeper inode. Both names remain; the shared content becomes read-only."
+								: "Only the explicitly reviewed extra paths are removed in the simulation.";
+				$(".js-decision").textContent = approved
+					? "Approved inside this demo: " + (current.resolution ? resolution : current.family === "duplicates" ? action + " · keeper " + current.source[keeper].name : "the displayed selection and options")
+					: "";
+				$(".js-outcome").hidden = k !== "done";
+				const play = $<HTMLButtonElement>(".js-play");
+				play.disabled = reduced.matches || k === "review" || k === "done";
+				play.textContent = playing ? "Pause" : reduced.matches ? "Step-only mode" : "Play simulation";
+				$<HTMLButtonElement>(".js-next").disabled = k === "review" || k === "done";
+				const seek = $<HTMLInputElement>(".js-seek");
+				seek.disabled = !duration() || reduced.matches;
+				seek.value = String(Math.round(fraction() * 100));
+				const root = $(".sim");
+				root.classList.toggle("playing", playing);
+				root.classList.toggle("copying", k === "copy");
+				root.classList.toggle("reduced", reduced.matches);
+				renderFiles();
+			}
+
+			function pause(message?: string) {
+				playing = false;
+				cancelAnimationFrame(raf);
+				raf = 0;
+				render();
+				if (message) say(message);
+			}
+			function advance(): boolean {
+				if (kind() === "review" && !approved) return false;
+				if (index >= current.stages.length - 1) {
+					pause("Simulation complete. Restart to replay.");
+					return false;
+				}
+				index++;
+				elapsed = 0;
+				render(true);
+				if (kind() === "review") {
+					pause("Review required. Make the decision, then use Approve in demo.");
+					return false;
+				}
+				if (kind() === "done") {
+					pause("Simulation complete. Inspect the outcome or restart.");
+					return false;
+				}
+				return true;
+			}
+			function tick(now: number) {
+				if (!playing) return;
+				const delta = lastTime ? Math.min(now - lastTime, 100) : 0;
+				lastTime = now;
+				elapsed += delta;
+				if (duration() && elapsed >= duration()) {
+					elapsed = duration();
+					render();
+					if (!advance()) return;
+				} else render();
+				raf = requestAnimationFrame(tick);
+			}
+			function play() {
+				if (reduced.matches || kind() === "review" || kind() === "done") return;
+				playing = true;
+				lastTime = 0;
+				render();
+				say("Playing a fictional, compressed-time simulation.");
+				raf = requestAnimationFrame(tick);
+			}
+			function choose(id: string) {
+				pause();
+				current = all.find((s) => s.id === id) || all[0];
+				index = 0;
+				elapsed = 0;
+				approved = false;
+				keeper = 0;
+				action = current.action || "copy";
+				resolution = "proposal-client-b.pdf";
+				renderKey = "";
+				render(true);
+				say(reduced.matches ? "Reduced motion: use Next stage and Approve for discrete states." : "Ready. Play or inspect one stage at a time.");
+			}
+
+			$(".js-play").onclick = () => (playing ? pause("Paused. Progress and file motion are frozen.") : play());
+			$(".js-next").onclick = () => {
+				pause();
+				advance();
+				if (kind() !== "review" && kind() !== "done") say("Stepped to " + current.stages[index].label + ".");
+			};
+			$(".js-restart").onclick = () => choose(current.id);
+			$<HTMLInputElement>(".js-seek").oninput = (e) => {
+				pause();
+				elapsed = (duration() * Number((e.target as HTMLInputElement).value)) / 100;
+				render();
+				say("Paused at the selected point in this stage.");
+			};
+			$(".js-approve").onclick = () => {
+				if (current.resolution) {
+					resolution = resolution.trim();
+					if (!resolution || resolution === "." || resolution === ".." || /[\\/\x00-\x1f]/.test(resolution) || current.dest.some((f) => f.name === resolution)) {
+						$(".js-review-error").textContent = "Choose a fresh filename that differs from the existing KEEP file.";
+						return;
+					}
+				}
+				approved = true;
+				advance();
+				if (reduced.matches) {
+					say("Approved inside demo. Use Next stage to inspect the result.");
+					$(".js-next").focus();
+				} else {
+					play();
+					$(".js-play").focus();
+				}
+			};
+
+			// The page's radio group chooses the situation; the simulation follows it.
+			const onChange = (e: Event) => {
+				const input = e.target as HTMLInputElement;
+				if (input.type === "radio" && input.id.startsWith("situ-")) choose(input.id.slice(5));
+			};
+			group.addEventListener("change", onChange);
+			const onReduced = () => {
+				pause(reduced.matches ? "Reduced motion enabled. Use discrete steps." : "Motion available. Press Play when ready.");
+				render();
+			};
+			reduced.addEventListener("change", onReduced);
+			const onHidden = () => {
+				if (document.hidden && playing) pause("Paused while the tab was hidden. Press Play to continue.");
+			};
+			document.addEventListener("visibilitychange", onHidden);
+
+			// Switch the card from its static examples to the player.
+			wf.classList.add("e-sim-on");
+			const hint = wf.querySelector(".e-hint");
+			if (hint) hint.textContent = "Choose an example, then press Play. Nothing here operates on your files.";
+			host.hidden = false;
+			const checked = group.querySelector<HTMLInputElement>('input[type="radio"]:checked');
+			choose(checked && checked.id.startsWith("situ-") ? checked.id.slice(5) : all[0].id);
+
+			return () => {
+				pause();
+				group.removeEventListener("change", onChange);
+				reduced.removeEventListener("change", onReduced);
+				document.removeEventListener("visibilitychange", onHidden);
+			};
+		}
+	}
+
+	if (!customElements.get("erawan-sim")) customElements.define("erawan-sim", ErawanSim);
+</script>
+
+<style is:global>
+	/* Simulation player, in the page's indri.studio dark palette. */
+	.erawan erawan-sim { display: block; grid-column: 1 / -1; min-width: 0; }
+	.erawan erawan-sim[hidden] { display: none; }
+	.sim { color: var(--color-on-surface); min-width: 0; }
+	.sim h4, .sim h5 { font-family: var(--font-display); font-weight: 700; margin: 0; color: var(--color-on-surface); letter-spacing: -0.01em; }
+	.sim p { margin: 8px 0; }
+	.sim-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px 16px; flex-wrap: wrap; margin-bottom: 12px; }
+	.sim-head h4 { font-size: 20px; }
+	.sim-badge { font-size: 12px; letter-spacing: 0.05em; color: var(--color-primary-container); font-weight: 700; }
+	.sim-steps { display: flex; gap: 8px; list-style: none; padding: 0; margin: 0 0 14px; flex-wrap: wrap; }
+	.sim-steps li { padding: 7px 12px; background: var(--color-surface-container-high); border-radius: 20px; font-size: 14px; }
+	.sim-steps .current { background: var(--color-primary-container); color: var(--color-on-primary-container); font-weight: 700; }
+	.sim-steps .past { background: #1f3d31; color: #b9efd4; }
+	.sim-stage { background: var(--color-surface-container-low); border-left: 4px solid var(--color-primary-container); padding: 12px 16px; margin-bottom: 14px; min-height: 84px; }
+	.sim-stage h5 { font-size: 17px; }
+	.sim-scene { display: grid; grid-template-columns: minmax(0, 1fr) 150px minmax(0, 1fr); align-items: stretch; gap: 16px; }
+	.sim-end { background: var(--color-surface-container-lowest); padding: 16px; border-radius: 12px; min-width: 0; }
+	.sim-end h5 { font-size: 17px; margin-top: 2px; }
+	.sim-end-label { font-size: 12px; letter-spacing: 0.06em; color: #87dbc9; font-weight: 700; }
+	.sim-files { list-style: none; padding: 0; margin: 12px 0 0; }
+	.sim-file { position: relative; padding: 10px 12px; margin-top: 8px; background: #1c1a18; border: 1px solid #4a4540; border-radius: 8px; overflow: hidden; min-height: 62px; }
+	.sim-filename { display: block; position: relative; font-size: 15px; font-weight: 650; overflow-wrap: anywhere; }
+	.sim-file-note { display: block; position: relative; font-size: 13px; color: var(--color-on-surface-variant); }
+	.sim-fill { position: absolute; inset: 0 auto 0 0; background: rgba(67, 184, 140, 0.28); }
+	.sim-file.verified { border-color: #5fb89a; }
+	.sim-file.conflict { border-color: #cba662; background: #3a2f1a; }
+	.sim-file.removed { border-style: dashed; border-color: #a86a6a; background: #36231f; }
+	.sim-file.removed .sim-filename { text-decoration: line-through; }
+	.sim-file.shared { border-color: #a78bcc; background: #2c2640; }
+	.sim-empty { padding: 26px 12px; border: 1px dashed #6b655f; border-radius: 8px; color: var(--color-on-surface-variant); font-size: 14px; margin-top: 12px; }
+	.sim-transit { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 12px; color: var(--color-on-surface-variant); font-size: 13px; min-height: 160px; }
+	.sim-relay { padding: 8px 10px; border: 1px solid #6b655f; border-radius: 8px; background: var(--color-surface-container-high); font-weight: 650; color: var(--color-on-surface); }
+	.sim-track { position: relative; width: 100%; height: 28px; border-top: 2px solid #8e8780; margin-top: 18px; }
+	.sim-track::after { content: "›"; position: absolute; right: 0; top: -26px; font-size: 28px; color: var(--color-primary-container); }
+	.sim-packet { position: absolute; top: -9px; left: 0; width: 18px; height: 13px; border-radius: 3px; background: linear-gradient(90deg, #2979ff, #35c8ce); opacity: 0; animation: sim-travel 2s ease-in-out infinite; animation-play-state: paused; }
+	.sim-packet-2 { animation-delay: -1s; }
+	.sim.copying .sim-packet { opacity: 1; }
+	.sim.playing.copying .sim-packet { animation-play-state: running; }
+	.sim-storage { font-size: 13px; margin-top: 10px; color: #cdb6f0; }
+	.sim-metrics { background: var(--color-surface-container-lowest); border-radius: 12px; padding: 16px 18px; color: #e8f0f9; margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+	.sim-metric-label { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 9px; gap: 10px; }
+	.sim-bar { height: 13px; background: #2a3b4c; border-radius: 4px; overflow: hidden; }
+	.sim-bar > span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #2979ff, #35cbdb); }
+	.sim-bar-verify > span { background: linear-gradient(90deg, #9f71f7, #39b3e8); }
+	.sim-metrics small { display: block; color: #b9cce1; margin-top: 9px; font-size: 13px; }
+	.sim-review { margin-top: 16px; padding: 16px 18px; background: #3a2f17; border: 1px solid #cba662; border-radius: 12px; }
+	.sim-review[hidden], .sim-outcome[hidden] { display: none; }
+	.sim-review h5 { font-size: 17px; }
+	.sim-review-fields { display: flex; gap: 14px; flex-wrap: wrap; margin: 12px 0; }
+	.sim-review-fields label { display: flex; flex-direction: column; gap: 5px; font-size: 14px; max-width: 100%; }
+	.sim input[type="text"], .sim-review-fields input, .sim-review-fields select { border: 1px solid #8e8780; border-radius: 6px; padding: 9px; background: #1c1a18; color: var(--color-on-surface); font: inherit; max-width: 100%; }
+	.sim-review-fields input { width: 300px; }
+	.sim-error { color: #ffb4a8; font-size: 14px; min-height: 0; }
+	.sim-decision { color: #9fe3c0; font-size: 14px; }
+	.sim-outcome { padding: 14px 18px; background: #1d3a2e; border-radius: 10px; margin-top: 16px; }
+	.sim-outcome h5 { font-size: 17px; }
+	.sim-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; border-top: 1px solid #6b655f; padding-top: 16px; margin-top: 16px; }
+	.sim-btn { min-height: 44px; border: 0; border-radius: 6px; background: var(--color-surface-container-high); color: var(--color-on-surface); padding: 9px 16px; font: inherit; font-weight: 700; font-size: 15px; cursor: pointer; }
+	.sim-btn:hover:not(:disabled) { background: var(--color-surface-container-highest); }
+	.sim-btn:disabled { opacity: 0.5; cursor: default; }
+	.sim-primary { background: var(--color-primary-container); color: var(--color-on-primary-container); }
+	.sim-primary:hover:not(:disabled) { background: var(--color-primary); }
+	.sim-btn:focus-visible, .sim input:focus-visible, .sim select:focus-visible { outline: 3px solid var(--color-on-surface); outline-offset: 3px; }
+	.sim-seek { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 240px; font-size: 13px; color: var(--color-on-surface-variant); }
+	.sim-seek input { width: 100%; accent-color: var(--color-primary-container); }
+	.sim-status { font-size: 14px; color: var(--color-on-surface-variant); min-height: 24px; margin-top: 10px; }
+	.sim-note { font-size: 14px; color: var(--color-on-surface-variant); margin: 8px 0 0; }
+	@keyframes sim-travel { from { transform: translateX(0); } to { transform: translateX(125px); } }
+	@media (max-width: 900px) {
+		.sim-scene { grid-template-columns: 1fr; gap: 8px; }
+		.sim-transit { min-height: 64px; flex-direction: row; gap: 14px; }
+		.sim-track { width: 85px; margin: 0; transform: rotate(90deg); height: 10px; }
+		.sim-packet { width: 10px; }
+		.sim-metrics { grid-template-columns: 1fr; gap: 14px; }
+		.sim-steps { gap: 5px; }
+		.sim-steps li { font-size: 12px; padding: 6px 9px; }
+		.sim-end { padding: 14px; }
+		.sim-controls button { font-size: 14px; padding: 8px 12px; }
+		.sim-seek { flex-basis: 100%; }
+		.sim-review-fields input { width: 100%; }
+		@keyframes sim-travel { from { transform: translateX(0); } to { transform: translateX(65px); } }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.sim *, .sim *::before, .sim *::after { animation: none !important; transition: none !important; }
+		.sim-packet { display: none !important; }
+	}
+	.sim.reduced .sim-packet { display: none; }
+</style>
