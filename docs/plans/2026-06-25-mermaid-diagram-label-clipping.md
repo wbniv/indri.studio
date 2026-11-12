@@ -120,3 +120,48 @@ pipeline (Sätteri).
 - **Dev mode** — the integration runs on `astro build` only, so `astro dev` shows an empty
   diagram box (production is correct). Acceptable; revisit if dev preview of diagrams is
   needed (a tiny client-side DOMParser hydrator would cover dev).
+
+## Verification (2026-11-12)
+
+Question: does the PDF / release-bundled docs path (`md-to-html.sh` → headless Chrome, used by `llvm-mos-65816/dev/build-release-docs.sh`) show the same `<br></br>` double-break / label-clip as the Astro web path? Only `snes-bootup` has a Mermaid diagram (`grep -c mermaid public/docs/*.md` → 1 for `snes-bootup.md`, 0 for the other five), so it is the only diagram on this path.
+
+Setup note: the `llvm-mos-65816` checkout lives on `/run/media/will/worktrees`, which is not mounted today (`/home/will/llvm/llvm-mos-65816` is a dangling symlink), so `build-release-docs.sh` could not run as written. Its two steps were replayed by hand on a copy of `public/docs/snes-bootup.md` (the raw source that `sync-65816-docs.sh` snapshots) with all output in the scratchpad. Differences from the script: `MD_TO_HTML_OUT_DIR` points the HTML at the scratchpad, and stderr is left visible (the script sends it to `/dev/null`).
+
+1. **Generate the HTML with `md-to-html.sh`, stderr visible.**
+   ```
+   $ MD_TO_PDF_NO_OPEN=1 MD_TO_HTML_OUT_DIR=$S/out bash ~/python-tui-lib/scripts/md-to-html.sh $S/in/snes-bootup.md
+   Style: n-miro
+   $S/out/snes-bootup.html (73 KB)
+   ```
+   No `Warning: mermaid.ink render failed` line, so the diagram rendered as SVG, not the `<pre>` fallback. PASS.
+
+2. **Inspect the diagram markup in the intermediate HTML.**
+   ```
+   mermaid-diagram divs: 1
+   <svg: 2  <g class="nodes": 1
+   literal <br></br>: 0
+   diagram block: 21520 bytes; </p><p>: 0  <br></br>: 0  <br />: 9
+   foreignObject: 17
+   label sample: <span class="nodeLabel "><p>Power-on / reset<br />65816 in 6502-emulation mode (E=1)</p></span>
+   after the svg: <p><code>.init.*</code> fragments are emitted into ...
+   ```
+   Pristine mermaid.ink bytes: single `<br />`, one `<g class="nodes">`, no doubled break, no foster-parented group, clean prose after the diagram. PASS.
+
+3. **Print to PDF with headless Chrome and render page 2 at 80 dpi, then a 160 dpi crop of the first three nodes.**
+   ```
+   $ ulimit -c 0; systemd-run --user --scope -q -p MemoryMax=4G google-chrome-stable --headless=new --no-sandbox --disable-gpu \
+       --no-pdf-header-footer --print-to-pdf=$S/out/snes-bootup.pdf file://$S/out/snes-bootup.html
+   216378 bytes written to file .../snes-bootup.pdf
+   $ pdfinfo snes-bootup.pdf | grep -E 'Pages|Page size'
+   Pages:           7
+   Page size:       612 x 792 pts (letter)
+   $ pdftoppm -r 80 -f 1 -l 2 -png snes-bootup.pdf pg
+   ```
+   Chrome crashes (`Trace/breakpoint trap`, rc 133) under `ulimit -v 4000000` because V8 reserves more address space than that, so the 4 GB cap was applied as a cgroup limit (`MemoryMax=4G`) instead. Page 2 ("The whole sequence at a glance") shows all nine nodes. Every multi-line label has a single line break between its parts, for example "Power-on / reset" over "65816 in 6502-emulation mode (E=1)". The longest label (`.init.50`, six lines) sits fully inside its box with margin on all sides. No text touches or crosses a node border, and `pdftotext` finds every label. PASS.
+
+Verdict: PASS, no double break and no label clip on the PDF path. The path never goes through Astro's rehype round-trip, so the `<br/>` → `<br></br>` doubling cannot occur; the Inter-font cascade is also absent because `md-to-html.sh` styles the page itself. The `sync-65816-docs.sh` fix is not needed there.
+
+Residual risks noticed, not defects of the render:
+
+- `build-release-docs.sh` and `sync-65816-docs.sh` both run `md-to-html.sh` with `>/dev/null 2>&1 || true`. If mermaid.ink is down or rejects a diagram, the PDF is still produced with the diagram as a raw code block and no warning is shown.
+- `build-release-docs.sh` pins three docs to `wt/321-snes-hwref`, a branch the "Follow-ups" section above says was deleted. Those three rows will be WARNed and skipped until the manifest points at `main`.

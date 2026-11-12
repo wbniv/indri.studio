@@ -15,13 +15,13 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 - [T4] **2026-06-25** **Astro 7 migration (Sätteri pipeline)** — modernise the markdown pipeline; its verbatim raw-HTML handling would let inline Mermaid SVG survive uncorrupted, letting us delete the build-done `mermaid-inject` integration. Requires porting `rehypeExternalLinks` to a Sätteri HAST plugin. Major bump — branch + full Lighthouse before tagging — [plan](docs/plans/2026-06-25-astro-7-migration.md)
 
-- [T2] **2026-06-25** Verify the **PDF / release-bundled docs** render path (`../python-tui-lib/scripts/md-to-html.sh`, used by `../llvm-mos-65816/dev/build-release-docs.sh`) for the same Mermaid `<br></br>` double-break / label-clip the web path had — it doesn't go through Astro so it may differ, and the `sync-65816-docs.sh` `</p><p>` fix doesn't touch it. Check a generated `.pdf` before assuming clean — [plan](docs/plans/2026-06-25-mermaid-diagram-label-clipping.md)
 
 ### Apt Packaging
 
 - [T2] **2026-05-22** Add `curl | bash` installer for `claude-usage` at `apt.indri.studio/install-claude-usage.sh` (thin bootstrap → upstream `install.sh`); also tighten `install.sh` pre-flight checks for `glib-compile-schemas` / `systemctl --user` / `gnome-shell` — [plan](docs/plans/2026-05-22-claude-usage-curlbash-installer.md)
 
 - [T3] **2026-05-21** Stand up a second apt repo at `apt.biohack.net` (own zone, own R2 bucket `biohack-net-secrets` + `biohack-net-apt`, own operator token). Decide whether biohack.net gets a fresh monorepo or piggy-backs on an existing biohack.net website repo. Reuse the same skill (`new-web-apt-repo`).
+- [T2] **2026-11-12** Make `scripts/sync-65816-docs.sh` fail loudly when `md-to-html.sh` falls back to a plain code block for a Mermaid diagram (it runs with `>/dev/null 2>&1 || true`, so a mermaid.ink outage ships a PDF with a raw code block and no warning). `build-release-docs.sh` in llvm-mos-65816 has the same pattern and pins three docs to a deleted branch — [plan](docs/plans/2026-06-25-mermaid-diagram-label-clipping.md)
 
 ## Watch
 
@@ -35,6 +35,7 @@ _Nothing parked._
 
 ## Done
 
+- ✅ 2026-11-12 — [release-docs-mermaid] PDF path checked on a rendered page: single `<br />`, no clipped labels, no fix needed. See [plan](docs/plans/2026-06-25-mermaid-diagram-label-clipping.md).
 - ✅ 2026-11-12 — [erawan-landing] Erawan landing page at /apps/erawan/, gallery card, Quick Start at /docs/erawan-quick-start/. See [plan](/home/will/erawan/docs/plans/2026-11-12-erawan-landing-page.md).
 - ✅ 2026-10-31 — [debug-bridge-page] Live at /apps/world-foundry-v2/debug-bridge/, with five bridge views. See [plan](docs/plans/2026-10-31-world-foundry-debug-bridge-page.md).
 - [x] 2026-10-18 — Added a real-panel demo video and transcript to the BGA app page — [plan](docs/plans/2026-10-17-bga-title-tray-catalogue.md).
@@ -90,4 +91,7 @@ _Auto-added from plan "Out of scope"/"Deferred" sections at commit time. Triage 
 - [ ] **(triage)** A fresh capture of the Blender panel showing the Frame / Step / Resume row. The panel code draws it under conditions the capture did not hit. — _from [2026-10-31-world-foundry-debug-bridge-page.md](docs/plans/2026-10-31-world-foundry-debug-bridge-page.md)_  <!-- fp:36845d9b8617177d -->
 - [ ] **(triage)** A capture of `wf-edit` going through its own bridge, or a build of `wf-edit` (no binary was found). — _from [2026-10-31-world-foundry-debug-bridge-page.md](docs/plans/2026-10-31-world-foundry-debug-bridge-page.md)_  <!-- fp:9b9579c2ffaca1bf -->
 - [ ] **(triage)** A write-up of the bridge protocol on the page. The page shows it; the command reference lives in the engine repo. — _from [2026-10-31-world-foundry-debug-bridge-page.md](docs/plans/2026-10-31-world-foundry-debug-bridge-page.md)_  <!-- fp:5e32792e8e5cdc1e -->
+- [ ] **(triage)** **`task sync-docs` is broken** — its manifest references the deleted `wt/321-snes-hwref` branch (from the worktree consolidation). Re-syncing all docs is blocked until the manifest points the consolidated docs at `main`. Tracked in TODO. — _from [2026-06-25-mermaid-diagram-label-clipping.md](docs/plans/2026-06-25-mermaid-diagram-label-clipping.md)_  <!-- fp:e0d0a53b699fdd36 -->
+- [ ] **(triage)** **Astro 7 / Sätteri migration** — `docs/plans/2026-06-25-astro-7-migration.md`. Its verbatim raw-HTML handling would let inline SVG survive uncorrupted, making the build-done integration **removable** (simpler). Verify the verbatim claim during the migration before deleting the integration. — _from [2026-06-25-mermaid-diagram-label-clipping.md](docs/plans/2026-06-25-mermaid-diagram-label-clipping.md)_  <!-- fp:f237de8d600fbf21 -->
+- [ ] **(triage)** **Dev mode** — the integration runs on `astro build` only, so `astro dev` shows an empty diagram box (production is correct). Acceptable; revisit if dev preview of diagrams is needed (a tiny client-side DOMParser hydrator would cover dev). — _from [2026-06-25-mermaid-diagram-label-clipping.md](docs/plans/2026-06-25-mermaid-diagram-label-clipping.md)_  <!-- fp:a2fb0927155a7f7c -->
 <!-- END auto-captured-deferrals -->
