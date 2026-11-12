@@ -3,7 +3,7 @@ title: "Erawan Quick Start"
 summary: "Watch a backup copy and verify, bring selected folders together, and find repeated files — each with a preview before anything changes."
 app: "erawan"
 sourceRepo: "erawan"
-sourceCommit: "475795d+uncommitted"
+sourceCommit: "0bcee89+uncommitted"
 license: "MIT"
 downloads: false
 order: 1

@@ -1,0 +1,56 @@
+---
+// A status pill for the Erawan backup-connectivity matrix: a bright check
+// instead of the word "Yes". Meaning never rests on colour alone — every pill
+// carries a glyph or a word, and screen readers get the plain wording.
+interface Props {
+	value: string;
+}
+const { value } = Astro.props;
+const base = value.replace(/[*†]+$/, "");
+const mark = value.slice(base.length);
+const kind = ({ Yes: "yes", Planned: "planned", Check: "check", No: "no" } as Record<string, string>)[base] ?? "no";
+---
+
+{kind === "yes" && (
+	<span class="cap cap-yes"><span aria-hidden="true">✓</span><span class="sr-only">Yes</span></span>
+)}
+{kind === "planned" && <span class="cap cap-planned">Planned</span>}
+{kind === "check" && (
+	<span class="cap cap-check">
+		<span aria-hidden="true" class="long">? Check</span>
+		<span aria-hidden="true" class="short">?</span>
+		<span class="sr-only">Check: validate your remote first</span>
+	</span>
+)}
+{kind === "no" && (
+	<span class="cap cap-no"><span aria-hidden="true">—</span><span class="sr-only">No</span></span>
+)}
+{mark && <span class="note">{mark}</span>}
+
+<style>
+	.cap {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 2.6em;
+		height: 1.7em;
+		padding: 0 0.75em;
+		border-radius: 999px;
+		font-weight: 700;
+		font-size: 0.95em;
+		line-height: 1;
+		white-space: nowrap;
+	}
+	/* The product's blue-to-green gradient accent, with dark text for contrast. */
+	.cap-yes { background: linear-gradient(90deg, #2fb4c9, #43b88c); color: #0a0908; font-size: 1.05em; }
+	.cap-planned { background: #ffcf6e; color: #1a1300; }
+	.cap-check { box-shadow: inset 0 0 0 2px #9fd8ff; color: #9fd8ff; }
+	.cap-no { color: var(--color-on-surface-variant); font-weight: 400; min-width: 2.6em; padding: 0; }
+	.cap-check .short { display: none; }
+	.note { margin-left: 0.3em; color: var(--color-on-surface-variant); }
+	@media (max-width: 900px) {
+		.cap { font-size: 14px; min-width: 2.3em; padding: 0 0.6em; }
+		.cap-check .long { display: none; }
+		.cap-check .short { display: inline; }
+	}
+</style>

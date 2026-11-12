@@ -4,9 +4,13 @@
 // work without JavaScript. Interface excerpts are enlarged fragments of the
 // real renderers, drawn from labelled demo data (see scripts/sync-erawan-docs.sh).
 import AppLayout from "../../../layouts/AppLayout.astro";
+import ErawanCap from "../../../components/ErawanCap.astro";
 
 const quickStart = "/docs/erawan-quick-start/";
 const a4 = "/apps/erawan/erawan-a4.pdf";
+const repo = "https://github.com/wbniv/erawan";
+// GitHub mark (Octicons mark-github, 16x16).
+const githubMark = "M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z";
 
 const workflows = [
 	{
@@ -50,7 +54,6 @@ const matrix = [
 <AppLayout
 	title="Erawan"
 	description="A visual terminal tool for backing up files, consolidating folders, and finding duplicates — with verification in plain view."
-	theme={{ background: "#f4f7fb", text: "#16253b" }}
 >
 	<div class="erawan">
 		<header class="e-top">
@@ -58,7 +61,7 @@ const matrix = [
 			<nav aria-label="Erawan">
 				<a href="#workflows">Workflows</a>
 				<a href={quickStart}>Quick Start</a>
-				<span class="e-nav-note">Source: private repository</span>
+				<a class="e-source" href={repo} rel="noopener"><svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d={githubMark} /></svg> Source</a>
 			</nav>
 		</header>
 
@@ -150,14 +153,15 @@ const matrix = [
 					{matrix.map(([type, from, to, detail]) => (
 						<tr>
 							<th scope="row">{type}</th>
-							<td data-label="From">{from}</td>
-							<td data-label="To">{to}</td>
+							<td data-label="From"><ErawanCap value={from} /></td>
+							<td data-label="To"><ErawanCap value={to} /></td>
 							<td class="e-detail">{detail}</td>
 						</tr>
 					))}
 				</tbody>
 			</table>
 			<p class="e-fine">* Local destinations: below a non-root mount. † Drive source verification is in progress. Routes are not an exhaustive tested-pair list.</p>
+			<p class="e-legend"><span aria-hidden="true">✓</span> supported · Planned = not yet · <span aria-hidden="true">?</span> Check = validate your remote first · <span aria-hidden="true">—</span> not supported</p>
 		</section>
 
 		<section class="e-split" aria-labelledby="e-visual-title">
@@ -203,7 +207,7 @@ const matrix = [
 
 		<section class="e-cta" aria-labelledby="e-cta-title">
 			<h2 id="e-cta-title">Ready to choose your first job?</h2>
-			<p>Set up from source on Linux, then open <code>erawan wizard</code>. The source repository is private for now, so there is no public download yet.</p>
+			<p>Set up from source on Linux, then open <code>erawan wizard</code>. There is no public download yet; the <a href={repo} rel="noopener">source repository</a> is private for now.</p>
 			<p class="e-actions">
 				<a class="e-btn e-btn-primary" href={quickStart}>Read Quick Start</a>
 				<a class="e-btn e-btn-light" href={a4} download>Download A4 overview</a>
@@ -212,23 +216,33 @@ const matrix = [
 		</section>
 
 		<footer class="e-foot">
-			Erawan · MIT · Source: private repository · <a href={quickStart}>Quick Start</a>
+			Erawan · MIT · <a class="e-source" href={repo} rel="noopener"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path fill="currentColor" d={githubMark} /></svg> Source</a> · <a href={quickStart}>Quick Start</a>
 		</footer>
 	</div>
 </AppLayout>
 
 <style>
+	/* Site-matched: the page inherits the indri.studio surface and tokens.
+	   Only the product's own gradient accents and terminal colours are local. */
 	.erawan {
-		--e-ink: #16253b;
-		--e-muted: #4b5b72;
-		--e-line: #cdd8e6;
-		--e-panel: #0f1f35;
-		--e-teal: #0b7f86;
-		--e-teal-text: #086a70;
-		--e-blue: #2a9ccf;
-		--e-green: #3fb27f;
-		--e-purple: #8d6fe0;
-		background: #f4f7fb;
+		--e-ink: var(--color-on-surface);
+		--e-muted: var(--color-on-surface-variant);
+		--e-panel: var(--color-surface-container-lowest);
+		--e-card: var(--color-surface-container);
+		--e-row: var(--color-surface-container-low);
+		--e-btn: var(--color-surface-container-high);
+		--e-btn-hover: var(--color-surface-container-highest);
+		--e-accent: var(--color-primary-container);
+		--e-on-accent: var(--color-on-primary-container);
+		/* Erawan's interface gradients */
+		--e-blue: #23a7c4;
+		--e-green: #43b88c;
+		--e-purple: #9875e6;
+		/* Terminal-panel colours */
+		--e-term-label: #87dbc9;
+		--e-term-dim: #b9cce1;
+		--e-term-ok: #8be3b6;
+		--e-term-warn: #ffd085;
 		color: var(--e-ink);
 		font-family: var(--font-body);
 		line-height: 1.55;
@@ -236,43 +250,42 @@ const matrix = [
 		padding: 0 max(16px, calc((100% - 1312px) / 2)) 48px;
 		font-size: 16px;
 	}
-	.erawan :global(a) { color: var(--e-teal-text); }
-	.erawan :global(a:focus-visible) { outline: 3px solid var(--e-teal); outline-offset: 3px; border-radius: 4px; }
+	.erawan :global(a) { color: var(--e-accent); }
+	.erawan :global(a:focus-visible) { outline: 3px solid var(--e-accent); outline-offset: 3px; border-radius: 4px; }
 	.erawan code { font-family: var(--font-mono); font-size: 0.92em; }
 	.erawan h1, .erawan h2, .erawan h3 { font-family: var(--font-display); color: var(--e-ink); letter-spacing: -0.01em; font-weight: 700; margin: 0; }
 
 	.e-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 28px 0 8px; }
-	.e-mark { font-family: var(--font-display); font-weight: 700; font-size: 28px; color: var(--e-ink) !important; text-decoration: none; }
+	.e-mark { font-family: var(--font-display); font-weight: 700; font-size: 28px; color: var(--e-ink) !important; text-decoration: none; letter-spacing: 0; }
 	.e-top nav { display: flex; flex-wrap: wrap; gap: 8px 28px; align-items: center; }
 	.e-top nav a { color: var(--e-ink); text-decoration: none; padding: 8px 0; }
-	.e-top nav a:hover { text-decoration: underline; }
-	.e-nav-note { color: var(--e-muted); font-size: 14px; }
-	.e-mark { letter-spacing: 0; }
+	.e-top nav a:hover { color: var(--e-accent); }
+	.e-source { display: inline-flex; align-items: center; gap: 7px; }
+	.e-source svg { flex: none; }
 
 	.e-hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; padding: 48px 0 56px; }
 	.e-hero h1 { font-size: clamp(32px, 4.4vw, 52px); line-height: 1.15; }
-	.e-lede { font-size: clamp(18px, 1.8vw, 21px); margin: 20px 0 28px; max-width: 34ch; }
+	.e-lede { font-size: clamp(18px, 1.8vw, 21px); margin: 20px 0 28px; max-width: 34ch; color: var(--e-ink); }
 	.e-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 0; }
 	.e-btn { display: inline-flex; align-items: center; min-height: 48px; padding: 0 20px; border-radius: 6px; font-weight: 700; font-size: 15px; text-decoration: none; }
-	.e-btn-primary { background: var(--e-teal-text); color: #fff !important; }
-	.e-btn-primary:hover { background: #065a60; }
-	.e-btn-quiet { background: #e4ebf4; color: var(--e-ink) !important; }
-	.e-btn-quiet:hover { background: #d6e0ee; }
-	.e-btn-light { background: #e4ebf4; color: var(--e-ink) !important; }
+	.e-btn-primary { background: var(--e-accent); color: var(--e-on-accent) !important; }
+	.e-btn-primary:hover { background: var(--color-primary); }
+	.e-btn-quiet, .e-btn-light { background: var(--e-btn); color: var(--e-ink) !important; }
+	.e-btn-quiet:hover, .e-btn-light:hover { background: var(--e-btn-hover); }
 	.e-status { color: var(--e-muted); font-size: 14px; margin: 16px 0 0; }
 	.e-actions .e-status { margin: 0 0 0 8px; }
-	.e-status-dark { color: #c4d2e6; }
+	.e-status-dark { color: var(--e-term-dim); }
 	.e-hero-shot { margin: 0; }
 	.e-hero-shot img, .e-split img { display: block; width: 100%; height: auto; border-radius: 22px; }
 	.e-hero-shot figcaption, .e-split figcaption { margin-top: 10px; font-size: 14px; color: var(--e-muted); }
 
 	.e-pick { display: none; }
 
-	.e-kicker { color: var(--e-teal-text); font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; margin: 0 0 6px; }
+	.e-kicker { color: var(--e-accent); font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; margin: 0 0 6px; }
 	.e-workflows { padding-top: 8px; scroll-margin-top: 80px; }
 	.e-workflows > h2 { font-size: clamp(26px, 3vw, 34px); margin-bottom: 24px; }
 	.e-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; }
-	.e-card { background: #fff; border-top: 4px solid var(--e-blue); border-radius: 4px 4px 12px 12px; padding: 24px 22px 26px; scroll-margin-top: 80px; display: flex; flex-direction: column; gap: 14px; }
+	.e-card { background: var(--e-card); border-top: 4px solid var(--e-blue); border-radius: 4px 4px 12px 12px; padding: 24px 22px 26px; scroll-margin-top: 80px; display: flex; flex-direction: column; gap: 14px; }
 	.e-green { border-top-color: var(--e-green); }
 	.e-purple { border-top-color: var(--e-purple); }
 	.e-card h3 { font-size: 24px; }
@@ -281,23 +294,25 @@ const matrix = [
 	.e-diagram { background: var(--e-panel); color: #e6eefb; border-radius: 12px; padding: 16px 18px; margin: 4px 0; }
 	.e-diagram p { margin: 0 0 6px; }
 	.e-diagram code { color: #fff; }
-	.e-d-label { color: #6fe0c4; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; }
+	.e-d-label { color: var(--e-term-label); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; }
 	.e-d-line { font-size: 16px; }
-	.e-d-flow { color: #b4c6de; font-size: 15px; }
-	.e-d-note { color: #c4d2e6; font-size: 13px; margin: 8px 0 0 !important; }
-	.e-d-ok { color: #8be3b6; }
-	.e-d-warn { color: #ffcf6e; }
+	.e-d-flow { color: var(--e-term-dim); font-size: 15px; }
+	.e-d-note { color: var(--e-term-dim); font-size: 13px; margin: 8px 0 0 !important; }
+	.e-d-ok { color: var(--e-term-ok); }
+	.e-d-warn { color: var(--e-term-warn); }
 	.e-card > p:last-child { margin: auto 0 0; padding-top: 6px; }
 
 	.e-matrix { margin-top: 64px; }
 	.e-matrix h2, .e-split h2, .e-cta h2 { font-size: clamp(24px, 2.6vw, 32px); }
 	.e-sub { color: var(--e-muted); margin: 8px 0 20px; }
-	.e-matrix table { width: 100%; border-collapse: collapse; background: #fff; }
+	.e-matrix table { width: 100%; border-collapse: collapse; }
 	.e-matrix thead th { background: var(--e-panel); color: #fff; text-align: left; padding: 12px 16px; }
 	.e-matrix tbody th { text-align: left; font-weight: 400; }
-	.e-matrix td, .e-matrix tbody th { padding: 11px 16px; vertical-align: top; }
-	.e-matrix tbody tr:nth-child(even) { background: #eaf0f8; }
+	.e-matrix td, .e-matrix tbody th { padding: 11px 16px; vertical-align: middle; }
+	.e-matrix tbody tr:nth-child(odd) { background: var(--e-row); }
+	.e-matrix tbody tr:nth-child(even) { background: var(--e-card); }
 	.e-fine { color: var(--e-muted); font-size: 14px; margin: 12px 0 0; }
+	.e-legend { color: var(--e-ink); font-size: 14px; margin: 8px 0 0; }
 
 	.e-split { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 72px; }
 	.e-split h2 { margin-bottom: 14px; }
@@ -311,11 +326,11 @@ const matrix = [
 	.e-cta p { margin: 0 0 22px; max-width: 62ch; }
 	.e-cta .e-actions { margin: 0; }
 	.e-cta code { color: #fff; }
-	.e-foot { margin-top: 36px; color: var(--e-muted); font-size: 14px; }
+	.e-foot { margin-top: 36px; color: var(--e-muted); font-size: 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
 
 	@media (max-width: 900px) {
 		.e-top { padding: 16px 0 0; }
-		.e-nav-note, .e-hero .e-btn-quiet { display: none; }
+		.e-hero .e-btn-quiet { display: none; }
 		.e-hero { grid-template-columns: 1fr; gap: 20px; padding: 16px 0 24px; }
 		.e-hero h1 { font-size: 30px; }
 		.e-lede { margin: 12px 0 18px; }
@@ -323,7 +338,7 @@ const matrix = [
 		.e-pick { display: block; margin-bottom: 28px; }
 		.e-pick h2 { font-size: 22px; margin-bottom: 12px; }
 		.e-pick ul { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; list-style: none; margin: 0; padding: 0; }
-		.e-pick a { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 6px; background: #e4ebf4; color: var(--e-ink); font-weight: 700; font-size: 14px; border-radius: 6px; text-decoration: none; text-align: center; }
+		.e-pick a { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 6px; background: var(--e-btn); color: var(--e-ink); font-weight: 700; font-size: 14px; border-radius: 6px; text-decoration: none; text-align: center; }
 		.e-cards { grid-template-columns: 1fr; }
 		.e-split, .e-split-flip { grid-template-columns: 1fr; gap: 24px; margin-top: 56px; }
 		.e-split-flip figure { order: 2; }
@@ -333,7 +348,7 @@ const matrix = [
 		.e-matrix table, .e-matrix tbody { display: block; }
 		.e-matrix thead { display: grid; grid-template-columns: minmax(0, 1fr) 5.25rem 5.25rem; background: var(--e-panel); }
 		.e-matrix thead .e-detail { display: none; }
-		.e-matrix tbody tr { display: grid; grid-template-columns: minmax(0, 1fr) 5.25rem 5.25rem; }
+		.e-matrix tbody tr { display: grid; grid-template-columns: minmax(0, 1fr) 5.25rem 5.25rem; align-items: center; }
 		.e-matrix tbody th, .e-matrix tbody td { padding: 12px 16px 4px; }
 		.e-matrix td.e-detail { grid-column: 1 / -1; padding: 0 16px 12px; color: var(--e-muted); font-size: 14px; }
 	}
