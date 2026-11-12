@@ -4,8 +4,6 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 ## Open
 
-- [wip T5] Add Erawan’s shortlisted background selector to the live page; final visual choice stays with Will. [plan](docs/plans/2026-11-12-erawan-background-selector.md)
-
 ### SNES player package
 
 - [T1] **2026-07-27** After the first npm publish of `@wbniv/bsnes-jg-player`, swap the git dep
@@ -36,6 +34,8 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 _Nothing parked._
 
 ## Done
+
+- [x] 2026-11-12 — Erawan background selector live in v0.1.289; 12 choices plus None. [plan](docs/plans/2026-11-12-erawan-background-selector.md)
 
 - ✅ 2026-11-12 — [release-docs-mermaid] PDF path checked on a rendered page: single `<br />`, no clipped labels, no fix needed. See [plan](docs/plans/2026-06-25-mermaid-diagram-label-clipping.md).
 - ✅ 2026-11-12 — [erawan-landing] Erawan landing page at /apps/erawan/, gallery card, Quick Start at /docs/erawan-quick-start/. See [plan](/home/will/erawan/docs/plans/2026-11-12-erawan-landing-page.md).

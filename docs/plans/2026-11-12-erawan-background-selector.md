@@ -1,7 +1,7 @@
 ---
 title: Erawan background selector
 date: 2026-11-12
-status: Verified locally; publication pending
+status: Published as v0.1.289; final background choice pending
 ---
 
 # Compare Will’s shortlist on the real Erawan page
@@ -96,7 +96,16 @@ PASS. Actual built-page captures:
 
 3. Publish through the existing tag deployment and verify the live Erawan route.
 
-Publication pending. Use the same Deploy workflow through its documented manual trigger when unrelated in-progress workspace changes prevent the tag task's clean-tree check. This deploys the committed revision without staging those unrelated changes.
+```text
+$ task publish
+publishing v0.1.289 on main (94d62b7)
+tagged v0.1.289; deploy workflow triggered.
+$ gh run watch 43256416020 --interval 30 --exit-status
+✓ deploy in 6m10s (ID 131315742650)
+PASS: live HTTPS page returns 200; exact 12 choices plus None; P19 animation and saved selection work; no JavaScript errors.
+```
+
+PASS: [live Erawan page](https://indri.studio/apps/erawan/), [deployment run](https://github.com/wbniv/indri.studio/actions/runs/43256416020). The optional Lighthouse stage reached Erawan, then stopped on the Foundry Linux route returning HTTP 404; its combined reports were skipped. This is not a full Lighthouse pass. The production build, existing tests, deployment, and explicit browser checks passed.
 
 ## Remaining decision
 
