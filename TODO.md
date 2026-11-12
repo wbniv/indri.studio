@@ -4,6 +4,8 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 ## Open
 
+- [wip T5] Add Erawan’s shortlisted background selector to the live page; final visual choice stays with Will. [plan](docs/plans/2026-11-12-erawan-background-selector.md)
+
 ### SNES player package
 
 - [T1] **2026-07-27** After the first npm publish of `@wbniv/bsnes-jg-player`, swap the git dep

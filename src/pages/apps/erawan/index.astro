@@ -1,10 +1,11 @@
 ---
 // Erawan landing page — implements docs/plans/2026-11-12-erawan-landing-page.md
-// in the Erawan repo. Static HTML + CSS only; navigation and essential content
+// in the Erawan repo. Navigation and essential content
 // work without JavaScript. Interface excerpts are enlarged fragments of the
 // real renderers, drawn from labelled demo data (see scripts/sync-erawan-docs.sh).
 import AppLayout from "../../../layouts/AppLayout.astro";
 import ErawanCap from "../../../components/ErawanCap.astro";
+import ErawanMotion from "../../../components/ErawanMotion.astro";
 
 const quickStart = "/docs/erawan-quick-start/";
 const a4 = "/apps/erawan/erawan-a4.pdf";
@@ -85,6 +86,7 @@ const matrix = [
 				/>
 				<figcaption>Actual interface · demo data · <a href={`${quickStart}#backup`}>See the full view →</a></figcaption>
 			</figure>
+			<ErawanMotion />
 		</section>
 
 		<nav class="e-pick" aria-label="Pick your workflow">
@@ -263,7 +265,8 @@ const matrix = [
 	.e-source { display: inline-flex; align-items: center; gap: 7px; }
 	.e-source svg { flex: none; }
 
-	.e-hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; padding: 48px 0 56px; }
+	.e-hero { position: relative; isolation: isolate; display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; padding: 48px 0 56px; }
+	.e-hero-copy, .e-hero-shot { position: relative; z-index: 1; }
 	.e-hero h1 { font-size: clamp(32px, 4.4vw, 52px); line-height: 1.15; }
 	.e-lede { font-size: clamp(18px, 1.8vw, 21px); margin: 20px 0 28px; max-width: 34ch; color: var(--e-ink); }
 	.e-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 0; }
