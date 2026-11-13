@@ -154,7 +154,7 @@ flowchart LR
 [![Graphics move with the content](2026-11-12-erawan-background-selector/document-scroll.png)](2026-11-12-erawan-background-selector/document-scroll.html)
 
 - [x] Verify that a 300 px scroll moves the decorative layer by 300 px, repeated motifs cover the document, and controls still work on desktop and mobile.
-- [ ] Publish and verify the live page.
+- [x] Published `v0.1.294` from `69088be`; live desktop/mobile checks passed: document-attached graphics scroll 300 px with the content, and footer controls work. [Deployment](https://github.com/wbniv/indri.studio/actions/runs/43357429868).
 
 
 ```text
@@ -170,3 +170,37 @@ PASS: mobile fit, reduced-motion opt-in/reset, blocked/invalid storage, and no-J
 ```
 
 PASS: [desktop](2026-11-12-erawan-background-selector/document-scroll-1440.png), [mobile](2026-11-12-erawan-background-selector/document-scroll-390.png), and [default subtle view](2026-11-12-erawan-background-selector/document-scroll-default.png) show repeated artwork at the connectivity section.
+
+
+## 2026-11-13 · adjustable simulation surfaces
+
+Add **Simulation opacity** to the Background disclosure: 0–100%, initially 70%, with a live percentage. Apply it to the workflow cards and the simulation's stage, endpoint, file, metrics, review and outcome backgrounds. Keep foreground text, controls, progress bars and status borders opaque. Save the choice in the existing browser preference; invalid or absent opacity falls back to 70%.
+
+```mermaid
+flowchart LR
+ A[Drag opacity slider] --> B[Show percentage and update background alpha]
+ B --> C[Motion shows through simulation surfaces]
+ A --> D[Save browser preference]
+ D --> E[Restore on reload]
+```
+
+[![Adjust opacity while watching a simulation](2026-11-12-erawan-background-selector/simulation-opacity.png)](2026-11-12-erawan-background-selector/simulation-opacity.html)
+
+- [x] Check 0%, 50%, 100%, keyboard control, persistence, and opaque text on desktop/mobile.
+- [ ] Publish and verify live scrolling and opacity controls.
+
+
+```text
+$ task build
+[build] 179 page(s) built in 5m 13s
+[build] Complete!
+$ python3 docs/plans/2026-11-12-erawan-background-selector/verify-browser.py http://localhost:4321/apps/erawan/
+PASS: simulation opacity endpoints, keyboard adjustment, saved value, opaque foreground, and desktop/mobile fit.
+PASS: exactly 12 shortlisted choices plus None; each selected motif visibly animates.
+PASS: pause/reload, saved choice/strength, None, and continued animation after scrolling past the hero.
+PASS: Astro navigation away and back restores one working component.
+PASS: backgrounds cover the document and move 300px with a 300px scroll; animation and footer selector work on desktop/mobile.
+PASS: mobile fit, reduced-motion opt-in/reset, blocked/invalid storage, and no-JS content.
+```
+
+PASS: visually reviewed 50% opacity on [desktop](2026-11-12-erawan-background-selector/simulation-opacity-1440.png) and [mobile](2026-11-12-erawan-background-selector/simulation-opacity-390.png).

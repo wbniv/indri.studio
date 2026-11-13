@@ -37,6 +37,10 @@ import { erawanMotionPatterns } from "../data/erawan-motion";
 				<select id="e-motion-strength"><option value="subtle">Subtle</option><option value="emphasized">Emphasized</option></select>
 			</label>
 			<button type="button" class="e-motion-toggle" aria-pressed="false">Play motion</button>
+			<label class="e-opacity-label" for="e-simulation-opacity">Simulation opacity
+				<input id="e-simulation-opacity" type="range" min="0" max="100" step="1" value="70" />
+				<output for="e-simulation-opacity">70%</output>
+			</label>
 		</div>
 		<p class="e-motion-status" role="status" aria-live="polite"></p>
 		</div>
@@ -48,6 +52,8 @@ import { erawanMotionPatterns } from "../data/erawan-motion";
 		connectedCallback() {
 			const select = this.querySelector<HTMLSelectElement>("#e-background")!;
 			const strength = this.querySelector<HTMLSelectElement>("#e-motion-strength")!;
+			const opacity = this.querySelector<HTMLInputElement>("#e-simulation-opacity")!;
+			const opacityOutput = this.querySelector<HTMLOutputElement>('output[for="e-simulation-opacity"]')!;
 			const toggle = this.querySelector<HTMLButtonElement>(".e-motion-toggle")!;
 			const status = this.querySelector<HTMLElement>(".e-motion-status")!;
 			const controls = this.querySelector<HTMLElement>(".e-motion-controls")!;
@@ -67,16 +73,19 @@ import { erawanMotionPatterns } from "../data/erawan-motion";
 					select.value = saved.pattern;
 					strength.value = saved.strength === "emphasized" ? "emphasized" : "subtle";
 					requestedPlay = saved.paused !== true;
+					if (typeof saved.simulationOpacity === "number" && Number.isFinite(saved.simulationOpacity) && saved.simulationOpacity >= 0 && saved.simulationOpacity <= 100) opacity.value = String(saved.simulationOpacity);
 					stored = true;
 				}
 			} catch { /* Blocked storage and invalid JSON leave the preview usable. */ }
 			const save = () => {
 				try {
-					localStorage.setItem(key, JSON.stringify({pattern: select.value, strength: strength.value, paused: !requestedPlay}));
+					localStorage.setItem(key, JSON.stringify({pattern: select.value, strength: strength.value, paused: !requestedPlay, simulationOpacity: opacity.valueAsNumber}));
 					stored = true;
 				} catch { stored = false; }
 			};
 			const update = () => {
+				page.style.setProperty("--e-simulation-opacity", `${opacity.value}%`);
+				opacityOutput.value = `${opacity.value}%`;
 				const none = select.value === "none";
 				const reduced = preference.matches && !optedIn;
 				const enabled = !none && requestedPlay && !reduced;
@@ -95,6 +104,7 @@ import { erawanMotionPatterns } from "../data/erawan-motion";
 			};
 			select.addEventListener("change", () => {save(); update();}, {signal});
 			strength.addEventListener("change", () => {save(); update();}, {signal});
+			opacity.addEventListener("input", () => {save(); update();}, {signal});
 			toggle.addEventListener("click", () => {
 				if (preference.matches && !optedIn) {optedIn = true; requestedPlay = true;}
 				else requestedPlay = !requestedPlay;
@@ -143,6 +153,9 @@ import { erawanMotionPatterns } from "../data/erawan-motion";
 	.erawan { position: relative; isolation: isolate; z-index: 1; }
 	.erawan > :not(erawan-motion) { position: relative; z-index: 1; }
 	erawan-motion .e-motion-fields { display: flex; align-items: end; flex-wrap: wrap; gap: 12px 20px; }
+	erawan-motion .e-opacity-label { flex-basis: 100%; }
+	erawan-motion input[type="range"] { flex: 1; min-width: 100px; min-height: 44px; accent-color: var(--e-accent); }
+	erawan-motion output { min-width: 4ch; font-variant-numeric: tabular-nums; }
 	erawan-motion label { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--e-muted); }
 	erawan-motion select, erawan-motion button { min-height: 44px; max-width: 100%; padding: 8px 12px; border: 1px solid var(--color-outline); border-radius: 6px; background: var(--e-btn); color: var(--e-ink); font: inherit; }
 	erawan-motion button { cursor: pointer; }

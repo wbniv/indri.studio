@@ -33,6 +33,33 @@ with sync_playwright() as p:
         ready(page)
         assert page.locator('#e-background option').evaluate_all('(a)=>a.map(e=>e.value)') == EXPECTED
         assert page.locator('#e-background').input_value() == 'P13'
+        slider = page.locator('#e-simulation-opacity')
+        assert slider.input_value() == '70'
+        slider.focus()
+        for key,value in [('Home',0),('End',100)]:
+            slider.press(key)
+            assert slider.input_value() == str(value)
+            assert page.locator('output[for="e-simulation-opacity"]').inner_text() == f'{value}%'
+            for surface in ['.e-wf','.sim-stage','.sim-end','.sim-file','.sim-metrics']:
+                alpha = page.locator(surface).first.evaluate("""e=>{const s=getComputedStyle(e),c=s.backgroundColor;return {opacity:s.opacity,alpha:c.includes('/')?parseFloat(c.split('/')[1]):c.startsWith('rgba')?parseFloat(c.split(',')[3]):1}}""")
+                assert alpha == {'opacity':'1','alpha':value/100}, (surface,alpha)
+        slider.evaluate("e=>{e.value='50';e.dispatchEvent(new Event('input',{bubbles:true}))}")
+        slider.press('ArrowRight')
+        assert slider.input_value() == '51'
+        page.reload();ready(page)
+        assert page.locator('#e-simulation-opacity').input_value() == '51'
+        for width,height in [(1440,900),(390,844)]:
+            page.set_viewport_size({'width':width,'height':height})
+            page.locator('#e-simulation-opacity').evaluate("e=>{e.value='50';e.dispatchEvent(new Event('input',{bubbles:true}))}")
+            page.locator('#e-background').select_option('P30')
+            page.locator('#e-motion-strength').select_option('emphasized')
+            page.locator('.e-wf').first.scroll_into_view_if_needed()
+            page.wait_for_timeout(800)
+            assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
+            page.screenshot(path=str(ROOT/f'simulation-opacity-{width}.png'))
+        page.set_viewport_size({'width':1440,'height':1100})
+        page.locator('#e-background').select_option('P13')
+        print('PASS: simulation opacity endpoints, keyboard adjustment, saved value, opaque foreground, and desktop/mobile fit.')
         page.locator('#e-motion-strength').select_option('emphasized')
         for value in EXPECTED[1:]:
             page.locator('#e-background').select_option(value)
@@ -135,6 +162,8 @@ with sync_playwright() as p:
         mockup = browser.new_page(viewport={'width':1440,'height':900})
         mockup.goto((ROOT/'document-scroll.html').as_uri())
         mockup.screenshot(path=str(ROOT/'document-scroll.png'))
+        mockup.goto((ROOT/'simulation-opacity.html').as_uri())
+        mockup.screenshot(path=str(ROOT/'simulation-opacity.png'))
         mockup.close()
     finally:
         browser.close()
