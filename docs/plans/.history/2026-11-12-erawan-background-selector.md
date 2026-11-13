@@ -1,9 +1,15 @@
 | Date | Change |
 |------|--------|
+| [2026-11-13](https://github.com/wbniv/indri.studio/commit/9592d95) | Keep Erawan background motion visible while scrolling |
 | [2026-11-12](https://github.com/wbniv/indri.studio/commit/85b49c9) | Record Erawan selector release and verification |
 | [2026-11-12](https://github.com/wbniv/indri.studio/commit/94d62b7) | Add Erawan background shortlist selector |
 
 <!--history-meta v1
+9592d95	author	Will Norris
+9592d95	added	25
+9592d95	deleted	0
+9592d95	files	1
+9592d95	body	Use a fixed mirrored background and a collapsible floating selector. Continue animation throughout the page and verify desktop/mobile scrolling, preferences, and reduced motion.\n\nAI-Tool: Codex 0.167.2\nAI-Model: gpt-6-astra\nAI-Reasoning-Effort: medium\nAI-Session: 01a1ced0-6eca-73b1-ac33-57470b82b605
 85b49c9	author	Will Norris
 85b49c9	added	11
 85b49c9	deleted	2

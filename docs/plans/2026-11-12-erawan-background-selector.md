@@ -130,8 +130,10 @@ flowchart LR
 [![Full-page placement and compact controls](2026-11-12-erawan-background-selector/scroll-layout.png)](2026-11-12-erawan-background-selector/scroll-layout.html)
 
 - [x] Verified animated viewport-sized backgrounds and reachable controls at the hero, situations, connectivity matrix, wizard and footer on desktop (1440 px) and mobile (390 px).
-- [ ] Publish the fix and verify the live page.
+- [x] Published `v0.1.293` from `9592d95`; verified the live page on desktop and mobile.
 
 Validation: `pnpm test` passed all 23 tests; `task build` passed (179 routes). Browser checks passed all 12 choices plus None, persisted preferences, pause/resume, Astro navigation, reduced-motion opt-in/reset, blocked/invalid storage, no-JS content, and mobile overflow. Fixed the footer stacking overlap found in the first browser pass. Inspected the default subtle appearance and emphasized comparison screenshots.
 
 [Default subtle appearance](2026-11-12-erawan-background-selector/scroll-default.png) · [Desktop comparison](2026-11-12-erawan-background-selector/scroll-1440.png) · [Mobile](2026-11-12-erawan-background-selector/scroll-390.png) · [Expanded controls](2026-11-12-erawan-background-selector/scroll-mobile-controls.png).
+
+Live verification: HTTP 200, fixed animated backgrounds after scrolling to the connectivity matrix and footer, clickable footer selector, all 12 choices plus None, saved selection after reload, and no JavaScript errors. [Release deployment](https://github.com/wbniv/indri.studio/actions/runs/43351147725): tests, build, Cloudflare upload and propagation succeeded; optional site-wide Lighthouse auditing was still running when this verification completed.
