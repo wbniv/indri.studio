@@ -1,0 +1,84 @@
+---
+// Erawan privacy policy. Linked from the Erawan page footer and from the Google sign-in
+// consent screen (Google Auth Platform → Branding → "Application privacy policy link").
+// Every statement here describes what the program does; change it when the program changes.
+import AppLayout from "../../../layouts/AppLayout.astro";
+
+const home = "/apps/erawan/";
+const updated = "13 November 2026";
+---
+
+<AppLayout
+	title="Erawan privacy policy"
+	description="What Erawan does with your files and your Google account: it runs on your computer, and nothing is sent to its authors."
+>
+	<div class="e-privacy">
+		<p class="e-back"><a href={home}>← Erawan</a></p>
+		<h1>Erawan privacy policy</h1>
+		<p class="e-date">Last updated {updated}</p>
+
+		<p>
+			Erawan is a program you run on your own computer to back up files, consolidate folders and
+			find duplicates. It has no server of its own and no account system. Its authors receive
+			nothing from it: no files, no file names, no usage statistics and no crash reports.
+		</p>
+
+		<h2>What Erawan reads and where it goes</h2>
+		<ul>
+			<li>Erawan reads the files and folders you select as a source, and their names, sizes, modification times and checksums.</li>
+			<li>It copies them only to the destination you choose, such as a disk, a server you name, or your own cloud storage.</li>
+			<li>Job settings, progress and logs are kept in a state directory on your computer. They include file names and paths.</li>
+			<li>Erawan makes no network connections other than to the sources and destinations you configure. Transfers are carried out by <a href="https://rclone.org/" rel="noopener">rclone</a> and rsync, which run on your computer.</li>
+		</ul>
+
+		<h2>Google Drive</h2>
+		<p>If you connect a Google Drive, you sign in to Google in your browser and Google asks you to approve the access.</p>
+		<ul>
+			<li><strong>As a backup source</strong>, Erawan asks for read-only access. It lists and downloads the Drive files in the folder you choose, to copy them to your destination. It cannot change or delete anything in your Drive.</li>
+			<li><strong>The sign-in token</strong> Google issues is stored in rclone's configuration file on your computer. It is not sent to Erawan's authors or to anyone else.</li>
+			<li><strong>Your Google data</strong> is used only to carry out the backup you start. It is not shared, sold, used for advertising, or read by any person other than you.</li>
+		</ul>
+		<p>
+			Erawan's use and transfer of information received from Google APIs adheres to the
+			<a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener">Google API Services User Data Policy</a>,
+			including the Limited Use requirements.
+		</p>
+
+		<h2>Removing access and data</h2>
+		<ul>
+			<li>Remove Erawan's access to your Google account at any time on Google's <a href="https://myaccount.google.com/connections" rel="noopener">third-party connections page</a>.</li>
+			<li>Delete the remote from rclone's configuration to remove the stored token.</li>
+			<li>Delete Erawan's state directory to remove its job records. Your backed-up files stay wherever you copied them until you delete them.</li>
+		</ul>
+
+		<h2>This website</h2>
+		<p>This site is static pages. It sets no cookies and has no sign-in.</p>
+
+		<h2>Contact</h2>
+		<p>Questions about this policy: <a href="mailto:hello@indri.studio">hello@indri.studio</a>.</p>
+	</div>
+</AppLayout>
+
+<style>
+	.e-privacy {
+		color: var(--color-on-surface);
+		font-family: var(--font-body);
+		font-size: 16px;
+		line-height: 1.65;
+		width: 100%;
+		max-width: 760px;
+		margin: 0 auto;
+		padding: 28px 16px 64px;
+	}
+	.e-privacy a { color: var(--color-primary-container); }
+	.e-privacy a:focus-visible { outline: 3px solid var(--color-primary-container); outline-offset: 3px; border-radius: 4px; }
+	.e-privacy h1, .e-privacy h2 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.01em; }
+	.e-privacy h1 { font-size: 34px; margin: 12px 0 4px; }
+	.e-privacy h2 { font-size: 21px; margin: 32px 0 8px; }
+	.e-privacy p { margin: 0 0 14px; }
+	.e-privacy ul { margin: 0 0 14px; padding-left: 22px; list-style: disc; }
+	.e-privacy li { margin: 0 0 8px; }
+	.e-back { margin: 0; }
+	.e-back a { text-decoration: none; }
+	.e-date { color: var(--color-on-surface-variant); font-size: 14px; }
+</style>
