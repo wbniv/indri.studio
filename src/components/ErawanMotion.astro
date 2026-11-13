@@ -4,7 +4,8 @@ import { erawanMotionPatterns } from "../data/erawan-motion";
 
 <erawan-motion>
 	<div class="e-motion-backdrop" aria-hidden="true">
-		<svg viewBox="0 0 520 310" preserveAspectRatio="xMaxYMid meet" focusable="false">
+		{["left", "right"].map((side) => (
+		<svg class={`e-motion-side e-motion-${side}`} viewBox="300 0 240 310" preserveAspectRatio="xMidYMid slice" focusable="false">
 			{erawanMotionPatterns.map((pattern) => (
 				<g data-pattern={pattern.id} hidden>
 					{pattern.shapes.map((shape, i) => (
@@ -15,8 +16,11 @@ import { erawanMotionPatterns } from "../data/erawan-motion";
 				</g>
 			))}
 		</svg>
+		))}
 	</div>
-	<aside class="e-motion-controls" aria-label="Background study" hidden>
+	<details class="e-motion-controls" hidden>
+		<summary>Background <span class="e-motion-selection">· P13</span></summary>
+		<div class="e-motion-panel">
 		<div class="e-motion-fields">
 			<label for="e-background">Background
 				<select id="e-background">
@@ -30,7 +34,8 @@ import { erawanMotionPatterns } from "../data/erawan-motion";
 			<button type="button" class="e-motion-toggle" aria-pressed="false">Play motion</button>
 		</div>
 		<p class="e-motion-status" role="status" aria-live="polite"></p>
-	</aside>
+		</div>
+	</details>
 </erawan-motion>
 
 <script>
@@ -41,7 +46,7 @@ import { erawanMotionPatterns } from "../data/erawan-motion";
 			const toggle = this.querySelector<HTMLButtonElement>(".e-motion-toggle")!;
 			const status = this.querySelector<HTMLElement>(".e-motion-status")!;
 			const controls = this.querySelector<HTMLElement>(".e-motion-controls")!;
-			const hero = this.closest<HTMLElement>(".e-hero")!;
+			const page = this.closest<HTMLElement>(".erawan")!;
 			const patterns = [...this.querySelectorAll<SVGGElement>("[data-pattern]")];
 			const preference = matchMedia("(prefers-reduced-motion: reduce)");
 			const key = "erawan-background-study";
@@ -71,6 +76,8 @@ import { erawanMotionPatterns } from "../data/erawan-motion";
 				const reduced = preference.matches && !optedIn;
 				const enabled = !none && requestedPlay && !reduced;
 				this.dataset.playing = String(enabled && visible && !document.hidden);
+				this.dataset.inView = String(visible);
+				this.querySelector(".e-motion-selection")!.textContent = `· ${none ? "None" : select.value}`;
 				this.dataset.strength = strength.value;
 				this.dataset.motionOptIn = String(optedIn);
 				patterns.forEach(pattern => pattern.toggleAttribute("hidden", pattern.dataset.pattern !== select.value));
@@ -94,7 +101,7 @@ import { erawanMotionPatterns } from "../data/erawan-motion";
 				visible = entries.some(entry => entry.isIntersecting);
 				update();
 			});
-			observer.observe(hero);
+			observer.observe(page);
 			controls.hidden = false;
 			update();
 			this.dataset.ready = "true";
@@ -109,8 +116,10 @@ import { erawanMotionPatterns } from "../data/erawan-motion";
 <style is:global>
 	erawan-motion { display: contents; --e-motion-speed: 1; --e-motion-travel: 1; --e-motion-strength: 1; }
 	erawan-motion[data-strength="emphasized"] { --e-motion-speed: .25; --e-motion-travel: 3; --e-motion-strength: 3; }
-	erawan-motion .e-motion-backdrop { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; mask-image: linear-gradient(90deg, transparent 10%, black 65%); }
-	erawan-motion .e-motion-backdrop svg { display: block; width: 100%; height: 100%; }
+	erawan-motion .e-motion-backdrop { position: fixed; inset: 0; display: flex; pointer-events: none; overflow: hidden; z-index: 0; mask-image: linear-gradient(90deg, black 10%, transparent 48%, transparent 52%, black 90%); }
+	erawan-motion[data-in-view="false"] .e-motion-backdrop { visibility: hidden; }
+	erawan-motion .e-motion-backdrop svg { display: block; width: 50%; height: 100%; }
+	erawan-motion .e-motion-left { transform: scaleX(-1); }
 	erawan-motion [hidden] { display: none !important; }
 	erawan-motion .e-motion-opacity { opacity: calc(var(--alpha) * var(--e-motion-strength)); }
 	erawan-motion .e-motion-piece { animation-duration: calc(var(--duration) * var(--e-motion-speed)); animation-delay: var(--delay); animation-timing-function: ease-in-out; animation-iteration-count: infinite; animation-play-state: paused; }
@@ -121,7 +130,13 @@ import { erawanMotionPatterns } from "../data/erawan-motion";
 	@keyframes erawan-drift { 0%,100% { transform: translate(0,0); } 50% { transform: translate(calc(var(--dx)*var(--e-motion-travel)),calc(var(--dy)*var(--e-motion-travel))); } }
 	@keyframes erawan-pulse { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
 	@keyframes erawan-dash { 0%,100% { stroke-dashoffset: 0; } 50% { stroke-dashoffset: calc(var(--dx)*var(--e-motion-travel)); } }
-	erawan-motion .e-motion-controls { position: relative; z-index: 1; grid-column: 1 / -1; padding: 16px 18px; border: 1px solid var(--color-outline-variant); border-radius: 10px; background: var(--e-card); }
+	erawan-motion .e-motion-controls { position: fixed; bottom: 16px; left: 16px; z-index: 40; max-width: min(680px, calc(100vw - 32px)); border: 1px solid var(--color-outline); border-radius: 10px; background: var(--e-card); }
+	erawan-motion summary { padding: 12px 16px; min-height: 44px; cursor: pointer; font-size: 14px; color: var(--e-ink); }
+	erawan-motion summary:focus-visible { outline: 3px solid var(--e-accent); outline-offset: 3px; border-radius: 10px; }
+	erawan-motion .e-motion-selection { color: var(--e-muted); }
+	erawan-motion .e-motion-panel { padding: 0 16px 14px; max-height: 55svh; overflow: auto; }
+	.erawan { position: relative; isolation: isolate; z-index: 1; }
+	.erawan > :not(erawan-motion) { position: relative; z-index: 1; }
 	erawan-motion .e-motion-fields { display: flex; align-items: end; flex-wrap: wrap; gap: 12px 20px; }
 	erawan-motion label { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--e-muted); }
 	erawan-motion select, erawan-motion button { min-height: 44px; max-width: 100%; padding: 8px 12px; border: 1px solid var(--color-outline); border-radius: 6px; background: var(--e-btn); color: var(--e-ink); font: inherit; }

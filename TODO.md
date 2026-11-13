@@ -35,6 +35,8 @@ _Nothing parked._
 
 ## Done
 
+- [x] Extended Erawan background motion through scrolling and kept comparison controls reachable. [plan](docs/plans/2026-11-12-erawan-background-selector.md#2026-11-13--background-throughout-the-page)
+
 - [x] 2026-11-12 — Erawan background selector live in v0.1.289; 12 choices plus None. [plan](docs/plans/2026-11-12-erawan-background-selector.md)
 
 - ✅ 2026-11-12 — [release-docs-mermaid] PDF path checked on a rendered page: single `<br />`, no clipped labels, no fix needed. See [plan](docs/plans/2026-06-25-mermaid-diagram-label-clipping.md).

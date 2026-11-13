@@ -110,3 +110,28 @@ PASS: [live Erawan page](https://indri.studio/apps/erawan/), [deployment run](ht
 ## Remaining decision
 
 - [ ] Will chooses the final background; remove the comparison selector in a later pass.
+
+
+## 2026-11-13 · background throughout the page
+
+The hero-local layer disappears when scrolling and its observer pauses animation. Move the component to the Erawan page wrapper. Use a fixed viewport layer with mirrored left/right artwork, a softer reading area in the middle, and no pointer interception. Observe the whole Erawan wrapper; pause only outside that page or in a hidden tab. Keep normal content and terminal panels above the decoration.
+
+A compact **Background · P13** disclosure stays at the lower left. Expanding it exposes the existing selector, motion strength and pause button. It collapses to a single button on mobile as well. The existing None, stored choices, and reduced-motion behavior remain available.
+
+```mermaid
+flowchart LR
+ A[Scroll Erawan page] --> B[Fixed background remains in viewport]
+ B --> C[Pattern visible along both sides]
+ A --> D[Background disclosure stays accessible]
+ D --> E[Choose pattern or pause]
+ E --> C
+```
+
+[![Full-page placement and compact controls](2026-11-12-erawan-background-selector/scroll-layout.png)](2026-11-12-erawan-background-selector/scroll-layout.html)
+
+- [x] Verified animated viewport-sized backgrounds and reachable controls at the hero, situations, connectivity matrix, wizard and footer on desktop (1440 px) and mobile (390 px).
+- [ ] Publish the fix and verify the live page.
+
+Validation: `pnpm test` passed all 23 tests; `task build` passed (179 routes). Browser checks passed all 12 choices plus None, persisted preferences, pause/resume, Astro navigation, reduced-motion opt-in/reset, blocked/invalid storage, no-JS content, and mobile overflow. Fixed the footer stacking overlap found in the first browser pass. Inspected the default subtle appearance and emphasized comparison screenshots.
+
+[Default subtle appearance](2026-11-12-erawan-background-selector/scroll-default.png) · [Desktop comparison](2026-11-12-erawan-background-selector/scroll-1440.png) · [Mobile](2026-11-12-erawan-background-selector/scroll-390.png) · [Expanded controls](2026-11-12-erawan-background-selector/scroll-mobile-controls.png).
