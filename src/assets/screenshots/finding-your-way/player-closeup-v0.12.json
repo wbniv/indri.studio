@@ -1,0 +1,74 @@
+{
+  "capturedAt": "2026-11-13T14:23:14Z",
+  "build": "/home/will/finding-your-way/game/parmenides-slice/build/v0.12-shoulder-review",
+  "artStage": "chapter-art",
+  "levelSha256": "46d6e6ad592d27f497f6238980eebf74ec415e9366260f376fd4de179dd12ef9",
+  "size": [
+    1280,
+    720
+  ],
+  "runtimeArgs": [],
+  "view": null,
+  "approachSeconds": 0.0,
+  "playerPosition": [
+    2.0,
+    -3.000013,
+    0.009756
+  ],
+  "binary": "/home/will/.cache/rc-runtime/5538a0c8863c/wf_game",
+  "binarySha256": "6ab3eebb3599bd9da9695f0fe39b0198cc522bbd74d41b738ea286135b26d5b6",
+  "display": "private Xvfb",
+  "glRenderer": "llvmpipe (LLVM 21.1.8, 256 bits)",
+  "pose": {
+    "x": 2.0,
+    "y": -3.0,
+    "headingTurns": 0.25,
+    "firstPerson": false
+  },
+  "state": {
+    "101": 0.0,
+    "102": 0.0,
+    "114": 0.25,
+    "140": 0.0
+  },
+  "poseName": "reference",
+  "presetMailboxes": {},
+  "camera": {
+    "mailboxes": "X,Y,Z then rotation A,B (pitch),C (yaw from +Y), turns",
+    "values": [
+      2.0,
+      -1.549995,
+      1.609704,
+      0.0,
+      0.983597,
+      0.5
+    ]
+  },
+  "pinned": {
+    "camera": [
+      2.0,
+      -1.55,
+      1.6
+    ],
+    "look": [
+      2.0,
+      -3.0,
+      1.45
+    ],
+    "forth": [
+      "0.0000 INDEXOF_X_POS 5 write-actor-mailbox",
+      "1.4500 INDEXOF_Y_POS 5 write-actor-mailbox",
+      "1.6000 INDEXOF_Z_POS 5 write-actor-mailbox",
+      "0.0000 INDEXOF_X_POS 119 write-actor-mailbox",
+      "0.0000 INDEXOF_Y_POS 119 write-actor-mailbox",
+      "1.4500 INDEXOF_Z_POS 119 write-actor-mailbox"
+    ]
+  },
+  "frame": "player-closeup-v0.12.png",
+  "phoneCrop": "release-player-closeup-phone.png",
+  "phoneAspect": "9:19.5 centre crop",
+  "method": "Opening sheet closed by mailbox 140; player placed by scene:set_transform and heading mailbox 114; paused after the follow camera settled; no human input",
+  "releaseApkSha256": "af60971af79424732d59659bf3b4350b38169a7a6e71636767b7b26a3b4a7a75",
+  "releaseCdSha256": "b72a2f06460b253678e6409913a8d6d97bff6bb2cbc952850e522bddcf00116b",
+  "presentation": "Desktop engine capture of the v0.12 release assets; CSS crops around the player at scale 2.6, origin 50% 43%."
+}

@@ -7,7 +7,7 @@ import loveStreetScreenshot from '../assets/screenshots/finding-your-way/love-st
 import truthCourtScreenshot from '../assets/screenshots/finding-your-way/truth-court-v0.9.2.png';
 import godAscentScreenshot from '../assets/screenshots/finding-your-way/god-ascent-v0.9.3.png';
 import v010GodSummitScreenshot from '../assets/screenshots/finding-your-way/god-summit-v0.10.png';
-import v012TempleScreenshot from '../assets/screenshots/finding-your-way/temple-v0.12.png';
+import v012PlayerScreenshot from '../assets/screenshots/finding-your-way/player-closeup-v0.12.png';
 import v011TempleScreenshot from '../assets/screenshots/finding-your-way/temple-fire-v0.11.png';
 import v08FpsScreenshot from '../assets/screenshots/finding-your-way/v0.8-fps-improvement.png';
 import v081TempleScreenshot from '../assets/screenshots/finding-your-way/temple-v0.8-family.jpg';
@@ -163,7 +163,7 @@ const milestones = [
       'The Player has a new painted model with revised proportions and a narrower stance.',
       'The goddess wears a draped chiton, with a glowing aura in place of wings.',
     ],
-    screenshot: { src: v012TempleScreenshot, alt: 'The Player approaches the goddess in the Temple in v0.12' },
+    screenshot: { src: v012PlayerScreenshot, alt: 'Closeup of the updated Player in v0.12', closeup: true },
   },
   {
     title: 'Motion and light v0.11',
@@ -306,7 +306,9 @@ const milestones = [
         </a>
       </summary>
       <div class="milestone-body">
-        {screenshot && <Image src={screenshot.src} alt={screenshot.alt} width={224} height={126} loading="lazy" class="milestone-screenshot" />}
+        {screenshot && <div class:list={['milestone-screenshot', { 'player-closeup': 'closeup' in screenshot && screenshot.closeup }]}>
+          <Image src={screenshot.src} alt={screenshot.alt} width={672} height={378} loading="lazy" />
+        </div>}
         <p>{description}</p>
         {highlights && <ul class="milestone-highlights">{highlights.map((highlight) => <li>{highlight}</li>)}</ul>}
         {knownIssues.length > 0 && <>
@@ -404,11 +406,13 @@ const milestones = [
     width: min(36%, 224px);
     height: auto;
     aspect-ratio: 16 / 9;
-    object-fit: cover;
+    overflow: hidden;
     margin: 0 0 10px 18px;
     border: 1px solid var(--color-outline-variant);
     border-radius: 6px;
   }
+  .milestone-screenshot img { display: block; width: 100%; height: auto; }
+  .milestone-screenshot.player-closeup img { transform: scale(2.6); transform-origin: 50% 43%; }
   .milestone-body .milestone-highlights { padding-left: 20px; margin: 0 0 14px; }
   .milestone-body .milestone-highlights li + li { margin-top: 5px; }
   .milestone-body .milestone-checksum {
