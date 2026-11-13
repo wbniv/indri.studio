@@ -7,6 +7,7 @@ import loveStreetScreenshot from '../assets/screenshots/finding-your-way/love-st
 import truthCourtScreenshot from '../assets/screenshots/finding-your-way/truth-court-v0.9.2.png';
 import godAscentScreenshot from '../assets/screenshots/finding-your-way/god-ascent-v0.9.3.png';
 import v010GodSummitScreenshot from '../assets/screenshots/finding-your-way/god-summit-v0.10.png';
+import v012TempleScreenshot from '../assets/screenshots/finding-your-way/temple-v0.12.png';
 import v011TempleScreenshot from '../assets/screenshots/finding-your-way/temple-fire-v0.11.png';
 import v08FpsScreenshot from '../assets/screenshots/finding-your-way/v0.8-fps-improvement.png';
 import v081TempleScreenshot from '../assets/screenshots/finding-your-way/temple-v0.8-family.jpg';
@@ -145,7 +146,25 @@ const motionLightRelease = {
   knownIssues: [],
 };
 
+const playerGoddessRelease = {
+  milestone: '2026-11-13-v0.12',
+  milestoneVersion: '0.12',
+  apk: 'parmenides-v0.12-af60971af7942473.apk',
+  sha256: 'af60971af79424732d59659bf3b4350b38169a7a6e71636767b7b26a3b4a7a75',
+  knownIssues: [],
+};
+
 const milestones = [
+  {
+    title: 'Player and goddess v0.12',
+    manifest: playerGoddessRelease,
+    description: 'Updates the Player model and gives the goddess a new chiton and aura.',
+    highlights: [
+      'The Player has a new painted model with revised proportions and a narrower stance.',
+      'The goddess wears a draped chiton, with a glowing aura in place of wings.',
+    ],
+    screenshot: { src: v012TempleScreenshot, alt: 'The Player approaches the goddess in the Temple in v0.12' },
+  },
   {
     title: 'Motion and light v0.11',
     manifest: motionLightRelease,
