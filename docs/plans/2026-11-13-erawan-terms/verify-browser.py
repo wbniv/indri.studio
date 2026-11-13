@@ -10,7 +10,7 @@ with sync_playwright() as p:
  try:
   for width,height in [(1440,900),(390,844)]:
    page=browser.new_page(viewport={'width':width,'height':height})
-   assert page.goto(origin+'/apps/erawan/terms/').ok
+   assert page.goto(origin+'/apps/erawan/terms-of-service/').ok
    assert page.locator('h1').inner_text()=='Erawan terms of service'
    assert ' '.join(page.locator('.e-license').inner_text().split())==' '.join(license_text.split())
    assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
@@ -18,12 +18,12 @@ with sync_playwright() as p:
    if 'localhost' in origin:page.screenshot(path=str(root/f'terms-{width}.png'),full_page=True)
    page.locator('.e-back a[href="/apps/erawan/privacy/"]').click()
    page.wait_for_url('**/apps/erawan/privacy/')
-   page.locator('.e-back a[href="/apps/erawan/terms/"]').click()
-   page.wait_for_url('**/apps/erawan/terms/')
+   page.locator('.e-back a[href="/apps/erawan/terms-of-service/"]').click()
+   page.wait_for_url('**/apps/erawan/terms-of-service/')
    page.locator('.e-back a[href="/apps/erawan/"]').click()
    page.wait_for_url('**/apps/erawan/')
-   page.locator('.e-foot a[href="/apps/erawan/terms/"]').click()
-   page.wait_for_url('**/apps/erawan/terms/')
+   page.locator('.e-foot a[href="/apps/erawan/terms-of-service/"]').click()
+   page.wait_for_url('**/apps/erawan/terms-of-service/')
    page.close()
   print('PASS: terms HTTP 200, exact repository MIT licence, contact link, desktop/mobile fit, and reciprocal Home/Privacy/Terms navigation.')
   if 'localhost' in origin:

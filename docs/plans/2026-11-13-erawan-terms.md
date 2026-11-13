@@ -1,6 +1,6 @@
 # Erawan Terms of Service
 
-Publish `/apps/erawan/terms/` alongside the existing privacy policy. Will requested the other policy named on Google's consent screen after completing client-reuse verification.
+Publish `/apps/erawan/terms-of-service/` alongside the existing privacy policy. Will requested the other policy named on Google's consent screen after completing client-reuse verification.
 
 Use the same readable single-column layout as Privacy. State that Erawan runs locally, users retain their files, file-changing actions require care, and configured providers have their own terms and charges. Reproduce the repository's MIT licence verbatim, preserving its copyright holder. These usage notes do not narrow the MIT permissions. Link Privacy and the application home page; add Terms to the landing-page footer and privacy-page navigation.
 
@@ -40,3 +40,10 @@ PASS: terms HTTP 200, exact repository MIT licence, contact link, desktop/mobile
 ```
 
 PASS: [live Terms of Service](https://indri.studio/apps/erawan/terms/). This is the URL for Google Auth Platform → Branding → Application terms of service. The Cloud Console field itself was not changed in this task.
+
+
+## URL wording · 2026-11-13
+
+Will prefers the explicit `/apps/erawan/terms-of-service/` URL. Renamed the route and updated the landing-page footer, Privacy navigation and browser checks. The original deployment evidence above records the previous URL.
+
+- [ ] Publish and verify the renamed route and navigation.
