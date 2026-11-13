@@ -4,6 +4,7 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 ## Open
 
+
 ### SNES player package
 
 - [T1] **2026-07-27** After the first npm publish of `@wbniv/bsnes-jg-player`, swap the git dep
@@ -34,6 +35,8 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 _Nothing parked._
 
 ## Done
+
+- [x] Made Erawan background motifs scroll with the document. [plan](docs/plans/2026-11-12-erawan-background-selector.md#2026-11-13--scroll-with-the-content)
 
 - [x] Extended Erawan background motion through scrolling and kept comparison controls reachable. [plan](docs/plans/2026-11-12-erawan-background-selector.md#2026-11-13--background-throughout-the-page)
 

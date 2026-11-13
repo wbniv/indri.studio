@@ -5,7 +5,9 @@ import { erawanMotionPatterns } from "../data/erawan-motion";
 <erawan-motion>
 	<div class="e-motion-backdrop" aria-hidden="true">
 		{["left", "right"].map((side) => (
-		<svg class={`e-motion-side e-motion-${side}`} viewBox="300 0 240 310" preserveAspectRatio="xMidYMid slice" focusable="false">
+		<svg class={`e-motion-side e-motion-${side}`} focusable="false">
+			<defs>
+			<pattern id={`e-motion-tile-${side}`} width="100%" height="800" patternUnits="userSpaceOnUse" viewBox="300 0 240 310" preserveAspectRatio="xMidYMid slice">
 			{erawanMotionPatterns.map((pattern) => (
 				<g data-pattern={pattern.id} hidden>
 					{pattern.shapes.map((shape, i) => (
@@ -15,6 +17,9 @@ import { erawanMotionPatterns } from "../data/erawan-motion";
 					))}
 				</g>
 			))}
+			</pattern>
+			</defs>
+			<rect width="100%" height="100%" fill={`url(#e-motion-tile-${side})`} />
 		</svg>
 		))}
 	</div>
@@ -116,7 +121,7 @@ import { erawanMotionPatterns } from "../data/erawan-motion";
 <style is:global>
 	erawan-motion { display: contents; --e-motion-speed: 1; --e-motion-travel: 1; --e-motion-strength: 1; }
 	erawan-motion[data-strength="emphasized"] { --e-motion-speed: .25; --e-motion-travel: 3; --e-motion-strength: 3; }
-	erawan-motion .e-motion-backdrop { position: fixed; inset: 0; display: flex; pointer-events: none; overflow: hidden; z-index: 0; mask-image: linear-gradient(90deg, black 10%, transparent 48%, transparent 52%, black 90%); }
+	erawan-motion .e-motion-backdrop { position: absolute; inset: 0; display: flex; pointer-events: none; overflow: hidden; z-index: 0; mask-image: linear-gradient(90deg, black 10%, transparent 48%, transparent 52%, black 90%); }
 	erawan-motion[data-in-view="false"] .e-motion-backdrop { visibility: hidden; }
 	erawan-motion .e-motion-backdrop svg { display: block; width: 50%; height: 100%; }
 	erawan-motion .e-motion-left { transform: scaleX(-1); }

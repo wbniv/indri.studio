@@ -1,10 +1,16 @@
 | Date | Change |
 |------|--------|
+| [2026-11-13](https://github.com/wbniv/indri.studio/commit/1e9034d) | Record live Erawan scrolling background verification |
 | [2026-11-13](https://github.com/wbniv/indri.studio/commit/9592d95) | Keep Erawan background motion visible while scrolling |
 | [2026-11-12](https://github.com/wbniv/indri.studio/commit/85b49c9) | Record Erawan selector release and verification |
 | [2026-11-12](https://github.com/wbniv/indri.studio/commit/94d62b7) | Add Erawan background shortlist selector |
 
 <!--history-meta v1
+1e9034d	author	Will Norris
+1e9034d	added	3
+1e9034d	deleted	1
+1e9034d	files	1
+1e9034d	body	AI-Tool: Codex 0.167.2\nAI-Model: gpt-6-astra\nAI-Reasoning-Effort: medium\nAI-Session: 01a1ced0-6eca-73b1-ac33-57470b82b605
 9592d95	author	Will Norris
 9592d95	added	25
 9592d95	deleted	0

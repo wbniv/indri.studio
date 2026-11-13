@@ -137,3 +137,36 @@ Validation: `pnpm test` passed all 23 tests; `task build` passed (179 routes). B
 [Default subtle appearance](2026-11-12-erawan-background-selector/scroll-default.png) · [Desktop comparison](2026-11-12-erawan-background-selector/scroll-1440.png) · [Mobile](2026-11-12-erawan-background-selector/scroll-390.png) · [Expanded controls](2026-11-12-erawan-background-selector/scroll-mobile-controls.png).
 
 Live verification: HTTP 200, fixed animated backgrounds after scrolling to the connectivity matrix and footer, clickable footer selector, all 12 choices plus None, saved selection after reload, and no JavaScript errors. [Release deployment](https://github.com/wbniv/indri.studio/actions/runs/43351147725): tests, build, Cloudflare upload and propagation succeeded; optional site-wide Lighthouse auditing was still running when this verification completed.
+
+
+## 2026-11-13 · scroll with the content
+
+Will rejected the viewport-fixed graphics. Replace the fixed layer with an absolute layer spanning the Erawan document. Repeat each animated SVG motif every 800 px down both sides; the pattern moves upward with the content during scrolling, while its own animation continues. Keep the compact selector reachable. Existing choices, pause, None and reduced-motion behavior remain.
+
+```mermaid
+flowchart LR
+ A[Scroll page] --> B[Content and decorative layer move together]
+ B --> C[Next repeated motif enters view]
+ D[Choose background] --> E[Animate repeated SVG pattern]
+ E --> C
+```
+
+[![Graphics move with the content](2026-11-12-erawan-background-selector/document-scroll.png)](2026-11-12-erawan-background-selector/document-scroll.html)
+
+- [x] Verify that a 300 px scroll moves the decorative layer by 300 px, repeated motifs cover the document, and controls still work on desktop and mobile.
+- [ ] Publish and verify the live page.
+
+
+```text
+$ task build
+[build] 179 page(s) built in 4m 49s
+[build] Complete!
+$ python3 docs/plans/2026-11-12-erawan-background-selector/verify-browser.py http://localhost:4321/apps/erawan/
+PASS: exactly 12 shortlisted choices plus None; each selected motif visibly animates.
+PASS: pause/reload, saved choice/strength, None, and continued animation after scrolling past the hero.
+PASS: Astro navigation away and back restores one working component.
+PASS: backgrounds cover the document and move 300px with a 300px scroll; animation and footer selector work on desktop/mobile.
+PASS: mobile fit, reduced-motion opt-in/reset, blocked/invalid storage, and no-JS content.
+```
+
+PASS: [desktop](2026-11-12-erawan-background-selector/document-scroll-1440.png), [mobile](2026-11-12-erawan-background-selector/document-scroll-390.png), and [default subtle view](2026-11-12-erawan-background-selector/document-scroll-default.png) show repeated artwork at the connectivity section.
