@@ -46,4 +46,4 @@ PASS: [live Terms of Service](https://indri.studio/apps/erawan/terms/). This is 
 
 Will prefers the explicit `/apps/erawan/terms-of-service/` URL. Renamed the route and updated the landing-page footer, Privacy navigation and browser checks. The original deployment evidence above records the previous URL.
 
-- [ ] Publish and verify the renamed route and navigation.
+- [x] Published `v0.1.298` from `8d37eab`; the renamed route returns HTTP 200 and desktop/mobile Home/Privacy/Terms navigation checks passed. [Deployment](https://github.com/wbniv/indri.studio/actions/runs/43376373188).
