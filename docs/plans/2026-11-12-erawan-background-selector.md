@@ -222,7 +222,7 @@ flowchart LR
 [![Final layout without preview controls](2026-11-12-erawan-background-selector/final-settings.png)](2026-11-12-erawan-background-selector/final-settings.html)
 
 - [x] Verify final values, no preview controls or preference overrides, desktop/mobile scrolling and reduced motion.
-- [ ] Publish and verify live.
+- [x] Published `v0.1.296` from `77de8f4`; the same desktop/mobile checks passed against the live site. [Deployment](https://github.com/wbniv/indri.studio/actions/runs/43362049673).
 
 
 ```text
@@ -235,3 +235,5 @@ PASS: desktop/mobile document scrolling, client navigation, reduced-motion chang
 ```
 
 PASS: reviewed final [desktop](2026-11-12-erawan-background-selector/final-settings-1440.png) and [mobile](2026-11-12-erawan-background-selector/final-settings-390.png) screenshots.
+
+Live verification passed after updating the test predicate to comply with the site CSP following client navigation. CI tests, build, upload and propagation passed; optional site-wide Lighthouse auditing was still running when verification finished.

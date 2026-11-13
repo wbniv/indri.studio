@@ -44,7 +44,7 @@ with sync_playwright() as p:
         assert page.evaluate('window.erawanNavigationProbe===true')
         assert page.locator('erawan-motion').count()==1
         page.emulate_media(reduced_motion='reduce')
-        page.wait_for_function('document.querySelector("erawan-motion").dataset.playing==="false"')
+        page.wait_for_function('()=>document.querySelector("erawan-motion").dataset.playing==="false"')
         assert piece.evaluate('(e)=>getComputedStyle(e).animationName')=='none'
         page.emulate_media(reduced_motion='no-preference')
         page.wait_for_selector('erawan-motion[data-playing="true"]')

@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-11-13](https://github.com/wbniv/indri.studio/commit/77de8f4) | Lock Erawan background settings and remove preview controls |
 | [2026-11-13](https://github.com/wbniv/indri.studio/commit/a102d53) | Record live verification of Erawan simulation opacity |
 | [2026-11-13](https://github.com/wbniv/indri.studio/commit/f449dfb) | Add a simulation background opacity slider for Erawan |
 | [2026-11-13](https://github.com/wbniv/indri.studio/commit/69088be) | Scroll Erawan background motifs with the page |
@@ -9,6 +10,11 @@
 | [2026-11-12](https://github.com/wbniv/indri.studio/commit/94d62b7) | Add Erawan background shortlist selector |
 
 <!--history-meta v1
+77de8f4	author	Will Norris
+77de8f4	added	30
+77de8f4	deleted	1
+77de8f4	files	1
+77de8f4	body	Use P30 with emphasized animation and 75% simulation surfaces. Remove candidate artwork, settings UI, and browser preference overrides while preserving document scrolling and reduced-motion support.\n\nAI-Tool: Codex 0.167.2\nAI-Model: gpt-6-astra\nAI-Reasoning-Effort: medium\nAI-Session: 01a1ced0-6eca-73b1-ac33-57470b82b605
 a102d53	author	Will Norris
 a102d53	added	3
 a102d53	deleted	1
