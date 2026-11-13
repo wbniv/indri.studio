@@ -455,22 +455,22 @@ const { family } = Astro.props;
 	.sim-steps li { padding: 7px 12px; background: var(--color-surface-container-high); border-radius: 20px; font-size: 14px; }
 	.sim-steps .current { background: var(--color-primary-container); color: var(--color-on-primary-container); font-weight: 700; }
 	.sim-steps .past { background: #1f3d31; color: #b9efd4; }
-	.sim-stage { background: color-mix(in srgb, var(--color-surface-container-low) var(--e-simulation-opacity, 70%), transparent); border-left: 4px solid var(--color-primary-container); padding: 12px 16px; margin-bottom: 14px; min-height: 84px; }
+	.sim-stage { background: color-mix(in srgb, var(--color-surface-container-low) var(--e-simulation-opacity, 75%), transparent); border-left: 4px solid var(--color-primary-container); padding: 12px 16px; margin-bottom: 14px; min-height: 84px; }
 	.sim-stage h5 { font-size: 17px; }
 	.sim-scene { display: grid; grid-template-columns: minmax(0, 1fr) 150px minmax(0, 1fr); align-items: stretch; gap: 16px; }
-	.sim-end { background: color-mix(in srgb, var(--color-surface-container-lowest) var(--e-simulation-opacity, 70%), transparent); padding: 16px; border-radius: 12px; min-width: 0; }
+	.sim-end { background: color-mix(in srgb, var(--color-surface-container-lowest) var(--e-simulation-opacity, 75%), transparent); padding: 16px; border-radius: 12px; min-width: 0; }
 	.sim-end h5 { font-size: 17px; margin-top: 2px; }
 	.sim-end-label { font-size: 12px; letter-spacing: 0.06em; color: #87dbc9; font-weight: 700; }
 	.sim-files { list-style: none; padding: 0; margin: 12px 0 0; }
-	.sim-file { position: relative; padding: 10px 12px; margin-top: 8px; background: color-mix(in srgb, #1c1a18 var(--e-simulation-opacity, 70%), transparent); border: 1px solid #4a4540; border-radius: 8px; overflow: hidden; min-height: 62px; }
+	.sim-file { position: relative; padding: 10px 12px; margin-top: 8px; background: color-mix(in srgb, #1c1a18 var(--e-simulation-opacity, 75%), transparent); border: 1px solid #4a4540; border-radius: 8px; overflow: hidden; min-height: 62px; }
 	.sim-filename { display: block; position: relative; font-size: 15px; font-weight: 650; overflow-wrap: anywhere; }
 	.sim-file-note { display: block; position: relative; font-size: 13px; color: var(--color-on-surface-variant); }
 	.sim-fill { position: absolute; inset: 0 auto 0 0; background: rgba(67, 184, 140, 0.28); }
 	.sim-file.verified { border-color: #5fb89a; }
-	.sim-file.conflict { border-color: #cba662; background: color-mix(in srgb, #3a2f1a var(--e-simulation-opacity, 70%), transparent); }
-	.sim-file.removed { border-style: dashed; border-color: #a86a6a; background: color-mix(in srgb, #36231f var(--e-simulation-opacity, 70%), transparent); }
+	.sim-file.conflict { border-color: #cba662; background: color-mix(in srgb, #3a2f1a var(--e-simulation-opacity, 75%), transparent); }
+	.sim-file.removed { border-style: dashed; border-color: #a86a6a; background: color-mix(in srgb, #36231f var(--e-simulation-opacity, 75%), transparent); }
 	.sim-file.removed .sim-filename { text-decoration: line-through; }
-	.sim-file.shared { border-color: #a78bcc; background: color-mix(in srgb, #2c2640 var(--e-simulation-opacity, 70%), transparent); }
+	.sim-file.shared { border-color: #a78bcc; background: color-mix(in srgb, #2c2640 var(--e-simulation-opacity, 75%), transparent); }
 	.sim-empty { padding: 26px 12px; border: 1px dashed #6b655f; border-radius: 8px; color: var(--color-on-surface-variant); font-size: 14px; margin-top: 12px; }
 	.sim-transit { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 12px; color: var(--color-on-surface-variant); font-size: 13px; min-height: 160px; }
 	.sim-relay { padding: 8px 10px; border: 1px solid #6b655f; border-radius: 8px; background: var(--color-surface-container-high); font-weight: 650; color: var(--color-on-surface); }
@@ -481,13 +481,13 @@ const { family } = Astro.props;
 	.sim.copying .sim-packet { opacity: 1; }
 	.sim.playing.copying .sim-packet { animation-play-state: running; }
 	.sim-storage { font-size: 13px; margin-top: 10px; color: #cdb6f0; }
-	.sim-metrics { background: color-mix(in srgb, var(--color-surface-container-lowest) var(--e-simulation-opacity, 70%), transparent); border-radius: 12px; padding: 16px 18px; color: #e8f0f9; margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+	.sim-metrics { background: color-mix(in srgb, var(--color-surface-container-lowest) var(--e-simulation-opacity, 75%), transparent); border-radius: 12px; padding: 16px 18px; color: #e8f0f9; margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 	.sim-metric-label { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 9px; gap: 10px; }
 	.sim-bar { height: 13px; background: #2a3b4c; border-radius: 4px; overflow: hidden; }
 	.sim-bar > span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #2979ff, #35cbdb); }
 	.sim-bar-verify > span { background: linear-gradient(90deg, #9f71f7, #39b3e8); }
 	.sim-metrics small { display: block; color: #b9cce1; margin-top: 9px; font-size: 13px; }
-	.sim-review { margin-top: 16px; padding: 16px 18px; background: color-mix(in srgb, #3a2f17 var(--e-simulation-opacity, 70%), transparent); border: 1px solid #cba662; border-radius: 12px; }
+	.sim-review { margin-top: 16px; padding: 16px 18px; background: color-mix(in srgb, #3a2f17 var(--e-simulation-opacity, 75%), transparent); border: 1px solid #cba662; border-radius: 12px; }
 	.sim-review[hidden], .sim-outcome[hidden] { display: none; }
 	.sim-review h5 { font-size: 17px; }
 	.sim-review-fields { display: flex; gap: 14px; flex-wrap: wrap; margin: 12px 0; }
@@ -496,7 +496,7 @@ const { family } = Astro.props;
 	.sim-review-fields input { width: 300px; }
 	.sim-error { color: #ffb4a8; font-size: 14px; min-height: 0; }
 	.sim-decision { color: #9fe3c0; font-size: 14px; }
-	.sim-outcome { padding: 14px 18px; background: color-mix(in srgb, #1d3a2e var(--e-simulation-opacity, 70%), transparent); border-radius: 10px; margin-top: 16px; }
+	.sim-outcome { padding: 14px 18px; background: color-mix(in srgb, #1d3a2e var(--e-simulation-opacity, 75%), transparent); border-radius: 10px; margin-top: 16px; }
 	.sim-outcome h5 { font-size: 17px; }
 	.sim-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; border-top: 1px solid #6b655f; padding-top: 16px; margin-top: 16px; }
 	.sim-btn { min-height: 44px; border: 0; border-radius: 6px; background: var(--color-surface-container-high); color: var(--color-on-surface); padding: 9px 16px; font: inherit; font-weight: 700; font-size: 15px; cursor: pointer; }

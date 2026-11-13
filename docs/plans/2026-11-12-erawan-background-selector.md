@@ -109,7 +109,7 @@ PASS: [live Erawan page](https://indri.studio/apps/erawan/), [deployment run](ht
 
 ## Remaining decision
 
-- [ ] Will chooses the final background; remove the comparison selector in a later pass.
+- [x] Will chose P30, emphasized motion, and 75% simulation opacity on 2026-11-13; remove the comparison selector.
 
 
 ## 2026-11-13 · background throughout the page
@@ -206,3 +206,32 @@ PASS: mobile fit, reduced-motion opt-in/reset, blocked/invalid storage, and no-J
 PASS: visually reviewed 50% opacity on [desktop](2026-11-12-erawan-background-selector/simulation-opacity-1440.png) and [mobile](2026-11-12-erawan-background-selector/simulation-opacity-390.png).
 
 Live verification passed after waiting for keyboard-driven values to settle; the initial immediate value read failed once. CI tests, build, Cloudflare upload and propagation passed. Optional site-wide Lighthouse auditing was still running at the time of this check.
+
+
+## 2026-11-13 · final settings
+
+Lock P30 (Conflict branches), emphasized motion, and 75% simulation background opacity. Remove the entire preview disclosure, sliders, selectors, storage logic, and unused candidate patterns. Existing browser preview preferences no longer affect the page. Keep document scrolling and reduced-motion support; a hidden tab pauses decoration.
+
+```mermaid
+flowchart LR
+ A[Open Erawan] --> B[P30 emphasized with 75 percent surfaces]
+ B --> C[Artwork scrolls with document]
+ D[Reduced motion or hidden tab] --> E[Stop decorative animation]
+```
+
+[![Final layout without preview controls](2026-11-12-erawan-background-selector/final-settings.png)](2026-11-12-erawan-background-selector/final-settings.html)
+
+- [x] Verify final values, no preview controls or preference overrides, desktop/mobile scrolling and reduced motion.
+- [ ] Publish and verify live.
+
+
+```text
+$ task build
+[build] 179 page(s) built in 4m 52s
+[build] Complete!
+$ python3 docs/plans/2026-11-12-erawan-background-selector/verify-browser.py http://localhost:4321/apps/erawan/
+PASS: P30 emphasized, 75% surfaces, opaque foreground, no preview controls, and old preferences ignored.
+PASS: desktop/mobile document scrolling, client navigation, reduced-motion changes, and no-JS content.
+```
+
+PASS: reviewed final [desktop](2026-11-12-erawan-background-selector/final-settings-1440.png) and [mobile](2026-11-12-erawan-background-selector/final-settings-390.png) screenshots.
