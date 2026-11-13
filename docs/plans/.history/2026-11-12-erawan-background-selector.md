@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-11-13](https://github.com/wbniv/indri.studio/commit/f449dfb) | Add a simulation background opacity slider for Erawan |
 | [2026-11-13](https://github.com/wbniv/indri.studio/commit/69088be) | Scroll Erawan background motifs with the page |
 | [2026-11-13](https://github.com/wbniv/indri.studio/commit/1e9034d) | Record live Erawan scrolling background verification |
 | [2026-11-13](https://github.com/wbniv/indri.studio/commit/9592d95) | Keep Erawan background motion visible while scrolling |
@@ -7,6 +8,11 @@
 | [2026-11-12](https://github.com/wbniv/indri.studio/commit/94d62b7) | Add Erawan background shortlist selector |
 
 <!--history-meta v1
+f449dfb	author	Will Norris
+f449dfb	added	35
+f449dfb	deleted	1
+f449dfb	files	1
+f449dfb	body	Adjust simulation surfaces from transparent to solid while preserving opaque text and controls. Save the setting locally and verify keyboard use, reload persistence, and mobile layout.\n\nAI-Tool: Codex 0.167.2\nAI-Model: gpt-6-astra\nAI-Reasoning-Effort: medium\nAI-Session: 01a1ced0-6eca-73b1-ac33-57470b82b605
 69088be	author	Will Norris
 69088be	added	33
 69088be	deleted	0

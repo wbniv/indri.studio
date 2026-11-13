@@ -187,7 +187,7 @@ flowchart LR
 [![Adjust opacity while watching a simulation](2026-11-12-erawan-background-selector/simulation-opacity.png)](2026-11-12-erawan-background-selector/simulation-opacity.html)
 
 - [x] Check 0%, 50%, 100%, keyboard control, persistence, and opaque text on desktop/mobile.
-- [ ] Publish and verify live scrolling and opacity controls.
+- [x] Published `v0.1.295` from `f449dfb`; verified live document scrolling, opacity endpoints, and saved slider values on desktop and mobile. [Deployment](https://github.com/wbniv/indri.studio/actions/runs/43359651171).
 
 
 ```text
@@ -204,3 +204,5 @@ PASS: mobile fit, reduced-motion opt-in/reset, blocked/invalid storage, and no-J
 ```
 
 PASS: visually reviewed 50% opacity on [desktop](2026-11-12-erawan-background-selector/simulation-opacity-1440.png) and [mobile](2026-11-12-erawan-background-selector/simulation-opacity-390.png).
+
+Live verification passed after waiting for keyboard-driven values to settle; the initial immediate value read failed once. CI tests, build, Cloudflare upload and propagation passed. Optional site-wide Lighthouse auditing was still running at the time of this check.
