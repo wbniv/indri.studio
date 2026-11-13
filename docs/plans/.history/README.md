@@ -1,5 +1,6 @@
 | Date | Change |
 |------|--------|
+| [2026-11-12](https://github.com/wbniv/indri.studio/commit/85b49c9) | Record Erawan selector release and verification |
 | [2026-10-31](https://github.com/wbniv/indri.studio/commit/60a01a2) | Record debug-bridge page verification; index the plan; mark done |
 | [2026-10-30](https://github.com/wbniv/indri.studio/commit/cbf89de) | Index bsnes-jg-wasm page layout plan |
 | [2026-10-17](https://github.com/wbniv/indri.studio/commit/6fc88ea) | Record BGA link audit and copy correction |
@@ -23,6 +24,11 @@
 | [2026-06-26](https://github.com/wbniv/indri.studio/commit/49f6b36) | docs: add plan index (docs/plans/README.md) |
 
 <!--history-meta v1
+85b49c9	author	Will Norris
+85b49c9	added	2
+85b49c9	deleted	1
+85b49c9	files	1
+85b49c9	body	Index the plan, mark the selector complete, and record v0.1.289 live\nverification plus the separate Foundry Linux 404 in the optional audit.\n\nAI-Tool: Codex 0.167.2\nAI-Model: gpt-6-astra\nAI-Reasoning-Effort: high\nAI-Session: 01a1ced0-6eca-73b1-ac33-57470b82b605
 60a01a2	author	Will Norris
 60a01a2	added	2
 60a01a2	deleted	1

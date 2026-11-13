@@ -86,6 +86,8 @@ rows on commit.*
 | [World Foundry debug bridge page](2026-10-31-world-foundry-debug-bridge-page.md) | Add a standalone page showing the engine's debug bridge six ways (Blender panel, editor, terminal session, bridge frames, two placeholders), linked from the World Foundry v2 page. | [`d74480f`](https://github.com/wbniv/indri.studio/commit/d74480f) | Feature |
 | [Erawan background selector](2026-11-12-erawan-background-selector.md) | Compare Will’s 12 shortlisted background motions on the live Erawan page, with saved choice, strength, pause, and reduced-motion support. | [`94d62b7`](https://github.com/wbniv/indri.studio/commit/94d62b7) | Feature |
 
+| [Erawan Terms of Service](2026-11-13-erawan-terms.md) | Publish Erawan’s MIT licence and local-tool usage terms, with links from the landing page and privacy policy. | [`58b21a2`](https://github.com/wbniv/indri.studio/commit/58b21a2) | Feature |
+
 ---
 
 ## How this index was derived
@@ -93,4 +95,4 @@ rows on commit.*
 - **Order** = each plan's *creation* commit (oldest commit that touched the file), by committer date.
 - **Commit(s)** = the full `git log --follow` set per plan, oldest → newest.
 - **Summaries / categories** auto-generated from each plan's TL;DR (Sonnet, medium effort) — refine as needed.
-- **Generated** 2026-06-26 for 65 plan(s); rows added by hand 2026-06-27 (66), 2026-06-30 (67), 2026-07-27 (68), 2026-10-05 (69), 2026-10-09 (71), 2026-10-17 (72 total), 2026-10-29 (73 total), 2026-10-31 (74 total), 2026-11-12 (75 total).
+- **Generated** 2026-06-26 for 65 plan(s); rows added by hand 2026-06-27 (66), 2026-06-30 (67), 2026-07-27 (68), 2026-10-05 (69), 2026-10-09 (71), 2026-10-17 (72 total), 2026-10-29 (73 total), 2026-10-31 (74 total), 2026-11-12 (75 total), 2026-11-13 (76 total).

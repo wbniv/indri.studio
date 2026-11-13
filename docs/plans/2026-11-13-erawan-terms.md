@@ -18,7 +18,7 @@ flowchart LR
 Google's branding guidance explains that policy links may remain hidden while branding is unverified. Publishing a URL is separate from configuring it in the Cloud Console. [Google guidance](https://developers.google.com/identity/protocols/oauth2/production-readiness/brand-verification). Licence reference: Erawan's `LICENSE` and the [MIT licence](https://opensource.org/license/mit).
 
 - [x] Build and check the terms page and navigation at desktop/mobile widths.
-- [ ] Publish, verify the public URL, and open it for Will.
+- [x] Publish, verify the public URL, and open it for Will.
 
 
 ```text
@@ -30,3 +30,13 @@ PASS: terms HTTP 200, exact repository MIT licence, contact link, desktop/mobile
 ```
 
 PASS: inspected [desktop](2026-11-13-erawan-terms/terms-1440.png) and [mobile](2026-11-13-erawan-terms/terms-390.png) screenshots.
+
+
+Published as `v0.1.297`, source commit `58b21a2`. [Deployment](https://github.com/wbniv/indri.studio/actions/runs/43373668361) succeeded, including tests, build, upload and propagation. Optional Lighthouse report/budget stages were skipped; this is not a recorded Lighthouse score.
+
+```text
+$ python3 docs/plans/2026-11-13-erawan-terms/verify-browser.py https://indri.studio
+PASS: terms HTTP 200, exact repository MIT licence, contact link, desktop/mobile fit, and reciprocal Home/Privacy/Terms navigation.
+```
+
+PASS: [live Terms of Service](https://indri.studio/apps/erawan/terms/). This is the URL for Google Auth Platform → Branding → Application terms of service. The Cloud Console field itself was not changed in this task.
