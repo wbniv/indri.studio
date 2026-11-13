@@ -1,0 +1,56 @@
+---
+import AppLayout from "../../../layouts/AppLayout.astro";
+---
+<AppLayout title="Erawan terms of service" description="Terms for using Erawan: your files, connected services, and the MIT software licence.">
+<div class="e-terms">
+<p class="e-back"><a href="/apps/erawan/">← Erawan</a> · <a href="/apps/erawan/privacy/">Privacy policy</a></p>
+<h1>Erawan terms of service</h1>
+<p class="e-date">Last updated 13 November 2026</p>
+<p>Erawan is software you run on your own computer to back up files, compare and consolidate folders, and find duplicates. It is under active development. Erawan does not provide hosted backup storage or an Erawan account.</p>
+<h2>Your files and choices</h2>
+<p>You retain your rights in your files. Using Erawan does not give its authors ownership of them. Use the program only with files, accounts and systems you are authorised to access.</p>
+<p>You choose the sources, destinations and operations. Review the selected paths, options and proposed actions before proceeding. Copying, consolidating, linking and deleting can change files or remove copies. Keep independent backups of important data and test that you can restore them.</p>
+<p>Read each job's verification result and any errors. A verification result describes the checks performed for that job; it is not a guarantee of future file integrity or that every restore will succeed.</p>
+<h2>Connected services</h2>
+<p>When you connect storage or a server, its provider's terms, limits and charges apply separately. You are responsible for the accounts, credentials and API clients you configure, and for storage, transfer or API charges incurred through them. Erawan's authors do not operate those services.</p>
+<p>Google Drive sign-in is handled by Google and rclone. The Drive backup-source setup requests read-only access. You can revoke access through your Google account and remove the local remote configuration; the <a href="/apps/erawan/privacy/">privacy policy</a> explains how.</p>
+<h2>Software licence and warranty</h2>
+<p>Erawan's software and accompanying documentation are licensed under the MIT License below. These usage notes do not replace or restrict that licence. Third-party software used with Erawan is covered by its own licences. Erawan is provided as is, without a promised support service or availability commitment.</p>
+<div class="e-license"><p>MIT License</p>
+<p>Copyright (c) 2026 William Bird Norris IV</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p></div>
+<p>Nothing on this page excludes rights or remedies that applicable law does not allow to be excluded.</p>
+<h2>Privacy</h2>
+<p>See the <a href="/apps/erawan/privacy/">Erawan privacy policy</a> for how the program handles files, local job records and sign-in tokens.</p>
+<h2>Updates and contact</h2>
+<p>This page may be updated as Erawan changes; the date above identifies the latest revision. Updates to these notes do not remove rights already granted under the MIT License.</p>
+<p>Questions about these terms: <a href="mailto:hello@indri.studio">hello@indri.studio</a>.</p>
+</div>
+</AppLayout>
+<style>
+	.e-terms {
+		color: var(--color-on-surface);
+		font-family: var(--font-body);
+		font-size: 16px;
+		line-height: 1.65;
+		width: 100%;
+		max-width: 760px;
+		margin: 0 auto;
+		padding: 28px 16px 64px;
+	}
+	.e-terms a { color: var(--color-primary-container); }
+	.e-terms a:focus-visible { outline: 3px solid var(--color-primary-container); outline-offset: 3px; border-radius: 4px; }
+	.e-terms h1, .e-terms h2 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.01em; }
+	.e-terms h1 { font-size: 34px; margin: 12px 0 4px; }
+	.e-terms h2 { font-size: 21px; margin: 32px 0 8px; }
+	.e-terms p { margin: 0 0 14px; }
+	.e-terms ul { margin: 0 0 14px; padding-left: 22px; list-style: disc; }
+	.e-terms li { margin: 0 0 8px; }
+	.e-back { margin: 0; }
+	.e-back a { text-decoration: none; }
+	.e-date { color: var(--color-on-surface-variant); font-size: 14px; }
+
+ .e-license { padding: 20px; margin: 18px 0; border: 1px solid var(--color-outline-variant); border-radius: 10px; font-size: 14px; overflow-wrap: anywhere; }
+</style>

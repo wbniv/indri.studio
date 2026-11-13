@@ -7,6 +7,7 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 
 
 
+
 ### SNES player package
 
 - [T1] **2026-07-27** After the first npm publish of `@wbniv/bsnes-jg-player`, swap the git dep
@@ -37,6 +38,8 @@ Low-priority tasks that aren't blocking but shouldn't be lost.
 _Nothing parked._
 
 ## Done
+
+- [x] Added Erawan Terms of Service and Home/Privacy links. [plan](docs/plans/2026-11-13-erawan-terms.md)
 
 - [x] Locked final Erawan background settings and removed preview controls. [plan](docs/plans/2026-11-12-erawan-background-selector.md#2026-11-13--final-settings)
 
