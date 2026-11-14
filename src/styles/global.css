@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source not "../../public/apps/erawan/replays";
 
 /* Brand fonts are self-hosted via the Astro Fonts API (astro.config.mjs
  * `fonts: [...]`). Astro emits the @font-face declarations + a metric-

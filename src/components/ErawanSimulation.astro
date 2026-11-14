@@ -2,34 +2,48 @@
 import replayData from '../data/erawan-replays.json';
 interface Props { family: 'backup' | 'consolidate' | 'duplicates' }
 const all = replayData.scenarios.filter(s => s.family === Astro.props.family);
-const first = all[0];
+const preferredId = Astro.props.family === 'consolidate' ? 'C05' : all[0].id;
+const first = all.find(s => s.id === preferredId) ?? all[0];
 const asset = '/apps/erawan/replays/';
+type Scenario = typeof all[number];
+const cropFor = (scenario: Scenario) => {
+  const occupied = scenario.frames.flatMap(frame => frame.text.split('\n').map((line, index) => ({ line, index })))
+    .filter(({ line }) => line.trim() && !line.startsWith('Updated '));
+  const cols = Math.min(140, Math.max(1, ...occupied.map(({ line }) => line.trimEnd().length)) + 3);
+  const rows = Math.min(38, Math.max(1, ...occupied.map(({ index }) => index + 1)) + 2);
+  const width = cols * 10.8 + 20;
+  const height = rows * 23 + 20;
+  return { width, height, scale: 1512 / width };
+};
+const firstCrop = cropFor(first);
 ---
 <div class="erawan-replay-mount"><erawan-sim data-family={Astro.props.family}>
   <script type="application/json" set:html={JSON.stringify(all).replace(/</g, '\\u003c')} />
   <section class="replay" aria-label="Erawan terminal replay">
-    <h4 class="replay-title">{first.title}</h4>
+    <h4 class="replay-title">{first.id} · {first.title}</h4>
     <p class="replay-provenance">{first.capture}</p>
-    <div class="replay-inputs">{first.inputs.map(input=><section><h5>📁 {input.role}</h5><code>{input.path}</code><ul>{input.files.length ? input.files.map(file=><li>{file}</li>) : <li>No files yet</li>}</ul></section>)}</div>
-    <div class="replay-commands">{first.commands.map((command,i)=><section><h5>Command {i+1}</h5><pre><code>{command}</code></pre></section>)}</div>
-    <p class="replay-stage" role="status" aria-live="polite">{first.frames[0].label}</p>
-    <p class="replay-command-label">Current command</p><pre class="replay-active"><code>{first.frames[0].command}</code></pre>
-    <button type="button" class="replay-expand" hidden>Open full terminal</button>
-    <img class="replay-frame" src={asset+first.frames[0].image} alt={first.frames[0].label} loading="lazy" />
-    <p class="replay-event"></p>
-    <div class="replay-controls" hidden>
-      <button type="button" class="replay-play">Play</button>
-      <button type="button" class="replay-step">Next frame</button>
-      <button type="button" class="replay-restart">Restart</button>
-      <label>Frame <input type="range" min="0" max={first.frames.length-1} value="0" class="replay-seek" /></label>
-      <span class="replay-position"></span>
+    <div class="replay-inputs" role="group" aria-label="Example source and destination">
+      {first.inputs.map((input, i) => <Fragment>
+        {i > 0 && <span class="replay-input-arrow" aria-hidden="true">→</span>}
+        <section>
+          <h5>{input.role}</h5>
+          <code>{input.path}</code>
+          <p>{input.files.length ? input.files.join(' · ') : 'No files yet'}</p>
+        </section>
+      </Fragment>)}
     </div>
-    <details class="replay-transcript"><summary>Transcript and recorded inputs</summary><div><pre>{first.frames.map(f=>`${f.command}\n${f.text}\n${f.event}`).join('\n\n')}</pre></div></details>
+    <p class="replay-status" role="status" aria-live="polite">Example 1 of {all.length} · plays while visible</p>
+    <div class="replay-command-window" role="group" aria-label="Full command">
+      <div class="replay-command-chrome" aria-hidden="true"><span></span><span></span><span></span><small>COMMAND</small></div>
+      <pre class="replay-active"><code>{first.frames[0].command}</code></pre>
+    </div>
+    <p class="replay-stage">{first.frames[0].label}</p>
+    <div class="replay-terminal" style={`aspect-ratio:${firstCrop.width}/${firstCrop.height};--crop-scale:${firstCrop.scale}`}>
+      <img class="replay-frame" src={asset+first.frames[0].image} alt={first.frames[0].label} loading="lazy" />
+    </div>
+    <p class="replay-event"></p>
+    <details class="replay-transcript"><summary>Transcript and recorded inputs</summary><div>{first.frames.map(f=><section><h5>{f.label}</h5><pre>{f.command}{'\n\n'}{f.text}{f.event ? `\n\nRecorded input: ${f.event}` : ''}</pre></section>)}</div></details>
     <p class="replay-note">Recorded examples only. Playback does not operate on your files. Paths beginning /demo represent disposable fixture paths.</p>
-    <dialog class="replay-dialog" aria-label="Full terminal">
-      <div class="replay-dialog-controls"><button type="button" class="replay-close">Close</button><button type="button" class="replay-zoom" aria-pressed="false">Native-size zoom</button></div>
-      <div class="replay-dialog-viewport"><img alt="" /></div>
-    </dialog>
   </section>
   <noscript>{all.map(s=><details><summary>{s.id} · {s.title} — commands and terminal transcript</summary><pre>{s.commands.join('\n')}</pre>{s.frames.map(f=><section><h5>{f.label}</h5><img src={asset+f.image} alt={f.label} loading="lazy" style="max-width:100%;height:auto"/><pre>{f.text}</pre></section>)}</details>)}</noscript>
 </erawan-sim></div>
@@ -46,50 +60,75 @@ const asset = '/apps/erawan/replays/';
       const group=this.closest('.e-situ')!;
       const reduced=matchMedia('(prefers-reduced-motion: reduce)');
       const controller=new AbortController(); const opts={signal:controller.signal};
-      let current=all[0], index=0, timer:ReturnType<typeof setTimeout>|undefined, playing=false;
-      const dialog=q<HTMLDialogElement>('dialog');
+      let scenarioIndex=all.findIndex(s=>group.querySelector<HTMLInputElement>(`#situ-${s.id}`)?.checked);
+      if(scenarioIndex<0) scenarioIndex=all.findIndex(s=>s.id===(this.dataset.family==='consolidate'?'C05':all[0].id));
+      let current=all[scenarioIndex]||all[0], frameIndex=0, timer:ReturnType<typeof setTimeout>|undefined, inView=false;
+      const observer=new IntersectionObserver(entries=>{
+        inView=entries.some(entry=>entry.isIntersecting&&entry.intersectionRatio>=.25);
+        syncPlayback();
+      },{threshold:[0,.25,.5]});
       const element=(tag:string,text:string)=>{const e=document.createElement(tag);e.textContent=text;return e;};
-      const stop=()=>{clearTimeout(timer);timer=undefined;playing=false;};
+      const isReady=()=>inView&&!document.hidden&&!reduced.matches;
+      const stop=()=>{clearTimeout(timer);timer=undefined;};
+      const updateCrop=()=>{
+        const occupied=current.frames.flatMap(frame=>frame.text.split('\n').map((line,index)=>({line,index})))
+          .filter(({line})=>line.trim()&&!line.startsWith('Updated '));
+        const cols=Math.min(140,Math.max(1,...occupied.map(({line})=>line.trimEnd().length))+3);
+        const rows=Math.min(38,Math.max(1,...occupied.map(({index})=>index+1))+2);
+        const width=cols*10.8+20,height=rows*23+20;
+        const terminal=q<HTMLElement>('.replay-terminal');
+        terminal.style.aspectRatio=`${width}/${height}`;
+        terminal.style.setProperty('--crop-scale',String(1512/width));
+      };
+      const renderInputs=()=>{
+        const inputs=q('.replay-inputs');inputs.replaceChildren();
+        current.inputs.forEach((input,i)=>{
+          if(i){const arrow=element('span','→');arrow.classList.add('replay-input-arrow');inputs.append(arrow);}
+          const card=document.createElement('section');
+          card.append(element('h5',input.role),element('code',input.path),element('p',input.files.length?input.files.join(' · '):'No files yet'));
+          inputs.append(card);
+        });
+      };
+      const renderTranscript=()=>{
+        const transcript=q('.replay-transcript div');transcript.replaceChildren();
+        for(const frame of current.frames){const block=document.createElement('section');block.append(element('h5',frame.label),element('pre',frame.command+'\n\n'+frame.text+(frame.event?'\n\nRecorded input: '+frame.event:'')));transcript.append(block);}
+      };
       const render=()=>{
-        const frame=current.frames[index];
-        q<HTMLImageElement>('.replay-frame').src=asset+frame.image;
-        q<HTMLImageElement>('.replay-frame').alt=frame.label;
+        const frame=current.frames[frameIndex];
+        q('.replay-title').textContent=current.id+' · '+current.title;
+        q('.replay-provenance').textContent=current.capture;
         q('.replay-stage').textContent=frame.label;
         q('.replay-active code').textContent=frame.command;
-        q('.replay-event').textContent=frame.event ? `Recorded input: ${frame.event}${frame.gate?' · replay paused for review':''}` : '';
-        q('.replay-position').textContent=`${index+1} / ${current.frames.length}`;
-        const seek=q<HTMLInputElement>('.replay-seek');seek.max=String(current.frames.length-1);seek.value=String(index);
-        const play=q<HTMLButtonElement>('.replay-play');play.textContent=reduced.matches?'Step-only mode':playing?'Pause':'Play';play.disabled=reduced.matches||frame.gate||index===current.frames.length-1;
-        const step=q<HTMLButtonElement>('.replay-step');step.disabled=index===current.frames.length-1;step.textContent=frame.gate&&frame.event?`Replay ${frame.event}`:'Next frame';
-        const img=q<HTMLImageElement>('.replay-dialog img'); img.src=asset+frame.image;img.alt=frame.label;
+        q('.replay-event').textContent=frame.event?`Recorded input · ${frame.event}`:'';
+        const status=reduced.matches?'Still frame':inView&&!document.hidden?'Cycling':'Paused';
+        q('.replay-status').textContent=`${status} · Example ${scenarioIndex+1} of ${all.length} · cycles while visible`;
+        const image=q<HTMLImageElement>('.replay-frame');image.src=asset+frame.image;image.alt=frame.label;
       };
-      const schedule=()=>{timer=setTimeout(()=>{index++;if(index>=current.frames.length-1||current.frames[index].gate)stop();render();if(playing)schedule();},current.frames[index].duration);};
+      const advance=()=>{
+        frameIndex++;
+        if(frameIndex>=current.frames.length){scenarioIndex=(scenarioIndex+1)%all.length;current=all[scenarioIndex];frameIndex=0;
+          const radio=group.querySelector<HTMLInputElement>(`#situ-${current.id}`);if(radio)radio.checked=true;
+          renderInputs();renderTranscript();updateCrop();
+        }
+        render();schedule();
+      };
+      const schedule=()=>{
+        stop();if(!isReady())return;
+        const frame=current.frames[frameIndex];
+        timer=setTimeout(advance,Math.max(frame.gate?900:300,frame.duration||900));
+      };
+      const syncPlayback=()=>{if(isReady())schedule();else stop();render();};
       const choose=(id:string)=>{
-        stop();current=all.find(s=>s.id===id)||all[0];index=0;
-        q('.replay-title').textContent=current.id+' · '+current.title;q('.replay-provenance').textContent=current.capture;
-        const inputs=q('.replay-inputs');inputs.replaceChildren();
-        for(const input of current.inputs){const card=document.createElement('section');card.append(element('h5','📁 '+input.role),element('code',input.path));const list=document.createElement('ul');for(const file of input.files)list.append(element('li',file));if(!input.files.length)list.append(element('li','No files yet'));card.append(list);inputs.append(card);}
-        const commands=q('.replay-commands');commands.replaceChildren();
-        current.commands.forEach((command,i)=>{const block=document.createElement('section');block.append(element('h5',current.commands.length>1?`Terminal ${i+1}`:'Command'));const pre=document.createElement('pre');pre.append(element('code',command));const copy=element('button','Copy command') as HTMLButtonElement;copy.type='button';copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(command);copy.textContent='Copied';}catch{copy.textContent='Select command to copy';}});block.append(pre,copy);commands.append(block);});
-        const transcript=q('.replay-transcript div');transcript.replaceChildren();
-        for(const frame of current.frames){transcript.append(element('h5',frame.label),element('pre',frame.command+'\n\n'+frame.text+(frame.event?'\n\nRecorded input: '+frame.event:'')));}
-        render();
+        stop();scenarioIndex=Math.max(0,all.findIndex(s=>s.id===id));current=all[scenarioIndex];frameIndex=0;
+        renderInputs();renderTranscript();updateCrop();render();if(isReady())schedule();
       };
-      q('.replay-play').addEventListener('click',()=>{if(playing){stop();render();return;}if(reduced.matches)return;playing=true;render();schedule();},opts);
-      q('.replay-step').addEventListener('click',()=>{stop();index=Math.min(index+1,current.frames.length-1);render();},opts);
-      q('.replay-restart').addEventListener('click',()=>choose(current.id),opts);
-      q('.replay-seek').addEventListener('input',e=>{stop();index=Number((e.target as HTMLInputElement).value);render();q('.replay-event').textContent='Recorded branch · '+current.frames.slice(0,index+1).filter(f=>f.event).map(f=>f.event).join(' → ');},opts);
       group.addEventListener('change',e=>{const input=e.target as HTMLInputElement;if(input.type==='radio'&&input.id.startsWith('situ-'))choose(input.id.slice(5));},opts);
-      reduced.addEventListener('change',()=>{stop();render();},opts);
-      document.addEventListener('visibilitychange',()=>{if(document.hidden){stop();render();}},opts);
-      q('.replay-expand').addEventListener('click',()=>{stop();render();dialog.showModal();q('.replay-close').focus();},opts);
-      q('.replay-close').addEventListener('click',()=>dialog.close(),opts);
-      dialog.addEventListener('close',()=>{dialog.classList.remove('zoomed');q('.replay-zoom').setAttribute('aria-pressed','false');q('.replay-expand').focus();},opts);
-      q('.replay-zoom').addEventListener('click',()=>{q('.replay-zoom').setAttribute('aria-pressed',String(dialog.classList.toggle('zoomed')));},opts);
-      q('.replay-controls').hidden=false;q('.replay-expand').hidden=false;
+      reduced.addEventListener('change',()=>{if(reduced.matches)frameIndex=0;syncPlayback();},opts);
+      document.addEventListener('visibilitychange',syncPlayback,opts);
+      observer.observe(q('.replay-terminal'));
       this.closest('.e-wf')?.classList.add('e-sim-on');
-      const selected=group.querySelector<HTMLInputElement>('input[type=radio]:checked');choose(selected?.id.slice(5)||all[0].id);
-      this.cleanup=()=>{stop();controller.abort();if(dialog.open)dialog.close();};
+      renderInputs();renderTranscript();render();
+      this.cleanup=()=>{stop();observer.disconnect();controller.abort();};
     }
     disconnectedCallback(){this.cleanup?.();this.cleanup=undefined;}
   }
@@ -99,23 +138,33 @@ const asset = '/apps/erawan/replays/';
   .erawan-replay-mount{min-width:0}
   erawan-sim{display:contents}
   .replay{min-width:0;color:var(--color-on-surface)}
-  .replay h4{font-size:1.4rem;margin:1rem 0}.replay h5{font-size:1rem;margin:.5rem 0}
-  .replay-provenance,.replay-note{color:var(--color-on-surface-variant);font-size:.9rem;margin:.8rem 0}
-  .replay-inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1rem;margin:1rem 0}
-  .replay-inputs section{border:1px solid var(--color-outline-variant);border-radius:12px;padding:1rem;overflow-wrap:anywhere}
-  .replay-inputs ul{padding-left:1.2rem;margin-top:.7rem}.replay-inputs code{font-size:.9rem}
-  .replay pre{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--color-surface-container);padding:1rem;border-radius:8px;font:14px/1.6 monospace;margin:.5rem 0;max-width:100%}
-  .replay-commands section{margin:1rem 0}.replay-stage{font-weight:700;margin:1.4rem 0 .5rem}.replay-command-label{font-size:.8rem}
-  .replay-frame{display:block;width:100%;height:auto;max-width:1512px;margin:1rem auto;border-radius:8px}
-  .replay button{min-height:44px;min-width:44px;padding:.6rem 1rem;border:1px solid var(--color-outline-variant);background:var(--color-surface-container-high);color:var(--color-on-surface);border-radius:7px;cursor:pointer;font:inherit}
-  .replay button:disabled{opacity:.5;cursor:default}.replay :focus-visible{outline:3px solid var(--color-primary-container);outline-offset:3px}
-  .replay-controls{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;margin:1rem 0}.replay-controls[hidden]{display:none}
-  .replay-controls label{display:flex;align-items:center;gap:.7rem;min-width:180px;flex:1}.replay-controls input{width:100%;min-height:44px;accent-color:var(--color-primary-container)}
-  .replay-event{min-height:1.5rem;font-size:.9rem}.replay summary{cursor:pointer;padding:.7rem 0;min-height:44px}
-  .replay-dialog{position:fixed;inset:0;margin:auto;width:96vw;height:94dvh;max-width:none;max-height:none;background:var(--color-surface);color:var(--color-on-surface);padding:1rem;border:1px solid var(--color-outline-variant);border-radius:12px}
-  .replay-dialog::backdrop{background:color-mix(in srgb,var(--color-surface) 85%,transparent)}
-  .replay-dialog-controls{display:flex;gap:1rem;margin-bottom:1rem}.replay-dialog-viewport{height:calc(100% - 70px);display:flex;align-items:center;justify-content:center;overflow:auto}
-  .replay-dialog img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
-  .replay-dialog.zoomed .replay-dialog-viewport{display:block}.replay-dialog.zoomed img{width:1512px;max-width:none;max-height:none;height:auto}
-  @media(max-width:699px){.replay-inputs{grid-template-columns:1fr}.replay-inputs section{padding:.8rem}.replay-dialog{width:100vw;height:100dvh;border-radius:0}}
+  .replay h4{font-size:1.25rem;line-height:1.25;margin:.5rem 0}
+  .replay h5{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 .2rem;color:var(--color-on-surface-variant)}
+  .replay-provenance,.replay-note{color:var(--color-on-surface-variant);font-size:.75rem;margin:.25rem 0}
+  .replay-inputs{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:.55rem;align-items:center;margin:.55rem 0}
+  .replay-inputs section{min-width:0;border:1px solid var(--color-outline-variant);border-radius:8px;padding:.55rem .7rem;overflow-wrap:anywhere}
+  .replay-inputs code{display:block;font-size:.78rem;line-height:1.35;overflow-wrap:anywhere}
+  .replay-inputs p{font-size:.68rem;line-height:1.35;color:var(--color-on-surface-variant);margin:.2rem 0 0}
+  .replay-input-arrow{color:var(--color-primary-container);font-size:1.1rem}
+  .replay-status{font-size:.72rem;color:var(--color-on-surface-variant);margin:.35rem 0 .45rem}
+  .replay-command-window{max-width:100%;overflow:hidden;border:1px solid #263b55;border-radius:8px;background:#101a29}
+  .replay-command-chrome{height:24px;display:flex;align-items:center;gap:6px;padding:0 9px;color:#aab8c8}
+  .replay-command-chrome span{width:7px;height:7px;border-radius:50%;background:#e66b76}
+  .replay-command-chrome span:nth-child(2){background:#eab94e}.replay-command-chrome span:nth-child(3){background:#54c99a}
+  .replay-command-chrome small{font:600 9px/1 var(--font-mono);letter-spacing:.08em;margin-left:5px}
+  .replay pre{max-width:100%;margin:0;padding:.65rem .8rem;font: .82rem/1.45 var(--font-mono);white-space:pre-wrap;overflow-wrap:anywhere}
+  .replay-active{color:#f6bd60;background:transparent!important}
+  .replay-active code{font:inherit;color:inherit}
+  .replay-stage{font-size:.78rem;font-weight:700;margin:.5rem 0 .25rem}
+  .replay-terminal{width:100%;overflow:hidden;border:1px solid var(--color-outline-variant);border-radius:8px;background:#101a29;line-height:0}
+  .replay-frame{display:block;width:calc(100% * var(--crop-scale));max-width:none;height:auto;margin:0;border-radius:0}
+  .replay-event{font-size:.72rem;color:var(--color-on-surface-variant);margin:.25rem 0;min-height:0}
+  .replay-event:empty{display:none}
+  .replay-transcript{margin-top:.35rem}.replay-transcript summary{cursor:pointer;padding:.5rem 0;min-height:40px;font-size:.8rem}
+  .replay-transcript section{margin:.5rem 0}.replay-transcript pre{max-height:24rem;overflow:auto;background:var(--color-surface-container);border-radius:6px}
+  .replay :focus-visible{outline:3px solid var(--color-primary-container);outline-offset:3px}
+  @media(max-width:699px){
+    .replay-inputs{gap:.35rem}.replay-inputs section{padding:.45rem}.replay-inputs code{font-size:.69rem}.replay-inputs p{font-size:.62rem}
+    .replay-command-chrome{height:21px}.replay pre{font-size:.72rem;padding:.55rem .65rem}
+  }
 </style>

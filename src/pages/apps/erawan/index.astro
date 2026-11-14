@@ -1,7 +1,7 @@
 ---
 // Erawan landing page — implements docs/plans/2026-11-12-erawan-landing-page-visual-plan-v2.md
 // ("situations first") and, on top of it, the v4 plan's animated simulations (ErawanSimulation)
-// and the v3 background shortlist (ErawanMotion), all in the Erawan repo, carrying over the revisions Will accepted on the
+// and the v3 background shortlist (ErawanMotion), while retaining the revisions Will accepted on the
 // published v1 page: the site's own palette, status pills in the matrix, and a Source link
 // with the GitHub mark. Navigation and every example work without JavaScript: the situation
 // choosers are native radio groups styled with CSS, and without CSS scripting support
@@ -143,10 +143,11 @@ const routes = [
 			{workflows.map((w) => (
 				<article id={w.id} class={`e-wf e-${w.tone}`} aria-labelledby={`${w.id}-title`}>
 					<h3 id={`${w.id}-title`}>{w.title}</h3>
+					<p class="e-wf-subtitle">From command to result</p>
 					<fieldset class="e-situ">
 						<legend class="sr-only">Pick a {w.title} situation</legend>
 						{w.situations.map((s, i) => (
-							<input type="radio" name={`situ-${w.id}`} id={`situ-${s.id}`} checked={i === 0} />
+							<input type="radio" name={`situ-${w.id}`} id={`situ-${s.id}`} checked={s.id === (w.id === "consolidate" ? "C05" : w.situations[0].id)} />
 						))}
 						<div class="e-left">
 							<div class="e-chips">
@@ -154,7 +155,7 @@ const routes = [
 									<label class="e-chip" for={`situ-${s.id}`}>{s.id} · {s.chip}</label>
 								))}
 							</div>
-							<p class="e-hint">Choose an example to see its locations, review decision, and possible result.</p>
+							<p class="e-hint">Choose an example · cycles while visible.</p>
 							<p class="e-guide"><a href={w.guide.href}>{w.guide.label} →</a></p>
 						</div>
 						<div class="e-panels">
@@ -355,7 +356,8 @@ const routes = [
 	.e-wf { background: color-mix(in srgb, var(--e-card) var(--e-simulation-opacity, 75%), transparent); border-top: 4px solid var(--e-blue); border-radius: 4px 4px 12px 12px; padding: 24px 24px 28px; scroll-margin-top: 80px; }
 	.e-green { border-top-color: var(--e-green); }
 	.e-purple { border-top-color: var(--e-purple); }
-	.e-wf > h3 { font-size: clamp(22px, 2.4vw, 28px); margin-bottom: 18px; }
+	.e-wf > h3 { font-size: clamp(22px, 2.4vw, 28px); margin-bottom: 2px; }
+	.e-wf-subtitle { color: var(--e-muted); font-size: 14px; font-weight: 600; margin: 0 0 14px; }
 	.e-situ { border: 0; margin: 0; padding: 0; min-width: 0; position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 24px; align-items: start; }
 	.e-left { min-width: 0; }
 	.e-chips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 14px; }
