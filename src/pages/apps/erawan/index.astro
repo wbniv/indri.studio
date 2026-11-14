@@ -11,6 +11,8 @@ import AppLayout from "../../../layouts/AppLayout.astro";
 import ErawanCap from "../../../components/ErawanCap.astro";
 import ErawanMotion from "../../../components/ErawanMotion.astro";
 import ErawanSimulation from "../../../components/ErawanSimulation.astro";
+import replayData from "../../../data/erawan-replays.json";
+import { checkSituations } from "../../../lib/erawanSituations.mjs";
 
 const quickStart = "/docs/erawan-quick-start/";
 const a4 = "/apps/erawan/erawan-a4.pdf";
@@ -64,6 +66,14 @@ const workflows = [
 		],
 	},
 ] as const;
+
+// The page and the recorded replays each name the twelve situations; fail the build if they drift.
+const situationCheck = checkSituations(
+	workflows.flatMap((w) => w.situations.map((s) => ({ id: s.id, family: w.id, title: s.title }))),
+	replayData.scenarios,
+);
+for (const warning of situationCheck.warnings) console.warn(`[erawan] ${warning}`);
+if (situationCheck.errors.length) throw new Error(`Erawan situations out of step:\n  ${situationCheck.errors.join("\n  ")}`);
 
 const matrix = [
 	["Local folders & mounted disks", "Yes", "Yes*", "Includes mounted USB drives and shares"],
