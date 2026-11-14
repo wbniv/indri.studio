@@ -1,0 +1,1517 @@
+{
+  "version": 5,
+  "revision": "791d1d64a0277018596047a6f04613ae29b016dd",
+  "normalization": "Temporary fixture prefix → /demo; scripted input; captured terminal grid 140 × 38",
+  "scenarios": [
+    {
+      "id": "B01",
+      "title": "Give photos a second home",
+      "family": "backup",
+      "commands": [
+        "erawan backup run /demo/Photos /demo/Archive/Photos --job demo-b01 --verify-mode content",
+        "erawan backup watch --job demo-b01"
+      ],
+      "inputs": [
+        {
+          "role": "SOURCE",
+          "path": "/demo/Photos",
+          "files": [
+            "beach.jpg · 40 MiB",
+            "garden.raw · 120 MiB",
+            "sunrise.jpg · 80 MiB"
+          ]
+        },
+        {
+          "role": "DESTINATION",
+          "path": "/demo/Archive/Photos",
+          "files": []
+        }
+      ],
+      "capture": "Actual Erawan renderer · simulated job data · compressed time",
+      "frames": [
+        {
+          "image": "B01-000.svg",
+          "text": "Erawan backup progress\nEligible paths  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/3\nEligible bytes  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0 B/240.0 MiB\nExcluded: 0 paths; catalog cursor: 0/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑   0%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ↑   0%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ↑   0%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b01",
+          "duration": 900
+        },
+        {
+          "image": "B01-001.svg",
+          "text": "Erawan backup progress\nEligible paths  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/3\nEligible bytes  ███▊░░░░░░░░░░░░░░░░░░░░░░░░░░ 12.5%  30.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 0/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑  12%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ↑  12%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ↑  12%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b01",
+          "duration": 900
+        },
+        {
+          "image": "B01-002.svg",
+          "text": "Erawan backup progress\nEligible paths  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/3\nEligible bytes  ███████▌░░░░░░░░░░░░░░░░░░░░░░ 25.0%  60.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 0/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑  25%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ↑  25%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ↑  25%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b01",
+          "duration": 900
+        },
+        {
+          "image": "B01-003.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████░░░░░░░░░░░░░░░░░░░░ 33.3%  1/3\nEligible bytes  ███████████▎░░░░░░░░░░░░░░░░░░ 37.5%  90.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 1/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑  37%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ↑  37%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ↑  37%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b01",
+          "duration": 900
+        },
+        {
+          "image": "B01-004.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████░░░░░░░░░░░░░░░░░░░░ 33.3%  1/3\nEligible bytes  ███████████████░░░░░░░░░░░░░░░ 50.0%  120.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 1/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑  50%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ↑  50%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ↑  50%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b01",
+          "duration": 900
+        },
+        {
+          "image": "B01-005.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████░░░░░░░░░░░░░░░░░░░░ 33.3%  1/3\nEligible bytes  ██████████████████▊░░░░░░░░░░░ 62.5%  150.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 1/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑  62%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ↑  62%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ↑  62%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b01",
+          "duration": 900
+        },
+        {
+          "image": "B01-006.svg",
+          "text": "Erawan backup progress\nEligible paths  ████████████████████░░░░░░░░░░ 66.7%  2/3\nEligible bytes  ██████████████████████▌░░░░░░░ 75.0%  180.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 2/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑  75%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ↑  75%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ↑  75%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b01",
+          "duration": 900
+        },
+        {
+          "image": "B01-007.svg",
+          "text": "Erawan backup progress\nEligible paths  ████████████████████░░░░░░░░░░ 66.7%  2/3\nEligible bytes  ██████████████████████████▎░░░ 87.5%  210.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 2/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑  87%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ↑  87%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ↑  87%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b01",
+          "duration": 900
+        },
+        {
+          "image": "B01-008.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑ 100%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ↑ 100%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ↑ 100%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b01",
+          "duration": 900
+        },
+        {
+          "image": "B01-009.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/3\n↔ Content read    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0 B/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕   0%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ⌕   0%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ⌕   0%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b01",
+          "duration": 900
+        },
+        {
+          "image": "B01-010.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/3\n↔ Content read    ███▊░░░░░░░░░░░░░░░░░░░░░░░░░░ 12.5%  60.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕  12%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ⌕  12%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ⌕  12%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b01",
+          "duration": 900
+        },
+        {
+          "image": "B01-011.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/3\n↔ Content read    ███████▌░░░░░░░░░░░░░░░░░░░░░░ 25.0%  120.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕  25%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ⌕  25%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ⌕  25%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b01",
+          "duration": 900
+        },
+        {
+          "image": "B01-012.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ██████████░░░░░░░░░░░░░░░░░░░░ 33.3%  1/3\n↔ Content read    ███████████▎░░░░░░░░░░░░░░░░░░ 37.5%  180.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕  37%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ⌕  37%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ⌕  37%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b01",
+          "duration": 900
+        },
+        {
+          "image": "B01-013.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ██████████░░░░░░░░░░░░░░░░░░░░ 33.3%  1/3\n↔ Content read    ███████████████░░░░░░░░░░░░░░░ 50.0%  240.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕  50%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ⌕  50%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ⌕  50%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b01",
+          "duration": 900
+        },
+        {
+          "image": "B01-014.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ██████████░░░░░░░░░░░░░░░░░░░░ 33.3%  1/3\n↔ Content read    ██████████████████▊░░░░░░░░░░░ 62.5%  300.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕  62%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ⌕  62%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ⌕  62%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b01",
+          "duration": 900
+        },
+        {
+          "image": "B01-015.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ████████████████████░░░░░░░░░░ 66.7%  2/3\n↔ Content read    ██████████████████████▌░░░░░░░ 75.0%  360.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕  75%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ⌕  75%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ⌕  75%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b01",
+          "duration": 900
+        },
+        {
+          "image": "B01-016.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ████████████████████░░░░░░░░░░ 66.7%  2/3\n↔ Content read    ██████████████████████████▎░░░ 87.5%  420.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕  87%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ⌕  87%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ⌕  87%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b01",
+          "duration": 900
+        },
+        {
+          "image": "B01-017.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ██████████████████████████████ 100.0%  3/3\n↔ Content read    ██████████████████████████████ 100.0%  480.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕ 100%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ⌕ 100%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ⌕ 100%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b01",
+          "duration": 900
+        },
+        {
+          "image": "B01-018.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Complete\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ backup complete and verified at 2026-11-14T16:01:00\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Source files retained\n│       ╰──────────────→  COMPLETE\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ✓ Backup complete\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-14/14  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Complete",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b01",
+          "duration": 900
+        }
+      ]
+    },
+    {
+      "id": "B04",
+      "title": "See the overnight upload",
+      "family": "backup",
+      "commands": [
+        "erawan backup run /demo/Video s3:example-backup/video --job demo-b04 --verify-mode content --window 22:00-07:00 --zone Asia/Bangkok",
+        "erawan backup watch --job demo-b04"
+      ],
+      "inputs": [
+        {
+          "role": "SOURCE",
+          "path": "/demo/Video",
+          "files": [
+            "interview.mov · 180 MiB",
+            "cutaway.mov · 60 MiB"
+          ]
+        },
+        {
+          "role": "DESTINATION",
+          "path": "s3:example-backup/video",
+          "files": []
+        }
+      ],
+      "capture": "Actual Erawan renderer · simulated job data · compressed time",
+      "frames": [
+        {
+          "image": "B04-000.svg",
+          "text": "Erawan backup progress\nEligible paths  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/2\nEligible bytes  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0 B/240.0 MiB\nExcluded: 0 paths; catalog cursor: 0/2\nPhase: Waiting for the run window\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\nRun window: 22:00-07:00 · Asia/Bangkok (UTC+07:00) · end soft\n  open now · closes 2026-11-14 07:00 +07 (2026-11-14T00:00:00Z) · in 6 h 5 min\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Video\n│  ╰─ Selected source paths wait for the run window\n│       ╰──────────────→  WAIT\n╰─ ☁ DEST    s3:example-backup/video\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-14/14  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Waiting for the run window",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b04",
+          "duration": 900
+        },
+        {
+          "image": "B04-001.svg",
+          "text": "Erawan backup progress\nEligible paths  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/2\nEligible bytes  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0 B/240.0 MiB\nExcluded: 0 paths; catalog cursor: 0/2\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\nRun window: 22:00-07:00 · Asia/Bangkok (UTC+07:00) · end soft\n  open now · closes 2026-11-14 07:00 +07 (2026-11-14T00:00:00Z) · in 6 h 5 min\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Video\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ ☁ DEST    s3:example-backup/video\n   ╰─ ↑ Copying from source to destination (2 active):\n      ↑   0%  ▄▅▄▇█            2.0 MiB/s  interview.mov\n      ↑   0%  ▄▅▄▇█            2.0 MiB/s  cutaway.mov\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-23/23  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b04",
+          "duration": 900
+        },
+        {
+          "image": "B04-002.svg",
+          "text": "Erawan backup progress\nEligible paths  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/2\nEligible bytes  ███▊░░░░░░░░░░░░░░░░░░░░░░░░░░ 12.5%  30.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 0/2\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\nRun window: 22:00-07:00 · Asia/Bangkok (UTC+07:00) · end soft\n  open now · closes 2026-11-14 07:00 +07 (2026-11-14T00:00:00Z) · in 6 h 5 min\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Video\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ ☁ DEST    s3:example-backup/video\n   ╰─ ↑ Copying from source to destination (2 active):\n      ↑  12%  ▄▅▄▇█            2.0 MiB/s  interview.mov\n      ↑  12%  ▄▅▄▇█            2.0 MiB/s  cutaway.mov\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-23/23  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b04",
+          "duration": 900
+        },
+        {
+          "image": "B04-003.svg",
+          "text": "Erawan backup progress\nEligible paths  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/2\nEligible bytes  ███████▌░░░░░░░░░░░░░░░░░░░░░░ 25.0%  60.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 0/2\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\nRun window: 22:00-07:00 · Asia/Bangkok (UTC+07:00) · end soft\n  open now · closes 2026-11-14 07:00 +07 (2026-11-14T00:00:00Z) · in 6 h 5 min\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Video\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ ☁ DEST    s3:example-backup/video\n   ╰─ ↑ Copying from source to destination (2 active):\n      ↑  25%  ▄▅▄▇█            2.0 MiB/s  interview.mov\n      ↑  25%  ▄▅▄▇█            2.0 MiB/s  cutaway.mov\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-23/23  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b04",
+          "duration": 900
+        },
+        {
+          "image": "B04-004.svg",
+          "text": "Erawan backup progress\nEligible paths  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/2\nEligible bytes  ███████████▎░░░░░░░░░░░░░░░░░░ 37.5%  90.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 0/2\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\nRun window: 22:00-07:00 · Asia/Bangkok (UTC+07:00) · end soft\n  open now · closes 2026-11-14 07:00 +07 (2026-11-14T00:00:00Z) · in 6 h 5 min\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Video\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ ☁ DEST    s3:example-backup/video\n   ╰─ ↑ Copying from source to destination (2 active):\n      ↑  37%  ▄▅▄▇█            2.0 MiB/s  interview.mov\n      ↑  37%  ▄▅▄▇█            2.0 MiB/s  cutaway.mov\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:51  Lines 1-23/23  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b04",
+          "duration": 900
+        },
+        {
+          "image": "B04-005.svg",
+          "text": "Erawan backup progress\nEligible paths  ███████████████░░░░░░░░░░░░░░░ 50.0%  1/2\nEligible bytes  ███████████████░░░░░░░░░░░░░░░ 50.0%  120.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 1/2\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\nRun window: 22:00-07:00 · Asia/Bangkok (UTC+07:00) · end soft\n  open now · closes 2026-11-14 07:00 +07 (2026-11-14T00:00:00Z) · in 6 h 5 min\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Video\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ ☁ DEST    s3:example-backup/video\n   ╰─ ↑ Copying from source to destination (2 active):\n      ↑  50%  ▄▅▄▇█            2.0 MiB/s  interview.mov\n      ↑  50%  ▄▅▄▇█            2.0 MiB/s  cutaway.mov\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-23/23  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b04",
+          "duration": 900
+        },
+        {
+          "image": "B04-006.svg",
+          "text": "Erawan backup progress\nEligible paths  ███████████████░░░░░░░░░░░░░░░ 50.0%  1/2\nEligible bytes  ██████████████████▊░░░░░░░░░░░ 62.5%  150.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 1/2\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\nRun window: 22:00-07:00 · Asia/Bangkok (UTC+07:00) · end soft\n  open now · closes 2026-11-14 07:00 +07 (2026-11-14T00:00:00Z) · in 6 h 5 min\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Video\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ ☁ DEST    s3:example-backup/video\n   ╰─ ↑ Copying from source to destination (2 active):\n      ↑  62%  ▄▅▄▇█            2.0 MiB/s  interview.mov\n      ↑  62%  ▄▅▄▇█            2.0 MiB/s  cutaway.mov\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-23/23  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b04",
+          "duration": 900
+        },
+        {
+          "image": "B04-007.svg",
+          "text": "Erawan backup progress\nEligible paths  ███████████████░░░░░░░░░░░░░░░ 50.0%  1/2\nEligible bytes  ██████████████████████▌░░░░░░░ 75.0%  180.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 1/2\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\nRun window: 22:00-07:00 · Asia/Bangkok (UTC+07:00) · end soft\n  open now · closes 2026-11-14 07:00 +07 (2026-11-14T00:00:00Z) · in 6 h 5 min\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Video\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ ☁ DEST    s3:example-backup/video\n   ╰─ ↑ Copying from source to destination (2 active):\n      ↑  75%  ▄▅▄▇█            2.0 MiB/s  interview.mov\n      ↑  75%  ▄▅▄▇█            2.0 MiB/s  cutaway.mov\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-23/23  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b04",
+          "duration": 900
+        },
+        {
+          "image": "B04-008.svg",
+          "text": "Erawan backup progress\nEligible paths  ███████████████░░░░░░░░░░░░░░░ 50.0%  1/2\nEligible bytes  ██████████████████████████▎░░░ 87.5%  210.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 1/2\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\nRun window: 22:00-07:00 · Asia/Bangkok (UTC+07:00) · end soft\n  open now · closes 2026-11-14 07:00 +07 (2026-11-14T00:00:00Z) · in 6 h 5 min\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Video\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ ☁ DEST    s3:example-backup/video\n   ╰─ ↑ Copying from source to destination (2 active):\n      ↑  87%  ▄▅▄▇█            2.0 MiB/s  interview.mov\n      ↑  87%  ▄▅▄▇█            2.0 MiB/s  cutaway.mov\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-23/23  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b04",
+          "duration": 900
+        },
+        {
+          "image": "B04-009.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  2/2\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 2/2\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\nRun window: 22:00-07:00 · Asia/Bangkok (UTC+07:00) · end soft\n  open now · closes 2026-11-14 07:00 +07 (2026-11-14T00:00:00Z) · in 6 h 5 min\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Video\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ ☁ DEST    s3:example-backup/video\n   ╰─ ↑ Copying from source to destination (2 active):\n      ↑ 100%  ▄▅▄▇█            2.0 MiB/s  interview.mov\n      ↑ 100%  ▄▅▄▇█            2.0 MiB/s  cutaway.mov\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-23/23  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b04",
+          "duration": 900
+        },
+        {
+          "image": "B04-010.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  2/2\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 2/2\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\nRun window: 22:00-07:00 · Asia/Bangkok (UTC+07:00) · end soft\n  open now · closes 2026-11-14 07:00 +07 (2026-11-14T00:00:00Z) · in 6 h 5 min\n✓ Verified files  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/2\n↔ Content read    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0 B/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Video\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ ☁ DEST    s3:example-backup/video\n   ╰─ ↔ Verifying destination against source (2 active):\n      ⌕   0%  ▄▅▄▇█            2.0 MiB/s  interview.mov\n      ⌕   0%  ▄▅▄▇█            2.0 MiB/s  cutaway.mov\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b04",
+          "duration": 900
+        },
+        {
+          "image": "B04-011.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  2/2\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 2/2\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\nRun window: 22:00-07:00 · Asia/Bangkok (UTC+07:00) · end soft\n  open now · closes 2026-11-14 07:00 +07 (2026-11-14T00:00:00Z) · in 6 h 5 min\n✓ Verified files  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/2\n↔ Content read    ███▊░░░░░░░░░░░░░░░░░░░░░░░░░░ 12.5%  60.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Video\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ ☁ DEST    s3:example-backup/video\n   ╰─ ↔ Verifying destination against source (2 active):\n      ⌕  12%  ▄▅▄▇█            2.0 MiB/s  interview.mov\n      ⌕  12%  ▄▅▄▇█            2.0 MiB/s  cutaway.mov\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b04",
+          "duration": 900
+        },
+        {
+          "image": "B04-012.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  2/2\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 2/2\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\nRun window: 22:00-07:00 · Asia/Bangkok (UTC+07:00) · end soft\n  open now · closes 2026-11-14 07:00 +07 (2026-11-14T00:00:00Z) · in 6 h 5 min\n✓ Verified files  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/2\n↔ Content read    ███████▌░░░░░░░░░░░░░░░░░░░░░░ 25.0%  120.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Video\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ ☁ DEST    s3:example-backup/video\n   ╰─ ↔ Verifying destination against source (2 active):\n      ⌕  25%  ▄▅▄▇█            2.0 MiB/s  interview.mov\n      ⌕  25%  ▄▅▄▇█            2.0 MiB/s  cutaway.mov\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b04",
+          "duration": 900
+        },
+        {
+          "image": "B04-013.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  2/2\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 2/2\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\nRun window: 22:00-07:00 · Asia/Bangkok (UTC+07:00) · end soft\n  open now · closes 2026-11-14 07:00 +07 (2026-11-14T00:00:00Z) · in 6 h 5 min\n✓ Verified files  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/2\n↔ Content read    ███████████▎░░░░░░░░░░░░░░░░░░ 37.5%  180.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Video\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ ☁ DEST    s3:example-backup/video\n   ╰─ ↔ Verifying destination against source (2 active):\n      ⌕  37%  ▄▅▄▇█            2.0 MiB/s  interview.mov\n      ⌕  37%  ▄▅▄▇█            2.0 MiB/s  cutaway.mov\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b04",
+          "duration": 900
+        },
+        {
+          "image": "B04-014.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  2/2\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 2/2\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\nRun window: 22:00-07:00 · Asia/Bangkok (UTC+07:00) · end soft\n  open now · closes 2026-11-14 07:00 +07 (2026-11-14T00:00:00Z) · in 6 h 5 min\n✓ Verified files  ███████████████░░░░░░░░░░░░░░░ 50.0%  1/2\n↔ Content read    ███████████████░░░░░░░░░░░░░░░ 50.0%  240.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Video\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ ☁ DEST    s3:example-backup/video\n   ╰─ ↔ Verifying destination against source (2 active):\n      ⌕  50%  ▄▅▄▇█            2.0 MiB/s  interview.mov\n      ⌕  50%  ▄▅▄▇█            2.0 MiB/s  cutaway.mov\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b04",
+          "duration": 900
+        },
+        {
+          "image": "B04-015.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  2/2\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 2/2\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\nRun window: 22:00-07:00 · Asia/Bangkok (UTC+07:00) · end soft\n  open now · closes 2026-11-14 07:00 +07 (2026-11-14T00:00:00Z) · in 6 h 5 min\n✓ Verified files  ███████████████░░░░░░░░░░░░░░░ 50.0%  1/2\n↔ Content read    ██████████████████▊░░░░░░░░░░░ 62.5%  300.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Video\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ ☁ DEST    s3:example-backup/video\n   ╰─ ↔ Verifying destination against source (2 active):\n      ⌕  62%  ▄▅▄▇█            2.0 MiB/s  interview.mov\n      ⌕  62%  ▄▅▄▇█            2.0 MiB/s  cutaway.mov\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b04",
+          "duration": 900
+        },
+        {
+          "image": "B04-016.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  2/2\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 2/2\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\nRun window: 22:00-07:00 · Asia/Bangkok (UTC+07:00) · end soft\n  open now · closes 2026-11-14 07:00 +07 (2026-11-14T00:00:00Z) · in 6 h 5 min\n✓ Verified files  ███████████████░░░░░░░░░░░░░░░ 50.0%  1/2\n↔ Content read    ██████████████████████▌░░░░░░░ 75.0%  360.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Video\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ ☁ DEST    s3:example-backup/video\n   ╰─ ↔ Verifying destination against source (2 active):\n      ⌕  75%  ▄▅▄▇█            2.0 MiB/s  interview.mov\n      ⌕  75%  ▄▅▄▇█            2.0 MiB/s  cutaway.mov\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b04",
+          "duration": 900
+        },
+        {
+          "image": "B04-017.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  2/2\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 2/2\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\nRun window: 22:00-07:00 · Asia/Bangkok (UTC+07:00) · end soft\n  open now · closes 2026-11-14 07:00 +07 (2026-11-14T00:00:00Z) · in 6 h 5 min\n✓ Verified files  ███████████████░░░░░░░░░░░░░░░ 50.0%  1/2\n↔ Content read    ██████████████████████████▎░░░ 87.5%  420.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Video\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ ☁ DEST    s3:example-backup/video\n   ╰─ ↔ Verifying destination against source (2 active):\n      ⌕  87%  ▄▅▄▇█            2.0 MiB/s  interview.mov\n      ⌕  87%  ▄▅▄▇█            2.0 MiB/s  cutaway.mov\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b04",
+          "duration": 900
+        },
+        {
+          "image": "B04-018.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  2/2\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 2/2\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\nRun window: 22:00-07:00 · Asia/Bangkok (UTC+07:00) · end soft\n  open now · closes 2026-11-14 07:00 +07 (2026-11-14T00:00:00Z) · in 6 h 5 min\n✓ Verified files  ██████████████████████████████ 100.0%  2/2\n↔ Content read    ██████████████████████████████ 100.0%  480.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Video\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ ☁ DEST    s3:example-backup/video\n   ╰─ ↔ Verifying destination against source (2 active):\n      ⌕ 100%  ▄▅▄▇█            2.0 MiB/s  interview.mov\n      ⌕ 100%  ▄▅▄▇█            2.0 MiB/s  cutaway.mov\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b04",
+          "duration": 900
+        },
+        {
+          "image": "B04-019.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  2/2\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 2/2\nPhase: Complete\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\nRun window: 22:00-07:00 · Asia/Bangkok (UTC+07:00) · end soft\n  open now · closes 2026-11-14 07:00 +07 (2026-11-14T00:00:00Z) · in 6 h 5 min\n✓ backup complete and verified at 2026-11-14T16:01:00\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Video\n│  ╰─ Source files retained\n│       ╰──────────────→  COMPLETE\n╰─ ☁ DEST    s3:example-backup/video\n   ╰─ ✓ Backup complete\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-16/16  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Complete",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b04",
+          "duration": 900
+        }
+      ]
+    },
+    {
+      "id": "B06",
+      "title": "One SFTP server to another",
+      "family": "backup",
+      "commands": [
+        "erawan backup run sftp-home:/srv/photos sftp-archive:/srv/photos --job demo-b06 --verify-mode content",
+        "erawan backup watch --job demo-b06"
+      ],
+      "inputs": [
+        {
+          "role": "SOURCE",
+          "path": "sftp-home:/srv/photos",
+          "files": [
+            "temple.raw · 120 MiB",
+            "garden.jpg · 40 MiB",
+            "coast.jpg · 80 MiB"
+          ]
+        },
+        {
+          "role": "DESTINATION",
+          "path": "sftp-archive:/srv/photos",
+          "files": []
+        }
+      ],
+      "capture": "Actual Erawan renderer · simulated job data · compressed time",
+      "frames": [
+        {
+          "image": "B06-000.svg",
+          "text": "Erawan backup progress\nEligible paths  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/3\nEligible bytes  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0 B/240.0 MiB\nExcluded: 0 paths; catalog cursor: 0/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  sftp-home:/srv/photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ ☁ DEST    sftp-archive:/srv/photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑   0%  ▄▅▄▇█            2.0 MiB/s  temple.raw\n      ↑   0%  ▄▅▄▇█            2.0 MiB/s  garden.jpg\n      ↑   0%  ▄▅▄▇█            2.0 MiB/s  coast.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b06",
+          "duration": 900
+        },
+        {
+          "image": "B06-001.svg",
+          "text": "Erawan backup progress\nEligible paths  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/3\nEligible bytes  ███▊░░░░░░░░░░░░░░░░░░░░░░░░░░ 12.5%  30.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 0/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  sftp-home:/srv/photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ ☁ DEST    sftp-archive:/srv/photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑  12%  ▄▅▄▇█            2.0 MiB/s  temple.raw\n      ↑  12%  ▄▅▄▇█            2.0 MiB/s  garden.jpg\n      ↑  12%  ▄▅▄▇█            2.0 MiB/s  coast.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b06",
+          "duration": 900
+        },
+        {
+          "image": "B06-002.svg",
+          "text": "Erawan backup progress\nEligible paths  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/3\nEligible bytes  ███████▌░░░░░░░░░░░░░░░░░░░░░░ 25.0%  60.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 0/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  sftp-home:/srv/photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ ☁ DEST    sftp-archive:/srv/photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑  25%  ▄▅▄▇█            2.0 MiB/s  temple.raw\n      ↑  25%  ▄▅▄▇█            2.0 MiB/s  garden.jpg\n      ↑  25%  ▄▅▄▇█            2.0 MiB/s  coast.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b06",
+          "duration": 900
+        },
+        {
+          "image": "B06-003.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████░░░░░░░░░░░░░░░░░░░░ 33.3%  1/3\nEligible bytes  ███████████▎░░░░░░░░░░░░░░░░░░ 37.5%  90.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 1/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  sftp-home:/srv/photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ ☁ DEST    sftp-archive:/srv/photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑  37%  ▄▅▄▇█            2.0 MiB/s  temple.raw\n      ↑  37%  ▄▅▄▇█            2.0 MiB/s  garden.jpg\n      ↑  37%  ▄▅▄▇█            2.0 MiB/s  coast.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b06",
+          "duration": 900
+        },
+        {
+          "image": "B06-004.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████░░░░░░░░░░░░░░░░░░░░ 33.3%  1/3\nEligible bytes  ███████████████░░░░░░░░░░░░░░░ 50.0%  120.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 1/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  sftp-home:/srv/photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ ☁ DEST    sftp-archive:/srv/photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑  50%  ▄▅▄▇█            2.0 MiB/s  temple.raw\n      ↑  50%  ▄▅▄▇█            2.0 MiB/s  garden.jpg\n      ↑  50%  ▄▅▄▇█            2.0 MiB/s  coast.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b06",
+          "duration": 900
+        },
+        {
+          "image": "B06-005.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████░░░░░░░░░░░░░░░░░░░░ 33.3%  1/3\nEligible bytes  ██████████████████▊░░░░░░░░░░░ 62.5%  150.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 1/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  sftp-home:/srv/photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ ☁ DEST    sftp-archive:/srv/photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑  62%  ▄▅▄▇█            2.0 MiB/s  temple.raw\n      ↑  62%  ▄▅▄▇█            2.0 MiB/s  garden.jpg\n      ↑  62%  ▄▅▄▇█            2.0 MiB/s  coast.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b06",
+          "duration": 900
+        },
+        {
+          "image": "B06-006.svg",
+          "text": "Erawan backup progress\nEligible paths  ████████████████████░░░░░░░░░░ 66.7%  2/3\nEligible bytes  ██████████████████████▌░░░░░░░ 75.0%  180.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 2/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  sftp-home:/srv/photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ ☁ DEST    sftp-archive:/srv/photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑  75%  ▄▅▄▇█            2.0 MiB/s  temple.raw\n      ↑  75%  ▄▅▄▇█            2.0 MiB/s  garden.jpg\n      ↑  75%  ▄▅▄▇█            2.0 MiB/s  coast.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b06",
+          "duration": 900
+        },
+        {
+          "image": "B06-007.svg",
+          "text": "Erawan backup progress\nEligible paths  ████████████████████░░░░░░░░░░ 66.7%  2/3\nEligible bytes  ██████████████████████████▎░░░ 87.5%  210.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 2/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  sftp-home:/srv/photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ ☁ DEST    sftp-archive:/srv/photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑  87%  ▄▅▄▇█            2.0 MiB/s  temple.raw\n      ↑  87%  ▄▅▄▇█            2.0 MiB/s  garden.jpg\n      ↑  87%  ▄▅▄▇█            2.0 MiB/s  coast.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b06",
+          "duration": 900
+        },
+        {
+          "image": "B06-008.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  sftp-home:/srv/photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ ☁ DEST    sftp-archive:/srv/photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑ 100%  ▄▅▄▇█            2.0 MiB/s  temple.raw\n      ↑ 100%  ▄▅▄▇█            2.0 MiB/s  garden.jpg\n      ↑ 100%  ▄▅▄▇█            2.0 MiB/s  coast.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b06",
+          "duration": 900
+        },
+        {
+          "image": "B06-009.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/3\n↔ Content read    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0 B/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  sftp-home:/srv/photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ ☁ DEST    sftp-archive:/srv/photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕   0%  ▄▅▄▇█            2.0 MiB/s  temple.raw\n      ⌕   0%  ▄▅▄▇█            2.0 MiB/s  garden.jpg\n      ⌕   0%  ▄▅▄▇█            2.0 MiB/s  coast.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b06",
+          "duration": 900
+        },
+        {
+          "image": "B06-010.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/3\n↔ Content read    ███▊░░░░░░░░░░░░░░░░░░░░░░░░░░ 12.5%  60.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  sftp-home:/srv/photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ ☁ DEST    sftp-archive:/srv/photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕  12%  ▄▅▄▇█            2.0 MiB/s  temple.raw\n      ⌕  12%  ▄▅▄▇█            2.0 MiB/s  garden.jpg\n      ⌕  12%  ▄▅▄▇█            2.0 MiB/s  coast.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b06",
+          "duration": 900
+        },
+        {
+          "image": "B06-011.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/3\n↔ Content read    ███████▌░░░░░░░░░░░░░░░░░░░░░░ 25.0%  120.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  sftp-home:/srv/photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ ☁ DEST    sftp-archive:/srv/photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕  25%  ▄▅▄▇█            2.0 MiB/s  temple.raw\n      ⌕  25%  ▄▅▄▇█            2.0 MiB/s  garden.jpg\n      ⌕  25%  ▄▅▄▇█            2.0 MiB/s  coast.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b06",
+          "duration": 900
+        },
+        {
+          "image": "B06-012.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ██████████░░░░░░░░░░░░░░░░░░░░ 33.3%  1/3\n↔ Content read    ███████████▎░░░░░░░░░░░░░░░░░░ 37.5%  180.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  sftp-home:/srv/photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ ☁ DEST    sftp-archive:/srv/photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕  37%  ▄▅▄▇█            2.0 MiB/s  temple.raw\n      ⌕  37%  ▄▅▄▇█            2.0 MiB/s  garden.jpg\n      ⌕  37%  ▄▅▄▇█            2.0 MiB/s  coast.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b06",
+          "duration": 900
+        },
+        {
+          "image": "B06-013.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ██████████░░░░░░░░░░░░░░░░░░░░ 33.3%  1/3\n↔ Content read    ███████████████░░░░░░░░░░░░░░░ 50.0%  240.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  sftp-home:/srv/photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ ☁ DEST    sftp-archive:/srv/photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕  50%  ▄▅▄▇█            2.0 MiB/s  temple.raw\n      ⌕  50%  ▄▅▄▇█            2.0 MiB/s  garden.jpg\n      ⌕  50%  ▄▅▄▇█            2.0 MiB/s  coast.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b06",
+          "duration": 900
+        },
+        {
+          "image": "B06-014.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ██████████░░░░░░░░░░░░░░░░░░░░ 33.3%  1/3\n↔ Content read    ██████████████████▊░░░░░░░░░░░ 62.5%  300.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  sftp-home:/srv/photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ ☁ DEST    sftp-archive:/srv/photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕  62%  ▄▅▄▇█            2.0 MiB/s  temple.raw\n      ⌕  62%  ▄▅▄▇█            2.0 MiB/s  garden.jpg\n      ⌕  62%  ▄▅▄▇█            2.0 MiB/s  coast.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:52  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b06",
+          "duration": 900
+        },
+        {
+          "image": "B06-015.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ████████████████████░░░░░░░░░░ 66.7%  2/3\n↔ Content read    ██████████████████████▌░░░░░░░ 75.0%  360.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  sftp-home:/srv/photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ ☁ DEST    sftp-archive:/srv/photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕  75%  ▄▅▄▇█            2.0 MiB/s  temple.raw\n      ⌕  75%  ▄▅▄▇█            2.0 MiB/s  garden.jpg\n      ⌕  75%  ▄▅▄▇█            2.0 MiB/s  coast.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b06",
+          "duration": 900
+        },
+        {
+          "image": "B06-016.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ████████████████████░░░░░░░░░░ 66.7%  2/3\n↔ Content read    ██████████████████████████▎░░░ 87.5%  420.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  sftp-home:/srv/photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ ☁ DEST    sftp-archive:/srv/photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕  87%  ▄▅▄▇█            2.0 MiB/s  temple.raw\n      ⌕  87%  ▄▅▄▇█            2.0 MiB/s  garden.jpg\n      ⌕  87%  ▄▅▄▇█            2.0 MiB/s  coast.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b06",
+          "duration": 900
+        },
+        {
+          "image": "B06-017.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ██████████████████████████████ 100.0%  3/3\n↔ Content read    ██████████████████████████████ 100.0%  480.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  sftp-home:/srv/photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ ☁ DEST    sftp-archive:/srv/photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕ 100%  ▄▅▄▇█            2.0 MiB/s  temple.raw\n      ⌕ 100%  ▄▅▄▇█            2.0 MiB/s  garden.jpg\n      ⌕ 100%  ▄▅▄▇█            2.0 MiB/s  coast.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b06",
+          "duration": 900
+        },
+        {
+          "image": "B06-018.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Complete\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ backup complete and verified at 2026-11-14T16:01:00\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  sftp-home:/srv/photos\n│  ╰─ Source files retained\n│       ╰──────────────→  COMPLETE\n╰─ ☁ DEST    sftp-archive:/srv/photos\n   ╰─ ✓ Backup complete\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-14/14  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Complete",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b06",
+          "duration": 900
+        }
+      ]
+    },
+    {
+      "id": "B15",
+      "title": "Resume an interrupted job",
+      "family": "backup",
+      "commands": [
+        "erawan backup run /demo/Photos /demo/Archive/Photos --job demo-b15 --verify-mode content",
+        "erawan backup watch --job demo-b15"
+      ],
+      "inputs": [
+        {
+          "role": "SOURCE",
+          "path": "/demo/Photos",
+          "files": [
+            "beach.jpg · 40 MiB",
+            "garden.raw · 120 MiB",
+            "sunrise.jpg · 80 MiB"
+          ]
+        },
+        {
+          "role": "DESTINATION",
+          "path": "/demo/Archive/Photos",
+          "files": [
+            "beach.jpg"
+          ]
+        }
+      ],
+      "capture": "Actual Erawan renderer · simulated job data · compressed time",
+      "frames": [
+        {
+          "image": "B15-000.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████░░░░░░░░░░░░░░░░░░░░ 33.3%  1/3\nEligible bytes  █████░░░░░░░░░░░░░░░░░░░░░░░░░ 16.7%  40.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 1/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n■ Service stopped; last phase: copy_batches\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ 💾  DEST    /demo/Archive/Photos\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-15/15  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Interrupted job",
+          "event": "Rerun saved command",
+          "gate": true,
+          "command": "erawan backup run /demo/Photos /demo/Archive/Photos --job demo-b15 --verify-mode content",
+          "duration": 900
+        },
+        {
+          "image": "B15-001.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████░░░░░░░░░░░░░░░░░░░░ 33.3%  1/3\nEligible bytes  █████░░░░░░░░░░░░░░░░░░░░░░░░░ 16.7%  40.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 1/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑   0%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ↑   0%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ↑   0%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b15",
+          "duration": 900
+        },
+        {
+          "image": "B15-002.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████░░░░░░░░░░░░░░░░░░░░ 33.3%  1/3\nEligible bytes  ████████▏░░░░░░░░░░░░░░░░░░░░░ 27.1%  65.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 1/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑  12%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ↑  12%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ↑  12%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b15",
+          "duration": 900
+        },
+        {
+          "image": "B15-003.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████░░░░░░░░░░░░░░░░░░░░ 33.3%  1/3\nEligible bytes  ███████████▎░░░░░░░░░░░░░░░░░░ 37.5%  90.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 1/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑  25%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ↑  25%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ↑  25%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b15",
+          "duration": 900
+        },
+        {
+          "image": "B15-004.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████░░░░░░░░░░░░░░░░░░░░ 33.3%  1/3\nEligible bytes  ██████████████▍░░░░░░░░░░░░░░░ 47.9%  115.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 1/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑  37%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ↑  37%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ↑  37%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b15",
+          "duration": 900
+        },
+        {
+          "image": "B15-005.svg",
+          "text": "Erawan backup progress\nEligible paths  ████████████████████░░░░░░░░░░ 66.7%  2/3\nEligible bytes  █████████████████▌░░░░░░░░░░░░ 58.3%  140.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 2/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑  50%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ↑  50%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ↑  50%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b15",
+          "duration": 900
+        },
+        {
+          "image": "B15-006.svg",
+          "text": "Erawan backup progress\nEligible paths  ████████████████████░░░░░░░░░░ 66.7%  2/3\nEligible bytes  ████████████████████▋░░░░░░░░░ 68.8%  165.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 2/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑  62%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ↑  62%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ↑  62%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b15",
+          "duration": 900
+        },
+        {
+          "image": "B15-007.svg",
+          "text": "Erawan backup progress\nEligible paths  ████████████████████░░░░░░░░░░ 66.7%  2/3\nEligible bytes  ███████████████████████▊░░░░░░ 79.2%  190.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 2/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑  75%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ↑  75%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ↑  75%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b15",
+          "duration": 900
+        },
+        {
+          "image": "B15-008.svg",
+          "text": "Erawan backup progress\nEligible paths  ████████████████████░░░░░░░░░░ 66.7%  2/3\nEligible bytes  ██████████████████████████▉░░░ 89.6%  215.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 2/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑  87%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ↑  87%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ↑  87%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b15",
+          "duration": 900
+        },
+        {
+          "image": "B15-009.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Copying source files to destination\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n⏳  Byte ETA: waiting for enough current-batch transfer data\nTransfer rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nFinal exclusion cleanup and verification follow the copy phase.\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Selected source paths feeding the copy\n│       ╰──────────────→  COPY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↑ Copying from source to destination (3 active):\n      ↑ 100%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ↑ 100%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ↑ 100%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nNo new copies logged; existing files may be checked and reused.\nPaths count copied or matching files; bytes include current-batch transfer.\nETA uses the current batch average; final reconciliation follows.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-22/22  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Copying source files to destination",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b15",
+          "duration": 900
+        },
+        {
+          "image": "B15-010.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/3\n↔ Content read    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0 B/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕   0%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ⌕   0%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ⌕   0%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b15",
+          "duration": 900
+        },
+        {
+          "image": "B15-011.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/3\n↔ Content read    ███▊░░░░░░░░░░░░░░░░░░░░░░░░░░ 12.5%  60.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕  12%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ⌕  12%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ⌕  12%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b15",
+          "duration": 900
+        },
+        {
+          "image": "B15-012.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0%  0/3\n↔ Content read    ███████▌░░░░░░░░░░░░░░░░░░░░░░ 25.0%  120.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕  25%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ⌕  25%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ⌕  25%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b15",
+          "duration": 900
+        },
+        {
+          "image": "B15-013.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ██████████░░░░░░░░░░░░░░░░░░░░ 33.3%  1/3\n↔ Content read    ███████████▎░░░░░░░░░░░░░░░░░░ 37.5%  180.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕  37%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ⌕  37%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ⌕  37%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b15",
+          "duration": 900
+        },
+        {
+          "image": "B15-014.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ██████████░░░░░░░░░░░░░░░░░░░░ 33.3%  1/3\n↔ Content read    ███████████████░░░░░░░░░░░░░░░ 50.0%  240.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕  50%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ⌕  50%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ⌕  50%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b15",
+          "duration": 900
+        },
+        {
+          "image": "B15-015.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ██████████░░░░░░░░░░░░░░░░░░░░ 33.3%  1/3\n↔ Content read    ██████████████████▊░░░░░░░░░░░ 62.5%  300.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕  62%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ⌕  62%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ⌕  62%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b15",
+          "duration": 900
+        },
+        {
+          "image": "B15-016.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ████████████████████░░░░░░░░░░ 66.7%  2/3\n↔ Content read    ██████████████████████▌░░░░░░░ 75.0%  360.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕  75%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ⌕  75%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ⌕  75%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b15",
+          "duration": 900
+        },
+        {
+          "image": "B15-017.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ████████████████████░░░░░░░░░░ 66.7%  2/3\n↔ Content read    ██████████████████████████▎░░░ 87.5%  420.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕  87%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ⌕  87%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ⌕  87%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b15",
+          "duration": 900
+        },
+        {
+          "image": "B15-018.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Reading source and destination content for verification\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ Verified files  ██████████████████████████████ 100.0%  3/3\n↔ Content read    ██████████████████████████████ 100.0%  480.0 MiB/480.0 MiB\n🔍  Verifying by full content comparison; current check is in progress\nVerification read rate  ▅▆▅███  4.3 MiB/s (last 30s avg)\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Source paths retained for comparison\n│       ╰──────────────↔  VERIFY\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ↔ Verifying destination against source (3 active):\n      ⌕ 100%  ▄▅▄▇█            2.0 MiB/s  beach.jpg\n      ⌕ 100%  ▄▅▄▇█            2.0 MiB/s  garden.raw\n      ⌕ 100%  ▄▅▄▇█            2.0 MiB/s  sunrise.jpg\nVerified files counts successful checks. Content read includes both copies.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-21/21  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Reading source and destination content for verification",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b15",
+          "duration": 900
+        },
+        {
+          "image": "B15-019.svg",
+          "text": "Erawan backup progress\nEligible paths  ██████████████████████████████ 100.0%  3/3\nEligible bytes  ██████████████████████████████ 100.0%  240.0 MiB/240.0 MiB\nExcluded: 0 paths; catalog cursor: 3/3\nPhase: Complete\nResources: 4 transfers · 8 checkers · bandwidth unlimited\nQuarantine: off · excluded copies are deleted immediately · changed files overwrite the old copy\n✓ backup complete and verified at 2026-11-14T16:01:00\nExclusion rules applied: 0\n\n╭─ 📁  SOURCE  /demo/Photos\n│  ╰─ Source files retained\n│       ╰──────────────→  COMPLETE\n╰─ 💾  DEST    /demo/Archive/Photos\n   ╰─ ✓ Backup complete\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUpdated 00:55:53  Lines 1-14/14  Col 1  arrows/PgUp/PgDn scroll  s source  d dest  b browse  m files  q quit",
+          "label": "Complete",
+          "event": "",
+          "gate": false,
+          "command": "erawan backup watch --job demo-b15",
+          "duration": 900
+        }
+      ]
+    },
+    {
+      "id": "C01",
+      "title": "Bring in the old laptop",
+      "family": "consolidate",
+      "inputs": [
+        {
+          "role": "KEEP",
+          "path": "/demo/KEEP",
+          "files": [
+            "beach.jpg"
+          ]
+        },
+        {
+          "role": "FROM",
+          "path": "/demo/FROM",
+          "files": [
+            "beach.jpg",
+            "garden.raw"
+          ]
+        }
+      ],
+      "commands": [
+        "erawan directories consolidate --keep /demo/KEEP --from /demo/FROM"
+      ],
+      "capture": "Production review screens · executed disposable local fixture",
+      "frames": [
+        {
+          "image": "C01-000.svg",
+          "text": "Consolidate directories · read-only plan\nKEEP  /demo/KEEP\n\nFROM 1  /demo/FROM\n  1 in KEEP · 0 shared FROM · 1 new · 0 keep-both · 0 conflicts\n  █KEEP 1.0MiB · ▓copy 1.0MiB\n  ████████████████████████████████████████████████████████████████████▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n1,048,578 bytes to copy · 0 conflicts\nSource removal: OFF\nMetadata differences: block source removal\nNo existing KEEP path will be overwritten. Conflicts stay unresolved.\n\nt size tree/map  1 actions  2 conflicts  d removal  m metadata  a apply  Esc compare",
+          "label": "Consolidate directories · read-only plan",
+          "event": "a",
+          "gate": true,
+          "command": "erawan directories consolidate --keep /demo/KEEP --from /demo/FROM",
+          "duration": 900
+        },
+        {
+          "image": "C01-001.svg",
+          "text": "Start copy and full verification?\n\nKEEP  /demo/KEEP\nCopy up to 1,048,578 bytes. Source removal: OFF.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress y to start, any other key to return",
+          "label": "Start copy and full verification?",
+          "event": "y",
+          "gate": true,
+          "command": "erawan directories consolidate --keep /demo/KEEP --from /demo/FROM",
+          "duration": 900
+        },
+        {
+          "image": "C01-002.svg",
+          "text": "Consolidation result\n\nConsolidate · KEEP /demo/KEEP\nFROM 1: /demo/FROM\n   1 already in KEEP · 0 supplied by another FROM · 1 new · 0 keep-both · 0 directories · 0 conflicts\n   planned copy 1.0 MiB · pre-merge verified coverage 1/2 files, 1.0 MiB/2.0 MiB\nTotal planned copy: 1.0 MiB · 0 unresolved conflicts\nidentical  FROM 1 \"beach.jpg\" → \"beach.jpg\" (already retained in KEEP)\nnew        FROM 1 \"garden.raw\" → \"garden.raw\" (copy into a missing KEEP path)\nFull-content SHA-256 verification is required for every retained source entry.\nNo existing KEEP entry will be overwritten. Source removal is off by default.\nApplied: 1 copied, 2 verified, 0 removed\nRun ID: 20261113T175554Z-0bd622e0\nJournal: /demo/state/erawan/merges/880f15e2196e631e227e/journal.json\nGenerate report: erawan directories report --journal /demo/state/erawan/merges/880f15e2196e631e227e/journal.json --run 20261113T175554Z-0bd\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nr Generate report    Esc Leave",
+          "label": "Consolidation result",
+          "event": "Esc",
+          "gate": false,
+          "command": "erawan directories consolidate --keep /demo/KEEP --from /demo/FROM",
+          "duration": 900
+        }
+      ]
+    },
+    {
+      "id": "C02",
+      "title": "Gather scattered photos",
+      "family": "consolidate",
+      "inputs": [
+        {
+          "role": "KEEP",
+          "path": "/demo/KEEP",
+          "files": [
+            "beach.jpg"
+          ]
+        },
+        {
+          "role": "FROM",
+          "path": "/demo/FROM + /demo/Drive",
+          "files": [
+            "beach.jpg",
+            "garden.raw",
+            "birthday.jpg"
+          ]
+        }
+      ],
+      "commands": [
+        "erawan directories consolidate --keep /demo/KEEP --from /demo/FROM --from /demo/Drive"
+      ],
+      "capture": "Production review screens · executed disposable local fixture",
+      "frames": [
+        {
+          "image": "C02-000.svg",
+          "text": "Consolidate directories · read-only plan\nKEEP  /demo/KEEP\n\nFROM 1  /demo/FROM\n  1 in KEEP · 0 shared FROM · 1 new · 0 keep-both · 0 conflicts\n  █KEEP 1.0MiB · ▓copy 1.0MiB\n  ████████████████████████████████████████████████████████████████████▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓\nFROM 2  /demo/Drive\n  0 in KEEP · 0 shared FROM · 1 new · 0 keep-both · 0 conflicts\n  ▓copy 1.0MiB\n  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n2,097,162 bytes to copy · 0 conflicts\nSource removal: OFF\nMetadata differences: block source removal\nNo existing KEEP path will be overwritten. Conflicts stay unresolved.\n\nt size tree/map  1 actions  2 conflicts  d removal  m metadata  a apply  Esc compare",
+          "label": "Consolidate directories · read-only plan",
+          "event": "a",
+          "gate": true,
+          "command": "erawan directories consolidate --keep /demo/KEEP --from /demo/FROM --from /demo/Drive",
+          "duration": 900
+        },
+        {
+          "image": "C02-001.svg",
+          "text": "Start copy and full verification?\n\nKEEP  /demo/KEEP\nCopy up to 2,097,162 bytes. Source removal: OFF.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress y to start, any other key to return",
+          "label": "Start copy and full verification?",
+          "event": "y",
+          "gate": true,
+          "command": "erawan directories consolidate --keep /demo/KEEP --from /demo/FROM --from /demo/Drive",
+          "duration": 900
+        },
+        {
+          "image": "C02-002.svg",
+          "text": "Consolidation result\n\nConsolidate · KEEP /demo/KEEP\nFROM 1: /demo/FROM\n   1 already in KEEP · 0 supplied by another FROM · 1 new · 0 keep-both · 0 directories · 0 conflicts\n   planned copy 1.0 MiB · pre-merge verified coverage 1/2 files, 1.0 MiB/2.0 MiB\nFROM 2: /demo/Drive\n   0 already in KEEP · 0 supplied by another FROM · 1 new · 0 keep-both · 0 directories · 0 conflicts\n   planned copy 1.0 MiB · pre-merge verified coverage 0/1 files, 0 B/1.0 MiB\n   ⚠ Low verified overlap with KEEP; review these exact roots.\nTotal planned copy: 2.0 MiB · 0 unresolved conflicts\nidentical  FROM 1 \"beach.jpg\" → \"beach.jpg\" (already retained in KEEP)\nnew        FROM 1 \"garden.raw\" → \"garden.raw\" (copy into a missing KEEP path)\nnew        FROM 2 \"birthday.jpg\" → \"birthday.jpg\" (copy into a missing KEEP path)\nFull-content SHA-256 verification is required for every retained source entry.\nNo existing KEEP entry will be overwritten. Source removal is off by default.\nApplied: 2 copied, 3 verified, 0 removed\nRun ID: 20261113T175557Z-03bf76ef\nJournal: /demo/state/erawan/merges/5379d42bc118859cb254/journal.json\nGenerate report: erawan directories report --journal /demo/state/erawan/merges/5379d42bc118859cb254/journal.json --run 20261113T175557Z-03b\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nr Generate report    Esc Leave",
+          "label": "Consolidation result",
+          "event": "Esc",
+          "gate": false,
+          "command": "erawan directories consolidate --keep /demo/KEEP --from /demo/FROM --from /demo/Drive",
+          "duration": 900
+        }
+      ]
+    },
+    {
+      "id": "C05",
+      "title": "Finish a partial copy",
+      "family": "consolidate",
+      "inputs": [
+        {
+          "role": "KEEP",
+          "path": "/demo/KEEP",
+          "files": [
+            "beach.jpg",
+            "garden.raw"
+          ]
+        },
+        {
+          "role": "FROM",
+          "path": "/demo/FROM",
+          "files": [
+            "beach.jpg",
+            "garden.raw",
+            "sunrise.jpg"
+          ]
+        }
+      ],
+      "commands": [
+        "erawan directories consolidate --keep /demo/KEEP --from /demo/FROM"
+      ],
+      "capture": "Production review screens · executed disposable local fixture",
+      "frames": [
+        {
+          "image": "C05-000.svg",
+          "text": "Consolidate directories · read-only plan\nKEEP  /demo/KEEP\n\nFROM 1  /demo/FROM\n  2 in KEEP · 0 shared FROM · 1 new · 0 keep-both · 0 conflicts\n  █KEEP 2.0MiB · ▓copy 1.0MiB\n  ███████████████████████████████████████████████████████████████████████████████████████████▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n1,048,579 bytes to copy · 0 conflicts\nSource removal: OFF\nMetadata differences: block source removal\nNo existing KEEP path will be overwritten. Conflicts stay unresolved.\n\nt size tree/map  1 actions  2 conflicts  d removal  m metadata  a apply  Esc compare",
+          "label": "Consolidate directories · read-only plan",
+          "event": "a",
+          "gate": true,
+          "command": "erawan directories consolidate --keep /demo/KEEP --from /demo/FROM",
+          "duration": 900
+        },
+        {
+          "image": "C05-001.svg",
+          "text": "Start copy and full verification?\n\nKEEP  /demo/KEEP\nCopy up to 1,048,579 bytes. Source removal: OFF.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress y to start, any other key to return",
+          "label": "Start copy and full verification?",
+          "event": "y",
+          "gate": true,
+          "command": "erawan directories consolidate --keep /demo/KEEP --from /demo/FROM",
+          "duration": 900
+        },
+        {
+          "image": "C05-002.svg",
+          "text": "Consolidation result\n\nConsolidate · KEEP /demo/KEEP\nFROM 1: /demo/FROM\n   2 already in KEEP · 0 supplied by another FROM · 1 new · 0 keep-both · 0 directories · 0 conflicts\n   planned copy 1.0 MiB · pre-merge verified coverage 2/3 files, 2.0 MiB/3.0 MiB\nTotal planned copy: 1.0 MiB · 0 unresolved conflicts\nidentical  FROM 1 \"beach.jpg\" → \"beach.jpg\" (already retained in KEEP)\nidentical  FROM 1 \"garden.raw\" → \"garden.raw\" (already retained in KEEP)\nnew        FROM 1 \"sunrise.jpg\" → \"sunrise.jpg\" (copy into a missing KEEP path)\nFull-content SHA-256 verification is required for every retained source entry.\nNo existing KEEP entry will be overwritten. Source removal is off by default.\nApplied: 1 copied, 3 verified, 0 removed\nRun ID: 20261113T175559Z-5f6d5a54\nJournal: /demo/state/erawan/merges/386c264ad5a479539eb6/journal.json\nGenerate report: erawan directories report --journal /demo/state/erawan/merges/386c264ad5a479539eb6/journal.json --run 20261113T175559Z-5f6\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nr Generate report    Esc Leave",
+          "label": "Consolidation result",
+          "event": "Esc",
+          "gate": false,
+          "command": "erawan directories consolidate --keep /demo/KEEP --from /demo/FROM",
+          "duration": 900
+        }
+      ]
+    },
+    {
+      "id": "C16",
+      "title": "Keep both conflicting files",
+      "family": "consolidate",
+      "inputs": [
+        {
+          "role": "KEEP",
+          "path": "/demo/KEEP",
+          "files": [
+            "proposal.pdf"
+          ]
+        },
+        {
+          "role": "FROM",
+          "path": "/demo/FROM",
+          "files": [
+            "proposal.pdf"
+          ]
+        }
+      ],
+      "commands": [
+        "erawan directories consolidate --keep /demo/KEEP --from /demo/FROM"
+      ],
+      "capture": "Production review screens · executed disposable local fixture",
+      "frames": [
+        {
+          "image": "C16-000.svg",
+          "text": "Consolidate directories · read-only plan\nKEEP  /demo/KEEP\n\nFROM 1  /demo/FROM\n  0 in KEEP · 0 shared FROM · 0 new · 0 keep-both · 1 conflicts\n  ░conflict 1.0MiB\n  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n0 bytes to copy · 1 conflicts\nSource removal: OFF\nMetadata differences: block source removal\nNo existing KEEP path will be overwritten. Conflicts stay unresolved.\n\nt size tree/map  1 actions  2 conflicts  d removal  m metadata  a apply  Esc compare",
+          "label": "Consolidate directories · read-only plan",
+          "event": "2",
+          "gate": false,
+          "command": "erawan directories consolidate --keep /demo/KEEP --from /demo/FROM",
+          "duration": 900
+        },
+        {
+          "image": "C16-001.svg",
+          "text": "Unresolved conflicts · 1\n\nFROM 1  proposal.pdf · KEEP contains a different entry at this path\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnter keeps both at a new path (directory moves its subtree)\n↑↓ choose  Enter resolve  Esc plan",
+          "label": "Unresolved conflicts · 1",
+          "event": "Enter",
+          "gate": true,
+          "command": "erawan directories consolidate --keep /demo/KEEP --from /demo/FROM",
+          "duration": 900
+        },
+        {
+          "image": "C16-002.svg",
+          "text": "Keep both · FROM 1\n\nOriginal: proposal.pdf\nEnter a fresh relative path inside KEEP.\n\nNew path: proposal-client-b.pdf\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnter saves the resolution · empty returns",
+          "label": "Keep both · FROM 1",
+          "event": "proposal-client-b.pdf + Enter",
+          "gate": true,
+          "command": "erawan directories consolidate --keep /demo/KEEP --from /demo/FROM",
+          "duration": 900
+        },
+        {
+          "image": "C16-003.svg",
+          "text": "Conflicts\n\nNo unresolved conflicts remain.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress any key to return",
+          "label": "Conflicts",
+          "event": "Esc",
+          "gate": false,
+          "command": "erawan directories consolidate --keep /demo/KEEP --from /demo/FROM",
+          "duration": 900
+        },
+        {
+          "image": "C16-004.svg",
+          "text": "Consolidate directories · read-only plan\nKEEP  /demo/KEEP\n\nFROM 1  /demo/FROM\n  0 in KEEP · 0 shared FROM · 0 new · 1 keep-both · 0 conflicts\n  ▌both 1.0MiB\n  ▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌▌\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n1,048,584 bytes to copy · 0 conflicts\nSource removal: OFF\nMetadata differences: block source removal\nNo existing KEEP path will be overwritten. Conflicts stay unresolved.\n\nt size tree/map  1 actions  2 conflicts  d removal  m metadata  a apply  Esc compare",
+          "label": "Consolidate directories · read-only plan",
+          "event": "a",
+          "gate": true,
+          "command": "erawan directories consolidate --keep /demo/KEEP --from /demo/FROM",
+          "duration": 900
+        },
+        {
+          "image": "C16-005.svg",
+          "text": "Start copy and full verification?\n\nKEEP  /demo/KEEP\nCopy up to 1,048,584 bytes. Source removal: OFF.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress y to start, any other key to return",
+          "label": "Start copy and full verification?",
+          "event": "y",
+          "gate": true,
+          "command": "erawan directories consolidate --keep /demo/KEEP --from /demo/FROM",
+          "duration": 900
+        },
+        {
+          "image": "C16-006.svg",
+          "text": "Consolidation result\n\nConsolidate · KEEP /demo/KEEP\nFROM 1: /demo/FROM\n   0 already in KEEP · 0 supplied by another FROM · 0 new · 1 keep-both · 0 directories · 0 conflicts\n   planned copy 1.0 MiB · pre-merge verified coverage 0/1 files, 0 B/1.0 MiB\n   ⚠ Low verified overlap with KEEP; review these exact roots.\nTotal planned copy: 1.0 MiB · 0 unresolved conflicts\nresolved   FROM 1 \"proposal.pdf\" → \"proposal-client-b.pdf\" (explicit keep-both subtree resolution)\nFull-content SHA-256 verification is required for every retained source entry.\nNo existing KEEP entry will be overwritten. Source removal is off by default.\nApplied: 1 copied, 1 verified, 0 removed\nRun ID: 20261113T175601Z-d8dc3986\nJournal: /demo/state/erawan/merges/b6126b066cc677731284/journal.json\nGenerate report: erawan directories report --journal /demo/state/erawan/merges/b6126b066cc677731284/journal.json --run 20261113T175601Z-d8d\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nr Generate report    Esc Leave",
+          "label": "Consolidation result",
+          "event": "Esc",
+          "gate": false,
+          "command": "erawan directories consolidate --keep /demo/KEEP --from /demo/FROM",
+          "duration": 900
+        }
+      ]
+    },
+    {
+      "id": "D01",
+      "title": "Repeated camera imports",
+      "family": "duplicates",
+      "inputs": [
+        {
+          "role": "SCAN ROOT",
+          "path": "/demo/FROM",
+          "files": [
+            "Photos/IMG_0421.jpg",
+            "Imports/IMG_0421.jpg",
+            "Camera/IMG_0421.jpg"
+          ]
+        },
+        {
+          "role": "REVIEW",
+          "path": "Complete SHA-256 comparison",
+          "files": [
+            "Keeper and action selected in terminal"
+          ]
+        }
+      ],
+      "commands": [
+        "erawan directories duplicates /demo/FROM --min-size 1M"
+      ],
+      "capture": "Production review screens · executed disposable local fixture",
+      "frames": [
+        {
+          "image": "D01-000.svg",
+          "text": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 2.0 MiB of 417.3 GiB used\nWalked 3 files in 0.0 s · 3 ≥ 1.0 MiB · 1 same-size → 1 sample matches → 3 verified copies in 1 groups · 0.1 s\nHard-linked paths share blocks and are listed, not counted. Logical bytes; physical reclaim depends on the filesystem.\nMarked  link         0 B       0 copies   nothing changes until --apply\n\nWhere the duplicate bytes are · tile area = reclaimable bytes under each directory · prefer none\n   Imports/ 1.0 MiB                                                    Photos/ 1.0 MiB\n\n\n\n\n\n\nLargest groups · action · reclaimable · copies × size · tag · ★ keeper (earliest root, then --prefer, then oldest, then shortest path)\n❯   ·      2.0 MiB    3 ×    1.0 MiB  other      ★ Camera/IMG_0421.jpg\n                                                   Imports/IMG_0421.jpg\n                                                   Photos/IMG_0421.jpg\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n   1 members  2 by directory (a marks every group with a copy under the directory)  3 pairs\nBiggest directory pair sharing content · handoff to the existing reviewed consolidation; whether these trees should become one is your call\n   Camera/ ⇄ Imports/   1.0 MiB verified identical at the same relative paths, 0 B at different paths\n   c prints:  erawan directories consolidate --keep /demo/FROM/Camera --from /demo/FROM/Imports\n\n\n↑↓ select  a action: none → link → delete  L link every store group  Enter members  t map  k keeper  p prefer  w write  c consolidate  Esc",
+          "label": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 2.0 MiB of 417.3 GiB used",
+          "event": "k",
+          "gate": false,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D01-001.svg",
+          "text": "Choose the kept copy · 1.0 MiB · SHA-256 ba2fde11389c1e31…\nThe other inodes become the reclaimable copies; nothing is changed now.\n\n❯ ★ 2023-11-14T22:13:20Z  Camera/IMG_0421.jpg\n    2023-11-14T22:13:20Z  Imports/IMG_0421.jpg\n    2023-11-14T22:13:20Z  Photos/IMG_0421.jpg\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n↑↓ choose  Enter keep this copy  Esc back",
+          "label": "Choose the kept copy · 1.0 MiB · SHA-256 ba2fde11389c1e31…",
+          "event": "j",
+          "gate": false,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D01-002.svg",
+          "text": "Choose the kept copy · 1.0 MiB · SHA-256 ba2fde11389c1e31…\nThe other inodes become the reclaimable copies; nothing is changed now.\n\n  ★ 2023-11-14T22:13:20Z  Camera/IMG_0421.jpg\n❯   2023-11-14T22:13:20Z  Imports/IMG_0421.jpg\n    2023-11-14T22:13:20Z  Photos/IMG_0421.jpg\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n↑↓ choose  Enter keep this copy  Esc back",
+          "label": "Choose the kept copy · 1.0 MiB · SHA-256 ba2fde11389c1e31…",
+          "event": "Enter",
+          "gate": true,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D01-003.svg",
+          "text": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 2.0 MiB of 417.3 GiB used\nWalked 3 files in 0.0 s · 3 ≥ 1.0 MiB · 1 same-size → 1 sample matches → 3 verified copies in 1 groups · 0.1 s\nHard-linked paths share blocks and are listed, not counted. Logical bytes; physical reclaim depends on the filesystem.\nMarked  link         0 B       0 copies   nothing changes until --apply\n\nWhere the duplicate bytes are · tile area = reclaimable bytes under each directory · prefer none · 1 keepers chosen with k\n   Camera/ 1.0 MiB                                                     Photos/ 1.0 MiB\n\n\n\n\n\n\nLargest groups · action · reclaimable · copies × size · tag · ★ keeper (earliest root, then --prefer, then oldest, then shortest path)\n❯   ·      2.0 MiB    3 ×    1.0 MiB  other      ★ Imports/IMG_0421.jpg\n                                                   Photos/IMG_0421.jpg\n                                                   Camera/IMG_0421.jpg\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n   1 members  2 by directory (a marks every group with a copy under the directory)  3 pairs\nBiggest directory pair sharing content · handoff to the existing reviewed consolidation; whether these trees should become one is your call\n   Camera/ ⇄ Imports/   1.0 MiB verified identical at the same relative paths, 0 B at different paths\n   c prints:  erawan directories consolidate --keep /demo/FROM/Imports --from /demo/FROM/Camera\n\nKeeper changed; directory totals recomputed.\n↑↓ select  a action: none → link → delete  L link every store group  Enter members  t map  k keeper  p prefer  w write  c consolidate  Esc",
+          "label": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 2.0 MiB of 417.3 GiB used",
+          "event": "a",
+          "gate": true,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D01-004.svg",
+          "text": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 2.0 MiB of 417.3 GiB used\nWalked 3 files in 0.0 s · 3 ≥ 1.0 MiB · 1 same-size → 1 sample matches → 3 verified copies in 1 groups · 0.1 s\nHard-linked paths share blocks and are listed, not counted. Logical bytes; physical reclaim depends on the filesystem.\nMarked  link     2.0 MiB       2 copies   other 2.0 MiB      nothing changes until --apply\n\nWhere the duplicate bytes are · tile area = reclaimable bytes under each directory · prefer none · 1 keepers chosen with k\n   Camera/ 1.0 MiB                                                     Photos/ 1.0 MiB\n\n\n\n\n\n\nLargest groups · action · reclaimable · copies × size · tag · ★ keeper (earliest root, then --prefer, then oldest, then shortest path)\n❯ link     2.0 MiB    3 ×    1.0 MiB  other      ★ Imports/IMG_0421.jpg\n                                                   Photos/IMG_0421.jpg\n                                                   Camera/IMG_0421.jpg\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n   1 members  2 by directory (a marks every group with a copy under the directory)  3 pairs\nBiggest directory pair sharing content · handoff to the existing reviewed consolidation; whether these trees should become one is your call\n   Camera/ ⇄ Imports/   1.0 MiB verified identical at the same relative paths, 0 B at different paths\n   c prints:  erawan directories consolidate --keep /demo/FROM/Imports --from /demo/FROM/Camera\n\nAction link · link: 2.0 MiB in 2 copies · delete: 0 B in 0 copies\n↑↓ select  a action: none → link → delete  L link every store group  Enter members  t map  k keeper  p prefer  w write  c consolidate  Esc",
+          "label": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 2.0 MiB of 417.3 GiB used",
+          "event": "a",
+          "gate": true,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D01-005.svg",
+          "text": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 2.0 MiB of 417.3 GiB used\nWalked 3 files in 0.0 s · 3 ≥ 1.0 MiB · 1 same-size → 1 sample matches → 3 verified copies in 1 groups · 0.1 s\nHard-linked paths share blocks and are listed, not counted. Logical bytes; physical reclaim depends on the filesystem.\nMarked  link         0 B       0 copies   nothing changes until --apply\n        delete   2.0 MiB       2 copies   other 2.0 MiB\n\nWhere the duplicate bytes are · tile area = reclaimable bytes under each directory · prefer none · 1 keepers chosen with k\n   Camera/ 1.0 MiB                                                     Photos/ 1.0 MiB\n\n\n\n\n\n\nLargest groups · action · reclaimable · copies × size · tag · ★ keeper (earliest root, then --prefer, then oldest, then shortest path)\n❯ delete   2.0 MiB    3 ×    1.0 MiB  other      ★ Imports/IMG_0421.jpg\n                                                   copies removed; keep a surviving group member for undo\n                                                   … 2 more paths\n\n\n\n\n\n\n\n\n\n\n\n\n\n   1 members  2 by directory (a marks every group with a copy under the directory)  3 pairs\nBiggest directory pair sharing content · handoff to the existing reviewed consolidation; whether these trees should become one is your call\n   Camera/ ⇄ Imports/   1.0 MiB verified identical at the same relative paths, 0 B at different paths\n   c prints:  erawan directories consolidate --keep /demo/FROM/Imports --from /demo/FROM/Camera\n\nAction delete · link: 0 B in 0 copies · delete: 2.0 MiB in 2 copies\n↑↓ select  a action: none → link → delete  L link every store group  Enter members  t map  k keeper  p prefer  w write  c consolidate  Esc",
+          "label": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 2.0 MiB of 417.3 GiB used",
+          "event": "w",
+          "gate": true,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D01-006.svg",
+          "text": "Write reviewed JSON\n\nA new mode-0600 file outside every root; an existing file is never replaced.\n\nFile: /demo/reviewed.json\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnter accepts · empty returns",
+          "label": "Write reviewed JSON",
+          "event": "/demo/reviewed.json + Enter",
+          "gate": true,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D01-007.svg",
+          "text": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 2.0 MiB of 417.3 GiB used\nWalked 3 files in 0.0 s · 3 ≥ 1.0 MiB · 1 same-size → 1 sample matches → 3 verified copies in 1 groups · 0.1 s\nHard-linked paths share blocks and are listed, not counted. Logical bytes; physical reclaim depends on the filesystem.\nMarked  link         0 B       0 copies   nothing changes until --apply\n        delete   2.0 MiB       2 copies   other 2.0 MiB\n\nWhere the duplicate bytes are · tile area = reclaimable bytes under each directory · prefer none · 1 keepers chosen with k\n   Camera/ 1.0 MiB                                                     Photos/ 1.0 MiB\n\n\n\n\n\n\nLargest groups · action · reclaimable · copies × size · tag · ★ keeper (earliest root, then --prefer, then oldest, then shortest path)\n❯ delete   2.0 MiB    3 ×    1.0 MiB  other      ★ Imports/IMG_0421.jpg\n                                                   copies removed; keep a surviving group member for undo\n                                                   … 2 more paths\n\n\n\n\n\n\n\n\n\n\n\n\n\n   1 members  2 by directory (a marks every group with a copy under the directory)  3 pairs\nBiggest directory pair sharing content · handoff to the existing reviewed consolidation; whether these trees should become one is your call\n   Camera/ ⇄ Imports/   1.0 MiB verified identical at the same relative paths, 0 B at different paths\n   c prints:  erawan directories consolidate --keep /demo/FROM/Imports --from /demo/FROM/Camera\n\n✓ Wrote /demo/reviewed.json (0600, nothing marked: a and L mark groups for link)\n↑↓ select  a action: none → link → delete  L link every store group  Enter members  t map  k keeper  p prefer  w write  c consolidate  Esc",
+          "label": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 2.0 MiB of 417.3 GiB used",
+          "event": "Esc",
+          "gate": false,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D01-008.svg",
+          "text": "Reviewed dry run\n\nDuplicate apply · dry run · report written 2026-11-14 00:56 · 1 root /demo/FROM\nPreflight of 1 marked group, 2 copies: identities checked against the scan, rules checked, nothing read in full yet\nWill link       0 copies        0 B   every path stays\nWill delete     2 copies    2.0 MiB\nRefused         0 copies        0 B\nCost\n   reads 3.0 MiB to hash each keeper once and each copy again just before it changes\n   free space now 27.0 GiB · about 27.0 GiB after, if nothing else on the disk changes\nUndo is available for every change: the journal records each path's mode, owner, mtime and extended attributes.\nDry run: nothing was changed.  Apply with:  erawan directories duplicates --apply /demo/reviewed.json",
+          "label": "Reviewed dry run",
+          "event": "",
+          "gate": true,
+          "command": "erawan directories duplicates --apply /demo/reviewed.json --dry-run",
+          "duration": 900
+        },
+        {
+          "image": "D01-009.svg",
+          "text": "Applied reviewed changes\n\nDuplicate apply · run 20261113T175604Z-9d84653e · journal /demo/state/erawan/duplicates/cadab02c9def73a2a10c/events.jsonl\nPreflight: 0 copies will be linked, 2 deleted, 0 refused\nFinished\nApplied: 0 linked · 2 deleted · 0 refused · 0.1 s\nFreed 2.0 MiB · free space 27.0 GiB before, 27.0 GiB after\nRun ID   20261113T175604Z-9d84653e\nJournal  /demo/state/erawan/duplicates/cadab02c9def73a2a10c/events.jsonl\nUndo     erawan directories duplicates --undo /demo/state/erawan/duplicates/cadab02c9def73a2a10c/events.jsonl --run 20261113T175604Z-9d8465\n         needs 2.0 MiB free; restores separate copies with their original mode, owner and mtime",
+          "label": "Applied reviewed changes",
+          "event": "",
+          "gate": false,
+          "command": "erawan directories duplicates --apply /demo/reviewed.json",
+          "duration": 900
+        }
+      ]
+    },
+    {
+      "id": "D02",
+      "title": "Downloads saved twice",
+      "family": "duplicates",
+      "inputs": [
+        {
+          "role": "SCAN ROOT",
+          "path": "/demo/FROM",
+          "files": [
+            "Downloads/setup.iso",
+            "Downloads/setup-copy.iso"
+          ]
+        },
+        {
+          "role": "REVIEW",
+          "path": "Complete SHA-256 comparison",
+          "files": [
+            "Keeper and action selected in terminal"
+          ]
+        }
+      ],
+      "commands": [
+        "erawan directories duplicates /demo/FROM --min-size 1M"
+      ],
+      "capture": "Production review screens · executed disposable local fixture",
+      "frames": [
+        {
+          "image": "D02-000.svg",
+          "text": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used\nWalked 2 files in 0.0 s · 2 ≥ 1.0 MiB · 1 same-size → 1 sample matches → 2 verified copies in 1 groups · 0.1 s\nHard-linked paths share blocks and are listed, not counted. Logical bytes; physical reclaim depends on the filesystem.\nMarked  link         0 B       0 copies   nothing changes until --apply\n\nWhere the duplicate bytes are · tile area = reclaimable bytes under each directory · prefer none\n   Downloads/ 1.0 MiB\n\n\n\n\n\n\nLargest groups · action · reclaimable · copies × size · tag · ★ keeper (earliest root, then --prefer, then oldest, then shortest path)\n❯   ·      1.0 MiB    2 ×    1.0 MiB  other      ★ Downloads/setup-copy.iso\n                                                   Downloads/setup.iso\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n   1 members  2 by directory (a marks every group with a copy under the directory)  3 pairs\n\n\n↑↓ select  a action: none → link → delete  L link every store group  Enter members  t map  k keeper  p prefer  w write  c consolidate  Esc",
+          "label": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used",
+          "event": "k",
+          "gate": false,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D02-001.svg",
+          "text": "Choose the kept copy · 1.0 MiB · SHA-256 ba2fde11389c1e31…\nThe other inodes become the reclaimable copies; nothing is changed now.\n\n❯ ★ 2023-11-14T22:13:20Z  Downloads/setup-copy.iso\n    2023-11-14T22:13:20Z  Downloads/setup.iso\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n↑↓ choose  Enter keep this copy  Esc back",
+          "label": "Choose the kept copy · 1.0 MiB · SHA-256 ba2fde11389c1e31…",
+          "event": "j",
+          "gate": false,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D02-002.svg",
+          "text": "Choose the kept copy · 1.0 MiB · SHA-256 ba2fde11389c1e31…\nThe other inodes become the reclaimable copies; nothing is changed now.\n\n  ★ 2023-11-14T22:13:20Z  Downloads/setup-copy.iso\n❯   2023-11-14T22:13:20Z  Downloads/setup.iso\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n↑↓ choose  Enter keep this copy  Esc back",
+          "label": "Choose the kept copy · 1.0 MiB · SHA-256 ba2fde11389c1e31…",
+          "event": "Enter",
+          "gate": true,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D02-003.svg",
+          "text": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used\nWalked 2 files in 0.0 s · 2 ≥ 1.0 MiB · 1 same-size → 1 sample matches → 2 verified copies in 1 groups · 0.1 s\nHard-linked paths share blocks and are listed, not counted. Logical bytes; physical reclaim depends on the filesystem.\nMarked  link         0 B       0 copies   nothing changes until --apply\n\nWhere the duplicate bytes are · tile area = reclaimable bytes under each directory · prefer none · 1 keepers chosen with k\n   Downloads/ 1.0 MiB\n\n\n\n\n\n\nLargest groups · action · reclaimable · copies × size · tag · ★ keeper (earliest root, then --prefer, then oldest, then shortest path)\n❯   ·      1.0 MiB    2 ×    1.0 MiB  other      ★ Downloads/setup.iso\n                                                   Downloads/setup-copy.iso\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n   1 members  2 by directory (a marks every group with a copy under the directory)  3 pairs\n\nKeeper changed; directory totals recomputed.\n↑↓ select  a action: none → link → delete  L link every store group  Enter members  t map  k keeper  p prefer  w write  c consolidate  Esc",
+          "label": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used",
+          "event": "a",
+          "gate": true,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D02-004.svg",
+          "text": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used\nWalked 2 files in 0.0 s · 2 ≥ 1.0 MiB · 1 same-size → 1 sample matches → 2 verified copies in 1 groups · 0.1 s\nHard-linked paths share blocks and are listed, not counted. Logical bytes; physical reclaim depends on the filesystem.\nMarked  link     1.0 MiB       1 copies   other 1.0 MiB      nothing changes until --apply\n\nWhere the duplicate bytes are · tile area = reclaimable bytes under each directory · prefer none · 1 keepers chosen with k\n   Downloads/ 1.0 MiB\n\n\n\n\n\n\nLargest groups · action · reclaimable · copies × size · tag · ★ keeper (earliest root, then --prefer, then oldest, then shortest path)\n❯ link     1.0 MiB    2 ×    1.0 MiB  other      ★ Downloads/setup.iso\n                                                   Downloads/setup-copy.iso\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n   1 members  2 by directory (a marks every group with a copy under the directory)  3 pairs\n\nAction link · link: 1.0 MiB in 1 copies · delete: 0 B in 0 copies\n↑↓ select  a action: none → link → delete  L link every store group  Enter members  t map  k keeper  p prefer  w write  c consolidate  Esc",
+          "label": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used",
+          "event": "a",
+          "gate": true,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D02-005.svg",
+          "text": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used\nWalked 2 files in 0.0 s · 2 ≥ 1.0 MiB · 1 same-size → 1 sample matches → 2 verified copies in 1 groups · 0.1 s\nHard-linked paths share blocks and are listed, not counted. Logical bytes; physical reclaim depends on the filesystem.\nMarked  link         0 B       0 copies   nothing changes until --apply\n        delete   1.0 MiB       1 copies   other 1.0 MiB\n\nWhere the duplicate bytes are · tile area = reclaimable bytes under each directory · prefer none · 1 keepers chosen with k\n   Downloads/ 1.0 MiB\n\n\n\n\n\n\nLargest groups · action · reclaimable · copies × size · tag · ★ keeper (earliest root, then --prefer, then oldest, then shortest path)\n❯ delete   1.0 MiB    2 ×    1.0 MiB  other      ★ Downloads/setup.iso\n                                                   copies removed; keep a surviving group member for undo\n                                                   Downloads/setup-copy.iso\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n   1 members  2 by directory (a marks every group with a copy under the directory)  3 pairs\n\nAction delete · link: 0 B in 0 copies · delete: 1.0 MiB in 1 copies\n↑↓ select  a action: none → link → delete  L link every store group  Enter members  t map  k keeper  p prefer  w write  c consolidate  Esc",
+          "label": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used",
+          "event": "w",
+          "gate": true,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D02-006.svg",
+          "text": "Write reviewed JSON\n\nA new mode-0600 file outside every root; an existing file is never replaced.\n\nFile: /demo/reviewed.json\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnter accepts · empty returns",
+          "label": "Write reviewed JSON",
+          "event": "/demo/reviewed.json + Enter",
+          "gate": true,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D02-007.svg",
+          "text": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used\nWalked 2 files in 0.0 s · 2 ≥ 1.0 MiB · 1 same-size → 1 sample matches → 2 verified copies in 1 groups · 0.1 s\nHard-linked paths share blocks and are listed, not counted. Logical bytes; physical reclaim depends on the filesystem.\nMarked  link         0 B       0 copies   nothing changes until --apply\n        delete   1.0 MiB       1 copies   other 1.0 MiB\n\nWhere the duplicate bytes are · tile area = reclaimable bytes under each directory · prefer none · 1 keepers chosen with k\n   Downloads/ 1.0 MiB\n\n\n\n\n\n\nLargest groups · action · reclaimable · copies × size · tag · ★ keeper (earliest root, then --prefer, then oldest, then shortest path)\n❯ delete   1.0 MiB    2 ×    1.0 MiB  other      ★ Downloads/setup.iso\n                                                   copies removed; keep a surviving group member for undo\n                                                   Downloads/setup-copy.iso\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n   1 members  2 by directory (a marks every group with a copy under the directory)  3 pairs\n\n✓ Wrote /demo/reviewed.json (0600, nothing marked: a and L mark groups for link)\n↑↓ select  a action: none → link → delete  L link every store group  Enter members  t map  k keeper  p prefer  w write  c consolidate  Esc",
+          "label": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used",
+          "event": "Esc",
+          "gate": false,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D02-008.svg",
+          "text": "Reviewed dry run\n\nDuplicate apply · dry run · report written 2026-11-14 00:56 · 1 root /demo/FROM\nPreflight of 1 marked group, 1 copy: identities checked against the scan, rules checked, nothing read in full yet\nWill link       0 copies        0 B   every path stays\nWill delete     1 copies    1.0 MiB\nRefused         0 copies        0 B\nCost\n   reads 2.0 MiB to hash each keeper once and each copy again just before it changes\n   free space now 27.0 GiB · about 27.0 GiB after, if nothing else on the disk changes\nUndo is available for every change: the journal records each path's mode, owner, mtime and extended attributes.\nDry run: nothing was changed.  Apply with:  erawan directories duplicates --apply /demo/reviewed.json",
+          "label": "Reviewed dry run",
+          "event": "",
+          "gate": true,
+          "command": "erawan directories duplicates --apply /demo/reviewed.json --dry-run",
+          "duration": 900
+        },
+        {
+          "image": "D02-009.svg",
+          "text": "Applied reviewed changes\n\nDuplicate apply · run 20261113T175605Z-23a65826 · journal /demo/state/erawan/duplicates/c6194da5ceca700f65f4/events.jsonl\nPreflight: 0 copies will be linked, 1 deleted, 0 refused\nFinished\nApplied: 0 linked · 1 deleted · 0 refused · 0.1 s\nFreed 1.0 MiB · free space 27.0 GiB before, 27.0 GiB after\nRun ID   20261113T175605Z-23a65826\nJournal  /demo/state/erawan/duplicates/c6194da5ceca700f65f4/events.jsonl\nUndo     erawan directories duplicates --undo /demo/state/erawan/duplicates/c6194da5ceca700f65f4/events.jsonl --run 20261113T175605Z-23a658\n         needs 1.0 MiB free; restores separate copies with their original mode, owner and mtime",
+          "label": "Applied reviewed changes",
+          "event": "",
+          "gate": false,
+          "command": "erawan directories duplicates --apply /demo/reviewed.json",
+          "duration": 900
+        }
+      ]
+    },
+    {
+      "id": "D03",
+      "title": "Repeats in backup folders",
+      "family": "duplicates",
+      "inputs": [
+        {
+          "role": "SCAN ROOT",
+          "path": "/demo/FROM",
+          "files": [
+            "Backup-1/photo.jpg",
+            "Backup-2/photo.jpg"
+          ]
+        },
+        {
+          "role": "REVIEW",
+          "path": "Complete SHA-256 comparison",
+          "files": [
+            "Keeper and action selected in terminal"
+          ]
+        }
+      ],
+      "commands": [
+        "erawan directories duplicates /demo/FROM --min-size 1M"
+      ],
+      "capture": "Production review screens · executed disposable local fixture",
+      "frames": [
+        {
+          "image": "D03-000.svg",
+          "text": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used\nWalked 2 files in 0.0 s · 2 ≥ 1.0 MiB · 1 same-size → 1 sample matches → 2 verified copies in 1 groups · 0.1 s\nHard-linked paths share blocks and are listed, not counted. Logical bytes; physical reclaim depends on the filesystem.\nMarked  link         0 B       0 copies   nothing changes until --apply\n\nWhere the duplicate bytes are · tile area = reclaimable bytes under each directory · prefer none\n   Backup-2/ 1.0 MiB\n\n\n\n\n\n\nLargest groups · action · reclaimable · copies × size · tag · ★ keeper (earliest root, then --prefer, then oldest, then shortest path)\n❯   ·      1.0 MiB    2 ×    1.0 MiB  other      ★ Backup-1/photo.jpg\n                                                   Backup-2/photo.jpg\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n   1 members  2 by directory (a marks every group with a copy under the directory)  3 pairs\nBiggest directory pair sharing content · handoff to the existing reviewed consolidation; whether these trees should become one is your call\n   Backup-1/ ⇄ Backup-2/   1.0 MiB verified identical at the same relative paths, 0 B at different paths\n   c prints:  erawan directories consolidate --keep /demo/FROM/Backup-1 --from /demo/FROM/Backup-2\n\n\n↑↓ select  a action: none → link → delete  L link every store group  Enter members  t map  k keeper  p prefer  w write  c consolidate  Esc",
+          "label": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used",
+          "event": "k",
+          "gate": false,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D03-001.svg",
+          "text": "Choose the kept copy · 1.0 MiB · SHA-256 ba2fde11389c1e31…\nThe other inodes become the reclaimable copies; nothing is changed now.\n\n❯ ★ 2023-11-14T22:13:20Z  Backup-1/photo.jpg\n    2023-11-14T22:13:20Z  Backup-2/photo.jpg\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n↑↓ choose  Enter keep this copy  Esc back",
+          "label": "Choose the kept copy · 1.0 MiB · SHA-256 ba2fde11389c1e31…",
+          "event": "j",
+          "gate": false,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D03-002.svg",
+          "text": "Choose the kept copy · 1.0 MiB · SHA-256 ba2fde11389c1e31…\nThe other inodes become the reclaimable copies; nothing is changed now.\n\n  ★ 2023-11-14T22:13:20Z  Backup-1/photo.jpg\n❯   2023-11-14T22:13:20Z  Backup-2/photo.jpg\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n↑↓ choose  Enter keep this copy  Esc back",
+          "label": "Choose the kept copy · 1.0 MiB · SHA-256 ba2fde11389c1e31…",
+          "event": "Enter",
+          "gate": true,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D03-003.svg",
+          "text": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used\nWalked 2 files in 0.0 s · 2 ≥ 1.0 MiB · 1 same-size → 1 sample matches → 2 verified copies in 1 groups · 0.1 s\nHard-linked paths share blocks and are listed, not counted. Logical bytes; physical reclaim depends on the filesystem.\nMarked  link         0 B       0 copies   nothing changes until --apply\n\nWhere the duplicate bytes are · tile area = reclaimable bytes under each directory · prefer none · 1 keepers chosen with k\n   Backup-1/ 1.0 MiB\n\n\n\n\n\n\nLargest groups · action · reclaimable · copies × size · tag · ★ keeper (earliest root, then --prefer, then oldest, then shortest path)\n❯   ·      1.0 MiB    2 ×    1.0 MiB  other      ★ Backup-2/photo.jpg\n                                                   Backup-1/photo.jpg\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n   1 members  2 by directory (a marks every group with a copy under the directory)  3 pairs\nBiggest directory pair sharing content · handoff to the existing reviewed consolidation; whether these trees should become one is your call\n   Backup-1/ ⇄ Backup-2/   1.0 MiB verified identical at the same relative paths, 0 B at different paths\n   c prints:  erawan directories consolidate --keep /demo/FROM/Backup-2 --from /demo/FROM/Backup-1\n\nKeeper changed; directory totals recomputed.\n↑↓ select  a action: none → link → delete  L link every store group  Enter members  t map  k keeper  p prefer  w write  c consolidate  Esc",
+          "label": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used",
+          "event": "w",
+          "gate": true,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D03-004.svg",
+          "text": "Write reviewed JSON\n\nA new mode-0600 file outside every root; an existing file is never replaced.\n\nFile: /demo/reviewed.json\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnter accepts · empty returns",
+          "label": "Write reviewed JSON",
+          "event": "/demo/reviewed.json + Enter",
+          "gate": true,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D03-005.svg",
+          "text": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used\nWalked 2 files in 0.0 s · 2 ≥ 1.0 MiB · 1 same-size → 1 sample matches → 2 verified copies in 1 groups · 0.1 s\nHard-linked paths share blocks and are listed, not counted. Logical bytes; physical reclaim depends on the filesystem.\nMarked  link         0 B       0 copies   nothing changes until --apply\n\nWhere the duplicate bytes are · tile area = reclaimable bytes under each directory · prefer none · 1 keepers chosen with k\n   Backup-1/ 1.0 MiB\n\n\n\n\n\n\nLargest groups · action · reclaimable · copies × size · tag · ★ keeper (earliest root, then --prefer, then oldest, then shortest path)\n❯   ·      1.0 MiB    2 ×    1.0 MiB  other      ★ Backup-2/photo.jpg\n                                                   Backup-1/photo.jpg\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n   1 members  2 by directory (a marks every group with a copy under the directory)  3 pairs\nBiggest directory pair sharing content · handoff to the existing reviewed consolidation; whether these trees should become one is your call\n   Backup-1/ ⇄ Backup-2/   1.0 MiB verified identical at the same relative paths, 0 B at different paths\n   c prints:  erawan directories consolidate --keep /demo/FROM/Backup-2 --from /demo/FROM/Backup-1\n\n✓ Wrote /demo/reviewed.json (0600, nothing marked: a and L mark groups for link)\n↑↓ select  a action: none → link → delete  L link every store group  Enter members  t map  k keeper  p prefer  w write  c consolidate  Esc",
+          "label": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used",
+          "event": "Esc",
+          "gate": false,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D03-006.svg",
+          "text": "No actions marked · both backups retained\n\nduplicates: no group in this report is marked for an action.\nMark groups in the review with a or L, and write it with w:\n   erawan directories duplicates /demo/FROM",
+          "label": "No actions marked · both backups retained",
+          "event": "",
+          "gate": false,
+          "command": "erawan directories duplicates --apply /demo/reviewed.json --dry-run",
+          "duration": 900
+        }
+      ]
+    },
+    {
+      "id": "D04",
+      "title": "Copies across worktrees",
+      "family": "duplicates",
+      "inputs": [
+        {
+          "role": "SCAN ROOT",
+          "path": "/demo/FROM",
+          "files": [
+            "worktree-a/node_modules/.pnpm/store.bin",
+            "worktree-b/node_modules/.pnpm/store.bin"
+          ]
+        },
+        {
+          "role": "REVIEW",
+          "path": "Complete SHA-256 comparison",
+          "files": [
+            "Keeper and action selected in terminal"
+          ]
+        }
+      ],
+      "commands": [
+        "erawan directories duplicates /demo/FROM --min-size 1M"
+      ],
+      "capture": "Production review screens · executed disposable local fixture",
+      "frames": [
+        {
+          "image": "D04-000.svg",
+          "text": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used\nWalked 2 files in 0.0 s · 2 ≥ 1.0 MiB · 1 same-size → 1 sample matches → 2 verified copies in 1 groups · 0.0 s\nHard-linked paths share blocks and are listed, not counted. Logical bytes; physical reclaim depends on the filesystem.\nMarked  link         0 B       0 copies   nothing changes until --apply\n\nWhere the duplicate bytes are · tile area = reclaimable bytes under each directory · prefer none\n   worktree-b/ 1.0 MiB\n\n\n\n\n\n\nLargest groups · action · reclaimable · copies × size · tag · ★ keeper (earliest root, then --prefer, then oldest, then shortest path)\n❯   ·      1.0 MiB    2 ×    1.0 MiB  store      ★ worktree-a/node_modules/.pnpm/store.bin\n                                                   worktree-b/node_modules/.pnpm/store.bin\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n   1 members  2 by directory (a marks every group with a copy under the directory)  3 pairs\nBiggest directory pair sharing content · handoff to the existing reviewed consolidation; whether these trees should become one is your call\n   worktree-a/ ⇄ worktree-b/   1.0 MiB verified identical at the same relative paths, 0 B at different paths\n   c prints:  erawan directories consolidate --keep /demo/FROM/worktree-a --from /demo/FROM/worktree-b\n\n\n↑↓ select  a action: none → link → delete  L link every store group  Enter members  t map  k keeper  p prefer  w write  c consolidate  Esc",
+          "label": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used",
+          "event": "k",
+          "gate": false,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D04-001.svg",
+          "text": "Choose the kept copy · 1.0 MiB · SHA-256 ba2fde11389c1e31…\nThe other inodes become the reclaimable copies; nothing is changed now.\n\n❯ ★ 2023-11-14T22:13:20Z  worktree-a/node_modules/.pnpm/store.bin\n    2023-11-14T22:13:20Z  worktree-b/node_modules/.pnpm/store.bin\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n↑↓ choose  Enter keep this copy  Esc back",
+          "label": "Choose the kept copy · 1.0 MiB · SHA-256 ba2fde11389c1e31…",
+          "event": "j",
+          "gate": false,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D04-002.svg",
+          "text": "Choose the kept copy · 1.0 MiB · SHA-256 ba2fde11389c1e31…\nThe other inodes become the reclaimable copies; nothing is changed now.\n\n  ★ 2023-11-14T22:13:20Z  worktree-a/node_modules/.pnpm/store.bin\n❯   2023-11-14T22:13:20Z  worktree-b/node_modules/.pnpm/store.bin\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n↑↓ choose  Enter keep this copy  Esc back",
+          "label": "Choose the kept copy · 1.0 MiB · SHA-256 ba2fde11389c1e31…",
+          "event": "Enter",
+          "gate": true,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D04-003.svg",
+          "text": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used\nWalked 2 files in 0.0 s · 2 ≥ 1.0 MiB · 1 same-size → 1 sample matches → 2 verified copies in 1 groups · 0.0 s\nHard-linked paths share blocks and are listed, not counted. Logical bytes; physical reclaim depends on the filesystem.\nMarked  link         0 B       0 copies   nothing changes until --apply\n\nWhere the duplicate bytes are · tile area = reclaimable bytes under each directory · prefer none · 1 keepers chosen with k\n   worktree-a/ 1.0 MiB\n\n\n\n\n\n\nLargest groups · action · reclaimable · copies × size · tag · ★ keeper (earliest root, then --prefer, then oldest, then shortest path)\n❯   ·      1.0 MiB    2 ×    1.0 MiB  store      ★ worktree-b/node_modules/.pnpm/store.bin\n                                                   worktree-a/node_modules/.pnpm/store.bin\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n   1 members  2 by directory (a marks every group with a copy under the directory)  3 pairs\nBiggest directory pair sharing content · handoff to the existing reviewed consolidation; whether these trees should become one is your call\n   worktree-a/ ⇄ worktree-b/   1.0 MiB verified identical at the same relative paths, 0 B at different paths\n   c prints:  erawan directories consolidate --keep /demo/FROM/worktree-b --from /demo/FROM/worktree-a\n\nKeeper changed; directory totals recomputed.\n↑↓ select  a action: none → link → delete  L link every store group  Enter members  t map  k keeper  p prefer  w write  c consolidate  Esc",
+          "label": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used",
+          "event": "a",
+          "gate": true,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D04-004.svg",
+          "text": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used\nWalked 2 files in 0.0 s · 2 ≥ 1.0 MiB · 1 same-size → 1 sample matches → 2 verified copies in 1 groups · 0.0 s\nHard-linked paths share blocks and are listed, not counted. Logical bytes; physical reclaim depends on the filesystem.\nMarked  link     1.0 MiB       1 copies   store 1.0 MiB (L)      nothing changes until --apply\n\nWhere the duplicate bytes are · tile area = reclaimable bytes under each directory · prefer none · 1 keepers chosen with k\n   worktree-a/ 1.0 MiB\n\n\n\n\n\n\nLargest groups · action · reclaimable · copies × size · tag · ★ keeper (earliest root, then --prefer, then oldest, then shortest path)\n❯ link     1.0 MiB    2 ×    1.0 MiB  store      ★ worktree-b/node_modules/.pnpm/store.bin\n                                                   worktree-a/node_modules/.pnpm/store.bin\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n   1 members  2 by directory (a marks every group with a copy under the directory)  3 pairs\nBiggest directory pair sharing content · handoff to the existing reviewed consolidation; whether these trees should become one is your call\n   worktree-a/ ⇄ worktree-b/   1.0 MiB verified identical at the same relative paths, 0 B at different paths\n   c prints:  erawan directories consolidate --keep /demo/FROM/worktree-b --from /demo/FROM/worktree-a\n\nAction link · link: 1.0 MiB in 1 copies · delete: 0 B in 0 copies\n↑↓ select  a action: none → link → delete  L link every store group  Enter members  t map  k keeper  p prefer  w write  c consolidate  Esc",
+          "label": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used",
+          "event": "w",
+          "gate": true,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D04-005.svg",
+          "text": "Write reviewed JSON\n\nA new mode-0600 file outside every root; an existing file is never replaced.\n\nFile: /demo/reviewed.json\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEnter accepts · empty returns",
+          "label": "Write reviewed JSON",
+          "event": "/demo/reviewed.json + Enter",
+          "gate": true,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D04-006.svg",
+          "text": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used\nWalked 2 files in 0.0 s · 2 ≥ 1.0 MiB · 1 same-size → 1 sample matches → 2 verified copies in 1 groups · 0.0 s\nHard-linked paths share blocks and are listed, not counted. Logical bytes; physical reclaim depends on the filesystem.\nMarked  link     1.0 MiB       1 copies   store 1.0 MiB (L)      nothing changes until --apply\n\nWhere the duplicate bytes are · tile area = reclaimable bytes under each directory · prefer none · 1 keepers chosen with k\n   worktree-a/ 1.0 MiB\n\n\n\n\n\n\nLargest groups · action · reclaimable · copies × size · tag · ★ keeper (earliest root, then --prefer, then oldest, then shortest path)\n❯ link     1.0 MiB    2 ×    1.0 MiB  store      ★ worktree-b/node_modules/.pnpm/store.bin\n                                                   worktree-a/node_modules/.pnpm/store.bin\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n   1 members  2 by directory (a marks every group with a copy under the directory)  3 pairs\nBiggest directory pair sharing content · handoff to the existing reviewed consolidation; whether these trees should become one is your call\n   worktree-a/ ⇄ worktree-b/   1.0 MiB verified identical at the same relative paths, 0 B at different paths\n   c prints:  erawan directories consolidate --keep /demo/FROM/worktree-b --from /demo/FROM/worktree-a\n\n✓ Wrote /demo/reviewed.json (0600, 1 marked copies).  Preview:  erawan directories duplicates --apply /demo/reviewed.json --dry-run\n↑↓ select  a action: none → link → delete  L link every store group  Enter members  t map  k keeper  p prefer  w write  c consolidate  Esc",
+          "label": "Duplicate files · /demo/FROM · verified by complete SHA-256 · reclaimable 1.0 MiB of 417.3 GiB used",
+          "event": "Esc",
+          "gate": false,
+          "command": "erawan directories duplicates /demo/FROM --min-size 1M",
+          "duration": 900
+        },
+        {
+          "image": "D04-007.svg",
+          "text": "Reviewed dry run\n\nDuplicate apply · dry run · report written 2026-11-14 00:56 · 1 root /demo/FROM\nPreflight of 1 marked group, 1 copy: identities checked against the scan, rules checked, nothing read in full yet\nWill link       1 copies    1.0 MiB   every path stays; 1 shared file becomes read-only (write bits cleared)\nWill delete     0 copies        0 B\nRefused         0 copies        0 B\nAlso changes\n   write bits                    1 keeper and every path linked to them become read-only:\n                                    a plain cp or an in-place save onto them fails with \"Permission denied\";\n                                    cp -f, git checkout and compilers that write a new file replace the path and end its sharing\nCost\n   reads 2.0 MiB to hash each keeper once and each copy again just before it changes\n   free space now 27.0 GiB · about 27.0 GiB after, if nothing else on the disk changes\nUndo is available for every change: the journal records each path's mode, owner, mtime and extended attributes.\nDry run: nothing was changed.  Apply with:  erawan directories duplicates --apply /demo/reviewed.json",
+          "label": "Reviewed dry run",
+          "event": "",
+          "gate": true,
+          "command": "erawan directories duplicates --apply /demo/reviewed.json --dry-run",
+          "duration": 900
+        },
+        {
+          "image": "D04-008.svg",
+          "text": "Applied reviewed changes\n\nDuplicate apply · run 20261113T175608Z-7cbbf11c · journal /demo/state/erawan/duplicates/43b2db2b2e9f629685ae/events.jsonl\nPreflight: 1 copies will be linked, 0 deleted, 0 refused\nFinished\nApplied: 1 linked · 0 deleted · 0 refused · 0.1 s\nFreed 1.0 MiB · free space 27.0 GiB before, 27.0 GiB after\nLinked files are read-only. A plain cp or an in-place save onto one of them fails with \"Permission denied\".\ncp -f, git checkout and compilers that write a new file replace the path and end its sharing; the other copies keep their bytes.\nRun ID   20261113T175608Z-7cbbf11c\nJournal  /demo/state/erawan/duplicates/43b2db2b2e9f629685ae/events.jsonl\nUndo     erawan directories duplicates --undo /demo/state/erawan/duplicates/43b2db2b2e9f629685ae/events.jsonl --run 20261113T175608Z-7cbbf1\n         needs 1.0 MiB free; restores separate copies with their original mode, owner and mtime",
+          "label": "Applied reviewed changes",
+          "event": "",
+          "gate": false,
+          "command": "erawan directories duplicates --apply /demo/reviewed.json",
+          "duration": 900
+        }
+      ]
+    }
+  ]
+}

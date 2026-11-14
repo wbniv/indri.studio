@@ -378,9 +378,10 @@ const routes = [
 	.e-purple .e-panels { border-left-color: var(--e-purple); }
 
 	/* With JavaScript the simulation player replaces the static panels (v4). */
-	.e-sim-on .e-situ { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+	.e-sim-on .e-situ { display: block; grid-template-columns: minmax(0, 1fr); gap: 18px; }
 	.e-sim-on .e-panels { display: none; }
 	.e-sim-on .e-chips { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+	.e-sim-on .e-left { margin-bottom: 18px; }
 	.e-sim-on .e-hint { margin: 14px 0 10px; }
 	.e-panel { display: none; }
 	/* Show the panel that matches the checked radio (the Nth input shows the Nth panel). */
