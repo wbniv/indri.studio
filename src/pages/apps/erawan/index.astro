@@ -81,7 +81,7 @@ const matrix = [
 	["Cloudflare R2 & Amazon S3", "Yes", "Yes", "To: a dedicated prefix inside a bucket"],
 	["SMB, WebDAV & FTP", "Yes", "Yes", "Configured rclone routes; backend evidence varies"],
 	["Running Docker containers", "Yes", "Yes", "Filesystem accessible from this host"],
-	["Google Drive", "Yes†", "Planned", "Read-only source setup"],
+	["Google Drive", "Yes†", "Yes", "To: a dedicated folder in My Drive (drive.file access); shared drives not yet measured"],
 	["Other rclone remotes", "Check", "Check", "Backend-specific validation needed"],
 	["Linux SSH peer (rsync)", "No", "Yes", "Requires a local source"],
 ] as const;
@@ -212,7 +212,7 @@ const routes = [
 					))}
 				</tbody>
 			</table>
-			<p class="e-fine">* Local destinations: below a non-root mount. † Drive source verification is in progress. Routes are not an exhaustive tested-pair list.</p>
+			<p class="e-fine">* Local destinations: below a non-root mount. † Drive: OAuth testing-token expiry after seven days is still being confirmed. Routes are not an exhaustive tested-pair list.</p>
 			<p class="e-legend"><span aria-hidden="true">✓</span> supported · Planned = not yet · <span aria-hidden="true">?</span> Check = validate your remote first · <span aria-hidden="true">—</span> not supported</p>
 			<details class="e-endpoint-details">
 				<summary><span class="e-show">Show endpoint details ↓</span><span class="e-hide">Hide endpoint details ↑</span></summary>
